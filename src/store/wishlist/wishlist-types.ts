@@ -1,0 +1,4 @@
+export enum WishlistType {
+  ADD_TO_WISHLIST = "ADD_TO_WISHLIST",
+  REMOVE_WISHLIST = "REMOVE_WISHLIST"
+}
