@@ -23,6 +23,11 @@ export const MainCatalogImage = styled.div`
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 16px;
+  transition: all .25s ease;
+  
+  &:hover{
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.12);
+  }
 `;
 
 export const MainCatalogLink = styled(Link)`
@@ -49,7 +54,7 @@ export const AdvertiseCatalog = styled.div``;
 export const SwiperContainer = styled.div`
   overflow: hidden;
 
-  & .swiper-button-disabled{
+  & .swiper-button-disabled {
     opacity: 1;
     cursor: pointer;
     pointer-events: initial;
@@ -67,7 +72,6 @@ export const SwiperContainer = styled.div`
     right: 33px;
     top: 50%;
     transform: translateY(-50%);
-
   }
 
   & .swiper-button-next::after {
@@ -98,7 +102,7 @@ export const SwiperContainer = styled.div`
     position: relative;
 
     & .swiper-wrapper {
-      padding-top: 24px;
+      /* padding-top: 24px; */
       padding-bottom: 30px;
     }
 
@@ -122,6 +126,39 @@ export const SwiperContainer = styled.div`
       top: -20px;
       left: -92%;
       z-index: 3;
+    }
+  }
+`;
+
+// CatalogLeftMmenu
+export const CatalogLeftMmenuUl = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+export const CatalogLeftMmenuLi = styled.li`
+  cursor: pointer;
+  color: ${({ theme }) => theme.grey1};
+  margin-bottom: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  transition: all .2s ease;
+
+  &:hover{
+    color: #1541A9;
+  }
+
+  &.main-catalog {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    line-height: 24px;
+
+    &:first-child{
+      margin-top: 0px;
     }
   }
 `;

@@ -39,3 +39,12 @@ export const SizeText = styled.div`
     width:250px;
 
 `;
+export const HandeleOpen = styled.p`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.15px;
+    color: #264796;
+    cursor: pointer;
+`;

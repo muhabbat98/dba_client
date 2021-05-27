@@ -40,7 +40,6 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ item, style }) => {
-  console.log('ITEM === ', item);
   const [isInCart, setIsInCart] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
 

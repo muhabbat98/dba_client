@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Title from '../../products-title';
 import StarRaiting from '../../star-rating';
 import Avatar1 from './avatar1.svg';
 import Avatar2 from './avatar2.svg';
 import Avatar3 from './avatar3.svg';
+import {ReactComponent as Like} from '../../../assets/icons/like-hand.svg'
 import {
     TestimonalWrapper,
     ItemContainer,
@@ -11,7 +12,11 @@ import {
     TopSectionDiv1,
     TopSectionDiv2,
     SubContainer,
-    SmsText
+    SmsText,
+    SmsActionContainer,
+    LikeAndDislike,
+    ViewAllTitle,
+    TestimonaMarks
 
 } from './style';
 
@@ -23,7 +28,19 @@ const testimonal = [
         sms:"Оригинал, все Круто) Доставка 4 дня 👍",
         like:53,
         disLike:4,
-        avatar:Avatar1
+        avatar:Avatar1,
+        replaysms:[
+            {
+                name:"Татьяна",
+                data:"04 марта, 16:23",
+                raiting:3,
+                sms:"Все как в рекламе ! Работает отлично, батарея держит хорошо , в руке удобно держать . Только доставка была долгой , переживала очень , но оно стоило того !",
+                like:43,
+                disLike:1,
+                avatar:Avatar3
+            },
+            
+        ]
     },
     {
         name:"Елизавета",
@@ -32,7 +49,7 @@ const testimonal = [
         sms:"iPhone был куплен 12.03.2021, отзыв пишу спустя месяц: 13.04.2021. Пользуюсь Apple с 2013 года и никогда не обращалась в сервисный центр, потому что не было надобности. Ранее не заказывала продукцию Apple на Wildberries, но ввиду скидки решила совершить покупку именно тут. И вот спустя месяц использования телефона, заказанного с данного сайта, перестал работать один из трёх микрофонов. Таким образом, совершение звонков, чтобы собеседник меня слышал, запись голосовых сообщений, использование диктофона - стало невозможным, ввиду того, что микрофон перестал функционировать, телефон становится отчасти бесполезным и непригодным для использования. Надеюсь, что обращение в авторизированный сервисный центр решит проблему. Не советую покупать данную продукцию с сайта Wildberries, иначе можете оказаться в ситуации, где у вас нет возможности получить какие-то гарантии, поддержку, а на обращения вам ответит Ева-бот и надеятся вам можно будет лишь на удачу в этой русской рулетке.",
         like:64,
         disLike:2,
-        avatar:Avatar2
+        avatar:Avatar2,
     },
     {
         name:"Татьяна",
@@ -41,10 +58,11 @@ const testimonal = [
         sms:"Все как в рекламе ! Работает отлично, батарея держит хорошо , в руке удобно держать . Только доставка была долгой , переживала очень , но оно стоило того !",
         like:43,
         disLike:1,
-        avatar:Avatar3
+        avatar:Avatar3,
     },
 ]
 const  Testimonial = () => {
+    const [viewReplays,setViewReplays] = useState<boolean>(false)
     return (
         <TestimonalWrapper>
             <Title title="Отзывы"/>
@@ -61,12 +79,50 @@ const  Testimonial = () => {
                             </TopSectionDiv2>
                         </TopSection>    
                         <SmsText>{item.sms}</SmsText>
-                        <div>
-                            
-                        </div>
+                        <SmsActionContainer>
+                            <p>Ответить</p>
+                            {item.replaysms && <p onClick={()=>setViewReplays(open=>!open)}>Показать ответы 1 </p>}
+                            <LikeAndDislike >
+                                <div><Like/><span>65</span></div>
+                                <div><Like style={{transform:'rotate(180deg)'}}/><span>2</span></div>
+                            </LikeAndDislike>
+                        </SmsActionContainer>
+                        {
+                            viewReplays && item.replaysms && item.replaysms.map((replay,index)=>(
+                                <div style={{marginLeft:42}}>
+                                    <TopSection>
+                                        <TopSectionDiv1><img src={replay.avatar}/></TopSectionDiv1>
+                                        <TopSectionDiv2> 
+                                            <p>{replay.name}</p>
+                                            <SubContainer>
+                                                <StarRaiting inputStar={replay.raiting} /> <span>{item.data}</span>
+                                            </SubContainer>
+                                        </TopSectionDiv2>
+                                    </TopSection>    
+                                    <SmsText>{replay.sms}</SmsText>
+                                    <SmsActionContainer>
+                                        <p>Ответить</p>
+                                        
+                                        <LikeAndDislike >
+                                            <div><Like/><span>65</span></div>
+                                            <div><Like style={{transform:'rotate(180deg)'}}/><span>2</span></div>
+                                        </LikeAndDislike>
+                                    </SmsActionContainer>   
+                                </div>
+                            ))
+                        }
+                        
                     </ItemContainer>
                 ))
             }
+            <ViewAllTitle>Посмотреть все 1241 отзыв</ViewAllTitle>
+            <div>
+                <TestimonaMarks>
+                    <Title title="Отзывы и оценки"/><span>1241</span>
+                </TestimonaMarks>
+                
+            </div>    
+            
         </TestimonalWrapper>
     )
 }

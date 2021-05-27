@@ -1,0 +1,948 @@
+{
+  "subCategories": [
+    {
+      "id": "604f2e0c41f0dd298a6140ea",
+      "name": "Мобильные телефоны и аксессуары",
+      "description": "Мобильные телефоны и аксессуары",
+      "route": "/catalog/mobilnie-telefoni-i-aksessuari-604f2e0c41f0dd298a6140ea",
+      "subCategories": [
+        {
+          "id": "604f339e41f0dd298a6141b1",
+          "name": "Мобильные телефоны",
+          "description": "Мобильные телефоны",
+          "route": "/catalog/mobilnie-telefoni-604f339e41f0dd298a6141b1",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f33a641f0dd298a6141b3",
+          "name": "Смартфоны",
+          "description": "Смартфоны",
+          "route": "/catalog/smartfoni-604f33a641f0dd298a6141b3",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f33b141f0dd298a6141b4",
+          "name": "Кнопочные телефоны",
+          "description": "Кнопочные телефоны",
+          "route": "/catalog/knopochnie-telefoni-604f33b141f0dd298a6141b4",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f33e841f0dd298a6141ba",
+          "name": "Аксессуары для телефонов",
+          "description": "Аксессуары для телефонов",
+          "route": "/catalog/aksessuari-dlja-telefonov-604f33e841f0dd298a6141ba",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f33f241f0dd298a6141bb",
+          "name": "Запчасти для смартфонов",
+          "description": "Запчасти для смартфонов",
+          "route": "/catalog/zapchasti-dlja-smartfonov-604f33f241f0dd298a6141bb",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f33fa41f0dd298a6141bd",
+          "name": "Сим-карты",
+          "description": "Сим-карты",
+          "route": "/catalog/simkarti-604f33fa41f0dd298a6141bd",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e1f41f0dd298a6140eb",
+      "name": "Телевизоры и аксессуары",
+      "description": "Телевизоры и аксессуары",
+      "route": "/catalog/televizori-i-aksessuari-604f2e1f41f0dd298a6140eb",
+      "subCategories": [
+        {
+          "id": "604f334841f0dd298a6141a1",
+          "name": "Встраиваемые телевизоры",
+          "description": "Встраиваемые телевизоры",
+          "route": "/catalog/vstraivaemie-televizori-604f334841f0dd298a6141a1",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f335141f0dd298a6141a3",
+          "name": "Телевизоры",
+          "description": "Телевизоры",
+          "route": "/catalog/televizori-604f335141f0dd298a6141a3",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f335a41f0dd298a6141a5",
+          "name": "Стойки и кронштейны для телевизоров",
+          "description": "Стойки и кронштейны для телевизоров",
+          "route": "/catalog/stoyki-i-kronshteyni-dlja-televizorov-604f335a41f0dd298a6141a5",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f336441f0dd298a6141a6",
+          "name": "Кабели и переходники",
+          "description": "Кабели и переходники",
+          "route": "/catalog/kabeli-i-perehodniki-604f336441f0dd298a6141a6",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f336e41f0dd298a6141a8",
+          "name": "Дисплеи для видеостен",
+          "description": "Дисплеи для видеостен",
+          "route": "/catalog/displei-dlja-videosten-604f336e41f0dd298a6141a8",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f337641f0dd298a6141aa",
+          "name": "Smart ТВ проигрыватели и аксессуары",
+          "description": "Smart ТВ проигрыватели и аксессуары",
+          "route": "/catalog/smart-tv-proigrivateli-i-aksessuari-604f337641f0dd298a6141aa",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f337e41f0dd298a6141ac",
+          "name": "ТВ-приставки",
+          "description": "ТВ-приставки",
+          "route": "/catalog/tvpristavki-604f337e41f0dd298a6141ac",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f338941f0dd298a6141ad",
+          "name": "Цифровое телевидение",
+          "description": "Цифровое телевидение",
+          "route": "/catalog/tsifrovoe-televidenie-604f338941f0dd298a6141ad",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f339541f0dd298a6141af",
+          "name": "Аксессуары для телевизоров",
+          "description": "Аксессуары для телевизоров",
+          "route": "/catalog/aksessuari-dlja-televizorov-604f339541f0dd298a6141af",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e2c41f0dd298a6140ed",
+      "name": "Ноутбуки и аксессуары",
+      "description": "Ноутбуки и аксессуары",
+      "route": "/catalog/noutbuki-i-aksessuari-604f2e2c41f0dd298a6140ed",
+      "subCategories": [
+        {
+          "id": "604f330941f0dd298a614197",
+          "name": "Ноутбуки",
+          "description": "Ноутбуки",
+          "route": "/catalog/noutbuki-604f330941f0dd298a614197",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f331341f0dd298a614199",
+          "name": "Аксессуары для ноутбуков",
+          "description": "Аксессуары для ноутбуков",
+          "route": "/catalog/aksessuari-dlja-noutbukov-604f331341f0dd298a614199",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f331c41f0dd298a61419b",
+          "name": "Игровые аксессуары для компьютеров",
+          "description": "Игровые аксессуары для компьютеров",
+          "route": "/catalog/igrovie-aksessuari-dlja-kompjuterov-604f331c41f0dd298a61419b",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f332441f0dd298a61419c",
+          "name": "Программное обеспечение",
+          "description": "Программное обеспечение",
+          "route": "/catalog/programmnoe-obespechenie-604f332441f0dd298a61419c",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f332f41f0dd298a61419e",
+          "name": "Запчасти и комплектующие для ноутбуков",
+          "description": "Запчасти и комплектующие для ноутбуков",
+          "route": "/catalog/zapchasti-i-komplektujuschie-dlja-noutbukov-604f332f41f0dd298a61419e",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e4441f0dd298a6140ef",
+      "name": "Наушники и аксессуары",
+      "description": "Наушники и аксессуары",
+      "route": "/catalog/naushniki-i-aksessuari-604f2e4441f0dd298a6140ef",
+      "subCategories": [
+        {
+          "id": "604f328d41f0dd298a614185",
+          "name": "Наушники",
+          "description": "Наушники",
+          "route": "/catalog/naushniki-604f328d41f0dd298a614185",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f329641f0dd298a614187",
+          "name": "Спортивные наушники",
+          "description": "Спортивные наушники",
+          "route": "/catalog/sportivnie-naushniki-604f329641f0dd298a614187",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32a241f0dd298a614189",
+          "name": "Наушники вкладыши",
+          "description": "Наушники вкладыши",
+          "route": "/catalog/naushniki-vkladishi-604f32a241f0dd298a614189",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32b741f0dd298a61418b",
+          "name": "Накладные наушники",
+          "description": "Накладные наушники",
+          "route": "/catalog/nakladnie-naushniki-604f32b741f0dd298a61418b",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32c041f0dd298a61418d",
+          "name": "Беспроводные наушники",
+          "description": "Беспроводные наушники",
+          "route": "/catalog/besprovodnie-naushniki-604f32c041f0dd298a61418d",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32cc41f0dd298a61418f",
+          "name": "Мониторные наушники",
+          "description": "Мониторные наушники",
+          "route": "/catalog/monitornie-naushniki-604f32cc41f0dd298a61418f",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32db41f0dd298a614191",
+          "name": "Наушники с микрофоном",
+          "description": "Наушники с микрофоном",
+          "route": "/catalog/naushniki-s-mikrofonom-604f32db41f0dd298a614191",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32e541f0dd298a614192",
+          "name": "Игровые наушники",
+          "description": "Игровые наушники",
+          "route": "/catalog/igrovie-naushniki-604f32e541f0dd298a614192",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32ee41f0dd298a614194",
+          "name": "Гарнитуры для телефонов",
+          "description": "Гарнитуры для телефонов",
+          "route": "/catalog/garnituri-dlja-telefonov-604f32ee41f0dd298a614194",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f32fc41f0dd298a614196",
+          "name": "Аксессуары для наушников",
+          "description": "Аксессуары для наушников",
+          "route": "/catalog/aksessuari-dlja-naushnikov-604f32fc41f0dd298a614196",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e4d41f0dd298a6140f0",
+      "name": "Портативная акустика",
+      "description": "Портативная акустика",
+      "route": "/catalog/portativnaja-akustika-604f2e4d41f0dd298a6140f0",
+      "subCategories": [
+        {
+          "id": "604f327541f0dd298a614182",
+          "name": "Портативные колонки",
+          "description": "Портативные колонки",
+          "route": "/catalog/portativnie-kolonki-604f327541f0dd298a614182",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f328241f0dd298a614184",
+          "name": "Чехлы для портативной акустики",
+          "description": "Чехлы для портативной акустики",
+          "route": "/catalog/chehli-dlja-portativnoy-akustiki-604f328241f0dd298a614184",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e6641f0dd298a6140f2",
+      "name": "Компьютеры и комплектующие",
+      "description": "Компьютеры и комплектующие",
+      "route": "/catalog/kompjuteri-i-komplektujuschie-604f2e6641f0dd298a6140f2",
+      "subCategories": [
+        {
+          "id": "604f31d941f0dd298a614170",
+          "name": "Системные блоки",
+          "description": "Системные блоки",
+          "route": "/catalog/sistemnie-bloki-604f31d941f0dd298a614170",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f31e541f0dd298a614172",
+          "name": "Мониторы",
+          "description": "Мониторы",
+          "route": "/catalog/monitori-604f31e541f0dd298a614172",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f31ee41f0dd298a614173",
+          "name": "Аксессуары для компьютеров",
+          "description": "Аксессуары для компьютеров",
+          "route": "/catalog/aksessuari-dlja-kompjuterov-604f31ee41f0dd298a614173",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f31f641f0dd298a614174",
+          "name": "Игровые аксессуары для компьютеров",
+          "description": "Игровые аксессуары для компьютеров",
+          "route": "/catalog/igrovie-aksessuari-dlja-kompjuterov-604f31f641f0dd298a614174",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f320041f0dd298a614175",
+          "name": "Моноблоки",
+          "description": "Моноблоки",
+          "route": "/catalog/monobloki-604f320041f0dd298a614175",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f320a41f0dd298a614176",
+          "name": "Накопители информации",
+          "description": "Накопители информации",
+          "route": "/catalog/nakopiteli-informatsii-604f320a41f0dd298a614176",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f321741f0dd298a614178",
+          "name": "Комплектующие для компьютера",
+          "description": "Комплектующие для компьютера",
+          "route": "/catalog/komplektujuschie-dlja-kompjutera-604f321741f0dd298a614178",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f322041f0dd298a614179",
+          "name": "Программное обеспечение",
+          "description": "Программное обеспечение",
+          "route": "/catalog/programmnoe-obespechenie-604f322041f0dd298a614179",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f322841f0dd298a61417b",
+          "name": "Серверное оборудование",
+          "description": "Серверное оборудование",
+          "route": "/catalog/servernoe-oborudovanie-604f322841f0dd298a61417b",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e7441f0dd298a6140f5",
+      "name": "Игровые приставки",
+      "description": "Игровые приставки",
+      "route": "/catalog/igrovie-pristavki-604f2e7441f0dd298a6140f5",
+      "subCategories": [
+        {
+          "id": "604f319441f0dd298a614165",
+          "name": "Игровые приставки PlayStation",
+          "description": "Игровые приставки PlayStation",
+          "route": "/catalog/igrovie-pristavki-playstation-604f319441f0dd298a614165",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f319c41f0dd298a614167",
+          "name": "Игровые приставки Xbox",
+          "description": "Игровые приставки Xbox",
+          "route": "/catalog/igrovie-pristavki-xbox-604f319c41f0dd298a614167",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f31a641f0dd298a614168",
+          "name": "Игровые приставки Nintendo",
+          "description": "Игровые приставки Nintendo",
+          "route": "/catalog/igrovie-pristavki-nintendo-604f31a641f0dd298a614168",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f31b241f0dd298a61416a",
+          "name": "Игровые приставки 8Bit и 16Bi",
+          "description": "Игровые приставки 8Bit и 16Bi",
+          "route": "/catalog/igrovie-pristavki-bit-i-bi-604f31b241f0dd298a61416a",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f31bb41f0dd298a61416c",
+          "name": "Аксессуары для игровых приставок",
+          "description": "Аксессуары для игровых приставок",
+          "route": "/catalog/aksessuari-dlja-igrovih-pristavok-604f31bb41f0dd298a61416c",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f31c841f0dd298a61416e",
+          "name": "Киберспортивная атрибутика",
+          "description": "Киберспортивная атрибутика",
+          "route": "/catalog/kibersportivnaja-atributika-604f31c841f0dd298a61416e",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e8141f0dd298a6140f7",
+      "name": "Видеоигры",
+      "description": "Видеоигры",
+      "route": "/catalog/videoigri-604f2e8141f0dd298a6140f7",
+      "subCategories": [
+        {
+          "id": "604f315841f0dd298a61415d",
+          "name": "Игры для Nintendo",
+          "description": "Игры для Nintendo",
+          "route": "/catalog/igri-dlja-nintendo-604f315841f0dd298a61415d",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f316141f0dd298a61415e",
+          "name": "Игры для PC",
+          "description": "Игры для PC",
+          "route": "/catalog/igri-dlja-pc-604f316141f0dd298a61415e",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f316a41f0dd298a61415f",
+          "name": "Игры для PlayStation",
+          "description": "Игры для PlayStation",
+          "route": "/catalog/igri-dlja-playstation-604f316a41f0dd298a61415f",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f317641f0dd298a614161",
+          "name": "Игры для Xbox",
+          "description": "Игры для Xbox",
+          "route": "/catalog/igri-dlja-xbox-604f317641f0dd298a614161",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f317e41f0dd298a614162",
+          "name": "Топ игр",
+          "description": "Топ игр",
+          "route": "/catalog/top-igr-604f317e41f0dd298a614162",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f318741f0dd298a614164",
+          "name": "Игровые новинки",
+          "description": "Игровые новинки",
+          "route": "/catalog/igrovie-novinki-604f318741f0dd298a614164",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e8c41f0dd298a6140f9",
+      "name": "Умные часы и браслеты",
+      "description": "Умные часы и браслеты",
+      "route": "/catalog/umnie-chasi-i-brasleti-604f2e8c41f0dd298a6140f9",
+      "subCategories": [
+        {
+          "id": "604f313741f0dd298a614157",
+          "name": "Смарт-часы",
+          "description": "Смарт-часы",
+          "route": "/catalog/smartchasi-604f313741f0dd298a614157",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f314341f0dd298a614159",
+          "name": "Фитнес-браслеты",
+          "description": "Фитнес-браслеты",
+          "route": "/catalog/fitnesbrasleti-604f314341f0dd298a614159",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f314c41f0dd298a61415b",
+          "name": "Аксессуары для смарт-часов",
+          "description": "Аксессуары для смарт-часов",
+          "route": "/catalog/aksessuari-dlja-smartchasov-604f314c41f0dd298a61415b",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2e9941f0dd298a6140fb",
+      "name": "Аудио и видео",
+      "description": "Аудио и видео",
+      "route": "/catalog/audio-i-video-604f2e9941f0dd298a6140fb",
+      "subCategories": [
+        {
+          "id": "604f30d941f0dd298a61414a",
+          "name": "Hi-Fi техника",
+          "description": "Hi-Fi техника",
+          "route": "/catalog/hifi-tehnika-604f30d941f0dd298a61414a",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30e241f0dd298a61414b",
+          "name": "Домашние кинотеатры",
+          "description": "Домашние кинотеатры",
+          "route": "/catalog/domashnie-kinoteatri-604f30e241f0dd298a61414b",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30ee41f0dd298a61414d",
+          "name": "Музыкальные центры и магнитолы",
+          "description": "Музыкальные центры и магнитолы",
+          "route": "/catalog/muzikalnie-tsentri-i-magnitoli-604f30ee41f0dd298a61414d",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30f741f0dd298a61414f",
+          "name": "Портативные плееры",
+          "description": "Портативные плееры",
+          "route": "/catalog/portativnie-pleeri-604f30f741f0dd298a61414f",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30ff41f0dd298a614150",
+          "name": "Проекторы и аксессуары",
+          "description": "Проекторы и аксессуары",
+          "route": "/catalog/proektori-i-aksessuari-604f30ff41f0dd298a614150",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f310c41f0dd298a614152",
+          "name": "DVD-плееры и аксессуары",
+          "description": "DVD-плееры и аксессуары",
+          "route": "/catalog/dvdpleeri-i-aksessuari-604f310c41f0dd298a614152",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f311541f0dd298a614154",
+          "name": "Аудио видео диски",
+          "description": "Аудио видео диски",
+          "route": "/catalog/audio-video-diski-604f311541f0dd298a614154",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f311f41f0dd298a614155",
+          "name": "Виниловые пластинки",
+          "description": "Виниловые пластинки",
+          "route": "/catalog/vinilovie-plastinki-604f311f41f0dd298a614155",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2eb141f0dd298a6140fe",
+      "name": "Офисная техника",
+      "description": "Офисная техника",
+      "route": "/catalog/ofisnaja-tehnika-604f2eb141f0dd298a6140fe",
+      "subCategories": [
+        {
+          "id": "604f307541f0dd298a61413b",
+          "name": "Стационарные телефоны",
+          "description": "Стационарные телефоны",
+          "route": "/catalog/statsionarnie-telefoni-604f307541f0dd298a61413b",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f308641f0dd298a61413e",
+          "name": "Факсы",
+          "description": "Факсы",
+          "route": "/catalog/faksi-604f308641f0dd298a61413e",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f309341f0dd298a61413f",
+          "name": "МФУ",
+          "description": "МФУ",
+          "route": "/catalog/mfu-604f309341f0dd298a61413f",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f309b41f0dd298a614141",
+          "name": "Принтеры",
+          "description": "Принтеры",
+          "route": "/catalog/printeri-604f309b41f0dd298a614141",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30a641f0dd298a614143",
+          "name": "Картриджи и чернила для принтеров",
+          "description": "Картриджи и чернила для принтеров",
+          "route": "/catalog/kartridzhi-i-chernila-dlja-printerov-604f30a641f0dd298a614143",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30b141f0dd298a614144",
+          "name": "Аксессуары для принтеров",
+          "description": "Аксессуары для принтеров",
+          "route": "/catalog/aksessuari-dlja-printerov-604f30b141f0dd298a614144",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30ba41f0dd298a614146",
+          "name": "Сканеры",
+          "description": "Сканеры",
+          "route": "/catalog/skaneri-604f30ba41f0dd298a614146",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30c541f0dd298a614148",
+          "name": "Торговое оборудование и аксессуары",
+          "description": "Торговое оборудование и аксессуары",
+          "route": "/catalog/torgovoe-oborudovanie-i-aksessuari-604f30c541f0dd298a614148",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f30ce41f0dd298a614149",
+          "name": "Шредеры",
+          "description": "Шредеры",
+          "route": "/catalog/shrederi-604f30ce41f0dd298a614149",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2ecb41f0dd298a614101",
+      "name": "Планшеты и аксессуары",
+      "description": "Планшеты и аксессуары",
+      "route": "/catalog/plansheti-i-aksessuari-604f2ecb41f0dd298a614101",
+      "subCategories": [
+        {
+          "id": "604f306041f0dd298a614138",
+          "name": "Планшеты",
+          "description": "Планшеты",
+          "route": "/catalog/plansheti-604f306041f0dd298a614138",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f306a41f0dd298a614139",
+          "name": "Аксессуары для планшетов",
+          "description": "Аксессуары для планшетов",
+          "route": "/catalog/aksessuari-dlja-planshetov-604f306a41f0dd298a614139",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2ed441f0dd298a614103",
+      "name": "Фото- и видеокамеры",
+      "description": "Фото- и видеокамеры",
+      "route": "/catalog/foto-i-videokameri-604f2ed441f0dd298a614103",
+      "subCategories": [
+        {
+          "id": "604f2ff941f0dd298a61412a",
+          "name": "Фотоаппараты",
+          "description": "Фотоаппараты",
+          "route": "/catalog/fotoapparati-604f2ff941f0dd298a61412a",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f300341f0dd298a61412b",
+          "name": "Объективы и аксессуары",
+          "description": "Объективы и аксессуары",
+          "route": "/catalog/obektivi-i-aksessuari-604f300341f0dd298a61412b",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f300d41f0dd298a61412c",
+          "name": "Экшн-камеры и аксессуары",
+          "description": "Экшн-камеры и аксессуары",
+          "route": "/catalog/ekshnkameri-i-aksessuari-604f300d41f0dd298a61412c",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f301641f0dd298a61412e",
+          "name": "Видеокамеры",
+          "description": "Видеокамеры",
+          "route": "/catalog/videokameri-604f301641f0dd298a61412e",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f302041f0dd298a61412f",
+          "name": "Штативы и моноподы",
+          "description": "Штативы и моноподы",
+          "route": "/catalog/shtativi-i-monopodi-604f302041f0dd298a61412f",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f302841f0dd298a614131",
+          "name": "Сумки и рюкзаки для фототехники",
+          "description": "Сумки и рюкзаки для фототехники",
+          "route": "/catalog/sumki-i-rjukzaki-dlja-fototehniki-604f302841f0dd298a614131",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f303441f0dd298a614133",
+          "name": "Фотооборудование",
+          "description": "Фотооборудование",
+          "route": "/catalog/fotooborudovanie-604f303441f0dd298a614133",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f304b41f0dd298a614135",
+          "name": "Радиоуправляемые устройства",
+          "description": "Радиоуправляемые устройства",
+          "route": "/catalog/radioupravljaemie-ustroystva-604f304b41f0dd298a614135",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f305441f0dd298a614136",
+          "name": "Цифровые фоторамки",
+          "description": "Цифровые фоторамки",
+          "route": "/catalog/tsifrovie-fotoramki-604f305441f0dd298a614136",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2ee041f0dd298a614105",
+      "name": "Электронные книги и аксессуары",
+      "description": "Электронные книги и аксессуары",
+      "route": "/catalog/elektronnie-knigi-i-aksessuari-604f2ee041f0dd298a614105",
+      "subCategories": [
+        {
+          "id": "604f2fd741f0dd298a614126",
+          "name": "Электронные книги",
+          "description": "Электронные книги",
+          "route": "/catalog/elektronnie-knigi-604f2fd741f0dd298a614126",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2fe441f0dd298a614128",
+          "name": "Чехлы для электронных книг",
+          "description": "Чехлы для электронных книг",
+          "route": "/catalog/chehli-dlja-elektronnih-knig-604f2fe441f0dd298a614128",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2eea41f0dd298a614106",
+      "name": "Сетевое оборудование",
+      "description": "Сетевое оборудование",
+      "route": "/catalog/setevoe-oborudovanie-604f2eea41f0dd298a614106",
+      "subCategories": [
+        {
+          "id": "604f2f4c41f0dd298a61410f",
+          "name": "Wi-Fi роутеры (Маршрутизаторы)",
+          "description": "Wi-Fi роутеры (Маршрутизаторы)",
+          "route": "/catalog/wifi-routeri-marshrutizatori-604f2f4c41f0dd298a61410f",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2f5a41f0dd298a614111",
+          "name": "Powerline адаптеры",
+          "description": "Powerline адаптеры",
+          "route": "/catalog/powerline-adapteri-604f2f5a41f0dd298a614111",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2f6741f0dd298a614113",
+          "name": "Коммутаторы",
+          "description": "Коммутаторы",
+          "route": "/catalog/kommutatori-604f2f6741f0dd298a614113",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2f7141f0dd298a614115",
+          "name": "Модемы",
+          "description": "Модемы",
+          "route": "/catalog/modemi-604f2f7141f0dd298a614115",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2f7f41f0dd298a614117",
+          "name": "Сетевые карты для компьютера",
+          "description": "Сетевые карты для компьютера",
+          "route": "/catalog/setevie-karti-dlja-kompjutera-604f2f7f41f0dd298a614117",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2f8941f0dd298a614119",
+          "name": "Wi-Fi адаптеры",
+          "description": "Wi-Fi адаптеры",
+          "route": "/catalog/wifi-adapteri-604f2f8941f0dd298a614119",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2f9241f0dd298a61411b",
+          "name": "Ретрансляторы Wi-Fi сигнала",
+          "description": "Ретрансляторы Wi-Fi сигнала",
+          "route": "/catalog/retransljatori-wifi-signala-604f2f9241f0dd298a61411b",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2f9d41f0dd298a61411d",
+          "name": "Сетевые хранилища",
+          "description": "Сетевые хранилища",
+          "route": "/catalog/setevie-hranilischa-604f2f9d41f0dd298a61411d",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2fa941f0dd298a61411f",
+          "name": "IP-камеры",
+          "description": "IP-камеры",
+          "route": "/catalog/ipkameri-604f2fa941f0dd298a61411f",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2fb341f0dd298a614120",
+          "name": "Точки доступа Wi-Fi",
+          "description": "Точки доступа Wi-Fi",
+          "route": "/catalog/tochki-dostupa-wifi-604f2fb341f0dd298a614120",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2fbc41f0dd298a614122",
+          "name": "IP-телефоны",
+          "description": "IP-телефоны",
+          "route": "/catalog/iptelefoni-604f2fbc41f0dd298a614122",
+          "subCategories": [],
+          "imageUrl": null
+        },
+        {
+          "id": "604f2fc741f0dd298a614124",
+          "name": "Усилители интернет сигнала",
+          "description": "Усилители интернет сигнала",
+          "route": "/catalog/usiliteli-internet-signala-604f2fc741f0dd298a614124",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2ef741f0dd298a614108",
+      "name": "Средства для ухода за электроникой",
+      "description": "Средства для ухода за электроникой",
+      "route": "/catalog/sredstva-dlja-uhoda-za-elektronikoy-604f2ef741f0dd298a614108",
+      "subCategories": [
+        {
+          "id": "604f2f3641f0dd298a61410d",
+          "name": "Средства для чистки экранов",
+          "description": "Средства для чистки экранов",
+          "route": "/catalog/sredstva-dlja-chistki-ekranov-604f2f3641f0dd298a61410d",
+          "subCategories": [],
+          "imageUrl": null
+        }
+      ],
+      "imageUrl": null
+    },
+    {
+      "id": "604f2f1141f0dd298a61410b",
+      "name": "Источники питания",
+      "description": "Источники питания",
+      "route": "/catalog/istochniki-pitanija-604f2f1141f0dd298a61410b",
+      "subCategories": [],
+      "imageUrl": null
+    }
+  ]
+}

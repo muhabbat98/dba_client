@@ -12,10 +12,11 @@ import Container from '../../components/grid/container';
 import Row from '../../components/grid/row';
 import ProductsTitle from '../../components/products-title';
 import Card from '../../components/card';
+import CatalogLeftMmenu from './catalog-left-menu';
 
 import {
    CatalogContainer, SidebarCategoryBox, MainCatalog, MainCatalogImage, MainCatalogLink, MainCatalogTitle,
-   CatalogSimilarProducts, AdvertiseCatalog, SwiperContainer
+   CatalogSimilarProducts, AdvertiseCatalog, SwiperContainer, CatalogLeftMmenuUl
 } from './style';
 
 import Catalog1 from '../../assets/images/catalog1.png';
@@ -26,7 +27,7 @@ import Catalog5 from '../../assets/images/catalog5.png';
 import Catalog6 from '../../assets/images/catalog6.png';
 import Catalog7 from '../../assets/images/catalog7.png';
 import Catalog8 from '../../assets/images/catalog8.png';
-import Advertise from '../../assets/images/advertise1.png';
+import Advertise from '../../assets/images/advertise1.png'; 
 
 
 import CardImage from '../../assets/images/card-item1.png';
@@ -37,6 +38,8 @@ import CardImage5 from '../../assets/images/card-item5.png';
 import CardImage6 from '../../assets/images/card-item6.png';
 import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
+
+import catalogData from './data.json';
 
 export const data = [
    {
@@ -189,6 +192,7 @@ export const data = [
 SwiperCore.use([Navigation]);
 
 const Catalog = () => {
+
    return (
       <CatalogContainer>
          <Container>
@@ -196,7 +200,11 @@ const Catalog = () => {
             <Row>
                <Col xl={3}>
                   <SidebarCategoryBox>
-
+                     <CatalogLeftMmenuUl>
+                        {
+                           catalogData.subCategories.map(item => <CatalogLeftMmenu items={item} />)
+                        }
+                     </CatalogLeftMmenuUl>
                   </SidebarCategoryBox>
                </Col>
                <Col xl={9}>
