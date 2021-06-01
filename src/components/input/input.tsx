@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import { Controller } from "react-hook-form";
 import { InputWrapper, MaskInput, InputElement, Label,ErrorTitle } from "./style";
 
@@ -17,17 +17,28 @@ const Input: React.FC<InputFilds> = ({
   control,
   ...rest
 }) => {
+  const refInput = useRef<any>();
+  
   const [isFocus, setIsFocus] = useState<boolean>(inputType ? true : false);
+  useEffect(()=>{
+    const leng=refInput.current.value
+    if(leng.length>0) {
+      setIsFocus(true);
+    }
+
+  })
   const onBlur = (e: any) => {
     const val = e.target.value;
-    if (val.length > 0 || inputType) {
+    if (val.length > 0 ) {
       setIsFocus(true);
+      console.log("Blur working")
     } else setIsFocus(false);
   };
   const inputMaskType = () => {
     if (inputType == "phone") {
       return (
         <Controller
+          ref={refInput}
           as={MaskInput}
           control={control}
           mask="+\9\98 99 999 99 99"
@@ -37,6 +48,7 @@ const Input: React.FC<InputFilds> = ({
     } else if (inputType == "card") {
       return (
         <Controller
+          ref={refInput}
           as={MaskInput}
           control={control}
           mask="9999 9999 9999 9999"
@@ -47,6 +59,7 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="cardData"){
       return (
         <Controller
+          ref={refInput}
           as={MaskInput}
           control={control}
           mask="99/99"
@@ -57,6 +70,7 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="brithDay"){
       return (
         <Controller
+          ref={refInput}
           as={MaskInput}
           control={control}
           mask="99/99/9999"
@@ -67,6 +81,7 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="passport"){
       return (
         <Controller
+          ref={refInput}
           as={MaskInput}
           control={control}
           mask={"aa 99999"}
@@ -84,12 +99,12 @@ const Input: React.FC<InputFilds> = ({
       ) : (
         <InputElement
           {...rest}
+          ref={refInput}
           autoFocus ={isFocus?true:false}
           placeholder={!isFocus ? placeholder : ""}
           isFocus={isFocus}
           onBlur={(e) => onBlur(e)}
-          error={error?true:false}
-          
+          error={error?true:false}    
         />
       )}
       
