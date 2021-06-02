@@ -1,5 +1,5 @@
 import React,{useState,useRef,useEffect} from 'react'
-// import Picker from 'emoji-picker-react';
+import Picker from 'emoji-picker-react';
 import Title from '../../../components/products-title';
 import StarRaiting from '../../../components/star-rating';
 import Button from '../../../components/button';
@@ -75,12 +75,15 @@ const  Testimonial = () => {
     const [viewReplays,setViewReplays] = useState<boolean>(false)
     const [open, setOpen] = useState<boolean>(false)
     const [textFild,setTextFild] = useState<boolean>(false);
-    const [chosenEmoji, setChosenEmoji] = useState(null);
-
-    // const onEmojiClick = (event, emojiObject) => {
-    // setChosenEmoji(emojiObject);
-    // };
-
+    const [smile,setSmile] = useState<boolean>(false); 
+    const [placeholder,setPlaceholder] = useState<any>('');
+    const onEmojiClick = (event:any, emojiObject:any) => {
+        setPlaceholder(placeholder+emojiObject.emoji)    
+    };
+    const handelChange = (e:any) =>{
+        setPlaceholder(e.target.value)
+    }
+   
     // useEffect(()=>{
     //     const leng=refAction && refAction.current.value
     //     if(leng.length>0) {
@@ -90,6 +93,9 @@ const  Testimonial = () => {
     //   })
     const handleBlur = () =>{
         setTextFild(true)
+    }
+    const onSubmit = () =>{
+        console.log('PlaceholderData--->',placeholder)
     }
     return (
         <TestimonalWrapper>
@@ -163,7 +169,7 @@ const  Testimonial = () => {
             </ButtonContainer>    
             {
                 open && 
-                <div>
+                <div style={{position:'relative'}}>
                     <Textarea state={textFild}>
                         <div onClick={()=>handleBlur()}>
                             <LabelSms state={textFild}>Введите описание товара</LabelSms>
@@ -172,19 +178,21 @@ const  Testimonial = () => {
                                 rows={7} 
                                 placeholder="Введите описание товара"
                                 ref={refAction}
-                                
+                                onChange={(e)=>handelChange(e)}
+                                value={placeholder}
+                                name="placeholder"
                                 />
-                            <EmojiContainer>
-                                
-                            </EmojiContainer>
+                            
                         </div>
-                        <Smile/>
+                        <Smile onClick={()=>setSmile(open=>!open)}/>
                     </Textarea>
-                    
+                    <EmojiContainer state={smile}>
+                        <Picker onEmojiClick={onEmojiClick} />
+                    </EmojiContainer>
                     <TextareaButton>
                         {!textFild 
                             ?<Button btnType="disabled">Добавить отзыв</Button>
-                            :<Button >Добавить отзыв</Button>
+                            :<Button onClick={onSubmit}>Добавить отзыв</Button>
                         }
                     </TextareaButton>
                 </div>

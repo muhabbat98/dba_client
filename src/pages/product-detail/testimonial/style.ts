@@ -220,6 +220,16 @@ export const TextareaButton = styled.div`
     justify-content:flex-end;
     margin-top: 24px;
 `;
-export const EmojiContainer = styled.div`
-    
+export const EmojiContainer = styled.div<Propses>`
+    position: absolute;
+    top:-380px;
+    right: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 16px;
+    animation: ${({state})=>state? Anim:''} 0.4s;
+    display: ${({state})=>state?"block":"none"};
+    .emoji-picker-react{
+        height:400px;
+    }
 `;
