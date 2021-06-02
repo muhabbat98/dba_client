@@ -21,7 +21,7 @@ const Input: React.FC<InputFilds> = ({
 }) => {
   const refInput = useRef<any>();
   
-  const [isFocus, setIsFocus] = useState<boolean>(inputType ? true : false);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
   useEffect(()=>{
     if(refInput.current){
       const leng=refInput.current.value
@@ -34,10 +34,12 @@ const Input: React.FC<InputFilds> = ({
   })
 
   const onBlur = (e: any) => {
+    console.log("Blur working....")
+    setIsFocus(true);
     const val = e.target.value;
     if (val.length > 0 ) {
       setIsFocus(true);
-      console.log("Blur working")
+      console.log("Blur working....")
     } else setIsFocus(false);
   };
   const inputMaskType = () => {
@@ -50,6 +52,10 @@ const Input: React.FC<InputFilds> = ({
           mask="+\9\98 99 999 99 99"
           name={inputType}
           defaultValue={defaultValue}
+          isFocus={isFocus}
+          error={error?true:false}  
+          placeholder={placeholder}
+          
         />
       );
     } else if (inputType == "card") {
@@ -61,6 +67,9 @@ const Input: React.FC<InputFilds> = ({
           mask="9999 9999 9999 9999"
           name={inputType}
           defaultValue={defaultValue}
+          isFocus={isFocus}
+          error={error?true:false}  
+          placeholder={placeholder}
           
         />
       );
@@ -74,6 +83,9 @@ const Input: React.FC<InputFilds> = ({
           mask="99/99"
           name={inputType}
           defaultValue={defaultValue}
+          isFocus={isFocus}
+          error={error?true:false}  
+          placeholder={placeholder}
           
         />
         )
@@ -87,6 +99,10 @@ const Input: React.FC<InputFilds> = ({
           mask="99/99/9999"
           name={inputType}
           defaultValue={defaultValue}
+          isFocus={isFocus}
+          error={error?true:false}
+          placeholder={placeholder}  
+          
         />
         )
     }
@@ -99,14 +115,28 @@ const Input: React.FC<InputFilds> = ({
           mask={"aa 99999"}
           name={inputType}
           defaultValue={defaultValue}
+          isFocus={isFocus}
+          error={error?true:false}  
+          placeholder={placeholder}
+          
         />
         )
     }
   };
+ 
   return (
   <>
-    <InputWrapper error={error?true:false} onFocus={() => setIsFocus(true)} >
+    <InputWrapper  
+      error={error?true:false} 
+      onFocus={() => setIsFocus(true)}
+      onBlur={(e) => onBlur(e)}
+    >
+      {isFocus &&
       <Label isFocus={isFocus} error={error?true:false}>{label}</Label>
+      } 
+       
+    
+     
       {inputType ? (
         inputMaskType()
       ) : (

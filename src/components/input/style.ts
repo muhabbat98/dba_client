@@ -19,6 +19,7 @@ export const InputWrapper = styled.div<Error>`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  overflow: hidden;
 `;
 
 const anim = keyframes`
@@ -56,7 +57,7 @@ export const Label = styled.label<InputStates>`
   animation: ${anim} 0.4s;
   
 `;
-export const MaskInput = styled(InputMask)`
+export const MaskInput = styled(InputMask)<InputStates>`
   color: #262626;
   font-family: Manrope;
   font-style: normal;
@@ -67,6 +68,8 @@ export const MaskInput = styled(InputMask)`
   border: none;
   outline: none;
   padding-left: 25px;
+  padding-top: ${({isFocus}) => isFocus ? 0 : 22}px;
+  background: ${({error}) => error?"#FFF4F4":"#f4f6f9"};
 
 `;
 export const ErrorTitle = styled.div`
