@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const activeClassName = 'nav-item-active';
 
-export const StyledLink = styled(NavLink).attrs({ activeClassName })`
+export const StyledLink = styled(NavLink).attrs({activeClassName})`
   &.${activeClassName} {
     background: #f4f6fa;
     color: black;
@@ -29,16 +29,18 @@ export const Li = styled.li`
   padding: 0;
   margin: 0;
   transition: 0.2s;
+
   &:hover {
     background: #f4f6fa;
   }
-  //border-bottom: 1px solid ${({ theme: { grey3 } }) => grey3};
+
+    //border-bottom: 1px solid ${({theme: {grey3}}) => grey3};
   &:last-child {
-    color: ${({ theme: { red } }) => red};
+    color: ${({theme: {red}}) => red};
     border-bottom: none;
   }
+
   a {
-    display: block;
     padding: 18px 24px;
     font-style: normal;
     font-weight: normal;
@@ -53,7 +55,6 @@ export const Li = styled.li`
 `;
 
 export const Exit = styled.div`
-  display: block;
   padding: 18px 32px;
   font-style: normal;
   font-weight: normal;
@@ -62,10 +63,11 @@ export const Exit = styled.div`
   display: flex;
   align-items: center;
   letter-spacing: 0.1px;
-  color: ${({ theme: { red } }) => red};
+  color: ${({theme: {red}}) => red};
   text-decoration: none;
   transition: 0.3s;
   cursor: pointer;
+
   &:hover {
     background: #f2f2f2;
   }

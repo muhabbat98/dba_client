@@ -56,6 +56,7 @@ const Phone: React.FC<PhoneProps> = ({
 
             <Input
               // inputRef={inp}
+
               name='phone'
               mask='99 999 99 99'
               onChange={change}
