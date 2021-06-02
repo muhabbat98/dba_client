@@ -21,12 +21,16 @@ const Input: React.FC<InputFilds> = ({
   
   const [isFocus, setIsFocus] = useState<boolean>(inputType ? true : false);
   useEffect(()=>{
-    const leng=refInput.current.value
-    if(leng.length>0) {
-      setIsFocus(true);
+    if(refInput.current){
+      const leng=refInput.current.value
+      if(leng.length>0) {
+        setIsFocus(true);
+      }
     }
+    
 
   })
+
   const onBlur = (e: any) => {
     const val = e.target.value;
     if (val.length > 0 ) {
@@ -53,6 +57,7 @@ const Input: React.FC<InputFilds> = ({
           control={control}
           mask="9999 9999 9999 9999"
           name={inputType}
+          
         />
       );
     }
@@ -64,6 +69,7 @@ const Input: React.FC<InputFilds> = ({
           control={control}
           mask="99/99"
           name={inputType}
+          
         />
         )
     }

@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+
+interface Propses {
+    state?:boolean;
+}
 
 export const TestimonalWrapper = styled.div`
 
@@ -133,4 +137,89 @@ export const TestimonaMarks = styled.div`
         letter-spacing: -0.15px;
         color: #797979;
     }
+`;
+export const StarContainer = styled.div`
+    display:flex;
+    margin-top:30px;
+    svg{
+        width:18px;
+        height: 18px;
+
+    }
+    span{
+        margin-left:17px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: -0.15px;
+        color: #000;
+    }
+`;
+export const ButtonContainer = styled.div`
+    display:flex;
+    justify-content:space-between;
+
+`;
+export const Textarea = styled.div<Propses>`
+    display: flex;
+    background: ${({state})=>state?"#ffffff":"#F4F6F9"};
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top:26px;
+    position:relative;
+    border:${({state})=>state?"1px solid #1541A9":""};
+    &:focus{
+            background: #fff;
+        }
+    div{
+        width: 100%;;
+    }
+    textarea{
+        margin-top:${({state})=>state?30:16}px;
+        margin-left:16px;
+        width:100%;
+        border:none;
+        background: ${({state})=>state?"#ffffff":"#F4F6F9"};
+        outline: none;
+        resize: none;
+        overflow: hidden;
+        
+    }
+    svg{
+        margin:24px 24px 0px 0px;
+        cursor:pointer;
+    }
+    
+`;
+const Anim = keyframes`
+    0%{
+        opacity:0.6;
+        transform: scale(0.5);
+    }
+    100%{
+        opacity:1;
+        transform: scale(1);
+    }
+`;
+export const LabelSms = styled.label<Propses>`
+    margin:10px 0px 0px 16px;
+    position: absolute;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #0091FF;
+    animation: ${({state})=>state? Anim:''} 0.4s;
+    visibility: ${({state})=>state?'visible':'hidden'};
+`;
+export const TextareaButton = styled.div`
+    display: flex;
+    justify-content:flex-end;
+    margin-top: 24px;
+`;
+export const EmojiContainer = styled.div`
+    
 `;

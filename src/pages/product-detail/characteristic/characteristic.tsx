@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
-import ProductTitle from '../../products-title';
+import ProductTitle from '../../../components/products-title';
+import Input from '../../../components/input';
+import { useForm } from "react-hook-form";
 import {
     WrapperContainer,
     CharacterContainer,
@@ -33,6 +35,12 @@ const network = [
 ]
 const Characteristic = () => {
     const [characters,setCharacters] = useState<boolean>(false)
+    const [inp,setInp] = useState<any>('');
+    
+    const {control} = useForm();
+    const handleChange = (e:any) =>{
+        console.log('uu--->',e.target.value)
+    }
     return (
         <div>
             <ProductTitle title="Характеристика"/>
@@ -89,6 +97,7 @@ const Characteristic = () => {
             </WrapperContainer>
             </>}
             <HandeleOpen onClick={()=>setCharacters(open=>!open)}>{characters?"Свернуть характеристики":"Развернуть характеристики"}</HandeleOpen>
+            <Input control={control} label="Number" inputType="brithDay" onChange={(e)=>handleChange(e)} defaultValue={inp}/> 
         </div>
     )
 }
