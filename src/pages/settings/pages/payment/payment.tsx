@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AddCards from './add-cards';
+import NoCards from './no-cards';
+import { PaymentContainer } from './styles';
 
 const Payment = () => {
-  return <div>Payment</div>;
+  const [cards, setCards] = useState([]);
+
+  return (
+    <PaymentContainer>
+      <NoCards />
+      <AddCards />
+    </PaymentContainer>
+  );
 };
 
 export default Payment;

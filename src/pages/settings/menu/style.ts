@@ -5,7 +5,7 @@ const activeClassName = 'nav-item-active';
 
 export const StyledLink = styled(NavLink).attrs({ activeClassName })`
   &.${activeClassName} {
-    background: #f2f2f2;
+    background: #f4f6fa;
     color: black;
     font-weight: 600;
     transition: 0.2s;
@@ -20,7 +20,7 @@ export const Ul = styled.ul`
   min-width: 320px;
   width: 320px;
   border-radius: 16px;
-  border: 1px solid ${({ theme: { grey3 } }) => grey3};
+  border: 2px solid #e9ecf4;
   list-style-type: none;
   overflow: hidden;
 `;
@@ -30,16 +30,16 @@ export const Li = styled.li`
   margin: 0;
   transition: 0.2s;
   &:hover {
-    background: #f2f2f2;
+    background: #f4f6fa;
   }
-  border-bottom: 1px solid ${({ theme: { grey3 } }) => grey3};
+  //border-bottom: 1px solid ${({ theme: { grey3 } }) => grey3};
   &:last-child {
     color: ${({ theme: { red } }) => red};
     border-bottom: none;
   }
   a {
     display: block;
-    padding: 18px 32px;
+    padding: 18px 24px;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;

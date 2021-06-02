@@ -30,7 +30,7 @@ const Menu = () => {
             Адреса доставки
           </StyledLink>
         </Li>
-        <Li>
+        {/* <Li>
           <StyledLink exact to={`${url}/notifications`}>
             Уведомления
           </StyledLink>
@@ -38,6 +38,11 @@ const Menu = () => {
         <Li>
           <StyledLink exact to={`${url}/change-password`}>
             Изменить пароль
+          </StyledLink>
+        </Li> */}
+        <Li>
+          <StyledLink exact to={`${url}/personal-data`}>
+            Данные профиля Marketplace
           </StyledLink>
         </Li>
         <Li>
