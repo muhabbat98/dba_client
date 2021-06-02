@@ -6,7 +6,7 @@ import Cart from '../../pages/cart';
 import Wishlist from '../../pages/wishlist';
 import Settings from '../../pages/settings';
 
-import ProductDetail from '../../components/product-detail';
+import ProductDetail from '../../pages/product-detail';
 
 import Catalog from '../../pages/catalog';
 import Products from '../../pages/products';

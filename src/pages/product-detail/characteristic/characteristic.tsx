@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
-import ProductTitle from '../../products-title';
+import ProductTitle from '../../../components/products-title';
+import Input from '../../../components/input';
+
 import {
     WrapperContainer,
     CharacterContainer,
@@ -33,6 +35,7 @@ const network = [
 ]
 const Characteristic = () => {
     const [characters,setCharacters] = useState<boolean>(false)
+   
     return (
         <div>
             <ProductTitle title="Характеристика"/>
@@ -89,6 +92,7 @@ const Characteristic = () => {
             </WrapperContainer>
             </>}
             <HandeleOpen onClick={()=>setCharacters(open=>!open)}>{characters?"Свернуть характеристики":"Развернуть характеристики"}</HandeleOpen>
+           
         </div>
     )
 }

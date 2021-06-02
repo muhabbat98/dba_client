@@ -54,6 +54,7 @@ export const Label = styled.label<InputStates>`
   color: ${({error})=>error?"red":theme.blue};
   display: ${({ isFocus }) => (isFocus ? 'block' : 'none')};
   animation: ${anim} 0.4s;
+  
 `;
 export const MaskInput = styled(InputMask)`
   color: #262626;
@@ -66,6 +67,7 @@ export const MaskInput = styled(InputMask)`
   border: none;
   outline: none;
   padding-left: 25px;
+
 `;
 export const ErrorTitle = styled.div`
   font-style: normal;

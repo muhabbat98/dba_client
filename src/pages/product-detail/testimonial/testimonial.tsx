@@ -1,9 +1,12 @@
-import React,{useState} from 'react'
-import Title from '../../products-title';
-import StarRaiting from '../../star-rating';
+import React,{useState,useRef,useEffect} from 'react'
+// import Picker from 'emoji-picker-react';
+import Title from '../../../components/products-title';
+import StarRaiting from '../../../components/star-rating';
+import Button from '../../../components/button';
 import Avatar1 from './avatar1.svg';
 import Avatar2 from './avatar2.svg';
 import Avatar3 from './avatar3.svg';
+import {ReactComponent as Smile} from './smile.svg'
 import {ReactComponent as Like} from '../../../assets/icons/like-hand.svg'
 import {
     TestimonalWrapper,
@@ -16,7 +19,13 @@ import {
     SmsActionContainer,
     LikeAndDislike,
     ViewAllTitle,
-    TestimonaMarks
+    TestimonaMarks,
+    StarContainer,
+    ButtonContainer,
+    Textarea,
+    LabelSms,
+    TextareaButton,
+    EmojiContainer
 
 } from './style';
 
@@ -62,7 +71,26 @@ const testimonal = [
     },
 ]
 const  Testimonial = () => {
+    const refAction = useRef<any>()
     const [viewReplays,setViewReplays] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false)
+    const [textFild,setTextFild] = useState<boolean>(false);
+    const [chosenEmoji, setChosenEmoji] = useState(null);
+
+    // const onEmojiClick = (event, emojiObject) => {
+    // setChosenEmoji(emojiObject);
+    // };
+
+    // useEffect(()=>{
+    //     const leng=refAction && refAction.current.value
+    //     if(leng.length>0) {
+    //         setTextFild(true);
+    //     }
+    
+    //   })
+    const handleBlur = () =>{
+        setTextFild(true)
+    }
     return (
         <TestimonalWrapper>
             <Title title="Отзывы"/>
@@ -116,13 +144,51 @@ const  Testimonial = () => {
                 ))
             }
             <ViewAllTitle>Посмотреть все 1241 отзыв</ViewAllTitle>
-            <div>
-                <TestimonaMarks>
-                    <Title title="Отзывы и оценки"/><span>1241</span>
-                </TestimonaMarks>
-                
-            </div>    
-            
+            <ButtonContainer>
+                <div>
+                    <TestimonaMarks>
+                        <Title title="Отзывы и оценки"/><span>1241</span>
+                    </TestimonaMarks> 
+                    <StarContainer>
+                        {!open?<StarRaiting inputStar={Math.round(4.8)}/> :<StarRaiting /> }
+                        { !open && <span style={{color:"#000",fontWeight:'bold',marginTop:0,fontSize:24}}>4.8</span>}
+                    </StarContainer>
+
+                </div>
+                {
+                    !open && 
+                    <Button onClick={()=>setOpen(true)} style={{alignSelf:'center'}}>Написать отзыв</Button>
+                }
+
+            </ButtonContainer>    
+            {
+                open && 
+                <div>
+                    <Textarea state={textFild}>
+                        <div onClick={()=>handleBlur()}>
+                            <LabelSms state={textFild}>Введите описание товара</LabelSms>
+                            <textarea
+                                onBlur={()=>handleBlur()}
+                                rows={7} 
+                                placeholder="Введите описание товара"
+                                ref={refAction}
+                                
+                                />
+                            <EmojiContainer>
+                                
+                            </EmojiContainer>
+                        </div>
+                        <Smile/>
+                    </Textarea>
+                    
+                    <TextareaButton>
+                        {!textFild 
+                            ?<Button btnType="disabled">Добавить отзыв</Button>
+                            :<Button >Добавить отзыв</Button>
+                        }
+                    </TextareaButton>
+                </div>
+            }
         </TestimonalWrapper>
     )
 }

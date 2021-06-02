@@ -47,6 +47,8 @@ export const CheckBoxLabel = styled.label`
     display: inline-block;
     width: 100%;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
 
   /* Box */

@@ -32,7 +32,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       inn: null,
       passportType: null,
       passportNumber: null,
-      gender: null
+      gender: null,
    });
    const [avatar, setAvatar] = useState<any>(Avatar);
    const [imgUrl, setImgUrl] = useState<any>(null);
@@ -234,13 +234,13 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <Input name="phoneNumber" onChange={handleChange} label="Телефон" value={state.phoneNumber} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Срок действия" value="26/06/2026" />
+                     <Input onChange={handleChange} label="Срок действия" value="26/06/2026" type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="homePhoneNumber" onChange={handleChange} label="Телефон (домашний)" value={state.homePhoneNumber} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Дата рождения" value="27/08/2000" />
+                     <Input onChange={handleChange} label="Дата рождения" value="27/08/2000" type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
