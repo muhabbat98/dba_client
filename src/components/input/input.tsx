@@ -7,6 +7,7 @@ interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   inputType?: "phone" | "card" | "cardData" | "passport" | "brithDay";
   control?: any;
   error?:string; //Error Text
+  defaultValue?:string;
 }
 
 const Input: React.FC<InputFilds> = ({
@@ -15,6 +16,7 @@ const Input: React.FC<InputFilds> = ({
   error,
   placeholder,
   control,
+  defaultValue,
   ...rest
 }) => {
   const refInput = useRef<any>();
@@ -47,6 +49,7 @@ const Input: React.FC<InputFilds> = ({
           control={control}
           mask="+\9\98 99 999 99 99"
           name={inputType}
+          defaultValue={defaultValue}
         />
       );
     } else if (inputType == "card") {
@@ -57,6 +60,7 @@ const Input: React.FC<InputFilds> = ({
           control={control}
           mask="9999 9999 9999 9999"
           name={inputType}
+          defaultValue={defaultValue}
           
         />
       );
@@ -69,6 +73,7 @@ const Input: React.FC<InputFilds> = ({
           control={control}
           mask="99/99"
           name={inputType}
+          defaultValue={defaultValue}
           
         />
         )
@@ -81,6 +86,7 @@ const Input: React.FC<InputFilds> = ({
           control={control}
           mask="99/99/9999"
           name={inputType}
+          defaultValue={defaultValue}
         />
         )
     }
@@ -92,6 +98,7 @@ const Input: React.FC<InputFilds> = ({
           control={control}
           mask={"aa 99999"}
           name={inputType}
+          defaultValue={defaultValue}
         />
         )
     }
