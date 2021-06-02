@@ -23,12 +23,14 @@ const AddCard = () => {
           <Input
             name='cardNumber'
             label='Номер карты'
+            placeholder='Номер карты'
             inputType='card'
             control={control}
           />
           <Input
             name='expireDate'
             label='Срок действия'
+            placeholder='Срок действия'
             inputType='cardData'
             control={control}
           />
