@@ -11,7 +11,6 @@ import PriceInput from './price-input';
 function ProductsFilter() {
    return (
       <ProductsFilterWrapper>
-
          <FilterCollapse headerTitle="Цена, UZS">
             <FilterCollapseItem>
                <PriceInput placeholder="От 10" />

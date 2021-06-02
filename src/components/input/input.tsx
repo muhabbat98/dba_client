@@ -148,6 +148,7 @@ const Input: React.FC<InputFilds> = ({
           isFocus={isFocus}
           onBlur={(e) => onBlur(e)}
           error={error?true:false}    
+          defaultValue={defaultValue}
         />
       )}
       

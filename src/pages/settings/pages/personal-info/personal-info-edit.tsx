@@ -5,6 +5,7 @@ import Input from '../../../../components/input/';
 import Button from '../../../../components/button';
 import Dropdown from '../../../../components/drop-down'
 import { axios, useActionCreators, useSelector } from '../../../../hooks';
+import { useForm } from "react-hook-form";
 
 import {
    PersonalInfoContainer, PersonalHeader, PersonalHeaderLeft, PersonalHeaderRight, PersonalAvatar,
@@ -22,6 +23,8 @@ interface PersonalInfoEditProps {
 }
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
+   const { register, handleSubmit } = useForm();
+
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
       firstName: "",
@@ -49,7 +52,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    useEffect(() => {
       getData('60927f03ad717f2975f9713d');
-      console.log('useeffect 2');
    }, []);
 
    const handleChange = (ev: any) => {
@@ -62,7 +64,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const dropdownHandle = (data: any) => {
-      console.log(data);
       setState({
          ...state,
          gender: data.value
@@ -70,7 +71,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const dropdownDocumentHandle = (data: any) => {
-      console.log(data);
       // setState({
       //    ...state,
       //    gender: data.value
@@ -100,7 +100,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          try {
             const response = await axios.post(`/images/upload`, formData);
             const data = await response.data;
-            console.log('Data == ', data);
             if (data.imageUrl) {
                setImgUrl(data);
             } else {
@@ -169,8 +168,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       }
    }
 
-   console.log('state = ', state);
-
    return (
       state &&
       <PersonalInfoContainer>
@@ -228,19 +225,19 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <Input name="secondName" onChange={handleChange} label="Фамилия" value={state.secondName} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Дата выдачи" value="27/07/2016" type="date" />
+                     <Input onChange={handleChange} label="Дата выдачи" defaultValue="2014-02-09" type="date"  />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="phoneNumber" onChange={handleChange} label="Телефон" value={state.phoneNumber} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Срок действия" value="26/06/2026" type="date" />
+                     <Input onChange={handleChange} label="Срок действия" defaultValue="2014-02-09" type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="homePhoneNumber" onChange={handleChange} label="Телефон (домашний)" value={state.homePhoneNumber} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Дата рождения" value="27/08/2000" type="date" />
+                     <Input onChange={handleChange} label="Дата рождения" defaultValue="2014-02-09" type="date" name="brithDate" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
@@ -248,7 +245,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="inn" onChange={handleChange} label="ИНН" value={state.inn} />
                   </PersonalBodyFlex>
-
                   <PersonalBodyFlex isEdit={true}>
                      <Dropdown option={['Мужской', 'Женский']} label="Пол" callback={dropdownHandle} />
                   </PersonalBodyFlex>
