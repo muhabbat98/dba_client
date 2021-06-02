@@ -4,10 +4,10 @@ import Container from '../../components/grid/container';
 import Card from '../../components/card';
 import Row from '../../components/grid/row';
 import ProductsTitle from '../../components/products-title';
-import FilterCollapse from './filter-collapse';
 import { useLocation, useHistory, useParams, useRouteMatch } from 'react-router-dom';
+import ProductsFilter from './products-filter'
 
-import { CategoryContainer, ProductsFilterWrapper, FilterCollapseItem } from './style';
+import { CategoryContainer } from './style';
 
 import CardImage from '../../assets/images/card-item1.png';
 import CardImage2 from '../../assets/images/card-item2.png';
@@ -17,8 +17,6 @@ import CardImage5 from '../../assets/images/card-item5.png';
 import CardImage6 from '../../assets/images/card-item6.png';
 import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
-import SettingsInput from '../../components/settings-input';
-
 
 const data = [
    {
@@ -168,6 +166,7 @@ const data = [
    }
 ]
 
+
 const Products = () => {
    console.log("useLocation == ", useLocation());
    console.log("useHistory == ", useHistory());
@@ -183,14 +182,7 @@ const Products = () => {
             <ProductsTitle title="Мобильные телефоны" />
             <Row>
                <Col xl={3}>
-                  <ProductsFilterWrapper>
-                     <FilterCollapse headerTitle="Цена, UZS">
-                        <FilterCollapseItem>
-                           <SettingsInput placeholder="От 20" style={{ width: '100%' }} />
-                           <SettingsInput placeholder="До 20" style={{ width: '100%' }} />
-                        </FilterCollapseItem>
-                     </FilterCollapse>
-                  </ProductsFilterWrapper>
+                  <ProductsFilter />
                </Col>
                <Col xl={9}>
                   <Row>
@@ -205,7 +197,7 @@ const Products = () => {
                </Col>
             </Row>
          </Container>
-      </CategoryContainer>
+      </CategoryContainer >
    )
 }
 
