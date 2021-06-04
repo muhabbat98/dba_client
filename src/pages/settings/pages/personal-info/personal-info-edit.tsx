@@ -111,11 +111,19 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             }
 
          } catch (error) {
-            setAlertMessage({
-               message: `Rasmni hajmi katta yoki boshqa format kiritildi`,
-               type: 'error',
-               position: AlertPosition.TOP_CENTER
-            })
+            if (error.debugMessage) {
+               setAlertMessage({
+                  message: error.debugMessage,
+                  type: 'error',
+                  position: AlertPosition.TOP_LEFT
+               });
+            } else {
+               setAlertMessage({
+                  message: error.message,
+                  type: 'error',
+                  position: AlertPosition.TOP_LEFT
+               });
+            }
          }
 
       } else {
@@ -135,11 +143,19 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          setAvatar(data.imageUrl);
          setImgUrl(data.imageUrl);
       } catch (error) {
-         setAlertMessage({
-            message: error.message,
-            type: 'error',
-            position: AlertPosition.TOP_CENTER
-         })
+         if (error.debugMessage) {
+            setAlertMessage({
+               message: error.debugMessage,
+               type: 'error',
+               position: AlertPosition.TOP_LEFT
+            });
+         } else {
+            setAlertMessage({
+               message: error.message,
+               type: 'error',
+               position: AlertPosition.TOP_LEFT
+            });
+         }
       }
    }
 
@@ -160,11 +176,19 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             position: AlertPosition.TOP_CENTER
          })
       } catch (error) {
-         setAlertMessage({
-            message: error.message,
-            type: 'error',
-            position: AlertPosition.TOP_CENTER
-         })
+         if (error.debugMessage) {
+            setAlertMessage({
+               message: error.debugMessage,
+               type: 'error',
+               position: AlertPosition.TOP_LEFT
+            });
+         } else {
+            setAlertMessage({
+               message: error.message,
+               type: 'error',
+               position: AlertPosition.TOP_LEFT
+            });
+         }
       }
    }
 
@@ -225,7 +249,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <Input name="secondName" onChange={handleChange} label="Фамилия" value={state.secondName} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Дата выдачи" defaultValue="2014-02-09" type="date"  />
+                     <Input onChange={handleChange} label="Дата выдачи" defaultValue="2014-02-09" type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="phoneNumber" onChange={handleChange} label="Телефон" value={state.phoneNumber} />

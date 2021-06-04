@@ -27,8 +27,8 @@ const Discussion = () => {
           <DiscussionFilterSection>
             <SettingsInput />
             <SettingsDropdown label="Статус" options={['Завершен', 'Активный']} />
-            <SettingsInput />
-            <SettingsInput />
+            <SettingsInput placeholder="Причина"/>
+            <SettingsInput placeholder="Продавец"/>
           </DiscussionFilterSection>
         ) : null
       }

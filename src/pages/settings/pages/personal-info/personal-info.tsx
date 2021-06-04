@@ -35,11 +35,19 @@ const PersonalInfo = () => {
       console.log(data);
       setPersonalInfo(data);
     } catch (error) {
-      setAlertMessage({
-        message: 'No WRONG!',
-        type: 'error',
-        position: AlertPosition.TOP_LEFT
-      })
+      if (error.debugMessage) {
+        setAlertMessage({
+          message: error.debugMessage,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+      } else {
+        setAlertMessage({
+          message: error.message,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+      }
     }
   }
 
@@ -55,7 +63,7 @@ const PersonalInfo = () => {
     <PersonalInfoContainer>
       <Alert />
       <PersonalHeader>
-        <PersonalHeaderLeftSide personalInfo={personalInfo}/>
+        <PersonalHeaderLeftSide personalInfo={personalInfo} />
         {/* <PersonalHeaderLeft>
           <PersonalAvatar>
             <PersonalAvatarImg src={!isEmptyObj(personalInfo) && personalInfo.imageUrl ? personalInfo.imageUrl : Avatar} />
