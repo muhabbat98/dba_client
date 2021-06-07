@@ -4,7 +4,7 @@ import { InputWrapper, MaskInput, InputElement, Label,ErrorTitle } from "./style
 
 interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  inputType?: "phone" | "card" | "cardData" | "passport" | "brithDay";
+  inputType?: "phone" | "card" | "cardData" | "passport" | "brithDay"| "inn" | "letter";
   control?: any;
   error?:string; //Error Text
   defaultValue?:string;
@@ -113,6 +113,38 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask={"aa 99999"}
+          name={inputType}
+          defaultValue={defaultValue}
+          isFocus={isFocus}
+          error={error?true:false}  
+          placeholder={placeholder}
+          
+        />
+        )
+    }
+    else if(inputType=="inn"){
+      return (
+        <Controller
+          ref={refInput}
+          as={MaskInput}
+          control={control}
+          mask={"999999999"}
+          name={inputType}
+          defaultValue={defaultValue}
+          isFocus={isFocus}
+          error={error?true:false}  
+          placeholder={placeholder}
+          
+        />
+        )
+    }
+    else if(inputType=="letter"){
+      return (
+        <Controller
+          ref={refInput}
+          as={MaskInput}
+          control={control}
+          mask={"aaaaaaaaaaaaaaaaaa"}
           name={inputType}
           defaultValue={defaultValue}
           isFocus={isFocus}

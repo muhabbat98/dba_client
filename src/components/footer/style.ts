@@ -50,10 +50,15 @@ export const ContainerBoottom = styled.div`
     }
 `;
 export const AppStories = styled.li`
+    margin:0px;
     svg{
         height:40px;
+        &:nth-child(1){
+        margin-left:0px;
+        }
         &:nth-child(2){
             margin-top:17px;
+            margin-left:3px;
         }
     }
 `;

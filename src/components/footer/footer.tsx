@@ -54,6 +54,7 @@ const Footer = () => {
         <Line></Line>
         <p>2020-2021 © Marketplace</p>
       </Container>
+     
     </FooterWrapper>
   );
 };
