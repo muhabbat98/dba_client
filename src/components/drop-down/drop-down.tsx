@@ -8,20 +8,21 @@ import {
 interface DropdownProps {
    callback: (data: string) => void;
    label?: string;
-   option?: any
+   option?: any,
+   selected?: string
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ callback, label, option }) => {
+const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }) => {
+   console.log('option == ', option);
+   console.log('selected == ', selected);
 
-   const options = option.map((item: any, i:any) => {
+   const options = option.map((item: any, i: any) => {
       return {
          index: i,
          value: item,
-         selected: false
+         selected: item == selected ? true : false
       }
    })
-
-   console.log(options);
 
    // const options = [
    //    { value: 'дешевые сверху', index: 0, selected: false },
@@ -38,13 +39,13 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option }) => {
 
    const dropdown = useRef<HTMLUListElement>(null);
 
-   useEffect(() => {
-      if (selectedOption === null) {
-         if (dropdown.current) {
-            dropdown.current.children[0].classList.add('selected');
-         }
-      }
-   }, []);
+   // useEffect(() => {
+   //    if (selectedOption === null) {
+   //       if (dropdown.current) {
+   //          dropdown.current.children[0].classList.add('selected');
+   //       }
+   //    }
+   // }, []);
 
    const selectItem = (item: any, e: SyntheticEvent) => {
       setSelectedOption(item.value);
@@ -53,6 +54,7 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option }) => {
       if (target.parentElement?.childElementCount !== undefined) {
          for (let i = 0; i < target.parentElement?.childElementCount; i++) {
             target.parentElement?.children[i].classList.remove('selected');
+            console.log(target.parentElement.children[i]);
          }
       }
       target.classList.add('selected');
@@ -69,6 +71,17 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option }) => {
       setIsOpen('');
    }
 
+   const getActiveName = () => {
+      console.log('getactive == ', options);
+      const o = options.filter((option:  any) => {
+         if (option.selected) {
+            return option;
+         }
+      })
+      console.log("o[0] == ", o[0] && o[0].value);
+      return o[0] && o[0].value;
+   }
+
    return (
       <>
          {
@@ -78,17 +91,21 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option }) => {
             <DropdownHeader onClick={toggleList}>
                <DropdownLabel>{label}</DropdownLabel>
                <DropdownHeaderTitle>
-                  {selectedOption || options[0].value}
+                  {
+                     getActiveName()
+                  }
+                  {/* {selectedOption || options[0].value} */}
                   <Arrow />
                </DropdownHeaderTitle>
             </DropdownHeader>
             {
                <DropdownOptionList className={isOpen} ref={dropdown}>
                   {
-                     options.map((item:any, key:any) => (
+                     options.map((item: any, key: any) => (
                         <DropdownOption
                            key={key}
                            data-index={item.index}
+                           className={item.selected ? 'selected' : ''}
                            onClick={(e: SyntheticEvent) => selectItem(item, e)}
                         >{item.value}</DropdownOption>
                      ))

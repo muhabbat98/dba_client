@@ -23,19 +23,20 @@ interface PersonalInfoEditProps {
 }
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
-   const { register, handleSubmit } = useForm();
+   const { register, handleSubmit, control } = useForm();
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
       firstName: "",
-      secondName: null,
-      phoneNumber: "",
+      secondName: "",
+      phoneNumber: null,
       homePhoneNumber: null,
       email: null,
       inn: null,
       passportType: null,
       passportNumber: null,
       gender: null,
+      brithDay: '2014-02-09',
    });
    const [avatar, setAvatar] = useState<any>(Avatar);
    const [imgUrl, setImgUrl] = useState<any>(null);
@@ -55,8 +56,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }, []);
 
    const handleChange = (ev: any) => {
+      console.log("WWWWWWWW");
       const name = ev.target.name;
       const value = ev.target.value;
+      console.log("name === ", name);
+      console.log("state == ", state);
       setState({
          ...state,
          [name]: value
@@ -71,6 +75,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const dropdownDocumentHandle = (data: any) => {
+      console.log('dropdownDocumentHandle = ', data);
       // setState({
       //    ...state,
       //    gender: data.value
@@ -192,6 +197,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       }
    }
 
+   console.log('STATE = ', state);
+
    return (
       state &&
       <PersonalInfoContainer>
@@ -231,46 +238,79 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             <form style={{ paddingBottom: '28px' }}>
                <PersonalBodyGrid>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="firstName" onChange={ev => handleChange(ev)} label="Имя" value={state.firstName} type="text" />
+                     <Input name="firstName" placeholder="Имя" onChange={ev => handleChange(ev)} label="Имя" value={state.firstName} type="text" inputType="letter" control={control} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Dropdown
-                        option={['Биометрический паспорт ', 'Биометрический паспорт 2']}
+                        option={['Биометрический паспортs', 'Биометрический паспорт 2']}
                         label="Тип удостоверяющего документа"
+                        selected="Биометрический паспорт 2"
                         callback={dropdownDocumentHandle} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
                         name="passportNumber"
+                        placeholder="Серия номер распорта(ID-карты)"
                         onChange={handleChange}
                         label="Серия номер распорта(ID-карты)" value={state.passportNumber} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="secondName" onChange={handleChange} label="Фамилия" value={state.secondName} />
+                     <Input 
+                     name="secondName" 
+                     onChange={handleChange} 
+                     label="Фамилия" 
+                     placeholder="Фамилия"
+                     value={state.secondName} 
+                     inputType="letter"
+                     control={control}/>
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input onChange={handleChange} label="Дата выдачи" defaultValue="2014-02-09" type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="phoneNumber" onChange={handleChange} label="Телефон" value={state.phoneNumber} />
+                     <Input
+                        name="phoneNumber"
+                        onChange={handleChange}
+                        label="Телефон"
+                        placeholder="Телефон"
+                        // value={state.phoneNumber}
+                        defaultValue="123141424"
+                        control={control}
+                        inputType="phone" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input onChange={handleChange} label="Срок действия" defaultValue="2014-02-09" type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="homePhoneNumber" onChange={handleChange} label="Телефон (домашний)" value={state.homePhoneNumber} />
+                     <Input 
+                        name="homePhoneNumber"
+                        onChange={handleChange}
+                        label="Телефон (домашний)"
+                        placeholder="Телефон (домашний)"
+                        // value={state.homePhoneNumber} 
+                        defaultValue={state.homePhoneNumber} 
+                        control={control}
+                        inputType="phone"/>
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Дата рождения" defaultValue="2014-02-09" type="date" name="brithDate" />
+                     <Input 
+                        onChange={handleChange} 
+                        label="Дата рождения"
+                        // defaultValue="2014-02-09" 
+                        defaultValue={state.brithDay}
+                        type="date" 
+                        name="brithDate" 
+                        
+                        />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="inn" onChange={handleChange} label="ИНН" value={state.inn} />
+                     <Input name="inn" placeholder="ИНН" onChange={handleChange} label="ИНН" value={state.inn} inputType="inn" control={control}/>
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Dropdown option={['Мужской', 'Женский']} label="Пол" callback={dropdownHandle} />
+                     <Dropdown option={['Мужской', 'Женский']} selected={state.gender} label="Пол" callback={dropdownHandle} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      {/* <Input name="inn" onChange={handleChange} label="ИНН" value={state.inn} /> */}
