@@ -150,7 +150,7 @@ const AddressBoxes: React.FC<Propses> = ({
                 <span>Удалить</span>
               </div>
               <Arrow
-                style={{ transform: "rotate(180deg)" }}
+                style={{ transform: "rotate(180deg)",transition:"0.3s"}}
                 onClick={() => setOpenAddress((open) => !open)}
               >
                 <DownArrow />

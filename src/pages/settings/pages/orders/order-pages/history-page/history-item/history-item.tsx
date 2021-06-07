@@ -32,11 +32,11 @@ const  HistoryItem:React.FC<Propses> = ({item}) => {
                 <div> {item.seller} </div>
                 <div> 
                     <span 
-                    style={{background:open?"#EAEDF5":"",}} 
+                    style={{background:open?"#EAEDF5":"",marginRight:20}} 
                     onClick={()=>setOpen(!open)}>
                         <ArrowIcon 
                         style={
-                            {transform:open?"rotate(180deg)":"",
+                            {transform:open?"rotate(180deg)":"",transition:"0.3s",
                             marginTop:open?-2:2}}/>
                         </span> 
                 </div>
