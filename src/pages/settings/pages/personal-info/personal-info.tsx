@@ -6,6 +6,7 @@ import { axios, useActionCreators, useSelector } from '../../../../hooks';
 import { AlertPosition } from '../../../../utils/alert-position-enum';
 
 import isEmptyObj from '../../../../utils/isEmptyObj';
+import PersonalHeaderLeftSide from './personal-header-left';
 
 import {
   PersonalInfoContainer, PersonalHeader, PersonalHeaderLeft, PersonalHeaderRight, PersonalAvatar,
@@ -34,11 +35,19 @@ const PersonalInfo = () => {
       console.log(data);
       setPersonalInfo(data);
     } catch (error) {
-      setAlertMessage({
-        message: 'No WRONG!',
-        type: 'error',
-        position: AlertPosition.TOP_LEFT
-      })
+      if (error.debugMessage) {
+        setAlertMessage({
+          message: error.debugMessage,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+      } else {
+        setAlertMessage({
+          message: error.message,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+      }
     }
   }
 
@@ -54,7 +63,8 @@ const PersonalInfo = () => {
     <PersonalInfoContainer>
       <Alert />
       <PersonalHeader>
-        <PersonalHeaderLeft>
+        <PersonalHeaderLeftSide personalInfo={personalInfo} />
+        {/* <PersonalHeaderLeft>
           <PersonalAvatar>
             <PersonalAvatarImg src={!isEmptyObj(personalInfo) && personalInfo.imageUrl ? personalInfo.imageUrl : Avatar} />
           </PersonalAvatar>
@@ -69,7 +79,7 @@ const PersonalInfo = () => {
               <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
             </PersonalVerified>
           </PersonalNameWrapper>
-        </PersonalHeaderLeft>
+        </PersonalHeaderLeft> */}
         <PersonalHeaderRight>
           <ChangeProfileButton onClick={toggleComponent}>
             <Edit />
