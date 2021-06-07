@@ -8,7 +8,8 @@ interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   control?: any;
   error?:string; //Error Text
   defaultValue?:string;
-  name?:any
+  name?:any,
+  value?:any
 }
 
 const Input: React.FC<InputFilds> = ({
@@ -19,6 +20,7 @@ const Input: React.FC<InputFilds> = ({
   control,
   defaultValue,
   name,
+  value,
   ...rest
 }) => {
   const refInput = useRef<any>();
@@ -176,6 +178,7 @@ const Input: React.FC<InputFilds> = ({
       ) : (
         <InputElement
           {...rest}
+          name={name}
           ref={refInput}
           autoFocus ={isFocus?true:false}
           placeholder={!isFocus ? placeholder : ""}

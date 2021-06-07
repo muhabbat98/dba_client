@@ -55,13 +55,13 @@ const PersonalInfo = () => {
     setState(!state);
   }
 
+
   if (state) {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />
   }
 
   return (
     <PersonalInfoContainer>
-      <Alert />
       <PersonalHeader>
         <PersonalHeaderLeftSide personalInfo={personalInfo} />
         {/* <PersonalHeaderLeft>

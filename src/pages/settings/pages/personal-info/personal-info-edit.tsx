@@ -17,6 +17,7 @@ import {
 import Avatar from '../../../../assets/images/personal-info-avatar.png';
 import { ReactComponent as PersonalAvatarEditImg } from '../../../../assets/icons/personal-info-avatar-edit.svg';
 import { ReactComponent as Verified } from '../../../../assets/icons/verified.svg';
+import getStoredState from 'redux-persist/es/integration/getStoredStateMigrateV4';
 
 interface PersonalInfoEditProps {
    toggleComponent: () => void
@@ -27,17 +28,18 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
-      firstName: "",
-      secondName: "",
-      phoneNumber: null,
-      homePhoneNumber: null,
+      // firstName: "frtrvrrvv",
+      // secondName: "",
+      // phoneNumber: null,
+      // homePhoneNumber: null,
       email: null,
-      inn: null,
+      // inn: null,
       passportType: null,
-      passportNumber: null,
+      // passportNumber: "qw1233333",
       gender: null,
       brithDay: '2014-02-09',
    });
+
    const [avatar, setAvatar] = useState<any>(Avatar);
    const [imgUrl, setImgUrl] = useState<any>(null);
    const [avatarToggle, setAvatarToggle] = useState(false);
@@ -56,11 +58,13 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }, []);
 
    const handleChange = (ev: any) => {
-      console.log("WWWWWWWW");
+      
       const name = ev.target.name;
       const value = ev.target.value;
-      console.log("name === ", name);
-      console.log("state == ", state);
+
+      console.log('handleChange name', ev.target);
+      console.log('handleChange value', value);
+
       setState({
          ...state,
          [name]: value
@@ -76,10 +80,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    const dropdownDocumentHandle = (data: any) => {
       console.log('dropdownDocumentHandle = ', data);
-      // setState({
-      //    ...state,
-      //    gender: data.value
-      // })
+      setState({
+         ...state,
+         passportType: data.value
+      })
    }
 
    const handleAvatarChange = async (ev: any) => {
@@ -164,11 +168,12 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       }
    }
 
-   const uploadData = async (ev: any) => {
-      ev.preventDefault();
+   const uploadData = async (obj: any) => {
+      // ev.preventDefault();
       try {
          let dataObj = {
             ...state,
+            ...obj,
             imageUrl: imgUrl.imageUrl || imgUrl
          }
 
@@ -181,24 +186,29 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             position: AlertPosition.TOP_CENTER
          })
       } catch (error) {
-         if (error.debugMessage) {
-            setAlertMessage({
-               message: error.debugMessage,
-               type: 'error',
-               position: AlertPosition.TOP_LEFT
-            });
-         } else {
-            setAlertMessage({
-               message: error.message,
-               type: 'error',
-               position: AlertPosition.TOP_LEFT
-            });
-         }
+         console.log('error === ', error)
+         // if (error.debugMessage) {
+         //    setAlertMessage({
+         //       message: error.debugMessage,
+         //       type: 'error',
+         //       position: AlertPosition.TOP_LEFT
+         //    });
+         // } else {
+         //    setAlertMessage({
+         //       message: error.message,
+         //       type: 'error',
+         //       position: AlertPosition.TOP_LEFT
+         //    });
+         // }
       }
    }
 
    console.log('STATE = ', state);
 
+   const onSubmit = (data:any) => {
+      console.log(data)
+      uploadData(data);
+   }
    return (
       state &&
       <PersonalInfoContainer>
@@ -235,34 +245,48 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             </PersonalHeaderRight>
          </PersonalHeader>
          <PersonalBody>
-            <form style={{ paddingBottom: '28px' }}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{ paddingBottom: '28px' }}>
                <PersonalBodyGrid>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="firstName" placeholder="Имя" onChange={ev => handleChange(ev)} label="Имя" value={state.firstName} type="text" inputType="letter" control={control} />
+                     <Input
+                        name="firstName"
+                        placeholder="Имя"
+                        onChange={ev => handleChange(ev)}
+                        label="Имя"
+                        // value={state.firstName} 
+                        defaultValue={state.firstName}
+                        inputType="letter"
+                        control={control}
+                        type="text" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Dropdown
                         option={['Биометрический паспортs', 'Биометрический паспорт 2']}
                         label="Тип удостоверяющего документа"
-                        selected="Биометрический паспорт 2"
+                        selected={state.passportType}
                         callback={dropdownDocumentHandle} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
                         name="passportNumber"
                         placeholder="Серия номер распорта(ID-карты)"
-                        onChange={handleChange}
-                        label="Серия номер распорта(ID-карты)" value={state.passportNumber} />
+                        // onChange={handleChange}
+                        label="Серия номер распорта(ID-карты)"
+                        inputType="passport"
+                        control={control}
+                        defaultValue={state.passportNumber}
+                        {...register("passportNumber")}
+                        />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input 
-                     name="secondName" 
-                     onChange={handleChange} 
-                     label="Фамилия" 
-                     placeholder="Фамилия"
-                     value={state.secondName} 
-                     inputType="letter"
-                     control={control}/>
+                     <Input
+                        name="secondName"
+                        onChange={handleChange}
+                        label="Фамилия"
+                        placeholder="Фамилия"
+                        value={state.secondName}
+                        inputType="letter"
+                        control={control} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input onChange={handleChange} label="Дата выдачи" defaultValue="2014-02-09" type="date" />
@@ -274,7 +298,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         label="Телефон"
                         placeholder="Телефон"
                         // value={state.phoneNumber}
-                        defaultValue="123141424"
+                        defaultValue={state.phoneNumber}
                         control={control}
                         inputType="phone" />
                   </PersonalBodyFlex>
@@ -282,32 +306,31 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <Input onChange={handleChange} label="Срок действия" defaultValue="2014-02-09" type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input 
+                     <Input
                         name="homePhoneNumber"
                         onChange={handleChange}
                         label="Телефон (домашний)"
                         placeholder="Телефон (домашний)"
                         // value={state.homePhoneNumber} 
-                        defaultValue={state.homePhoneNumber} 
+                        defaultValue={state.homePhoneNumber}
                         control={control}
-                        inputType="phone"/>
+                        inputType="phone" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input 
-                        onChange={handleChange} 
+                     <Input
+                        onChange={handleChange}
                         label="Дата рождения"
                         // defaultValue="2014-02-09" 
                         defaultValue={state.brithDay}
-                        type="date" 
-                        name="brithDate" 
-                        
-                        />
+                        type="date"
+                        name="brithDate"
+                     />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="inn" placeholder="ИНН" onChange={handleChange} label="ИНН" value={state.inn} inputType="inn" control={control}/>
+                     <Input name="inn" placeholder="ИНН" onChange={handleChange} label="ИНН" value={state.inn} inputType="inn" control={control} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Dropdown option={['Мужской', 'Женский']} selected={state.gender} label="Пол" callback={dropdownHandle} />
@@ -316,7 +339,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      {/* <Input name="inn" onChange={handleChange} label="ИНН" value={state.inn} /> */}
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                     <Button onClick={uploadData} style={{ backgroundColor: '#1541A9', width: '100%' }}>Сохранить</Button>
+                     <Button type="submit" style={{ backgroundColor: '#1541A9', width: '100%' }}>Сохранить</Button>
                   </PersonalBodyFlex>
                </PersonalBodyGrid>
             </form>
