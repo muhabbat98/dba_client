@@ -8,6 +8,7 @@ interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   control?: any;
   error?:string; //Error Text
   defaultValue?:string;
+  name?:any
 }
 
 const Input: React.FC<InputFilds> = ({
@@ -17,6 +18,7 @@ const Input: React.FC<InputFilds> = ({
   placeholder,
   control,
   defaultValue,
+  name,
   ...rest
 }) => {
   const refInput = useRef<any>();
@@ -50,7 +52,7 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask="+\9\98 99 999 99 99"
-          name={inputType}
+          name={name}
           defaultValue={defaultValue}
           isFocus={isFocus}
           error={error?true:false}  
@@ -65,7 +67,7 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask="9999 9999 9999 9999"
-          name={inputType}
+          name={name}
           defaultValue={defaultValue}
           isFocus={isFocus}
           error={error?true:false}  
@@ -81,7 +83,7 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask="99/99"
-          name={inputType}
+          name={name}
           defaultValue={defaultValue}
           isFocus={isFocus}
           error={error?true:false}  
@@ -97,7 +99,7 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask="99/99/9999"
-          name={inputType}
+          name={name}
           defaultValue={defaultValue}
           isFocus={isFocus}
           error={error?true:false}
@@ -113,7 +115,7 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask={"aa 99999"}
-          name={inputType}
+          name={name}
           defaultValue={defaultValue}
           isFocus={isFocus}
           error={error?true:false}  
@@ -129,7 +131,7 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask={"999999999"}
-          name={inputType}
+          name={name}
           defaultValue={defaultValue}
           isFocus={isFocus}
           error={error?true:false}  
@@ -145,7 +147,7 @@ const Input: React.FC<InputFilds> = ({
           as={MaskInput}
           control={control}
           mask={"aaaaaaaaaaaaaaaaaa"}
-          name={inputType}
+          name={name}
           defaultValue={defaultValue}
           isFocus={isFocus}
           error={error?true:false}  
