@@ -39,12 +39,12 @@ const Input: React.FC<InputFilds> = ({
   })
 
   const onBlur = (e: any) => {
-    console.log("Blur working....")
+    // console.log("Blur working....")
     setIsFocus(true);
     const val = e.target.value;
     if (val.length > 0 ) {
       setIsFocus(true);
-      console.log("Blur working....")
+      // console.log("Blur working....")
     } else setIsFocus(false);
   };
   const inputMaskType = () => {
@@ -180,6 +180,7 @@ const Input: React.FC<InputFilds> = ({
         <InputElement
           {...rest}
           name={name}
+          value={value}
           ref={refInput}
           autoFocus ={isFocus?true:false}
           placeholder={!isFocus ? placeholder : ""}

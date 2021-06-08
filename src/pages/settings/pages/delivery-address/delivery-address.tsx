@@ -38,14 +38,13 @@ const DeliveryAddress = () => {
     getPersonalAddress(user.id);
     
   }, []);
-
   const getPersonalAddress = async (id: any) => {
     setAddress(null);
     try {
       const response = await axios.get(`/user/location/${id}`);
       const data = await response.data;
       setAddress(data);
-      console.log("getDataa---->", data);
+      // console.log("getDataa---->", data);
     } catch (error) {
       if (error.debugMessage) {
         setAlertMessage({
@@ -93,9 +92,8 @@ const DeliveryAddress = () => {
     const userId = user.id;
     try {
       const response = await axios.put(`/user/location/`, { ...data, userId });
-      console.log('responsEdit------->',response)
       handleStateChange(response && true);
-      console.log('responseEdit-->',response);
+      // console.log('responseEdit-->',response);
     } catch (error) {
       if (error.debugMessage) {
         setAlertMessage({
@@ -120,7 +118,7 @@ const DeliveryAddress = () => {
         locationId,
       });
       handleStateChange(response && true);
-      console.log('responMain-->',response)
+      // console.log('responMain-->',response)
     } catch (error) {
       if (error.debugMessage) {
         setAlertMessage({
@@ -142,7 +140,7 @@ const DeliveryAddress = () => {
     try{
       const response = await axios.delete(`/user/location/${id}`);
       handleStateChange(response && true);
-      console.log('responseDelete-->',response);
+      // console.log('responseDelete-->',response);
     }
     catch(error){
       setAlertMessage({
