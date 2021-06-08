@@ -26,6 +26,7 @@ const Input: React.FC<InputFilds> = ({
   const refInput = useRef<any>();
   
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [onlyLetter, setOnlyLetter] = useState<any>("");
   useEffect(()=>{
     if(refInput.current){
       const leng=refInput.current.value
@@ -144,18 +145,20 @@ const Input: React.FC<InputFilds> = ({
     }
     else if(inputType=="letter"){
       return (
-        <Controller
-          ref={refInput}
-          as={MaskInput}
-          control={control}
-          mask={"aaaaaaaaaaaaaaaaaa"}
+        <InputElement
+          {...rest}
           name={name}
-          defaultValue={defaultValue}
+          ref={refInput}
+          autoFocus ={isFocus?true:false}
+          placeholder={!isFocus ? placeholder : ""}
           isFocus={isFocus}
-          error={error?true:false}  
-          placeholder={placeholder}
-          
+          onBlur={(e) => onBlur(e)}
+          error={error?true:false}    
+          defaultValue={defaultValue}
+          value={onlyLetter}
+          onChange={(e)=>setOnlyLetter(e.target.value.replace(/[^a-zA-Z]/ig,""))}
         />
+        
         )
     }
   };
@@ -170,9 +173,7 @@ const Input: React.FC<InputFilds> = ({
       {isFocus &&
       <Label isFocus={isFocus} error={error?true:false}>{label}</Label>
       } 
-       
-    
-     
+
       {inputType ? (
         inputMaskType()
       ) : (

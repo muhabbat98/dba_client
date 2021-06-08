@@ -4,7 +4,6 @@ import { AlertPosition } from "../../../../utils/alert-position-enum";
 import DefaultPage from "./addres-pages/default-page";
 import ViewAddress from "./addres-pages/view-address-page";
 import AddressBox from "../../../../components/address-box";
-
 const DeliveryAddress = () => {
   const [address, setAddress] = useState<any[] | null>([]);
   const [openModal, setOpenModal] = useState(false);
@@ -48,11 +47,19 @@ const DeliveryAddress = () => {
       setAddress(data);
       console.log("getDataa---->", data);
     } catch (error) {
-      setAlertMessage({
-        message: error.message,
-        type: "error",
-        position: AlertPosition.TOP_CENTER,
-      });
+      if (error.debugMessage) {
+        setAlertMessage({
+          message: error.debugMessage,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    } else {
+        setAlertMessage({
+          message: error.message,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    }
     }
   };
 
@@ -66,11 +73,19 @@ const DeliveryAddress = () => {
       console.log('responseAdd-->',response);
       handleStateChange(response && true);
     } catch (error) {
-      setAlertMessage({
-        message: error.message,
-        type: "error",
-        position: AlertPosition.TOP_CENTER,
-      });
+      if (error.debugMessage) {
+        setAlertMessage({
+          message: error.debugMessage,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    } else {
+        setAlertMessage({
+          message: error.message,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    }
     }
   };
 
@@ -82,11 +97,19 @@ const DeliveryAddress = () => {
       handleStateChange(response && true);
       console.log('responseEdit-->',response);
     } catch (error) {
-      setAlertMessage({
-        message: error.message,
-        type: "error",
-        position: AlertPosition.TOP_CENTER,
-      });
+      if (error.debugMessage) {
+        setAlertMessage({
+          message: error.debugMessage,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    } else {
+        setAlertMessage({
+          message: error.message,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    }
     }
   };
   const editMainAddress = async (locationId: any) => {
@@ -99,11 +122,19 @@ const DeliveryAddress = () => {
       handleStateChange(response && true);
       console.log('responMain-->',response)
     } catch (error) {
-      setAlertMessage({
-        message: error.message,
-        type: "error",
-        position: AlertPosition.TOP_CENTER,
-      });
+      if (error.debugMessage) {
+        setAlertMessage({
+          message: error.debugMessage,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    } else {
+        setAlertMessage({
+          message: error.message,
+          type: 'error',
+          position: AlertPosition.TOP_LEFT
+        });
+    }
     }
   };
 
@@ -121,7 +152,6 @@ const DeliveryAddress = () => {
       });
     }
   };
-  
   return (
     <div>
       {address && address.length>0 ? (

@@ -40,7 +40,10 @@ const ViewAddress: React.FC<Addresses> = ({
   const { user } = useSelector((state: any) => ({
     user: state.user,
   }));
- 
+  let main=data;
+  let multi=data;
+  let mainAddress = main.find((item: any) => item.main == true);
+  let addresses = multi.filter((item: any) => item.main !== true);
 
   const editHandle = () => {
     setEditItem(mainAddress);
@@ -58,10 +61,7 @@ const ViewAddress: React.FC<Addresses> = ({
       },
     });
   };
-  let main=data;
-  let multi=data;
-  let mainAddress = main.find((item: any) => item.main == true);
-  let addresses = multi.filter((item: any) => item.main !== true);
+  
   
   // console.log('mainAddress--',mainAddress);
   // console.log('addresses--',addresses);

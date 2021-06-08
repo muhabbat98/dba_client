@@ -253,8 +253,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         placeholder="Имя"
                         onChange={ev => handleChange(ev)}
                         label="Имя"
-                        // value={state.firstName} 
-                        defaultValue={state.firstName}
+                        value={state.firstName} 
+                        // defaultValue={state.firstName}
                         inputType="letter"
                         control={control}
                         type="text" />

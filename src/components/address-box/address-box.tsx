@@ -44,7 +44,7 @@ const AddressBox: React.FC<PropsModal> = ({
   let mainn:boolean;
   useEffect(() => {
     inputItems && setData(inputItems);
-    
+    console.log("working input--",inputItems)
   }, []);
   
   const handleSubmitt = (e: any) => {
@@ -85,6 +85,7 @@ const AddressBox: React.FC<PropsModal> = ({
               placeholder="Город"
               name="city"
               value={data.city}
+              defaultValue={data.city}
               onChange={(e: any) => handleChange(e)}
             />
             <Input
@@ -92,6 +93,7 @@ const AddressBox: React.FC<PropsModal> = ({
               placeholder="Улица"
               name="street"
               value={data.street}
+              defaultValue={data.street}
               onChange={(e: any) => handleChange(e)}
             />
             <SubInputs>
@@ -100,6 +102,7 @@ const AddressBox: React.FC<PropsModal> = ({
                 label="Дом"
                 name="homeNumber"
                 value={data.homeNumber}
+                defaultValue={data.homeNumber}
                 onChange={(e: any) => handleChange(e)}
               />
               <Input
@@ -107,6 +110,7 @@ const AddressBox: React.FC<PropsModal> = ({
                 label="Квартира"
                 name="apartmentNumber"
                 value={data.apartmentNumber}
+                defaultValue={data.apartmentNumber}
                 onChange={(e: any) => handleChange(e)}
               />
             </SubInputs>
@@ -115,6 +119,7 @@ const AddressBox: React.FC<PropsModal> = ({
               label="Дополнительная информация"
               name="additionalInformation"
               value={data.additionalInformation}
+              defaultValue={data.additionalInformation}
               onChange={(e: any) => handleChange(e)}
             />
             {!chackboxdHide && (
