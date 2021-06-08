@@ -18,6 +18,7 @@ import Avatar from '../../../../assets/images/personal-info-avatar.png';
 import { ReactComponent as PersonalAvatarEditImg } from '../../../../assets/icons/personal-info-avatar-edit.svg';
 import { ReactComponent as Verified } from '../../../../assets/icons/verified.svg';
 import getStoredState from 'redux-persist/es/integration/getStoredStateMigrateV4';
+import inputLetter from '../../../../utils/input-letter';
 
 interface PersonalInfoEditProps {
    toggleComponent: () => void
@@ -28,14 +29,14 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
-      // firstName: "frtrvrrvv",
-      // secondName: "",
-      // phoneNumber: null,
-      // homePhoneNumber: null,
+      firstName: "frtrvrrvv",
+      secondName: "",
+      phoneNumber: null,
+      homePhoneNumber: null,
       email: null,
-      // inn: null,
+      inn: "",
       passportType: null,
-      // passportNumber: "qw1233333",
+      passportNumber: "",
       gender: null,
       brithDay: '2014-02-09',
    });
@@ -251,12 +252,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <Input
                         name="firstName"
                         placeholder="Имя"
-                        onChange={ev => handleChange(ev)}
+                        onChange={ev =>setState({...state, firstName:inputLetter(ev)})}
                         label="Имя"
-                        value={state.firstName} 
-                        // defaultValue={state.firstName}
-                        inputType="letter"
-                        control={control}
+                        value={state.firstName}
+                        defaultValue={state.firstName}
                         type="text" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
@@ -275,18 +274,16 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         inputType="passport"
                         control={control}
                         defaultValue={state.passportNumber}
-                        {...register("passportNumber")}
                         />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
                         name="secondName"
-                        onChange={handleChange}
                         label="Фамилия"
                         placeholder="Фамилия"
                         value={state.secondName}
-                        inputType="letter"
-                        control={control} />
+                        onChange={ev =>setState({...state, secondName:inputLetter(ev)})}
+                        />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input onChange={handleChange} label="Дата выдачи" defaultValue="2014-02-09" type="date" />
@@ -330,7 +327,15 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input name="inn" placeholder="ИНН" onChange={handleChange} label="ИНН" value={state.inn} inputType="inn" control={control} />
+                     <Input 
+                        name="inn" 
+                        placeholder="ИНН" 
+                        onChange={handleChange} 
+                        label="ИНН" 
+                        defaultValue={state.inn.toString()} 
+                        value={state.inn} 
+                        inputType="inn" 
+                        control={control} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Dropdown option={['Мужской', 'Женский']} selected={state.gender} label="Пол" callback={dropdownHandle} />

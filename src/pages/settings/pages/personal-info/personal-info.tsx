@@ -32,20 +32,19 @@ const PersonalInfo = () => {
     try {
       const response = await axios.get(`/user/${id}`);
       const data = await response.data;
-      console.log(data);
       setPersonalInfo(data);
     } catch (error) {
       if (error.debugMessage) {
         setAlertMessage({
           message: error.debugMessage,
           type: 'error',
-          position: AlertPosition.TOP_LEFT
+          position: AlertPosition.TOP_CENTER
         });
       } else {
         setAlertMessage({
           message: error.message,
           type: 'error',
-          position: AlertPosition.TOP_LEFT
+          position: AlertPosition.TOP_CENTER
         });
       }
     }
@@ -64,22 +63,6 @@ const PersonalInfo = () => {
     <PersonalInfoContainer>
       <PersonalHeader>
         <PersonalHeaderLeftSide personalInfo={personalInfo} />
-        {/* <PersonalHeaderLeft>
-          <PersonalAvatar>
-            <PersonalAvatarImg src={!isEmptyObj(personalInfo) && personalInfo.imageUrl ? personalInfo.imageUrl : Avatar} />
-          </PersonalAvatar>
-          <PersonalNameWrapper>
-            <PersonalName>
-              {!isEmptyObj(personalInfo) && personalInfo.firstName} {' '}
-              {!isEmptyObj(personalInfo) && personalInfo.secondName}
-            </PersonalName>
-            <PersonalNameEmail>{!isEmptyObj(personalInfo) && personalInfo.email}</PersonalNameEmail>
-            <PersonalVerified>
-              <Verified />
-              <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
-            </PersonalVerified>
-          </PersonalNameWrapper>
-        </PersonalHeaderLeft> */}
         <PersonalHeaderRight>
           <ChangeProfileButton onClick={toggleComponent}>
             <Edit />
@@ -95,6 +78,10 @@ const PersonalInfo = () => {
               {!isEmptyObj(personalInfo) && personalInfo.firstName} {' '}
               {!isEmptyObj(personalInfo) && personalInfo.secondName}
             </PersonalBodyName>
+          </PersonalBodyFlex>
+          <PersonalBodyFlex isEdit={false}>
+            <PersonalBodyLabel>Тип удостоверяющего документа</PersonalBodyLabel>
+            <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.passportType}</PersonalBodyName>
           </PersonalBodyFlex>
           <PersonalBodyFlex isEdit={false}>
             <PersonalBodyLabel>Номер телефона(мобильный)</PersonalBodyLabel>
