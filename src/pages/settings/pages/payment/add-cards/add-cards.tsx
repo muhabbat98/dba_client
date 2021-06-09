@@ -1,7 +1,7 @@
-import React from 'react';
-import { usePayment } from '../context';
-import Content from './content';
-import { AddCardsContainer, BackDrop } from './style';
+import React from "react";
+import { usePayment } from "../context";
+import Content from "./content";
+import { AddCardsContainer, BackDrop } from "./style";
 
 interface AddCards {}
 
