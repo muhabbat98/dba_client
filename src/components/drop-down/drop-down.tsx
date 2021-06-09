@@ -13,8 +13,14 @@ interface DropdownProps {
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }) => {
-   console.log('option == ', option);
-   console.log('selected == ', selected);
+   const toggleRef = useRef<HTMLDivElement>(null);
+   const [isOpen, setIsOpen] = useState('');
+   const [selectedOption, setSelectedOption] = useState(null);
+
+   useEffect(() => {
+      window.addEventListener('click', dropdownOverlayClick);
+      return () => window.removeEventListener('click', dropdownOverlayClick);
+   }, [isOpen])
 
    const options = option.map((item: any, i: any) => {
       return {
@@ -34,8 +40,7 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }
    //    { value: 'по популярности', index: 6, selected: false },
    // ];
 
-   const [isOpen, setIsOpen] = useState('');
-   const [selectedOption, setSelectedOption] = useState(null);
+
 
    const dropdown = useRef<HTMLUListElement>(null);
 
@@ -54,7 +59,6 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }
       if (target.parentElement?.childElementCount !== undefined) {
          for (let i = 0; i < target.parentElement?.childElementCount; i++) {
             target.parentElement?.children[i].classList.remove('selected');
-            console.log(target.parentElement.children[i]);
          }
       }
       target.classList.add('selected');
@@ -67,27 +71,31 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }
       setIsOpen(isOpen == 'active' ? '' : 'active');
    }
 
-   const dropdownOverlayClick = () => {
-      setIsOpen('');
+   const dropdownOverlayClick = (ev: any) => {
+      if (isOpen == 'active' &&
+         !(toggleRef.current && toggleRef.current.contains(ev.target))) {
+         setIsOpen('');
+      }
    }
 
    const getActiveName = () => {
-      console.log('getactive == ', options);
-      const o = options.filter((option:  any) => {
+      const o = options.filter((option: any) => {
          if (option.selected) {
             return option;
          }
       })
-      console.log("o[0] == ", o[0] && o[0].value);
       return o[0] && o[0].value;
    }
 
+   // function foobar() {
+   //    console.log('fooooo  ', isOpen);
+   // }
+
+   // foobar();
+
    return (
       <>
-         {
-            isOpen == 'active' ? <DropdownOverlay onClick={dropdownOverlayClick}></DropdownOverlay> : null
-         }
-         <DropdownContainer>
+         <DropdownContainer ref={toggleRef} className="dropdown-container">
             <DropdownHeader onClick={toggleList}>
                <DropdownLabel>{label}</DropdownLabel>
                <DropdownHeaderTitle>
