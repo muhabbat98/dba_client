@@ -29,7 +29,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
-      firstName: "frtrvrrvv",
+      firstName: "",
       secondName: "",
       phoneNumber: null,
       homePhoneNumber: null,
@@ -38,7 +38,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       passportType: null,
       passportNumber: "",
       gender: null,
-      brithDay: '2014-02-09',
+      birthday: null,
+      dateOfExpire: "2021-06-17",
+      dateOfIssue: null
+
    });
 
    const [avatar, setAvatar] = useState<any>(Avatar);
@@ -59,12 +62,9 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }, []);
 
    const handleChange = (ev: any) => {
-      
+
       const name = ev.target.name;
       const value = ev.target.value;
-
-      console.log('handleChange name', ev.target);
-      console.log('handleChange value', value);
 
       setState({
          ...state,
@@ -80,7 +80,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const dropdownDocumentHandle = (data: any) => {
-      console.log('dropdownDocumentHandle = ', data);
       setState({
          ...state,
          passportType: data.value
@@ -177,10 +176,12 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             ...obj,
             imageUrl: imgUrl.imageUrl || imgUrl
          }
+         console.log("dataObj === ", dataObj)
 
          const response = await axios.post(`user/`, dataObj);
          const data = await response.data;
-         toggleComponent();
+         console.log("DDDDDDDDDDD ===  ", data);
+         // toggleComponent();
          setAlertMessage({
             message: data.message,
             type: 'success',
@@ -206,8 +207,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    console.log('STATE = ', state);
 
-   const onSubmit = (data:any) => {
-      console.log(data)
+   const onSubmit = (data: any) => {
+      console.log('data ===== ', data);
       uploadData(data);
    }
    return (
@@ -252,7 +253,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <Input
                         name="firstName"
                         placeholder="Имя"
-                        onChange={ev =>setState({...state, firstName:inputLetter(ev)})}
+                        onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
                         label="Имя"
                         value={state.firstName}
                         defaultValue={state.firstName}
@@ -274,7 +275,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         inputType="passport"
                         control={control}
                         defaultValue={state.passportNumber}
-                        />
+                     />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
@@ -282,11 +283,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         label="Фамилия"
                         placeholder="Фамилия"
                         value={state.secondName}
-                        onChange={ev =>setState({...state, secondName:inputLetter(ev)})}
-                        />
+                        onChange={ev => setState({ ...state, secondName: inputLetter(ev) })}
+                     />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Дата выдачи" defaultValue="2014-02-09" type="date" />
+                     <Input onChange={handleChange} label="Дата выдачи" name="dateOfIssue" defaultValue={state.dateOfIssue} type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
@@ -300,7 +301,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         inputType="phone" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Срок действия" defaultValue="2014-02-09" type="date" />
+                     <Input onChange={handleChange} label="Срок действия" name="dateOfExpire" defaultValue={state.dateOfExpire} type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
@@ -318,23 +319,23 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         onChange={handleChange}
                         label="Дата рождения"
                         // defaultValue="2014-02-09" 
-                        defaultValue={state.brithDay}
+                        defaultValue={state.birthday}
                         type="date"
-                        name="brithDate"
+                        name="birthday"
                      />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input 
-                        name="inn" 
-                        placeholder="ИНН" 
-                        onChange={handleChange} 
-                        label="ИНН" 
-                        defaultValue={state.inn.toString()} 
-                        value={state.inn} 
-                        inputType="inn" 
+                     <Input
+                        name="inn"
+                        placeholder="ИНН"
+                        onChange={handleChange}
+                        label="ИНН"
+                        defaultValue={state.inn.toString()}
+                        value={state.inn}
+                        inputType="inn"
                         control={control} />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>

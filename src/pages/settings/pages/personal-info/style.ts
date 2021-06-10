@@ -126,6 +126,9 @@ export const PersonalName = styled.h3`
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 16px;
+  /* max-width: 120px;
+  width: 100%; */
+  word-break: break-all;
 `;
 export const PersonalNameEmail = styled.span`
   font-family: Manrope;

@@ -54,6 +54,10 @@ const PersonalInfo = () => {
     setState(!state);
   }
 
+  console.log('personalInfo === ',
+   personalInfo && personalInfo.birthday && personalInfo.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("/"));
+  console.log('personalInfo ===>  ', personalInfo);
+
   if (state) {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />
   }
@@ -104,7 +108,8 @@ const PersonalInfo = () => {
           </PersonalBodyFlex>
           <PersonalBodyFlex isEdit={false}>
             <PersonalBodyLabel>Дата рождения</PersonalBodyLabel>
-            <PersonalBodyName>27/08/2000</PersonalBodyName>
+            <PersonalBodyName>{!isEmptyObj(personalInfo)
+                && personalInfo.birthday && personalInfo.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("/")} </PersonalBodyName>
           </PersonalBodyFlex>
           <PersonalBodyFlex isEdit={false}>
             <PersonalBodyLabel>Пол</PersonalBodyLabel>
