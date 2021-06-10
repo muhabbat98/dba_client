@@ -1,25 +1,64 @@
 import React,{useState,useEffect} from 'react'
 import Marker from './marker.svg'
-import { YMaps, Map,Placemark,ZoomControl,SearchControl } from 'react-yandex-maps';
+import axios from 'axios';
+import { YMaps, Map,Placemark,ZoomControl,SearchControl,GeolocationControl,GeoObject } from 'react-yandex-maps';
 
 interface Location{
     setLocation?:any;
+    defaultCordinate?:any;
+    setData?:any
 }
-const YandexMap: React.FC<Location> = ({setLocation}) => {
-    const [geometry,setgeometry] = useState([41.31207798268884, 69.24238483965644]);
-    
+const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) => {
+    const [geometry,setgeometry] = useState(defaultCordinate ? defaultCordinate:[41.31207798268884, 69.24238483965644]);
+    const [state,setState] = useState<any>({coordinates:null})
     
     const getAddress = (e:any) => {
         setgeometry(e.get('target').geometry.getCoordinates());
         setLocation({latitude:geometry[0],longitude:geometry[1]});
     }
+
     // console.log(geometry);
+    console.log("tt-->",state)
+    useEffect(()=>{
+        getAdd()
+    },[geometry])
+    let doc:any;
+
+    const searchText = (text:any, key:any) => {
+        const temp = text.toLowerCase().includes(key);
+        return temp;
+    }
+
+    const  getAdd = async () =>{ 
+        const data = await axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=e29642df-87bb-4b68-80a4-eecf4e8b1b64&geocode=${geometry[1]},${geometry[0]}`);
+        const parser = new DOMParser();  
+        doc = parser.parseFromString(data.data, 'text/xml')
+        console.log('rrrr-->',doc)
+
+        // featureMember
+        const x = doc.getElementsByTagName("featureMember")[0].getElementsByTagName("text")[0].childNodes[0].nodeValue; 
+        const x2 = doc.getElementsByTagName("featureMember")[1].getElementsByTagName("text")[0].childNodes[0].nodeValue; 
+        const y=x.split(",");
+        const y2=x2.split(",");
+        setData && setData({
+            country:y2[0],
+            city:y2[1],
+            district:searchText(y2[2],"район")?y2[2]:null,
+            homeNumber:y[4]?y[4]:"",
+            street:searchText(y[2],"улица")?y[2]:null,
+        })
+        // console.log("x == ", x.split(","));
+        // console.log("x2 === ", x2.split(","))
+    }
+    
     return (
         <YMaps
-        //     enterprise
-        //     query={{
-        //     apikey: '7ddb1dfe-52c0-4810-b8ab-9fe60a10265f',
-        // }}
+        
+            enterprise={true}
+            query={{
+                lang:'ru_RU',
+                apikey: 'e29642df-87bb-4b68-80a4-eecf4e8b1b64',
+        }}
         >
             <Map
                 // modules={["Placemark", "geocode", "geoObject.addon.balloon"]}
@@ -57,7 +96,8 @@ const YandexMap: React.FC<Location> = ({setLocation}) => {
                 
                 />
         
-                
+                <GeolocationControl />
+                <GeoObject/>
                 <ZoomControl options={
                     { 
                         float: 'left',

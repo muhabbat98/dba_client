@@ -10,6 +10,7 @@ interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   defaultValue?:string;
   name?:any,
   value?:any
+  style?:any
 }
 
 const Input: React.FC<InputFilds> = ({
@@ -21,6 +22,7 @@ const Input: React.FC<InputFilds> = ({
   defaultValue,
   name,
   value,
+  style,
   ...rest
 }) => {
   const refInput = useRef<any>();
@@ -47,6 +49,14 @@ const Input: React.FC<InputFilds> = ({
       // console.log("Blur working....")
     } else setIsFocus(false);
   };
+  // function formatPhoneNumber(phoneNumber:any) {
+  //   const cleanNum = phoneNumber.toString().replace(/\D/g, '');
+  //   const match = cleanNum.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
+  //   if (match) {
+  //     return '(' + match[1] + ') ' + (match[2] ? match[2] + "-" : "") + match[3];
+  //   }
+  //   return cleanNum;
+  // }
   const inputMaskType = () => {
     if (inputType == "phone") {
       return (
@@ -143,24 +153,24 @@ const Input: React.FC<InputFilds> = ({
         />
         )
     }
-    else if(inputType=="letter"){
-      return (
-        <InputElement
-          {...rest}
-          name={name}
-          ref={refInput}
-          autoFocus ={isFocus?true:false}
-          placeholder={!isFocus ? placeholder : ""}
-          isFocus={isFocus}
-          onBlur={(e) => onBlur(e)}
-          error={error?true:false}    
-          defaultValue={defaultValue}
-          value={onlyLetter}
-          onChange={(e)=>setOnlyLetter(e.target.value.replace(/[^a-zA-Z]/ig,""))}
-        />
+    // else if(inputType=="letter"){
+    //   return (
+    //     <InputElement
+    //       {...rest}
+    //       name={name}
+    //       ref={refInput}
+    //       autoFocus ={isFocus?true:false}
+    //       placeholder={!isFocus ? placeholder : ""}
+    //       isFocus={isFocus}
+    //       onBlur={(e) => onBlur(e)}
+    //       error={error?true:false}    
+    //       defaultValue={defaultValue}
+    //       value={onlyLetter}
+    //       onChange={(e)=>setOnlyLetter(formatPhoneNumber(e.target.value))}
+    //     />
         
-        )
-    }
+    //     )
+    // }
   };
  
   return (
@@ -169,6 +179,7 @@ const Input: React.FC<InputFilds> = ({
       error={error?true:false} 
       onFocus={() => setIsFocus(true)}
       onBlur={(e) => onBlur(e)}
+      style={style}
     >
       {isFocus &&
       <Label isFocus={isFocus} error={error?true:false}>{label}</Label>
