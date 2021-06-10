@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import PersonalInfo from '../pages/personal-info';
 import DeliveryAddress from '../pages/delivery-address';
-import Notifications from '../pages/notifications';
+import PersonalData from '../pages/personal-data';
 import ChangePassword from '../pages/change-password';
 import Payment from '../pages/payment';
 import Orders from '../pages/orders';
@@ -21,7 +21,7 @@ const Content = () => {
           path={`${path}/delivery-address`}
           component={DeliveryAddress}
         />
-        <Route exact path={`${path}/notifications`} component={Notifications} />
+        <Route exact path={`${path}/personal-data`} component={PersonalData} />
         <Route
           exact
           path={`${path}/change-password`}

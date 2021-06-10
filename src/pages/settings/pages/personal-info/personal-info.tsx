@@ -54,7 +54,6 @@ const PersonalInfo = () => {
     setState(!state);
   }
 
-
   if (state) {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />
   }
