@@ -25,7 +25,7 @@ const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) =
     let doc:any;
 
     const searchText = (text:any, key:any) => {
-        const temp = text.toLowerCase().includes(key);
+        const temp = text && text.toLowerCase().includes(key);
         return temp;
     }
 
@@ -43,9 +43,9 @@ const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) =
         setData && setData({
             country:y2[0],
             city:y2[1],
-            district:searchText(y2[2],"район")?y2[2]:null,
+            district:searchText(y2[2],"район")?y2[2]:"",
             homeNumber:y[4]?y[4]:"",
-            street:searchText(y[2],"улица")?y[2]:null,
+            street:searchText(y[2],"улица")?y[2]:"",
         })
         // console.log("x == ", x.split(","));
         // console.log("x2 === ", x2.split(","))
