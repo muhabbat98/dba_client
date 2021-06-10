@@ -84,7 +84,7 @@ const AddressBox: React.FC<PropsModal> = ({
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  
+  console.log(inputItems&&inputItems.latitude,inputItems&&inputItems.longitude)
   return (
     <ModalContainer className="glass-container" onClick={clickHandler}>
       <Wrapper>
@@ -170,7 +170,12 @@ const AddressBox: React.FC<PropsModal> = ({
           </form>
         </FormContainer>
         <YMapContainer>
-          <YandexMap setLocation={setLocation} setData={!inputItems&&setData} />
+          <YandexMap 
+            setLocation={setLocation} 
+            setData={!inputItems&&setData} 
+            defaultCordinate={
+              inputItems && [inputItems.latitude,inputItems.longitude]
+            } />
         </YMapContainer>
       </Wrapper>
     </ModalContainer>
