@@ -34,13 +34,27 @@ const AddressBox: React.FC<PropsModal> = ({
 }) => {
   const [location, setLocation] = useState<any>();
   const [main, setMain] = useState(true);
+  const [getAdderss,setGetAddres] = useState<any>(
+    {
+      city: "",
+      street: "",
+      homeNumber: "",
+      apartmentNumber: "",
+      additionalInformation: "",
+      country:"",
+      district:""
+    }
+  );
   const [data, setData] = useState({
     city: "",
     street: "",
     homeNumber: "",
     apartmentNumber: "",
     additionalInformation: "",
+    country:"",
+    district:""
   });
+ 
   let mainn:boolean;
   useEffect(() => {
     inputItems && setData(inputItems);
@@ -70,7 +84,7 @@ const AddressBox: React.FC<PropsModal> = ({
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  
+  console.log(inputItems&&inputItems.latitude,inputItems&&inputItems.longitude)
   return (
     <ModalContainer className="glass-container" onClick={clickHandler}>
       <Wrapper>
@@ -81,6 +95,14 @@ const AddressBox: React.FC<PropsModal> = ({
           />
           <form>
             <Input
+              label="Страна"
+              placeholder="Страна"
+              name="country"
+              value={data.country}
+              defaultValue={data.country}
+              onChange={(e: any) => handleChange(e)}
+            />
+            <Input
               label="Город"
               placeholder="Город"
               name="city"
@@ -88,6 +110,15 @@ const AddressBox: React.FC<PropsModal> = ({
               defaultValue={data.city}
               onChange={(e: any) => handleChange(e)}
             />
+            <Input
+              label="Район"
+              placeholder="Район"
+              name="district"
+              value={data.district}
+              defaultValue={data.district}
+              onChange={(e: any) => handleChange(e)}
+            />
+            
             <Input
               label="Улица"
               placeholder="Улица"
@@ -118,6 +149,7 @@ const AddressBox: React.FC<PropsModal> = ({
               placeholder="Дополнительная информация"
               label="Дополнительная информация"
               name="additionalInformation"
+              style={{height:100}}
               value={data.additionalInformation}
               defaultValue={data.additionalInformation}
               onChange={(e: any) => handleChange(e)}
@@ -138,7 +170,12 @@ const AddressBox: React.FC<PropsModal> = ({
           </form>
         </FormContainer>
         <YMapContainer>
-          <YandexMap setLocation={setLocation} />
+          <YandexMap 
+            setLocation={setLocation} 
+            setData={!inputItems&&setData} 
+            defaultCordinate={
+              inputItems && [inputItems.latitude,inputItems.longitude]
+            } />
         </YMapContainer>
       </Wrapper>
     </ModalContainer>

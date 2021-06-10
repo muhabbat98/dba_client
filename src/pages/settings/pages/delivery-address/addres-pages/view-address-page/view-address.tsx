@@ -79,7 +79,7 @@ const ViewAddress: React.FC<Addresses> = ({
                 <AddresTitiles>
                   <p>Адрес 1</p>
                   <p>
-                    {mainAddress.region ? mainAddress.region : "Юнусабадский"}{" "}
+                    {mainAddress.district}{" "}
                     район улица {mainAddress.street} <br />
                     {mainAddress.apartmentNumber}-квартира{" "}
                     {mainAddress.homeNumber}-дом

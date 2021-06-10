@@ -72,7 +72,7 @@ const AddressBoxes: React.FC<Propses> = ({
           <AddresTitiles style={{ marginLeft: 0 }}>
             <p>Адрес {index}</p>
             <p>
-              {data.region ? data.region : "Юнусабадский"} район улица{" "}
+              {data.district} район улица{" "}
               {data.street} <br />
               {data.apartmentNumber}-квартира {data.homeNumber}-дом
             </p>
@@ -101,7 +101,7 @@ const AddressBoxes: React.FC<Propses> = ({
           <AddressInfo>
             <div>
               <p>Страна</p>
-              <h5>{data.country ? data.country : "Узбекистан"}</h5>
+              <h5>{data.country}</h5>
             </div>
             <div>
               <p>Город</p>
@@ -109,7 +109,7 @@ const AddressBoxes: React.FC<Propses> = ({
             </div>
             <div>
               <p>Район</p>
-              <h5>{data.region ? data.region : "Юнусабадский"}</h5>
+              <h5>{data.district}</h5>
             </div>
             <div>
               <p>Улица</p>
@@ -137,7 +137,7 @@ const AddressBoxes: React.FC<Propses> = ({
             }}
           >
             <ActionsContainer>
-              <div>
+              <div onClick={handleExit}>
                 <Btnhouse />
                 <span>Сделать основной</span>
               </div>
@@ -145,7 +145,7 @@ const AddressBoxes: React.FC<Propses> = ({
                 <Pencil />
                 <span>Изменить</span>
               </div>
-              <div>
+              <div onClick={() => handleDelete()}>
                 <Trash />
                 <span>Удалить</span>
               </div>

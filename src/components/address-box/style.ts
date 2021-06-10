@@ -11,6 +11,7 @@ export const ModalContainer = styled.div`
     top:0px;
     left:0px;
     overflow:hidden;
+    z-index: 99;
 `;
 
 export const Wrapper = styled.div`
@@ -30,12 +31,10 @@ export const FormContainer = styled.div`
     }
     div{
         margin-bottom:12px;
-        &:nth-child(4){
+        /* &:nth-child(6){
             height:100px;
-            input{
-                
-            }
-        }
+            
+        } */
     }
 `;
 export const SubInputs = styled.div`
@@ -49,7 +48,7 @@ export const SubInputs = styled.div`
 `;
 export const YMapContainer = styled.div`
     width:70%;
-    height:530px;
+    height:650px;
     overflow:hidden;
     border-radius: 20px 0px 0px 20px;
     
