@@ -26,9 +26,9 @@ const Discussion = () => {
         toggleFilter ? (
           <DiscussionFilterSection>
             <SettingsInput placeholder="ID ЗАКАЗА"/>
-            <SettingsDropdown label="Статус" options={['Завершен', 'Активный']} />
-            <SettingsInput placeholder="Причина"/>
-            <SettingsInput placeholder="Продавец"/>
+            <SettingsDropdown label="Статус" options={['Завершен', 'Активный']} getOption/>
+            <SettingsDropdown label="Причина" options={['Причина1', 'Причина2']} getOption/>
+            <SettingsDropdown label="Продавец" options={['Продавец1', 'Продавец2']} getOption/>
           </DiscussionFilterSection>
         ) : null
       }

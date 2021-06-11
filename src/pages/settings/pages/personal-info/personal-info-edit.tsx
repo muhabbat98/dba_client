@@ -150,15 +150,15 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
          const dataObj = {...data};
-         console.log("dataObj ==== ", dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-"));
-         // dataObj.birthday = moment(dataObj.birthday).subtract(10, "days").calendar();
-         dataObj.birthday = dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-         dataObj.dateOfExpire = dataObj.dateOfExpire.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-         dataObj.dateOfIssue = dataObj.dateOfIssue.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-         console.log("dataObj22222 ==== ", dataObj);
-         // birthday: "2021-06-17T00:00:00.000+00:00"
-         // dateOfExpire: "2021-06-09T00:00:00.000+00:00"
-         // dateOfIssue: "2021-07-03T00:00:00.000+00:00"
+
+         // dataObj.birthday = dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
+         // dataObj.dateOfExpire = dataObj.dateOfExpire.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
+         // dataObj.dateOfIssue = dataObj.dateOfIssue.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
+
+         dataObj.birthday = moment(dataObj.birthday).format('YYYY-MM-DD');
+         dataObj.dateOfExpire = moment(dataObj.dateOfExpire).format('YYYY-MM-DD');
+         dataObj.dateOfIssue = moment(dataObj.dateOfIssue).format('YYYY-MM-DD');
+
          setState(dataObj);
          setAvatar(data.imageUrl);
          setImgUrl(data.imageUrl);
@@ -187,11 +187,9 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             ...obj,
             imageUrl: imgUrl.imageUrl || imgUrl
          }
-         console.log("dataObj === ", dataObj)
 
          const response = await axios.post(`user/`, dataObj);
          const data = await response.data;
-         console.log("DDDDDDDDDDD ===  ", data);
          toggleComponent();
          setAlertMessage({
             message: data.message,
@@ -199,29 +197,26 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             position: AlertPosition.TOP_CENTER
          })
       } catch (error) {
-         console.log('error === ', error)
-         // if (error.debugMessage) {
-         //    setAlertMessage({
-         //       message: error.debugMessage,
-         //       type: 'error',
-         //       position: AlertPosition.TOP_LEFT
-         //    });
-         // } else {
-         //    setAlertMessage({
-         //       message: error.message,
-         //       type: 'error',
-         //       position: AlertPosition.TOP_LEFT
-         //    });
-         // }
+         if (error.debugMessage) {
+            setAlertMessage({
+               message: error.debugMessage,
+               type: 'error',
+               position: AlertPosition.TOP_LEFT
+            });
+         } else {
+            setAlertMessage({
+               message: error.message,
+               type: 'error',
+               position: AlertPosition.TOP_LEFT
+            });
+         }
       }
    }
 
-   console.log('STATE = ', state);
-
    const onSubmit = (data: any) => {
-      console.log('data ===== ', data);
       uploadData(data);
    }
+
    return (
       state &&
       <PersonalInfoContainer>
