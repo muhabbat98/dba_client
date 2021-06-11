@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import moment from 'moment';
 
 import PersonalInfoEdit from './personal-info-edit';
 import Alert from '../../../../components/alert';
@@ -10,15 +10,12 @@ import isEmptyObj from '../../../../utils/isEmptyObj';
 import PersonalHeaderLeftSide from './personal-header-left';
 
 import {
-  PersonalInfoContainer, PersonalHeader, PersonalHeaderLeft, PersonalHeaderRight, PersonalAvatar,
-  PersonalAvatarImg, PersonalNameWrapper, PersonalName, PersonalNameEmail, ChangeProfileButton, ChangeName, PersonalBody,
-  PersonalBodyGrid, PersonalBodyLabel, PersonalBodyName, PersonalBodyFlex, PersonalVerified, PersonalVerifiedToggle
+  PersonalInfoContainer, PersonalHeader, PersonalHeaderRight, 
+   ChangeProfileButton, ChangeName, PersonalBody,
+  PersonalBodyGrid, PersonalBodyLabel, PersonalBodyName, PersonalBodyFlex
 } from './style';
 
-import Avatar from '../../../../assets/images/personal-info-avatar.png';
 import { ReactComponent as Edit } from '../../../../assets/icons/edit.svg';
-import { ReactComponent as Verified } from '../../../../assets/icons/verified.svg';
-// import Avatar2 from '../../../../assets/images/tiger2.jpg';
 
 const PersonalInfo = () => {
   const [state, setState] = useState(false);
@@ -54,10 +51,6 @@ const PersonalInfo = () => {
   const toggleComponent = () => {
     setState(!state);
   }
-
-  console.log('personalInfo === ',
-   personalInfo && personalInfo.birthday && personalInfo.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("/"));
-  console.log('personalInfo ===>  ', personalInfo);
 
   if (state) {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />
@@ -109,8 +102,7 @@ const PersonalInfo = () => {
           </PersonalBodyFlex>
           <PersonalBodyFlex isEdit={false}>
             <PersonalBodyLabel>Дата рождения</PersonalBodyLabel>
-            <PersonalBodyName>{!isEmptyObj(personalInfo)
-                && personalInfo.birthday && personalInfo.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("/")} </PersonalBodyName>
+            <PersonalBodyName>{!isEmptyObj(personalInfo) && moment(personalInfo.birthday).format('YYYY/MM/DD')} </PersonalBodyName>
           </PersonalBodyFlex>
           <PersonalBodyFlex isEdit={false}>
             <PersonalBodyLabel>Пол</PersonalBodyLabel>
