@@ -62,6 +62,7 @@ export const SmsText = styled.p`
 export const SmsActionContainer = styled.div`
     display: flex;
     margin-bottom:32px;
+    width: 838px;;
     p{
         margin:0px;
         cursor:pointer;

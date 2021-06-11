@@ -77,11 +77,14 @@ const  Testimonial = () => {
     const [textFild,setTextFild] = useState<boolean>(false);
     const [smile,setSmile] = useState<boolean>(false); 
     const [placeholder,setPlaceholder] = useState<any>('');
+    const [replayTxt,setReplayText] = useState<any>('');
+    const [replay,setReplay] = useState<boolean>(false);
     const onEmojiClick = (event:any, emojiObject:any) => {
         setPlaceholder(placeholder+emojiObject.emoji)    
     };
     const handelChange = (e:any) =>{
         setPlaceholder(e.target.value)
+        setReplayText(e.target.value)
     }
    
     // useEffect(()=>{
@@ -114,7 +117,7 @@ const  Testimonial = () => {
                         </TopSection>    
                         <SmsText>{item.sms}</SmsText>
                         <SmsActionContainer>
-                            <p>Ответить</p>
+                            <p onClick={()=>setReplay(open=>!open)}>Ответить</p>
                             {item.replaysms && <p onClick={()=>setViewReplays(open=>!open)}>Показать ответы 1 </p>}
                             <LikeAndDislike >
                                 <div><Like/><span>65</span></div>
@@ -145,6 +148,49 @@ const  Testimonial = () => {
                                 </div>
                             ))
                         }
+                        {replay && 
+                            <div style={{marginLeft:42}}>
+                            <TopSection>
+                                <TopSectionDiv1><img src={item.avatar}/></TopSectionDiv1>
+                                <TopSectionDiv2> 
+                                    <p>{item.name}</p>
+                                    <SubContainer>
+                                        <StarRaiting inputStar={item.raiting} /> <span>{item.data}</span>
+                                    </SubContainer>
+                                </TopSectionDiv2>
+                            </TopSection>    
+                           
+                            <SmsActionContainer>
+                                <div style={{position:'relative',width:'100%'}}>
+                                    <Textarea state={textFild}>
+                                        <div onClick={()=>handleBlur()}>
+                                            <LabelSms state={textFild}>Введите описание товара</LabelSms>
+                                            <textarea
+                                                onBlur={()=>handleBlur()}
+                                                rows={7} 
+                                                placeholder="Введите описание товара"
+                                                ref={refAction}
+                                                onChange={(e)=>handelChange(e)}
+                                                value={replayTxt}
+                                                name="placeholder"
+                                                />
+                                            
+                                        </div>
+                                        <Smile onClick={()=>setSmile(open=>!open)}/>
+                                    </Textarea>
+                                    <EmojiContainer state={smile}>
+                                        <Picker onEmojiClick={onEmojiClick} />
+                                    </EmojiContainer>
+                                    <TextareaButton>
+                                        {!textFild 
+                                            ?<Button btnType="disabled">Добавить отзыв</Button>
+                                            :<Button onClick={onSubmit}>Добавить отзыв</Button>
+                                        }
+                                    </TextareaButton>
+                                </div>
+                            </SmsActionContainer>   
+                        </div>
+                        }
                         
                     </ItemContainer>
                 ))
@@ -169,7 +215,7 @@ const  Testimonial = () => {
             </ButtonContainer>    
             {
                 open && 
-                <div style={{position:'relative'}}>
+                <div style={{position:'relative',width:"100%"}}>
                     <Textarea state={textFild}>
                         <div onClick={()=>handleBlur()}>
                             <LabelSms state={textFild}>Введите описание товара</LabelSms>
