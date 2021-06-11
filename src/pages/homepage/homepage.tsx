@@ -44,6 +44,7 @@ import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
 import Tiger1 from '../../assets/images/tiger.jpg';
 import Tiger2 from '../../assets/images/tiger2.jpg';
+import Slider from '../../components/slider';
 
 const data = [
   {
@@ -193,8 +194,6 @@ const data = [
   }
 ]
 
-SwiperCore.use([Navigation]);
-
 const Homepage = () => {
   return (
     <div>
@@ -203,44 +202,7 @@ const Homepage = () => {
       <Cont>
         <Container>
           <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-          <SwiperContainer>
-            <Swiper
-              navigation
-              slidesPerView={5}
-              spaceBetween={24}
-              // centeredSlides={true}
-              breakpoints={{
-                576: {
-                  slidesPerView: 2,
-                  // spaceBetween: 20,
-                },
-                768: {
-                  slidesPerView: 3,
-                  // spaceBetween: 20,
-                },
-                992: {
-                  slidesPerView: 4,
-                  // spaceBetween: 40,
-                },
-                1250: {
-                  slidesPerView: 5,
-                  // spaceBetween: 50,
-                },
-              }}
-            // onSlideChange={() => console.log('slide change')}
-            // onSwiper={(swiper) => console.log(swiper)}
-            >
-              {
-                data.map((i: any) => {
-                  return (
-                    <SwiperSlide key={i.id}>
-                      <Card item={i} />
-                    </SwiperSlide>
-                  )
-                })
-              }
-            </Swiper>
-          </SwiperContainer>
+          <Slider data={data}/>
         </Container>
       </Cont>
 
