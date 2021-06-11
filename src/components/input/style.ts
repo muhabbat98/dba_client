@@ -6,7 +6,7 @@ interface Error {
   error:boolean,
 }
 interface InputStates{
-  isFocus: boolean;
+  isfocus: boolean;
   error:boolean,
 }
 
@@ -36,12 +36,12 @@ export const InputElement = styled.input<InputStates>`
   background: ${({error})=>error?"#FFF4F4":"#f4f6f9"};
   border-radius: 16px;
   padding: 0px 10px 8px 24px;
-  margin-top: ${({ isFocus }) => (isFocus ? 0 : 22)}px;
+  margin-top: ${({ isfocus }) => (isfocus ? 0 : 22)}px;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  /* cursor:${({ isFocus }) => (isFocus ? 'pointer' : '')}; */
+  /* cursor:${({ isfocus }) => (isfocus ? 'pointer' : '')}; */
   outline: none;
 `;
 
@@ -52,7 +52,7 @@ export const Label = styled.label<InputStates>`
   font-size: 14px;
   line-height: 15px;
   color: ${({error})=>error?"red":theme.blue};
-  display: ${({ isFocus }) => (isFocus ? 'block' : 'none')};
+  display: ${({ isfocus }) => (isfocus ? 'block' : 'none')};
   animation: ${anim} 0.4s;
   
 `;
@@ -67,7 +67,7 @@ export const MaskInput = styled(InputMask)<InputStates>`
   border: none;
   outline: none;
   padding-left: 25px;
-  padding-top: ${({isFocus}) => isFocus ? 0 : 22}px;
+  padding-top: ${({isfocus}) => isfocus ? 0 : 22}px;
   background: ${({error}) => error?"#FFF4F4":"#f4f6f9"};
 
 `;

@@ -1,6 +1,7 @@
 import React,{useState,useRef,useEffect} from 'react'
 import Picker from 'emoji-picker-react';
 import Title from '../../../components/products-title';
+import ChatItem from '../chat-item';
 import StarRaiting from '../../../components/star-rating';
 import Button from '../../../components/button';
 import Avatar1 from './avatar1.svg';
@@ -105,94 +106,95 @@ const  Testimonial = () => {
             <Title title="Отзывы"/>
             {
                 testimonal.map((item,index)=>(
-                    <ItemContainer>
-                        <TopSection>
-                            <TopSectionDiv1><img src={item.avatar}/></TopSectionDiv1>
-                            <TopSectionDiv2> 
-                                <p>{item.name}</p>
-                                <SubContainer>
-                                    <StarRaiting inputStar={item.raiting} /> <span>{item.data}</span>
-                                </SubContainer>
-                            </TopSectionDiv2>
-                        </TopSection>    
-                        <SmsText>{item.sms}</SmsText>
-                        <SmsActionContainer>
-                            <p onClick={()=>setReplay(open=>!open)}>Ответить</p>
-                            {item.replaysms && <p onClick={()=>setViewReplays(open=>!open)}>Показать ответы 1 </p>}
-                            <LikeAndDislike >
-                                <div><Like/><span>65</span></div>
-                                <div><Like style={{transform:'rotate(180deg)'}}/><span>2</span></div>
-                            </LikeAndDislike>
-                        </SmsActionContainer>
-                        {
-                            viewReplays && item.replaysms && item.replaysms.map((replay,index)=>(
-                                <div style={{marginLeft:42}}>
-                                    <TopSection>
-                                        <TopSectionDiv1><img src={replay.avatar}/></TopSectionDiv1>
-                                        <TopSectionDiv2> 
-                                            <p>{replay.name}</p>
-                                            <SubContainer>
-                                                <StarRaiting inputStar={replay.raiting} /> <span>{item.data}</span>
-                                            </SubContainer>
-                                        </TopSectionDiv2>
-                                    </TopSection>    
-                                    <SmsText>{replay.sms}</SmsText>
-                                    <SmsActionContainer>
-                                        <p>Ответить</p>
+                    <ChatItem key={index} item={item}/>
+                    // <ItemContainer>
+                    //     <TopSection>
+                    //         <TopSectionDiv1><img src={item.avatar}/></TopSectionDiv1>
+                    //         <TopSectionDiv2> 
+                    //             <p>{item.name}</p>
+                    //             <SubContainer>
+                    //                 <StarRaiting inputStar={item.raiting} /> <span>{item.data}</span>
+                    //             </SubContainer>
+                    //         </TopSectionDiv2>
+                    //     </TopSection>    
+                    //     <SmsText>{item.sms}</SmsText>
+                    //     <SmsActionContainer>
+                    //         <p onClick={()=>setReplay(open=>!open)}>Ответить</p>
+                    //         {item.replaysms && <p onClick={()=>setViewReplays(open=>!open)}>Показать ответы 1 </p>}
+                    //         <LikeAndDislike >
+                    //             <div><Like/><span>65</span></div>
+                    //             <div><Like style={{transform:'rotate(180deg)'}}/><span>2</span></div>
+                    //         </LikeAndDislike>
+                    //     </SmsActionContainer>
+                    //     {
+                    //         viewReplays && item.replaysms && item.replaysms.map((replay,index)=>(
+                    //             <div style={{marginLeft:42}}>
+                    //                 <TopSection>
+                    //                     <TopSectionDiv1><img src={replay.avatar}/></TopSectionDiv1>
+                    //                     <TopSectionDiv2> 
+                    //                         <p>{replay.name}</p>
+                    //                         <SubContainer>
+                    //                             <StarRaiting inputStar={replay.raiting} /> <span>{item.data}</span>
+                    //                         </SubContainer>
+                    //                     </TopSectionDiv2>
+                    //                 </TopSection>    
+                    //                 <SmsText>{replay.sms}</SmsText>
+                    //                 <SmsActionContainer>
+                    //                     <p>Ответить</p>
                                         
-                                        <LikeAndDislike >
-                                            <div><Like/><span>65</span></div>
-                                            <div><Like style={{transform:'rotate(180deg)'}}/><span>2</span></div>
-                                        </LikeAndDislike>
-                                    </SmsActionContainer>   
-                                </div>
-                            ))
-                        }
-                        {replay && 
-                            <div style={{marginLeft:42}}>
-                            <TopSection>
-                                <TopSectionDiv1><img src={item.avatar}/></TopSectionDiv1>
-                                <TopSectionDiv2> 
-                                    <p>{item.name}</p>
-                                    <SubContainer>
-                                        <StarRaiting inputStar={item.raiting} /> <span>{item.data}</span>
-                                    </SubContainer>
-                                </TopSectionDiv2>
-                            </TopSection>    
+                    //                     <LikeAndDislike >
+                    //                         <div><Like/><span>65</span></div>
+                    //                         <div><Like style={{transform:'rotate(180deg)'}}/><span>2</span></div>
+                    //                     </LikeAndDislike>
+                    //                 </SmsActionContainer>   
+                    //             </div>
+                    //         ))
+                    //     }
+                    //     {replay && 
+                    //         <div style={{marginLeft:42}}>
+                    //         <TopSection>
+                    //             <TopSectionDiv1><img src={item.avatar}/></TopSectionDiv1>
+                    //             <TopSectionDiv2> 
+                    //                 <p>{item.name}</p>
+                    //                 <SubContainer>
+                    //                     <StarRaiting inputStar={item.raiting} /> <span>{item.data}</span>
+                    //                 </SubContainer>
+                    //             </TopSectionDiv2>
+                    //         </TopSection>    
                            
-                            <SmsActionContainer>
-                                <div style={{position:'relative',width:'100%'}}>
-                                    <Textarea state={textFild}>
-                                        <div onClick={()=>handleBlur()}>
-                                            <LabelSms state={textFild}>Введите описание товара</LabelSms>
-                                            <textarea
-                                                onBlur={()=>handleBlur()}
-                                                rows={7} 
-                                                placeholder="Введите описание товара"
-                                                ref={refAction}
-                                                onChange={(e)=>handelChange(e)}
-                                                value={replayTxt}
-                                                name="placeholder"
-                                                />
+                    //         <SmsActionContainer>
+                    //             <div style={{position:'relative',width:'100%'}}>
+                    //                 <Textarea state={textFild}>
+                    //                     <div onClick={()=>handleBlur()}>
+                    //                         <LabelSms state={textFild}>Введите описание товара</LabelSms>
+                    //                         <textarea
+                    //                             onBlur={()=>handleBlur()}
+                    //                             rows={7} 
+                    //                             placeholder="Введите описание товара"
+                    //                             ref={refAction}
+                    //                             onChange={(e)=>handelChange(e)}
+                    //                             value={replayTxt}
+                    //                             name="placeholder"
+                    //                             />
                                             
-                                        </div>
-                                        <Smile onClick={()=>setSmile(open=>!open)}/>
-                                    </Textarea>
-                                    <EmojiContainer state={smile}>
-                                        <Picker onEmojiClick={onEmojiClick} />
-                                    </EmojiContainer>
-                                    <TextareaButton>
-                                        {!textFild 
-                                            ?<Button btnType="disabled">Добавить отзыв</Button>
-                                            :<Button onClick={onSubmit}>Добавить отзыв</Button>
-                                        }
-                                    </TextareaButton>
-                                </div>
-                            </SmsActionContainer>   
-                        </div>
-                        }
+                    //                     </div>
+                    //                     <Smile onClick={()=>setSmile(open=>!open)}/>
+                    //                 </Textarea>
+                    //                 <EmojiContainer state={smile}>
+                    //                     {smile && <Picker onEmojiClick={onEmojiClick} />}
+                    //                 </EmojiContainer>
+                    //                 <TextareaButton>
+                    //                     {!textFild 
+                    //                         ?<Button btnType="disabled">Добавить отзыв</Button>
+                    //                         :<Button onClick={onSubmit}>Добавить отзыв</Button>
+                    //                     }
+                    //                 </TextareaButton>
+                    //             </div>
+                    //         </SmsActionContainer>   
+                    //     </div>
+                    //     }
                         
-                    </ItemContainer>
+                    // </ItemContainer>
                 ))
             }
             <ViewAllTitle>Посмотреть все 1241 отзыв</ViewAllTitle>
@@ -232,8 +234,8 @@ const  Testimonial = () => {
                         </div>
                         <Smile onClick={()=>setSmile(open=>!open)}/>
                     </Textarea>
-                    <EmojiContainer state={smile}>
-                        <Picker onEmojiClick={onEmojiClick} />
+                    <EmojiContainer  state={smile}>
+                        {smile && <Picker onEmojiClick={onEmojiClick} />}
                     </EmojiContainer>
                     <TextareaButton>
                         {!textFild 
