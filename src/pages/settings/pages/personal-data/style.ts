@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
-export const PersonalDataContainer = styled.div`
+interface PersonalDataContainerProps {
+  loading: boolean;
+}
+
+export const PersonalDataContainer = styled.div<PersonalDataContainerProps>`
   padding: 40px;
   border-radius: 16px;
   border: 2px solid #e9ecf4;
+  position: relative;
+  height: ${({ loading }) => (loading ? "425px" : "auto")};
 `;
 
 export const Div = styled.div`

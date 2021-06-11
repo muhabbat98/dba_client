@@ -38,6 +38,7 @@ const Sms: React.FC<SmsProps> = ({ reSend, sendSms }) => {
 
   const confirmRegistration = () => {
     const code = one + two + three + four;
+    setError(undefined);
     sendSms(code, (e) => {
       setError(e);
       fourRef.current?.focus();
