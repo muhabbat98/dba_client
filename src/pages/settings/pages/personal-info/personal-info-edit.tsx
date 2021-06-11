@@ -32,16 +32,16 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       id: "60927f03ad717f2975f9713d",
       firstName: "",
       secondName: "",
-      phoneNumber: null,
-      homePhoneNumber: null,
-      email: null,
+      phoneNumber: "",
+      homePhoneNumber: "",
+      email: "",
       inn: "",
-      passportType: null,
+      passportType: "",
       passportNumber: "",
-      gender: null,
-      birthday: null,
-      dateOfExpire: null,
-      dateOfIssue: null
+      gender: "",
+      birthday: "",
+      dateOfExpire: "",
+      dateOfIssue: ""
 
    });
 

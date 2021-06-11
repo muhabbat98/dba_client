@@ -12,7 +12,7 @@ export const SwiperContainer = styled.div`
     height: 40px;
     border-radius: 50%;
     box-shadow: 0px 10px 30px rgb(0 0 0 / 7%);
-    background-color: #fff;
+    background-color: ${({theme}) => theme.light_grey};
     right: -20px;
   }
 
@@ -29,7 +29,7 @@ export const SwiperContainer = styled.div`
     height: 40px;
     border-radius: 50%;
     box-shadow: 0px 10px 30px rgb(0 0 0 / 7%);
-    background-color: #fff;
+    background-color: ${({theme}) => theme.light_grey};
     left: -20px;
   }
 

@@ -7,13 +7,6 @@
 // export default Homepage;
 
 import React from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation } from 'swiper';
-
-// Import Swiper styles
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/swiper-bundle.css';
 
 import Card from '../../components/card';
 
@@ -28,7 +21,6 @@ import Row from '../../components/grid/row';
 import Col from '../../components/grid/col';
 
 import { CardWrapperRow, CardWrapperCol, Cont } from './style';
-import { SwiperContainer } from './style';
 
 import Dishes from "../../assets/images/dishes.svg";
 import Shoe from "../../assets/images/shoe.svg";
