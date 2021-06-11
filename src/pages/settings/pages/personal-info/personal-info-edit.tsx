@@ -19,6 +19,7 @@ import { ReactComponent as PersonalAvatarEditImg } from '../../../../assets/icon
 import { ReactComponent as Verified } from '../../../../assets/icons/verified.svg';
 import getStoredState from 'redux-persist/es/integration/getStoredStateMigrateV4';
 import inputLetter from '../../../../utils/input-letter';
+import moment from 'moment';
 
 interface PersonalInfoEditProps {
    toggleComponent: () => void
@@ -39,7 +40,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       passportNumber: "",
       gender: null,
       birthday: null,
-      dateOfExpire: "2021-06-17",
+      dateOfExpire: null,
       dateOfIssue: null
 
    });
@@ -148,7 +149,17 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       try {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
-         setState(data);
+         const dataObj = {...data};
+         console.log("dataObj ==== ", dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-"));
+         // dataObj.birthday = moment(dataObj.birthday).subtract(10, "days").calendar();
+         dataObj.birthday = dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
+         dataObj.dateOfExpire = dataObj.dateOfExpire.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
+         dataObj.dateOfIssue = dataObj.dateOfIssue.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
+         console.log("dataObj22222 ==== ", dataObj);
+         // birthday: "2021-06-17T00:00:00.000+00:00"
+         // dateOfExpire: "2021-06-09T00:00:00.000+00:00"
+         // dateOfIssue: "2021-07-03T00:00:00.000+00:00"
+         setState(dataObj);
          setAvatar(data.imageUrl);
          setImgUrl(data.imageUrl);
       } catch (error) {
@@ -181,7 +192,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          const response = await axios.post(`user/`, dataObj);
          const data = await response.data;
          console.log("DDDDDDDDDDD ===  ", data);
-         // toggleComponent();
+         toggleComponent();
          setAlertMessage({
             message: data.message,
             type: 'success',
@@ -287,7 +298,13 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Дата выдачи" name="dateOfIssue" defaultValue={state.dateOfIssue} type="date" />
+                     <Input 
+                        onChange={handleChange} 
+                        label="Дата выдачи" 
+                        name="dateOfIssue" 
+                        defaultValue={state.dateOfIssue} 
+                        value={state.dateOfIssue} 
+                        type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
@@ -301,7 +318,13 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         inputType="phone" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
-                     <Input onChange={handleChange} label="Срок действия" name="dateOfExpire" defaultValue={state.dateOfExpire} type="date" />
+                     <Input 
+                        onChange={handleChange}
+                        label="Срок действия" 
+                        name="dateOfExpire"
+                        defaultValue={state.dateOfExpire} 
+                        value={state.dateOfExpire} 
+                        type="date" />
                   </PersonalBodyFlex>
                   <PersonalBodyFlex isEdit={true}>
                      <Input
@@ -309,7 +332,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         onChange={handleChange}
                         label="Телефон (домашний)"
                         placeholder="Телефон (домашний)"
-                        // value={state.homePhoneNumber} 
+                        value={state.homePhoneNumber} 
                         defaultValue={state.homePhoneNumber}
                         control={control}
                         inputType="phone" />
@@ -319,7 +342,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         onChange={handleChange}
                         label="Дата рождения"
                         // defaultValue="2014-02-09" 
-                        defaultValue={state.birthday}
+                        // defaultValue={state.birthday}
+                        value={state.birthday}
                         type="date"
                         name="birthday"
                      />
