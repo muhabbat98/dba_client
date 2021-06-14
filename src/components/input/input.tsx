@@ -61,15 +61,15 @@ const Input: React.FC<InputFilds> = ({
     if (inputType == "phone") {
       return (
         <Controller
-          ref={refInput}
+          // ref={refInput}
           as={MaskInput}
           control={control}
           mask="+\9\98 99 999 99 99"
           name={name}
           defaultValue={defaultValue}
           value={value}
-          isFocus={isFocus}
-          error={error?true:false}  
+          isfocus={isFocus}
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -77,15 +77,15 @@ const Input: React.FC<InputFilds> = ({
     } else if (inputType == "card") {
       return (
         <Controller
-          ref={refInput}
+          // ref={refInput}
           as={MaskInput}
           control={control}
           mask="9999 9999 9999 9999"
           name={name}
           defaultValue={defaultValue}
           value={value}
-          isFocus={isFocus}
-          error={error?true:false}  
+          isfocus={isFocus}
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -94,15 +94,15 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="cardData"){
       return (
         <Controller
-          ref={refInput}
+          // ref={refInput}
           as={MaskInput}
           control={control}
           mask="99/99"
           name={name}
           defaultValue={defaultValue}
           value={value}
-          isFocus={isFocus}
-          error={error?true:false}  
+          isfocus={isFocus}
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -111,15 +111,15 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="brithDay"){
       return (
         <Controller
-          ref={refInput}
+          // ref={refInput}
           as={MaskInput}
           control={control}
           mask="99/99/9999"
           name={name}
           defaultValue={defaultValue}
           value={value}
-          isFocus={isFocus}
-          error={error?true:false}
+          isfocus={isFocus}
+          err={error?"true":"false"}
           placeholder={placeholder}  
           
         />
@@ -128,15 +128,15 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="passport"){
       return (
         <Controller
-          ref={refInput}
+          // ref={refInput}
           as={MaskInput}
           control={control}
           mask={"aa 99999"}
           name={name}
           defaultValue={defaultValue}
           value={value}
-          isFocus={isFocus}
-          error={error?true:false}  
+          isfocus={isFocus}
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -145,15 +145,15 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="inn"){
       return (
         <Controller
-          ref={refInput}
+          // ref={refInput}
           as={MaskInput}
           control={control}
           mask={"999 999999"}
           name={name}
           defaultValue={defaultValue}
           value={value}
-          isFocus={isFocus}
-          error={error?true:false}  
+          isfocus={isFocus}
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -188,7 +188,7 @@ const Input: React.FC<InputFilds> = ({
       style={style}
     >
       {isFocus &&
-      <Label isFocus={isFocus} error={error?true:false}>{label}</Label>
+      <Label isfocus={isFocus} err={error?true:false}>{label}</Label>
       } 
 
       {inputType ? (
@@ -201,10 +201,10 @@ const Input: React.FC<InputFilds> = ({
           ref={refInput}
           autoFocus ={isFocus?true:false}
           placeholder={!isFocus ? placeholder : ""}
-          isFocus={isFocus}
+          isfocus={isFocus}
           onBlur={(e) => onBlur(e)}
-          error={error?true:false}    
-          defaultValue={defaultValue}
+          err={error?"true":"false"}    
+          // defaultValue={defaultValue}
         />
       )}
       

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BorderBoxContainer = styled.div`
     background: #ffffff;
-    border: 1px solid #d7d7d7;
+    border: 2px solid #E9ECF4;
     box-sizing: border-box;
     border-radius: 16px;
     width: 100%;

@@ -5,7 +5,7 @@ interface APPBar{
 }
 
 export const MainWrapper = styled.div<APPBar>`
-    border: ${({state})=>state?"0px 0px 2px 0px solid #D1D1D1":"2px solid #D1D1D1"};
+    border: ${({state})=>state?"0px 0px 2px 0px solid #E9ECF4":"2px solid #E9ECF4"};
     box-sizing: border-box;
     border-radius: 16px;
     padding-bottom:20px;
@@ -14,7 +14,7 @@ export const MainWrapper = styled.div<APPBar>`
 export const  OrderHeader = styled.div`
     display:flex;
     justify-content:space-between;
-    border-bottom:1px solid ${({theme})=>theme.grey3};
+    border-bottom:2px solid #E9ECF4;
 
     div{
         /* margin:18px 24px; */

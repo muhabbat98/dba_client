@@ -6,7 +6,7 @@ export const DefaultPageContainer = styled.div`
     align-items:center;
     flex-direction:column;
     border-radius: 16px;
-    border: 1px solid ${({theme})=>theme.grey3};
+    border: 2px solid #E9ECF4;
     padding:70px 0px;
     
 `;

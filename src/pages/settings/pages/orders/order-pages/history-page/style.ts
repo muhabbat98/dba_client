@@ -9,7 +9,7 @@ export const TableHeader = styled.div`
     display:flex;
     justify-content:space-between;
     padding:16px 23px;
-    border-bottom:2px solid ${({theme})=>theme.grey3};
+    border-bottom:2px solid #E9ECF4;
     
     div{
         flex:1;

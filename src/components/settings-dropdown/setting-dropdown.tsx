@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 import {ReactComponent as  Arrow} from '../../assets/icons/down-arrow2.svg'
 import {DropDownContainer,DropDownInput,DropDownList,ListOption} from './style';
 
@@ -15,8 +15,10 @@ const SettingDropdown:React.FC<Propses> = ({label,options,getOption,...rest}) =>
         setIsOpen(false);
         getOption(data);
     }
+
+
     return (
-        <DropDownContainer isOpen={isOpen} {...rest}>
+        <DropDownContainer isOpen={isOpen} {...rest} >
             <DropDownInput state={option?true:false} onClick={()=>setIsOpen(open=>!open)}>
                 <p>{option||label}</p>
                 <Arrow/>
