@@ -67,35 +67,7 @@ const AddressBoxes: React.FC<Propses> = ({
 
   return (
     <BorderBoxContainer>
-      {!openAddress ? (
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <AddresTitiles style={{ marginLeft: 0 }}>
-            <p>Адрес {index}</p>
-            <p>
-              {data.district} район улица{" "}
-              {data.street} <br />
-              {data.apartmentNumber}-квартира {data.homeNumber}-дом
-            </p>
-          </AddresTitiles>
-          <ActionsContainer>
-            <div onClick={handleExit}>
-              <Btnhouse />
-              <span>Сделать основной</span>
-            </div>
-            <div onClick={handleEditButton}>
-              <Pencil />
-              <span>Изменить</span>
-            </div>
-            <div onClick={() => handleDelete()}>
-              <Trash />
-              <span>Удалить</span>
-            </div>
-            <Arrow onClick={() => setOpenAddress((open) => !open)}>
-              <DownArrow />
-            </Arrow>
-          </ActionsContainer>
-        </div>
-      ) : (
+     
         <SecondContainer>
           <Title>Адрес {index}</Title>
           <AddressInfo>
@@ -149,16 +121,11 @@ const AddressBoxes: React.FC<Propses> = ({
                 <Trash />
                 <span>Удалить</span>
               </div>
-              <Arrow
-                style={{ transform: "rotate(180deg)",transition:"0.3s"}}
-                onClick={() => setOpenAddress((open) => !open)}
-              >
-                <DownArrow />
-              </Arrow>
+             
             </ActionsContainer>
           </div>
         </SecondContainer>
-      )}
+     
     </BorderBoxContainer>
   );
 };

@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Marker from './marker.svg'
-import axios from 'axios';
+import { axios, useActionCreators, useSelector } from "../../../hooks";
+import { AlertPosition } from "../../../utils/alert-position-enum";
 import { YMaps, Map,Placemark,ZoomControl,SearchControl,GeolocationControl,GeoObject } from 'react-yandex-maps';
 
 interface Location{
@@ -11,8 +12,15 @@ interface Location{
 const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) => {
     const [geometry,setgeometry] = useState(defaultCordinate ? defaultCordinate:[41.31207798268884, 69.24238483965644]);
     const [state,setState] = useState<any>({coordinates:null})
-    
+    const { setAlertMessage } = useActionCreators();
     const getAddress = (e:any) => {
+        setData({
+            country:"",
+            city:"",
+            district:"",
+            homeNumber:"",
+            street:"",
+        })
         setgeometry(e.get('target').geometry.getCoordinates());
         setLocation({latitude:geometry[0],longitude:geometry[1]});
     }
@@ -30,14 +38,39 @@ const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) =
     }
 
     const  getAdd = async () =>{ 
+        try{
         const data = await axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=e29642df-87bb-4b68-80a4-eecf4e8b1b64&geocode=${geometry[1]},${geometry[0]}`);
         const parser = new DOMParser();  
         doc = parser.parseFromString(data.data, 'text/xml')
         console.log('rrrr-->',doc)
+        }
+        catch(error){
+            if (error.debugMessage) {
+                setAlertMessage({
+                  message: error.debugMessage,
+                  type: 'error',
+                  position: AlertPosition.TOP_LEFT
+                });
+            } else {
+                setAlertMessage({
+                  message: error.message,
+                  type: 'error',
+                  position: AlertPosition.TOP_LEFT
+                });
+            }
+        }
 
         // featureMember
-        const x = doc.getElementsByTagName("featureMember")[0].getElementsByTagName("text")[0].childNodes[0].nodeValue; 
-        const x2 = doc.getElementsByTagName("featureMember")[1].getElementsByTagName("text")[0].childNodes[0].nodeValue; 
+        const x = doc.getElementsByTagName("featureMember")[0] 
+        ? doc.getElementsByTagName("featureMember")[0]
+            .getElementsByTagName("text")[0]
+            .childNodes[0]
+            .nodeValue:",,,,,,,"; 
+        const x2 = doc.getElementsByTagName("featureMember")[1] 
+        ? doc.getElementsByTagName("featureMember")[1]
+            .getElementsByTagName("text")[0]
+            .childNodes[0]
+            .nodeValue:",,,,,,,"; 
         const y=x.split(",");
         const y2=x2.split(",");
         setData && setData({

@@ -6,7 +6,7 @@ open:boolean;
 
 export const Tr = styled.div<Open>`
     box-shadow:${({open})=>open?"0px 2px 4px -2px rgba(24, 39, 75, 0.12), 0px 4px 4px -2px rgba(24, 39, 75, 0.08)":""};
-    border-bottom:2px solid  ${({theme})=>theme.grey3};
+    border-bottom:2px solid  #E9ECF4;
     display:flex;
     justify-content:space-between;
     padding:16px 23px 8px 23px;
@@ -62,7 +62,7 @@ export const Tr = styled.div<Open>`
 export const InfoWrapper = styled.div`
     padding:0px 39px 24px 39px;
     width:100%;
-    border-bottom:1px solid  ${({theme})=>theme.grey3};
+    border-bottom:2px solid  #E9ECF4;
     position:relative;
     background-color:#ffff;
 `;

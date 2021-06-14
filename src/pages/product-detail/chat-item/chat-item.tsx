@@ -98,10 +98,13 @@ const  ChatItem:React.FC<Propses> = ({item}) => {
                             <div style={{marginLeft:42}}>
                             <TopSection>
                                 <TopSectionDiv1><img src={item.avatar}/></TopSectionDiv1>
-                                <TopSectionDiv2> 
-                                    <p>{item.name}</p>
+                                <TopSectionDiv2 > 
+                                    <div style={{display: 'flex'}}>
+                                        <p>{item.name}</p>
+                                        <span style={{marginLeft:14}}> ответ {item.name}</span>
+                                    </div>
                                     <SubContainer>
-                                        <StarRaiting inputStar={item.raiting} /> <span>{item.data}</span>
+                                        <span>{item.data}</span>
                                     </SubContainer>
                                 </TopSectionDiv2>
                             </TopSection>    
