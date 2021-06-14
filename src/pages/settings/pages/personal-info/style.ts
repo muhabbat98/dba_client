@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const PersonalInfoContainer = styled.div`
-  border: 1px solid ${({ theme }) => theme.grey3};
+  border: 2px solid #e9ecf4;
   border-radius: 16px;
   padding: 40px 40px 0 40px;
 `;

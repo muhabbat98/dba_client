@@ -42,7 +42,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       birthday: "",
       dateOfExpire: "",
       dateOfIssue: ""
-
    });
 
    const [avatar, setAvatar] = useState<any>(Avatar);

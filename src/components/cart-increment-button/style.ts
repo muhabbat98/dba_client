@@ -5,6 +5,7 @@ export const CartIcrementButtonContainer = styled.div`
   padding: 4px;
   border-radius: 8px;
   display: flex;
+  justify-content: space-between;
 `;
 
 export const CartDecrementButton = styled.button`

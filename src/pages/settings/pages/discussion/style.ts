@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const DiscussionContainer = styled.div`
-  border: 2px solid ${({ theme }) => theme.grey3};
+  border: 2px solid #e9ecf4;
   border-radius: 16px;
 `;
 
@@ -14,7 +14,7 @@ export const DiscussionTop = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 19px 20px;
-  border-bottom: 2px solid ${({ theme }) => theme.grey3};
+  border-bottom: 2px solid #e9ecf4;
 `;
 
 export const DiscussionFilterBtn = styled.button`
@@ -83,7 +83,7 @@ export const StatusDisccusionButton = styled.button<Props>`
   line-height: 16px;
   padding: 8px 14px;
   border: none;
-  cursor: pointer;
+  /* cursor: pointer; */
   border-radius: 100px;
   background-color: ${({ isBg }) => (isBg ? "#DEF4EA" : "#D9EFFF")};
   color: ${({ isBg, theme }) => (isBg ? theme.green : theme.blue)};
@@ -198,6 +198,11 @@ export const DiscussionEditCancelButton = styled.button`
   position: relative;
   top: -40px;
   left: -80px;
+
+  :disabled{
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 
   & > svg {
     margin-right: 10px;

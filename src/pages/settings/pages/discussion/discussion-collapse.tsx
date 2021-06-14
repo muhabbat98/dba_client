@@ -34,7 +34,7 @@ const DiscussionCollapse = () => {
 
    return (
       <>
-         <DiscussionHeadFlex style={{ borderBottom: '2px solid #D1D1D1' }}>
+         <DiscussionHeadFlex style={{ borderBottom: '2px solid #e9ecf4' }}>
             <DiscussionHead>ID Заказа</DiscussionHead>
             <DiscussionHead>Причина</DiscussionHead>
             <DiscussionHead>Дата начала спора</DiscussionHead>
@@ -42,7 +42,7 @@ const DiscussionCollapse = () => {
             <DiscussionHead style={{ textAlign: 'center' }}>Cтатус</DiscussionHead>
             <DiscussionHead>{" "}</DiscussionHead>
          </DiscussionHeadFlex>
-         <DiscussionHeadFlex style={{ borderBottom: toggle ? '2px solid #D1D1D1' : '' }}>
+         <DiscussionHeadFlex style={{ borderBottom: toggle ? '2px solid #e9ecf4' : '' }}>
             <DiscussionHead>№1231235</DiscussionHead>
             <DiscussionHead>Товар не прибыл</DiscussionHead>
             <DiscussionHead>15 сентября 2020</DiscussionHead>
@@ -89,7 +89,7 @@ const DiscussionCollapse = () => {
                         </DiscussionItem>
                      </DiscussionEditTopBody>
                      <DiscussionEditCancel>
-                        <DiscussionEditCancelButton onClick={cancelDiscussion}><CancelIcon />Завершить спор</DiscussionEditCancelButton>
+                        <DiscussionEditCancelButton disabled={true} onClick={cancelDiscussion}><CancelIcon />Завершить спор</DiscussionEditCancelButton>
                      </DiscussionEditCancel>
                   </DiscussionEditTopWrap>
                </DiscussionEditTop>
