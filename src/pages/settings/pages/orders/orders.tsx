@@ -6,7 +6,7 @@ import {history,activeData} from "./datas"
 
 
 const Orders = () => {
-const [openOrder, setOpenOrder] = useState(false);
+const [openOrder, setOpenOrder] = useState((history||activeData)?true:false);
 
   return (
     <div>

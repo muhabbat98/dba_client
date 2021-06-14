@@ -69,7 +69,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={value}
           isfocus={isFocus}
-          error={error?true:false}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -85,7 +85,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={value}
           isfocus={isFocus}
-          error={error?true:false}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -102,7 +102,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={value}
           isfocus={isFocus}
-          error={error?true:false}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -119,7 +119,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={value}
           isfocus={isFocus}
-          error={error?true:false}
+          err={error?"true":"false"}
           placeholder={placeholder}  
           
         />
@@ -136,7 +136,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={value}
           isfocus={isFocus}
-          error={error?true:false}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -153,7 +153,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={value}
           isfocus={isFocus}
-          error={error?true:false}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
           
         />
@@ -188,7 +188,7 @@ const Input: React.FC<InputFilds> = ({
       style={style}
     >
       {isFocus &&
-      <Label isfocus={isFocus} error={error?true:false}>{label}</Label>
+      <Label isfocus={isFocus} err={error?true:false}>{label}</Label>
       } 
 
       {inputType ? (
@@ -203,7 +203,7 @@ const Input: React.FC<InputFilds> = ({
           placeholder={!isFocus ? placeholder : ""}
           isfocus={isFocus}
           onBlur={(e) => onBlur(e)}
-          error={error?true:false}    
+          err={error?"true":"false"}    
           // defaultValue={defaultValue}
         />
       )}

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ActiveProductsItemContainer = styled.div`
-    border: 2px solid ${({theme})=>theme.grey3};
+    border: 2px solid #E9ECF4;
     box-sizing: border-box;
     border-radius: 16px;
     overflow: hidden;

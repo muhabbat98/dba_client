@@ -7,7 +7,7 @@ export const DefaultPageContainer = styled.div`
     flex-direction:column;
     box-sizing: border-box;
     border-radius: 16px;
-    border: 1px solid ${({theme})=>theme.grey3};
+    border: 2px solid #E9ECF4;
     padding:70px 0px;
     
 `;

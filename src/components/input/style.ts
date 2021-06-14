@@ -6,8 +6,8 @@ interface Error {
   error:boolean,
 }
 interface InputStates{
-  isfocus: boolean;
-  error:boolean,
+  isfocus: any;
+  err:any,
 }
 
 export const InputWrapper = styled.div<Error>`
@@ -33,10 +33,10 @@ const anim = keyframes`
 
 export const InputElement = styled.input<InputStates>`
   border: none;
-  background: ${({error})=>error?"#FFF4F4":"#f4f6f9"};
+  background: ${({err})=>err==="true"?"#FFF4F4":"#f4f6f9"};
   border-radius: 16px;
   padding: 0px 10px 8px 24px;
-  margin-top: ${({ isfocus }) => (isfocus ? 0 : 22)}px;
+  margin-top: ${({ isfocus }) => (isfocus? 0 : 22)}px;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -51,7 +51,7 @@ export const Label = styled.label<InputStates>`
   font-weight: normal;
   font-size: 14px;
   line-height: 15px;
-  color: ${({error})=>error?"red":theme.blue};
+  color: ${({err})=>err=="true"?"red":theme.blue};
   display: ${({ isfocus }) => (isfocus ? 'block' : 'none')};
   animation: ${anim} 0.4s;
   
@@ -67,8 +67,8 @@ export const MaskInput = styled(InputMask)<InputStates>`
   border: none;
   outline: none;
   padding-left: 25px;
-  padding-top: ${({isfocus}) => isfocus ? 0 : 22}px;
-  background: ${({error}) => error?"#FFF4F4":"#f4f6f9"};
+  padding-top: ${({isfocus}) => isfocus? 0 : 22}px;
+  background: ${({err}) => err=="true"?"#FFF4F4":"#f4f6f9"};
 
 `;
 export const ErrorTitle = styled.div`
