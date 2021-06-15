@@ -16,6 +16,12 @@ import {
   AddresTitiles,
   ActionsContainer,
   PlusButton,
+
+  SecondContainer,
+  Titlee,
+  AddressInfo,
+  Line
+
 } from "./style";
 
 interface Addresses {
@@ -78,15 +84,53 @@ const ViewAddress: React.FC<Addresses> = ({
                 </HouseCircle>
                 <AddresTitiles>
                   <p>Адрес 1</p>
-                  <p>
-                    {mainAddress.district}{" "}
-                    район улица {mainAddress.street} <br />
-                    {mainAddress.apartmentNumber}-квартира{" "}
-                    {mainAddress.homeNumber}-дом
-                  </p>
+                  
                 </AddresTitiles>
               </div>
+              
+            </div>
+          <div>
+            <Title>Адрес 1</Title>
+            <AddressInfo>
+              <div>
+                <p>Страна</p>
+                <h5>{mainAddress.country}</h5>
+              </div>
+              <div>
+                <p>Город</p>
+                <h5>{mainAddress.city}</h5>
+              </div>
+              <div>
+                <p>Район</p>
+                <h5>{mainAddress.district}</h5>
+              </div>
+              <div>
+                <p>Улица</p>
+                <h5>{mainAddress.street}</h5>
+              </div>
+              <div>
+                <p>Доп. информация</p>
+                <h5>{mainAddress.additionalInformation}</h5>
+              </div>
+              <div>
+                <p>Дом</p>
+                <h5>{mainAddress.apartmentNumber}</h5>
+              </div>
+              <div>
+                <p>Квартира</p>
+                <h5>{mainAddress.homeNumber}</h5>
+              </div>
+            </AddressInfo>
+            <Line></Line>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: 25,
+              }}
+            >
               <ActionsContainer>
+                
                 <div onClick={editHandle}>
                   <Pencil />
                   <span>Изменить</span>
@@ -95,9 +139,13 @@ const ViewAddress: React.FC<Addresses> = ({
                   <Trash />
                   <span>Удалить</span>
                 </div>
+              
               </ActionsContainer>
             </div>
-          </BorderBox>
+        </div>
+        
+        
+        </BorderBox>
         </>
       )}
 

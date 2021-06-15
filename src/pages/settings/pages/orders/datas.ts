@@ -5,7 +5,7 @@ import Sneakers  from '../../../../assets/images/card-item8.png'
 
 export const history = [
   {
-    idOrder:1213124,
+    idOrder:111122,
     totalPrice: 231125000,
     status:"canceled",
     seller:'ООО /"ДИХАУС/"',
@@ -33,7 +33,7 @@ export const history = [
     ]
   },
   {
-    idOrder:13214324,
+    idOrder:123456,
     totalPrice: 115125000,
     status:"canceled",
     seller:'ООО /ЧП РАХИМ/"',
@@ -61,7 +61,7 @@ export const history = [
     ]
   },
   {
-    idOrder:13214324,
+    idOrder:654321,
     totalPrice: 115125000,
     status:"completed",
     seller:'ООО /ЧП РАХИМ/"',
@@ -120,7 +120,7 @@ export const history = [
 
 export const activeData = [
   {
-    idOrder:1213124,
+    idOrder:122233,
     totalPrice: 231125000,
     status:"packing",
     seller:'ООО /"ДИХАУС/"',
@@ -176,7 +176,7 @@ export const activeData = [
     ]
   },
   {
-    idOrder:13214324,
+    idOrder:1321433,
     totalPrice: 115125000,
     status:"delivered",
     seller:'ООО /ЧП РАХИМ/"',

@@ -24,9 +24,11 @@ import {
 
 interface ActivePagePropses {
   activeData: any;
+  setOpen:any
+  setGetDisputeItem:any
 }
-const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData }) => {
-  const [open, setOpen] = useState(false)
+const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData,setOpen,setGetDisputeItem }) => {
+  const [open, setOpenn] = useState(false)
   const [status, setStatus] = useState(
     {
       state1:true,
@@ -133,10 +135,14 @@ const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData }) => {
           </>}
         
         <ButtonsGroupContainier >
-          <div onClick={()=>setOpen(open=>!open)}>
+          <div onClick={()=>setOpenn(open=>!open)}>
             <span>{open?"Скрыть":"Подробнее"}</span><DownArrow style={{transform:open?"rotate(180deg)":"",}}/>
           </div>
-          <Button style={{maxWidth:240}} btnType="outlined">Начать спор</Button>
+          <Button 
+            style={{maxWidth:240}} 
+            btnType="outlined"
+            onClick={()=>{setOpen(true); setGetDisputeItem(activeData)}}
+            >Начать спор</Button>
         </ButtonsGroupContainier>
       </InfoWrapper>
     </ActiveProductsItemContainer>

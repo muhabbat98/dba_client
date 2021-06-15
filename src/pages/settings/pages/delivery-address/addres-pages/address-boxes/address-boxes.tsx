@@ -3,7 +3,6 @@ import { useActionCreators } from "../../../../../../hooks";
 import { ReactComponent as Pencil } from "../../../../../../assets/icons/pencil.svg";
 import { ReactComponent as Trash } from "../../../../../../assets/icons/red-trash.svg";
 import { ReactComponent as Btnhouse } from "../../../../../../assets/icons/house-btn.svg";
-import { ReactComponent as DownArrow } from "../../../../../../assets/icons/down-arrow2.svg";
 import {
   BorderBoxContainer,
   AddresTitiles,
@@ -12,7 +11,6 @@ import {
   Title,
   AddressInfo,
   Line,
-  Arrow,
 } from "./style";
 
 interface Propses {

@@ -5,7 +5,9 @@ import ProductsTitle from '../../components/products-title'
 import ProductDetailHeader from './product-detail-header';
 import Characteristic from './characteristic';
 import Testimonial from './testimonial';
-import {TabBarHead,DescriptionText} from './style';
+import Slider from '../../components/slider';
+import {data} from '../homepage/homepage'
+import {TabBarHead,DescriptionText,Cont} from './style';
 
 const ProductDetail = () => {
     const [tabBar,setTabBar] = useState({
@@ -79,8 +81,15 @@ const ProductDetail = () => {
                         <Testimonial/>
                     }
                 </div>
+                
 
             </Container>
+            <Cont>
+                <Container>
+                    <ProductsTitle style={{ marginBottom: '0px' }} title="Похожие товары" />
+                    <Slider data={data}/>
+                </Container>
+            </Cont>
             
             <ReklamaMobileApp/>
         </>

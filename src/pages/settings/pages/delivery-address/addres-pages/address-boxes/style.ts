@@ -107,21 +107,7 @@ export const ActionsContainer = styled.div`
         }
     } */
 `;
-export const Arrow = styled.div`
-    padding:0px !important;
-    height:30px;
-    width:30px;
-    align-self:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    
-    svg{
-        fill:${({theme})=>theme.primary_color};
-        width:15px;
-        height:15px;
-    }
-`;
+
 export const SecondContainer =styled.div`
     
 `;

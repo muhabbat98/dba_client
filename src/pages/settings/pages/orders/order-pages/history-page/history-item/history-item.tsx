@@ -15,14 +15,16 @@ import {
 
 interface Propses{
     item:any;
+    setOpen:any,
+    setGetDisputeItem:any,
 }
 
-const  HistoryItem:React.FC<Propses> = ({item}) => {
+const  HistoryItem:React.FC<Propses> = ({item,setOpen,setGetDisputeItem}) => {
     const styleStatus = {
         background:item.status=="completed"?"#DEF4EA":"#FFE3E3",
         color:item.status=="completed"?"green":"red",
     }
-    const [open, setOpen] = useState(false);
+    const [open, setOpenn] = useState(false);
     return (
         <>
             <Tr open={open}>
@@ -33,7 +35,7 @@ const  HistoryItem:React.FC<Propses> = ({item}) => {
                 <div> 
                     <span 
                     style={{background:open?"#EAEDF5":"",marginRight:20}} 
-                    onClick={()=>setOpen(!open)}>
+                    onClick={()=>setOpenn(!open)}>
                         <ArrowIcon 
                         style={
                             {transform:open?"rotate(180deg)":"",transition:"0.3s",
@@ -97,7 +99,7 @@ const  HistoryItem:React.FC<Propses> = ({item}) => {
                         
                     </InfoDeliveryContainer>
                     <div style={{display:"flex",justifyContent:"center",}}>
-                        <Button btnType="outlined">Начать спор</Button>
+                        <Button btnType="outlined" onClick={()=>{setOpen(true);setGetDisputeItem(item)}}>Начать спор</Button>
                     </div>
                 </InfoWrapper> 
             }

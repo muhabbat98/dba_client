@@ -23,3 +23,17 @@ export const DescriptionText = styled.p`
     line-height: 32px;
     color: #000000;
 `;
+export const Cont = styled.div`
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+    }
+`;

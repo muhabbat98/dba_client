@@ -38,7 +38,7 @@ import Tiger1 from '../../assets/images/tiger.jpg';
 import Tiger2 from '../../assets/images/tiger2.jpg';
 import Slider from '../../components/slider';
 
-const data = [
+export const data = [
   {
     "id": "6063033fb1a9f83cc5c61050",
     "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",

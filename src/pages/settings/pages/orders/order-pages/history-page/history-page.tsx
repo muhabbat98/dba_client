@@ -7,8 +7,10 @@ import {TableHeader,Table,FilterContainer} from './style'
 interface Propses{
     history:any,
     filterOpen:boolean,
+    setOpen:any
+    setGetDisputeItem:any
 }
-const  HistoryPage: React.FC<Propses> = ({history,filterOpen}) => {
+const  HistoryPage: React.FC<Propses> = ({history,filterOpen,setOpen,setGetDisputeItem}) => {
     const func = (data:any) =>{
         console.log('------->',data)
     }
@@ -40,7 +42,12 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen}) => {
                 {
                     history.map((item:any,index:number)=>{
                         return(
-                            <HistoryItem item={item} key={index}/>
+                            <HistoryItem 
+                                item={item} 
+                                key={index}
+                                setOpen={setOpen}
+                                setGetDisputeItem={setGetDisputeItem}
+                                />
                         )
                     })
                 }

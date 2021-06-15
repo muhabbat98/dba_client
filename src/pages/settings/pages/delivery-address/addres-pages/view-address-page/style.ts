@@ -16,8 +16,8 @@ export const BorderBoxContainer = styled.div`
   margin-bottom:16px;
 `;
 export const HouseCircle = styled.div`
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   background: #e5faf3;
   display: flex;
   justify-content: center;
@@ -26,6 +26,8 @@ export const HouseCircle = styled.div`
   align-self: center;
   svg {
     margin: -2px 0px 0px 3px;
+    width: 16px;
+    height: 16px;
   }
 `;
 export const AddresTitiles = styled.div`
@@ -133,4 +135,61 @@ export const PlusButton = styled.div`
       margin-right:12px;
     }
   }
+`;
+
+
+// ----------------------->
+
+export const SecondContainer =styled.div`
+    
+`;
+export const Titlee = styled.div`
+    margin: 0px 0px 8px 0px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.155556px;
+    color: #000000;
+    cursor: pointer;
+`;
+export const AddressInfo = styled.div`
+    display:flex;
+    /* justify-content:space-between; */
+    flex-wrap:wrap;
+    margin-top:8px;
+    div{
+        width:190px;
+        margin-top:16px;
+        p{
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.155556px;
+            color: ${({theme})=>theme.grey1};
+            margin:0px;
+        }
+        h5{
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.155556px;
+            color: #000000;
+            margin:4px 0px 0px 0px;
+        }
+    }
+`;
+export const Line = styled.div`
+    height:1px;
+    width:100%;
+    background:#F2F2F2;
+    margin-top:24px;
 `;

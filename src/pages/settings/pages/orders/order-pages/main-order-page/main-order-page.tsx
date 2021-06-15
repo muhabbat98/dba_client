@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import HistoryPage from '../history-page';
 import ActiveProductsPage from '../active-products-page';
+import CreateDispute from '../create-dispute';
 import {ReactComponent as FilterIcon} from '../../../../../../assets/icons/filter-icon.svg';
 import {MainWrapper,OrderHeader,AppBar1,AppBar2,FilterButtonContainer} from './style';
 
@@ -10,14 +11,16 @@ interface Propses{
 }
 const MainOrderPage: React.FC<Propses> = ({history,activeData}) => {
     const [state,setState] = useState({active:true,history:false});
-    const [filterOpen,setFilterOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [filterOpen,setFilterOpen] = useState<boolean>(false);
+    const [getDisputeItem,setGetDisputeItem] = useState<any>();
     const appBar1 = ( ) => {
         setState({active:true,history:false});
     }
     const appBar2 = ( ) => {
         setState({active:false,history:true});
     }
-
+    const closeModal = () => setOpen(false);
     return (
         <MainWrapper state={state.active}>
             <OrderHeader >
@@ -33,14 +36,24 @@ const MainOrderPage: React.FC<Propses> = ({history,activeData}) => {
             </OrderHeader>
             {
                 state.active && <div>
-                   <ActiveProductsPage activeData={activeData}/> 
+                    <ActiveProductsPage 
+                        activeData={activeData} 
+                        setOpen={setOpen} 
+                        setGetDisputeItem={setGetDisputeItem}/> 
                 </div>
             }
             {
                 state.history && <div>
-                    <HistoryPage filterOpen={filterOpen} history = {history}/>
+                    <HistoryPage 
+                        filterOpen={filterOpen} 
+                        history = {history}
+                        setOpen={setOpen}
+                        setGetDisputeItem={setGetDisputeItem}
+                        />
                 </div>
             }
+
+            {open && <CreateDispute closeModal={closeModal} getDisputeItem={getDisputeItem}/> }
         </MainWrapper>
     )
 }
