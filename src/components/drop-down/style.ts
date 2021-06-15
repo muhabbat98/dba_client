@@ -49,6 +49,12 @@ export const DropdownLabel = styled.span`
 
 export const DropdownHeaderTitle = styled.div`
   margin-top: 2px;
+  -webkit-box-orient: vertical;
+   display: block;
+   display: -webkit-box;
+   text-overflow: ellipsis;
+   -webkit-line-clamp: 1;
+   overflow: hidden;
 `;
 
 export const DropdownOptionList = styled.ul`
