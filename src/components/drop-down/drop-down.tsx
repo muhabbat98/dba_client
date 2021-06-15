@@ -9,18 +9,23 @@ interface DropdownProps {
    callback: (data: string) => void;
    label?: string;
    option?: any,
-   selected?: string
+   selected?: string,
+   style?: any
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }) => {
+const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected, style }) => {
    const toggleRef = useRef<HTMLDivElement>(null);
    const [isOpen, setIsOpen] = useState('');
    const [selectedOption, setSelectedOption] = useState(null);
 
    useEffect(() => {
       window.addEventListener('click', dropdownOverlayClick);
-      return () => window.removeEventListener('click', dropdownOverlayClick);
-   }, [isOpen])
+
+      return () => {
+         console.log("Wilunmount")
+         window.removeEventListener('click', dropdownOverlayClick);
+      }
+   }, [isOpen]);
 
    const options = option.map((item: any, i: any) => {
       return {
@@ -39,7 +44,6 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }
    //    { value: 'по снижению цены', index: 5, selected: false },
    //    { value: 'по популярности', index: 6, selected: false },
    // ];
-
 
 
    const dropdown = useRef<HTMLUListElement>(null);
@@ -72,6 +76,7 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }
    }
 
    const dropdownOverlayClick = (ev: any) => {
+      console.log("hhssss");
       if (isOpen == 'active' &&
          !(toggleRef.current && toggleRef.current.contains(ev.target))) {
          setIsOpen('');
@@ -95,7 +100,7 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected }
 
    return (
       <>
-         <DropdownContainer ref={toggleRef} className="dropdown-container">
+         <DropdownContainer ref={toggleRef} className="dropdown-container" style={style}>
             <DropdownHeader onClick={toggleList}>
                <DropdownLabel>{label}</DropdownLabel>
                <DropdownHeaderTitle>
