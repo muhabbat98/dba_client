@@ -1,11 +1,13 @@
 import React from 'react';
-import { useActionCreators } from '../../../hooks';
+import { useActionCreators, useRole, UserRole } from '../../../hooks';
 import { useRouteMatch } from 'react-router-dom';
-import { MenuContainer, Ul, Li, StyledLink, Exit } from './style';
+import { MenuContainer, Ul, Li, Exit } from './style';
+import BuyerMenu from './buyer-menu';
+import SellerMenu from './seller-menu';
 
 const Menu = () => {
-  const { url } = useRouteMatch();
   const { setConfirm, cleanUser, cleanConfirm } = useActionCreators();
+  const { isBuyer, userRole } = useRole();
 
   const handleExit = () => {
     setConfirm({
@@ -17,49 +19,12 @@ const Menu = () => {
     });
   };
 
+  console.log('UserRole', userRole === UserRole.SELLER);
+
   return (
     <MenuContainer>
       <Ul>
-        <Li>
-          <StyledLink exact to={`${url}`}>
-            Мои данные
-          </StyledLink>
-        </Li>
-        <Li>
-          <StyledLink exact to={`${url}/delivery-address`}>
-            Адреса доставки
-          </StyledLink>
-        </Li>
-        {/* <Li>
-          <StyledLink exact to={`${url}/notifications`}>
-            Уведомления
-          </StyledLink>
-        </Li>
-        <Li>
-          <StyledLink exact to={`${url}/change-password`}>
-            Изменить пароль
-          </StyledLink>
-        </Li> */}
-        <Li>
-          <StyledLink exact to={`${url}/personal-data`}>
-            Данные профиля Marketplace
-          </StyledLink>
-        </Li>
-        <Li>
-          <StyledLink exact to={`${url}/payment`}>
-            Оплата
-          </StyledLink>
-        </Li>
-        <Li>
-          <StyledLink exact to={`${url}/orders`}>
-            Мои заказы
-          </StyledLink>
-        </Li>
-        <Li>
-          <StyledLink exact to={`${url}/discussion`}>
-            Споры
-          </StyledLink>
-        </Li>
+        {isBuyer ? <BuyerMenu /> : <SellerMenu />}
         <Li onClick={handleExit}>
           <Exit>Выйти</Exit>
         </Li>

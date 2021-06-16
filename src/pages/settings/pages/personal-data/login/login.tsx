@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import LoginChangeForm from './login-change-form';
+import { FC, useState } from "react";
+import LoginChangeForm from "./login-change-form";
 import {
   Row,
   LeftSide,
@@ -8,9 +8,9 @@ import {
   Title,
   Caption,
   Content,
-} from '../style';
+} from "../style";
 
-import { ReactComponent as Edit } from '../../../../../assets/icons/edit.svg';
+import { ReactComponent as Edit } from "../../../../../assets/icons/edit.svg";
 
 interface Props {
   phoneNumber: string;

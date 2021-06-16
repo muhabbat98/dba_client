@@ -31,6 +31,7 @@ const AddCard = () => {
       <FormContainer>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
+            name='cardName'
             label='Номер карты'
             placeholder='Номер карты'
             inputType='card'

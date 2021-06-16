@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../protected-route';
 import Homepage from '../../pages/homepage';
 import Cart from '../../pages/cart';
@@ -10,7 +10,6 @@ import ProductDetail from '../../pages/product-detail';
 
 import Catalog from '../../pages/catalog';
 import Products from '../../pages/products';
-
 
 const Content = () => {
   const { path } = useRouteMatch();
@@ -26,6 +25,7 @@ const Content = () => {
         <ProtectedRoute path='/settings'>
           <Settings />
         </ProtectedRoute>
+        <Redirect to='/' />
       </Switch>
     </div>
   );
