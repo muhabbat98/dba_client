@@ -24,11 +24,11 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
         {
             spor1:spor1.value,
             spor2:spor2.value,
-            blah:getDisputeItem.seller,
+            blah:"",
             description:"",
         }
     );
-        console.log("sdfdfsd--",getDisputeItem)
+  
     const hundleSubmit = () =>{
         console.log('sdfsfsd',data)
         history.push('/settings/discussion')

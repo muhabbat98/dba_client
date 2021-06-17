@@ -7,10 +7,8 @@ import {TableHeader,Table,FilterContainer} from './style'
 interface Propses{
     history:any,
     filterOpen:boolean,
-    setOpen:any
-    setGetDisputeItem:any
 }
-const  HistoryPage: React.FC<Propses> = ({history,filterOpen,setOpen,setGetDisputeItem}) => {
+const  HistoryPage: React.FC<Propses> = ({history,filterOpen}) => {
     const func = (data:any) =>{
         console.log('------->',data)
     }
@@ -20,13 +18,13 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen,setOpen,setGetDispu
                 <FilterContainer >
                     <SettingsInput placeholder="ID Заказа" />
                     <SettingsInput placeholder="Стоимость" />
+                    <SettingsInput placeholder="Продавец" />
                     <SettingsDropdown 
                         style={{width:"100%"}} 
                         label="Статус"
                         options={["Все","Отменён","Доставлен"]}
                         getOption={func}
                     />
-                    <SettingsInput placeholder="Продавец" />
                 </FilterContainer>  
             }
             
@@ -34,8 +32,8 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen,setOpen,setGetDispu
                 <TableHeader>
                     <div><p>ID Заказа</p></div>
                     <div><p>Стоимость</p></div>
-                    <div><p>Cтатус</p></div>
                     <div><p>Продавец</p></div>
+                    <div><p>Cтатус</p></div>
                     <div></div>
                 </TableHeader>
                 
@@ -45,8 +43,6 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen,setOpen,setGetDispu
                             <HistoryItem 
                                 item={item} 
                                 key={index}
-                                setOpen={setOpen}
-                                setGetDisputeItem={setGetDisputeItem}
                                 />
                         )
                     })

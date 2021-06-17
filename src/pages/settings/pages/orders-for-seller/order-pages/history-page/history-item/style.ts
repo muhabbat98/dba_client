@@ -21,7 +21,7 @@ export const Tr = styled.div<Open>`
         &:nth-child(2){
             text-align:center;
         }
-        &:nth-child(3){
+        &:nth-child(4){
             text-align:center;
             span{
                 padding:8px 18px;
@@ -29,7 +29,7 @@ export const Tr = styled.div<Open>`
             }
             
         }
-        &:nth-child(4){
+        &:nth-child(3){
             text-align:center;
         }
         &:nth-child(5){

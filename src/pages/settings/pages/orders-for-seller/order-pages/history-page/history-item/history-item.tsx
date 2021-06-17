@@ -15,15 +15,12 @@ import {
 
 interface Propses{
     item:any;
-    setOpen:any,
-    setGetDisputeItem:any,
 }
 
-const  HistoryItem:React.FC<Propses> = ({item,setOpen,setGetDisputeItem}) => {
+const  HistoryItem:React.FC<Propses> = ({item}) => {
     const styleStatus = {
         background:item.status=="completed"?"#DEF4EA":"#FFE3E3",
         color:item.status=="completed"?"green":"red",
-        
     }
     const [open, setOpenn] = useState(false);
     return (
@@ -31,8 +28,8 @@ const  HistoryItem:React.FC<Propses> = ({item,setOpen,setGetDisputeItem}) => {
             <Tr open={open}>
                 <div> №{item.idOrder} </div>
                 <div> {formatMoney(item.totalPrice)}сум </div>
-                <div> <span style={styleStatus}>{item.status=="completed"?"Доставлен":"Отменён"} </span> </div>
                 <div> {item.seller} </div>
+                <div> <span style={styleStatus}>{item.status=="completed"?"Доставлен":"Отменён"} </span> </div>
                 <div> 
                     <span 
                     style={{background:open?"#EAEDF5":"",marginRight:20}} 
@@ -99,9 +96,7 @@ const  HistoryItem:React.FC<Propses> = ({item,setOpen,setGetDisputeItem}) => {
                         </div>
                         
                     </InfoDeliveryContainer>
-                    <div style={{display:"flex",justifyContent:"center",}}>
-                        <Button btnType="outlined" onClick={()=>{setOpen(true);setGetDisputeItem(item)}}>Начать спор</Button>
-                    </div>
+                   
                 </InfoWrapper> 
             }
             

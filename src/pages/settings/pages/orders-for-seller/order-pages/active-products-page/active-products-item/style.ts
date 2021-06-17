@@ -1,72 +1,65 @@
 import styled from "styled-components";
 
-interface Open {
-open:boolean;
-}
-
-export const Tr = styled.div<Open>`
-    box-shadow:${({open})=>open?"0px 2px 4px -2px rgba(24, 39, 75, 0.12), 0px 4px 4px -2px rgba(24, 39, 75, 0.08)":""};
-    border-bottom:2px solid  #E9ECF4;
-    display:flex;
-    justify-content:space-between;
-    padding:16px 23px 8px 23px;
-    div{
-        flex:2;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 20px;
-        align-items: center;
-        color: #000000;
-        &:nth-child(2){
-            text-align:center;
-        }
-        &:nth-child(3){
-            text-align:center;
-            span{
-                padding:8px 18px;
-                border-radius:100px;
-            }
-            
-        }
-        &:nth-child(4){
-            text-align:center;
-        }
-        &:nth-child(5){
-            align-self:top;
-            flex:0;
-            span{
-                width:30px;
-                height:30px;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                /* background-color:#eee; */
-                border-radius:4px;
-                margin:auto;
-                margin-top:-5px;
-                &:hover{
-                        background-color:#EAEDF5;
-                        transition:0.4s;
-                    }
-                svg{
-                    margin-top:2px;
-                    width:15px;
-                    height:15px;
-                }
-            } 
-        }
-    }
-    
-    
+export const ActiveProductsItemContainer = styled.div`
+    border: 2px solid #E9ECF4;
+    box-sizing: border-box;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top:24px;
 `;
 export const InfoWrapper = styled.div`
     padding:0px 39px 24px 39px;
     width:100%;
-    border-bottom:2px solid  #E9ECF4;
     position:relative;
     background-color:#ffff;
 `;
+export const OrderHeader = styled.div`
+    display:flex;
+    justify-content:space-between;
+    margin-top:24px;
+    div{
+        background: rgba(34, 181, 115, 0.15);
+        border-radius: 100px;
+        align-self:flex-start;
+        padding:8px 12px;
+        color:#22B573;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: -0.155556px;
+    }
+`;
+
+export const SubContainer = styled.div`
+    /* flex:1; */
+    div{
+        display:flex;
+        align-items:center;
+        h6{
+            margin:0px 16px 0px 8px; 
+        }
+        svg{
+            width:40px;
+            height:40px;
+        }
+
+        span{
+            width:150px;
+            height:2px;
+            background-color:${({theme})=>theme.primary_color};
+        }
+    }
+    p{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 22px;
+        color: rgba(0, 0, 0, 0.5);
+        margin: -4px 0px 40px 48px;
+    }
+`;
+
 export const InfoTitle = styled.h6`
     font-style: normal;
     font-weight: bold;
@@ -161,6 +154,30 @@ export const InfoDeliveryContainer = styled.div`
                 text-align:right;
                 color:#000000;
             }
+        }
+    }
+`;
+export const ButtonsGroupContainier = styled.div`
+    display:flex;
+    justify-content:space-between;
+    div{
+        align-self:center;
+        color:${({theme})=>theme.primary_color};
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: -0.05px;
+        text-decoration-line:underline;
+        display:flex;
+        cursor:pointer;
+        svg{
+            fill:${({theme})=>theme.primary_color};
+            width:12px;
+            height:12px;
+            margin-left:13px;
+            align-self:center;
+            
         }
     }
 `;
