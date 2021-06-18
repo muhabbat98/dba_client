@@ -18,7 +18,7 @@ import Avatar from '../../../../assets/images/personal-info-avatar.png';
 import { ReactComponent as PersonalAvatarEditImg } from '../../../../assets/icons/personal-info-avatar-edit.svg';
 import { ReactComponent as Verified } from '../../../../assets/icons/verified.svg';
 import getStoredState from 'redux-persist/es/integration/getStoredStateMigrateV4';
-import inputLetter from '../../../../utils/input-letter';
+import inputLetter, { inn, passport, phoneMask } from '../../../../utils/input-letter';
 import moment from 'moment';
 import CircleLoader from '../../../../components/circle-loader';
 
@@ -283,10 +283,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               name="passportNumber"
                               placeholder="Серия номер распорта(ID-карты)"
                               // onChange={handleChange}
+                              onChange = {ev => setState({...state, passportNumber: passport(ev)})}
                               label="Серия номер распорта(ID-карты)"
-                              inputType="passport"
-                              control={control}
                               defaultValue={state.passportNumber}
+                              value={state.passportNumber}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -310,13 +310,14 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         <PersonalBodyFlex isEdit={true}>
                            <Input
                               name="phoneNumber"
-                              onChange={handleChange}
+                              // onChange={handleChange}
+                              onChange = {ev => setState({...state, phoneNumber: phoneMask(ev)})}
                               label="Телефон"
                               placeholder="Телефон"
-                              // value={state.phoneNumber}
+                              value={state.phoneNumber}
                               defaultValue={state.phoneNumber}
-                              control={control}
-                              inputType="phone" />
+                              
+                              />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
@@ -330,13 +331,12 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         <PersonalBodyFlex isEdit={true}>
                            <Input
                               name="homePhoneNumber"
-                              onChange={handleChange}
                               label="Телефон (домашний)"
                               placeholder="Телефон (домашний)"
+                              onChange = {ev => setState({...state, homePhoneNumber: phoneMask(ev)})}
                               value={state.homePhoneNumber}
                               defaultValue={state.homePhoneNumber}
-                              control={control}
-                              inputType="phone" />
+                              />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
@@ -356,12 +356,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                            <Input
                               name="inn"
                               placeholder="ИНН"
-                              onChange={handleChange}
+                              onChange={ev => setState({ ...state, inn: inn(ev) })}
                               label="ИНН"
                               defaultValue={state.inn.toString()}
                               value={state.inn}
-                              inputType="inn"
-                              control={control} />
+                              />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Dropdown option={['Мужской', 'Женский']} selected={state.gender} label="Пол" callback={dropdownHandle} />

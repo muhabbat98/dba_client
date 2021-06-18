@@ -93,11 +93,11 @@ const PersonalInfo = () => {
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Номер телефона(мобильный)</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.phoneNumber}</PersonalBodyName>
+                  <PersonalBodyName>+998 {!isEmptyObj(personalInfo) && personalInfo.phoneNumber}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Номер телефона (домашний)</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.homePhoneNumber}</PersonalBodyName>
+                  <PersonalBodyName>+998 {!isEmptyObj(personalInfo) && personalInfo.homePhoneNumber}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Электронная почта</PersonalBodyLabel>
