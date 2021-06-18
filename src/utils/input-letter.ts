@@ -4,6 +4,7 @@ const inputLetter = (e:any) =>{
 export default inputLetter;
 
 export const phoneMask = (e:any) => {
+    console.log("Phone, ", e)
     return e.target.value.replace(/\D/g, '')
     .replace(/^(\d)/, '($1')
     .replace(/^(\(\d{2})(\d)/, '$1)$2')
@@ -13,7 +14,6 @@ export const phoneMask = (e:any) => {
 }
 export const passport = (e:any) => {
     return e.target.value.replace(/\D/g, '')
-    
     .replace(/(\D{2})(\d{1,5})/, '$1-$2')
     .replace(/(-\d{7})\d+?$/, '$1');
 }
