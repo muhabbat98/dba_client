@@ -20,7 +20,8 @@ import { useRole } from '../../../hooks';
 const Content = () => {
   let { path } = useRouteMatch();
   const { isBuyer } = useRole();
-
+  console.log("isBuyer = ", isBuyer)
+  console.log("path = ", path)
   return (
     <ContentContainer>
       <Switch>

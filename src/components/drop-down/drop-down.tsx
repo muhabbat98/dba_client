@@ -76,7 +76,6 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected, 
    }
 
    const dropdownOverlayClick = (ev: any) => {
-      console.log("hhssss");
       if (isOpen == 'active' &&
          !(toggleRef.current && toggleRef.current.contains(ev.target))) {
          setIsOpen('');
