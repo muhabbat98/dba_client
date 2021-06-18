@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../protected-route';
 import Homepage from '../../pages/homepage';
