@@ -5,6 +5,7 @@ import Row from '../../components/grid/row';
 import ProductsTitle from '../../components/products-title';
 import Card from '../../components/card';
 import { useActionCreators, useSelector } from '../../hooks';
+import WishlistEmpty from './wishlist-empty';
 
 import { WishlistContainer, WishlistWrapperRow, WishlistWrapperCol } from './style';
 
@@ -22,16 +23,15 @@ function Wishlist() {
             </Row>
             <Row>
                {
-                  wishlistItems.length > 0 && wishlistItems.map((i: any) => {
-                     return (
-                        <Col xl={3} key={i.id}>
-                           <Card item={i} style={{marginBottom: '16px'}}/>
-                        </Col>
-                     )
-                  }
-                  )
+                  wishlistItems.length == 0 ? <WishlistEmpty /> :
+                     wishlistItems.length > 0 && wishlistItems.map((i: any) => {
+                        return (
+                           <Col xl={3} key={i.id}>
+                              <Card item={i} style={{ marginBottom: '16px' }} />
+                           </Col>
+                        )
+                     })
                }
-
             </Row>
          </Container>
       </WishlistContainer>

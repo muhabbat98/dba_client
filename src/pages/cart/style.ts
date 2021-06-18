@@ -183,3 +183,40 @@ export const CartSoldPrice = styled.div`
   font-size: 16px;
   line-height: 22px;
 `;
+
+
+
+/** CartEmpty.tsx */
+export const CartEmptyContainer = styled.div`
+  max-width: 400px;
+  margin: auto;
+  margin-top: 80px;
+  margin-bottom: 200px;
+`;
+
+export const CartEmptyImg = styled.div`
+  text-align: center;
+  margin-bottom: 32px;
+
+  & > svg {
+    display: block;
+    margin: auto;
+  }
+`;
+
+export const CartEmptyTextBox = styled.div`
+  text-align: center;
+  margin-bottom: 32px;
+`;
+
+export const CartEmptyTitle = styled.div`
+  line-height: 18px;
+  font-weight: 400;
+  font-size: 24px;
+  margin-bottom: 15px;
+`;
+
+export const CartEmptyText = styled.div`
+  color: #333333;
+  font-size: 14px;
+`;

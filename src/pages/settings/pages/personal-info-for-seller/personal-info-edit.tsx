@@ -20,6 +20,7 @@ import { ReactComponent as Verified } from '../../../../assets/icons/verified.sv
 import getStoredState from 'redux-persist/es/integration/getStoredStateMigrateV4';
 import inputLetter from '../../../../utils/input-letter';
 import moment from 'moment';
+import CircleLoader from '../../../../components/circle-loader';
 
 interface PersonalInfoEditProps {
    toggleComponent: () => void
@@ -47,6 +48,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    const [avatar, setAvatar] = useState<any>(Avatar);
    const [imgUrl, setImgUrl] = useState<any>(null);
    const [avatarToggle, setAvatarToggle] = useState(false);
+   const [loading, setLoading] = useState(true);
    const { setAlertMessage } = useActionCreators();
 
    const fileRef = useRef<HTMLInputElement>(null);
@@ -148,11 +150,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       try {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
-         const dataObj = {...data};
-
-         // dataObj.birthday = dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-         // dataObj.dateOfExpire = dataObj.dateOfExpire.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-         // dataObj.dateOfIssue = dataObj.dateOfIssue.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
+         const dataObj = { ...data };
+         setLoading(false);
 
          dataObj.birthday = moment(dataObj.birthday).format('YYYY-MM-DD');
          dataObj.dateOfExpire = moment(dataObj.dateOfExpire).format('YYYY-MM-DD');
@@ -216,158 +215,227 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       uploadData(data);
    }
 
+   console.log("state == ", state);
+
+
    return (
-      state &&
-      <PersonalInfoContainer>
-         <PersonalHeader>
-            <PersonalHeaderLeft>
-               <PersonalAvatarEdit isAvatar={avatarToggle}>
-                  <PersonalAvatarImg src={avatar} />
-                  <input ref={fileRef} type="file" onChange={handleAvatarChange} />
-                  {
-                     avatarToggle ? (
-                        <PersonalEditImageOther onClick={handleAvatarChange}>
-                           <PersonalAvatarEditImg />
-                        </PersonalEditImageOther>
-                     ) : (
-                        <PersonalEditImage isAvatar={avatarToggle}>
-                           <PersonalAvatarEditImg />
-                        </PersonalEditImage>
-                     )
-                  }
-               </PersonalAvatarEdit>
-               <PersonalNameWrapper>
-                  <PersonalName>{state.firstName} {" "} {state.secondName}</PersonalName>
-                  <PersonalNameEmail>{state.email}</PersonalNameEmail>
-                  <PersonalVerified>
-                     <Verified />
-                     <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
-                  </PersonalVerified>
-               </PersonalNameWrapper>
-            </PersonalHeaderLeft>
-            <PersonalHeaderRight>
-               <ChangeProfileButton onClick={toggleComponent}>
-                  <ChangeName style={{ margin: '0px' }}>Отмена</ChangeName>
-               </ChangeProfileButton>
-            </PersonalHeaderRight>
-         </PersonalHeader>
-         <PersonalBody>
-            <form onSubmit={handleSubmit(onSubmit)} style={{ paddingBottom: '28px' }}>
-               <PersonalBodyGrid>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input
-                        name="firstName"
-                        placeholder="Имя"
-                        onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
-                        label="Имя"
-                        value={state.firstName}
-                        defaultValue={state.firstName}
-                        type="text" />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Dropdown
-                        option={['Биометрический паспортs', 'Биометрический паспорт 2']}
-                        label="Тип удостоверяющего документа"
-                        selected={state.passportType}
-                        callback={dropdownDocumentHandle} />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input
-                        name="passportNumber"
-                        placeholder="Серия номер распорта(ID-карты)"
-                        // onChange={handleChange}
-                        label="Серия номер распорта(ID-карты)"
-                        inputType="passport"
-                        control={control}
-                        defaultValue={state.passportNumber}
-                     />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input
-                        name="secondName"
-                        label="Фамилия"
-                        placeholder="Фамилия"
-                        value={state.secondName}
-                        onChange={ev => setState({ ...state, secondName: inputLetter(ev) })}
-                     />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input 
-                        onChange={handleChange} 
-                        label="Дата выдачи" 
-                        name="dateOfIssue" 
-                        defaultValue={state.dateOfIssue} 
-                        value={state.dateOfIssue} 
-                        type="date" />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input
-                        name="phoneNumber"
-                        onChange={handleChange}
-                        label="Телефон"
-                        placeholder="Телефон"
-                        // value={state.phoneNumber}
-                        defaultValue={state.phoneNumber}
-                        control={control}
-                        inputType="phone" />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input 
-                        onChange={handleChange}
-                        label="Срок действия" 
-                        name="dateOfExpire"
-                        defaultValue={state.dateOfExpire} 
-                        value={state.dateOfExpire} 
-                        type="date" />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input
-                        name="homePhoneNumber"
-                        onChange={handleChange}
-                        label="Телефон (домашний)"
-                        placeholder="Телефон (домашний)"
-                        value={state.homePhoneNumber} 
-                        defaultValue={state.homePhoneNumber}
-                        control={control}
-                        inputType="phone" />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input
-                        onChange={handleChange}
-                        label="Дата рождения"
-                        // defaultValue="2014-02-09" 
-                        // defaultValue={state.birthday}
-                        value={state.birthday}
-                        type="date"
-                        name="birthday"
-                     />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Input
-                        name="inn"
-                        placeholder="ИНН"
-                        onChange={handleChange}
-                        label="ИНН"
-                        defaultValue={state.inn.toString()}
-                        value={state.inn}
-                        inputType="inn"
-                        control={control} />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     <Dropdown option={['Мужской', 'Женский']} selected={state.gender} label="Пол" callback={dropdownHandle} />
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true}>
-                     {/* <Input name="inn" onChange={handleChange} label="ИНН" value={state.inn} /> */}
-                  </PersonalBodyFlex>
-                  <PersonalBodyFlex isEdit={true} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                     <Button type="submit" style={{ backgroundColor: '#1541A9', width: '100%' }}>Сохранить</Button>
-                  </PersonalBodyFlex>
-               </PersonalBodyGrid>
-            </form>
-         </PersonalBody>
+      <PersonalInfoContainer isLoading={loading}>
+         {
+            loading && <CircleLoader />
+         }
+         {
+            !loading && (
+               <>
+                  <PersonalHeader>
+                     <PersonalHeaderLeft>
+                        <PersonalAvatarEdit isAvatar={avatarToggle}>
+                           <PersonalAvatarImg src={avatar} />
+                           <input ref={fileRef} type="file" onChange={handleAvatarChange} />
+                           {
+                              avatarToggle ? (
+                                 <PersonalEditImageOther onClick={handleAvatarChange}>
+                                    <PersonalAvatarEditImg />
+                                 </PersonalEditImageOther>
+                              ) : (
+                                 <PersonalEditImage isAvatar={avatarToggle}>
+                                    <PersonalAvatarEditImg />
+                                 </PersonalEditImage>
+                              )
+                           }
+                        </PersonalAvatarEdit>
+                        <PersonalNameWrapper>
+                           <PersonalName>{state.firstName} {" "} {state.secondName}</PersonalName>
+                           <PersonalNameEmail> Продавец </PersonalNameEmail>
+                           <PersonalVerified>
+                              <Verified />
+                              <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
+                           </PersonalVerified>
+                        </PersonalNameWrapper>
+                     </PersonalHeaderLeft>
+                     <PersonalHeaderRight>
+                        <ChangeProfileButton onClick={toggleComponent}>
+                           <ChangeName style={{ margin: '0px' }}>Отмена</ChangeName>
+                        </ChangeProfileButton>
+                     </PersonalHeaderRight>
+                  </PersonalHeader>
+                  <PersonalBody>
+                     <form onSubmit={handleSubmit(onSubmit)} style={{ paddingBottom: '28px' }}>
+                        <PersonalBodyGrid>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="Название предприятия"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="Название предприятия"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="РКП НДС"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="РКП НДС"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="Ф.И.О"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="Ф.И.О"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="ОКЭД"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="ОКЭД"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 name="phoneNumber"
+                                 onChange={handleChange}
+                                 label="Телефон (мобильный)"
+                                 placeholder="Телефон (мобильный)"
+                                 // value={state.phoneNumber}
+                                 defaultValue={state.phoneNumber}
+                                 control={control}
+                                 inputType="phone" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="Код банка"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="Код банка"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 name="homePhoneNumber"
+                                 onChange={handleChange}
+                                 label="Телефон (домашний)"
+                                 placeholder="Телефон (домашний)"
+                                 value={state.homePhoneNumber}
+                                 defaultValue={state.homePhoneNumber}
+                                 control={control}
+                                 inputType="phone" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="Форма собственности"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="Форма собственности"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 name="email"
+                                 onChange={handleChange}
+                                 placeholder="Эл.почта"
+                                 value={state.email} />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="Тип удостоверяющего документа руководител"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="Тип удостоверяющего документа руководител"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Dropdown
+                                 option={['Супермаркет', 'Супермаркет2']}
+                                 // selected={state.gender} 
+                                 label="Тип"
+                                 callback={dropdownHandle}
+                              />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="Серия и номер документа"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="Серия и номер документа"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 // name="firstName"
+                                 placeholder="Расчетный счет в банке"
+                                 // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                                 label="СРасчетный счет в банке"
+                                 // value={state.firstName}
+                                 // defaultValue={state.firstName}
+                                 type="text" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 onChange={handleChange}
+                                 label="Дата выдачи док-та"
+                                 // name="dateOfIssue"
+                                 // defaultValue={state.dateOfIssue}
+                                 // value={state.dateOfIssue}
+                                 type="date" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Dropdown
+                                 option={['Предприниматель', 'Предприниматель2']}
+                                 // selected={state.gender} 
+                                 label="Вид деятельности"
+                                 callback={dropdownHandle}
+                              />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 onChange={handleChange}
+                                 label="Срок действия док-та"
+                                 // name="dateOfIssue"
+                                 // defaultValue={state.dateOfIssue}
+                                 // value={state.dateOfIssue}
+                                 type="date" />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 name="inn"
+                                 placeholder="ИНН"
+                                 onChange={handleChange}
+                                 label="ИНН"
+                                 defaultValue={state.inn.toString()}
+                                 value={state.inn}
+                                 inputType="inn"
+                                 control={control} />
+                           </PersonalBodyFlex>
+
+                           <PersonalBodyFlex isEdit={true} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                              <Button type="submit" style={{ backgroundColor: '#1541A9', width: '100%' }}>Сохранить</Button>
+                           </PersonalBodyFlex>
+                        </PersonalBodyGrid>
+                     </form>
+                  </PersonalBody>
+               </>
+            )
+         }
+
       </PersonalInfoContainer>
    )
 }

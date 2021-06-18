@@ -3,12 +3,16 @@ import styled from "styled-components";
 interface Props {
   isEdit?: boolean;
   isAvatar?: boolean;
+  isLoading?: boolean;
 }
 
-export const PersonalInfoContainer = styled.div`
+export const PersonalInfoContainer = styled.div<Props>`
   border: 2px solid #e9ecf4;
   border-radius: 16px;
   padding: 40px 40px 0 40px;
+  position: relative;
+  height: ${({isLoading}) => isLoading ? "400px" : "auto"};
+  overflow: ${({isLoading}) => isLoading ? "hidden" : "auto"};
 `;
 
 export const PersonalHeader = styled.div`
