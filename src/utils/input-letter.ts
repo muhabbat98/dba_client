@@ -14,7 +14,7 @@ export const phoneMask = (e:any) => {
 }
 export const passport = (e:any) => {
     return e.target.value.replace(/\D/g, '')
-    .replace(/(\D{2})(\d{1,5})/, '$1-$2')
+    .replace(/(\d{2})(\d{1,5})/, '$1-$2')
     .replace(/(-\d{7})\d+?$/, '$1');
 }
 export const cardNumber = (e:any) => {
@@ -34,8 +34,3 @@ export const inn = (e:any) => {
     .replace(/(\d{3})(\d{1,3})/, '$1-$2')
     .replace(/(-\d{6})\d+?$/, '$1');
 }
-// replace(/\D/g, '')
-//     .replace(/^(\d)/, '($1')
-//     .replace(/^(\(\d{2})(\d)/, '$1) $2')
-//     .replace(/(\d{4})(\d{1,5})/, '$1-$2')
-//     .replace(/(-\d{5})\d+?$/, '$1');
