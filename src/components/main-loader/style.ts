@@ -38,7 +38,7 @@ export const Spinner = styled.svg`
 `;
 
 export const SpinnerContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;

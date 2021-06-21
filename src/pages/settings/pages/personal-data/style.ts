@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface PersonalDataContainerProps {
   loading: boolean;
@@ -9,7 +9,7 @@ export const PersonalDataContainer = styled.div<PersonalDataContainerProps>`
   border-radius: 16px;
   border: 2px solid #e9ecf4;
   position: relative;
-  height: ${({ loading }) => (loading ? "425px" : "auto")};
+  height: ${({ loading }) => (loading ? '425px' : 'auto')};
 `;
 
 export const Div = styled.div`
