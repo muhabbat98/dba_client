@@ -151,7 +151,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
          const dataObj = { ...data };
-
+            
          // dataObj.birthday = dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
          // dataObj.dateOfExpire = dataObj.dateOfExpire.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
          // dataObj.dateOfIssue = dataObj.dateOfIssue.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
@@ -283,7 +283,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               name="passportNumber"
                               placeholder="Серия номер распорта(ID-карты)"
                               // onChange={handleChange}
-                              onChange = {ev => setState({...state, passportNumber: passport(ev)})}
+                              onChange={ev => setState({ ...state, passportNumber: passport(ev) })}
                               label="Серия номер распорта(ID-карты)"
                               defaultValue={state.passportNumber}
                               value={state.passportNumber}
@@ -311,13 +311,13 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                            <Input
                               name="phoneNumber"
                               // onChange={handleChange}
-                              onChange = {ev => setState({...state, phoneNumber: phoneMask(ev)})}
+                              onChange={ev => setState({ ...state, phoneNumber: phoneMask(ev) })}
                               label="Телефон"
                               placeholder="Телефон"
                               value={state.phoneNumber}
                               defaultValue={state.phoneNumber}
-                              
-                              />
+
+                           />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
@@ -333,10 +333,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               name="homePhoneNumber"
                               label="Телефон (домашний)"
                               placeholder="Телефон (домашний)"
-                              onChange = {ev => setState({...state, homePhoneNumber: phoneMask(ev)})}
+                              onChange={ev => setState({ ...state, homePhoneNumber: phoneMask(ev) })}
                               value={state.homePhoneNumber}
                               defaultValue={state.homePhoneNumber}
-                              />
+                           />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
@@ -360,7 +360,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               label="ИНН"
                               defaultValue={state.inn.toString()}
                               value={state.inn}
-                              />
+                           />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Dropdown option={['Мужской', 'Женский']} selected={state.gender} label="Пол" callback={dropdownHandle} />
