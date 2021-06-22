@@ -17,7 +17,7 @@ import {
 
 import { ReactComponent as Edit } from '../../../../assets/icons/edit.svg';
 import CircleLoader from '../../../../components/circle-loader';
-import Inputs from '../../../../pages/cart/inputs';
+import {Inputs, Form} from '../../../../pages/cart/inputs';
 import { useForm, Controller } from "react-hook-form";
 
 const PersonalInfo = () => {
@@ -25,8 +25,6 @@ const PersonalInfo = () => {
   const [loading, setLoading] = useState(true);
   const [personalInfo, setPersonalInfo] = useState<any>(null);
   const { setAlertMessage } = useActionCreators();
-
-  const { handleSubmit, reset, setValue, control, register } = useForm();
 
   useEffect(() => {
     getPersonalInfo('60927f03ad717f2975f9713d');
@@ -67,7 +65,7 @@ const PersonalInfo = () => {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />
   }
 
-  console.log("personalInfo == ", personalInfo);
+  console.log("personalInfo == ", !isEmptyObj(personalInfo) && personalInfo.phoneNumber);
 
   return (
     <PersonalInfoContainer isLoading={loading}>
@@ -77,16 +75,22 @@ const PersonalInfo = () => {
       {
         personalInfo && (
           <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            {/* <Form onSubmit={onSubmit}>
+
               <Inputs
                 inputType='date'
                 name="date"
-                ref={register}
-                {...register("date", { required: true })}
               />
-              <input type="text" name="names"  {...register("names", { required: true }) }/>
-              <button type="submit">send</button>
-            </form>
+      
+              <Inputs 
+                inputType="card"
+                name="card"
+                // value="8600000000000000"
+                defaultValue="8600000000000000"
+              />
+              
+              <input type="submit" value="send" />
+            </Form> */}
 
             <PersonalHeader>
               <PersonalHeaderLeftSide personalInfo={personalInfo} />
