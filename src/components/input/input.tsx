@@ -11,6 +11,7 @@ interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   name?:any,
   value?:any
   style?:any
+  register?:any
 }
 
 const Input: React.FC<InputFilds> = ({
@@ -23,20 +24,21 @@ const Input: React.FC<InputFilds> = ({
   name,
   value,
   style,
+  register,
   ...rest
 }) => {
   const refInput = useRef<any>();
   
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [onlyLetter, setOnlyLetter] = useState<any>("");
+
   useEffect(()=>{
-    if(refInput.current){
-      const leng=refInput.current.value
+    const val:any = document.querySelector('#inputt');
+    if(val){
+      const leng=val.value
       if(leng.length>0) {
         setIsFocus(true);
       }
     }
-    
 
   })
 
@@ -49,14 +51,7 @@ const Input: React.FC<InputFilds> = ({
       // console.log("Blur working....")
     } else setIsFocus(false);
   };
-  // function formatPhoneNumber(phoneNumber:any) {
-  //   const cleanNum = phoneNumber.toString().replace(/\D/g, '');
-  //   const match = cleanNum.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
-  //   if (match) {
-  //     return '(' + match[1] + ') ' + (match[2] ? match[2] + "-" : "") + match[3];
-  //   }
-  //   return cleanNum;
-  // }
+  
   const inputMaskType = () => {
     if (inputType == "phone") {
       return (
@@ -159,24 +154,7 @@ const Input: React.FC<InputFilds> = ({
         />
         )
     }
-    // else if(inputType=="letter"){
-    //   return (
-    //     <InputElement
-    //       {...rest}
-    //       name={name}
-    //       ref={refInput}
-    //       autoFocus ={isFocus?true:false}
-    //       placeholder={!isFocus ? placeholder : ""}
-    //       isFocus={isFocus}
-    //       onBlur={(e) => onBlur(e)}
-    //       error={error?true:false}    
-    //       defaultValue={defaultValue}
-    //       value={onlyLetter}
-    //       onChange={(e)=>setOnlyLetter(formatPhoneNumber(e.target.value))}
-    //     />
-        
-    //     )
-    // }
+   
   };
  
   return (
@@ -196,9 +174,10 @@ const Input: React.FC<InputFilds> = ({
       ) : (
         <InputElement
           {...rest}
+          id="inputt"
           name={name}
           value={value}
-          ref={refInput}
+          ref={register}
           autoFocus ={isFocus?true:false}
           placeholder={!isFocus ? placeholder : ""}
           isfocus={isFocus}
