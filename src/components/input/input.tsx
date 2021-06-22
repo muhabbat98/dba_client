@@ -71,7 +71,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          
+          {...{required:true}}
         />
       );
     } else if (inputType == "card") {
@@ -87,7 +87,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          
+          {...{required:true}}
         />
       );
     }
@@ -104,7 +104,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          
+          {...{required:true}}
         />
         )
     }
@@ -121,7 +121,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}
           placeholder={placeholder}  
-          
+          {...{required:true}}
         />
         )
     }
@@ -138,7 +138,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          
+          {...{required:true}}
         />
         )
     }
@@ -155,7 +155,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          
+          {...{required:true}}
         />
         )
     }
@@ -204,6 +204,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           onBlur={(e) => onBlur(e)}
           err={error?"true":"false"}    
+          {...{required:true}}
           // defaultValue={defaultValue}
         />
       )}
