@@ -1,17 +1,21 @@
 import React, { useState,useEffect,useRef } from "react";
-import { Controller } from "react-hook-form";
+import { Controller,useForm } from "react-hook-form";
 import { InputWrapper, MaskInput, InputElement, Label,ErrorTitle } from "./style";
-
+import inputLetter,{email,passport,cardNumber,cardDate,inn, phoneMask} from '../../utils/input-letter'
 interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  inputType?: "phone" | "card" | "cardData" | "passport" | "brithDay"| "inn" | "letter";
-  control?: any;
-  error?:string; //Error Text
-  defaultValue?:string;
+  inputType?: "phone" | "card" | "cardData" | "passport" | "brithDay"| "inn" | "letter" | "email";
+  error?:any; //Error Text
   name?:any,
   value?:any
   style?:any
   register?:any
+  watch?:any
+  defVal?:string
+  type?:any
+
+  defaultValue?:string
+  control?: any
 }
 
 const Input: React.FC<InputFilds> = ({
@@ -25,11 +29,15 @@ const Input: React.FC<InputFilds> = ({
   value,
   style,
   register,
+  watch,
+  defVal,
+  type,
   ...rest
 }) => {
   const refInput = useRef<any>();
   
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const {setValue} = useForm();
 
   useEffect(()=>{
     const val:any = document.querySelector('#inputt');
@@ -41,7 +49,9 @@ const Input: React.FC<InputFilds> = ({
     }
 
   })
-
+  useEffect(() => {
+    setValue(name,defVal  )
+},[])
   const onBlur = (e: any) => {
     // console.log("Blur working....")
     setIsFocus(true);
@@ -55,106 +65,110 @@ const Input: React.FC<InputFilds> = ({
   const inputMaskType = () => {
     if (inputType == "phone") {
       return (
-        <Controller
-          // ref={refInput}
-          as={MaskInput}
-          control={control}
-          mask="+\9\98 99 999 99 99"
+        <InputElement
+          id="inputt"
+          ref={register({ required: true, minLength: 13 })}
           name={name}
           defaultValue={defaultValue}
-          value={value}
+          value={phoneMask( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          {...{required:true}}
+          // {...{required:true}}
         />
       );
     } else if (inputType == "card") {
       return (
-        <Controller
-          // ref={refInput}
-          as={MaskInput}
-          control={control}
-          mask="9999 9999 9999 9999"
+        <InputElement
+          id="inputt"
+          ref={register({ required: true, minLength: 19 })}
           name={name}
           defaultValue={defaultValue}
-          value={value}
+          value={cardNumber( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          {...{required:true}}
+          // {...{required:true}}
         />
       );
     }
     else if(inputType=="cardData"){
       return (
-        <Controller
-          // ref={refInput}
-          as={MaskInput}
-          control={control}
-          mask="99/99"
+        <InputElement
+          id="inputt"
+          ref={register({ required: true, minLength: 5 })}
           name={name}
           defaultValue={defaultValue}
-          value={value}
+          value={cardDate( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          {...{required:true}}
+          // {...{required:true}}
         />
         )
     }
-    else if(inputType=="brithDay"){
+    else if(inputType=="email"){
       return (
-        <Controller
-          // ref={refInput}
-          as={MaskInput}
-          control={control}
-          mask="99/99/9999"
+        <InputElement
+          id="inputt"
+          ref={register({ required: true,pattern: {value: /^\S+@\S+\.\S+$/i,} })}
           name={name}
           defaultValue={defaultValue}
-          value={value}
+          // value={email( watch)}
+          type="type"
           isfocus={isFocus}
-          err={error?"true":"false"}
-          placeholder={placeholder}  
-          {...{required:true}}
+          err={error?"true":"false"}  
+          placeholder={placeholder}
+          // pattern="/^\S+@\S+\.\S+$/i"
         />
         )
     }
     else if(inputType=="passport"){
       return (
-        <Controller
-          // ref={refInput}
-          as={MaskInput}
-          control={control}
-          mask={"aa 9999999"}
+        <InputElement
+          id="inputt"
+          ref={register({ required: true, minLength: 10 })}
           name={name}
           defaultValue={defaultValue}
-          value={value}
+          value={passport( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          {...{required:true}}
+          // {...{required:true}}
         />
         )
     }
     else if(inputType=="inn"){
       return (
-        <Controller
-          // ref={refInput}
-          as={MaskInput}
-          control={control}
-          mask={"999 999999"}
+        <InputElement
+          id="inputt"
+          ref={register({ required: true, minLength: 10 })}
           name={name}
           defaultValue={defaultValue}
-          value={value}
+          value={inn( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          {...{required:true}}
+          // {...{required:true}}
         />
         )
     }
-   
+    else if(inputType=="letter"){
+      return (
+        <InputElement
+          id="inputt"
+          ref={register({ required: true })}
+          name={name}
+          defaultValue={defaultValue}
+          value={inputLetter( watch)}
+          isfocus={isFocus}
+          err={error?"true":"false"}  
+          placeholder={placeholder}
+          // {...{required:true}}
+        />
+        )
+    }
+    
   };
  
   return (
@@ -176,20 +190,20 @@ const Input: React.FC<InputFilds> = ({
           {...rest}
           id="inputt"
           name={name}
-          value={value}
-          ref={register}
+          type={type}
+          ref={register({ required: true})}
           autoFocus ={isFocus?true:false}
           placeholder={!isFocus ? placeholder : ""}
           isfocus={isFocus}
           onBlur={(e) => onBlur(e)}
           err={error?"true":"false"}    
-          {...{required:true}}
-          // defaultValue={defaultValue}
+          
+      
         />
       )}
       
     </InputWrapper>
-    {error && <ErrorTitle>{error}</ErrorTitle>}
+    {error && <ErrorTitle>Error</ErrorTitle>}
   </>
   );
 };
