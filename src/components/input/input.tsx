@@ -1,5 +1,4 @@
 import React, { useState,useEffect,useRef } from "react";
-import { Controller,useForm } from "react-hook-form";
 import { InputWrapper, MaskInput, InputElement, Label,ErrorTitle } from "./style";
 import inputLetter,{email,passport,cardNumber,cardDate,inn, phoneMask} from '../../utils/input-letter'
 interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -13,7 +12,7 @@ interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   watch?:any
   defVal?:string
   type?:any
-
+  setValue?:any
   defaultValue?:string
   control?: any
 }
@@ -32,12 +31,11 @@ const Input: React.FC<InputFilds> = ({
   watch,
   defVal,
   type,
+  setValue,
   ...rest
 }) => {
   const refInput = useRef<any>();
-  
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const {setValue} = useForm();
 
   useEffect(()=>{
     const val:any = document.querySelector('#inputt');
@@ -50,15 +48,15 @@ const Input: React.FC<InputFilds> = ({
 
   })
   useEffect(() => {
-    setValue(name,defVal  )
-},[])
+    setValue(name,defVal)
+})
   const onBlur = (e: any) => {
-    // console.log("Blur working....")
+    
     setIsFocus(true);
     const val = e.target.value;
     if (val.length > 0 ) {
       setIsFocus(true);
-      // console.log("Blur working....")
+
     } else setIsFocus(false);
   };
   
@@ -74,7 +72,6 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          // {...{required:true}}
         />
       );
     } else if (inputType == "card") {
@@ -88,7 +85,6 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          // {...{required:true}}
         />
       );
     }
@@ -103,7 +99,6 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          // {...{required:true}}
         />
         )
     }
@@ -114,12 +109,9 @@ const Input: React.FC<InputFilds> = ({
           ref={register({ required: true,pattern: {value: /^\S+@\S+\.\S+$/i,} })}
           name={name}
           defaultValue={defaultValue}
-          // value={email( watch)}
-          type="type"
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          // pattern="/^\S+@\S+\.\S+$/i"
         />
         )
     }
@@ -134,7 +126,6 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          // {...{required:true}}
         />
         )
     }
@@ -149,7 +140,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          // {...{required:true}}
+  
         />
         )
     }
@@ -164,7 +155,6 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-          // {...{required:true}}
         />
         )
     }
