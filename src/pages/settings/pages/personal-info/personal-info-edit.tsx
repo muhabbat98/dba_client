@@ -273,9 +273,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               defVal={state.firstName}
                               inputType="letter"
                               watch={watch("firstName")}
-                              error={errors.firstName}
+                              // error={errors.firstName}
+                              error={{errors: errors.firstName, message:errors.firstName && 'Blah'}}
                               register={register}
                               setValue={setValue}
+                              readOnly
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -296,9 +298,12 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               // value={state.passportNumber}
                               watch={watch("passportNumber")}
                               register={register}
-                              error={errors.passportNumber}
+                              // error={errors.passportNumber}
+                              error={{errors: errors.passportNumber, message:errors.passportNumber && 'Blah'}}
+
                               inputType="passport"
                               setValue={setValue}
+                              readOnly
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -310,7 +315,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("secondName")}
                               register={register}
                               inputType="letter"
-                              error={errors.secondName}
+                              // error={errors.secondName}
+                              error={{errors: errors.secondName, message:errors.secondName && 'Blah'}}
+
+                              readOnly
                               setValue={setValue}
                            // onChange={ev => setState({ ...state, secondName: inputLetter(ev) })}
                            />
@@ -323,8 +331,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               defVal={state.dateOfIssue}
                               watch={watch("dateOfIssue")}
                               register={register}
-                              error={errors.dateOfIssue}
+                              // error={errors.dateOfIssue}
+                              error={{errors: errors.dateOfIssue, message:errors.dateOfIssue && 'Blah'}}
+                              
                               setValue={setValue}
+                              readOnly
                               type="date" />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -338,8 +349,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("phoneNumber")}
                               register={register}
                               inputType="phone"
-                              error={errors.phoneNumber}
+                              // error={errors.phoneNumber}
+                              error={{errors: errors.phoneNumber, message:errors.phoneNumber && 'Blah'}}
+
                               setValue={setValue}
+                              readOnly
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -351,8 +365,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("dateOfExpire")}
                               register={register}
                               type="date"
-                              error={errors.dateOfExpire}
+                              // error={errors.dateOfExpire}
+                              error={{errors: errors.dateOfExpire, message:errors.dateOfExpire && 'Blah'}}
+
                               setValue={setValue}
+                              readOnly
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -360,13 +377,17 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               name="homePhoneNumber"
                               label="Телефон (домашний)"
                               placeholder="Телефон (домашний)"
+                              readOnly
                               // onChange={ev => setState({ ...state, homePhoneNumber: phoneMask(ev) })}
                               defVal={state.homePhoneNumber}
                               watch={watch("homePhoneNumber")}
                               register={register}
                               inputType="phone"
-                              error={errors.homePhoneNumber}
+                              // error={errors.homePhoneNumber}
+                              error={{errors: errors.homePhoneNumber, message:errors.homePhoneNumber && 'Blah'}}
+
                               setValue={setValue}
+                              
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -378,8 +399,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               type="date"
                               name="birthday"
-                              error={errors.birthday}
+                              // error={errors.birthday}
+                              error={{errors: errors.birthday, message:errors.birthday && 'Blah'}}
                               setValue={setValue}
+                              readOnly
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -391,8 +414,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               defVal={state.email}
                               watch={watch("email")}
                               register={register}
-                              error={errors.email}
+                              // error={errors.email}
+                              error={{errors: errors.email, message:errors.email && 'Blah'}}
                               inputType="email" 
+                              readOnly
                               setValue={setValue}/>
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -406,7 +431,9 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("inn")}
                               register={register}
                               inputType="inn"
-                              error={errors.inn}
+                              readOnly
+                              // error={ errors.inn}
+                              error={{errors: errors.inn, message:errors.inn && 'Blah'}}
                               setValue={setValue}
                            />
                         </PersonalBodyFlex>
