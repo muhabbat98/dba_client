@@ -48,8 +48,8 @@ const Input: React.FC<InputFilds> = ({
 
   })
   useEffect(() => {
-    setValue(name,defVal)
-})
+    defVal && setValue(name,defVal)
+}, [defVal])
   const onBlur = (e: any) => {
     
     setIsFocus(true);

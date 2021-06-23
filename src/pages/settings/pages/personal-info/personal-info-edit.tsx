@@ -27,7 +27,7 @@ interface PersonalInfoEditProps {
 }
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
-   const { register, handleSubmit, control, watch, errors } = useForm();
+   const { register, handleSubmit, control, watch, errors, setValue } = useForm();
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
@@ -275,6 +275,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("firstName")}
                               error={errors.firstName}
                               register={register}
+                              setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -297,6 +298,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               error={errors.passportNumber}
                               inputType="passport"
+                              setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -309,6 +311,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               inputType="letter"
                               error={errors.secondName}
+                              setValue={setValue}
                            // onChange={ev => setState({ ...state, secondName: inputLetter(ev) })}
                            />
                         </PersonalBodyFlex>
@@ -321,6 +324,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("dateOfIssue")}
                               register={register}
                               error={errors.dateOfIssue}
+                              setValue={setValue}
                               type="date" />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -335,7 +339,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               inputType="phone"
                               error={errors.phoneNumber}
-
+                              setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -348,6 +352,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               type="date"
                               error={errors.dateOfExpire}
+                              setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -361,6 +366,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               inputType="phone"
                               error={errors.homePhoneNumber}
+                              setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -373,6 +379,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               type="date"
                               name="birthday"
                               error={errors.birthday}
+                              setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -385,7 +392,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("email")}
                               register={register}
                               error={errors.email}
-                              inputType="email" />
+                              inputType="email" 
+                              setValue={setValue}/>
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
@@ -399,6 +407,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               inputType="inn"
                               error={errors.inn}
+                              setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>

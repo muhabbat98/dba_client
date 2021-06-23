@@ -73,27 +73,6 @@ const PersonalInfo = () => {
       {
         personalInfo && (
           <>
-            <Form onSubmit={onSubmit}>
-
-              <Inputs
-                inputType='date'
-                name="date"
-              />
-      
-              <Inputs 
-                inputType="card"
-                name="card"
-                // defaultValue="gda@gmail.com"
-                // value="gda@gmail.com"
-
-                // value="8600000000000000"
-                defaultValue={860000000000}
-              />
-              
-              <input type="submit" value="send" />
-              {/* <Inputs inputType="reset" /> */}
-            </Form>
-
             <PersonalHeader>
               <PersonalHeaderLeftSide personalInfo={personalInfo} />
               <PersonalHeaderRight>
