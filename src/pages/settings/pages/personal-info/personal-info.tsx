@@ -64,9 +64,7 @@ const PersonalInfo = () => {
   if (state) {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />
   }
-
-  console.log("personalInfo == ", !isEmptyObj(personalInfo) && personalInfo.phoneNumber);
-
+  
   return (
     <PersonalInfoContainer isLoading={loading}>
       {
@@ -75,7 +73,7 @@ const PersonalInfo = () => {
       {
         personalInfo && (
           <>
-            {/* <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit}>
 
               <Inputs
                 inputType='date'
@@ -85,12 +83,16 @@ const PersonalInfo = () => {
               <Inputs 
                 inputType="card"
                 name="card"
+                // defaultValue="gda@gmail.com"
+                // value="gda@gmail.com"
+
                 // value="8600000000000000"
-                defaultValue="8600000000000000"
+                defaultValue={860000000000}
               />
               
               <input type="submit" value="send" />
-            </Form> */}
+              {/* <Inputs inputType="reset" /> */}
+            </Form>
 
             <PersonalHeader>
               <PersonalHeaderLeftSide personalInfo={personalInfo} />

@@ -27,7 +27,7 @@ interface PersonalInfoEditProps {
 }
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
-   const { register, handleSubmit, control } = useForm();
+   const { register, handleSubmit, control, watch, errors } = useForm();
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
@@ -115,12 +115,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                setImgUrl(data);
             } else {
                setAlertMessage({
-                  message: `Serverdan rasmni manzili(url) NULL keldi!`,
+                  message: 'Serverdan rasmni manzili(url) NULL keldi!',
                   type: 'error',
                   position: AlertPosition.TOP_CENTER
                })
             }
-
          } catch (error) {
             if (error.debugMessage) {
                setAlertMessage({
@@ -151,7 +150,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
          const dataObj = { ...data };
-            
+
          // dataObj.birthday = dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
          // dataObj.dateOfExpire = dataObj.dateOfExpire.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
          // dataObj.dateOfIssue = dataObj.dateOfIssue.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
@@ -217,7 +216,10 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    const onSubmit = (data: any) => {
       uploadData(data);
+      console.log("dataa----->", data)
    }
+
+   console.log("state === ", state);
 
    return (
       <PersonalInfoContainer isLoading={loading}>
@@ -265,11 +267,15 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                            <Input
                               name="firstName"
                               placeholder="Имя"
-                              onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
+                              // onChange={ev => setState({ ...state, firstName: inputLetter(ev) })}
                               label="Имя"
-                              value={state.firstName}
-                              defaultValue={state.firstName}
-                              type="text" />
+                              // value={state.firstName}
+                              defVal={state.firstName}
+                              inputType="letter"
+                              watch={watch("firstName")}
+                              error={errors.firstName}
+                              register={register}
+                           />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Dropdown
@@ -283,10 +289,14 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               name="passportNumber"
                               placeholder="Серия номер распорта(ID-карты)"
                               // onChange={handleChange}
-                              onChange={ev => setState({ ...state, passportNumber: passport(ev) })}
+                              // onChange={ev => setState({ ...state, passportNumber: passport(ev) })}
                               label="Серия номер распорта(ID-карты)"
-                              defaultValue={state.passportNumber}
-                              value={state.passportNumber}
+                              defVal={state.passportNumber}
+                              // value={state.passportNumber}
+                              watch={watch("passportNumber")}
+                              register={register}
+                              error={errors.passportNumber}
+                              inputType="passport"
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -294,72 +304,101 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               name="secondName"
                               label="Фамилия"
                               placeholder="Фамилия"
-                              value={state.secondName}
-                              onChange={ev => setState({ ...state, secondName: inputLetter(ev) })}
+                              defVal={state.secondName}
+                              watch={watch("secondName")}
+                              register={register}
+                              inputType="letter"
+                              error={errors.secondName}
+                           // onChange={ev => setState({ ...state, secondName: inputLetter(ev) })}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
-                              onChange={handleChange}
+                              // onChange={handleChange}
                               label="Дата выдачи"
                               name="dateOfIssue"
-                              defaultValue={state.dateOfIssue}
-                              value={state.dateOfIssue}
+                              defVal={state.dateOfIssue}
+                              watch={watch("dateOfIssue")}
+                              register={register}
+                              error={errors.dateOfIssue}
                               type="date" />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
                               name="phoneNumber"
                               // onChange={handleChange}
-                              onChange={ev => setState({ ...state, phoneNumber: phoneMask(ev) })}
+                              // onChange={ev => setState({ ...state, phoneNumber: phoneMask(ev) })}
                               label="Телефон"
                               placeholder="Телефон"
-                              value={state.phoneNumber}
-                              defaultValue={state.phoneNumber}
+                              defVal={state.phoneNumber}
+                              watch={watch("phoneNumber")}
+                              register={register}
+                              inputType="phone"
+                              error={errors.phoneNumber}
 
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
-                              onChange={handleChange}
+                              // onChange={handleChange}
                               label="Срок действия"
                               name="dateOfExpire"
-                              defaultValue={state.dateOfExpire}
-                              value={state.dateOfExpire}
-                              type="date" />
+                              defVal={state.dateOfExpire}
+                              watch={watch("dateOfExpire")}
+                              register={register}
+                              type="date"
+                              error={errors.dateOfExpire}
+                           />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
                               name="homePhoneNumber"
                               label="Телефон (домашний)"
                               placeholder="Телефон (домашний)"
-                              onChange={ev => setState({ ...state, homePhoneNumber: phoneMask(ev) })}
-                              value={state.homePhoneNumber}
-                              defaultValue={state.homePhoneNumber}
+                              // onChange={ev => setState({ ...state, homePhoneNumber: phoneMask(ev) })}
+                              defVal={state.homePhoneNumber}
+                              watch={watch("homePhoneNumber")}
+                              register={register}
+                              inputType="phone"
+                              error={errors.homePhoneNumber}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
-                              onChange={handleChange}
+                              // onChange={handleChange}
                               label="Дата рождения"
-                              // defaultValue="2014-02-09" 
-                              // defaultValue={state.birthday}
-                              value={state.birthday}
+                              defVal={state.birthday}
+                              watch={watch("birthday")}
+                              register={register}
                               type="date"
                               name="birthday"
+                              error={errors.birthday}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
-                           <Input name="email" onChange={handleChange} placeholder="Эл.почта" value={state.email} />
+
+                           <Input
+                              name="email"
+                              // onChange={handleChange} 
+                              placeholder="Эл.почта"
+                              defVal={state.email}
+                              watch={watch("email")}
+                              register={register}
+                              error={errors.email}
+                              inputType="email" />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
                               name="inn"
                               placeholder="ИНН"
-                              onChange={ev => setState({ ...state, inn: inn(ev) })}
+                              // onChange={ev => setState({ ...state, inn: inn(ev) })}
                               label="ИНН"
-                              defaultValue={state.inn.toString()}
-                              value={state.inn}
+                              // defaultValue={state.inn.toString()}
+                              defVal={state.inn}
+                              watch={watch("inn")}
+                              register={register}
+                              inputType="inn"
+                              error={errors.inn}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
