@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Spinner, SpinnerContainer } from './style';
 
-interface CircleLoader {
+interface CircleLoaderProps {
   style?: any
 }
 
-const CircleLoader: FC<CircleLoader> = ({ style }) => {
+const CircleLoader: FC<CircleLoaderProps> = ({ style }) => {
   return (
     <SpinnerContainer style={style}>
       <Spinner viewBox='0 0 50 50'>
