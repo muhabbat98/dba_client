@@ -42,7 +42,7 @@ export const SubInputs = styled.div`
     justify-content:space-between;
     
     div{
-        width:48%;
+        width:164px;
         margin-bottom:0px;
     }
 `;

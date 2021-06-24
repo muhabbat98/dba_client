@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useRef } from "react";
+import React, { useState,useEffect} from "react";
 import { InputWrapper, MaskInput, InputElement, Label,ErrorTitle } from "./style";
 import inputLetter,{email,passport,cardNumber,cardDate,inn, phoneMask} from '../../utils/input-letter'
 interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -34,7 +34,6 @@ const Input: React.FC<InputFilds> = ({
   setValue,
   ...rest
 }) => {
-  const refInput = useRef<any>();
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
   useEffect(()=>{
@@ -59,7 +58,6 @@ const Input: React.FC<InputFilds> = ({
 
     } else setIsFocus(false);
   };
-  console.log("err-->",error)
   const inputMaskType = () => {
     if (inputType == "phone") {
       return (

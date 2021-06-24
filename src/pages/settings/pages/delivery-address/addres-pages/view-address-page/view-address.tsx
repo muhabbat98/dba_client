@@ -3,6 +3,7 @@ import { axios, useActionCreators, useSelector } from "../../../../../../hooks";
 import { AlertPosition } from "../../../../../../utils/alert-position-enum";
 import Title from "../../../../../../components/products-title";
 import Button from "../../../../../../components/button";
+import CircleLoader from "../../../../../../components/circle-loader";
 import AddressBoxes from "../address-boxes";
 import { ReactComponent as House1 } from "../../../../../../assets/icons/house-1.svg";
 import { ReactComponent as Pencil } from "../../../../../../assets/icons/pencil.svg";
@@ -72,110 +73,115 @@ const ViewAddress: React.FC<Addresses> = ({
   // console.log('mainAddress--',mainAddress);
   // console.log('addresses--',addresses);
   return (
-    <ViewAddressContainer>
-      {mainAddress && (
-        <>
-          <Title title="Основной адрес" style={{ marginTop: 0 }} />
-          <BorderBox>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div style={{ display: "flex" }}>
-                <HouseCircle>
-                  <House1 />
-                </HouseCircle>
-                <AddresTitiles>
-                  <p>Адрес 1</p>
-                  
-                </AddresTitiles>
-              </div>
-              
-            </div>
-          <div>
-            <Title>Адрес 1</Title>
-            <AddressInfo>
-              <div>
-                <p>Страна</p>
-                <h5>{mainAddress.country}</h5>
-              </div>
-              <div>
-                <p>Город</p>
-                <h5>{mainAddress.city}</h5>
-              </div>
-              <div>
-                <p>Район</p>
-                <h5>{mainAddress.district}</h5>
-              </div>
-              <div>
-                <p>Улица</p>
-                <h5>{mainAddress.street}</h5>
-              </div>
-              <div>
-                <p>Доп. информация</p>
-                <h5>{mainAddress.additionalInformation}</h5>
-              </div>
-              <div>
-                <p>Дом</p>
-                <h5>{mainAddress.apartmentNumber}</h5>
-              </div>
-              <div>
-                <p>Квартира</p>
-                <h5>{mainAddress.homeNumber}</h5>
-              </div>
-            </AddressInfo>
-            <Line></Line>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginTop: 25,
-              }}
-            >
-              <ActionsContainer>
+    <ViewAddressContainer isLoading={data ? false : true}>
+      { !data?
+        <CircleLoader style={{position:"absolute"}}/>
+      :<>
+        {mainAddress && (
+          <>
+            <Title title="Основной адрес" style={{ marginTop: 0 }} />
+            <BorderBox>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div style={{ display: "flex" }}>
+                  <HouseCircle>
+                    <House1 />
+                  </HouseCircle>
+                  <AddresTitiles>
+                    <p>Адрес 1</p>
+                    
+                  </AddresTitiles>
+                </div>
                 
-                <div onClick={editHandle}>
-                  <Pencil />
-                  <span>Изменить</span>
+              </div>
+            <div>
+              <Title>Адрес 1</Title>
+              <AddressInfo>
+                <div>
+                  <p>Страна</p>
+                  <h5>{mainAddress.country}</h5>
                 </div>
-                <div onClick={() => handleDelete(mainAddress.id)}>
-                  <Trash />
-                  <span>Удалить</span>
+                <div>
+                  <p>Город</p>
+                  <h5>{mainAddress.city}</h5>
                 </div>
-              
-              </ActionsContainer>
-            </div>
-        </div>
-        
-        
-        </BorderBox>
-        </>
-      )}
-
-      {addresses.length ? <Title title="Дополнительные адреса" /> : <></>}
-      {addresses &&
-        addresses.map((data: any, index: number) => {
-          return (
-            <AddressBoxes
-              deleteItem={deleteItem}
-              key={data.id}
-              setEditItem={setEditItem}
-              setOpenEditModal={setOpenEditModal}
-              data={data}
-              setMainAddresHandler={setMainAddresHandler}
-              index={mainAddress ? index + 2 : index + 1}
-            />
-          );
-        })}
-      <PlusButton>
-        <Button
-          onClick={() => {
-            openModal(true);
-          }}
-        >
-          <div>
-            <PlusIcon />
-            Добавить адрес
+                <div>
+                  <p>Район</p>
+                  <h5>{mainAddress.district}</h5>
+                </div>
+                <div>
+                  <p>Улица</p>
+                  <h5>{mainAddress.street}</h5>
+                </div>
+                <div>
+                  <p>Доп. информация</p>
+                  <h5>{mainAddress.additionalInformation}</h5>
+                </div>
+                <div>
+                  <p>Дом</p>
+                  <h5>{mainAddress.apartmentNumber}</h5>
+                </div>
+                <div>
+                  <p>Квартира</p>
+                  <h5>{mainAddress.homeNumber}</h5>
+                </div>
+              </AddressInfo>
+              <Line></Line>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: 25,
+                }}
+              >
+                <ActionsContainer>
+                  
+                  <div onClick={editHandle}>
+                    <Pencil />
+                    <span>Изменить</span>
+                  </div>
+                  <div onClick={() => handleDelete(mainAddress.id)}>
+                    <Trash />
+                    <span>Удалить</span>
+                  </div>
+                
+                </ActionsContainer>
+              </div>
           </div>
-        </Button>
-      </PlusButton>
+          
+          
+          </BorderBox>
+          </>
+        )}
+
+        {addresses.length ? <Title title="Дополнительные адреса" /> : <></>}
+        {addresses &&
+          addresses.map((data: any, index: number) => {
+            return (
+              <AddressBoxes
+                deleteItem={deleteItem}
+                key={data.id}
+                setEditItem={setEditItem}
+                setOpenEditModal={setOpenEditModal}
+                data={data}
+                setMainAddresHandler={setMainAddresHandler}
+                index={mainAddress ? index + 2 : index + 1}
+              />
+            );
+          })}
+        <PlusButton>
+          <Button
+            onClick={() => {
+              openModal(true);
+            }}
+          >
+            <div>
+              <PlusIcon />
+              Добавить адрес
+            </div>
+          </Button>
+        </PlusButton>
+      </>
+      }
     </ViewAddressContainer>
   );
 };

@@ -22,11 +22,13 @@ const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) =
             street:"",
         })
         setgeometry(e.get('target').geometry.getCoordinates());
-        setLocation({latitude:geometry[0],longitude:geometry[1]});
+        setLocation(geometry);
+        // setLocation({latitude:geometry[0],longitude:geometry[1]});
     }
 
-    // console.log(geometry);
-    console.log("tt-->",state)
+    // console.log("geo-->",geometry);
+    // console.log("ge-->",geometry[0],geometry[1]);
+    // console.log("tt-->",state)
     useEffect(()=>{
         getAdd()
     },[geometry])
