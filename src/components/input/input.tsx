@@ -59,7 +59,7 @@ const Input: React.FC<InputFilds> = ({
 
     } else setIsFocus(false);
   };
-  
+  console.log("err-->",error)
   const inputMaskType = () => {
     if (inputType == "phone") {
       return (
@@ -164,13 +164,13 @@ const Input: React.FC<InputFilds> = ({
   return (
   <>
     <InputWrapper  
-      error={error.errors?true:false} 
+      error={error?true:false} 
       onFocus={() => setIsFocus(true)}
       onBlur={(e) => onBlur(e)}
       style={style}
     >
       {isFocus &&
-      <Label isfocus={isFocus} err={error?true:false} >{label} </Label>
+      <Label isfocus={isFocus} err={error?"true":"false"} >{label} </Label>
       } 
 
       {inputType ? (

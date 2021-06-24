@@ -54,7 +54,7 @@ const AddressBox: React.FC<PropsModal> = ({
     country:"",
     district:""
   });
- 
+  const {register, watch,setValue,handleSubmit,errors} = useForm();
   let mainn:boolean;
   useEffect(() => {
     inputItems && setData(inputItems);
@@ -84,6 +84,13 @@ const AddressBox: React.FC<PropsModal> = ({
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+  const onSubmit = (data: any) => {
+    setData(data);
+    mainn=chackboxdHide?false:main;
+    getItems({ ...data, ...location, main });
+    closeModal(false);
+    console.log("dataa------->", data)
+ }
   console.log(inputItems&&inputItems.latitude,inputItems&&inputItems.longitude)
   return (
     <ModalContainer className="glass-container" onClick={clickHandler}>
@@ -93,56 +100,68 @@ const AddressBox: React.FC<PropsModal> = ({
             style={{ textAlign: "center", marginTop: 0 }}
             title={modalTitle}
           />
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               label="Страна"
               placeholder="Страна"
               name="country"
-              value={data.country}
-              defaultValue={data.country}
-              onChange={(e: any) => handleChange(e)}
+              defVal={data.country}
+              register={register}
+              setValue={setValue}
+              watch={watch("country")}
+              error={errors.country}
             />
             <Input
               label="Город"
               placeholder="Город"
               name="city"
-              value={data.city}
-              defaultValue={data.city}
-              onChange={(e: any) => handleChange(e)}
+              defVal={data.city}
+              register={register}
+              setValue={setValue}
+              watch={watch("city")}
+              error={errors.city}
             />
             <Input
               label="Район"
               placeholder="Район"
               name="district"
-              value={data.district}
-              defaultValue={data.district}
-              onChange={(e: any) => handleChange(e)}
+              defVal={data.district}
+              register={register}
+              setValue={setValue}
+              watch={watch("district")}
+              error={errors.district}
             />
             
             <Input
               label="Улица"
               placeholder="Улица"
               name="street"
-              value={data.street}
-              defaultValue={data.street}
-              onChange={(e: any) => handleChange(e)}
+              defVal={data.street}
+              register={register}
+              setValue={setValue}
+              watch={watch("street")}
+              error={errors.street}
             />
             <SubInputs>
               <Input
                 placeholder="Дом"
                 label="Дом"
                 name="homeNumber"
-                value={data.homeNumber}
-                defaultValue={data.homeNumber}
-                onChange={(e: any) => handleChange(e)}
+                defVal={data.homeNumber}
+                register={register}
+                setValue={setValue}
+                watch={watch("homeNumber")}
+                error={errors.homeNumber}
               />
               <Input
                 placeholder="Квартира"
                 label="Квартира"
                 name="apartmentNumber"
-                value={data.apartmentNumber}
-                defaultValue={data.apartmentNumber}
-                onChange={(e: any) => handleChange(e)}
+                defVal={data.apartmentNumber}
+                register={register}
+                setValue={setValue}
+                watch={watch("apartmentNumber")}
+                error={errors.apartmentNumber}
               />
             </SubInputs>
             <Input
@@ -150,9 +169,11 @@ const AddressBox: React.FC<PropsModal> = ({
               label="Дополнительная информация"
               name="additionalInformation"
               style={{height:100}}
-              value={data.additionalInformation}
-              defaultValue={data.additionalInformation}
-              onChange={(e: any) => handleChange(e)}
+              defVal={data.additionalInformation}
+              register={register}
+              setValue={setValue}
+              watch={watch("additionalInformation")}
+              error={errors.additionalInformation}
             />
             {!chackboxdHide && (
               <Checkbox
@@ -164,7 +185,7 @@ const AddressBox: React.FC<PropsModal> = ({
               />
             )}
 
-            <Button type="submit" onClick={handleSubmitt}>
+            <Button type="submit" >
               Сохранить
             </Button>
           </form>
