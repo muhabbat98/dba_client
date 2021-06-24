@@ -70,7 +70,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={phoneMask( watch)}
           isfocus={isFocus}
-          err={error.errors?"true":"false"}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
         />
       );
@@ -83,7 +83,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={cardNumber( watch)}
           isfocus={isFocus}
-          err={error.errors?"true":"false"}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
         />
       );
@@ -97,7 +97,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={cardDate( watch)}
           isfocus={isFocus}
-          err={error.errors?"true":"false"}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
         />
         )
@@ -110,7 +110,7 @@ const Input: React.FC<InputFilds> = ({
           name={name}
           defaultValue={defaultValue}
           isfocus={isFocus}
-          err={error.errors?"true":"false"}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
         />
         )
@@ -124,7 +124,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={passport( watch)}
           isfocus={isFocus}
-          err={error.errors?"true":"false"}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
         />
         )
@@ -138,7 +138,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={inn( watch)}
           isfocus={isFocus}
-          err={error.errors?"true":"false"}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
   
         />
@@ -153,7 +153,7 @@ const Input: React.FC<InputFilds> = ({
           defaultValue={defaultValue}
           value={inputLetter( watch)}
           isfocus={isFocus}
-          err={error.errors?"true":"false"}  
+          err={error?"true":"false"}  
           placeholder={placeholder}
         />
         )
@@ -170,7 +170,7 @@ const Input: React.FC<InputFilds> = ({
       style={style}
     >
       {isFocus &&
-      <Label isfocus={isFocus} err={error.errors?true:false}>{label}</Label>
+      <Label isfocus={isFocus} err={error?true:false} >{label} </Label>
       } 
 
       {inputType ? (
@@ -186,14 +186,14 @@ const Input: React.FC<InputFilds> = ({
           placeholder={!isFocus ? placeholder : ""}
           isfocus={isFocus}
           onBlur={(e) => onBlur(e)}
-          err={error.errors?"true":"false"}    
+          err={error?"true":"false"}    
           
       
         />
       )}
       
     </InputWrapper>
-      {error.message && <ErrorTitle>{error.message}</ErrorTitle>}
+      {error && <ErrorTitle>Поля не заполнены</ErrorTitle>}
   </>
   );
 };

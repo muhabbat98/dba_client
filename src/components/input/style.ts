@@ -55,6 +55,7 @@ export const Label = styled.label<InputStates>`
   display: ${({ isfocus }) => (isfocus ? 'block' : 'none')};
   animation: ${anim} 0.4s;
   
+  
 `;
 export const MaskInput = styled(InputMask)<InputStates>`
   color: #262626;
