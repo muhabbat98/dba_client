@@ -191,7 +191,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
          const response = await axios.post(`user/`, dataObj);
          const data = await response.data;
-         toggleComponent();
+         // toggleComponent();
          setAlertMessage({
             message: data.message,
             type: 'success',
@@ -214,8 +214,9 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       }
    }
 
-   const onSubmit = (data: any) => {
+   const onSubmit = (data: any, ev:any) => {
       uploadData(data);
+      ev.target.reset();
       console.log("dataa----->", data)
    }
 
@@ -277,7 +278,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               error={errors.firstName}
                               register={register}
                               setValue={setValue}
-                              readOnly
+                              
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -303,7 +304,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
                               inputType="passport"
                               setValue={setValue}
-                              readOnly
+                              
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -318,7 +319,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               // error={errors.secondName}
                               error={errors.secondName}
 
-                              readOnly
+                              
                               setValue={setValue}
                            // onChange={ev => setState({ ...state, secondName: inputLetter(ev) })}
                            />
@@ -335,7 +336,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               error={errors.dateOfIssue}
                               
                               setValue={setValue}
-                              readOnly
+                              
                               type="date" />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -353,7 +354,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               error={errors.phoneNumber}
 
                               setValue={setValue}
-                              readOnly
+                              
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -369,7 +370,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               error={errors.dateOfExpire}
 
                               setValue={setValue}
-                              readOnly
+                              
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -377,7 +378,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               name="homePhoneNumber"
                               label="Телефон (домашний)"
                               placeholder="Телефон (домашний)"
-                              readOnly
+                              
                               // onChange={ev => setState({ ...state, homePhoneNumber: phoneMask(ev) })}
                               defVal={state.homePhoneNumber}
                               watch={watch("homePhoneNumber")}
@@ -402,7 +403,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               // error={errors.birthday}
                               error={ errors.birthday}
                               setValue={setValue}
-                              readOnly
+                              
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -417,7 +418,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               // error={errors.email}
                               error={errors.email}
                               inputType="email" 
-                              readOnly
                               setValue={setValue}/>
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
@@ -431,7 +431,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("inn")}
                               register={register}
                               inputType="inn"
-                              readOnly
+                              
                               // error={ errors.inn}
                               error={ errors.inn}
                               setValue={setValue}
@@ -442,6 +442,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            {/* <Input name="inn" onChange={handleChange} label="ИНН" value={state.inn} /> */}
+                           {/* <input type="reset" value="RESET" /> */}
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true} style={{ display: 'flex', alignItems: 'flex-end' }}>
                            <Button type="submit" style={{ backgroundColor: '#1541A9', width: '100%' }}>Сохранить</Button>
