@@ -31,7 +31,7 @@ export const DropdownHeader = styled.div`
   background-color: #f4f6f9;
 
   position: relative;
-  z-index: 9;
+  /* z-index: 9; */
 
   & svg {
     position: absolute;

@@ -274,7 +274,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               inputType="letter"
                               watch={watch("firstName")}
                               // error={errors.firstName}
-                              error={{errors: errors.firstName, message:errors.firstName && 'Blah'}}
+                              error={errors.firstName}
                               register={register}
                               setValue={setValue}
                               readOnly
@@ -299,7 +299,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("passportNumber")}
                               register={register}
                               // error={errors.passportNumber}
-                              error={{errors: errors.passportNumber, message:errors.passportNumber && 'Blah'}}
+                              error={errors.passportNumber}
 
                               inputType="passport"
                               setValue={setValue}
@@ -316,7 +316,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               inputType="letter"
                               // error={errors.secondName}
-                              error={{errors: errors.secondName, message:errors.secondName && 'Blah'}}
+                              error={errors.secondName}
 
                               readOnly
                               setValue={setValue}
@@ -332,7 +332,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("dateOfIssue")}
                               register={register}
                               // error={errors.dateOfIssue}
-                              error={{errors: errors.dateOfIssue, message:errors.dateOfIssue && 'Blah'}}
+                              error={errors.dateOfIssue}
                               
                               setValue={setValue}
                               readOnly
@@ -350,7 +350,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               inputType="phone"
                               // error={errors.phoneNumber}
-                              error={{errors: errors.phoneNumber, message:errors.phoneNumber && 'Blah'}}
+                              error={errors.phoneNumber}
 
                               setValue={setValue}
                               readOnly
@@ -366,7 +366,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               type="date"
                               // error={errors.dateOfExpire}
-                              error={{errors: errors.dateOfExpire, message:errors.dateOfExpire && 'Blah'}}
+                              error={errors.dateOfExpire}
 
                               setValue={setValue}
                               readOnly
@@ -384,7 +384,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               inputType="phone"
                               // error={errors.homePhoneNumber}
-                              error={{errors: errors.homePhoneNumber, message:errors.homePhoneNumber && 'Blah'}}
+                              error={errors.homePhoneNumber}
 
                               setValue={setValue}
                               
@@ -400,7 +400,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               type="date"
                               name="birthday"
                               // error={errors.birthday}
-                              error={{errors: errors.birthday, message:errors.birthday && 'Blah'}}
+                              error={ errors.birthday}
                               setValue={setValue}
                               readOnly
                            />
@@ -415,7 +415,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("email")}
                               register={register}
                               // error={errors.email}
-                              error={{errors: errors.email, message:errors.email && 'Blah'}}
+                              error={errors.email}
                               inputType="email" 
                               readOnly
                               setValue={setValue}/>
@@ -433,7 +433,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               inputType="inn"
                               readOnly
                               // error={ errors.inn}
-                              error={{errors: errors.inn, message:errors.inn && 'Blah'}}
+                              error={ errors.inn}
                               setValue={setValue}
                            />
                         </PersonalBodyFlex>
