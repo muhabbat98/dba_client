@@ -17,8 +17,6 @@ import {
 import Avatar from '../../../../assets/images/personal-info-avatar.png';
 import { ReactComponent as PersonalAvatarEditImg } from '../../../../assets/icons/personal-info-avatar-edit.svg';
 import { ReactComponent as Verified } from '../../../../assets/icons/verified.svg';
-import getStoredState from 'redux-persist/es/integration/getStoredStateMigrateV4';
-import inputLetter, { inn, passport, phoneMask } from '../../../../utils/input-letter';
 import moment from 'moment';
 import CircleLoader from '../../../../components/circle-loader';
 
@@ -151,10 +149,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          const data = await response.data;
          const dataObj = { ...data };
 
-         // dataObj.birthday = dataObj.birthday.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-         // dataObj.dateOfExpire = dataObj.dateOfExpire.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-         // dataObj.dateOfIssue = dataObj.dateOfIssue.split(":").splice(0, 1).join(" ").split("T")[0].split("-").join("-");
-
          dataObj.birthday = moment(dataObj.birthday).format('YYYY-MM-DD');
          dataObj.dateOfExpire = moment(dataObj.dateOfExpire).format('YYYY-MM-DD');
          dataObj.dateOfIssue = moment(dataObj.dateOfIssue).format('YYYY-MM-DD');
@@ -191,7 +185,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
          const response = await axios.post(`user/`, dataObj);
          const data = await response.data;
-         // toggleComponent();
+         toggleComponent();
          setAlertMessage({
             message: data.message,
             type: 'success',
@@ -216,16 +210,12 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
 
    const onSubmit = (data: any, ev:any) => {
       uploadData(data);
-      ev.target.reset();
-      console.log("dataa----->", data)
    }
-
-   console.log("state === ", state);
 
    return (
       <PersonalInfoContainer isLoading={loading}>
          {
-            loading && <CircleLoader />
+            loading && <CircleLoader style={{position: 'absolute'}} />
          }
          {
             !loading && <>
