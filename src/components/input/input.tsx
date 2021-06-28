@@ -60,6 +60,9 @@ const Input: React.FC<InputFilds> = ({
 
     } else setIsFocus(false);
   };
+  const change = () =>{
+    
+  }
   const inputMaskType = () => {
     if (inputType == "phone") {
       return (
@@ -68,7 +71,7 @@ const Input: React.FC<InputFilds> = ({
           className="inputt"
           ref={register({ required: true, minLength: 13 })}
           name={name}
-          defaultValue={defaultValue}
+          onChange={change}
           value={phoneMask( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
@@ -82,7 +85,7 @@ const Input: React.FC<InputFilds> = ({
           className="inputt"
           ref={register({ required: true, minLength: 19 })}
           name={name}
-          defaultValue={defaultValue}
+          onChange={change}
           value={cardNumber( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
@@ -97,7 +100,7 @@ const Input: React.FC<InputFilds> = ({
           className="inputt"
           ref={register({ required: true, minLength: 5 })}
           name={name}
-          defaultValue={defaultValue}
+          onChange={change}
           value={cardDate( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
@@ -112,7 +115,7 @@ const Input: React.FC<InputFilds> = ({
           className="inputt"
           ref={register({ required: true,pattern: {value: /^\S+@\S+\.\S+$/i,} })}
           name={name}
-          defaultValue={defaultValue}
+          onChange={change}
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
@@ -126,7 +129,7 @@ const Input: React.FC<InputFilds> = ({
           className="inputt"
           ref={register({ required: true, minLength: 10 })}
           name={name}
-          defaultValue={defaultValue}
+          onChange={change}
           value={passport( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
@@ -141,7 +144,7 @@ const Input: React.FC<InputFilds> = ({
           className="inputt"
           ref={register({ required: true, minLength: 10 })}
           name={name}
-          defaultValue={defaultValue}
+          onChange={change}
           value={inn( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
@@ -157,7 +160,7 @@ const Input: React.FC<InputFilds> = ({
           className="inputt"
           ref={register({ required: true })}
           name={name}
-          defaultValue={defaultValue}
+          onChange={change}
           value={inputLetter( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
