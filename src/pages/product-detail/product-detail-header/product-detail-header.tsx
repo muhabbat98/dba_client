@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import StarRaiting from '../../../components/star-rating';
 import FormatMoney from '../../../utils/format-money';
 import Button from '../../../components/button';
+import { useParams } from 'react-router-dom';
+import { useActionCreators, useSelector } from '../../../hooks';
 import  PhoneMain from './images/phoneMain.svg'
 import  Phone1 from './images/phone1.svg'
 import  Phone2 from './images/phone2.svg'
@@ -9,6 +11,7 @@ import  Phone3 from './images/phone3.svg'
 import  Phone4 from './images/phone4.svg'
 import  Phone5 from './images/phone5.svg'
 import {ReactComponent as Heart} from '../../../assets/icons/heart2.svg'
+import {ReactComponent as HeartFull} from '../../../assets/icons/heart-full2.svg'
 import {
     DetailHeaderContainer,
     LeftPictureContainer,
@@ -22,7 +25,6 @@ import {
     BinaryTextConatiner,
     ColorsContainer
 
-
 } from './style'
 
 const images = [
@@ -33,13 +35,60 @@ const images = [
     {img:Phone5},
 ]
 const  ProductDetailHeader = () => {
+    const { id } = useParams<any>();
     const [mainImage,setMainImage] = useState();
+    const [isInCart, setIsInCart] = useState(false);
+    const [isInWishlist, setIsInWishlist] = useState(false);
+  
+    const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
+    
+    const addToCartHandle = (item: any) => {
+        addToCart(item);
+        setIsInCart(!isInCart);
+    };
+    
+    const deleteFromCartHandle = (item: any) => {
+        removeCart(item);
+        setIsInCart(!isInCart);
+    };
+    
+    const addToWishlistHandle = (item: any) => {
+        setIsInWishlist(!isInWishlist);
+        addToWishlist(item);
+    };
+    
+    const removeFromWishlistHandle = (item: any) => {
+        setIsInWishlist(!isInWishlist);
+        removeWishlist(item);
+    };
+
     const starRaitingResult = (num:number) => {
         console.log("num-star----->",num)
     }
     const setMainPicture = (item:any) => {
         setMainImage(item);
     }
+
+    const item = {
+        "id": id,
+        "route": "/catalog/details/samsung-6063033fb1a9f83cc5c612330",
+        "name": "Apple / Смартфон iPhone 11 128GB (новая комплектация)",
+        "images": [
+            PhoneMain
+        ],
+        "priceResponse": {
+          "value": "7574000",
+          "currency": {
+            "id": "6063033fb1a9f83cc5c612330",
+            "name": "Uzbekistan Sum",
+            "shortName": "сум",
+            "code": 860,
+            "format": 2
+          }
+        }
+      }
+    
+// console.log("id--->",id)
     return (
         <DetailHeaderContainer>
             <LeftPictureContainer>
@@ -59,7 +108,13 @@ const  ProductDetailHeader = () => {
             <ProductInformation>
                 <InfoTitleContainer>
                     <p>Apple / Смартфон iPhone 11 128GB (новая комплектация)</p>
-                    <Heart/>
+                    <div 
+                        onClick={() =>
+                            isInWishlist
+                                ? removeFromWishlistHandle(item)
+                                : addToWishlistHandle(item)
+                            }
+                    >{isInWishlist ?<HeartFull/>:<Heart />}</div>
                 </InfoTitleContainer>
                 <RatingContainer>
                     <StarRaiting callback={starRaitingResult} />
@@ -83,7 +138,9 @@ const  ProductDetailHeader = () => {
                 <BinaryTextConatiner>
                     <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
                 </BinaryTextConatiner>
-                <Button style={{marginTop:27}}>Добавить в корзину</Button>
+                <Button style={{marginTop:27}} onClick={() =>
+                isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)
+              }>{isInCart ? "в корзину" : "Добавить в корзину"}</Button>
             </ProductInformation>
             
         </DetailHeaderContainer>

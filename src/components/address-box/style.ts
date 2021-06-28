@@ -40,11 +40,12 @@ export const FormContainer = styled.div`
 export const SubInputs = styled.div`
     display:flex;
     justify-content:space-between;
-    
     div{
-        width:164px;
         margin-bottom:0px;
     }
+`;
+export const SubDiv = styled.div`
+    width:48%;
 `;
 export const YMapContainer = styled.div`
     width:70%;

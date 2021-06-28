@@ -1,5 +1,6 @@
 import React, { useState,useEffect} from "react";
 import { InputWrapper, MaskInput, InputElement, Label,ErrorTitle } from "./style";
+import { v4 as uuidv4 } from 'uuid';
 import inputLetter,{email,passport,cardNumber,cardDate,inn, phoneMask} from '../../utils/input-letter'
 interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -35,9 +36,9 @@ const Input: React.FC<InputFilds> = ({
   ...rest
 }) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
-
+  const [id,setId] = useState<string>('');
   useEffect(()=>{
-    const val:any = document.querySelector('#inputt');
+    const val:any = document.querySelector('.inputt');
     if(val){
       const leng=val.value
       if(leng.length>0) {
@@ -46,6 +47,7 @@ const Input: React.FC<InputFilds> = ({
     }
 
   })
+  useEffect(() => {setId(uuidv4());},[])
   useEffect(() => {
     defVal && setValue(name,defVal)
 }, [defVal])
@@ -62,7 +64,8 @@ const Input: React.FC<InputFilds> = ({
     if (inputType == "phone") {
       return (
         <InputElement
-          id="inputt"
+          id={id}
+          className="inputt"
           ref={register({ required: true, minLength: 13 })}
           name={name}
           defaultValue={defaultValue}
@@ -75,7 +78,8 @@ const Input: React.FC<InputFilds> = ({
     } else if (inputType == "card") {
       return (
         <InputElement
-          id="inputt"
+          id={id}
+          className="inputt"
           ref={register({ required: true, minLength: 19 })}
           name={name}
           defaultValue={defaultValue}
@@ -89,7 +93,8 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="cardData"){
       return (
         <InputElement
-          id="inputt"
+          id={id}
+          className="inputt"
           ref={register({ required: true, minLength: 5 })}
           name={name}
           defaultValue={defaultValue}
@@ -103,7 +108,8 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="email"){
       return (
         <InputElement
-          id="inputt"
+          id={id}
+          className="inputt"
           ref={register({ required: true,pattern: {value: /^\S+@\S+\.\S+$/i,} })}
           name={name}
           defaultValue={defaultValue}
@@ -116,7 +122,8 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="passport"){
       return (
         <InputElement
-          id="inputt"
+          id={id}
+          className="inputt"
           ref={register({ required: true, minLength: 10 })}
           name={name}
           defaultValue={defaultValue}
@@ -130,7 +137,8 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="inn"){
       return (
         <InputElement
-          id="inputt"
+          id={id}
+          className="inputt"
           ref={register({ required: true, minLength: 10 })}
           name={name}
           defaultValue={defaultValue}
@@ -145,7 +153,8 @@ const Input: React.FC<InputFilds> = ({
     else if(inputType=="letter"){
       return (
         <InputElement
-          id="inputt"
+          id={id}
+          className="inputt"
           ref={register({ required: true })}
           name={name}
           defaultValue={defaultValue}
@@ -168,7 +177,7 @@ const Input: React.FC<InputFilds> = ({
       style={style}
     >
       {isFocus &&
-      <Label isfocus={isFocus} err={error?"true":"false"} >{label} </Label>
+      <Label htmlFor={id} isfocus={isFocus} err={error?"true":"false"} >{label} </Label>
       } 
 
       {inputType ? (
@@ -176,7 +185,8 @@ const Input: React.FC<InputFilds> = ({
       ) : (
         <InputElement
           {...rest}
-          id="inputt"
+          id={id}
+          className="inputt"
           name={name}
           type={type}
           ref={register({ required: true})}

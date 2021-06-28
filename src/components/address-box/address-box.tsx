@@ -10,6 +10,7 @@ import {
   FormContainer,
   YMapContainer,
   SubInputs,
+  SubDiv
 } from "./style";
 
 import { useForm } from "react-hook-form";
@@ -137,7 +138,7 @@ const AddressBox: React.FC<PropsModal> = ({
               error={errors.street}
             />
             <SubInputs>
-              <div >
+              <SubDiv >
                 <Input
                   placeholder="Дом"
                   label="Дом"
@@ -148,8 +149,8 @@ const AddressBox: React.FC<PropsModal> = ({
                   watch={watch("homeNumber")}
                   error={errors.homeNumber}
                 />
-              </div>
-              <div>
+              </SubDiv>
+              <SubDiv>
                 <Input
                   placeholder="Квартира"
                   label="Квартира"
@@ -160,7 +161,7 @@ const AddressBox: React.FC<PropsModal> = ({
                   watch={watch("apartmentNumber")}
                   error={errors.apartmentNumber}
                 />
-              </div>
+              </SubDiv>
             </SubInputs>
             <Input
               placeholder="Дополнительная информация"
