@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ContentContainer, CloseIconContainer } from './style';
 import AddMarketAccount from './add-market-account';
 import AddCard from './add-card';
@@ -12,6 +12,7 @@ const Content: React.FC<Props> = () => {
     state: { cardFormType },
     closeAddModal,
   } = usePayment();
+
   return (
     <ContentContainer>
       <CloseIconContainer onClick={closeAddModal} />

@@ -8,8 +8,9 @@ import { loadingErrorReducer } from './loading-error-handler/loading-error-handl
 import { menuReducer } from './menu/menu-reducer';
 import { confirmReducer } from './confirm/confirm-reducer';
 import { cartReducer } from './cart/cart-reducer';
-import { wishlistReducer} from './wishlist/wishlist-reducer';
-import {alertReducer} from './alert/alert-reducer';
+import { wishlistReducer } from './wishlist/wishlist-reducer';
+import { alertReducer } from './alert/alert-reducer';
+import { bankDetailsReducer } from './bank-details/bank-details-reducer';
 
 const persistConfig = {
   key: 'root',
@@ -26,7 +27,8 @@ export const rootReducer = combineReducers({
   confirm: confirmReducer,
   cart: cartReducer,
   wishlist: wishlistReducer,
-  alert: alertReducer
+  alert: alertReducer,
+  bankDetails: bankDetailsReducer,
 });
 
 export default persistReducer<any, any>(persistConfig, rootReducer);

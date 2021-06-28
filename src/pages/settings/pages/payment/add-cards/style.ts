@@ -4,6 +4,7 @@ export const AddCardsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: scroll;
 `;
 
 export const BackDrop = styled.div`
