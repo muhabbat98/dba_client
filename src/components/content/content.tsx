@@ -19,7 +19,7 @@ const Content = () => {
         <Route exact path={path} component={Homepage} />
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/wishlist' component={Wishlist} />
-        <Route exact path='/product-detail' component={ProductDetail} />
+        <Route exact path='/product-detail/:id' component={ProductDetail} />
         <Route exact path='/catalog' component={Catalog} />
         <Route exact path='/products' component={Products} />
         <ProtectedRoute path='/settings'>

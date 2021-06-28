@@ -122,7 +122,6 @@ const Cart = () => {
                      </>
                   )
                }
-
             </Row>
          </Container>
       </CartContainer>

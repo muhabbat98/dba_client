@@ -1,7 +1,7 @@
 import React, { useState, SyntheticEvent, useEffect, useRef } from 'react';
 import { ReactComponent as Arrow } from '../../assets/icons/down-arrow.svg';
 import {
-   DropdownContainer, DropdownHeader, DropdownOptionList, DropdownOption, DropdownHeaderTitle, DropdownOverlay,
+   DropdownContainer, DropdownHeader, DropdownOptionList, DropdownOption, DropdownHeaderTitle,
    DropdownLabel
 } from './style';
 
@@ -22,7 +22,6 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected, 
       window.addEventListener('click', dropdownOverlayClick);
 
       return () => {
-         console.log("Wilunmount")
          window.removeEventListener('click', dropdownOverlayClick);
       }
    }, [isOpen]);
@@ -47,14 +46,6 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected, 
 
 
    const dropdown = useRef<HTMLUListElement>(null);
-
-   // useEffect(() => {
-   //    if (selectedOption === null) {
-   //       if (dropdown.current) {
-   //          dropdown.current.children[0].classList.add('selected');
-   //       }
-   //    }
-   // }, []);
 
    const selectItem = (item: any, e: SyntheticEvent) => {
       setSelectedOption(item.value);

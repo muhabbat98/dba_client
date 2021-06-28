@@ -20,7 +20,6 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 
 
 export const Form: FC<FormProps> = ({ defaultValues, children, onSubmit }) => {
-   // console.log("defaultValues = ", defaultValues)
    const { handleSubmit, register, control, reset } = useForm({ defaultValues });
 
    return (
@@ -46,7 +45,6 @@ export const Form: FC<FormProps> = ({ defaultValues, children, onSubmit }) => {
 }
 
 export const Inputs: FC<InputsProps> = ({ inputType, register, control, name, reset, defaultValues, ...rest }) => {
-   // console.log("value = ", rest);
    const [state, setstate] = useState({
       card:''
    });
@@ -66,7 +64,6 @@ export const Inputs: FC<InputsProps> = ({ inputType, register, control, name, re
             <>
                <label>{}</label>
                <input
-                  // onChange={(ev) => handleChange(ev)}
                   placeholder="date"
                   type="date"
                   name={name}
@@ -132,62 +129,3 @@ export const Inputs: FC<InputsProps> = ({ inputType, register, control, name, re
          )
    }
 }
-
-
-
-// const Inputs: FC<InputsProps> = ({ inputType, label, name, ...rest }) => {
-//    renderCount++;
-//    console.log("renderCount = ", renderCount);
-//    console.log("rest = ", rest);
-
-//    switch (inputType) {
-//       case InputTypes.DATE:
-//          return (
-//             <>
-//                <label>{}</label>
-//                <input
-//                   placeholder="date"
-//                   type="date"
-//                   name={name}
-//                   {...rest}
-//                />
-//                {console.log(inputType)}
-//             </>
-//          );
-//       default:
-//          return (
-//             <input
-//             placeholder="jjikkl"
-//             type="text"
-//             name={name}
-//             {...rest}
-//             />
-//          )
-//    }
-// }
-
-// export default Inputs;
-
-
-// export function Form({ defaultValues, children, onSubmit }) {
-//    const { handleSubmit, register } = useForm({ defaultValues });
-
-//    return (
-//      <form onSubmit={handleSubmit(onSubmit)}>
-//        {Array.isArray(children)
-//          ? children.map(child => {
-//              return child.props.name
-//                ? React.createElement(child.type, {
-//                    ...{
-//                      ...child.props,
-//                      register,
-//                      key: child.props.name
-//                    }
-//                  })
-//                : child;
-//            })
-//          : children}
-//      </form>
-//    );
-//  }
-

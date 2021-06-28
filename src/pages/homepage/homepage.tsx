@@ -34,11 +34,30 @@ import CardImage5 from '../../assets/images/card-item5.png';
 import CardImage6 from '../../assets/images/card-item6.png';
 import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
+import CardImage9 from '../product-detail/product-detail-header/images/phoneMain.svg';
 import Tiger1 from '../../assets/images/tiger.jpg';
 import Tiger2 from '../../assets/images/tiger2.jpg';
 import Slider from '../../components/slider';
 
 export const data = [
+  {
+    "id": "6063033fb1a9f83cc5c612330",
+    "route": "/catalog/details/samsung-6063033fb1a9f83cc5c612330",
+    "name": "Apple / Смартфон iPhone 11 128GB (новая комплектация)",
+    "images": [
+      CardImage9
+    ],
+    "priceResponse": {
+      "value": "7574000",
+      "currency": {
+        "id": "6063033fb1a9f83cc5c612330",
+        "name": "Uzbekistan Sum",
+        "shortName": "сум",
+        "code": 860,
+        "format": 2
+      }
+    }
+  },
   {
     "id": "6063033fb1a9f83cc5c61050",
     "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",

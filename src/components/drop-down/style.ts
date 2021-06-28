@@ -4,16 +4,6 @@ interface selectedColor {
   isSelected?: boolean;
 }
 
-export const DropdownOverlay = styled.div`
-  position: fixed;
-  background: transparent;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 9;
-`;
-
 export const DropdownContainer = styled.div`
   /* max-width: 300px; */
   width: 100%;

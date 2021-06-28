@@ -103,7 +103,7 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
         </CardImageWrapper>
       </CardHeader>
       <CardBody>
-        <CardTitle title={item.name} to=''>
+        <CardTitle title={item.name} to={`/product-detail/${item.id}`}>
           {item.name}
         </CardTitle>
         <CardComents>

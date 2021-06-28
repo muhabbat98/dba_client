@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 import PersonalInfoEdit from './personal-info-edit';
-import Alert from '../../../../components/alert';
 import { axios, useActionCreators, useSelector } from '../../../../hooks';
 import { AlertPosition } from '../../../../utils/alert-position-enum';
 
@@ -17,8 +16,6 @@ import {
 
 import { ReactComponent as Edit } from '../../../../assets/icons/edit.svg';
 import CircleLoader from '../../../../components/circle-loader';
-import {Inputs, Form} from '../../../../pages/cart/inputs';
-import { useForm, Controller } from "react-hook-form";
 
 const PersonalInfo = () => {
   const [state, setState] = useState(false);
@@ -57,10 +54,6 @@ const PersonalInfo = () => {
     setState(!state);
   }
 
-  const onSubmit = (data: any) => {
-    console.log("getInputData = ", data);
-  }
-
   if (state) {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />
   }
@@ -68,10 +61,10 @@ const PersonalInfo = () => {
   return (
     <PersonalInfoContainer isLoading={loading}>
       {
-        loading && <CircleLoader />
+        loading && <CircleLoader style={{position: 'absolute'}} />
       }
       {
-        personalInfo && (
+        !isEmptyObj(personalInfo) && (
           <>
             <PersonalHeader>
               <PersonalHeaderLeftSide personalInfo={personalInfo} />
@@ -87,48 +80,47 @@ const PersonalInfo = () => {
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Ф.И.О</PersonalBodyLabel>
                   <PersonalBodyName>
-                    {!isEmptyObj(personalInfo) && personalInfo.firstName} {' '}
-                    {!isEmptyObj(personalInfo) && personalInfo.secondName}
+                    { personalInfo.firstName} {' '}
+                    { personalInfo.secondName}
                   </PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Тип удостоверяющего документа</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.passportType}</PersonalBodyName>
+                  <PersonalBodyName>{ personalInfo.passportType}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Номер телефона(мобильный)</PersonalBodyLabel>
-                  <PersonalBodyName>+998 {!isEmptyObj(personalInfo) && personalInfo.phoneNumber}</PersonalBodyName>
+                  <PersonalBodyName>+998 { personalInfo.phoneNumber}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Номер телефона (домашний)</PersonalBodyLabel>
-                  <PersonalBodyName>+998 {!isEmptyObj(personalInfo) && personalInfo.homePhoneNumber}</PersonalBodyName>
+                  <PersonalBodyName>+998 { personalInfo.homePhoneNumber}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Электронная почта</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.email}</PersonalBodyName>
+                  <PersonalBodyName>{ personalInfo.email}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Серия, номер паспорта (ID-карты)</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.passportNumber}</PersonalBodyName>
+                  <PersonalBodyName>{ personalInfo.passportNumber}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>ИНН</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.inn}</PersonalBodyName>
+                  <PersonalBodyName>{ personalInfo.inn}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Дата рождения</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && moment(personalInfo.birthday).format('YYYY/MM/DD')} </PersonalBodyName>
+                  <PersonalBodyName>{ moment(personalInfo.birthday).format('YYYY/MM/DD')} </PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
                   <PersonalBodyLabel>Пол</PersonalBodyLabel>
-                  <PersonalBodyName>{!isEmptyObj(personalInfo) && personalInfo.gender}</PersonalBodyName>
+                  <PersonalBodyName>{ personalInfo.gender}</PersonalBodyName>
                 </PersonalBodyFlex>
               </PersonalBodyGrid>
             </PersonalBody>
           </>
         )
       }
-
     </PersonalInfoContainer>
   );
 };
