@@ -1,10 +1,19 @@
 import styled from "styled-components";
 
-export const ViewAddressContainer = styled.div`
+interface Props{
+  isLoading?:boolean;
+}
+
+export const ViewAddressContainer = styled.div<Props>`
   border: 2px solid #E9ECF4;
   box-sizing: border-box;
   border-radius: 16px;
   padding: 16px 24px;
+  position: relative;
+
+  height: ${({ isLoading }) => (isLoading ? "400px" : "auto")};
+  /* overflow: ${({ isLoading }) => (isLoading ? "hidden" : "auto")}; */
+  overflow: hidden !important;
 `;
 export const BorderBoxContainer = styled.div`
   background: #ffffff;

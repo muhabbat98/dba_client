@@ -35,15 +35,7 @@ const AddressBox: React.FC<PropsModal> = ({
   const [location, setLocation] = useState<any>();
   const [main, setMain] = useState(true);
   const [getAdderss,setGetAddres] = useState<any>(
-    {
-      city: "",
-      street: "",
-      homeNumber: "",
-      apartmentNumber: "",
-      additionalInformation: "",
-      country:"",
-      district:""
-    }
+   
   );
   const [data, setData] = useState({
     city: "",
@@ -84,14 +76,16 @@ const AddressBox: React.FC<PropsModal> = ({
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  const onSubmit = (data: any) => {
-    setData(data);
+  const onSubmit = (dataa: any) => {
+    setData(dataa);
     mainn=chackboxdHide?false:main;
-    getItems({ ...data, ...location, main });
+    getItems({ ...dataa, latitude:location&&location[0],longitude:location&&location[1], main });
     closeModal(false);
-    console.log("dataa------->", data)
+    // console.log("dataa------->", dataa)
+    // console.log("Maindataa------->", data)
  }
-  console.log(inputItems&&inputItems.latitude,inputItems&&inputItems.longitude)
+ console.log("gggg--",location&&location[0])
+//   console.log("lat-",inputItems&&inputItems.latitude,"long-",inputItems&&inputItems.longitude)
   return (
     <ModalContainer className="glass-container" onClick={clickHandler}>
       <Wrapper>
@@ -143,26 +137,30 @@ const AddressBox: React.FC<PropsModal> = ({
               error={errors.street}
             />
             <SubInputs>
-              <Input
-                placeholder="Дом"
-                label="Дом"
-                name="homeNumber"
-                defVal={data.homeNumber}
-                register={register}
-                setValue={setValue}
-                watch={watch("homeNumber")}
-                error={errors.homeNumber}
-              />
-              <Input
-                placeholder="Квартира"
-                label="Квартира"
-                name="apartmentNumber"
-                defVal={data.apartmentNumber}
-                register={register}
-                setValue={setValue}
-                watch={watch("apartmentNumber")}
-                error={errors.apartmentNumber}
-              />
+              <div >
+                <Input
+                  placeholder="Дом"
+                  label="Дом"
+                  name="homeNumber"
+                  defVal={data.homeNumber}
+                  register={register}
+                  setValue={setValue}
+                  watch={watch("homeNumber")}
+                  error={errors.homeNumber}
+                />
+              </div>
+              <div>
+                <Input
+                  placeholder="Квартира"
+                  label="Квартира"
+                  name="apartmentNumber"
+                  defVal={data.apartmentNumber}
+                  register={register}
+                  setValue={setValue}
+                  watch={watch("apartmentNumber")}
+                  error={errors.apartmentNumber}
+                />
+              </div>
             </SubInputs>
             <Input
               placeholder="Дополнительная информация"
@@ -193,10 +191,11 @@ const AddressBox: React.FC<PropsModal> = ({
         <YMapContainer>
           <YandexMap 
             setLocation={setLocation} 
-            setData={!inputItems&&setData} 
+            setData={!inputItems?setData:setGetAddres} 
             defaultCordinate={
               inputItems && [inputItems.latitude,inputItems.longitude]
-            } />
+            } 
+            />
         </YMapContainer>
       </Wrapper>
     </ModalContainer>
