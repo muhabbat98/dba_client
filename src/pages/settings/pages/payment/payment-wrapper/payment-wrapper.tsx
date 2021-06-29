@@ -19,6 +19,8 @@ const PaymentWrapper = () => {
 
   const isCardExist = cards.length === 0;
 
+  console.log(cards);
+
   return (
     <PaymentWrapperContainer isLoading={isCardExist}>
       {isCardExist && <NoCards />}
