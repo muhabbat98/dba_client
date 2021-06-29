@@ -19,14 +19,13 @@ const SettingDropdown:React.FC<Propses> = ({label,options,getOption,...rest}) =>
     const ref = useRef<any>()
     useEffect(() => {
         const checkIfClickedOutside = (e:any) => {
-        if (isOpen && ref.current && !ref.current.contains(e.target)) {
-            setIsOpen(false)
-        }
+            if (isOpen && ref.current && !ref.current.contains(e.target)) {
+                setIsOpen(false)
+            }
         }
         document.addEventListener("mousedown", checkIfClickedOutside)
         return () => {
-        // Cleanup the event listener
-        document.removeEventListener("mousedown", checkIfClickedOutside)
+            document.removeEventListener("mousedown", checkIfClickedOutside)
         }
     }, [isOpen])
     return (

@@ -91,7 +91,7 @@ const DeliveryAddress = () => {
   const editAddress = async (data: any) => {
     const userId = user.id;
     try {
-      const response = await axios.put(`/user/location/`, { ...data, userId });
+      const response = await axios.put(`/user/location`, { ...data, userId });
       handleStateChange(response && true);
       // console.log('responseEdit-->',response);
     } catch (error) {

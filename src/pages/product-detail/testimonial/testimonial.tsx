@@ -104,16 +104,13 @@ const  Testimonial = () => {
     const ref = useRef<any>()
     useEffect(() => {
         const checkIfClickedOutside = (e:any) => {
-        // If the menu is open and the clicked target is not within the menu,
-        // then close the menu
         if (smile && ref.current && !ref.current.contains(e.target)) {
             setSmile(false)
         }
         }
         document.addEventListener("mousedown", checkIfClickedOutside)
         return () => {
-        // Cleanup the event listener
-        document.removeEventListener("mousedown", checkIfClickedOutside)
+            document.removeEventListener("mousedown", checkIfClickedOutside)
         }
     }, [smile])
     return (
