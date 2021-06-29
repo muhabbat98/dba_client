@@ -26,7 +26,7 @@ const WishlistEmpty = () => {
             </WishlistEmptyTextBox>
             <div style={{ display: 'flex', alignItems: "center", flexDirection: 'column' }}>
                <Button onClick={goHome} style={{marginBottom: "24px"}}>Перейти на Главную</Button>
-               <Button btnType="disabled" style={{ cursor: "pointer" }}>Войти в свой аккаунт</Button>
+               {/* <Button btnType="disabled" style={{ cursor: "pointer" }}>Войти в свой аккаунт</Button> */}
             </div>
          </WishlistEmptyContainer>
       </Col>
