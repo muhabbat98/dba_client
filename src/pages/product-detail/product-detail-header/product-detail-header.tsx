@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import StarRaiting from '../../../components/star-rating';
 import FormatMoney from '../../../utils/format-money';
 import Button from '../../../components/button';
@@ -41,12 +41,19 @@ const  ProductDetailHeader = () => {
     const [isInWishlist, setIsInWishlist] = useState(false);
   
     const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
-    
+    const { cartItems } = useSelector((state) => state.cart);
     const addToCartHandle = (item: any) => {
         addToCart(item);
         setIsInCart(!isInCart);
     };
+    useEffect(() => {
+        for (let i = 0; i < cartItems.length; i++) {
+          if (cartItems[i].id === item.id) {
+            setIsInCart(true);
+          }
+        }
     
+      }, []);
     const deleteFromCartHandle = (item: any) => {
         removeCart(item);
         setIsInCart(!isInCart);
@@ -138,9 +145,12 @@ const  ProductDetailHeader = () => {
                 <BinaryTextConatiner>
                     <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
                 </BinaryTextConatiner>
-                <Button style={{marginTop:27}} onClick={() =>
-                isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)
-              }>{isInCart ? "в корзину" : "Добавить в корзину"}</Button>
+                {isInCart
+                ?<Button  style={{marginTop:27}} btnType="disabled">Товар добавлен в корзину</Button>
+                :<Button style={{marginTop:27}} onClick={() =>
+                    isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)}
+                  >{isInCart ? "Товар добавлен в корзину" : "Добавить в корзину"}</Button>
+                }
             </ProductInformation>
             
         </DetailHeaderContainer>
