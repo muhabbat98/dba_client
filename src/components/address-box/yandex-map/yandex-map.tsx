@@ -10,9 +10,16 @@ interface Location{
     setData?:any
 }
 const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) => {
-    const [geometry,setgeometry] = useState(defaultCordinate ? defaultCordinate:[41.31207798268884, 69.24238483965644]);
-    const [state,setState] = useState<any>({coordinates:null})
+    const [geometry,setgeometry] = useState<any>(defaultCordinate ? defaultCordinate:[41.31207798268884, 69.24238483965644]);
     const { setAlertMessage } = useActionCreators();
+    // useEffect(()=>{
+    //     setgeometry();
+    // },[]);
+
+    useEffect(()=>{
+        getAdd()
+    },[geometry])
+    let doc:any;
     const getAddress = (e:any) => {
         setData({
             country:"",
@@ -22,17 +29,16 @@ const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) =
             street:"",
         })
         setgeometry(e.get('target').geometry.getCoordinates());
-        setLocation(geometry);
+        setLocation(e.get('target').geometry.getCoordinates());
+        console.log("h--->",e.get('target').geometry.getCoordinates())
         // setLocation({latitude:geometry[0],longitude:geometry[1]});
     }
 
     // console.log("geo-->",geometry);
     // console.log("ge-->",geometry[0],geometry[1]);
     // console.log("tt-->",state)
-    useEffect(()=>{
-        getAdd()
-    },[geometry])
-    let doc:any;
+   
+    
 
     const searchText = (text:any, key:any) => {
         const temp = text && text.toLowerCase().includes(key);
@@ -44,7 +50,7 @@ const YandexMap: React.FC<Location> = ({setLocation,defaultCordinate,setData}) =
         const data = await axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=e29642df-87bb-4b68-80a4-eecf4e8b1b64&geocode=${geometry[1]},${geometry[0]}`);
         const parser = new DOMParser();  
         doc = parser.parseFromString(data.data, 'text/xml')
-        console.log('rrrr-->',doc)
+        // console.log('rrrr-->',doc)
         }
         catch(error){
             if (error.debugMessage) {

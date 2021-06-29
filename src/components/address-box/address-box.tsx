@@ -33,7 +33,7 @@ const AddressBox: React.FC<PropsModal> = ({
   chackboxdHide,
   locationPosition,
 }) => {
-  const [location, setLocation] = useState<any>();
+  const [location, setLocation] = useState<any>([inputItems&&inputItems.latitude,inputItems&&inputItems.longitude]);
   const [main, setMain] = useState(true);
   const [getAdderss,setGetAddres] = useState<any>(
    
@@ -74,19 +74,34 @@ const AddressBox: React.FC<PropsModal> = ({
     }
   };
 
-  const handleChange = (e: any) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+  const haveInput = (data:any,location:any) =>{
+    if(data && location=="lat"){
+      return location?location[0]:inputItems.latitude;
+    }
+    else if(data==undefined && location=="lat"){
+      return location[0];
+    }
+    else if(data && location=="long"){
+      return location?location[1]:inputItems.longitude;
+    }
+    else if(data==undefined && location=="long"){
+      return location[1]
+    }
+  }
+  const latitude = location && location[0];
+  const longitude = location && location[1];
   const onSubmit = (dataa: any) => {
     setData(dataa);
     mainn=chackboxdHide?false:main;
-    getItems({ ...dataa, latitude:location&&location[0],longitude:location&&location[1], main });
+    getItems({ ...dataa, latitude,longitude, main });
     closeModal(false);
     // console.log("dataa------->", dataa)
     // console.log("Maindataa------->", data)
  }
- console.log("gggg--",location&&location[0])
-//   console.log("lat-",inputItems&&inputItems.latitude,"long-",inputItems&&inputItems.longitude)
+//  console.log("gggg--",location&&location[0])
+  // console.log("lat-",inputItems&&inputItems.latitude,"long-",inputItems&&inputItems.longitude)
+  // console.log("rr->>",location)
+// console.log("inputdata---->",inputItems)
   return (
     <ModalContainer className="glass-container" onClick={clickHandler}>
       <Wrapper>
