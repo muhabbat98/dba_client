@@ -4,10 +4,12 @@ import fetch from 'axios';
 
 //http://10.50.50.97:8008/gavharopa-v1/api
 
-const url =
-  process.env.NODE_ENV === 'development'
-    ? 'http://10.50.50.97:8008/marketplace-v1/api/'
-    : 'https://my.fido.uz/marketplace-v1/api';
+// const url =
+//   process.env.NODE_ENV === 'development'
+//     ? 'http://10.50.50.97:8008/marketplace-v1/api/'
+//     : 'https://my.fido.uz/marketplace-v1/api';
+
+const url = 'https://my.fido.uz/marketplace-v1/api';
 
 // const url =
 //   process.env.NODE_ENV === 'development'

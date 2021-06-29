@@ -14,8 +14,6 @@ export enum FormType {
 }
 
 interface LoginState {
-  open: boolean;
-  setOpen: (open: boolean) => void;
   userType: UserType;
   formType: FormType;
   user: User;
@@ -47,8 +45,6 @@ interface LoginContextType {
 
 const loginContextDefaultValue: LoginContextType = {
   state: {
-    open: false,
-    setOpen: () => {},
     userType: UserType.BUYER,
     formType: FormType.LoginForm,
     user: 'buyer',
@@ -76,19 +72,8 @@ function loginReducer(state: LoginState, action: Action): LoginState {
   }
 }
 
-interface LoginProviderProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-}
-
-export const LoginProvider: React.FC<LoginProviderProps> = ({
-  children,
-  setOpen,
-  open,
-}) => {
+export const LoginProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(loginReducer, {
-    open: open,
-    setOpen: setOpen,
     userType: UserType.BUYER,
     formType: FormType.LoginForm,
     user: 'buyer',
@@ -102,8 +87,6 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({
 
 export const useLogin = () => {
   const { state, dispatch } = useContext(LoginContext);
-
-  const closeLogin = () => state.setOpen(false);
 
   const setBuyer = () => {
     dispatch({
@@ -146,7 +129,6 @@ export const useLogin = () => {
 
   return {
     state,
-    closeLogin,
     setBuyer,
     setSeller,
     setLoginForm,

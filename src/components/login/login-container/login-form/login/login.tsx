@@ -24,8 +24,9 @@ const Login = () => {
 
   const {
     state: { user },
-    closeLogin,
   } = useLogin();
+
+  const { closeLogin } = useActionCreators();
 
   const submit = (data: FieldProps) => {
     setError(null);
@@ -84,7 +85,7 @@ const Login = () => {
         <Container>
           {loading && <CircleLoader />}
           <Phone onchange={setPhone} />
-          <Password label='Пароль' name='pasword' register={register} />
+          <Password label="Пароль" name="pasword" register={register} />
           <Div />
           {error && <Error>{error}</Error>}
           <Button>Продолжить</Button>

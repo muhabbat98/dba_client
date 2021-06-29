@@ -14,8 +14,7 @@ const Main = () => {
       <>
         {/* {Helper components} */}
         <Confirm /> <Alert />
-        {/* <Login/> */}
-        {/* </Login> */}
+        <Login />
       </>
     </div>
   );

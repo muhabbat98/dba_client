@@ -16,7 +16,8 @@ import {
 function Menu() {
   let { url } = useRouteMatch();
   const { username, email } = useSelector((state) => state.user);
-  const admin = useSelector((state) => checkUSer(state.user));
+  // const admin = useSelector((state) => checkUSer(state.user));
+  const admin = true;
 
   return (
     <MenuContainer>
@@ -34,7 +35,7 @@ function Menu() {
           <MenuItem to={`${url}/references`}>Справочник</MenuItem>
 
           {admin && (
-            <MenuItem parent='Модератор'>
+            <MenuItem parent="Модератор">
               <MenuItem to={`${url}/moderator/moderators`}>Модераторы</MenuItem>
               <MenuItem to={`${url}/moderator/moderators-reg`}>
                 Регистрация

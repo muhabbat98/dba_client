@@ -7,12 +7,14 @@ import GlassLayer from '../../../components/glass-layer';
 import { useLogin, FormType } from '../context';
 import { ReactComponent as Close } from '../../../assets/icons/ic_close.svg';
 import { LoginContainerWrapper } from './style';
+import { useActionCreators } from '../../../hooks';
 
 const LoginContainer = () => {
   const {
-    closeLogin,
     state: { formType },
   } = useLogin();
+
+  const { closeLogin } = useActionCreators();
 
   return (
     <GlassLayer close={closeLogin}>

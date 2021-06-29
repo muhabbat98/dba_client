@@ -11,6 +11,7 @@ import { cartReducer } from './cart/cart-reducer';
 import { wishlistReducer } from './wishlist/wishlist-reducer';
 import { alertReducer } from './alert/alert-reducer';
 import { bankDetailsReducer } from './bank-details/bank-details-reducer';
+import { loginReducer } from './login/login-reducer';
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ export const rootReducer = combineReducers({
   wishlist: wishlistReducer,
   alert: alertReducer,
   bankDetails: bankDetailsReducer,
+  login: loginReducer,
 });
 
 export default persistReducer<any, any>(persistConfig, rootReducer);

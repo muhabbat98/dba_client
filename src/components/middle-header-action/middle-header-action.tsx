@@ -19,6 +19,7 @@ import {
   CartContainer,
   Count,
 } from './style';
+import { useActionCreators } from '../../hooks';
 
 const MiddleHeaderAction = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -29,9 +30,10 @@ const MiddleHeaderAction = () => {
     user: checkUSer(state.user),
   }));
 
+  const { openLogin } = useActionCreators();
+
   return (
     <MiddleHeaderActionContainer>
-      {open && <Login open={open} setOpen={setOpen} />}
       {user ? (
         <Action>
           <Link to="/settings" title="Перейти к личный кабинет">
@@ -41,7 +43,7 @@ const MiddleHeaderAction = () => {
           </Link>
         </Action>
       ) : (
-        <Action onClick={() => setOpen(true)}>
+        <Action onClick={openLogin}>
           <AccountLogo>
             <Account />
           </AccountLogo>

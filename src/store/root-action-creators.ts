@@ -8,3 +8,4 @@ export * from './cart/cart-action-creator';
 export * from './wishlist/wishlist-action-creator';
 export * from './alert/alert-action-creators';
 export * from './bank-details/bank-details-action-creator';
+export * from './login/login-action-creator';

@@ -26,10 +26,9 @@ enum FormType {
 }
 
 const RegistrationForm = () => {
-  const { setAlertMessage, setUser } = useActionCreators();
+  const { setAlertMessage, setUser, closeLogin } = useActionCreators();
   const {
     state: { user },
-    closeLogin,
   } = useLogin();
   const [phone, setPhone] = useState('');
   const [formType, setFormType] = useState(FormType.Reg);
@@ -174,7 +173,7 @@ const RegistrationForm = () => {
 
   return (
     <RegistrationFormContainer>
-      <LoginHeader title='Регистрация' />
+      <LoginHeader title="Регистрация" />
       <Line isSms={formType === FormType.SMS} />
       <Container>
         {loading && <CircleLoader />}
