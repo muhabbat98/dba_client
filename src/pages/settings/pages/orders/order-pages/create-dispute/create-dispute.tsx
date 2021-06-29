@@ -6,6 +6,7 @@ import ProductsTitle from '../../../../../../components/products-title';
 import Input from '../../../../../../components/input';
 import Dropdown from '../../../../../../components/drop-down';
 import Button from '../../../../../../components/button';
+import { useForm } from "react-hook-form";
 import {DisputeContainer,CloseButton,DisputeTitle,InputContainer,Discription} from './style';
 
 interface Propses {
@@ -13,6 +14,7 @@ interface Propses {
     getDisputeItem:any
 }
 const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
+    const { register, handleSubmit, control, watch, errors, setValue } = useForm();
     const options:any=[];
     getDisputeItem.order.forEach((item:any,index:number) => {
         options[index]=item.itemTitle
@@ -28,9 +30,9 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
             description:"",
         }
     );
-        console.log("sdfdfsd--",getDisputeItem)
+        // console.log("sdfdfsd--",getDisputeItem)
     const hundleSubmit = () =>{
-        console.log('sdfsfsd',data)
+        console.log('submit->',data)
         history.push('/settings/discussion')
     }
     return (
@@ -62,7 +64,7 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
                         placeholder="Наименование продавца"
                         onChange={(e:any)=>setData({...data,blah:e.target.value})}
                         value={data.blah}
-                        
+                        register={register}
                     />
                     <Discription 
                         placeholder="Расскажите, пожалуйста что произошло"
