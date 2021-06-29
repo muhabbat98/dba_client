@@ -1,10 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { WishlistEmptyContainer, WishlistEmptyImg, WishlistEmptyTextBox, WishlistEmptyTitle, WishlistEmptyText } from './style';
 import { ReactComponent as WishlistEmptyIcon } from '../../assets/icons/love.svg'
 import Col from '../../components/grid/col';
 import Button from '../../components/button';
 
 const WishlistEmpty = () => {
+   const {push} = useHistory();
+
+   const goHome = () =>{
+      push("/");
+   }
+
    return (
       <Col xl={12}>
          <WishlistEmptyContainer>
@@ -18,7 +25,7 @@ const WishlistEmpty = () => {
                   мы вам напишем.</WishlistEmptyText>
             </WishlistEmptyTextBox>
             <div style={{ display: 'flex', alignItems: "center", flexDirection: 'column' }}>
-               <Button style={{marginBottom: "24px"}}>Перейти на Главную</Button>
+               <Button onClick={goHome} style={{marginBottom: "24px"}}>Перейти на Главную</Button>
                <Button btnType="disabled" style={{ cursor: "pointer" }}>Войти в свой аккаунт</Button>
             </div>
          </WishlistEmptyContainer>
@@ -26,4 +33,4 @@ const WishlistEmpty = () => {
    )
 }
 
-export default WishlistEmpty
+export default WishlistEmpty;

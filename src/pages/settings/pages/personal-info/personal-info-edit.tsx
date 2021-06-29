@@ -377,7 +377,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
-                           <Dropdown option={['Мужской', 'Женский']} selected={state.gender} label="Пол" callback={dropdownHandle} />
+                           <Dropdown 
+                              option={['Мужской', 'Женский']} 
+                              selected={state.gender} 
+                              label="Пол" 
+                              callback={dropdownHandle} />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                         </PersonalBodyFlex>
