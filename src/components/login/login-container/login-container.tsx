@@ -18,6 +18,7 @@ const LoginContainer = () => {
     <GlassLayer close={closeLogin}>
       <LoginContainerWrapper>
         <Close onClick={closeLogin} />
+
         {formType === FormType.LoginForm && <LoginForm />}
 
         {formType === FormType.RegistratiomConfirmForm && (

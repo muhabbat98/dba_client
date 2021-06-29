@@ -34,9 +34,9 @@ const MiddleHeaderAction = () => {
       {open && <Login open={open} setOpen={setOpen} />}
       {user ? (
         <Action>
-          <Link to='/settings' title='Перейти к личный кабинет'>
+          <Link to="/settings" title="Перейти к личный кабинет">
             <AccountLogo>
-              <LoginAfter className='login-after' />
+              <LoginAfter className="login-after" />
             </AccountLogo>
           </Link>
         </Action>
@@ -54,7 +54,7 @@ const MiddleHeaderAction = () => {
       </Action> */}
       <Action>
         <HeartLogo>
-          <Link to='/wishlist'>
+          <Link to="/wishlist">
             {wishlist > 0 && <Count>{wishlist}</Count>}
             <Heart />
           </Link>
@@ -62,7 +62,7 @@ const MiddleHeaderAction = () => {
       </Action>
       <Action>
         <CartLogo>
-          <Link to='/cart'>
+          <Link to="/cart">
             {cart > 0 && <Count>{cart}</Count>}
             <Cart />
           </Link>

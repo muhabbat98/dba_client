@@ -7,6 +7,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   label?: string;
   disabled?: boolean;
+  register?: any;
   style?: any;
   callback?: (e: SyntheticEvent) => void;
 }
@@ -18,6 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   id,
   label,
   style,
+  register,
   callback,
   ...rest
 }) => {
@@ -28,8 +30,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
         value={value}
         disabled={disabled}
         onChange={callback}
+        ref={register}
         id={id}
-        type='checkbox'
+        type="checkbox"
         {...rest}
       />
       <CheckBoxSpan style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>

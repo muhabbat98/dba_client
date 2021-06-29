@@ -1,17 +1,32 @@
-import React from 'react';
+import { useEffect } from 'react';
 import AddCards from '../add-cards';
 import NoCards from '../no-cards';
 import { usePayment } from '../context';
+import { useActionCreators, useSelector } from '../../../../../hooks';
+import { PaymentWrapperContainer } from './style';
+import CircleLoader from '../../../../../components/main-loader';
 
 const PaymentWrapper = () => {
   const {
-    state: { modal, cards },
+    state: { modal },
   } = usePayment();
+  const { cards } = useSelector((state) => state.bankDetails);
+  const { fetchAllcards } = useActionCreators();
+
+  useEffect(() => {
+    fetchAllcards();
+  }, []);
+
+  const isCardExist = cards.length === 0;
+
   return (
-    <div>
-      {cards.length === 0 && <NoCards />}
+    <PaymentWrapperContainer isLoading={isCardExist}>
+      {isCardExist && <NoCards />}
+
       {modal && <AddCards />}
-    </div>
+
+      {isCardExist && <CircleLoader />}
+    </PaymentWrapperContainer>
   );
 };
 

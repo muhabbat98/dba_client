@@ -12,12 +12,12 @@ function App() {
   return (
     <div>
       <Switch>
-        <AdminProtectedRoute path='/admin'>
+        <AdminProtectedRoute path="/admin">
           <Suspense fallback={<MainLoader />}>
             <Admin />
           </Suspense>
         </AdminProtectedRoute>
-        <Route path='/' component={Main} />
+        <Route path="/" component={Main} />
       </Switch>
     </div>
   );

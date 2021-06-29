@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-export const AddCardContainer = styled.div``;
+export const AddCardContainer = styled.div`
+  position: relative;
+`;
 
 export const FormContainer = styled.div`
   margin-top: 32px;
+  position: relative;
 `;
 
 export const Div = styled.div`
@@ -25,4 +28,10 @@ export const Title = styled.div`
     cursor: pointer;
     user-select: none;
   }
+`;
+
+export const ErrorContainer = styled.div``;
+
+export const Error = styled.div`
+  color: ${({ theme: { red } }) => red};
 `;
