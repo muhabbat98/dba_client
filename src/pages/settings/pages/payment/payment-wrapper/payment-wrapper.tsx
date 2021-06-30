@@ -26,7 +26,7 @@ const PaymentWrapper = () => {
     <PaymentWrapperContainer isLoading={isCardExist}>
       {isCardExist && <NoCards />}
       {modal && <AddCards />}
-      {isCardExist && <CircleLoader />}
+      {/* {isCardExist && <CircleLoader />} */}
       {!isCardExist && <BankDetails cards={cards} />}
     </PaymentWrapperContainer>
   );
