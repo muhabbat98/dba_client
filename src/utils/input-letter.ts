@@ -1,6 +1,6 @@
 const inputLetter = (e:any) =>{
     if(e){
-    return e.replace(/[^a-zA-Z-а-яА-Я]/ig,"")
+    return e.replace(/[^a-zA-Z-а-яА-Я]\s/ig,"")
     } 
     return "";
 }
@@ -54,6 +54,15 @@ export const email = (e:any) => {
     if(e){
         return e.replace(/^\S+@\S+\.\S+$/i, '')
     
+    }
+    return "";
+}
+export const anotherThreepleCard = (e:any) => {
+    if(e){
+        return e.replace(/\D/g, '')
+    .replace(/(\d{4})(\d{1,3})/, '$1-$2')
+    .replace(/(\d{4})(\d{1,3})/, '$1-$2')
+    .replace(/(-\d{4})\d+?$/, '$1');
     }
     return "";
 }
