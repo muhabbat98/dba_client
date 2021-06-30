@@ -38,7 +38,6 @@ const DropdownMenu: React.FC<DropdownMenuInterface> = ({ children, id }) => {
   };
 
   const clickHandler = (e: any) => {
-    console.log(11111);
     if (e.target.classList.contains(id)) {
       return;
     } else {
@@ -47,11 +46,8 @@ const DropdownMenu: React.FC<DropdownMenuInterface> = ({ children, id }) => {
     }
   };
 
-  console.log('render', open);
-
   const clickHandle = () => {
     setOpen((o) => !o);
-
     window.addEventListener('click', clickHandler);
   };
 

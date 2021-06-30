@@ -16,6 +16,7 @@ import {
 import Checkbox from '../../../../../../../components/checkbox';
 import CircleLoader from '../../../../../../../components/main-loader';
 import { axios, useActionCreators } from '../../../../../../../hooks';
+import { usePayment } from '../../../context';
 
 interface FormType {
   card: string;
@@ -29,15 +30,17 @@ const AddCard = () => {
     useForm<FormType>();
   const [loading, isLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { setAlertMessage } = useActionCreators();
+  const { setAlertMessage, fetchAllcards } = useActionCreators();
   const [isSmsStep, setIsSmsStep] = useState<boolean>(false);
   const [smsLoading, setSmsLoading] = useState<boolean>(false);
+  const { closeAddModal } = usePayment();
 
   const onSubmit = async (data: FormType) => {
     console.log(data);
     setError(null);
+    isLoading(true);
     const { cardName, card, expireDate, isMain } = data;
-    const cardNameTransformed = card.replaceAll(' ', '').replaceAll('_', '');
+    const cardNameTransformed = card.replaceAll(' ', '').replaceAll('-', '');
     const expireDateTransformed = expireDate
       .replaceAll(' ', '')
       .replaceAll('_', '');
@@ -52,7 +55,10 @@ const AddCard = () => {
       main: isMain,
     };
 
+    console.log('cardObject', cardObject);
+
     if (cardName && card && expireDate) {
+      isLoading(false);
       if (
         cardNameTransformed.length === 16 &&
         expireDateTransformed.length === 5 &&
@@ -61,7 +67,16 @@ const AddCard = () => {
         try {
           const respone = await axios.post('/user/card', cardObject);
           const data = await respone;
+          closeAddModal();
+          setAlertMessage({
+            message: 'Карта успешно добавлен',
+            type: 'success',
+          });
+          fetchAllcards(true);
+          // setIsSmsStep(true);
+          // isLoading(false);
         } catch (error) {
+          isLoading(false);
           if (error.debugMessage) {
             setAlertMessage({
               message: error.debugMessage,
@@ -79,6 +94,7 @@ const AddCard = () => {
       }
     } else {
       setError('Пожалуйста, заполните все поля.');
+      isLoading(false);
     }
   };
 

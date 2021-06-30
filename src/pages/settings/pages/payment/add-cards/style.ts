@@ -4,7 +4,7 @@ export const AddCardsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
+  //overflow: scroll;
 `;
 
 export const BackDrop = styled.div`
@@ -14,4 +14,5 @@ export const BackDrop = styled.div`
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
+  z-index: 3;
 `;

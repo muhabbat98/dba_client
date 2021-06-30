@@ -24,6 +24,7 @@ export const ConfirmContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 `;
 
 export const ConfirmContent = styled.div<{ isClose: boolean }>`
