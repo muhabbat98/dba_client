@@ -5,6 +5,7 @@ import Title from "../../../../../../components/products-title";
 import Button from "../../../../../../components/button";
 import CircleLoader from "../../../../../../components/circle-loader";
 import AddressBoxes from "../address-boxes";
+import { useRole } from '../../../../../../hooks';
 import { ReactComponent as House1 } from "../../../../../../assets/icons/house-1.svg";
 import { ReactComponent as Pencil } from "../../../../../../assets/icons/pencil.svg";
 import { ReactComponent as Trash } from "../../../../../../assets/icons/red-trash.svg";
@@ -47,6 +48,7 @@ const ViewAddress: React.FC<Addresses> = ({
   const { user } = useSelector((state: any) => ({
     user: state.user,
   }));
+  const isBuyer = useRole();
   let main=data;
   let multi=data;
   let mainAddress = main.find((item: any) => item.main == true);
@@ -124,6 +126,12 @@ const ViewAddress: React.FC<Addresses> = ({
                   <p>Квартира</p>
                   <h5>{mainAddress.homeNumber}</h5>
                 </div>
+                {!isBuyer.isBuyer && 
+                  <div>
+                    <p>Почтовый индекс</p>
+                    <h5>1234567</h5>
+                  </div>
+                }
               </AddressInfo>
               <Line></Line>
               <div

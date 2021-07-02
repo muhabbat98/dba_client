@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useActionCreators } from "../../../../../../hooks";
+import { useRole } from '../../../../../../hooks';
 import { ReactComponent as Pencil } from "../../../../../../assets/icons/pencil.svg";
 import { ReactComponent as Trash } from "../../../../../../assets/icons/red-trash.svg";
 import { ReactComponent as Btnhouse } from "../../../../../../assets/icons/house-btn.svg";
@@ -38,7 +39,7 @@ const AddressBoxes: React.FC<Propses> = ({
     setEditItem(data);
   };
   const { setConfirm, cleanConfirm } = useActionCreators();
-
+  const isBuyer = useRole();
   const handleExit = () => {
     setConfirm({
       message: "Вы хотите этот адрес сделать основным?",
@@ -97,6 +98,12 @@ const AddressBoxes: React.FC<Propses> = ({
               <p>Квартира</p>
               <h5>{data.homeNumber}</h5>
             </div>
+            {!isBuyer.isBuyer && 
+              <div>
+                <p>Почтовый индекс</p>
+                <h5>1234567</h5>
+              </div>
+            }
           </AddressInfo>
           <Line></Line>
           <div

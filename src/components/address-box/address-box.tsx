@@ -4,6 +4,9 @@ import Button from "../button";
 import Title from "../products-title";
 import Input from "../input";
 import Checkbox from "../checkbox";
+import { useRole } from '../../hooks';
+import { useForm } from "react-hook-form";
+import { isConstructorDeclaration } from "typescript";
 import {
   ModalContainer,
   Wrapper,
@@ -12,10 +15,6 @@ import {
   SubInputs,
   SubDiv
 } from "./style";
-
-import { useForm } from "react-hook-form";
-import { isConstructorDeclaration } from "typescript";
-
 interface PropsModal {
   closeModal: any;
   modalTitle: string;
@@ -36,7 +35,6 @@ const AddressBox: React.FC<PropsModal> = ({
   const [location, setLocation] = useState<any>([inputItems&&inputItems.latitude,inputItems&&inputItems.longitude]);
   const [main, setMain] = useState(true);
   const [getAdderss,setGetAddres] = useState<any>(
-   
   );
   const [data, setData] = useState({
     city: "",
@@ -48,6 +46,7 @@ const AddressBox: React.FC<PropsModal> = ({
     district:""
   });
   const {register, watch,setValue,handleSubmit,errors} = useForm();
+  const isBuyer = useRole();
   let mainn:boolean;
   useEffect(() => {
     inputItems && setData(inputItems);
@@ -152,6 +151,18 @@ const AddressBox: React.FC<PropsModal> = ({
               watch={watch("street")}
               error={errors.street}
             />
+            {!isBuyer.isBuyer && 
+              <Input
+              label="Почтовый индекс"
+              placeholder="Почтовый индекс"
+              name="postIndex"
+              defVal={data.street}
+              register={register}
+              setValue={setValue}
+              watch={watch("street")}
+              error={errors.street}
+            />
+            }
             <SubInputs>
               <SubDiv >
                 <Input

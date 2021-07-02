@@ -29,14 +29,15 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen}) => {
             }
             
             <Table>
-                <TableHeader>
-                    <div><p>ID Заказа</p></div>
-                    <div><p>Стоимость</p></div>
-                    <div><p>Продавец</p></div>
-                    <div><p>Cтатус</p></div>
-                    <div></div>
-                </TableHeader>
-                
+                {!filterOpen && 
+                    <TableHeader>
+                        <div><p>ID Заказа</p></div>
+                        <div><p>Стоимость</p></div>
+                        <div><p>Продавец</p></div>
+                        <div><p>Cтатус</p></div>
+                        <div></div>
+                    </TableHeader>
+                }
                 {
                     history.map((item:any,index:number)=>{
                         return(
