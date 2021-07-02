@@ -118,7 +118,7 @@ const PersonalInfo = () => {
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
-                <PersonalBodyLabel>Номер телефона (домашний)</PersonalBodyLabel>
+                <PersonalBodyLabel>Номер телефона (Рабочий )</PersonalBodyLabel>
                 <PersonalBodyName>
                   {personalInfo.homePhoneNumber}
                 </PersonalBodyName>

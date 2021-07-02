@@ -5,7 +5,8 @@ import SettingsDropdown from '../../../../components/settings-dropdown';
 import SettingsInput from '../../../../components/settings-input';
 
 import {
-  DiscussionContainer, DiscussionTop, DiscussionFilterBtn, FilterText, DiscussionFilterSection
+  DiscussionContainer, DiscussionTop, DiscussionFilterBtn, FilterText, DiscussionFilterSection,
+  DiscussionHeadFlex, DiscussionHead
 } from './style';
 
 import { ReactComponent as FilterIcon } from '../../../../assets/icons/filter-icon.svg';
@@ -13,8 +14,6 @@ import { ReactComponent as FilterIcon } from '../../../../assets/icons/filter-ic
 const Discussion = () => {
   const [toggleFilter, setToggleFilter] = useState(false);
   const [state, setState] = useState("");
-
-  console.log(state)
 
   return (
     <DiscussionContainer>
@@ -35,6 +34,17 @@ const Discussion = () => {
           </DiscussionFilterSection>
         ) : null
       }
+
+      <DiscussionHeadFlex style={{ borderBottom: '2px solid #e9ecf4' }}>
+        <DiscussionHead>ID Заказа</DiscussionHead>
+        <DiscussionHead>Причина</DiscussionHead>
+        <DiscussionHead>Дата начала спора</DiscussionHead>
+        <DiscussionHead>Продавец</DiscussionHead>
+        <DiscussionHead style={{ textAlign: 'center' }}>Cтатус</DiscussionHead>
+        <DiscussionHead>{" "}</DiscussionHead>
+      </DiscussionHeadFlex>
+      <DiscussionCollapse isClosed={true} />
+      <DiscussionCollapse isClosed={false} />
 
       <DiscussionCollapse />
     </DiscussionContainer >
