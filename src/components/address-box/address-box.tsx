@@ -53,13 +53,6 @@ const AddressBox: React.FC<PropsModal> = ({
     inputItems && setData(inputItems);
     console.log("working input--",inputItems)
   }, []);
-  
-  const handleSubmitt = (e: any) => {
-    e.preventDefault();
-    mainn=chackboxdHide?false:main;
-    getItems({ ...data, ...location, main });
-    closeModal(false);
-  };
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -74,26 +67,14 @@ const AddressBox: React.FC<PropsModal> = ({
     }
   };
 
-  const haveInput = (data:any,location:any) =>{
-    if(data && location=="lat"){
-      return location?location[0]:inputItems.latitude;
-    }
-    else if(data==undefined && location=="lat"){
-      return location[0];
-    }
-    else if(data && location=="long"){
-      return location?location[1]:inputItems.longitude;
-    }
-    else if(data==undefined && location=="long"){
-      return location[1]
-    }
-  }
   const latitude = location && location[0];
   const longitude = location && location[1];
+  
+  const id=inputItems?inputItems.id:null
   const onSubmit = (dataa: any) => {
     setData(dataa);
     mainn=chackboxdHide?false:main;
-    getItems({ ...dataa, latitude,longitude, main });
+    getItems({ ...dataa, latitude,longitude,id:id, main });
     closeModal(false);
     console.log("dataa------->", dataa)
     // console.log("Maindataa------->", data)
