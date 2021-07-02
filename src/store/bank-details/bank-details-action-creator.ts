@@ -12,31 +12,61 @@ export const setAllCards = (
   payload: allCards,
 });
 
-export const fetchAllcards = () => async (dispatch: any, getState: any) => {
-  const {
-    bankDetails: { cards },
-  } = getState();
+export const fetchAllcards =
+  (reFetch?: boolean) => async (dispatch: any, getState: any) => {
+    const {
+      bankDetails: { cards },
+    } = getState();
 
-  if (cards.length === 0) {
-    try {
-      const response = await axios.get('/user/cards');
-      const data = await response.data;
-    } catch (error) {
-      if (error.debugMessage) {
-        dispatch(
-          setAlertMessage({
-            type: 'error',
-            message: error.debugMessage,
-          })
-        );
-      } else {
-        dispatch(
-          setAlertMessage({
-            type: 'error',
-            message: error.message,
-          })
-        );
+    console.log('114565456411');
+
+    if (reFetch) {
+      try {
+        const response = await axios.get('/user/cards');
+        const data = await response.data;
+        console.log(data);
+        dispatch(setAllCards(data));
+      } catch (error) {
+        if (error.debugMessage) {
+          dispatch(
+            setAlertMessage({
+              type: 'error',
+              message: error.debugMessage,
+            })
+          );
+        } else {
+          dispatch(
+            setAlertMessage({
+              type: 'error',
+              message: error.message,
+            })
+          );
+        }
+      }
+    } else {
+      if (cards.length === 0) {
+        try {
+          const response = await axios.get('/user/cards');
+          const data = await response.data;
+          console.log(data);
+          dispatch(setAllCards(data));
+        } catch (error) {
+          if (error.debugMessage) {
+            dispatch(
+              setAlertMessage({
+                type: 'error',
+                message: error.debugMessage,
+              })
+            );
+          } else {
+            dispatch(
+              setAlertMessage({
+                type: 'error',
+                message: error.message,
+              })
+            );
+          }
+        }
       }
     }
-  }
-};
+  };

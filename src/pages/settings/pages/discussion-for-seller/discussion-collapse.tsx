@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 
 import StatusButton from './status-button';
 import { axios, useActionCreators, useSelector } from '../../../../hooks';
@@ -15,7 +15,11 @@ import { ReactComponent as CancelIcon } from '../../../../assets/icons/discussio
 import { ReactComponent as FileIcon } from '../../../../assets/icons/discussion-file-icon.svg';
 import { ReactComponent as SendIcon } from '../../../../assets/icons/discussion-home-icon.svg';
 
-const DiscussionCollapse = () => {
+interface DiscussionCollapseProps {
+   isClosed?: boolean;
+}
+
+const DiscussionCollapse: FC<DiscussionCollapseProps> = ({ isClosed }) => {
    const { setConfirm, cleanConfirm } = useActionCreators();
    const [toggle, setToggle] = useState(false);
 
@@ -34,21 +38,13 @@ const DiscussionCollapse = () => {
 
    return (
       <>
-         <DiscussionHeadFlex style={{ borderBottom: '2px solid #e9ecf4' }}>
-            <DiscussionHead>ID Заказа</DiscussionHead>
-            <DiscussionHead>Причина</DiscussionHead>
-            <DiscussionHead>Дата начала спора</DiscussionHead>
-            <DiscussionHead>Продавец</DiscussionHead>
-            <DiscussionHead style={{ textAlign: 'center' }}>Cтатус</DiscussionHead>
-            <DiscussionHead>{" "}</DiscussionHead>
-         </DiscussionHeadFlex>
          <DiscussionHeadFlex style={{ borderBottom: toggle ? '2px solid #e9ecf4' : '' }}>
             <DiscussionHead>№1231235</DiscussionHead>
             <DiscussionHead>Товар не прибыл</DiscussionHead>
             <DiscussionHead>15 сентября 2020</DiscussionHead>
             <DiscussionHead>ООО "ДИХАУС"</DiscussionHead>
             <DiscussionHead style={{ textAlign: 'center' }}>
-               <StatusButton isClosed={true}>Завершен</StatusButton>
+               <StatusButton isClosed={isClosed}>{isClosed ? "Завершен" : "Активный"}</StatusButton>
             </DiscussionHead>
             <DiscussionHead style={{ justifyContent: "flex-end", display: "flex", alignItems: "center" }}>
                <ArrowButton onClick={toggleHandle} className={toggle ? 'opened' : ''}>
@@ -89,7 +85,7 @@ const DiscussionCollapse = () => {
                         </DiscussionItem>
                      </DiscussionEditTopBody>
                      <DiscussionEditCancel>
-                        <DiscussionEditCancelButton disabled={true} onClick={cancelDiscussion}><CancelIcon />Завершить спор</DiscussionEditCancelButton>
+                        <DiscussionEditCancelButton disabled={isClosed} onClick={cancelDiscussion}><CancelIcon />Завершить спор</DiscussionEditCancelButton>
                      </DiscussionEditCancel>
                   </DiscussionEditTopWrap>
                </DiscussionEditTop>

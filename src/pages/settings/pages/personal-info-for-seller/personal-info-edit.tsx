@@ -28,19 +28,27 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    const { register, handleSubmit, control, errors, watch, setValue } = useForm();
 
    const [state, setState] = useState<any>({
-      id: "60927f03ad717f2975f9713d",
-      firstName: "",
-      secondName: "",
+      id: "60cb25a8fdf13d0065176014",
+      fullName: "",
+      nameOfTheCompany: "",
       phoneNumber: "",
       homePhoneNumber: "",
       email: "",
       inn: "",
+      imgUrl: "",
       passportType: "",
       passportNumber: "",
-      gender: "",
-      birthday: "",
       dateOfExpire: "",
-      dateOfIssue: ""
+      dateOfIssue: "",
+      type: "",
+      bankAccount: "",
+      kindOfActivity: "",
+      rkpnds: "",
+      oked: "",
+      bankCode: "",
+      typeOfOwnership: "",
+      typeOfIdentityDocumentOfSupervisor: "",
+      documentSeriesAndNumber: "",
    });
 
    const [avatar, setAvatar] = useState<any>(Avatar);
@@ -58,20 +66,20 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }, [avatar]);
 
    useEffect(() => {
-      getData('60927f03ad717f2975f9713d');
+      getData('60cb25a8fdf13d0065176014');
    }, []);
 
-   const dropdownHandle = (data: any) => {
+   const dropdownTypeHandle = (data: any) => {
       setState({
          ...state,
-         gender: data.value
+         type: data.value
       })
    }
 
-   const dropdownDocumentHandle = (data: any) => {
+   const dropdownActivityHandle = (data: any) => {
       setState({
          ...state,
-         passportType: data.value
+         kindOfActivity: data.value
       })
    }
 
@@ -123,7 +131,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                });
             }
          }
-
       } else {
          setAlertMessage({
             message: 'Siz yuklagan rasm hajmi juda katta yoki boshqa format tanladingiz',
@@ -137,10 +144,11 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       try {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
+         console.log("SSSSAAAA = ", data);
          const dataObj = { ...data };
          setLoading(false);
 
-         dataObj.birthday = moment(dataObj.birthday).format('YYYY-MM-DD');
+         // dataObj.birthday = moment(dataObj.birthday).format('YYYY-MM-DD');
          dataObj.dateOfExpire = moment(dataObj.dateOfExpire).format('YYYY-MM-DD');
          dataObj.dateOfIssue = moment(dataObj.dateOfIssue).format('YYYY-MM-DD');
 
@@ -165,13 +173,15 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const uploadData = async (obj: any) => {
-      // ev.preventDefault();
+      console.log("OBJEEEECTTT = ", obj);
       try {
          let dataObj = {
             ...state,
             ...obj,
+            // birthday: "2021-06-30",
             imageUrl: imgUrl.imageUrl || imgUrl
          }
+         console.log("-------------- ", dataObj);
 
          const response = await axios.post(`user/`, dataObj);
          const data = await response.data;
@@ -182,6 +192,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             position: AlertPosition.TOP_CENTER
          })
       } catch (error) {
+         console.log("Error = ", error);
          if (error.debugMessage) {
             setAlertMessage({
                message: error.debugMessage,
@@ -199,16 +210,16 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const onSubmit = (data: any) => {
+      console.log("State personal info onSubmit = ", data);
       uploadData(data);
    }
 
-   console.log("state == ", state);
-
+   console.log("State personal info EDIT = ", state);
 
    return (
       <PersonalInfoContainer isLoading={loading}>
          {
-            loading && <CircleLoader />
+            loading && <CircleLoader style={{ position: 'absolute' }} />
          }
          {
             !loading && (
@@ -250,139 +261,207 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         <PersonalBodyGrid>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 name="firstName"
+                                 name="nameOfTheCompany"
                                  placeholder="Название предприятия"
                                  label="Название предприятия"
-                                 defVal={state.firstName}
+                                 defVal={state.nameOfTheCompany}
                                  inputType="letter"
-                                 watch={watch("firstName")}
-                                 error={errors.firstName}
+                                 watch={watch("nameOfTheCompany")}
+                                 error={errors.nameOfTheCompany}
                                  register={register}
                                  setValue={setValue}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 name="firstName"
+                                 name="rkpnds"
                                  placeholder="РКП НДС"
                                  label="РКП НДС"
-                                 type="text"
-                                 inputType="letter"
-                                 watch={watch("firstName")}
-                                 error={errors.firstName}
+                                 defVal={state.rkpnds}
+                                 inputType="anotherThreepleCard"
+                                 watch={watch("rkpnds")}
+                                 error={errors.rkpnds}
                                  register={register}
                                  setValue={setValue}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 name="firstName"
+                                 name="fullName"
                                  placeholder="Ф.И.О"
                                  label="Ф.И.О"
-                                 type="letter" 
-                                 
-                                 />
+                                 inputType="letter"
+                                 defVal={state.fullName}
+                                 watch={watch("fullName")}
+                                 error={errors.fullName}
+                                 register={register}
+                                 setValue={setValue}
+                              />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 // name="firstName"
+                                 name="oked"
                                  placeholder="ОКЭД"
                                  label="ОКЭД"
-                                 type="text" />
+                                 inputType="anotherThreepleCard"
+                                 defVal={state.oked}
+                                 watch={watch("oked")}
+                                 error={errors.oked}
+                                 register={register}
+                                 setValue={setValue}
+                              />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
                                  name="phoneNumber"
                                  label="Телефон (мобильный)"
                                  placeholder="Телефон (мобильный)"
-                                 inputType="phone" />
-                           </PersonalBodyFlex>
-                           <PersonalBodyFlex isEdit={true}>
-                              <Input
-                                 // name="firstName"
-                                 placeholder="Код банка"
-                                 label="Код банка"
-                                 type="text" />
-                           </PersonalBodyFlex>
-                           <PersonalBodyFlex isEdit={true}>
-                              <Input
-                                 name="homePhoneNumber"
-                                 label="Телефон (домашний)"
-                                 placeholder="Телефон (домашний)"
-                                 inputType="phone" 
+                                 defVal={state.phoneNumber}
+                                 inputType="phone"
+                                 watch={watch("phoneNumber")}
+                                 error={errors.phoneNumber}
+                                 register={register}
+                                 setValue={setValue}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 // name="firstName"
+                                 name="bankCode"
+                                 placeholder="Код банка"
+                                 label="Код банка"
+                                 defVal={state.bankCode}
+                                 inputType="card"
+                                 watch={watch("bankCode")}
+                                 error={errors.bankCode}
+                                 register={register}
+                                 setValue={setValue}
+                              />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 name="homePhoneNumber"
+                                 label="Телефон (рабочий )"
+                                 placeholder="Телефон (рабочий )"
+                                 inputType="phone"
+                                 defVal={state.homePhoneNumber}
+                                 watch={watch("homePhoneNumber")}
+                                 error={errors.homePhoneNumber}
+                                 register={register}
+                                 setValue={setValue}
+                              />
+                           </PersonalBodyFlex>
+                           <PersonalBodyFlex isEdit={true}>
+                              <Input
+                                 name="typeOfOwnership"
                                  placeholder="Форма собственности"
                                  label="Форма собственности"
-                                 type="text"
+                                 defVal={state.typeOfOwnership}
+                                 watch={watch("typeOfOwnership")}
+                                 error={errors.typeOfOwnership}
+                                 register={register}
+                                 setValue={setValue}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
                                  name="email"
                                  placeholder="Эл.почта"
-                                 value={state.email} 
+                                 defVal={state.email}
+                                 watch={watch("email")}
+                                 error={errors.email}
+                                 register={register}
+                                 setValue={setValue}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 // name="firstName"
+                                 name="typeOfIdentityDocumentOfSupervisor"
                                  placeholder="Тип удостоверяющего документа руководител"
                                  label="Тип удостоверяющего документа руководител"
-                                 type="text" 
+                                 defVal={state.typeOfIdentityDocumentOfSupervisor}
+                                 watch={watch("typeOfIdentityDocumentOfSupervisor")}
+                                 error={errors.typeOfIdentityDocumentOfSupervisor}
+                                 register={register}
+                                 setValue={setValue}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Dropdown
                                  option={['Супермаркет', 'Супермаркет2']}
-                                 // selected={state.gender} 
+                                 selected={state.type}
                                  label="Тип"
-                                 callback={dropdownHandle}
+                                 callback={dropdownTypeHandle}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 // name="firstName"
+                                 name="documentSeriesAndNumber"
                                  placeholder="Серия и номер документа"
                                  label="Серия и номер документа"
-                                 type="text" />
+                                 defVal={state.documentSeriesAndNumber}
+                                 watch={watch("documentSeriesAndNumber")}
+                                 error={errors.documentSeriesAndNumber}
+                                 register={register}
+                                 setValue={setValue}
+                              />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
-                                 // name="firstName"
+                                 name="bankAccount"
                                  placeholder="Расчетный счет в банке"
-                                 label="СРасчетный счет в банке"
-                                 type="text" />
+                                 label="Расчетный счет в банке"
+                                 inputType="card"
+                                 defVal={state.bankAccount}
+                                 watch={watch("bankAccount")}
+                                 error={errors.bankAccount}
+                                 register={register}
+                                 setValue={setValue}
+                              />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
                                  label="Дата выдачи док-та"
-                                 // name="dateOfIssue"
-                                 type="date" />
+                                 name="dateOfIssue"
+                                 type="date"
+                                 defVal={state.dateOfIssue}
+                                 watch={watch("dateOfIssue")}
+                                 error={errors.dateOfIssue}
+                                 register={register}
+                                 setValue={setValue}
+                              />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Dropdown
                                  option={['Предприниматель', 'Предприниматель2']}
-                                 // selected={state.gender} 
+                                 selected={state.kindOfActivity}
                                  label="Вид деятельности"
-                                 callback={dropdownHandle}
+                                 callback={dropdownActivityHandle}
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
                                  label="Срок действия док-та"
-                                 // name="dateOfIssue"
-                                 type="date" />
+                                 name="dateOfExpire"
+                                 type="date"
+                                 defVal={state.dateOfExpire}
+                                 watch={watch("dateOfExpire")}
+                                 register={register}
+                                 error={errors.dateOfExpire}
+                                 setValue={setValue}
+                              />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Input
                                  name="inn"
                                  placeholder="ИНН"
                                  label="ИНН"
-                                 inputType="inn"/>
+                                 inputType="inn"
+                                 defVal={state.inn}
+                                 watch={watch("inn")}
+                                 register={register}
+                                 error={errors.inn}
+                                 setValue={setValue}
+                              />
                            </PersonalBodyFlex>
 
                            <PersonalBodyFlex isEdit={true} style={{ display: 'flex', alignItems: 'flex-end' }}>

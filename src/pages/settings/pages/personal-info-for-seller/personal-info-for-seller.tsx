@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 import PersonalInfoEdit from './personal-info-edit';
-import Alert from '../../../../components/alert';
 import { axios, useActionCreators, useSelector } from '../../../../hooks';
 import { AlertPosition } from '../../../../utils/alert-position-enum';
-
-import isEmptyObj from '../../../../utils/isEmptyObj';
 import PersonalHeaderLeftSide from './personal-header-left';
 
 import {
@@ -32,7 +29,7 @@ const PersonalInfo = () => {
   const { setAlertMessage } = useActionCreators();
 
   useEffect(() => {
-    getPersonalInfo('60927f03ad717f2975f9713d');
+    getPersonalInfo('60cb25a8fdf13d0065176014');
   }, [state]);
 
   const getPersonalInfo = async (id: any) => {
@@ -62,6 +59,8 @@ const PersonalInfo = () => {
     setState(!state);
   };
 
+  console.log("State personalInfo = ", personalInfo)
+
   if (state) {
     return <PersonalInfoEdit toggleComponent={toggleComponent} />;
   }
@@ -69,7 +68,7 @@ const PersonalInfo = () => {
   return (
     <PersonalInfoContainer isLoading={loading}>
       {
-        loading && <CircleLoader />
+        loading && <CircleLoader style={{ position: 'absolute' }} />
       }
 
       {
@@ -88,121 +87,100 @@ const PersonalInfo = () => {
             <PersonalBodyGrid>
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Название предприятия</PersonalBodyLabel>
-                <PersonalBodyName>
-                  Sherin
-                </PersonalBodyName>
+                <PersonalBodyName>{personalInfo.nameOfTheCompany}</PersonalBodyName>
               </PersonalBodyFlex>
+
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>РКП НДС</PersonalBodyLabel>
-                <PersonalBodyName>
-                  1200 3256
-                </PersonalBodyName>
+                <PersonalBodyName>{personalInfo.rkpnds}</PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Ф.И.О руководителя</PersonalBodyLabel>
-                <PersonalBodyName>
-                  {!isEmptyObj(personalInfo) && personalInfo.firstName}{' '}
-                  {!isEmptyObj(personalInfo) && personalInfo.secondName}
-                </PersonalBodyName>
+                <PersonalBodyName>{personalInfo.fullName}</PersonalBodyName>
               </PersonalBodyFlex>
+
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>ОКЭД</PersonalBodyLabel>
-                <PersonalBodyName>
-                  6540 3210 5487 2200
-                </PersonalBodyName>
+                <PersonalBodyName>{personalInfo.oked}</PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Номер телефона(мобильный)</PersonalBodyLabel>
                 <PersonalBodyName>
-                  {!isEmptyObj(personalInfo) && personalInfo.phoneNumber}
-                </PersonalBodyName>
-              </PersonalBodyFlex>
-              <PersonalBodyFlex isEdit={false}>
-                <PersonalBodyLabel>Код банка</PersonalBodyLabel>
-                <PersonalBodyName>
-                  1403 2102 5547 7965
+                  {personalInfo.phoneNumber}
                 </PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
-                <PersonalBodyLabel>Номер телефона (домашний)</PersonalBodyLabel>
+                <PersonalBodyLabel>Код банка</PersonalBodyLabel>
+                <PersonalBodyName>{personalInfo.bankCode}</PersonalBodyName>
+              </PersonalBodyFlex>
+
+              <PersonalBodyFlex isEdit={false}>
+                <PersonalBodyLabel>Номер телефона (рабочий )</PersonalBodyLabel>
                 <PersonalBodyName>
-                  {!isEmptyObj(personalInfo) && personalInfo.homePhoneNumber}
+                  {personalInfo.homePhoneNumber}
                 </PersonalBodyName>
               </PersonalBodyFlex>
+
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Форма собственности</PersonalBodyLabel>
-                <PersonalBodyName>
-                  Не указан
-                </PersonalBodyName>
+                <PersonalBodyName>{personalInfo.typeOfOwnership}</PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Электронная почта</PersonalBodyLabel>
                 <PersonalBodyName>
-                  {!isEmptyObj(personalInfo) && personalInfo.email}
+                  {personalInfo.email}
                 </PersonalBodyName>
               </PersonalBodyFlex>
+
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Тип удостоверяющего документа</PersonalBodyLabel>
                 <PersonalBodyName>
-                  {!isEmptyObj(personalInfo) && personalInfo.passportType}
+                  {personalInfo.typeOfIdentityDocumentOfSupervisor}
                 </PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Тип</PersonalBodyLabel>
-                <PersonalBodyName>
-                  Супермаркет
-                </PersonalBodyName>
+                <PersonalBodyName>{personalInfo.type}</PersonalBodyName>
               </PersonalBodyFlex>
+
               <PersonalBodyFlex isEdit={false}>
-                <PersonalBodyLabel>
-                  Серия и номер документа
-                </PersonalBodyLabel>
-                <PersonalBodyName>
-                  Не указан
-                </PersonalBodyName>
+                <PersonalBodyLabel>Серия и номер документа</PersonalBodyLabel>
+                <PersonalBodyName>{personalInfo.documentSeriesAndNumber}</PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Расчетный счет в банке</PersonalBodyLabel>
-                <PersonalBodyName>
-                  1420 0030 2000 6552
-                </PersonalBodyName>
+                <PersonalBodyName>{personalInfo.bankAccount}</PersonalBodyName>
               </PersonalBodyFlex>
+
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Дата выдачи док-та</PersonalBodyLabel>
                 <PersonalBodyName>
-                  27/08/2016
-                  {/* {!isEmptyObj(personalInfo) &&
-                moment(personalInfo.birthday).format('YYYY/MM/DD')}{' '} */}
+                  {moment(personalInfo.dateOfIssue).format('YYYY/MM/DD')}{' '}
                 </PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
-                <PersonalBodyLabel>
-                  Вид деятельности
-                </PersonalBodyLabel>
-                <PersonalBodyName>
-                  Предприниматель
-                </PersonalBodyName>
+                <PersonalBodyLabel>Вид деятельности</PersonalBodyLabel>
+                <PersonalBodyName>{personalInfo.kindOfActivity}</PersonalBodyName>
               </PersonalBodyFlex>
+
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>Срок действия док-та</PersonalBodyLabel>
                 <PersonalBodyName>
-                  27/08/2016
-                  {/* {!isEmptyObj(personalInfo) &&
-                moment(personalInfo.birthday).format('YYYY/MM/DD')}{' '} */}
+                  {moment(personalInfo.dateOfExpire).format('YYYY/MM/DD')}{' '}
                 </PersonalBodyName>
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
                 <PersonalBodyLabel>ИНН</PersonalBodyLabel>
                 <PersonalBodyName>
-                  {!isEmptyObj(personalInfo) && personalInfo.inn}
+                  {personalInfo.inn}
                 </PersonalBodyName>
               </PersonalBodyFlex>
 

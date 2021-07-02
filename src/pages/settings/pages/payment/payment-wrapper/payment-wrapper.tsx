@@ -5,6 +5,7 @@ import { usePayment } from '../context';
 import { useActionCreators, useSelector } from '../../../../../hooks';
 import { PaymentWrapperContainer } from './style';
 import CircleLoader from '../../../../../components/main-loader';
+import BankDetails from '../bank-details';
 
 const PaymentWrapper = () => {
   const {
@@ -24,10 +25,9 @@ const PaymentWrapper = () => {
   return (
     <PaymentWrapperContainer isLoading={isCardExist}>
       {isCardExist && <NoCards />}
-
       {modal && <AddCards />}
-
-      {isCardExist && <CircleLoader />}
+      {/* {isCardExist && <CircleLoader />} */}
+      {!isCardExist && <BankDetails cards={cards} />}
     </PaymentWrapperContainer>
   );
 };
