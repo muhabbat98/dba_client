@@ -18,7 +18,6 @@ import {
   AddresTitiles,
   ActionsContainer,
   PlusButton,
-
   SecondContainer,
   Titlee,
   AddressInfo,
