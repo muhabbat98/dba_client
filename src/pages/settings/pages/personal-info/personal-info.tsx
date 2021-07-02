@@ -93,7 +93,7 @@ const PersonalInfo = () => {
                   <PersonalBodyName>+998 { personalInfo.phoneNumber}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>
-                  <PersonalBodyLabel>Номер телефона (Рабочий )</PersonalBodyLabel>
+                  <PersonalBodyLabel>Номер телефона (рабочий )</PersonalBodyLabel>
                   <PersonalBodyName>+998 { personalInfo.homePhoneNumber}</PersonalBodyName>
                 </PersonalBodyFlex>
                 <PersonalBodyFlex isEdit={false}>

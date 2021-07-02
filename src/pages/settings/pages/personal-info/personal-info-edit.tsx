@@ -330,8 +330,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         <PersonalBodyFlex isEdit={true}>
                            <Input
                               name="homePhoneNumber"
-                              label="Телефон (Рабочий )"
-                              placeholder="Телефон (Рабочий )"
+                              label="Телефон (рабочий )"
+                              placeholder="Телефон (рабочий )"
                               defVal={state.homePhoneNumber}
                               watch={watch("homePhoneNumber")}
                               register={register}
