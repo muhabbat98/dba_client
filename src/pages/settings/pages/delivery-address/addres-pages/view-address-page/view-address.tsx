@@ -128,7 +128,7 @@ const ViewAddress: React.FC<Addresses> = ({
                 {!isBuyer.isBuyer && 
                   <div>
                     <p>Почтовый индекс</p>
-                    <h5>1234567</h5>
+                    <h5>{mainAddress.postcode}</h5>
                   </div>
                 }
               </AddressInfo>

@@ -43,7 +43,8 @@ const AddressBox: React.FC<PropsModal> = ({
     apartmentNumber: "",
     additionalInformation: "",
     country:"",
-    district:""
+    district:"",
+    postcode:"",
   });
   const {register, watch,setValue,handleSubmit,errors} = useForm();
   const isBuyer = useRole();
@@ -94,7 +95,7 @@ const AddressBox: React.FC<PropsModal> = ({
     mainn=chackboxdHide?false:main;
     getItems({ ...dataa, latitude,longitude, main });
     closeModal(false);
-    // console.log("dataa------->", dataa)
+    console.log("dataa------->", dataa)
     // console.log("Maindataa------->", data)
  }
 //  console.log("gggg--",location&&location[0])
@@ -155,12 +156,12 @@ const AddressBox: React.FC<PropsModal> = ({
               <Input
               label="Почтовый индекс"
               placeholder="Почтовый индекс"
-              name="postIndex"
-              defVal={data.street}
+              name="postcode"
+              defVal={data.postcode}
               register={register}
               setValue={setValue}
-              watch={watch("street")}
-              error={errors.street}
+              watch={watch("postcode")}
+              error={errors.postcode}
             />
             }
             <SubInputs>

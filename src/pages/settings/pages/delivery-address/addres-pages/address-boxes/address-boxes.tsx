@@ -101,7 +101,7 @@ const AddressBoxes: React.FC<Propses> = ({
             {!isBuyer.isBuyer && 
               <div>
                 <p>Почтовый индекс</p>
-                <h5>1234567</h5>
+                <h5>{data.postcode}</h5>
               </div>
             }
           </AddressInfo>
