@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Col from '../../components/grid/col';
 import Container from '../../components/grid/container';
@@ -48,6 +49,8 @@ import { ReactComponent as CartDelete } from '../../assets/icons/cart-delete.svg
 import CartEmpty from './cart-empty';
 
 const Cart = () => {
+  const { push } = useHistory();
+
   const { cartItems, totalPrice, tSum, totalCount } = useSelector(
     (state) => state.cart
   );
@@ -66,6 +69,10 @@ const Cart = () => {
   };
 
   console.log('cartItems = ', cartItems);
+
+  const gotoOrdersPage = () => {
+    push('settings/orders');
+  };
 
   return (
     <CartContainer>
@@ -154,7 +161,7 @@ const Cart = () => {
                     <CartSoldAll>Итого</CartSoldAll>
                     <CartSoldAllPrice>{formatMoney(tSum)} сум</CartSoldAllPrice>
                   </CartSoldAllWrapper>
-                  <Button style={{ width: '100%' }}>
+                  <Button onClick={gotoOrdersPage} style={{ width: '100%' }}>
                     Перейти к оформлению
                   </Button>
                 </CartSoldCount>
