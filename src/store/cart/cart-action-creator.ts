@@ -1,22 +1,27 @@
-import { CartType } from "./cart-types";
-import { CartItemState } from "./cart-reducer";
+import { CartType } from './cart-types';
+import { CartItemState, CartCheckedTotalSum } from './cart-reducer';
 
 export const addToCart = (cartItem: CartItemState) => ({
   type: CartType.ADD_TO_CART,
-  payload: cartItem
+  payload: cartItem,
 });
 
 export const incrementCart = (cartItem: CartItemState) => ({
   type: CartType.INCREMENT,
-  payload: cartItem
+  payload: cartItem,
 });
 
 export const decrementCart = (cartItem: CartItemState) => ({
   type: CartType.DECREMENT,
-  payload: cartItem
+  payload: cartItem,
 });
 
 export const removeCart = (cartItem: CartItemState) => ({
   type: CartType.REMOVE_ITEM,
-  payload: cartItem
+  payload: cartItem,
+});
+
+export const getTotalSum = (checkedTotalSum: CartCheckedTotalSum) => ({
+  type: CartType.GET_TOTAL_SUM,
+  payload: checkedTotalSum,
 });

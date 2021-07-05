@@ -1,6 +1,10 @@
-import { stat } from "fs";
-import { CartActionTypes } from "./cart-action-types";
-import { CartType } from "./cart-types";
+import { CartActionTypes } from './cart-action-types';
+import { CartType } from './cart-types';
+
+export interface CartCheckedTotalSum {
+  id: any;
+  isChecked: boolean;
+}
 
 export interface CartItemState {
   cartItems: any[];
@@ -9,14 +13,14 @@ export interface CartItemState {
 export interface CartReducerState extends CartItemState {
   totalPrice: number;
   totalCount: number;
-  isChecked: boolean;
+  tSum: number;
 }
 
 const initialState: CartReducerState = {
   cartItems: [],
   totalPrice: 0,
   totalCount: 0,
-  isChecked: false
+  tSum: 0,
 };
 
 export const cartReducer = (
@@ -36,41 +40,67 @@ export const cartReducer = (
     case CartType.REMOVE_ITEM:
       return removeCart(state, action.payload);
 
+    case CartType.GET_TOTAL_SUM:
+      return getTotalSum(state, action.payload);
     default:
       return state;
   }
 };
 
+// getTotalSum()
+const getTotalSum = (state: CartReducerState, t: any) => {
+  let copyOfCartItems = [...state.cartItems];
+  let changedCartItems = [];
+  changedCartItems = copyOfCartItems.map((c) => {
+    if (c.id === t.id) {
+      const copyCart = { ...c };
+
+      if (t.isChecked) {
+        copyCart.isChecked = true;
+        state.tSum += copyCart.totalSum;
+      } else {
+        copyCart.isChecked = false;
+        state.tSum -= copyCart.totalSum;
+      }
+      return copyCart;
+    } else {
+      return c;
+    }
+  });
+
+  return { ...state, cartItems: changedCartItems };
+};
 
 // removeCart()
 const removeCart = (state: CartReducerState, cart: any) => {
-  console.log(cart);
-  let removedArray = state.cartItems.filter(item => item.id !== cart.id);
+  let removedArray = state.cartItems.filter((item) => item.id !== cart.id);
   for (let i = 0; i < state.cartItems.length; i++) {
     if (state.cartItems[i].id === cart.id) {
       state.totalPrice =
         state.totalPrice -
         state.cartItems[i].count * Number(cart.priceResponse.value);
+
+      state.tSum = state.tSum - cart.priceResponse.value * cart.count;
+
       state.totalCount = state.totalCount - state.cartItems[i].count;
     }
   }
   return { ...state, cartItems: removedArray };
 };
 
-
 // addToCart ()
 const addToCart = (state: CartReducerState, cart: any) => {
-  let isExist = state.cartItems.find(c => c.id === cart.id);
+  console.log('cart =======> ', cart);
+  let isExist = state.cartItems.find((c) => c.id === cart.id);
   let copyOfCartItems = [...state.cartItems];
   let changedCartItems = [];
-  console.log("isExist ===== ", isExist);
   if (isExist) {
-    alert("addToCart");
-    changedCartItems = copyOfCartItems.map(c => {
+    alert('addToCart');
+    changedCartItems = copyOfCartItems.map((c) => {
       if (c.id === cart.id) {
         const copyCart = { ...c };
         copyCart.count = copyCart.count + 1;
-        // copyCart.isInCart =
+
         state.totalPrice =
           state.totalPrice + copyCart.count * Number(c.priceResponse.value);
         state.totalCount = state.totalCount + 1;
@@ -79,35 +109,33 @@ const addToCart = (state: CartReducerState, cart: any) => {
       return c;
     });
   } else {
-    console.log('state === ', state);
-    console.log('cart === ', cart);
-    console.log('state.totalPrice === ', typeof(state.totalPrice));
-    console.log('cart.priceResponse.value1111 === ', cart.priceResponse.value)
-    console.log('cart.priceResponse.value == ', Number(cart.priceResponse.value.replace(' ','')));
-    console.log('cart.priceResponse.value2 == ', typeof (Number(cart.priceResponse.value.replace(' ',''))));
     state.totalPrice = state.totalPrice + Number(cart.priceResponse.value);
     state.totalCount = state.totalCount + 1;
-    console.log('state2 === ', state);
 
     changedCartItems = [
       ...copyOfCartItems,
-      { count: 1, isInCart: true, ...cart }
+      { count: 1, totalSum: Number(cart.priceResponse.value), ...cart },
     ];
   }
   return { ...state, cartItems: changedCartItems };
 };
 
-
 // increment()
 const incrementCart = (state: CartReducerState, cart: any) => {
-  let isExist = state.cartItems.find(c => c.id === cart.id);
+  let isExist = state.cartItems.find((c) => c.id === cart.id);
   let copyOfCartItems = [...state.cartItems];
   let changedCartItems = [];
   if (isExist) {
-    changedCartItems = copyOfCartItems.map(c => {
+    changedCartItems = copyOfCartItems.map((c) => {
       if (c.id === cart.id) {
         const copyCart = { ...c };
         copyCart.count = copyCart.count + 1;
+
+        copyCart.totalSum += Number(c.priceResponse.value);
+        if (cart.isChecked) {
+          state.tSum += Number(c.priceResponse.value);
+        }
+
         state.totalPrice = state.totalPrice + Number(c.priceResponse.value);
         state.totalCount = state.totalCount + 1;
         return copyCart;
@@ -115,25 +143,34 @@ const incrementCart = (state: CartReducerState, cart: any) => {
       return c;
     });
   } else {
+    alert('incrementCart()');
     state.totalPrice = state.totalPrice + Number(cart.priceResponse.value);
     state.totalCount = +state.totalCount + 1;
-    changedCartItems = [...copyOfCartItems, { count: 1, ...cart }];
+    changedCartItems = [
+      ...copyOfCartItems,
+      { count: 1, totalSum: Number(cart.priceResponse.value), ...cart },
+    ];
   }
   return { ...state, cartItems: changedCartItems };
 };
 
-
 // decrementCart()
 const decrementCart = (state: CartReducerState, cart: any) => {
-  let isExist = state.cartItems.find(c => c.id === cart.id);
+  let isExist = state.cartItems.find((c) => c.id === cart.id);
   let copyOfCartItems = [...state.cartItems];
   let changedCartItems = [];
 
   if (isExist) {
-    changedCartItems = copyOfCartItems.map(c => {
+    changedCartItems = copyOfCartItems.map((c) => {
       if (c.id === cart.id) {
         const copyCart = { ...c };
         copyCart.count = copyCart.count - 1;
+
+        copyCart.totalSum -= Number(c.priceResponse.value);
+        if (cart.isChecked) {
+          state.tSum -= Number(c.priceResponse.value);
+        }
+
         state.totalPrice = state.totalPrice - Number(c.priceResponse.value);
         state.totalCount = state.totalCount - 1;
         return copyCart;
@@ -141,8 +178,9 @@ const decrementCart = (state: CartReducerState, cart: any) => {
       return c;
     });
   } else {
+    alert('decrementCart()');
     state.totalCount = state.totalCount - 1;
-    changedCartItems = [...copyOfCartItems, { count: 1, ...cart }];
+    changedCartItems = [...copyOfCartItems, { count: 1, totalSum: 0, ...cart }];
   }
   return { ...state, cartItems: changedCartItems };
 };

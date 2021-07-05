@@ -1,4 +1,4 @@
-import { CartType } from "./cart-types";
+import { CartType } from './cart-types';
 
 interface SetAddToCart {
   type: CartType.ADD_TO_CART;
@@ -20,8 +20,14 @@ interface SetDecrement {
   payload: {};
 }
 
+interface SetCheckedTotalSum {
+  type: CartType.GET_TOTAL_SUM;
+  payload: {};
+}
+
 export type CartActionTypes =
   | SetAddToCart
   | SetRemoveItem
   | SetIncrement
-  | SetDecrement;
+  | SetDecrement
+  | SetCheckedTotalSum;
