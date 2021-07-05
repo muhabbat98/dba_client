@@ -1,14 +1,14 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import { StatusDisccusionButton } from './style';
 
 interface StatusButtonProps {
-   isClosed?: boolean;
+  isClosed?: boolean;
 }
 
 const StatusButton: FC<StatusButtonProps> = ({ children, isClosed }) => {
-   return (
-      <StatusDisccusionButton isBg={isClosed}>{children}</StatusDisccusionButton>
-   )
-}
+  return (
+    <StatusDisccusionButton isBg={isClosed}>{children}</StatusDisccusionButton>
+  );
+};
 
-export default StatusButton
+export default StatusButton;
