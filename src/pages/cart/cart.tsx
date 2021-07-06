@@ -51,9 +51,7 @@ import CartEmpty from './cart-empty';
 const Cart = () => {
   const { push } = useHistory();
 
-  const { cartItems, totalPrice, tSum, totalCount } = useSelector(
-    (state) => state.cart
-  );
+  const { cartItems, tSum, totalCount } = useSelector((state) => state.cart);
   const { removeCart, getTotalSum } = useActionCreators();
 
   const deleteCart = (data: any) => {
@@ -67,8 +65,6 @@ const Cart = () => {
       getTotalSum({ id, isChecked: false });
     }
   };
-
-  console.log('cartItems = ', cartItems);
 
   const gotoOrdersPage = () => {
     push('settings/orders');
@@ -101,7 +97,7 @@ const Cart = () => {
                               onChange={(ev) => getCheckedTotalSum(item.id, ev)}
                             />
                           </CartCheckBoxWrapper>
-                          <CartIconWrapper>
+                          <CartIconWrapper isChecked={item.isChecked}>
                             <CartItemImageLink to="">
                               <CartItemImage src={item.images[0]} />
                             </CartItemImageLink>

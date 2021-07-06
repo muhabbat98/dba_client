@@ -21,7 +21,6 @@ const DiscussionForSeller = () => {
   const [state, setState] = useState('');
 
   console.log(state);
-
   return (
     <DiscussionContainer>
       <DiscussionTop>
@@ -44,7 +43,7 @@ const DiscussionForSeller = () => {
             getOption={setState}
           />
           <SettingsDropdown
-            label="Продавец"
+            label="Покупатель"
             options={['ООО "ДИХАУС', 'ООО "ДИХАУС']}
             getOption={setState}
           />
@@ -55,7 +54,7 @@ const DiscussionForSeller = () => {
         <DiscussionHead>ID Заказа</DiscussionHead>
         <DiscussionHead>Причина</DiscussionHead>
         <DiscussionHead>Дата начала спора</DiscussionHead>
-        <DiscussionHead>Продавец</DiscussionHead>
+        <DiscussionHead>Покупатель</DiscussionHead>
         <DiscussionHead style={{ textAlign: 'center' }}>Cтатус</DiscussionHead>
         <DiscussionHead> </DiscussionHead>
       </DiscussionHeadFlex>

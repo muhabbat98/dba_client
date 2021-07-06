@@ -1,5 +1,9 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+interface Props {
+  isChecked: boolean;
+}
 
 export const CartContainer = styled.div``;
 
@@ -15,7 +19,7 @@ export const CartBox = styled.div`
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     right: 0;
@@ -48,9 +52,9 @@ export const CartBoxRightContainer = styled.div`
   height: 100%;
 `;
 
-export const CartIconWrapper = styled.div`
+export const CartIconWrapper = styled.div<Props>`
   padding: 8px;
-  border: 1px solid #e9ecf4;
+  border: 1px solid ${({ isChecked }) => (isChecked ? '#264796' : '#e9ecf4')};
   border-radius: 8px;
   margin-right: 16px;
 `;
@@ -183,8 +187,6 @@ export const CartSoldPrice = styled.div`
   font-size: 16px;
   line-height: 22px;
 `;
-
-
 
 /** CartEmpty.tsx */
 export const CartEmptyContainer = styled.div`
