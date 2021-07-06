@@ -18,7 +18,7 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen}) => {
                 <FilterContainer >
                     <SettingsInput placeholder="ID Заказа" />
                     <SettingsInput placeholder="Стоимость" />
-                    <SettingsInput placeholder="Продавец" />
+                    <SettingsInput placeholder="Покупатель" />
                     <SettingsDropdown 
                         style={{width:"100%"}} 
                         label="Статус"
@@ -33,7 +33,7 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen}) => {
                     <TableHeader>
                         <div><p>ID Заказа</p></div>
                         <div><p>Стоимость</p></div>
-                        <div><p>Продавец</p></div>
+                        <div><p>Покупатель</p></div>
                         <div><p>Cтатус</p></div>
                         <div></div>
                     </TableHeader>
