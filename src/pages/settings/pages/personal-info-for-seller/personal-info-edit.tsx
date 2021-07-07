@@ -8,7 +8,7 @@ import { axios, useActionCreators, useSelector } from '../../../../hooks';
 import { useForm } from "react-hook-form";
 
 import {
-   PersonalInfoContainer, PersonalHeader, PersonalHeaderLeft, PersonalHeaderRight, PersonalAvatar,
+   PersonalInfoContainer, PersonalHeader, PersonalHeaderLeft, PersonalHeaderRight,
    PersonalAvatarImg, PersonalNameWrapper, PersonalName, PersonalNameEmail, ChangeProfileButton, ChangeName, PersonalBody,
    PersonalBodyGrid, PersonalBodyFlex, PersonalEditImage, PersonalAvatarEdit, PersonalEditImageOther, PersonalVerified,
    PersonalVerifiedToggle
@@ -164,7 +164,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       try {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
-         console.log("SSSSAAAA = ", data);
          setDocType(data.typeOfIdentityDocumentOfSupervisor);
          const dataObj = { ...data };
          setLoading(false);
@@ -194,7 +193,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const uploadData = async (obj: any) => {
-      console.log("OBJEEEECTTT = ", obj);
       try {
          let dataObj = {
             ...state,
@@ -202,7 +200,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             // birthday: "2021-06-30",
             imageUrl: imgUrl.imageUrl || imgUrl
          }
-         console.log("-------------- ", dataObj);
 
          const response = await axios.post(`user/`, dataObj);
          const data = await response.data;
@@ -213,7 +210,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             position: AlertPosition.TOP_CENTER
          })
       } catch (error) {
-         console.log("Error = ", error);
          if (error.debugMessage) {
             setAlertMessage({
                message: error.debugMessage,
@@ -231,7 +227,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const onSubmit = (data: any) => {
-      console.log("State personal info onSubmit = ", data);
       uploadData(data);
    }
 
@@ -398,17 +393,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                                  label="Тип удостоверяющего документа"
                                  selected={state.typeOfIdentityDocumentOfSupervisor}
                                  callback={dropdownDocumentHandle} />
-
-                              {/* <Input
-                                 name="typeOfIdentityDocumentOfSupervisor"
-                                 placeholder="Тип удостоверяющего документа руководител"
-                                 label="Тип удостоверяющего документа руководител"
-                                 defVal={state.typeOfIdentityDocumentOfSupervisor}
-                                 watch={watch("typeOfIdentityDocumentOfSupervisor")}
-                                 error={errors.typeOfIdentityDocumentOfSupervisor}
-                                 register={register}
-                                 setValue={setValue}
-                              /> */}
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Dropdown
