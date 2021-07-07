@@ -21,7 +21,7 @@ import moment from 'moment';
 import CircleLoader from '../../../../components/circle-loader';
 
 interface PersonalInfoEditProps {
-   toggleComponent: () => void
+   toggleComponent: () => void,
 }
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
@@ -42,7 +42,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       dateOfExpire: "",
       dateOfIssue: ""
    });
-
+  
+   const [docType, setDocType] = useState<any>('');
    const [avatar, setAvatar] = useState<any>(Avatar);
    const [imgUrl, setImgUrl] = useState<any>(null);
    const [avatarToggle, setAvatarToggle] = useState(false);
@@ -69,12 +70,23 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const dropdownDocumentHandle = (data: any) => {
+      let text;
+      if (data.value == 'Биометрический паспорт') {
+         text = 'Серия номер биометрического распорта';
+      } else if (data.value == 'ID-карта Республики Узбекистан') {
+         text = 'Серия номер ID-карты Республики Узбекистан';
+      } else if (data.value == 'Паспорт иностранного гражданина') {
+         text = 'Серия номер паспорта иностранного гражданина';
+      }
+
+      setDocType(text);
+
       setState({
          ...state,
          passportType: data.value
       })
    }
-
+   
    const handleAvatarChange = async (ev: any) => {
       let imgFile = ev.target.files[0];
       const fileExt = imgFile.name.toLowerCase().split('.').pop();
@@ -136,6 +148,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       try {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
+         setDocType(data.passportType);
          const dataObj = { ...data };
 
          dataObj.birthday = moment(dataObj.birthday).format('YYYY-MM-DD');
@@ -164,7 +177,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    }
 
    const uploadData = async (obj: any) => {
-      // ev.preventDefault();
       try {
          let dataObj = {
             ...state,
@@ -197,14 +209,14 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       }
    }
 
-   const onSubmit = (data: any, ev:any) => {
+   const onSubmit = (data: any, ev: any) => {
       uploadData(data);
    }
 
    return (
       <PersonalInfoContainer isLoading={loading}>
          {
-            loading && <CircleLoader style={{position: 'absolute'}} />
+            loading && <CircleLoader style={{ position: 'absolute' }} />
          }
          {
             !loading && <>
@@ -259,7 +271,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Dropdown
-                              option={['Биометрический паспортs', 'Биометрический паспорт 2']}
+                              option={['Биометрический паспорт', 'ID-карта Республики Узбекистан', 'Паспорт иностранного гражданина']}
                               label="Тип удостоверяющего документа"
                               selected={state.passportType}
                               callback={dropdownDocumentHandle} />
@@ -267,8 +279,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                         <PersonalBodyFlex isEdit={true}>
                            <Input
                               name="passportNumber"
-                              placeholder="Серия номер распорта(ID-карты)"
-                              label="Серия номер распорта(ID-карты)"
+                              placeholder={docType}
+                              label={docType}
                               defVal={state.passportNumber}
                               // value={state.passportNumber}
                               watch={watch("passportNumber")}
@@ -348,7 +360,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               register={register}
                               type="date"
                               name="birthday"
-                              error={ errors.birthday}
+                              error={errors.birthday}
                               setValue={setValue}
                            />
                         </PersonalBodyFlex>
@@ -360,8 +372,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("email")}
                               register={register}
                               error={errors.email}
-                              inputType="email" 
-                              setValue={setValue}/>
+                              inputType="email"
+                              setValue={setValue} />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
                            <Input
@@ -372,15 +384,15 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               watch={watch("inn")}
                               register={register}
                               inputType="inn"
-                              error={ errors.inn}
+                              error={errors.inn}
                               setValue={setValue}
                            />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>
-                           <Dropdown 
-                              option={['Мужской', 'Женский']} 
-                              selected={state.gender} 
-                              label="Пол" 
+                           <Dropdown
+                              option={['Мужской', 'Женский']}
+                              selected={state.gender}
+                              label="Пол"
                               callback={dropdownHandle} />
                         </PersonalBodyFlex>
                         <PersonalBodyFlex isEdit={true}>

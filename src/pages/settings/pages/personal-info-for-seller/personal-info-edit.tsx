@@ -55,6 +55,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    const [imgUrl, setImgUrl] = useState<any>(null);
    const [avatarToggle, setAvatarToggle] = useState(false);
    const [loading, setLoading] = useState(true);
+   const [docType, setDocType] = useState<any>('');
+
    const { setAlertMessage } = useActionCreators();
 
    const fileRef = useRef<HTMLInputElement>(null);
@@ -80,6 +82,24 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       setState({
          ...state,
          kindOfActivity: data.value
+      })
+   }
+
+   const dropdownDocumentHandle = (data: any) => {
+      let text;
+      if (data.value == 'Биометрический паспорт') {
+         text = 'Серия номер биометрического распорта';
+      } else if (data.value == 'ID-карта Республики Узбекистан') {
+         text = 'Серия номер ID-карты Республики Узбекистан';
+      } else if (data.value == 'Паспорт иностранного гражданина') {
+         text = 'Серия номер паспорта иностранного гражданина';
+      }
+
+      setDocType(text);
+
+      setState({
+         ...state,
+         typeOfIdentityDocumentOfSupervisor: data.value
       })
    }
 
@@ -145,6 +165,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          const response = await axios.get(`/user/${id}`);
          const data = await response.data;
          console.log("SSSSAAAA = ", data);
+         setDocType(data.typeOfIdentityDocumentOfSupervisor);
          const dataObj = { ...data };
          setLoading(false);
 
@@ -214,8 +235,6 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       uploadData(data);
    }
 
-   console.log("State personal info EDIT = ", state);
-
    return (
       <PersonalInfoContainer isLoading={loading}>
          {
@@ -242,7 +261,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                            }
                         </PersonalAvatarEdit>
                         <PersonalNameWrapper>
-                           <PersonalName>{state.firstName} {" "} {state.secondName}</PersonalName>
+                           <PersonalName>{state.fullName}</PersonalName>
                            <PersonalNameEmail> Продавец </PersonalNameEmail>
                            <PersonalVerified>
                               <Verified />
@@ -374,7 +393,13 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                               />
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
-                              <Input
+                              <Dropdown
+                                 option={['Биометрический паспорт', 'ID-карта Республики Узбекистан', 'Паспорт иностранного гражданина']}
+                                 label="Тип удостоверяющего документа"
+                                 selected={state.typeOfIdentityDocumentOfSupervisor}
+                                 callback={dropdownDocumentHandle} />
+
+                              {/* <Input
                                  name="typeOfIdentityDocumentOfSupervisor"
                                  placeholder="Тип удостоверяющего документа руководител"
                                  label="Тип удостоверяющего документа руководител"
@@ -383,7 +408,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                                  error={errors.typeOfIdentityDocumentOfSupervisor}
                                  register={register}
                                  setValue={setValue}
-                              />
+                              /> */}
                            </PersonalBodyFlex>
                            <PersonalBodyFlex isEdit={true}>
                               <Dropdown
@@ -396,8 +421,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                            <PersonalBodyFlex isEdit={true}>
                               <Input
                                  name="documentSeriesAndNumber"
-                                 placeholder="Серия и номер документа"
-                                 label="Серия и номер документа"
+                                 placeholder={docType}
+                                 label={docType}
                                  defVal={state.documentSeriesAndNumber}
                                  watch={watch("documentSeriesAndNumber")}
                                  error={errors.documentSeriesAndNumber}

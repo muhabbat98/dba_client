@@ -10,6 +10,9 @@ export const Tr = styled.div<Open>`
     display:flex;
     justify-content:space-between;
     padding:16px 23px 8px 23px;
+    &:last-child{
+        border:none;
+    }
     div{
         flex:2;
         font-style: normal;
@@ -65,7 +68,12 @@ export const InfoWrapper = styled.div`
     width:100%;
     border-bottom:2px solid  #E9ECF4;
     position:relative;
-    background-color:#ffff;
+    /* background-color:#ffff; */
+    
+    &:last-child{
+        border:none;
+        overflow: hidden !important;
+    }
 `;
 export const InfoTitle = styled.h6`
     font-style: normal;

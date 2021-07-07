@@ -8,7 +8,6 @@ export const MainWrapper = styled.div<APPBar>`
     border: ${({state})=>state?"0px 0px 2px 0px solid #E9ECF4":"2px solid #E9ECF4"};
     box-sizing: border-box;
     border-radius: 16px;
-    padding-bottom:20px;
     
 `;
 export const  OrderHeader = styled.div`
