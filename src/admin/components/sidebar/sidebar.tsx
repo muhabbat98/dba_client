@@ -1,8 +1,14 @@
 import React from 'react';
-import { SidebarContainer } from './style';
+import Menu from '../menu';
+import { SidebarContainer, Logo } from './style';
 
 const Sidebar = () => {
-  return <SidebarContainer>Sidebar</SidebarContainer>;
+  return (
+    <SidebarContainer>
+      <Logo>Marketplace</Logo>
+      <Menu />
+    </SidebarContainer>
+  );
 };
 
 export default Sidebar;

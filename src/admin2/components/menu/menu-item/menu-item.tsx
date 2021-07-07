@@ -26,11 +26,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   let { url, path, isExact } = useRouteMatch();
-  console.log(children);
-  console.log(isChild);
-  console.log('url', url);
-  console.log('path', path);
-  console.log('isExact', isExact);
 
   return (
     <MenuItemContainer isChild={isChild}>
