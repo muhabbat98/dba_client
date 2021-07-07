@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const DashboardContainer = styled.div`
-  background-color: #f2f6f7;
+  //background-color: #f2f6f7;
   height: 100vh;
   background-attachment: fixed;
 `;
