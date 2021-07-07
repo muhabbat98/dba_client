@@ -26,17 +26,33 @@ const PersonalInfo = () => {
   const [state, setState] = useState(false);
   const [personalInfo, setPersonalInfo] = useState<any>({});
   const [loading, setLoading] = useState(true);
+  const [docType, setDocType] = useState<any>('');
+
   const { setAlertMessage } = useActionCreators();
 
   useEffect(() => {
     getPersonalInfo('60cb25a8fdf13d0065176014');
   }, [state]);
 
+  const setDocTypeHandler = (data: any) => {
+    let text;
+    if (data == 'Биометрический паспорт') {
+      text = 'Серия номер биометрического распорта';
+    } else if (data == 'ID-карта Республики Узбекистан') {
+      text = 'Серия номер ID-карты Республики Узбекистан';
+    } else if (data == 'Паспорт иностранного гражданина') {
+      text = 'Серия номер паспорта иностранного гражданина';
+    }
+
+    setDocType(text);
+  }
+
   const getPersonalInfo = async (id: any) => {
     try {
       const response = await axios.get(`/user/${id}`);
       const data = await response.data;
       setLoading(false);
+      setDocTypeHandler(data.typeOfIdentityDocumentOfSupervisor);
       setPersonalInfo(data);
     } catch (error) {
       if (error.debugMessage) {
@@ -149,7 +165,7 @@ const PersonalInfo = () => {
               </PersonalBodyFlex>
 
               <PersonalBodyFlex isEdit={false}>
-                <PersonalBodyLabel>Серия и номер документа</PersonalBodyLabel>
+                <PersonalBodyLabel>{docType}</PersonalBodyLabel>
                 <PersonalBodyName>{personalInfo.documentSeriesAndNumber}</PersonalBodyName>
               </PersonalBodyFlex>
 

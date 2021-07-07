@@ -16,6 +16,8 @@ interface PersonalHeaderLeftSideProps {
 }
 
 const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({personalInfo}) => {
+   console.log("personalInfo ==> ", personalInfo);
+   
    return (
       <PersonalHeaderLeft>
          <PersonalAvatar>
@@ -23,8 +25,7 @@ const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({personalInfo})
          </PersonalAvatar>
          <PersonalNameWrapper>
             <PersonalName>
-               {!isEmptyObj(personalInfo) && personalInfo.firstName} {' '}
-               {!isEmptyObj(personalInfo) && personalInfo.secondName}
+               {!isEmptyObj(personalInfo) && personalInfo.fullName} 
             </PersonalName>
             <PersonalNameEmail>{!isEmptyObj(personalInfo) && personalInfo.email}</PersonalNameEmail>
             <PersonalVerified>
