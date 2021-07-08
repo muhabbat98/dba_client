@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkProps } from 'react-router-dom';
-import { MenuItemContainer, StyledLink } from './style';
+import { StyledLink } from './style';
 
 interface Props extends LinkProps {}
 

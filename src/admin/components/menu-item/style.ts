@@ -15,6 +15,7 @@ export const StyledLink = styled(NavLink).attrs({ activeClassName })`
   color: #a4a6b3;
   text-decoration: none;
   display: block;
+  transition: 0.3s;
 
   &.${activeClassName} {
     background: #3e4049;

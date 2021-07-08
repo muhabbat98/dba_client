@@ -1,7 +1,12 @@
-import { CategoryContainer } from './style';
+import { CategoryProvider } from './context';
+import CategoryMain from './category-main';
 
 const Category = () => {
-  return <CategoryContainer>Category</CategoryContainer>;
+  return (
+    <CategoryProvider>
+      <CategoryMain />
+    </CategoryProvider>
+  );
 };
 
 export default Category;
