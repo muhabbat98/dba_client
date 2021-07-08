@@ -1,6 +1,6 @@
 import Main from './pages/main';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { DashboardContainer, Section } from './style';
+import { DashboardContainer } from './style';
 
 function Admin() {
   const { path } = useRouteMatch();
@@ -8,7 +8,7 @@ function Admin() {
   return (
     <DashboardContainer>
       <Switch>
-        <Route exact path={path} component={Main} />
+        <Route path={path} component={Main} />
       </Switch>
     </DashboardContainer>
   );
