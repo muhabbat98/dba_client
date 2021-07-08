@@ -17,4 +17,5 @@ export const RightSide = styled.div`
   flex: 1;
   height: 6000px;
   margin-left: 280px;
+  padding: 0 24px 50px 24px;
 `;

@@ -1,6 +1,6 @@
 import Main from './pages/main';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { DashboardContainer } from './style';
+import { DashboardContainer, Section } from './style';
 
 function Admin() {
   const { path } = useRouteMatch();
