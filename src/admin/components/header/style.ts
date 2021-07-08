@@ -21,7 +21,20 @@ export const HeaderTitle = styled.h1`
   margin: 0;
 `;
 
-export const HeaderNotification = styled.div``;
+export const HeaderNotification = styled.div`
+  padding-right: 24px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 32px;
+    background: #dfe0eb;
+    top: -4px;
+    right: 0;
+  }
+`;
 
 export const HeaderGoToHome = styled.div`
   font-size: 14px;
@@ -41,7 +54,7 @@ export const HeaderGoToHome = styled.div`
     width: 1px;
     height: 32px;
     background: #dfe0eb;
-    top: 0;
+    top: -4px;
     right: 0;
   }
 

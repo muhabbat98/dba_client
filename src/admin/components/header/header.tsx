@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {useHistory} from 'react-router-dom';
 import {
   HeaderContainer, HeaderContainerLeft, HeaderContainerRight, HeaderTitle, HeaderNotification, HeaderGoToHome,
   HeaderProfile, HeaderProfileLeft, HeaderProfileRight, AvatarBox, AvatarImg
@@ -10,6 +10,13 @@ import { ReactComponent as HomeIcon } from '../../assets/icons/home-icon.svg';
 import Avatar from '../../assets/images/profile-avatar.png';
 
 const Header = () => {
+
+  const {push} = useHistory();
+
+  const goHome = () =>{
+    push('/');
+  }
+
   return <HeaderContainer>
     <HeaderContainerLeft>
       <HeaderTitle>Все Категории</HeaderTitle>
@@ -20,7 +27,7 @@ const Header = () => {
         <NotificationIcon />
       </HeaderNotification>
 
-      <HeaderGoToHome>
+      <HeaderGoToHome onClick={goHome}>
         <HomeIcon />
         <span>Перейти к сайту</span>
       </HeaderGoToHome>
