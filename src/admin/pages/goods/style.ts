@@ -11,6 +11,7 @@ export const GoodsTopControl = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 32px;
 `;
 
 export const GoodsTopControlBreadcrumb = styled.div`
@@ -79,8 +80,16 @@ export const DisplayTable = styled.div`
 
 export const DisplayGrid = styled.div`
   cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.active {
+    background-color: ${({ theme }) => theme.primary_color};
+
     & > svg {
       & > rect {
         fill: ${({ theme }) => theme.primary_color};
