@@ -30,5 +30,5 @@ export const Exit = styled.div`
   color: #ffffff;
   text-align: center;
   cursor: pointer;
-  margin-top: 20px;
+  //margin-top: 20px;
 `;
