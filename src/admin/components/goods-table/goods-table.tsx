@@ -1,14 +1,11 @@
-import React from 'react';
-import Checkbox from '../../../components/checkbox';
+import GoodsTableItem from './goods-table-item';
+
 import {
-   GoodsTableContainer, GoodsTableHeader, GoodsTableHeaderItem, GoodsTableBody, GoodsTableBodyItem,
-   StatusBox, OptionBox, OptionBoxButton, OptionBoxList, OptionBoxListWrapper
+   GoodsTableContainer, GoodsTableHeader, GoodsTableHeaderItem, GoodsTableBody
 } from './style';
 
-import { ReactComponent as Checked } from '../../assets/icons/checked.svg';
-import { ReactComponent as Rejected } from '../../assets/icons/rejected.svg';
-
 const GoodsTable = () => {
+
    return (
       <GoodsTableContainer>
          <GoodsTableHeader>
@@ -20,29 +17,10 @@ const GoodsTable = () => {
          </GoodsTableHeader>
 
          <GoodsTableBody>
-            <GoodsTableBodyItem>
-               <span>1</span>
-               <Checkbox />
-            </GoodsTableBodyItem>
-            <GoodsTableBodyItem>Игровая клавиатура </GoodsTableBodyItem>
-            <GoodsTableBodyItem> Мобильные телефоны</GoodsTableBodyItem>
-            <GoodsTableBodyItem>Филипп Назаров</GoodsTableBodyItem>
-            <GoodsTableBodyItem>
-               <StatusBox isActiveStatus={true}>Активный</StatusBox>
-               <OptionBox>
-                  <OptionBoxButton><div></div></OptionBoxButton>
-                  <OptionBoxListWrapper>
-                     <OptionBoxList>
-                        <Checked />
-                        <span>одобрить</span>
-                     </OptionBoxList>
-                     <OptionBoxList>
-                        <Rejected />
-                        <span>отклонить</span>
-                     </OptionBoxList>
-                  </OptionBoxListWrapper>
-               </OptionBox>
-            </GoodsTableBodyItem>
+            <GoodsTableItem />
+            <GoodsTableItem />
+            <GoodsTableItem />
+            <GoodsTableItem />
          </GoodsTableBody>
       </GoodsTableContainer>
    );

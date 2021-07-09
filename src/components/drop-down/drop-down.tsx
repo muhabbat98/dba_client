@@ -34,17 +34,6 @@ const Dropdown: React.FC<DropdownProps> = ({ callback, label, option, selected, 
       }
    })
 
-   // const options = [
-   //    { value: 'дешевые сверху', index: 0, selected: false },
-   //    { value: 'дорогие сверху', index: 1, selected: false },
-   //    { value: 'высокий рейтинг по отзывам', index: 2, selected: false },
-   //    { value: 'много отзывов', index: 3, selected: false },
-   //    { value: 'по новинкам', index: 4, selected: false },
-   //    { value: 'по снижению цены', index: 5, selected: false },
-   //    { value: 'по популярности', index: 6, selected: false },
-   // ];
-
-
    const dropdown = useRef<HTMLUListElement>(null);
 
    const selectItem = (item: any, e: SyntheticEvent) => {

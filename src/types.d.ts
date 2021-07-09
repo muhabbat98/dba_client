@@ -10,3 +10,10 @@ interface CardType {
 }
 
 type AllCardsType = CardType[];
+
+interface Good {
+  id: string;
+  name: string;
+}
+
+type Goods = Good[];

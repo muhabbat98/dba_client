@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import {
   GoodsContainer, GoodsTopControl, GoodsTopControlBreadcrumb, GoodsTopControlRight,
-  GoodsIconButtons, GoodsIconButton, SearchInputBox, SearchInput, DisplayTypeBox, DisplayTable,
+  GoodsIconButtons, GoodsIconButton, DisplayTypeBox, DisplayTable,
   DisplayGrid, GoodsDisplayContainer,
 } from './style';
 
 import { ReactComponent as Excel } from '../../assets/icons/excel.svg';
 import { ReactComponent as Printer } from '../../assets/icons/printer.svg';
 import { ReactComponent as Delete } from '../../assets/icons/trash.svg';
-import { ReactComponent as Search } from '../../assets/icons/search-icon.svg';
-import { ReactComponent as TableIcon } from '../../assets/icons/table-icon.svg';
 import { ReactComponent as GridIcon } from '../../assets/icons/grid-icon.svg';
 import GoodsGrid from '../../components/goods-grid';
 import GoodsTable from '../../components/goods-table';
+import SearchInput from '../../components/search-input';
 
 enum DisplayType {
   GRID_TYPE = "GRID_TYPE",
@@ -25,6 +24,10 @@ const Goods = () => {
 
   const changeDisplay = (type: DisplayType) => {
     setDisplayType(type);
+  }
+
+  const changeHandle = (ev: any) => {
+    console.log(ev.target.value);
   }
 
   return (
@@ -45,10 +48,7 @@ const Goods = () => {
             </GoodsIconButton>
           </GoodsIconButtons>
 
-          <SearchInputBox>
-            <SearchInput placeholder="Искать категории ..." />
-            <Search />
-          </SearchInputBox>
+          <SearchInput label="Искать категории ..." callback={changeHandle} />
 
           <DisplayTypeBox>
             <DisplayGrid
@@ -56,7 +56,7 @@ const Goods = () => {
               onClick={() => changeDisplay(DisplayType.GRID_TYPE)}>
               <GridIcon />
             </DisplayGrid>
-            <DisplayTable 
+            <DisplayTable
               className={displayType == DisplayType.TABLE_TYPE ? 'active' : ''}
               onClick={() => changeDisplay(DisplayType.TABLE_TYPE)}>
               {/* <TableIcon /> */}
