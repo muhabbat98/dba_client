@@ -16,11 +16,11 @@ export const SearchInputBox = styled.div`
 export const SearchInputItem = styled.input`
   background-color: #f7f8fc;
   padding: 10px 14px 10px 36px;
-  height: 36px;
+  height: 46px;
   border-radius: 6px;
   outline: none;
   border: none;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
 
   &::placeholder {
