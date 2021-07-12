@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from '../card';
 import { GoodsGridContainer, FlexRow, FlexCol } from './style';
 
@@ -10,6 +10,9 @@ import Good5 from '../../assets/images/good5.png';
 import Good6 from '../../assets/images/good6.png';
 import Good7 from '../../assets/images/good7.png';
 import Good8 from '../../assets/images/good8.png';
+
+
+
 
 const GoodsGrid = () => {
    return (

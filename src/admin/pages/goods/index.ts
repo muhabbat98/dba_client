@@ -1,3 +1,3 @@
-import Goods from './goods';
+import GoodsWrapper from './goods-wrapper';
 
-export default Goods;
+export default GoodsWrapper;

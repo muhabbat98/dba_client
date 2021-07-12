@@ -16,7 +16,10 @@ export const GoodsTableHeader = styled.div`
   /* grid-template-columns: repeat(5, 1fr); */
   grid-column-gap: 10px;
   align-items: center;
-  padding: 8px 0;
+  padding: 14px 8px;
+  background-color: #f7f8fc;
+  border-radius: 8px;
+  margin-bottom: 16px;
 `;
 
 export const GoodsTableHeaderItem = styled.div`
@@ -25,6 +28,17 @@ export const GoodsTableHeaderItem = styled.div`
   font-family: Manrope;
   font-weight: 700;
   line-height: 21px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:first-child {
+    cursor: default;
+  }
+
+  & > svg {
+    margin-left: 8px;
+  }
 `;
 
 export const GoodsTableBody = styled.div``;
