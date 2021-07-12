@@ -67,7 +67,7 @@ const Cart = () => {
   };
 
   const gotoOrdersPage = () => {
-    push('settings/checkout');
+    push('/checkout');
   };
 
   return (

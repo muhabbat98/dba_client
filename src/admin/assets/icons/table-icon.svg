@@ -1,26 +1,8 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="path-1-inside-1" fill="white">
-<rect width="3" height="3" rx="1" transform="matrix(-1 0 0 1 5.25 4.5)"/>
-</mask>
-<rect width="3" height="3" rx="1" transform="matrix(-1 0 0 1 5.25 4.5)" fill="white" stroke="white" stroke-width="3" mask="url(#path-1-inside-1)"/>
-<mask id="path-2-inside-2" fill="white">
-<rect width="15" height="3" rx="1" transform="matrix(-1 0 0 1 21.75 4.5)"/>
-</mask>
-<rect width="15" height="3" rx="1" transform="matrix(-1 0 0 1 21.75 4.5)" stroke="white" stroke-width="3" mask="url(#path-2-inside-2)"/>
-<mask id="path-3-inside-3" fill="white">
-<rect width="3" height="3" rx="1" transform="matrix(-1 0 0 1 5.25 10.5)"/>
-</mask>
-<rect width="3" height="3" rx="1" transform="matrix(-1 0 0 1 5.25 10.5)" fill="white" stroke="white" stroke-width="3" mask="url(#path-3-inside-3)"/>
-<mask id="path-4-inside-4" fill="white">
-<rect width="15" height="3" rx="1" transform="matrix(-1 0 0 1 21.75 10.5)"/>
-</mask>
-<rect width="15" height="3" rx="1" transform="matrix(-1 0 0 1 21.75 10.5)" stroke="white" stroke-width="3" mask="url(#path-4-inside-4)"/>
-<mask id="path-5-inside-5" fill="white">
-<rect width="3" height="3" rx="1" transform="matrix(-1 0 0 1 5.25 16.5)"/>
-</mask>
-<rect width="3" height="3" rx="1" transform="matrix(-1 0 0 1 5.25 16.5)" fill="white" stroke="white" stroke-width="3" mask="url(#path-5-inside-5)"/>
-<mask id="path-6-inside-6" fill="white">
-<rect width="15" height="3" rx="1" transform="matrix(-1 0 0 1 21.75 16.5)"/>
-</mask>
-<rect width="15" height="3" rx="1" transform="matrix(-1 0 0 1 21.75 16.5)" stroke="white" stroke-width="3" mask="url(#path-6-inside-6)"/>
+<svg width="26" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 0H3C3.55228 0 4 0.447715 4 1V3C4 3.55228 3.55228 4 3 4H1C0.447715 4 0 3.55228 0 3V1C0 0.447715 0.447715 0 1 0Z" fill="#B8C3DE"/>
+<path d="M7 0H25C25.5523 0 26 0.447715 26 1V3C26 3.55228 25.5523 4 25 4H7C6.44772 4 6 3.55228 6 3V1C6 0.447715 6.44772 0 7 0Z" fill="#B8C3DE"/>
+<path d="M1 8H3C3.55228 8 4 8.44772 4 9V11C4 11.5523 3.55228 12 3 12H1C0.447715 12 0 11.5523 0 11V9C0 8.44772 0.447715 8 1 8Z" fill="#B8C3DE"/>
+<path d="M7 8H25C25.5523 8 26 8.44772 26 9V11C26 11.5523 25.5523 12 25 12H7C6.44772 12 6 11.5523 6 11V9C6 8.44772 6.44772 8 7 8Z" fill="#B8C3DE"/>
+<path d="M1 16H3C3.55228 16 4 16.4477 4 17V19C4 19.5523 3.55228 20 3 20H1C0.447715 20 0 19.5523 0 19V17C0 16.4477 0.447715 16 1 16Z" fill="#B8C3DE"/>
+<path d="M7 16H25C25.5523 16 26 16.4477 26 17V19C26 19.5523 25.5523 20 25 20H7C6.44772 20 6 19.5523 6 19V17C6 16.4477 6.44772 16 7 16Z" fill="#B8C3DE"/>
 </svg>

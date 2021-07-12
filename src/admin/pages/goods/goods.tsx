@@ -7,6 +7,7 @@ import {
 
 import { ReactComponent as FilterIcon } from '../../assets/icons/filter.svg';
 import { ReactComponent as GridIcon } from '../../assets/icons/grid-icon.svg';
+import { ReactComponent as TableIcon } from '../../assets/icons/table-icon.svg';
 import GoodsGrid from '../../components/goods-grid';
 import GoodsTable from '../../components/goods-table';
 import SearchInput from '../../components/search-input';
@@ -30,7 +31,12 @@ const Goods = () => {
     console.log(ev.target.value);
   }
 
-  console.log(openFilter);
+  console.log('displayType = ', displayType);
+  console.log("DisplayType.TABLE_TYPE = ", DisplayType.TABLE_TYPE);
+
+  console.log("displayType == DisplayType.TABLE_TYPE = ", displayType == DisplayType.TABLE_TYPE);
+
+
 
 
   return (
@@ -54,20 +60,23 @@ const Goods = () => {
           <SearchInput
             label="Искать категории ..."
             callback={changeHandle}
+            style={{ marginRight: '16px' }}
           />
 
           <DisplayTypeBox>
+            <DisplayTable
+              className={displayType == DisplayType.TABLE_TYPE ? 'active' : ''}
+              onClick={() => changeDisplay(DisplayType.TABLE_TYPE)}>
+              <TableIcon />
+            </DisplayTable>
+
             <DisplayGrid
               className={displayType == DisplayType.GRID_TYPE ? 'active' : ''}
               onClick={() => changeDisplay(DisplayType.GRID_TYPE)}>
               <GridIcon />
             </DisplayGrid>
-            <DisplayTable
-              className={displayType == DisplayType.TABLE_TYPE ? 'active' : ''}
-              onClick={() => changeDisplay(DisplayType.TABLE_TYPE)}>
-              {/* <TableIcon /> */}
-            </DisplayTable>
           </DisplayTypeBox>
+
           <FilterBtn isOpen={openFilter} onClick={() => setOpenFilter(!openFilter)}>
             <FilterIcon />
             Фильтр
@@ -75,16 +84,28 @@ const Goods = () => {
         </GoodsTopControlRight>
       </GoodsTopControl>
 
-      <GoodsFilterBox>
-        <GoodsFilterBoxItem>
-          <FilterInput placeholder="Название товара" />
-        </GoodsFilterBoxItem>
+      {
+        openFilter ? (
+          <GoodsFilterBox>
+            <GoodsFilterBoxItem>
+              <FilterInput placeholder="Название товара" />
+            </GoodsFilterBoxItem>
 
-        <GoodsFilterBoxItem>
-          <SettingsDropdown style={{ padding: '11px 16px' }} label="Категория" options={['Категория', 'Категория2']} />
-        </GoodsFilterBoxItem>
+            <GoodsFilterBoxItem>
+              <SettingsDropdown isFromAdmin={true} label="Категория" options={['Категория', 'Категория2']} />
+            </GoodsFilterBoxItem>
 
-      </GoodsFilterBox>
+
+            <GoodsFilterBoxItem>
+              <FilterInput placeholder="ФИО руководителя" />
+            </GoodsFilterBoxItem>
+
+            <GoodsFilterBoxItem>
+              <SettingsDropdown isFromAdmin={true} label="Статус" options={['Активный', 'Неактивный']} />
+            </GoodsFilterBoxItem>
+          </GoodsFilterBox>
+        ) : null
+      }
 
       <GoodsDisplayContainer>
         {

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const SearchInputBox = styled.div`
-  margin-left: 24px;
-  margin-right: 24px;
+  /* margin-left: 24px;
+  margin-right: 24px; */
   position: relative;
 
   & > svg {

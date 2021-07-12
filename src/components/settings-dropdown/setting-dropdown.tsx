@@ -1,16 +1,17 @@
-import React,{useState,useRef,useEffect} from 'react'
-import {ReactComponent as  Arrow} from '../../assets/icons/down-arrow2.svg'
-import {DropDownContainer,DropDownInput,DropDownList,ListOption} from './style';
+import React, { useState, useRef, useEffect } from 'react'
+import { ReactComponent as Arrow } from '../../assets/icons/down-arrow2.svg'
+import { DropDownContainer, DropDownInput, DropDownList, ListOption } from './style';
 
-interface Propses extends React.InputHTMLAttributes<HTMLInputElement>{
-    label:string;
-    options:any[];
-    getOption?:any;
+interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
+    label: string;
+    options: any[];
+    getOption?: any;
+    isFromAdmin?: boolean;
 }
-const SettingDropdown:React.FC<Propses> = ({label,options,getOption,...rest}) => {
-    const [isOpen,setIsOpen] = useState<boolean>(false);
-    const[option,setOption] = useState<any>();
-    const selectOption = (data:any)=>{
+const SettingDropdown: React.FC<Propses> = ({ label, options, getOption, isFromAdmin, ...rest }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [option, setOption] = useState<any>();
+    const selectOption = (data: any) => {
         setOption(data);
         setIsOpen(false);
         getOption(data);
@@ -18,7 +19,7 @@ const SettingDropdown:React.FC<Propses> = ({label,options,getOption,...rest}) =>
 
     const ref = useRef<any>()
     useEffect(() => {
-        const checkIfClickedOutside = (e:any) => {
+        const checkIfClickedOutside = (e: any) => {
             if (isOpen && ref.current && !ref.current.contains(e.target)) {
                 setIsOpen(false)
             }
@@ -30,13 +31,13 @@ const SettingDropdown:React.FC<Propses> = ({label,options,getOption,...rest}) =>
     }, [isOpen])
     return (
         <DropDownContainer isOpen={isOpen} {...rest} >
-            <DropDownInput state={option?true:false} onClick={()=>setIsOpen(open=>!open)}>
-                <p>{option||label}</p>
-                <Arrow/>
+            <DropDownInput isFromAdmin={isFromAdmin} state={option ? true : false} onClick={() => setIsOpen(open => !open)}>
+                <p>{option || label}</p>
+                <Arrow />
             </DropDownInput>
             <DropDownList isOpen={isOpen} ref={ref}>
-                {options && options.map((item,index)=>(
-                    <ListOption key={index} state={option==item?true:false} onClick={()=>selectOption(item)}>{item}</ListOption>
+                {options && options.map((item, index) => (
+                    <ListOption key={index} state={option == item ? true : false} onClick={() => selectOption(item)}>{item}</ListOption>
                 ))}
             </DropDownList>
         </DropDownContainer>

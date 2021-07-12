@@ -35,6 +35,12 @@ const Content = () => {
           component={DeliveryAddress}
         />
 
+        <Route
+          exact
+          path={`${path}/checkoo`}
+          component={DeliveryAddress}
+        />
+
         <Route exact path={`${path}/personal-data`} component={PersonalData} />
 
         <ProtectedRouteForBuyer exact path={`${path}/payment`}>

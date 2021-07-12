@@ -48,20 +48,37 @@ export const DisplayTypeBox = styled.div`
 
 export const DisplayTable = styled.div`
   cursor: pointer;
+  border-radius: 6px;
+  width: 46px;
+  height: 46px;
+  background-color: #f7f8fc;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  width: 20px;
-  height: 20px;
-  background-color: red;
+  &.active {
+    background-color: ${({ theme }) => theme.primary_color};
+
+    & > svg {
+      & > path {
+        fill: #fff;
+        stroke: #fff;
+      }
+    }
+  }
 `;
 
 export const DisplayGrid = styled.div`
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f7f8fc;
+  margin-right: 16px;
 
   &.active {
     background-color: ${({ theme }) => theme.primary_color};
@@ -96,17 +113,20 @@ export const FilterBtn = styled.div<Props>`
 
 export const GoodsFilterBox = styled.div`
   display: flex;
+  margin-bottom: 24px;
 `;
 
-export const GoodsFilterBoxItem = styled.div``;
+export const GoodsFilterBoxItem = styled.div`
+  margin-right: 62px;
+`;
 
 export const FilterInput = styled.input`
   background-color: #f7f8fc;
   color: ${({ theme }) => theme.primary_color};
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   border-radius: 8px;
-  padding: 12px;
+  padding: 14px 12px;
   border: 1px solid #f7f8fc;
   outline: none;
 

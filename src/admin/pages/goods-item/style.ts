@@ -24,4 +24,15 @@ export const GoodsItemRight = styled.div`
 
 export const EditButton = styled.button`
   background-color: #f7f8fc;
+  font-size: 16px;
 `;
+
+export const GoodName = styled.div``;
+
+export const GoodsImages = styled.div`
+  display: flex;
+`;
+
+export const GoodsImageItem = styled.div``;
+
+export const GoodsImg = styled.img``;
