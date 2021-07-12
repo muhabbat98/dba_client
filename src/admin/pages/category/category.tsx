@@ -1,5 +1,5 @@
 import { CategoryProvider } from './context';
-import { useRouteMatch, useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import CategoryMain from './category-main';
 import CategoryPage from './category-children';
