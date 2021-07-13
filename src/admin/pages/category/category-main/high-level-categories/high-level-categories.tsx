@@ -9,12 +9,11 @@ import CategoryHeader from '../../../../components/category-header';
 import CategoryRow from '../../../../components/category-row';
 
 interface Props {
-  menu: any;
+  menus: any;
+  fetchMenu: () => void;
 }
 
-const HighLevelCategories: React.FC<Props> = ({ menu }) => {
-  console.log(menu);
-
+const HighLevelCategories: React.FC<Props> = ({ menus, fetchMenu }) => {
   return (
     <HighLevelCategoriesContainer>
       <CategoryHeader />
@@ -22,8 +21,13 @@ const HighLevelCategories: React.FC<Props> = ({ menu }) => {
         <No>№</No>
         <Name>Називания категории</Name>
       </CategoryRowHeader>
-      {menu.map((category: any, index: number) => (
-        <CategoryRow key={category.id} row={category} num={index + 1} />
+      {menus.map((category: any, index: number) => (
+        <CategoryRow
+          fetchMenu={fetchMenu}
+          key={category.id}
+          row={category}
+          num={index + 1}
+        />
       ))}
     </HighLevelCategoriesContainer>
   );

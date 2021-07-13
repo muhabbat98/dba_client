@@ -10,5 +10,6 @@ export const CategoryMainContainer = styled.div<CategoryMainContainerProps>`
   background-color: white;
   padding: 24px;
   position: relative;
-  height: ${({ loading }) => (loading ? '400px' : 'auto')};
+  height: ${({ loading }) => (loading ? '600px' : 'auto')};
+  display: block;
 `;

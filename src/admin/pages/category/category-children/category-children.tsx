@@ -1,7 +1,11 @@
-import React from 'react';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
-import queryString from 'query-string';
-import { CategoryContainer } from './style';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { axios } from '../../../../hooks';
+import CircleLoader from '../../../../components/main-loader';
+import Error from '../../../components/error';
+import Categories from './categories';
+import { CategoryChildrenContainer } from './style';
+import add_category from '../../../../admin2/components/fields-modal/add_category/add_category';
 
 interface Params {
   id: string;
@@ -9,18 +13,59 @@ interface Params {
 
 const CategoryChildren = () => {
   const { id } = useParams<Params>();
-  const history = useHistory();
-  const location = useLocation();
 
-  // console.log(params);
-  console.log(history);
-  console.log(location);
+  const [menus, setMenus] = useState(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchCategory();
+  }, [id]);
+
+  const fetchCategory = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const response = await axios.get(`/catalog?parentId=${id}`);
+      const data = await response.data;
+      setMenus(data);
+      setLoading(false);
+      setError(false);
+    } catch (error) {
+      //checkError(error);
+      setError(true);
+      setLoading(false);
+    }
+  };
+
+  const add_category = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const response = await axios.get(`/catalog?parentId=${id}`);
+      const data = await response.data;
+      setMenus(data);
+      setLoading(false);
+      setError(false);
+    } catch (error) {
+      //checkError(error);
+      setError(true);
+      setLoading(false);
+    }
+  };
+
+  const isLoading = error || loading;
 
   return (
-    <CategoryContainer>
-      Category: {id}
-      <p>{JSON.stringify(queryString.parse(location.search))}</p>
-    </CategoryContainer>
+    <CategoryChildrenContainer loading={isLoading}>
+      {loading ? (
+        <CircleLoader />
+      ) : error ? (
+        <Error callback={fetchCategory} />
+      ) : (
+        <Categories menus={menus} fetchCategory={fetchCategory} />
+      )}
+    </CategoryChildrenContainer>
   );
 };
 

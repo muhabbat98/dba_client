@@ -7,9 +7,10 @@ import { CategoryRowContainer, CategoryName, Left, Right } from './style';
 interface Props {
   num: number;
   row: any;
+  fetchMenu: () => void;
 }
 
-const CategoryRow: React.FC<Props> = ({ row, num }) => {
+const CategoryRow: React.FC<Props> = ({ fetchMenu, row, num }) => {
   const { path } = useRouteMatch();
   const { push } = useHistory();
 
@@ -24,7 +25,7 @@ const CategoryRow: React.FC<Props> = ({ row, num }) => {
         <CategoryName onClick={onClick}>{row.name}</CategoryName>
       </Left>
       <Right>
-        <Dots row={row} />
+        <Dots row={row} fetchMenu={fetchMenu} />
       </Right>
     </CategoryRowContainer>
   );

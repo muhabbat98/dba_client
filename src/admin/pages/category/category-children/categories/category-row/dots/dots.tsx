@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Dot, DotsContainer } from './style';
 import Menu from './menu';
-import { axios, useActionCreators, useError } from '../../../hooks';
+import { axios, useActionCreators, useError } from '../../../../../../../hooks';
 
 interface Props {
   row: any;
-  fetchMenu: () => void;
+  fetchCategory: () => void;
 }
 
-const Dots: React.FC<Props> = ({ row, fetchMenu }) => {
+const Dots: React.FC<Props> = ({ row, fetchCategory }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { setConfirm, setAlertMessage, cleanConfirm } = useActionCreators();
   const { checkError } = useError();
   const className = 'dots' + uuid();
+
   useEffect(() => {
     if (isOpen) {
       window.addEventListener('click', clickHandler);
@@ -62,8 +63,7 @@ const Dots: React.FC<Props> = ({ row, fetchMenu }) => {
             message: data.message,
             type: 'success',
           });
-          fetchMenu();
-
+          fetchCategory();
           cleanConfirm();
         } catch (e) {
           checkError(e);

@@ -16,7 +16,7 @@ enum FormType {
 
 const Category = () => {
   const { id } = useParams<Params>();
-  const [form, setForm] = useState<FormType>(FormType.PARENT);
+  const [form, setForm] = useState<FormType | null>(null);
   //console.log('params', params);
 
   useEffect(() => {

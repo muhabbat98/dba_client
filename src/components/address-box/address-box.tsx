@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import YandexMap from "./yandex-map";
-import Button from "../button";
-import Title from "../products-title";
-import Input from "../input";
-import Checkbox from "../checkbox";
+import React, { useState, useEffect } from 'react';
+import YandexMap from './yandex-map';
+import Button from '../button';
+import Title from '../products-title';
+import Input from '../input';
+import Checkbox from '../checkbox';
 import { useRole } from '../../hooks';
-import { useForm } from "react-hook-form";
-import { isConstructorDeclaration } from "typescript";
+import { useForm } from 'react-hook-form';
+import { isConstructorDeclaration } from 'typescript';
 import {
   ModalContainer,
   Wrapper,
   FormContainer,
   YMapContainer,
   SubInputs,
-  SubDiv
-} from "./style";
+  SubDiv,
+} from './style';
 interface PropsModal {
   closeModal: any;
   modalTitle: string;
@@ -22,7 +22,6 @@ interface PropsModal {
   inputItems?: any; // Incoming information when edititng information
   chackboxdHide?: boolean; //chackbox hidden true || false
   locationPosition?: []; //map location items [43.23232,46.54543]
-  
 }
 const AddressBox: React.FC<PropsModal> = ({
   closeModal,
@@ -32,63 +31,66 @@ const AddressBox: React.FC<PropsModal> = ({
   chackboxdHide,
   locationPosition,
 }) => {
-  const [location, setLocation] = useState<any>([inputItems&&inputItems.latitude,inputItems&&inputItems.longitude]);
+  const [location, setLocation] = useState<any>([
+    inputItems && inputItems.latitude,
+    inputItems && inputItems.longitude,
+  ]);
   const [main, setMain] = useState(true);
-  const [getAdderss,setGetAddres] = useState<any>(
-  );
+  const [getAdderss, setGetAddres] = useState<any>();
   const [data, setData] = useState({
-    city: "",
-    street: "",
-    homeNumber: "",
-    apartmentNumber: "",
-    additionalInformation: "",
-    country:"",
-    district:"",
-    postcode:"",
+    city: '',
+    street: '',
+    homeNumber: '',
+    apartmentNumber: '',
+    additionalInformation: '',
+    country: '',
+    district: '',
+    postcode: '',
   });
-  const {register, watch,setValue,handleSubmit,errors} = useForm();
+  const { register, watch, setValue, handleSubmit, errors } = useForm();
   const isBuyer = useRole();
-  let mainn:boolean;
+  let mainn: boolean;
+
   useEffect(() => {
     inputItems && setData(inputItems);
-    console.log("working input--",inputItems)
+    console.log('working input--', inputItems);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, []);
   const clickHandler = (e: any) => {
-    if (e.target.classList.contains("glass-container")) {
+    if (e.target.classList.contains('glass-container')) {
       closeModal(false);
     }
   };
 
   const latitude = location && location[0];
   const longitude = location && location[1];
-  
-  const id=inputItems?inputItems.id:null
+
+  const id = inputItems ? inputItems.id : null;
   const onSubmit = (dataa: any) => {
     setData(dataa);
-    mainn=chackboxdHide?false:main;
-    getItems({ ...dataa, latitude,longitude,id:id, main });
+    mainn = chackboxdHide ? false : main;
+    getItems({ ...dataa, latitude, longitude, id: id, main });
     closeModal(false);
-    console.log("dataa------->", dataa)
+    console.log('dataa------->', dataa);
     // console.log("Maindataa------->", data)
- }
-//  console.log("gggg--",location&&location[0])
+  };
+  //  console.log("gggg--",location&&location[0])
   // console.log("lat-",inputItems&&inputItems.latitude,"long-",inputItems&&inputItems.longitude)
   // console.log("rr->>",location)
-// console.log("inputdata---->",inputItems)
+  // console.log("inputdata---->",inputItems)
   return (
     <ModalContainer className="glass-container" onClick={clickHandler}>
       <Wrapper>
         <FormContainer>
           <Title
-            style={{ textAlign: "center", marginTop: 0 }}
+            style={{ textAlign: 'center', marginTop: 0 }}
             title={modalTitle}
           />
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -99,7 +101,7 @@ const AddressBox: React.FC<PropsModal> = ({
               defVal={data.country}
               register={register}
               setValue={setValue}
-              watch={watch("country")}
+              watch={watch('country')}
               error={errors.country}
             />
             <Input
@@ -109,7 +111,7 @@ const AddressBox: React.FC<PropsModal> = ({
               defVal={data.city}
               register={register}
               setValue={setValue}
-              watch={watch("city")}
+              watch={watch('city')}
               error={errors.city}
             />
             <Input
@@ -119,10 +121,10 @@ const AddressBox: React.FC<PropsModal> = ({
               defVal={data.district}
               register={register}
               setValue={setValue}
-              watch={watch("district")}
+              watch={watch('district')}
               error={errors.district}
             />
-            
+
             <Input
               label="Улица"
               placeholder="Улица"
@@ -130,23 +132,23 @@ const AddressBox: React.FC<PropsModal> = ({
               defVal={data.street}
               register={register}
               setValue={setValue}
-              watch={watch("street")}
+              watch={watch('street')}
               error={errors.street}
             />
-            {!isBuyer.isBuyer && 
+            {!isBuyer.isBuyer && (
               <Input
-              label="Почтовый индекс"
-              placeholder="Почтовый индекс"
-              name="postcode"
-              defVal={data.postcode}
-              register={register}
-              setValue={setValue}
-              watch={watch("postcode")}
-              error={errors.postcode}
-            />
-            }
+                label="Почтовый индекс"
+                placeholder="Почтовый индекс"
+                name="postcode"
+                defVal={data.postcode}
+                register={register}
+                setValue={setValue}
+                watch={watch('postcode')}
+                error={errors.postcode}
+              />
+            )}
             <SubInputs>
-              <SubDiv >
+              <SubDiv>
                 <Input
                   placeholder="Дом"
                   label="Дом"
@@ -154,7 +156,7 @@ const AddressBox: React.FC<PropsModal> = ({
                   defVal={data.homeNumber}
                   register={register}
                   setValue={setValue}
-                  watch={watch("homeNumber")}
+                  watch={watch('homeNumber')}
                   error={errors.homeNumber}
                 />
               </SubDiv>
@@ -166,7 +168,7 @@ const AddressBox: React.FC<PropsModal> = ({
                   defVal={data.apartmentNumber}
                   register={register}
                   setValue={setValue}
-                  watch={watch("apartmentNumber")}
+                  watch={watch('apartmentNumber')}
                   error={errors.apartmentNumber}
                 />
               </SubDiv>
@@ -175,11 +177,11 @@ const AddressBox: React.FC<PropsModal> = ({
               placeholder="Дополнительная информация"
               label="Дополнительная информация"
               name="additionalInformation"
-              style={{height:100}}
+              style={{ height: 100 }}
               defVal={data.additionalInformation}
               register={register}
               setValue={setValue}
-              watch={watch("additionalInformation")}
+              watch={watch('additionalInformation')}
               error={errors.additionalInformation}
             />
             {!chackboxdHide && (
@@ -192,19 +194,17 @@ const AddressBox: React.FC<PropsModal> = ({
               />
             )}
 
-            <Button type="submit" >
-              Сохранить
-            </Button>
+            <Button type="submit">Сохранить</Button>
           </form>
         </FormContainer>
         <YMapContainer>
-          <YandexMap 
-            setLocation={setLocation} 
-            setData={!inputItems?setData:setGetAddres} 
+          <YandexMap
+            setLocation={setLocation}
+            setData={!inputItems ? setData : setGetAddres}
             defaultCordinate={
-              inputItems && [inputItems.latitude,inputItems.longitude]
-            } 
-            />
+              inputItems && [inputItems.latitude, inputItems.longitude]
+            }
+          />
         </YMapContainer>
       </Wrapper>
     </ModalContainer>

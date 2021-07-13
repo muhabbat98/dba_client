@@ -4,13 +4,15 @@ import { axios, useError } from '../../../../hooks';
 import { CategoryMainContainer } from './style';
 import CircleLoader from '../../../../components/main-loader';
 import HighLevelCategories from './high-level-categories';
+import Error from '../../../components/error';
 
 //marketplace-v1/api/category/{categoryId}
 
 const CategoryMain = () => {
-  const [menu, setMenu] = useState(null);
+  const [menus, setMenus] = useState(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const { checkError } = useError();
+  const [error, setError] = useState<boolean>(false);
+  //const { checkError } = useError();
 
   useEffect(() => {
     fetchMenu();
@@ -18,19 +20,31 @@ const CategoryMain = () => {
 
   const fetchMenu = async () => {
     setLoading(true);
+    setError(false);
     try {
       const response = await axios.get('/catalog?parentId=');
       const data = await response.data;
-      setMenu(data);
+      setMenus(data);
       setLoading(false);
+      setError(false);
     } catch (error) {
-      checkError(error);
+      //checkError(error);
+      setError(true);
+      setLoading(false);
     }
   };
 
+  const isLoading = error || loading;
+
   return (
-    <CategoryMainContainer loading={loading}>
-      {loading ? <CircleLoader /> : <HighLevelCategories menu={menu} />}
+    <CategoryMainContainer loading={isLoading}>
+      {loading ? (
+        <CircleLoader />
+      ) : error ? (
+        <Error callback={fetchMenu} />
+      ) : (
+        <HighLevelCategories menus={menus} fetchMenu={fetchMenu} />
+      )}
     </CategoryMainContainer>
   );
 };
