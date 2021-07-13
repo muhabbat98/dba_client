@@ -15,7 +15,7 @@ export const LeftSide = styled.div`
 export const RightSide = styled.div`
   background-color: #f7f8fc;
   flex: 1;
-  height: 6000px;
+  //height: 6000px;
   margin-left: 280px;
   padding: 0 24px 50px 24px;
 `;

@@ -8,6 +8,7 @@ export const CategoryAddButtonContainer = styled.div`
   display: flex;
   height: 46px;
   cursor: pointer;
+  margin-left: 32px;
   :hover {
     background: #e1e2e6;
   }
