@@ -9,7 +9,8 @@ const Settings = () => {
   return (
     <Conatiner>
       <SettingsContainer>
-        <Breadcrumb title='juebhu' />
+        {/* <Breadcrumb title='juebhu' /> */}
+
         <Title>Настройки </Title>
         <MenuAndContent>
           <Menu />

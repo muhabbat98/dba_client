@@ -29,6 +29,7 @@ const DiscussionForSeller = () => {
           <FilterText>Фильтр</FilterText>
         </DiscussionFilterBtn>
       </DiscussionTop>
+
       {toggleFilter ? (
         <DiscussionFilterSection>
           <SettingsInput placeholder="ID ЗАКАЗА" />

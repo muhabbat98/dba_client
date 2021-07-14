@@ -1,10 +1,8 @@
 import React from 'react';
 
-import SearchInput from '../../components/search-input';
-
 import {
    GoodsItemContainer, GoodsItemContainerHeader, GoodsItemBreadCrumb, GoodsItemRight, EditButton, GoodName,
-   GoodsImages, GoodsImageItem, GoodsImg
+   GoodsImages, GoodsImageItem, GoodsImg, Circle
 } from './style';
 
 import { ReactComponent as Edit } from '../../assets/icons/edit-icon.svg';
@@ -23,10 +21,11 @@ const GoodsItem = () => {
             <GoodsItemBreadCrumb>Информация о товара/Defender, Геймпад</GoodsItemBreadCrumb>
             <GoodsItemRight>
                <EditButton >
-                  <Edit />
+                  <Circle>
+                     <Edit />
+                  </Circle>
                   Изменить
                </EditButton>
-               <SearchInput label="Искать  ..." />
             </GoodsItemRight>
          </GoodsItemContainerHeader>
 

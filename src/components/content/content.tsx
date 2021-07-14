@@ -5,6 +5,7 @@ import Homepage from '../../pages/homepage';
 import Cart from '../../pages/cart';
 import Wishlist from '../../pages/wishlist';
 import Settings from '../../pages/settings';
+import AddProduct from '../../pages/add-product';
 
 import ProductDetail from '../../pages/product-detail';
 
@@ -17,15 +18,16 @@ const Content = () => {
     <div>
       <Switch>
         <Route exact path={path} component={Homepage} />
-        <Route exact path='/cart' component={Cart} />
-        <Route exact path='/wishlist' component={Wishlist} />
-        <Route exact path='/product-detail/:id' component={ProductDetail} />
-        <Route exact path='/catalog' component={Catalog} />
-        <Route exact path='/products' component={Products} />
-        <ProtectedRoute path='/settings'>
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/wishlist" component={Wishlist} />
+        <Route exact path="/product-detail/:id" component={ProductDetail} />
+        <Route exact path="/catalog" component={Catalog} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/profile/add-product" component={AddProduct} />
+        <ProtectedRoute path="/profile/settings">
           <Settings />
         </ProtectedRoute>
-        <Redirect to='/' />
+        <Redirect to="/" />
       </Switch>
     </div>
   );

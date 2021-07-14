@@ -6,6 +6,7 @@ import { checkUSer } from '../../utils/check-user';
 const ProtectedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const user = useSelector((state) => checkUSer(state.user));
   //const user = true;
+  console.log('user = ', user);
   return (
     <Route
       {...rest}

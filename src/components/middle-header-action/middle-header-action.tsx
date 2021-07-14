@@ -36,7 +36,7 @@ const MiddleHeaderAction = () => {
     <MiddleHeaderActionContainer>
       {user ? (
         <Action>
-          <Link to="/settings" title="Перейти к личный кабинет">
+          <Link to="/profile/settings" title="Перейти к личный кабинет">
             <AccountLogo>
               <LoginAfter className="login-after" />
             </AccountLogo>

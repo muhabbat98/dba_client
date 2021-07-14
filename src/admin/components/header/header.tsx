@@ -1,5 +1,5 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   HeaderContainer, HeaderContainerLeft, HeaderContainerRight, HeaderTitle, HeaderNotification, HeaderGoToHome,
   HeaderProfile, HeaderProfileLeft, HeaderProfileRight, AvatarBox, AvatarImg
@@ -11,10 +11,10 @@ import Avatar from '../../assets/images/profile-avatar.png';
 
 const Header = () => {
 
-  const {push} = useHistory();
+  const { replace } = useHistory();
 
-  const goHome = () =>{
-    push('/');
+  const goHome = () => {
+    replace('/');
   }
 
   return <HeaderContainer>
@@ -33,7 +33,7 @@ const Header = () => {
       </HeaderGoToHome>
 
       <HeaderProfile>
-        <HeaderProfileLeft>Diyorbek <br/> Abdushukurov</HeaderProfileLeft>
+        <HeaderProfileLeft>Diyorbek <br /> Abdushukurov</HeaderProfileLeft>
         <HeaderProfileRight>
           <AvatarBox>
             <div>
