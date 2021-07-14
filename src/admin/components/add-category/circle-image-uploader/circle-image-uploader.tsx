@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { ReactComponent as View } from '../../../assets/icons/view.svg';
+import { ReactComponent as Cancel } from '../../../assets/icons/cancel.svg';
+import { useActionCreators } from '../../../../hooks';
 import {
   CircleImageUploaderContainer,
   Label,
@@ -7,9 +10,11 @@ import {
   Title,
   IconContainer,
   UploadedImage,
+  CancelIconContainer,
+  ViewIconContainer,
+  IconWrapper,
   Overlay,
 } from './style';
-import { useActionCreators } from '../../../../hooks';
 
 interface Props {
   title: string;
@@ -64,7 +69,7 @@ const CircleImageUploader: React.FC<Props> = ({
   };
 
   return (
-    <CircleImageUploaderContainer>
+    <CircleImageUploaderContainer isImage={image}>
       <Label htmlFor={id} />
       {!image ? (
         <>
@@ -74,7 +79,21 @@ const CircleImageUploader: React.FC<Props> = ({
       ) : (
         <>
           <UploadedImage src={image} alt="image" />
-          <Overlay></Overlay>
+          <Overlay>
+            <IconWrapper>
+              {/*<ViewIconContainer title="Посмотреть фото ">*/}
+              {/*  <a href={image} target="_blank">*/}
+              {/*    <View />*/}
+              {/*  </a>*/}
+              {/*</ViewIconContainer>*/}
+              <CancelIconContainer
+                title="Убрать фото"
+                onClick={() => setImage(null)}
+              >
+                <Cancel />
+              </CancelIconContainer>
+            </IconWrapper>
+          </Overlay>
         </>
       )}
 
@@ -84,6 +103,8 @@ const CircleImageUploader: React.FC<Props> = ({
         type="file"
         id={id}
         ref={register}
+        //value={image}
+        defaultValue={image}
       />
     </CircleImageUploaderContainer>
   );

@@ -1,33 +1,46 @@
-import React, { lazy } from 'react';
-import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
-import ProtectedRoute from '../protected-route';
+import React from 'react';
+import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Homepage from '../../pages/homepage';
-import Cart from '../../pages/cart';
-import Wishlist from '../../pages/wishlist';
-import Settings from '../../pages/settings';
-import AddProduct from '../../pages/add-product';
-
-import ProductDetail from '../../pages/product-detail';
-
-import Catalog from '../../pages/catalog';
-import Products from '../../pages/products';
+import { useRole, UserRole, useSelector } from '../../hooks';
+import ForSeller from '../../pages/for-seller';
+import ForBuyer from '../../pages/for-buyer';
 
 const Content = () => {
   const { path } = useRouteMatch();
+  const { userRole } = useRole();
+  console.log(userRole);
   return (
     <div>
       <Switch>
-        <Route exact path={path} component={Homepage} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/wishlist" component={Wishlist} />
-        <Route exact path="/product-detail/:id" component={ProductDetail} />
-        <Route exact path="/catalog" component={Catalog} />
-        <Route exact path="/products" component={Products} />
-        <Route exact path="/profile/add-product" component={AddProduct} />
-        <ProtectedRoute path="/profile/settings">
-          <Settings />
-        </ProtectedRoute>
+        <Route exact path="/seller">
+          {userRole === UserRole.SELLER ? <ForSeller /> : <Redirect to="/" />}
+        </Route>
+
+        <Route path={path}>
+          {userRole === UserRole.BUYER || userRole === null ? (
+            <ForBuyer />
+          ) : (
+            <Redirect to="/seller" />
+          )}
+        </Route>
+
         <Redirect to="/" />
+        {/*<ProtectedRouteForBuyer exact path="/cart">*/}
+        {/*  <Cart />*/}
+        {/*</ProtectedRouteForBuyer>*/}
+
+        {/*<ProtectedRouteForBuyer exact path="/wishlist">*/}
+        {/*  <Wishlist />*/}
+        {/*</ProtectedRouteForBuyer>*/}
+
+        {/*<Route exact path="/product-detail/:id" component={ProductDetail} />*/}
+        {/*<Route exact path="/catalog" component={Catalog} />*/}
+        {/*<Route exact path="/products" component={Products} />*/}
+        {/*<Route exact path="/profile/add-product" component={AddProduct} />*/}
+        {/*<ProtectedRoute path="/profile/settings">*/}
+        {/*  <Settings />*/}
+        {/*</ProtectedRoute>*/}
+        {/*<Redirect to="/" />*/}
       </Switch>
     </div>
   );

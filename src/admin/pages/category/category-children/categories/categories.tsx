@@ -26,10 +26,11 @@ interface Props {
 const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
+  const openAddModal = () => {};
+
   return (
     <CategoriesContainer>
-      {}
-      <AddCategory />
+      {/*{<AddCategory />}*/}
       <CategoryHeader />
       {menus.length !== 0 && (
         <CategoryRowHeader>

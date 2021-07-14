@@ -20,8 +20,8 @@ import { useRole } from '../../../hooks';
 const Content = () => {
   let { path } = useRouteMatch();
   const { isBuyer } = useRole();
-  console.log("isBuyer = ", isBuyer)
-  console.log("path = ", path)
+  console.log('isBuyer = ', isBuyer);
+  console.log('path = ', path);
   return (
     <ContentContainer>
       <Switch>
@@ -35,11 +35,7 @@ const Content = () => {
           component={DeliveryAddress}
         />
 
-        <Route
-          exact
-          path={`${path}/checkoo`}
-          component={DeliveryAddress}
-        />
+        <Route exact path={`${path}/checkoo`} component={DeliveryAddress} />
 
         <Route exact path={`${path}/personal-data`} component={PersonalData} />
 

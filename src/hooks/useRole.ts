@@ -7,20 +7,23 @@ export enum UserRole {
 
 interface UserRoleType {
   isBuyer: boolean;
-  userRole: UserRole;
+  userRole: UserRole | null;
 }
 
 export const useRole = (): UserRoleType => {
   const { roles } = useSelector((state) => state.user);
-  let isBuyer: boolean;
-  let userRole: UserRole;
+  let isBuyer: any;
+  let userRole: UserRole | null;
 
   if (roles === 'ROLE_BUYER') {
     isBuyer = true;
     userRole = UserRole.BUYER;
-  } else {
+  } else if (roles === 'ROLE_SELLER') {
     isBuyer = false;
     userRole = UserRole.SELLER;
+  } else {
+    isBuyer = false;
+    userRole = null;
   }
 
   return {

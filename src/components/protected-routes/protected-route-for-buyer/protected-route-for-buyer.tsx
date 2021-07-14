@@ -1,12 +1,13 @@
+import { FC } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { useRole } from '../../../hooks';
 
-export const ProtectedRouteForBuyer: React.FC<RouteProps> = ({
+export const ProtectedRouteForBuyer: FC<RouteProps> = ({
   children,
   ...rest
 }) => {
   const { isBuyer } = useRole();
-
+  console.log(isBuyer);
   return (
     <Route
       {...rest}
@@ -14,7 +15,7 @@ export const ProtectedRouteForBuyer: React.FC<RouteProps> = ({
         isBuyer ? (
           children
         ) : (
-          <Redirect to={{ pathname: '/settings', state: { from: location } }} />
+          <Redirect to={{ pathname: '/', state: { from: location } }} />
         )
       }
     />

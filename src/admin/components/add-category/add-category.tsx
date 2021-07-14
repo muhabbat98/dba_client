@@ -25,6 +25,8 @@ const AddCategory = () => {
   const [data, setData] = useState({
     name: '',
     description: '',
+    icon: '',
+    photo: '',
   });
 
   const { register, watch, setValue, handleSubmit, errors } =
@@ -45,7 +47,7 @@ const AddCategory = () => {
             register={register}
             icon={photoIcon}
             title="Фото"
-            //imageProps="https://www.gravatar.com/avatar/7bda2a2eac33e696cf0978dc9d24b5f0?s=328&d=identicon&r=PG&f=1"
+            imageProps="https://www.gravatar.com/avatar/7bda2a2eac33e696cf0978dc9d24b5f0?s=328&d=identicon&r=PG&f=1"
             name="photo"
           />
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
