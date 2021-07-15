@@ -1,6 +1,6 @@
 import Main from './pages/main';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { DashboardContainer, Section } from './style';
+import { DashboardContainer } from './style';
 import Confirm from '../components/confirm';
 import Alert from '../components/alert';
 

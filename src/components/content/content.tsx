@@ -5,6 +5,10 @@ import { useRole, UserRole, useSelector } from '../../hooks';
 import ForSeller from '../../pages/for-seller';
 import ForBuyer from '../../pages/for-buyer';
 
+//seller
+
+///seller/settings
+
 const Content = () => {
   const { path } = useRouteMatch();
   const { userRole } = useRole();
@@ -12,7 +16,7 @@ const Content = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/seller">
+        <Route path="/seller">
           {userRole === UserRole.SELLER ? <ForSeller /> : <Redirect to="/" />}
         </Route>
 

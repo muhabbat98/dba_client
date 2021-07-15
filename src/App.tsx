@@ -5,7 +5,7 @@ import MainLoader from './components/main-loader';
 import Main from './pages/main';
 import AdminProtectedRoute from './admin/components/admin-protected-route';
 import './App.css';
-import { useError } from './hooks';
+//import { useError } from './hooks';
 
 const Admin = lazy(() => import('./admin'));
 const Old = lazy(() => import('./admin2'));
@@ -19,11 +19,11 @@ function App() {
             <Admin />
           </Suspense>
         </AdminProtectedRoute>
-        <AdminProtectedRoute path="/admin2">
-          <Suspense fallback={<MainLoader />}>
-            <Old />
-          </Suspense>
-        </AdminProtectedRoute>
+        {/*<AdminProtectedRoute path="/admin2">*/}
+        {/*  <Suspense fallback={<MainLoader />}>*/}
+        {/*    <Old />*/}
+        {/*  </Suspense>*/}
+        {/*</AdminProtectedRoute>*/}
         <Route path="/" component={Main} />
       </Switch>
     </div>

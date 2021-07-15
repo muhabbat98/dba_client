@@ -6,8 +6,6 @@ import { MenuContainer } from './style';
 const Menu = () => {
   let { url } = useRouteMatch();
   const { pathname } = useLocation();
-  console.log('pathname', pathname);
-  console.log(['/category'].includes(pathname));
 
   return (
     <MenuContainer>
