@@ -13,4 +13,5 @@ export const Title = styled.h1`
 
 export const MenuAndContent = styled.div`
   display: flex;
+  align-items: flex-start;
 `;
