@@ -1,7 +1,22 @@
 import React from 'react';
+import BuyerMenu from "./buyer-menu";
+import BuyerContent from "./buyer-content";
+import Title from '../../components/products-title';
+import {SettingsForBuyerContainer, MenuAndContent} from './style';
+import Container from "../../components/grid/container";
 
 const SettingsForBuyer = () => {
-  return <h1>SettingsForBuyer</h1>;
+  return (
+      <Container>
+          <SettingsForBuyerContainer>
+              <Title>Настройки </Title>
+              <MenuAndContent>
+                  <BuyerMenu />
+                  <BuyerContent />
+              </MenuAndContent>
+          </SettingsForBuyerContainer>
+      </Container>
+  )
 };
 
 export default SettingsForBuyer;

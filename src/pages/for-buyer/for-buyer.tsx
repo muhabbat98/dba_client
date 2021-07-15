@@ -2,7 +2,7 @@ import React from 'react';
 import { ForBuyerContainer } from './style';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Homepage from '../homepage';
-import { UserRole } from '../../hooks';
+import {useRole, UserRole} from '../../hooks';
 import ForSeller from '../for-seller';
 import Wishlist from '../wishlist';
 import Products from '../products';
@@ -14,11 +14,14 @@ import {
   ProtectedRouteForBuyer,
   ProtectedRouteForSeller,
 } from '../../components/protected-routes';
-import Settings from '../settings';
+import Settings from '../settings-for-buyer';
 
 const ForBuyer = () => {
   const { path, url } = useRouteMatch();
   console.log('path', path);
+  const { isBuyer } = useRole();
+
+  console.log("isBuyer ==> ", isBuyer);
   return (
     <ForBuyerContainer>
       <Switch>
@@ -32,6 +35,7 @@ const ForBuyer = () => {
         <ProtectedRouteForBuyer path="/settings">
           <Settings />
         </ProtectedRouteForBuyer>
+
         <Redirect to="/" />
       </Switch>
     </ForBuyerContainer>

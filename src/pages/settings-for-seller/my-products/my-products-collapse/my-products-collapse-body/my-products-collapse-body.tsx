@@ -6,13 +6,13 @@ import {
    RedactirovatBtn, DedactirovatBtn
 } from './style';
 
-import MyProduct1 from '../../../../../../admin/assets/images/goods-item1.png';
-import MyProduct2 from '../../../../../../admin/assets/images/goods-item2.png';
-import MyProduct3 from '../../../../../../admin/assets/images/goods-item3.png';
-import MyProduct4 from '../../../../../../admin/assets/images/goods-item4.png';
-import MyProduct5 from '../../../../../../admin/assets/images/goods-item5.png';
-import MyProduct6 from '../../../../../../admin/assets/images/goods-item6.png';
-import MyProduct7 from '../../../../../../admin/assets/images/goods-item7.png';
+import MyProduct1 from '../../../../../admin/assets/images/goods-item1.png';
+import MyProduct2 from '../../../../../admin/assets/images/goods-item2.png';
+import MyProduct3 from '../../../../../admin/assets/images/goods-item3.png';
+import MyProduct4 from '../../../../../admin/assets/images/goods-item4.png';
+import MyProduct5 from '../../../../../admin/assets/images/goods-item5.png';
+import MyProduct6 from '../../../../../admin/assets/images/goods-item6.png';
+import MyProduct7 from '../../../../../admin/assets/images/goods-item7.png';
 
 const MyProductsCollapseBody = () => {
    return (

@@ -5,8 +5,8 @@ import {
    MyProductsHeadItem, MyProductsFilterSection,
 } from './style';
 
-import { ReactComponent as FilterIcon } from '../../../../../assets/icons/filter-icon.svg';
-import { ReactComponent as AddProductIcon } from '../../../../../assets/icons/add-product-icon.svg'
+import { ReactComponent as FilterIcon } from '../../../../assets/icons/filter-icon.svg';
+import { ReactComponent as AddProductIcon } from '../../../../assets/icons/add-product-icon.svg'
 import MyProductsCollapse from '../my-products-collapse';
 import SettingsInput from '../../../../components/settings-input';
 import SettingsDropdown from '../../../../components/settings-dropdown';

@@ -1,13 +1,13 @@
 import React,{useState} from "react";
 import Button from "../../../../../../components/button";
 import formatMoney from "../../../../../../utils/format-money";
-import {ReactComponent as BoxGray} from '../../../../../../../assets/icons/box-gray.svg'
-import {ReactComponent as BoxBlue} from '../../../../../../../assets/icons/box-blue.svg'
-import {ReactComponent as CarGray} from '../../../../../../../assets/icons/car-gray.svg'
-import {ReactComponent as CarBlue} from '../../../../../../../assets/icons/car-blue.svg'
-import {ReactComponent as SuccessGray} from '../../../../../../../assets/icons/success-gray.svg'
-import {ReactComponent as SuccessBlue} from '../../../../../../../assets/icons/success-blue.svg'
-import {ReactComponent as DownArrow} from '../../../../../../../assets/icons/down-arrow2.svg'
+import {ReactComponent as BoxGray} from '../../../../../../assets/icons/box-gray.svg'
+import {ReactComponent as BoxBlue} from '../../../../../../assets/icons/box-blue.svg'
+import {ReactComponent as CarGray} from '../../../../../../assets/icons/car-gray.svg'
+import {ReactComponent as CarBlue} from '../../../../../../assets/icons/car-blue.svg'
+import {ReactComponent as SuccessGray} from '../../../../../../assets/icons/success-gray.svg'
+import {ReactComponent as SuccessBlue} from '../../../../../../assets/icons/success-blue.svg'
+import {ReactComponent as DownArrow} from '../../../../../../assets/icons/down-arrow2.svg'
 import {
   ActiveProductsItemContainer,
   InfoWrapper,

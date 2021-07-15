@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Backdrop from '../../../../../components/backdrop'
-import { ReactComponent as CloseIcon } from '../../../../../../assets/icons/ic_close.svg';
+import { ReactComponent as CloseIcon } from '../../../../../assets/icons/ic_close.svg';
 import ProductsTitle from '../../../../../components/products-title';
 import Input from '../../../../../components/input';
 import Dropdown from '../../../../../components/drop-down';

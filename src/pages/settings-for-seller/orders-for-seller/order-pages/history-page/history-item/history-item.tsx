@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import formatMoney from '../../../../../../utils/format-money';
 import Button from '../../../../../../components/button';
-import { ReactComponent as ArrowIcon } from '../../../../../../../assets/icons/arrow-down.svg';
+import { ReactComponent as ArrowIcon } from '../../../../../../assets/icons/arrow-down.svg';
 import {
   Tr,
   InfoWrapper,

@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import HistoryPage from '../history-page';
 import ActiveProductsPage from '../active-products-page';
 import CreateDispute from '../create-dispute';
-import {ReactComponent as FilterIcon} from '../../../../../../assets/icons/filter-icon.svg';
+import {ReactComponent as FilterIcon} from '../../../../../assets/icons/filter-icon.svg';
 import {MainWrapper,OrderHeader,AppBar1,AppBar2,FilterButtonContainer} from './style';
 
 interface Propses{

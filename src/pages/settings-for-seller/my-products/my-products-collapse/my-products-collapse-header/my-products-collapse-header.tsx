@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { MyProductsCollapseHeaderContainer, MyProductsCollapseHeaderItem, ArrowButton } from './style';
 
-import { ReactComponent as Arrow } from '../../../../../../assets/icons/down-arrow.svg';
+import { ReactComponent as Arrow } from '../../../../../assets/icons/down-arrow.svg';
 import MyProductsCollapseBody from '../my-products-collapse-body';
 
 const MyProductsCollapseHeader = () => {
