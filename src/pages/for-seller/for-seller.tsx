@@ -8,7 +8,8 @@ import Settings from '../settings-for-seller';
 const ForSeller = () => {
   console.log('ForSeller');
   const { path } = useRouteMatch();
-  //console.log(match);
+  console.log('ForSeller path = ', path);
+
   return (
     <HomePageForSellerContainer>
       <Switch>
@@ -16,7 +17,7 @@ const ForSeller = () => {
 
         {/*<Route exact path={`/seller/settings`} component={Homepage} />*/}
 
-        <Route exact path={`${path}/settings`} component={Settings} />
+        <Route path={`${path}/settings`} component={Settings} />
         {/*<ProtectedRouteForSeller path="/seller/settings">*/}
         {/*  <Settings />*/}
         {/*</ProtectedRouteForSeller>*/}
