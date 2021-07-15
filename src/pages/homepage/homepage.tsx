@@ -213,7 +213,7 @@ const Homepage = () => {
       <Cont>
         <Container>
           <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-          <Slider data={data}/>
+          <Slider data={data} />
         </Container>
       </Cont>
 
