@@ -12,7 +12,7 @@ import ForBuyer from '../../pages/for-buyer';
 const Content = () => {
   const { path } = useRouteMatch();
   const { userRole } = useRole();
-  console.log(userRole);
+  console.log(userRole, 'rtjhtr');
   return (
     <div>
       <Switch>
