@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { axios, useActionCreators } from '../../../../hooks';
-import PersonalHeaderLeft from '../personal-info/personal-header-left';
+import { axios, useActionCreators } from '../../../hooks';
+import PersonalHeaderLeft from './personal-header-left';
 import { PersonalDataContainer, Div } from './style';
 import Login from './login';
 import Password from './password';
-import CircleLoader from '../../../../components/circle-loader';
+import CircleLoader from '../../../components/circle-loader';
 
 const Notifications = () => {
   const [personalData, setPersonalData] = useState<any>(null);

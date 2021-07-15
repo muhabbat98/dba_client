@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useActionCreators } from '../../../../../../../../hooks';
-import Button from '../../../../../../../../components/button';
+import { useActionCreators } from '../../../../../../../hooks';
+import Button from '../../../../../../../components/button';
 import { NumberFormContainer } from './style';
 import { Caption, Div, Error, ErrorContainer } from '../password-form/style';
 import { useForm } from 'react-hook-form';
-import Input from '../../../../../../../../components/input';
-import CircleLoader from '../../../../../../../../components/circle-loader';
+import Input from '../../../../../../../components/input';
+import CircleLoader from '../../../../../../../components/circle-loader';
 
 interface FormInputs {
   phone: string;
@@ -54,11 +54,11 @@ const NumberForm: React.FC<Props> = ({ phoneHandler }) => {
       <Caption>Пожалуйста, введите новый номер</Caption>
       <form onSubmit={handleSubmit(submit)}>
         <Input
-          name='phone'
+          name="phone"
           control={control}
-          inputType='phone'
-          label='Hовый номер'
-          placeholder='Hовый номер'
+          inputType="phone"
+          label="Hовый номер"
+          placeholder="Hовый номер"
         />
         <Div style={{ marginBottom: '12px' }} />
         {error ? (

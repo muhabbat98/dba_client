@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useActionCreators } from '../../../../../../../../hooks';
-import Button from '../../../../../../../../components/button';
-import CircleLoader from '../../../../../../../../components/circle-loader';
-import Password from '../../../../../../../../components/login/login-inputs/password';
+import { useActionCreators } from '../../../../../../../hooks';
+import Button from '../../../../../../../components/button';
+import CircleLoader from '../../../../../../../components/circle-loader';
+import Password from '../../../../../../../components/login/login-inputs/password';
 import {
   PasswordFormContainer,
   Caption,
@@ -60,7 +60,7 @@ const PasswordForm: React.FC<Props> = ({ confirmPassword }) => {
         Чтобы изменить свой номер мобильного телефона, введите пароль
       </Caption>
       <form onSubmit={handleSubmit(submit)}>
-        <Password name='password' register={register} label='Пароль' />
+        <Password name="password" register={register} label="Пароль" />
 
         {error ? (
           <ErrorContainer>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Password from '../../../../../../../components/login/login-inputs/password';
-import Button from '../../../../../../../components/button';
+import Password from '../../../../../../components/login/login-inputs/password';
+import Button from '../../../../../../components/button';
 import { ReactComponent as CloseIcon } from '../../../../../../../assets/icons/ic_close.svg';
 
 import {
@@ -14,8 +14,8 @@ import {
   CloseIconContainer,
   Error,
 } from './style';
-import { axios, useActionCreators } from '../../../../../../../hooks';
-import CircleLoader from '../../../../../../../components/circle-loader';
+import { axios, useActionCreators } from '../../../../../../hooks';
+import CircleLoader from '../../../../../../components/circle-loader';
 
 interface Props {
   closeModal: () => void;
@@ -96,16 +96,16 @@ const PasswordForm: React.FC<Props> = ({ closeModal }) => {
       <Title>Пожалуйста введите текущий пароль</Title>
       <form onSubmit={handleSubmit(submit)}>
         <Password
-          label='Текущий пароль'
-          name='currentPassword'
+          label="Текущий пароль"
+          name="currentPassword"
           register={register}
         />
         <Div />
-        <Password label='Новый пароль' name='password' register={register} />
+        <Password label="Новый пароль" name="password" register={register} />
         <Div />
         <Password
-          label='Повторите новый пароль'
-          name='rePassword'
+          label="Повторите новый пароль"
+          name="rePassword"
           register={register}
         />
         {error ? <Error>{error}</Error> : <Div2 />}

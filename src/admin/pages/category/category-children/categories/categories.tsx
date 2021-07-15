@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CategoriesContainer,
   CategoryRowHeader,
@@ -17,6 +17,7 @@ import CategoryRow from './category-row';
 import CategoryHeader from '../../../../components/category-header';
 import Empty from '../../../../components/empty';
 import AddCategory from '../../../../components/add-category';
+import { axios } from '../../../../../hooks';
 
 interface Props {
   menus: any;
@@ -25,13 +26,32 @@ interface Props {
 
 const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [image, setImage] = useState<any>();
 
   const openAddModal = () => {};
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get(
+          'images/test/60eecf7e41876e336bb858b7'
+        );
+        const data = await response.data;
+        setImage(data);
+      } catch (e) {}
+    })();
+  }, []);
 
   return (
     <CategoriesContainer>
       {/*{<AddCategory />}*/}
       <CategoryHeader />
+      {image && (
+        <img
+          src={`data:${image.contentType};base64,${image.body}`}
+          alt={'hnjk'}
+        />
+      )}
       {menus.length !== 0 && (
         <CategoryRowHeader>
           <No>
@@ -49,7 +69,6 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
           <Actions> </Actions>
         </CategoryRowHeader>
       )}
-
       {menus.length === 0 ? (
         <Empty
           callback={() => console.log()}

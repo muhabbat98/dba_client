@@ -1,5 +1,5 @@
 import React from 'react';
-import Backdrop from '../../../../../../components/backdrop';
+import Backdrop from '../../../../../components/backdrop';
 import PasswordForm from './password-form';
 import { PasswordChangeFormContainer } from './style';
 

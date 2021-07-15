@@ -1,7 +1,7 @@
 import React from 'react';
 import { SmsFormContainer } from './style';
 import { Caption } from '../password-form/style';
-import Sms from '../../../../../../../../components/sms';
+import Sms from '../../../../../../../components/sms';
 
 interface Props {
   phoneNumber: string;

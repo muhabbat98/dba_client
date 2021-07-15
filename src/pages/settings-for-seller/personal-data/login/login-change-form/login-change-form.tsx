@@ -1,5 +1,5 @@
 import React from 'react';
-import Backdrop from '../../../../../../components/backdrop';
+import Backdrop from '../../../../../components/backdrop';
 import LoginForms from './login-forms';
 import { LoginChangeFormContainer } from './style';
 

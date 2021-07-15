@@ -5,7 +5,7 @@ import NumberForm from './number-form';
 import { ReactComponent as CloseIcon } from '../../../../../../../assets/icons/ic_close.svg';
 import Line from './line';
 import { LoginFormsContainer, Title, CloseIconContainer } from './style';
-import { axios, useActionCreators } from '../../../../../../../hooks';
+import { axios, useActionCreators } from '../../../../../../hooks';
 
 export enum LoginChangeFormSteps {
   PASSWORD,
