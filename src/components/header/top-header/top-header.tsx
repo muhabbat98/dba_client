@@ -13,7 +13,7 @@ import { useRole, UserRole } from '../../../hooks';
 
 const TopHeader = () => {
   const { userRole } = useRole();
-  return userRole === UserRole.SELLER ? (
+  return userRole === UserRole.SELLER ? null : (
     <TopHeaderContainer>
       <Container>
         <TopHeaderWrapper>
@@ -42,7 +42,7 @@ const TopHeader = () => {
         </TopHeaderWrapper>
       </Container>
     </TopHeaderContainer>
-  ) : null;
+  );
 };
 
 export default TopHeader;
