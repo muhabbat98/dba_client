@@ -2,7 +2,7 @@ import React from 'react';
 import { ForBuyerContainer } from './style';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Homepage from '../homepage';
-import {useRole, UserRole} from '../../hooks';
+import { useRole, UserRole } from '../../hooks';
 import ForSeller from '../for-seller';
 import Wishlist from '../wishlist';
 import Products from '../products';

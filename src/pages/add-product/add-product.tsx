@@ -10,12 +10,16 @@ import {
 import { ReactComponent as ListIcon } from '../../assets/icons/ic_tv.svg';
 import { axios, useError } from '../../hooks';
 import CircleLoader from '../../components/circle-loader';
+import Container from '../../components/grid/container';
+import AddProductModal from './add-product-modal';
 
 const AddProduct = () => {
   const { checkError } = useError();
 
   const [allProduct, setAllProduct] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [id, setId] = useState<string>('');
 
   useEffect(() => {
     getAllProducts();
@@ -35,23 +39,35 @@ const AddProduct = () => {
     }
   };
 
-  console.log('allProduct = ', allProduct);
+  const openModalHandle = (id: string) => {
+    setOpenModal(true);
+    setId(id);
+  }
+
+  const modalClose = () => {
+    setOpenModal(false);
+  }
 
   return (
-    <AddProductContainer>
-      {loading ? (
-        <CircleLoader />
-      ) : (
-        <AddProductList>
-          {allProduct.map((item: any) => (
-            <AddProductItem>
-              <ListIcon />
-              <ItemText>{item.name}</ItemText>
-            </AddProductItem>
-          ))}
-        </AddProductList>
-      )}
-    </AddProductContainer>
+    <Container>
+      <AddProductContainer>
+        {loading ? (
+          <CircleLoader />
+        ) : (
+          <AddProductList>
+            {
+              openModal && <AddProductModal itemId={id} modalClose={modalClose} />
+            }
+            {allProduct.map((item: any) => (
+              <AddProductItem onClick={() => openModalHandle(item.id)} key={item.id}>
+                <ListIcon />
+                <ItemText>{item.name}</ItemText>
+              </AddProductItem>
+            ))}
+          </AddProductList>
+        )}
+      </AddProductContainer>
+    </Container>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   ProtectedRouteForBuyer,
   ProtectedRouteForSeller,
 } from '../protected-routes';
+import Erro404 from '../404';
 
 const Content = () => {
   return (
@@ -29,7 +30,7 @@ const Content = () => {
         </ProtectedRouteForBuyer>
 
         <Route path="*">
-          <h1>404</h1>
+          <Erro404 />
         </Route>
       </Switch>
     </div>
