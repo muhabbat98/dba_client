@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Login from '../login';
-import { useSelector } from '../../hooks/useSelector';
+import { useSelector } from '../../hooks';
 import { ReactComponent as Account } from '../../assets/icons/account.svg';
 import { ReactComponent as LoginAfter } from '../../assets/icons/after_login.svg';
 import { ReactComponent as Heart } from '../../assets/icons/heart2.svg';
@@ -12,18 +11,12 @@ import {
   Action,
   AccountLogo,
   CartLogo,
-  Title,
-  Price,
-  Info,
   HeartLogo,
-  CartContainer,
   Count,
 } from './style';
 import { useActionCreators } from '../../hooks';
 
 const MiddleHeaderAction = () => {
-  const [open, setOpen] = useState<boolean>(false);
-
   const { wishlist, cart, user } = useSelector((state) => ({
     wishlist: state.wishlist.wishlistItems.length,
     cart: state.cart.totalCount,
@@ -49,11 +42,6 @@ const MiddleHeaderAction = () => {
           </AccountLogo>
         </Action>
       )}
-      {/* <Action onClick={() => setOpen(true)}>
-        <AccountLogo>
-          <Account />
-        </AccountLogo>
-      </Action> */}
       <Action>
         <HeartLogo>
           <Link to="/wishlist">
@@ -69,12 +57,6 @@ const MiddleHeaderAction = () => {
             <Cart />
           </Link>
         </CartLogo>
-        {/* <CartContainer>
-          <Info>
-            <Title>Сумма</Title>
-            <Price>120 000 </Price>
-          </Info> 
-        </CartContainer> */}
       </Action>
     </MiddleHeaderActionContainer>
   );
