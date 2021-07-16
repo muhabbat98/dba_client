@@ -1,50 +1,36 @@
 import React from 'react';
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Homepage from '../../pages/homepage';
-import { useRole, UserRole, useSelector } from '../../hooks';
 import ForSeller from '../../pages/for-seller';
 import ForBuyer from '../../pages/for-buyer';
-
-//seller
-
-///seller/settings
+import ProductDetail from '../../pages/product-detail';
+import Catalog from '../../pages/catalog';
+import Products from '../../pages/products';
+import {
+  ProtectedRouteForBuyer,
+  ProtectedRouteForSeller,
+} from '../protected-routes';
 
 const Content = () => {
-  const { path } = useRouteMatch();
-  const { userRole } = useRole();
-  console.log(userRole, 'rtjhtr');
   return (
     <div>
       <Switch>
-        <Route path="/seller">
-          {userRole === UserRole.SELLER ? <ForSeller /> : <Redirect to="/" />}
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/product-detail/:id" component={ProductDetail} />
+        <Route exact path="/catalog" component={Catalog} />
+        <Route exact path="/products" component={Products} />
+
+        <ProtectedRouteForSeller path="/seller">
+          <ForSeller />
+        </ProtectedRouteForSeller>
+
+        <ProtectedRouteForBuyer path="/settings">
+          <ForBuyer />
+        </ProtectedRouteForBuyer>
+
+        <Route path="*">
+          <h1>404</h1>
         </Route>
-
-        <Route path={path}>
-          {userRole === UserRole.BUYER || userRole === null ? (
-            <ForBuyer />
-          ) : (
-            <Redirect to="/seller" />
-          )}
-        </Route>
-
-        <Redirect to="/" />
-        {/*<ProtectedRouteForBuyer exact path="/cart">*/}
-        {/*  <Cart />*/}
-        {/*</ProtectedRouteForBuyer>*/}
-
-        {/*<ProtectedRouteForBuyer exact path="/wishlist">*/}
-        {/*  <Wishlist />*/}
-        {/*</ProtectedRouteForBuyer>*/}
-
-        {/*<Route exact path="/product-detail/:id" component={ProductDetail} />*/}
-        {/*<Route exact path="/catalog" component={Catalog} />*/}
-        {/*<Route exact path="/products" component={Products} />*/}
-        {/*<Route exact path="/profile/add-product" component={AddProduct} />*/}
-        {/*<ProtectedRoute path="/profile/settings">*/}
-        {/*  <Settings />*/}
-        {/*</ProtectedRoute>*/}
-        {/*<Redirect to="/" />*/}
       </Switch>
     </div>
   );

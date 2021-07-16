@@ -9,13 +9,15 @@ import {
   Menu,
   MenuContainer,
 } from './style';
+import { useRole, UserRole } from '../../../hooks';
 
 const TopHeader = () => {
-  return (
+  const { userRole } = useRole();
+  return userRole === UserRole.SELLER ? (
     <TopHeaderContainer>
       <Container>
         <TopHeaderWrapper>
-          <DropdownMenu id='regions'>
+          <DropdownMenu id="regions">
             <p default={true}>Ташкент</p>
             <p>Андижан</p>
             <p>Бухара</p>
@@ -31,7 +33,7 @@ const TopHeader = () => {
               <MenuItem>Контакты</MenuItem>
             </Menu>
           </MenuContainer>
-          <DropdownMenu id='langs'>
+          <DropdownMenu id="langs">
             <p>O'zbekcha</p>
             <p default={true}>Русский</p>
             <p>Ўзбекча</p>
@@ -40,7 +42,7 @@ const TopHeader = () => {
         </TopHeaderWrapper>
       </Container>
     </TopHeaderContainer>
-  );
+  ) : null;
 };
 
 export default TopHeader;

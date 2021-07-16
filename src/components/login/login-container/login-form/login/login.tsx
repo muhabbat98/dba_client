@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { axios, useActionCreators } from '../../../../../hooks';
+import { axios, useActionCreators, UserRole } from '../../../../../hooks';
 import LoginFooter from '../../../login-footer';
 import Phone from '../../../login-inputs/phone';
 import Password from '../../../login-inputs/password';
@@ -9,12 +9,14 @@ import { useLogin } from '../../../context';
 import { AlertPosition } from '../../../../../utils/alert-position-enum';
 import { Div, Error, Container } from './style';
 import CircleLoader from '../../../../circle-loader';
+import { useLocation, useHistory } from 'react-router-dom';
 
 interface FieldProps {
   pasword: string;
 }
 
 const Login = () => {
+  const { push } = useHistory();
   const { setAlertMessage, setUser } = useActionCreators();
   const { register, handleSubmit } = useForm<FieldProps>();
   const [error, setError] = useState<string | null>('');
@@ -60,6 +62,9 @@ const Login = () => {
       const data = await respone.data;
       setUser(data);
       setLoading(false);
+      if (data.roles === UserRole.SELLER) {
+        push('/seller');
+      }
       closeLogin();
       // window.location.reload();
     } catch (error) {

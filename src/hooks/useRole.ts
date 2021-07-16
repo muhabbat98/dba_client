@@ -1,8 +1,8 @@
 import { useSelector } from './useSelector';
 
 export enum UserRole {
-  BUYER,
-  SELLER,
+  BUYER = 'ROLE_BUYER',
+  SELLER = 'ROLE_SELLER',
 }
 
 interface UserRoleType {
