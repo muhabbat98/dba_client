@@ -1,63 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from '../../hooks';
-import { ReactComponent as Account } from '../../assets/icons/account.svg';
-import { ReactComponent as LoginAfter } from '../../assets/icons/after_login.svg';
-import { ReactComponent as Heart } from '../../assets/icons/heart2.svg';
-import { ReactComponent as Cart } from '../../assets/icons/shopping-cart.svg';
-import { checkUSer } from '../../utils/check-user';
-import {
-  MiddleHeaderActionContainer,
-  Action,
-  AccountLogo,
-  CartLogo,
-  HeartLogo,
-  Count,
-} from './style';
-import { useActionCreators } from '../../hooks';
+import { useSellerPathname } from '../../hooks';
+import MiddleHeaderActionForBuyer from './middle-header-action-for-buyer';
+import MiddleHeaderActionForSeller from './middle-header-action-for-seller';
+
+import { MiddleHeaderActionContainer } from './style';
 
 const MiddleHeaderAction = () => {
-  const { wishlist, cart, user } = useSelector((state) => ({
-    wishlist: state.wishlist.wishlistItems.length,
-    cart: state.cart.totalCount,
-    user: checkUSer(state.user),
-  }));
-
-  const { openLogin } = useActionCreators();
-
+  const { isSellerPath } = useSellerPathname();
   return (
     <MiddleHeaderActionContainer>
-      {user ? (
-        <Action>
-          <Link to="/settings" title="Перейти к личный кабинет">
-            <AccountLogo>
-              <LoginAfter className="login-after" />
-            </AccountLogo>
-          </Link>
-        </Action>
+      {isSellerPath ? (
+        <MiddleHeaderActionForSeller />
       ) : (
-        <Action onClick={openLogin}>
-          <AccountLogo>
-            <Account />
-          </AccountLogo>
-        </Action>
+        <MiddleHeaderActionForBuyer />
       )}
-      <Action>
-        <HeartLogo>
-          <Link to="/wishlist">
-            {wishlist > 0 && <Count>{wishlist}</Count>}
-            <Heart />
-          </Link>
-        </HeartLogo>
-      </Action>
-      <Action>
-        <CartLogo>
-          <Link to="/cart">
-            {cart > 0 && <Count>{cart}</Count>}
-            <Cart />
-          </Link>
-        </CartLogo>
-      </Action>
     </MiddleHeaderActionContainer>
   );
 };

@@ -9,11 +9,13 @@ import {
   Menu,
   MenuContainer,
 } from './style';
-import { useRole, UserRole } from '../../../hooks';
+import { useLocation } from 'react-router-dom';
+import { useSellerPathname } from '../../../hooks';
 
 const TopHeader = () => {
-  const { userRole } = useRole();
-  return userRole === UserRole.SELLER ? null : (
+  const { isSellerPath } = useSellerPathname();
+
+  return isSellerPath ? null : (
     <TopHeaderContainer>
       <Container>
         <TopHeaderWrapper>
