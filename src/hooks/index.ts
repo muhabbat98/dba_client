@@ -3,6 +3,7 @@ import { axios, useAxios } from './useAxios';
 import { useSelector } from './useSelector';
 import { UserRole, useRole } from './useRole';
 import { useError } from './useError';
+import { useSellerPathname } from './useSellerPathname';
 
 export {
   useActionCreators,
@@ -12,4 +13,5 @@ export {
   UserRole,
   useRole,
   useError,
+  useSellerPathname,
 };
