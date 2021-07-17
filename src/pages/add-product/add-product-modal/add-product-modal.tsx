@@ -26,19 +26,29 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const { checkError } = useError();
 
   const [menu, setMenu] = useState<any>(null);
+  const [prevIds, setPrevIds] = useState<any>([]);
   const [id, setId] = useState<any>(itemId);
   const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getChildMenuItem();
+    console.log('useEffect useEffect');
   }, [id]);
+
+
+  useEffect(() => {
+    setPrevIds([...prevIds, itemId]);
+  }, []);
 
   const getChildMenuItem = async () => {
     setLoading(true);
     try {
       const response = await axios.get('catalog?parentId=' + id);
       const data = await response.data;
-      setMenu(data);
+      if (data.length > 0) {
+        setMenu(data);
+      }
+
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -46,9 +56,44 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
     }
   }
 
+  const setItemId = (id: string) => {
+    setId(id);
+    setPrevIds([...prevIds, id])
+  }
+
+  const backHandle = async () => {
+    setLoading(true);
+
+    console.log("prevIds => ", prevIds);
+
+    let id = prevIds.pop();
+
+    console.log("ID ==== > ", id);
+
+    if (id.length > 0) {
+      try {
+        const response = await axios.get('catalog?parentId=' + id[0]);
+        const data = await response.data;
+        console.log("data == > ", data);
+
+        setMenu(data);
+
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        checkError(error);
+      }
+    } else {
+      closeModal();
+    }
+  }
+
   const closeModal = () => {
     modalClose();
   }
+
+
+  console.log('prevIds = ', prevIds);
 
   return (
     <>
@@ -56,9 +101,9 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
 
       <AddProductModalContainer isLoading={isLoading}>
         {
-          isLoading ? <CircleLoader style={{ position: 'absolute' }} /> : (
+          isLoading ? <CircleLoader style={{ position: 'absolute', borderRadius: '16px' }} /> : (
             <>
-              <BackButton>
+              <BackButton onClick={backHandle}>
                 <Back />
               </BackButton>
 
@@ -85,7 +130,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
               <AddProductModalMenu>
                 {
                   menu && menu.map((item: any, index: number) => (
-                    <AddProductModalMenuItem key={item.id} onClick={() => setId(item.id)}>
+                    <AddProductModalMenuItem key={item.id} onClick={() => setItemId(item.id)}>
                       <ProductOrder>{index + 1}</ProductOrder><ProductName>{item.name}</ProductName>
                     </AddProductModalMenuItem>)
                   )
