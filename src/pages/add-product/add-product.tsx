@@ -42,11 +42,11 @@ const AddProduct = () => {
   const openModalHandle = (id: string) => {
     setOpenModal(true);
     setId(id);
-  }
+  };
 
   const modalClose = () => {
     setOpenModal(false);
-  }
+  };
 
   return (
     <Container>
@@ -55,11 +55,14 @@ const AddProduct = () => {
           <CircleLoader />
         ) : (
           <AddProductList>
-            {
-              openModal && <AddProductModal itemId={id} modalClose={modalClose} />
-            }
+            {openModal && (
+              <AddProductModal itemId={id} modalClose={modalClose} />
+            )}
             {allProduct.map((item: any) => (
-              <AddProductItem onClick={() => openModalHandle(item.id)} key={item.id}>
+              <AddProductItem
+                onClick={() => openModalHandle(item.id)}
+                key={item.id}
+              >
                 <ListIcon />
                 <ItemText>{item.name}</ItemText>
               </AddProductItem>

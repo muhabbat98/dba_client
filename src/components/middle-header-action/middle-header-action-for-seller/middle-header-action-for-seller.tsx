@@ -1,5 +1,6 @@
 import React from 'react';
 import src from './image.png';
+import { ReactComponent as Logout } from './logout.svg';
 import {
   MiddleHeaderActionForSellerContainer,
   Img,
@@ -7,7 +8,10 @@ import {
   ProfileContainer,
   ProfilePicture,
   Role,
+  Exit,
   Name,
+  Right,
+  Title,
 } from './style';
 
 const MiddleHeaderActionForSeller = () => {
@@ -22,6 +26,12 @@ const MiddleHeaderActionForSeller = () => {
           <Role>Продавец</Role>
         </InfoContainer>
       </ProfileContainer>
+      <Right>
+        <Exit>
+          <Logout />
+          <Title>Выйти</Title>
+        </Exit>
+      </Right>
     </MiddleHeaderActionForSellerContainer>
   );
 };
