@@ -13,6 +13,7 @@ import {
   Right,
   Title,
 } from './style';
+import DropdownMenu from '../../dropdown-menu';
 
 const MiddleHeaderActionForSeller = () => {
   return (
@@ -27,6 +28,11 @@ const MiddleHeaderActionForSeller = () => {
         </InfoContainer>
       </ProfileContainer>
       <Right>
+        <DropdownMenu id="langs">
+          <p>O'zbekcha</p>
+          <p default={true}>Русский</p>
+          <p>Ўзбекча</p>
+        </DropdownMenu>
         <Exit>
           <Logout />
           <Title>Выйти</Title>
