@@ -1,22 +1,87 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form';
+
 import Container from '../../components/grid/container';
-import {
-   AddProductFormContainer, AddProductFormBreadcrumb, AddProductFormBreadcrumbItem, AddProductFormItem,
-   AddProductFormItemBody, AddProductFormItemBodyItem, Textarea, AddProductFormBottom
-} from './style';
-import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
 import ProductTitle from '../../components/products-title';
 import Input from '../../components/input';
-import { useForm } from 'react-hook-form';
 import Dropdown from '../../components/drop-down';
 import Button from '../../components/button';
+import RadioButton from '../../components/radio-button';
+import { setAlertMessage } from '../../store/root-action-creators';
+import { AlertPosition } from '../../utils/alert-position-enum';
+
+import {
+   AddProductFormContainer, AddProductFormBreadcrumb, AddProductFormBreadcrumbItem, AddProductFormItem,
+   AddProductFormItemBody, AddProductFormItemBodyItem, Textarea, AddProductFormBottom, DeleiveryItem, Deleivery,
+   DeleiveryBox, DeleiveryZone, DeleiveryZoneItem, DeleiveryZoneBox, AddProductPhotoBox,
+   AddProductPhotoBoxItem, AddProductPhotoAttention, AddProductPhoto, AddProductPhotoItem,
+   PtotoApparatBox, DeleteIconBox
+} from './style';
+
+import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
+import { ReactComponent as PhotoApparat } from '../../assets/icons/add-product-photo-apparat.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-delete-icon.svg';
+
 
 const AddProductForm = () => {
    const { register, handleSubmit, control, errors, watch, setValue } = useForm();
 
+   const [openDeleivery, setOpenDeleivery] = useState<boolean>(false);
+   const [productPhoto, setProductPhoto] = useState<any>(null);
+
    const dropdownDocumentHandle = () => {
 
    }
+
+   const setDelivery = (ev: any) => {
+      const val = ev.target.value;
+      if (val == 'yes') {
+         setOpenDeleivery(true);
+      } else {
+         setOpenDeleivery(false);
+      }
+   }
+
+   const handleProductPhoto = (ev: any) => {
+      console.log('ev ==> ', ev.target.files);
+
+      let imgFile = ev.target.files[0];
+      const fileExt = imgFile.name.toLowerCase().split('.').pop();
+
+      if (
+         imgFile &&
+         (fileExt == 'jpg' ||
+            fileExt == 'jpeg' ||
+            fileExt == 'png' ||
+            fileExt == 'gif' ||
+            fileExt == 'webp')
+      ) {
+         let reader = new FileReader();
+         reader.onload = function () {
+            console.log(reader.result);
+
+            setProductPhoto(reader.result);
+         };
+         reader.readAsDataURL(imgFile);
+
+         const formData = new FormData();
+         formData.append('file', imgFile);
+      } else {
+         setAlertMessage({
+            message:
+               'Siz yuklagan rasm hajmi juda katta yoki boshqa format tanladingiz',
+            type: 'error',
+            position: AlertPosition.TOP_CENTER,
+         });
+      }
+   }
+
+   const handleDeletePhoto = () => {
+      alert('aaa')
+   }
+
+   console.log('productPhoto = ', productPhoto);
+
 
    return (
       <Container>
@@ -74,6 +139,160 @@ const AddProductForm = () => {
                   </AddProductFormItemBodyItem>
                </AddProductFormItemBody>
             </AddProductFormItem>
+
+
+            <AddProductPhotoBox>
+               <ProductTitle title="Добавить фото" />
+               <AddProductPhotoBoxItem>
+                  <AddProductPhotoAttention>Первое фото будет на обложке объявления. Перетащите, чтобы изменить порядок</AddProductPhotoAttention>
+                  <AddProductPhoto>
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                     <AddProductPhotoItem>
+                        <input
+                           type="file"
+                           onChange={handleProductPhoto}
+                        />
+                        {
+                           productPhoto ? <img src={productPhoto} /> :
+                              (<PtotoApparatBox onClick={handleProductPhoto}>
+                                 <PhotoApparat />
+                              </PtotoApparatBox>)
+                        }
+                        {
+                           productPhoto ? <DeleteIconBox onClick={handleDeletePhoto}>
+                              <DeleteIcon />
+                           </DeleteIconBox> : null
+                        }
+                     </AddProductPhotoItem>
+
+                  </AddProductPhoto>
+               </AddProductPhotoBoxItem>
+            </AddProductPhotoBox>
 
             <AddProductFormItem>
                <ProductTitle title="Общая характеристика" />
@@ -429,6 +648,57 @@ const AddProductForm = () => {
             </AddProductFormItem>
 
 
+            <DeleiveryBox>
+               <ProductTitle title="Доставка" />
+               <Deleivery>
+                  <DeleiveryItem>
+                     <RadioButton value="yes" name="delivery" label="Есть" callback={setDelivery} />
+                  </DeleiveryItem>
+
+                  <DeleiveryItem>
+                     <RadioButton value="no" name="delivery" label="Нет" callback={setDelivery} />
+                  </DeleiveryItem>
+               </Deleivery>
+            </DeleiveryBox>
+
+            {
+               openDeleivery ? (
+                  <DeleiveryZoneBox>
+                     <ProductTitle title="Территория доставки" />
+                     <DeleiveryZone>
+                        <DeleiveryZoneItem>
+                           <Dropdown
+                              option={[
+                                 'Биометрический паспорт',
+                                 'ID-карта Республики Узбекистан',
+                                 'Паспорт иностранного гражданина',
+                              ]}
+                              label="Область"
+                              // selected={state.typeOfIdentityDocumentOfSupervisor}
+                              callback={dropdownDocumentHandle}
+                           />
+                        </DeleiveryZoneItem>
+
+                        <DeleiveryZoneItem>
+                           <Dropdown
+                              option={[
+                                 'Алмалык',
+                                 'Ангрен',
+                                 'Ахангаран',
+                                 'Бекабад',
+                                 'Нурафшан',
+                                 'Чирчик ',
+                                 'Янгиюль '
+                              ]}
+                              label="Город"
+                              // selected={state.typeOfIdentityDocumentOfSupervisor}
+                              callback={dropdownDocumentHandle}
+                           />
+                        </DeleiveryZoneItem>
+                     </DeleiveryZone>
+                  </DeleiveryZoneBox>
+               ) : null
+            }
 
             <AddProductFormBottom>
                <Button btnType="gray" >Очистить</Button>

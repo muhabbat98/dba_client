@@ -1,11 +1,13 @@
 import React, { useState, FC, useEffect, useRef } from 'react';
-import { AlertPosition } from '../../../utils/alert-position-enum';
+import moment from 'moment';
+import { useForm } from 'react-hook-form';
 
+import CircleLoader from '../../../components/circle-loader';
+import { AlertPosition } from '../../../utils/alert-position-enum';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 import Dropdown from '../../../components/drop-down';
 import { axios, useActionCreators, useSelector } from '../../../hooks';
-import { useForm } from 'react-hook-form';
 
 import {
   PersonalInfoContainer,
@@ -31,8 +33,6 @@ import {
 import Avatar from '../../../assets/images/personal-info-avatar.png';
 import { ReactComponent as PersonalAvatarEditImg } from '../../../assets/icons/personal-info-avatar-edit.svg';
 import { ReactComponent as Verified } from '../../../assets/icons/verified.svg';
-import moment from 'moment';
-import CircleLoader from '../../../components/circle-loader';
 
 interface PersonalInfoEditProps {
   toggleComponent: () => void;
