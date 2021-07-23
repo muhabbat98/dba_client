@@ -138,6 +138,19 @@ export const OptionBoxButton = styled.div`
       border-radius: 100%;
     }
   }
+
+  &.active {
+    background-color: ${({ theme }) => theme.primary_color};
+
+    ${Dot} {
+      background-color: #fff;
+
+      &:after,
+      &:before {
+        background-color: #fff;
+      }
+    }
+  }
 `;
 
 export const OptionBoxListWrapper = styled.div`

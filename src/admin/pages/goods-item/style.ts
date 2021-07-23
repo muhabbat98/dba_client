@@ -83,3 +83,41 @@ export const GoodsImg = styled.img`
   height: 114px;
   object-fit: cover;
 `;
+
+export const GoodsItemInformation = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 48px;
+  grid-row-gap: 8px;
+
+  height: 42px;
+  overflow: hidden;
+`;
+
+export const GoodsItemInformationItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const GoodsItemInformationItemLeft = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  color: ${({ theme }) => theme.grey1};
+`;
+
+export const GoodsItemInformationItemRight = styled(
+  GoodsItemInformationItemLeft
+)`
+  font-weight: 400;
+  color: #000;
+`;
+
+export const GoodItemInformationMore = styled.div`
+  color: ${({ theme }) => theme.primary_color};
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 12px;
+`;

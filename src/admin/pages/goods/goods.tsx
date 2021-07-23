@@ -31,14 +31,6 @@ const Goods = () => {
     console.log(ev.target.value);
   }
 
-  console.log('displayType = ', displayType);
-  console.log("DisplayType.TABLE_TYPE = ", DisplayType.TABLE_TYPE);
-
-  console.log("displayType == DisplayType.TABLE_TYPE = ", displayType == DisplayType.TABLE_TYPE);
-
-
-
-
   return (
     <GoodsContainer>
       <GoodsTopControl>

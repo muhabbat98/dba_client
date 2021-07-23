@@ -137,8 +137,6 @@ export const AddProductPhotoItem = styled.div`
   position: relative;
 
   &:first-child {
-    border: 1px solid red;
-
     &::after {
       content: url('../../assets/icons/add-product-star.svg');
       position: absolute;
