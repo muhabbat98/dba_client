@@ -1,67 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Link,
+  useRouteMatch,
+  useLocation,
+  useHistory,
+  useParams,
+} from 'react-router-dom';
 import Container from '../../grid/container';
 import BreadCrumb from '../../hambuger-menu';
+import MenuItem from './menu-item';
 import {
   BottomHeaderContainer,
   MenuContainer,
-  MenuItem,
   BottomHeaderWrapper,
   MenuItemAll,
   MenuWrapper,
 } from './style';
-interface MenuStateProps {
-  state?: boolean | undefined;
-  stateHandler?: () => void | undefined;
-}
-const BottomHeaderForSeller: React.FC<MenuStateProps> = ({
-  state,
-  stateHandler,
-}) => {
-  const [componentState, setMenuComponentState] = useState<any>();
-  useEffect(() => {
-    setMenuComponentState(state);
-  }, [state]);
-  const handleMenuIcon = () => {
-    setMenuComponentState(!state);
-    setTimeout(function () {
-      if (stateHandler) stateHandler();
-    }, 200);
-  };
+
+interface MenuStateProps {}
+const BottomHeaderForSeller: React.FC<MenuStateProps> = () => {
+  const { url, path } = useRouteMatch();
+  const { pathname } = useLocation();
+
+  //console.log(loc);
+
+  console.log('url --- ', url);
+  console.log('path --- ', path);
   return (
     <BottomHeaderContainer>
       <Container>
-        <BottomHeaderWrapper>
-          <MenuWrapper>
-            <MenuContainer>
-              <MenuItem>
-                <Link to="/">Мобильные телефоны</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/">Телевизоры</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/">Товари длядома</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/">Авто</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/">Гигиена</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/">Зоотовари</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/">Красота</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/">Строительство и ремонт</Link>
-              </MenuItem>
-            </MenuContainer>
-          </MenuWrapper>
-          {/* <MenuItemAll>Ещё...</MenuItemAll> */}
-        </BottomHeaderWrapper>
+        <MenuContainer>
+          <MenuItem to={'/seller'}>Приборная панель</MenuItem>
+          <MenuItem to={`/seller/settings`}>Настройки</MenuItem>
+          <MenuItem to={`/seller/add-product`}>Добавить товар</MenuItem>
+        </MenuContainer>
       </Container>
     </BottomHeaderContainer>
   );

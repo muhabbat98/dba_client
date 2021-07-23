@@ -2,8 +2,9 @@ import React from 'react';
 import { HomePageForSellerContainer } from './style';
 import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom';
 import Settings from '../settings-for-seller';
-import Erro404 from '../../components/404';
+import Error404 from '../../components/404';
 import AddProduct from '../add-product';
+import MainPageForSeller from '../main-page-for-seller';
 
 const ForSeller = () => {
   const { path } = useRouteMatch();
@@ -11,11 +12,11 @@ const ForSeller = () => {
   return (
     <HomePageForSellerContainer>
       <Switch>
-        <Route exact path={path} render={() => <h1>Seller</h1>} />
+        <Route exact path={path} component={MainPageForSeller} />
         <Route path={`${path}/settings`} component={Settings} />
         <Route path={`${path}/add-product`} component={AddProduct} />
         <Route path="*">
-          <Erro404 />
+          <Error404 />
         </Route>
       </Switch>
     </HomePageForSellerContainer>

@@ -1,6 +1,7 @@
 import React from 'react';
 import src from './image.png';
 import { ReactComponent as Logout } from './logout.svg';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import {
   MiddleHeaderActionForSellerContainer,
   Img,
@@ -14,11 +15,26 @@ import {
   Title,
 } from './style';
 import DropdownMenu from '../../dropdown-menu';
+import { useActionCreators, useSellerPathname } from '../../../hooks';
 
-const MiddleHeaderActionForSeller = () => {
+export function Profile() {
+  const { push } = useHistory();
+  const { isSellerPath } = useSellerPathname();
+  const { setConfirm, cleanUser, cleanConfirm } = useActionCreators();
+
+  const handleExit = () => {
+    setConfirm({
+      message: 'Вы действительно хотите выйти',
+      callback: () => {
+        cleanUser();
+        cleanConfirm();
+      },
+    });
+  };
+
   return (
-    <MiddleHeaderActionForSellerContainer>
-      <ProfileContainer>
+    <>
+      <ProfileContainer onClick={() => push('seller')}>
         <ProfilePicture>
           <Img src={src} />
         </ProfilePicture>
@@ -27,6 +43,20 @@ const MiddleHeaderActionForSeller = () => {
           <Role>Продавец</Role>
         </InfoContainer>
       </ProfileContainer>
+      {!isSellerPath && (
+        <Exit onClick={handleExit}>
+          <Logout />
+          <Title>Выйти</Title>
+        </Exit>
+      )}
+    </>
+  );
+}
+
+const MiddleHeaderActionForSeller = () => {
+  return (
+    <MiddleHeaderActionForSellerContainer>
+      <Profile />
       <Right>
         <DropdownMenu id="langs">
           <p>O'zbekcha</p>

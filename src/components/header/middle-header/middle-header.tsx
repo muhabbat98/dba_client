@@ -17,12 +17,11 @@ const MiddleHeader = () => {
       <Container>
         <MiddleHeaderWrapper>
           <Logo>
-            <Link to='/'>Marketplace</Link>
+            <Link to="/">Marketplace</Link>
           </Logo>
           <SearchContainer>
             <Search />
           </SearchContainer>
-
           <MiddleHeaderAction />
         </MiddleHeaderWrapper>
       </Container>

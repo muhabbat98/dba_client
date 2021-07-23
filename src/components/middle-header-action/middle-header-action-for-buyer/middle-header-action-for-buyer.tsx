@@ -6,14 +6,20 @@ import { ReactComponent as Heart } from '../../../assets/icons/heart2.svg';
 import { ReactComponent as Cart } from '../../../assets/icons/shopping-cart.svg';
 import { checkUSer } from '../../../utils/check-user';
 import {
-  MiddleHeaderActionContainer,
-  Action,
   AccountLogo,
+  Action,
   CartLogo,
-  HeartLogo,
   Count,
+  HeartLogo,
+  MiddleHeaderActionContainer,
 } from './style';
-import { useActionCreators, useSelector } from '../../../hooks';
+import {
+  useActionCreators,
+  useRole,
+  UserRole,
+  useSelector,
+} from '../../../hooks';
+import { Profile } from '../middle-header-action-for-seller/middle-header-action-for-seller';
 
 const MiddleHeaderActionForBuyer = () => {
   const { wishlist, cart, user } = useSelector((state) => ({
@@ -22,10 +28,12 @@ const MiddleHeaderActionForBuyer = () => {
     user: checkUSer(state.user),
   }));
 
+  const { userRole } = useRole();
+
   const { openLogin } = useActionCreators();
 
-  return (
-    <MiddleHeaderActionContainer>
+  const buyerHeader = (
+    <>
       {user ? (
         <Action>
           <Link to="/settings" title="Перейти к личный кабинет">
@@ -57,6 +65,12 @@ const MiddleHeaderActionForBuyer = () => {
           </Link>
         </CartLogo>
       </Action>
+    </>
+  );
+
+  return (
+    <MiddleHeaderActionContainer>
+      {userRole === UserRole.SELLER ? <Profile /> : buyerHeader}
     </MiddleHeaderActionContainer>
   );
 };
