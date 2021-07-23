@@ -71,7 +71,9 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const backHandle = async () => {
     if (prevIds.length > 1) {
       let lastIds = [...prevIds];
+      console.log('LastIds = ', lastIds);
       lastIds.pop();
+      console.log('LastIds after pop() = ', lastIds);
       setPrevIds(lastIds);
       const lastIdd = lastIds[lastIds.length - 1];
       await getChildMenuItem(lastIdd, true);
