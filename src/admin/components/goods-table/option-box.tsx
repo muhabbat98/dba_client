@@ -29,7 +29,7 @@ const OptionBox = () => {
 
    return (
       <OptionBoxContainer>
-         <OptionBoxButton onClick={() => setChecked(!checked)}><Dot></Dot></OptionBoxButton>
+         <OptionBoxButton className={checked ? 'active' : ''} onClick={() => setChecked(!checked)}><Dot></Dot></OptionBoxButton>
          {
             checked ? (
                <OptionBoxListWrapper ref={toggleRef}>
