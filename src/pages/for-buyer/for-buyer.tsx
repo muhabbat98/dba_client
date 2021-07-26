@@ -10,6 +10,7 @@ import Cart from '../cart';
 import Catalog from '../catalog';
 import AddProduct from '../add-product';
 import ProductDetail from '../product-detail';
+import CheckOut from '../check-out';
 import {
   ProtectedRouteForBuyer,
   ProtectedRouteForSeller,
@@ -21,7 +22,7 @@ const ForBuyer = () => {
   console.log('path', path);
   const { isBuyer } = useRole();
 
-  console.log("isBuyer ==> ", isBuyer);
+  console.log('isBuyer ==> ', isBuyer);
   return (
     <ForBuyerContainer>
       <Switch>
@@ -32,6 +33,8 @@ const ForBuyer = () => {
         <Route exact path={`/catalog`} component={Catalog} />
         <Route exact path={`/products`} component={Products} />
         <Route exact path={`/add-product`} component={AddProduct} />
+        <Route exact path={`/check-out`} component={CheckOut} />
+
         <ProtectedRouteForBuyer path="/settings">
           <Settings />
         </ProtectedRouteForBuyer>
