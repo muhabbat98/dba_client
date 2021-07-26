@@ -15,6 +15,7 @@ export interface CartReducerState extends CartItemState {
   totalCount: number;
   tSum: number;
   checkedAll: any[];
+  checkedAllCount: number;
 }
 
 const initialState: CartReducerState = {
@@ -23,6 +24,7 @@ const initialState: CartReducerState = {
   totalCount: 0,
   tSum: 0,
   checkedAll: [],
+  checkedAllCount: 0,
 };
 
 export const cartReducer = (
@@ -138,6 +140,7 @@ const incrementCart = (state: CartReducerState, cart: any) => {
         copyCart.count = copyCart.count + 1;
 
         copyCart.totalSum += Number(c.priceResponse.value);
+        console.log('cart => ', cart);
         if (cart.isChecked) {
           state.tSum += Number(c.priceResponse.value);
         }

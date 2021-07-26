@@ -1,4 +1,5 @@
 import React, { useState, FC } from 'react';
+import { useHistory } from 'react-router-dom';
 import Checkbox from '../../../components/checkbox';
 import { GoodsTableBodyItemWrapper, GoodsTableBodyItem, StatusBox } from './style';
 import OptionBox from './option-box';
@@ -13,6 +14,7 @@ interface GoodsTableItemProps {
 
 const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelected }) => {
    const { addId } = useItemChecked();
+   const { push } = useHistory();
 
    const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -31,13 +33,12 @@ const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelect
    }
 
    const clickHandler = (id: any, ev: any) => {
-      ev.stopPropagation();
-      console.log('ev => ', ev)
-      const parentElement = ev.target.parentElement;
-      console.log('parentElement => ', parentElement.classList.contains('option-box'));
-      // if (parentElement.contains('option-box')) {
-      //    console.log('option-box')
-      // }
+      if (getParents(ev.target)) {
+
+      } else {
+         console.log('iddddddd=> ', id);
+         // push('/sellers/about-seller/' + id);
+      }
    }
 
    const getParents = (element: any) => {
@@ -46,8 +47,8 @@ const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelect
          if (element.classList.contains('option-box')) {
             return true;
          }
-         return false;
       }
+      return false;
    }
 
    if (isRowClickable) {
