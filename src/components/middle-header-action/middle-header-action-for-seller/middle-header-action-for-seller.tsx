@@ -54,6 +54,18 @@ export function Profile() {
 }
 
 const MiddleHeaderActionForSeller = () => {
+  const { setConfirm, cleanUser, cleanConfirm } = useActionCreators();
+
+  const handleExit = () => {
+    setConfirm({
+      message: 'Вы действительно хотите выйти',
+      callback: () => {
+        cleanUser();
+        cleanConfirm();
+      },
+    });
+  };
+
   return (
     <MiddleHeaderActionForSellerContainer>
       <Profile />
@@ -63,7 +75,7 @@ const MiddleHeaderActionForSeller = () => {
           <p default={true}>Русский</p>
           <p>Ўзбекча</p>
         </DropdownMenu>
-        <Exit>
+        <Exit onClick={handleExit}>
           <Logout />
           <Title>Выйти</Title>
         </Exit>
