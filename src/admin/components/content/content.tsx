@@ -4,6 +4,8 @@ import Homepage from '../../pages/homepage';
 import Goods from '../../pages/goods';
 import GoodsItem from '../../pages/goods-item';
 import Category from '../../pages/category';
+import Sellers from '../../pages/sellers';
+import Buyers from '../../pages/buyers';
 
 import { ContentContainer } from './style';
 
@@ -21,6 +23,8 @@ const Content = () => {
         />
         <Route exact path={`${path}/goods`} component={Goods} />
         <Route exact path={`${path}/goods-item`} component={GoodsItem} />
+        <Route exact path={`${path}/buyers`} component={Buyers} />
+        <Route exact path={`${path}/sellers`} component={Sellers} />
       </Switch>
     </ContentContainer>
   );
