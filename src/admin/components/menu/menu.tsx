@@ -17,6 +17,7 @@ const Menu = () => {
         Категория
       </MenuItem>
       <MenuItem to={`${url}/goods`}>Товары</MenuItem>
+      <MenuItem to={`${url}/moderators`}>Модераторы </MenuItem>
     </MenuContainer>
   );
 };
