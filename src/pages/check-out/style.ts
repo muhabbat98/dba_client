@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-export const CheckOutLink = styled(Link)``;
-export const CartLink = styled(Link)``;
-export const HomeLink = styled(Link)``;
+
+interface Props {
+  count: string;
+}
 
 export const SmallerContainer = styled.div`
   max-width: 588px;
@@ -33,6 +33,7 @@ export const CheckOutHeader = styled.h3`
 `;
 export const CheckOutBox = styled.div`
   padding: 2.7rem;
+  margin: 2rem 0px;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.light_grey};
 `;
@@ -57,12 +58,13 @@ export const CartItemImg = styled.img`
   height: 84px;
   object-fit: cover;
 `;
-export const CartItemText = styled.div`
-  padding: 0px 24px;
+export const CartItemText = styled.div<Props>`
+  padding: 10px 24px;
+  font-weight: 600;
   font-size: 16px;
   line-height: 22px;
   &::after {
-    content: '1 шт.';
+    content: '${({ count }) => count} шт.';
     display: block;
     font-weight: 600;
     font-size: 16px;
@@ -71,3 +73,78 @@ export const CartItemText = styled.div`
     color: ${({ theme }) => theme.grey1};
   }
 `;
+
+// Оформление заказа
+
+export const StepsOrder = styled.div`
+  display: flex;
+  justify-content: space-between;
+  & div > div {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid ${({ theme }) => theme.grey1};
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  & div > p {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 10px 0px;
+    font-weight: 600;
+  }
+  & div:not(:last-child) div::after {
+    content: '';
+    display: block;
+    width: 91px;
+    height: 1px;
+    background-color: ${({ theme }) => theme.grey1};
+    position: absolute;
+    right: -120px;
+    top: 50%;
+  }
+`;
+
+export const Recipient = styled.div`
+  position: relative;
+`;
+
+interface RecipientIconProps {
+  active: number;
+}
+
+export const RecipientIcon = styled.div<RecipientIconProps>`
+  background: ${({ theme, active }) =>
+    active === 1 ? theme.primary_color : ''};
+  svg {
+    width: 23px;
+    height: 23px;
+  }
+`;
+export const RecipientText = styled.p``;
+
+export const Address = styled.div``;
+export const AddressIcon = styled.div<RecipientIconProps>`
+  background: ${({ theme, active }) =>
+    active === 1 ? theme.primary_color : ''};
+
+  svg {
+    width: 23px;
+    height: 23px;
+  }
+`;
+export const AddressText = styled.p``;
+export const Payment = styled.div``;
+export const PaymentIcon = styled.div<RecipientIconProps>`
+  background: ${({ theme, active }) =>
+    active === 1 ? theme.primary_color : ''};
+`;
+export const PaymentText = styled.p``;
+
+export const UserRecipient = styled.input``;
+export const NumberRecipient = styled.div``;
+export const SendButton = styled.button``;
