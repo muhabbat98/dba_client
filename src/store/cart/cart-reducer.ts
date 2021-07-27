@@ -15,6 +15,7 @@ export interface CartReducerState extends CartItemState {
   totalCount: number;
   tSum: number;
   checkedAll: any[];
+  checkedAllCount: number;
 }
 
 const initialState: CartReducerState = {
@@ -23,6 +24,7 @@ const initialState: CartReducerState = {
   totalCount: 0,
   tSum: 0,
   checkedAll: [],
+  checkedAllCount: 0,
 };
 
 export const cartReducer = (
@@ -56,14 +58,15 @@ const getTotalSum = (state: CartReducerState, t: any) => {
   changedCartItems = copyOfCartItems.map((c) => {
     if (c.id === t.id) {
       const copyCart = { ...c };
-
       if (t.isChecked) {
         copyCart.isChecked = true;
         state.tSum += copyCart.totalSum;
         state.checkedAll.push(copyCart);
+        state.checkedAllCount += c.count;
       } else {
         copyCart.isChecked = false;
         state.tSum -= copyCart.totalSum;
+        state.checkedAllCount -= c.count;
 
         let removedArray = state.checkedAll.filter((item) => item.id != c.id);
         state.checkedAll = [...removedArray];
@@ -89,6 +92,13 @@ const removeCart = (state: CartReducerState, cart: any) => {
       state.tSum = state.tSum - cart.priceResponse.value * cart.count;
 
       state.totalCount = state.totalCount - state.cartItems[i].count;
+
+      state.checkedAllCount -= cart.count;
+      let copyCheckedAll = [...state.checkedAll];
+      let removedCheckedAll = copyCheckedAll.filter(
+        (item) => item.id !== cart.id
+      );
+      state.checkedAll = [...removedCheckedAll];
     }
   }
   return { ...state, cartItems: removedArray };
@@ -96,7 +106,6 @@ const removeCart = (state: CartReducerState, cart: any) => {
 
 // addToCart ()
 const addToCart = (state: CartReducerState, cart: any) => {
-  console.log('cart =======> ', cart);
   let isExist = state.cartItems.find((c) => c.id === cart.id);
   let copyOfCartItems = [...state.cartItems];
   let changedCartItems = [];
@@ -138,12 +147,15 @@ const incrementCart = (state: CartReducerState, cart: any) => {
         copyCart.count = copyCart.count + 1;
 
         copyCart.totalSum += Number(c.priceResponse.value);
+        console.log('increment cart => ', cart);
         if (cart.isChecked) {
           state.tSum += Number(c.priceResponse.value);
+          state.checkedAllCount += cart.count;
         }
 
         state.totalPrice = state.totalPrice + Number(c.priceResponse.value);
         state.totalCount = state.totalCount + 1;
+
         return copyCart;
       }
       return c;
@@ -175,6 +187,7 @@ const decrementCart = (state: CartReducerState, cart: any) => {
         copyCart.totalSum -= Number(c.priceResponse.value);
         if (cart.isChecked) {
           state.tSum -= Number(c.priceResponse.value);
+          state.checkedAllCount -= cart.count;
         }
 
         state.totalPrice = state.totalPrice - Number(c.priceResponse.value);

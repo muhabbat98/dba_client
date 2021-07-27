@@ -1,6 +1,5 @@
 import { CategoryProvider } from './context';
 import { useParams } from 'react-router-dom';
-
 import CategoryMain from './category-main';
 import CategoryPage from './category-children';
 import { useEffect, useState } from 'react';
@@ -14,7 +13,7 @@ enum FormType {
   CHILD = 'CHILD',
 }
 
-const Category = () => {
+function CategoryWrapper() {
   const { id } = useParams<Params>();
   const [form, setForm] = useState<FormType | null>(null);
   //console.log('params', params);
@@ -26,11 +25,18 @@ const Category = () => {
       setForm(FormType.PARENT);
     }
   }, [id]);
-
   return (
-    <CategoryProvider>
+    <>
       {form === FormType.PARENT && <CategoryMain />}
       {form === FormType.CHILD && <CategoryPage />}
+    </>
+  );
+}
+
+const Category = () => {
+  return (
+    <CategoryProvider>
+      <CategoryWrapper />
     </CategoryProvider>
   );
 };

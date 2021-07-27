@@ -1,15 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useActionCreators, useSelector, useRole, UserRole } from '../../hooks';
 
 import Col from '../../components/grid/col';
 import Container from '../../components/grid/container';
 import Row from '../../components/grid/row';
 import Checkbox from '../../components/checkbox';
-
 import ProductsTitle from '../../components/products-title';
 import Button from '../../components/button';
 import CartIncrementButton from '../../components/cart-increment-button';
-import { useActionCreators, useSelector } from '../../hooks';
 import formatMoney from '../../utils/format-money';
 import CartIconWishlist from './cart-icon-wishlist';
 
@@ -52,7 +51,11 @@ const Cart = () => {
   const { push } = useHistory();
 
   const { cartItems, tSum, totalCount } = useSelector((state) => state.cart);
-  const { removeCart, getTotalSum } = useActionCreators();
+  const { removeCart, getTotalSum, openLogin } = useActionCreators();
+
+  const { userRole } = useRole();
+
+  console.log("userRole => ", userRole);
 
   const deleteCart = (data: any) => {
     removeCart(data);
@@ -67,7 +70,11 @@ const Cart = () => {
   };
 
   const gotoOrdersPage = () => {
-    push('/checkout');
+    if (userRole === UserRole.BUYER) {
+      push('/checkout');
+    } else {
+      openLogin();
+    }
   };
 
   return (

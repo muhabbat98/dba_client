@@ -5,7 +5,11 @@ interface Props {
 }
 
 interface BGColorProps {
-  bgColor: boolean;
+  bgColor?: boolean;
+}
+
+interface CursorProps {
+  isCursor?: boolean;
 }
 
 export const GoodsTableContainer = styled.div``;
@@ -43,7 +47,7 @@ export const GoodsTableHeaderItem = styled.div`
 
 export const GoodsTableBody = styled.div``;
 
-export const GoodsTableBodyItemWrapper = styled.div<BGColorProps>`
+export const GoodsTableBodyItemWrapper = styled.div<BGColorProps & CursorProps>`
   display: grid;
   grid-template-columns: 1fr 3fr 3fr 3fr 3fr;
   /* grid-template-columns: repeat(5, 1fr); */
@@ -52,10 +56,17 @@ export const GoodsTableBodyItemWrapper = styled.div<BGColorProps>`
   padding: 10px 8px;
   border-bottom: 1px solid #dfe0eb;
 
+  cursor: ${({ isCursor }) => (isCursor ? 'pointer' : 'auto')};
+
   background-color: ${({ bgColor }) => (bgColor ? '#F7F8FC' : '#fff')};
+  transition: all 0.25s ease;
 
   &:first-child {
     border-top: 1px solid #dfe0eb;
+  }
+
+  &:hover {
+    background-color: #f7f8fc;
   }
 `;
 

@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import GoodsTableItem from './goods-table-item';
 
 import {
@@ -6,23 +7,31 @@ import {
 
 import { ReactComponent as FilterColumn } from "../../assets/icons/filter-column.svg";
 
-const GoodsTable = () => {
+interface GoodsTableProps {
+   header: any,
+   dataSource?: any,
+   isRowClickable?: boolean,
+   rowSelected?: (item: any) => void
+}
+
+const GoodsTable: FC<GoodsTableProps> = ({ header, isRowClickable, rowSelected, dataSource }) => {
 
    return (
       <GoodsTableContainer>
          <GoodsTableHeader>
-            <GoodsTableHeaderItem>№</GoodsTableHeaderItem>
-            <GoodsTableHeaderItem>Названия товаров <FilterColumn /></GoodsTableHeaderItem>
-            <GoodsTableHeaderItem>Категория <FilterColumn /></GoodsTableHeaderItem>
-            <GoodsTableHeaderItem>Имя владельца <FilterColumn /></GoodsTableHeaderItem>
-            <GoodsTableHeaderItem>Статус <FilterColumn /></GoodsTableHeaderItem>
+            {
+               header.map((item: any) => <GoodsTableHeaderItem key={item.dataIndex}>{item.title} <FilterColumn /></GoodsTableHeaderItem>)
+            }
          </GoodsTableHeader>
 
          <GoodsTableBody>
-            <GoodsTableItem id="dadak232rfhjiwrhhwh4349h" />
-            <GoodsTableItem id="dadak232rfhjiwrhhssqa49h" />
-            <GoodsTableItem id="dadak232rfhjiwrrwwh449h" />
-            <GoodsTableItem id="dadak232rfhjiwrh3fda49h" />
+            {/* {
+               dataSource.map((item: any) => <GoodsTableItem id="dadak232rfhjiwrhhwh4349h" />)
+            } */}
+            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrhhwh4349h" />
+            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrhhssqa49h" />
+            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrrwwh449h" />
+            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrh3fda49h" />
          </GoodsTableBody>
       </GoodsTableContainer>
    );

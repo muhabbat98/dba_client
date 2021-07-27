@@ -22,13 +22,15 @@ const OptionBox = () => {
    }, [checked]);
 
    const toggleOptionList = (ev: any) => {
+      console.log('optionbox');
+
       if (checked && !(toggleRef.current && toggleRef.current.contains(ev.target))) {
          setChecked(false);
       }
    }
 
    return (
-      <OptionBoxContainer>
+      <OptionBoxContainer className="option-box">
          <OptionBoxButton className={checked ? 'active' : ''} onClick={() => setChecked(!checked)}><Dot></Dot></OptionBoxButton>
          {
             checked ? (
