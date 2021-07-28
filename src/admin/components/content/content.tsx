@@ -8,6 +8,7 @@ import Sellers from '../../pages/sellers';
 import Buyers from '../../pages/buyers';
 
 import { ContentContainer } from './style';
+import Moderator from '../../../admin/pages/moderator';
 
 const Content = () => {
   const { path } = useRouteMatch();
@@ -23,6 +24,9 @@ const Content = () => {
         />
         <Route exact path={`${path}/goods`} component={Goods} />
         <Route exact path={`${path}/goods-item`} component={GoodsItem} />
+
+        <Route exact path={`${path}/moderators`} component={Moderator} />
+
         <Route exact path={`${path}/buyers`} component={Buyers} />
         <Route exact path={`${path}/sellers`} component={Sellers} />
       </Switch>
