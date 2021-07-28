@@ -1,19 +1,19 @@
 import React, { useState, FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import Checkbox from '../../../components/checkbox';
-import { GoodsTableBodyItemWrapper, GoodsTableBodyItem, StatusBox, Order } from './style';
+import { StatusBox, Order } from './style';
 import OptionBox from './option-box';
 
 import { useItemChecked } from '../../pages/goods/goods-context';
+import { TableBodyItem, TableBodyItemWrapper } from '../../../global-styles';
 
 interface GoodsTableItemProps {
    id: string;
    isRowClickable?: boolean | undefined;
-   rowSelected?: (item: any) => void | undefined;
-   headerCount: number;
+   rowSelected?: (item: any) => void | null;
 }
 
-const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelected, headerCount }) => {
+const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelected }) => {
    const { addId } = useItemChecked();
    const { push } = useHistory();
 
@@ -54,47 +54,45 @@ const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelect
 
    if (isRowClickable) {
       return (
-         <GoodsTableBodyItemWrapper
+         <TableBodyItemWrapper
             onClick={(ev: any) => clickHandler(id, ev)}
             isCursor={isRowClickable}
-            columnCount={headerCount}
-            grids={['1fr', '2fr', '3fr', '4fr', '4fr', '4fr']}
+            grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
          >
-            <GoodsTableBodyItem>
+            <TableBodyItem>
                <Order>1</Order>
-            </GoodsTableBodyItem>
-            <GoodsTableBodyItem>Игровая клавиатура </GoodsTableBodyItem>
-            <GoodsTableBodyItem> Мобильные телефоны</GoodsTableBodyItem>
-            <GoodsTableBodyItem>Филипп Назаров</GoodsTableBodyItem>
-            <GoodsTableBodyItem>
+            </TableBodyItem>
+            <TableBodyItem>Игровая клавиатура </TableBodyItem>
+            <TableBodyItem> Мобильные телефоны</TableBodyItem>
+            <TableBodyItem>Филипп Назаров</TableBodyItem>
+            <TableBodyItem>
                <StatusBox isActiveStatus={true!}>Активный</StatusBox>
-            </GoodsTableBodyItem>
-            <GoodsTableBodyItem>
+            </TableBodyItem>
+            <TableBodyItem>
                <OptionBox />
-            </GoodsTableBodyItem>
-         </GoodsTableBodyItemWrapper>
+            </TableBodyItem>
+         </TableBodyItemWrapper>
       );
    }
 
    return (
-      <GoodsTableBodyItemWrapper
+      <TableBodyItemWrapper
          bgColor={isChecked!}
          isCursor={isRowClickable}
-         columnCount={headerCount}
-         grids={['1fr', '2fr', '3fr', '4fr', '4fr', '4fr']}
+         grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
       >
-         <GoodsTableBodyItem>
+         <TableBodyItem>
             <Order>1</Order>
             <Checkbox onClick={() => check(id)} callback={checkHandle} />
-         </GoodsTableBodyItem>
-         <GoodsTableBodyItem>Игровая клавиатура </GoodsTableBodyItem>
-         <GoodsTableBodyItem> Мобильные телефоны</GoodsTableBodyItem>
-         <GoodsTableBodyItem>Филипп Назаров</GoodsTableBodyItem>
-         <GoodsTableBodyItem>
+         </TableBodyItem>
+         <TableBodyItem>Игровая клавиатура </TableBodyItem>
+         <TableBodyItem> Мобильные телефоны</TableBodyItem>
+         <TableBodyItem>Филипп Назаров</TableBodyItem>
+         <TableBodyItem>
             <StatusBox isActiveStatus={true!}>Активный</StatusBox>
             <OptionBox />
-         </GoodsTableBodyItem>
-      </GoodsTableBodyItemWrapper>
+         </TableBodyItem>
+      </TableBodyItemWrapper>
    );
 }
 
