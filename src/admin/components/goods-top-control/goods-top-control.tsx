@@ -18,17 +18,20 @@ enum DisplayType {
 }
 
 interface GoodsTopControlProps {
-   changeDisplay: (type: DisplayType) => void
+   changeDisplay?: (type: DisplayType) => void | null,
+   isShowChangeGrids: boolean
 }
 
-const GoodsTopControl: FC<GoodsTopControlProps> = ({ changeDisplay }) => {
+const GoodsTopControl: FC<GoodsTopControlProps> = ({ changeDisplay, isShowChangeGrids }) => {
    const [openFilter, setOpenFilter] = useState(false);
 
    const [displayType, setDisplayType] = useState<DisplayType>(DisplayType.TABLE_TYPE);
 
    const changeDisplays = (type: DisplayType) => {
       setDisplayType(type);
-      changeDisplay(type);
+      if (changeDisplay) {
+         changeDisplay(type);
+      }
    }
 
    const changeHandle = (ev: any) => {
@@ -59,19 +62,24 @@ const GoodsTopControl: FC<GoodsTopControlProps> = ({ changeDisplay }) => {
                   style={{ marginRight: '16px' }}
                />
 
-               <DisplayTypeBox>
-                  <DisplayTable
-                     className={displayType == DisplayType.TABLE_TYPE ? 'active' : ''}
-                     onClick={() => changeDisplays(DisplayType.TABLE_TYPE)}>
-                     <TableIcon />
-                  </DisplayTable>
+               {
+                  isShowChangeGrids ? (
+                     <DisplayTypeBox>
+                        <DisplayTable
+                           className={displayType == DisplayType.TABLE_TYPE ? 'active' : ''}
+                           onClick={() => changeDisplays(DisplayType.TABLE_TYPE)}>
+                           <TableIcon />
+                        </DisplayTable>
 
-                  <DisplayGrid
-                     className={displayType == DisplayType.GRID_TYPE ? 'active' : ''}
-                     onClick={() => changeDisplays(DisplayType.GRID_TYPE)}>
-                     <GridIcon />
-                  </DisplayGrid>
-               </DisplayTypeBox>
+                        <DisplayGrid
+                           className={displayType == DisplayType.GRID_TYPE ? 'active' : ''}
+                           onClick={() => changeDisplays(DisplayType.GRID_TYPE)}>
+                           <GridIcon />
+                        </DisplayGrid>
+                     </DisplayTypeBox>
+                  ) : null
+               }
+
 
                <FilterBtn isOpen={openFilter} onClick={() => setOpenFilter(!openFilter)}>
                   <FilterIcon />

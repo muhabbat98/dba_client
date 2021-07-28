@@ -24,22 +24,14 @@ const Goods = () => {
     console.log('Item: => ', item)
   }
 
-  const header = [
-    { title: '№', dataIndex: 'no' },
-    { title: 'Названия товаров', dataIndex: 'products name' },
-    { title: 'Категория', dataIndex: 'category' },
-    { title: 'Имя владельца', dataIndex: 'owner name' },
-    { title: 'Статус', dataIndex: 'status' },
-  ]
-
   return (
     <GoodsContainer>
-      <GoodsTopControl changeDisplay={changeDisplay} />
+      <GoodsTopControl isShowChangeGrids={true} changeDisplay={changeDisplay} />
 
       <GoodsDisplayContainer>
         {
           displayType == DisplayType.GRID_TYPE ? <GoodsGrid />
-            : <GoodsTable rowSelected={rowSelectedHandler} isRowClickable={true} header={header} />
+            : <GoodsTable rowSelected={rowSelectedHandler} isRowClickable={true} />
         }
       </GoodsDisplayContainer>
 

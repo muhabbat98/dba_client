@@ -6,6 +6,7 @@ import GoodsItem from '../../pages/goods-item';
 import Category from '../../pages/category';
 import Sellers from '../../pages/sellers';
 import Buyers from '../../pages/buyers';
+import AboutSeller from '../../pages/sellers/about-seller'
 
 import { ContentContainer } from './style';
 import Moderator from '../../../admin/pages/moderator';
@@ -29,6 +30,8 @@ const Content = () => {
 
         <Route exact path={`${path}/buyers`} component={Buyers} />
         <Route exact path={`${path}/sellers`} component={Sellers} />
+
+        <Route exact path={`${path}/sellers/:id`} component={AboutSeller} />
       </Switch>
     </ContentContainer>
   );
