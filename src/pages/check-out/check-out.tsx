@@ -11,6 +11,7 @@ import { ReactComponent as PaymantIcon } from '../../assets/icons/money-payment.
 import RecipientItem from './recipient/';
 import AddressItem from './address';
 import PaymentItem from './payment';
+import PaymentDetails from './detail';
 import {
   SmallerContainer,
   CheckOutHeader,
@@ -115,6 +116,7 @@ const CheckOut = () => {
             <RecipientItem nextStep={{ tab, setTab, setStep, step }} />
           )}
         </CheckOutBox>
+        {tab === 'payment' ? <PaymentDetails /> : <></>}
       </SmallerContainer>
     </Container>
   );

@@ -74,7 +74,7 @@ const AdressItem: FC<AdressItemProps> = ({ nextStep }) => {
             {state && (
               <AddressBox
                 closeModal={setState}
-                modalTitle="birnima"
+                modalTitle="Указать адрес"
                 getItems={(data: any) => sendData(data)}
               />
             )}

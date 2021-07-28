@@ -13,13 +13,17 @@ import {
 
 import Uzcard from '../../../assets/images/uzcard-small.png';
 
-import Humo from '../../../assets/images/humo-small.png';
+import Humo from '../../../assets/images/humocard-small.png';
 
-import { CardImage, CardMoney, MainCardData, SampleCard } from './style';
 import {
-  CardName,
-  CardNumber,
-} from '../../settings/pages/payment/bank-details/cards/card/style';
+  CardData,
+  CardImage,
+  CardMoney,
+  MainCardData,
+  SampleCard,
+  NameCard,
+  NumberCard,
+} from './style';
 
 const Payment = () => {
   enum Tabs {
@@ -51,26 +55,46 @@ const Payment = () => {
         </MailHeader>
       </HeaderAddress>
       {type === 0 ? (
-        <>KOSHELOK</>
+        <>работа в прогрессии</>
       ) : type === 1 ? (
         <PackmenBody>
           <AddressList>
-            <SampleCard>
-              {/* <CardImage /> */}
-              <MainCardData>
-                <CardName>AAB Humo</CardName>
-                <CardNumber>Humo **** 6600</CardNumber>
-              </MainCardData>
-              <CardMoney>125 300 сум</CardMoney>
-            </SampleCard>
-            <SampleCard>Ташкент, Чиланзарский район , 100135</SampleCard>
-            <SampleCard>Ташкент, Чиланзарский район , 100135</SampleCard>
+            <SampleAdress as={SampleCard}>
+              <CardImage src={Uzcard} />
+              <CardData>
+                <MainCardData>
+                  <NameCard>AAB Humo</NameCard>
+                  <NumberCard>Humo **** 6600</NumberCard>
+                </MainCardData>
+                <CardMoney>125 300 </CardMoney>
+              </CardData>
+            </SampleAdress>
+            <SampleAdress as={SampleCard}>
+              <CardImage src={Humo} />
+              <CardData>
+                <MainCardData>
+                  <NameCard>AAB Humo</NameCard>
+                  <NumberCard>Humo **** 6600</NumberCard>
+                </MainCardData>
+                <CardMoney>125 300 </CardMoney>
+              </CardData>
+            </SampleAdress>
+            <SampleAdress as={SampleCard}>
+              <CardImage src={Uzcard} />
+              <CardData>
+                <MainCardData>
+                  <NameCard>AAB Humo</NameCard>
+                  <NumberCard>Humo **** 6600</NumberCard>
+                </MainCardData>
+                <CardMoney>125 300 </CardMoney>
+              </CardData>
+            </SampleAdress>
 
-            <AddressButton>+ Указать адрес</AddressButton>
+            <AddressButton>+ Добавить карту</AddressButton>
           </AddressList>
         </PackmenBody>
       ) : (
-        <>SCHOT</>
+        <>работа в прогрессии</>
       )}
     </Address>
   );
