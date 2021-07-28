@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from '../../hooks';
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import Container from '../../components/grid/container';
 import { ReactComponent as AccountIcon } from '../../assets/icons/account-white.svg';
 import { ReactComponent as NavigationIcon } from '../../assets/icons/map-navigation.svg';
@@ -43,19 +42,13 @@ enum ActionSteps {
 
 const CheckOut = () => {
   const { cart } = useSelector((state) => state);
-
+  const [allData, setData] = useState({});
   const [tab, setTab] = useState('resipient');
   const [step, setStep] = useState({
     resipient: ActionSteps.RECIPIENT,
     address: ActionSteps.ADDRESS,
     payment: ActionSteps.PAYMENT,
   });
-
-  const onSubmit = (data: any, ev: any) => {
-    console.log('data => ', data);
-  };
-
-  console.log('cart => ', cart);
 
   return (
     <Container>
@@ -109,14 +102,24 @@ const CheckOut = () => {
             </Payment>
           </StepsOrder>
           {tab === 'address' ? (
-            <AddressItem nextStep={{ tab, setTab, setStep, step }} />
+            <AddressItem
+              dataShare={{ allData, setData }}
+              nextStep={{ tab, setTab, setStep, step }}
+            />
           ) : tab === 'payment' ? (
-            <PaymentItem />
+            <PaymentItem dataShare={{ allData, setData }} />
           ) : (
-            <RecipientItem nextStep={{ tab, setTab, setStep, step }} />
+            <RecipientItem
+              dataShare={{ allData, setData }}
+              nextStep={{ tab, setTab, setStep, step }}
+            />
           )}
         </CheckOutBox>
-        {tab === 'payment' ? <PaymentDetails /> : <></>}
+        {tab === 'payment' ? (
+          <PaymentDetails dataShare={{ allData, setData }} />
+        ) : (
+          <></>
+        )}
       </SmallerContainer>
     </Container>
   );

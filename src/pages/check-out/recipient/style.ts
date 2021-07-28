@@ -9,3 +9,6 @@ export const FormRecipient = styled.form`
     margin: 1rem 0rem;
   }
 `;
+export const RecipientButton = styled.button`
+  margin-top: 2rem;
+`;
