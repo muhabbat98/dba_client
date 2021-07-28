@@ -44,7 +44,7 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
 
   return (
     <CategoriesContainer>
-      {/*{<AddCategory />}*/}
+      {/*<AddCategory />*/}
       <CategoryHeader />
       {image && (
         <img

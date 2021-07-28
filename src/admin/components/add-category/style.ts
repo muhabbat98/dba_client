@@ -4,6 +4,18 @@ export const AddCategoryContainer = styled.div`
   position: relative;
 `;
 
+export const CloseIconContainer = styled.div`
+  position: absolute;
+  width: 20px;
+  right: 16px;
+  top: 16px;
+  cursor: pointer;
+`;
+
+interface Props {
+  grids: number[];
+}
+
 export const AddCategoryWrapper = styled.div`
   position: fixed;
   width: 430px;
