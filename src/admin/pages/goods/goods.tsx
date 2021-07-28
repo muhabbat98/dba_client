@@ -26,7 +26,7 @@ const Goods = () => {
 
   return (
     <GoodsContainer>
-      <GoodsTopControl changeDisplay={changeDisplay} />
+      <GoodsTopControl isShowChangeGrids={true} changeDisplay={changeDisplay} />
 
       <GoodsDisplayContainer>
         {

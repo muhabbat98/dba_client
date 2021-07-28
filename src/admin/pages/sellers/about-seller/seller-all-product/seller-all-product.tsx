@@ -4,7 +4,7 @@ import { SellerProductContainer } from './style';
 const SellerAllProduct = () => {
    return (
       <SellerProductContainer>
-         SellerAllProduct
+
       </SellerProductContainer>
    );
 }
