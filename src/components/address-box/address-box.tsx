@@ -22,7 +22,9 @@ interface PropsModal {
   inputItems?: any; // Incoming information when edititng information
   chackboxdHide?: boolean; //chackbox hidden true || false
   locationPosition?: []; //map location items [43.23232,46.54543]
+  callback?: (data: any) => void | null;
 }
+
 const AddressBox: React.FC<PropsModal> = ({
   closeModal,
   modalTitle,
@@ -30,6 +32,7 @@ const AddressBox: React.FC<PropsModal> = ({
   inputItems,
   chackboxdHide,
   locationPosition,
+  callback,
 }) => {
   const [location, setLocation] = useState<any>([
     inputItems && inputItems.latitude,
@@ -78,7 +81,7 @@ const AddressBox: React.FC<PropsModal> = ({
     mainn = chackboxdHide ? false : main;
     getItems({ ...dataa, latitude, longitude, id: id, main });
     closeModal(false);
-    console.log('dataa------->', dataa);
+    if (callback) callback(data);
     // console.log("Maindataa------->", data)
   };
   //  console.log("gggg--",location&&location[0])
