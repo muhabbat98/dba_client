@@ -53,6 +53,7 @@ export const TableBodyItemWrapper = styled.div<
   grid-column-gap: 30px;
   align-items: center;
   padding: 10px 8px;
+  padding-right: 24px;
   border-bottom: 1px solid #dfe0eb;
 
   cursor: ${({ isCursor }) => (isCursor ? 'pointer' : 'auto')};
@@ -83,7 +84,7 @@ export const TableBodyItem = styled.div`
 
   &:last-child {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
   }
 `;

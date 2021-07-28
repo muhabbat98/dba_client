@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const AboutSellerContainer = styled.div``;
+export const AboutSellerContainer = styled.div`
+  border: 1px solid #dfe0eb;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 24px;
+`;
 
 export const TabHeader = styled.div`
   display: flex;
