@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import Checkbox from '../../../components/checkbox';
-import { GoodsTableBodyItemWrapper, GoodsTableBodyItem, StatusBox } from './style';
+import { GoodsTableBodyItemWrapper, GoodsTableBodyItem, StatusBox, Order } from './style';
 import OptionBox from './option-box';
 
 import { useItemChecked } from '../../pages/goods/goods-context';
@@ -9,10 +9,11 @@ import { useItemChecked } from '../../pages/goods/goods-context';
 interface GoodsTableItemProps {
    id: string;
    isRowClickable?: boolean | undefined;
-   rowSelected?: (item: any) => void | undefined
+   rowSelected?: (item: any) => void | undefined;
+   headerCount: number;
 }
 
-const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelected }) => {
+const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelected, headerCount }) => {
    const { addId } = useItemChecked();
    const { push } = useHistory();
 
@@ -56,15 +57,19 @@ const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelect
          <GoodsTableBodyItemWrapper
             onClick={(ev: any) => clickHandler(id, ev)}
             isCursor={isRowClickable}
+            columnCount={headerCount}
+            grids={['1fr', '2fr', '3fr', '4fr', '4fr', '4fr']}
          >
             <GoodsTableBodyItem>
-               <span>1</span>
+               <Order>1</Order>
             </GoodsTableBodyItem>
             <GoodsTableBodyItem>Игровая клавиатура </GoodsTableBodyItem>
             <GoodsTableBodyItem> Мобильные телефоны</GoodsTableBodyItem>
             <GoodsTableBodyItem>Филипп Назаров</GoodsTableBodyItem>
             <GoodsTableBodyItem>
                <StatusBox isActiveStatus={true!}>Активный</StatusBox>
+            </GoodsTableBodyItem>
+            <GoodsTableBodyItem>
                <OptionBox />
             </GoodsTableBodyItem>
          </GoodsTableBodyItemWrapper>
@@ -75,9 +80,11 @@ const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelect
       <GoodsTableBodyItemWrapper
          bgColor={isChecked!}
          isCursor={isRowClickable}
+         columnCount={headerCount}
+         grids={['1fr', '2fr', '3fr', '4fr', '4fr', '4fr']}
       >
          <GoodsTableBodyItem>
-            <span>1</span>
+            <Order>1</Order>
             <Checkbox onClick={() => check(id)} callback={checkHandle} />
          </GoodsTableBodyItem>
          <GoodsTableBodyItem>Игровая клавиатура </GoodsTableBodyItem>

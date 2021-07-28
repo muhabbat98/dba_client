@@ -18,9 +18,15 @@ const GoodsTable: FC<GoodsTableProps> = ({ header, isRowClickable, rowSelected, 
 
    return (
       <GoodsTableContainer>
-         <GoodsTableHeader>
+         <GoodsTableHeader
+            grids={['1fr', '2fr', '3fr', '4fr', '4fr', '4fr']}
+         >
             {
-               header.map((item: any) => <GoodsTableHeaderItem key={item.dataIndex}>{item.title} <FilterColumn /></GoodsTableHeaderItem>)
+               header.map((item: any) => (
+                  <GoodsTableHeaderItem
+                     key={item.dataIndex}
+                  >{item.title} <FilterColumn /></GoodsTableHeaderItem>
+               ))
             }
          </GoodsTableHeader>
 
@@ -28,10 +34,30 @@ const GoodsTable: FC<GoodsTableProps> = ({ header, isRowClickable, rowSelected, 
             {/* {
                dataSource.map((item: any) => <GoodsTableItem id="dadak232rfhjiwrhhwh4349h" />)
             } */}
-            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrhhwh4349h" />
-            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrhhssqa49h" />
-            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrrwwh449h" />
-            <GoodsTableItem rowSelected={rowSelected} isRowClickable={isRowClickable} id="dadak232rfhjiwrh3fda49h" />
+            <GoodsTableItem
+               headerCount={header.length}
+               rowSelected={rowSelected}
+               isRowClickable={isRowClickable}
+               id="dadak232rfhjiwrhhwh4349h"
+            />
+            <GoodsTableItem
+               headerCount={header.length}
+               rowSelected={rowSelected}
+               isRowClickable={isRowClickable}
+               id="dadak232rfhjiwrhhssqa49h"
+            />
+            <GoodsTableItem
+               headerCount={header.length}
+               rowSelected={rowSelected}
+               isRowClickable={isRowClickable}
+               id="dadak232rfhjiwrrwwh449h"
+            />
+            <GoodsTableItem
+               headerCount={header.length}
+               rowSelected={rowSelected}
+               isRowClickable={isRowClickable}
+               id="dadak232rfhjiwrh3fda49h"
+            />
          </GoodsTableBody>
       </GoodsTableContainer>
    );

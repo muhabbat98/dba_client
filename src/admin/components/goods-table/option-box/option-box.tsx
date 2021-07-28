@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import { ReactComponent as Checked } from '../../assets/icons/checked.svg';
-import { ReactComponent as Rejected } from '../../assets/icons/rejected.svg';
+import { ReactComponent as Checked } from '../../../assets/icons/checked.svg';
+import { ReactComponent as Rejected } from '../../../assets/icons/rejected.svg';
 
 import {
    OptionBoxContainer, OptionBoxButton, OptionBoxList, OptionBoxListWrapper, Permission, Reject,
@@ -22,8 +22,6 @@ const OptionBox = () => {
    }, [checked]);
 
    const toggleOptionList = (ev: any) => {
-      console.log('optionbox');
-
       if (checked && !(toggleRef.current && toggleRef.current.contains(ev.target))) {
          setChecked(false);
       }
@@ -31,7 +29,11 @@ const OptionBox = () => {
 
    return (
       <OptionBoxContainer className="option-box">
-         <OptionBoxButton className={checked ? 'active' : ''} onClick={() => setChecked(!checked)}><Dot></Dot></OptionBoxButton>
+         <OptionBoxButton
+            className={checked ? 'active' : ''}
+            onClick={() => setChecked(!checked)}
+         ><Dot></Dot></OptionBoxButton>
+
          {
             checked ? (
                <OptionBoxListWrapper ref={toggleRef}>

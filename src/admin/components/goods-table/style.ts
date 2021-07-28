@@ -12,12 +12,20 @@ interface CursorProps {
   isCursor?: boolean;
 }
 
+interface ColumnCountProps {
+  columnCount: number;
+}
+
+interface GridProps {
+  grids: any[];
+}
+
 export const GoodsTableContainer = styled.div``;
 
-export const GoodsTableHeader = styled.div`
+export const GoodsTableHeader = styled.div<GridProps>`
   display: grid;
-  grid-template-columns: 1fr 3fr 3fr 3fr 3fr;
-  /* grid-template-columns: repeat(5, 1fr); */
+  /* grid-template-columns: 1fr 3fr 3fr 3fr 3fr; */
+  grid-template-columns: ${({ grids }) => grids.join(' ')};
   grid-column-gap: 10px;
   align-items: center;
   padding: 14px 8px;
@@ -47,10 +55,12 @@ export const GoodsTableHeaderItem = styled.div`
 
 export const GoodsTableBody = styled.div``;
 
-export const GoodsTableBodyItemWrapper = styled.div<BGColorProps & CursorProps>`
+export const GoodsTableBodyItemWrapper = styled.div<
+  BGColorProps & CursorProps & ColumnCountProps & GridProps
+>`
   display: grid;
-  grid-template-columns: 1fr 3fr 3fr 3fr 3fr;
-  /* grid-template-columns: repeat(5, 1fr); */
+  grid-template-columns: ${({ grids }) => grids.join(' ')};
+  grid-column: span 3;
   grid-column-gap: 10px;
   align-items: center;
   padding: 10px 8px;
@@ -70,6 +80,8 @@ export const GoodsTableBodyItemWrapper = styled.div<BGColorProps & CursorProps>`
   }
 `;
 
+export const Order = styled.span``;
+
 export const GoodsTableBodyItem = styled.div`
   flex-grow: 1;
   font-size: 14px;
@@ -77,7 +89,7 @@ export const GoodsTableBodyItem = styled.div`
   color: #565f75;
   line-height: 18px;
 
-  & > span {
+  & > ${Order} {
     margin-right: 16px;
   }
 
@@ -104,98 +116,4 @@ export const StatusBox = styled.div<Props>`
   padding: 3px 8px;
   border-radius: 5px;
   height: 24px;
-`;
-
-export const OptionBoxContainer = styled.div`
-  position: relative;
-`;
-
-export const Dot = styled.div``;
-
-export const OptionBoxButton = styled.div`
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  background-color: #f7f8fc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  & > ${Dot} {
-    position: relative;
-    width: 4px;
-    height: 4px;
-    background-color: #9e9ea7;
-    border-radius: 100%;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: -5px;
-      width: 4px;
-      height: 4px;
-      background-color: #9e9ea7;
-      border-radius: 100%;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 5px;
-      width: 4px;
-      height: 4px;
-      background-color: #9e9ea7;
-      border-radius: 100%;
-    }
-  }
-
-  &.active {
-    background-color: ${({ theme }) => theme.primary_color};
-
-    ${Dot} {
-      background-color: #fff;
-
-      &:after,
-      &:before {
-        background-color: #fff;
-      }
-    }
-  }
-`;
-
-export const OptionBoxListWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  right: 104%;
-  top: 0;
-  z-index: 2;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.07);
-  width: fit-content;
-  background-color: #fff;
-  border-radius: 12px;
-`;
-
-export const OptionBoxList = styled.div`
-  padding: 11px 16px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #f5f8ff;
-  }
-
-  & > svg {
-    margin-right: 8px;
-  }
-`;
-
-export const Permission = styled.span`
-  color: #22b573;
-`;
-
-export const Reject = styled.span`
-  color: #f03738;
 `;

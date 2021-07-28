@@ -30,6 +30,7 @@ const Goods = () => {
     { title: 'Категория', dataIndex: 'category' },
     { title: 'Имя владельца', dataIndex: 'owner name' },
     { title: 'Статус', dataIndex: 'status' },
+    { title: '', dataIndex: 'empty' },
   ]
 
   return (
