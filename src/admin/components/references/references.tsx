@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ReferencesContainer } from './style';
+import { ReferencesContainer, ReferencesWrapper } from './style';
 import { axios, useError } from '../../../hooks';
 import Error from '../error';
 import ReferenceList from './reference-list';
@@ -38,7 +38,9 @@ const References = () => {
       ) : isError ? (
         <Error callback={() => fetchReferences()} />
       ) : (
-        <ReferenceList references={references} />
+        <ReferencesWrapper>
+          <ReferenceList references={references} />
+        </ReferencesWrapper>
       )}
     </ReferencesContainer>
   );

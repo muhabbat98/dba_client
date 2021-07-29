@@ -1,12 +1,21 @@
 import React from 'react';
-import { ReferenceListContainer } from './style';
+import { ReactComponent } from '../../';
+import { ReferenceListContainer, Title } from './style';
 
 interface Props {
   references: any[];
 }
 
 const ReferenceList: React.FC<Props> = ({ references }) => {
-  return <ReferenceListContainer> Reference List</ReferenceListContainer>;
+  console.log(references);
+  return (
+    <ReferenceListContainer>
+      <Header>
+        <Title>Справочники</Title>
+        <AddButton></AddButton>
+      </Header>
+    </ReferenceListContainer>
+  );
 };
 
 export default ReferenceList;
