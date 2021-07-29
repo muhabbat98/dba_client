@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent } from '../../../assets/icons/plus-btn.svg';
-import { ReferenceListContainer, Title } from './style';
+import { ReactComponent as Plus } from '../../../assets/icons/plus-btn.svg';
+import { ReferenceListContainer, Title, AddButton, Add, Header } from './style';
 
 interface Props {
   references: any[];
@@ -10,10 +10,13 @@ const ReferenceList: React.FC<Props> = ({ references }) => {
   console.log(references);
   return (
     <ReferenceListContainer>
-      {/*<Header>*/}
-      {/*  <Title>Справочники</Title>*/}
-      {/*  <AddButton></AddButton>*/}
-      {/*</Header>*/}
+      <Header>
+        <Title>Справочники</Title>
+        <AddButton>
+          <Plus />
+          <Add>Добавить</Add>
+        </AddButton>
+      </Header>
     </ReferenceListContainer>
   );
 };

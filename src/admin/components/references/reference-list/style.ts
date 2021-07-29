@@ -16,3 +16,24 @@ export const Title = styled.div`
   letter-spacing: 0.2px;
   color: #264796;
 `;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const AddButton = styled.div`
+  display: flex;
+  align-items: center;
+  margin: -8px;
+`;
+
+export const Add = styled.div`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: #0091ff;
+  margin-left: 8px;
+`;
