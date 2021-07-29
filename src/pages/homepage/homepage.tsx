@@ -233,7 +233,7 @@ const Homepage = () => {
         <Row>
           {data.map((i: any) => {
             return (
-              <Col xl={3} lg={4} md={6} sm={6} xs={12}>
+              <Col xl={3}>
                 <Card item={i} />
               </Col>
             );
