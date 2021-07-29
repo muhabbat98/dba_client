@@ -106,6 +106,10 @@ export const StepsOrder = styled.div`
     position: absolute;
     right: -120px;
     top: 50%;
+    @media ${({ theme }) => theme.breakpoints.xs} {
+      right: -70px;
+      width: 60px;
+    }
   }
 `;
 
