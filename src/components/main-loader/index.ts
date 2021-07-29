@@ -1,2 +1,2 @@
-import CircleLoader from './circle-loader';
-export default CircleLoader;
+import MainLoader from './main-loader';
+export default MainLoader;

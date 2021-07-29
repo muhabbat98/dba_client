@@ -9,7 +9,7 @@ import Buyers from '../../pages/buyers';
 import AboutSeller from '../../pages/sellers/about-seller';
 import BuyersInformation from '../../pages/buyers/buyers-information';
 import Moderator from '../../../admin/pages/moderator';
-import References from '../../pages/references';
+import References from '../../pages/references-page';
 import { ContentContainer } from './style';
 
 const Content = () => {

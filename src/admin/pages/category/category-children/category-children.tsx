@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { axios } from '../../../../hooks';
-import CircleLoader from '../../../../components/main-loader';
+import MainLoader from '../../../../components/main-loader';
 import Error from '../../../components/error';
 import Categories from './categories';
 import { CategoryChildrenContainer } from './style';
@@ -59,7 +59,7 @@ const CategoryChildren = () => {
   return (
     <CategoryChildrenContainer loading={isLoading}>
       {loading ? (
-        <CircleLoader />
+        <MainLoader />
       ) : error ? (
         <Error callback={fetchCategory} />
       ) : (
