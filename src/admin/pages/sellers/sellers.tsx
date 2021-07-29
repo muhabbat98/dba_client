@@ -21,9 +21,23 @@ const Sellers = () => {
   const { push } = useHistory();
   const { pathname } = useLocation();
 
-  const clickHandler = (id: any) => {
-    push(`${pathname}/${id}`);
-  };
+  const clickHandler = (id: any, ev: any) => {
+    if (getParents(ev.target)) {
+      console.log('iddddddd=> ', id);
+    } else {
+      push(`${pathname}/${id}`);
+    }
+  }
+
+  const getParents = (element: any) => {
+    while (element.parentElement) {
+      element = element.parentElement;
+      if (element.classList.contains('option-box')) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   return (
     <SellersContainer>
@@ -53,7 +67,7 @@ const Sellers = () => {
       </TableHeader>
 
       <TableBodyItemWrapper
-        onClick={() => clickHandler('3113dfdkg00e9ej')}
+        onClick={(ev: any) => clickHandler('3113dfdkg00e9ej', ev)}
         isCursor={true}
         grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
       >
@@ -71,7 +85,7 @@ const Sellers = () => {
         </TableBodyItem>
       </TableBodyItemWrapper>
       <TableBodyItemWrapper
-        onClick={() => clickHandler('3113dfdkg00werrw')}
+        onClick={(ev: any) => clickHandler('3113dfdkg00werrw', ev)}
         isCursor={true}
         grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
       >
@@ -89,7 +103,7 @@ const Sellers = () => {
         </TableBodyItem>
       </TableBodyItemWrapper>
       <TableBodyItemWrapper
-        onClick={() => clickHandler('3113dfdkg0234243')}
+        onClick={(ev: any) => clickHandler('3113dfdkg0234243', ev)}
         isCursor={true}
         grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
       >
@@ -107,7 +121,7 @@ const Sellers = () => {
         </TableBodyItem>
       </TableBodyItemWrapper>
       <TableBodyItemWrapper
-        onClick={() => clickHandler('3113dfdkfsf44533')}
+        onClick={(ev: any) => clickHandler('3113dfdkfsf44533', ev)}
         isCursor={true}
         grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
       >
@@ -125,7 +139,7 @@ const Sellers = () => {
         </TableBodyItem>
       </TableBodyItemWrapper>
       <TableBodyItemWrapper
-        onClick={() => clickHandler('3113dfdk234sfs34')}
+        onClick={(ev: any) => clickHandler('3113dfdk234sfs34', ev)}
         isCursor={true}
         grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
       >
@@ -143,7 +157,7 @@ const Sellers = () => {
         </TableBodyItem>
       </TableBodyItemWrapper>
       <TableBodyItemWrapper
-        onClick={() => clickHandler('3113dfdkg4fsfsf3')}
+        onClick={(ev: any) => clickHandler('3113dfdkg4fsfsf3', ev)}
         isCursor={true}
         grids={['1fr', '4fr', '4fr', '4fr', '4fr', '1fr']}
       >
