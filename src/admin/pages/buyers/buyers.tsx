@@ -10,6 +10,7 @@ import { BuyersContainer } from './style';
 import { ReactComponent as FilterColumn } from "../../assets/icons/filter-column.svg";
 import Avatar from '../../assets/images/buyer-table-img.png';
 import Avatar2 from '../../assets/images/buyer-table-img2.png';
+import GoodsTopControl from '../../components/goods-top-control';
 
 const Buyers = () => {
    const { push } = useHistory();
@@ -35,6 +36,9 @@ const Buyers = () => {
 
    return (
       <BuyersContainer>
+
+         <GoodsTopControl isShowChangeGrids={false} />
+
          <TableHeader grids={['1fr', '2fr', '4fr', '4fr', '4fr', '1fr']}>
             <TableHeaderItem>№<FilterColumn /></TableHeaderItem>
             <TableHeaderItem>Фото<FilterColumn /></TableHeaderItem>
