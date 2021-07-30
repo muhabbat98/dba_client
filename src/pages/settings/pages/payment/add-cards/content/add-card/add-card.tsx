@@ -14,7 +14,7 @@ import {
   CheckContainer,
 } from './style';
 import Checkbox from '../../../../../../../components/checkbox';
-import CircleLoader from '../../../../../../../components/main-loader';
+import MainLoader from '../../../../../../../components/main-loader';
 import { axios, useActionCreators } from '../../../../../../../hooks';
 import { usePayment } from '../../../context';
 
@@ -107,10 +107,10 @@ const AddCard = () => {
       {!isSmsStep && <Tabs />}
 
       {isSmsStep && <Sms reSend={resendHandler} sendSms={sendSmsHandler} />}
-      {smsLoading && <CircleLoader />}
+      {smsLoading && <MainLoader />}
       {!isSmsStep && (
         <FormContainer>
-          {loading && <CircleLoader />}
+          {loading && <MainLoader />}
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input

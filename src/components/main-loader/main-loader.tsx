@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spinner, SpinnerContainer } from './style';
 
-function CircleLoader() {
+function MainLoader() {
   return (
     <SpinnerContainer>
       <Spinner viewBox="0 0 50 50">
@@ -11,4 +11,4 @@ function CircleLoader() {
   );
 }
 
-export default CircleLoader;
+export default MainLoader;

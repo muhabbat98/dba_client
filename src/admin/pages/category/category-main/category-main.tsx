@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { axios, useError } from '../../../../hooks';
 import { CategoryMainContainer } from './style';
-import CircleLoader from '../../../../components/main-loader';
+import MainLoader from '../../../../components/main-loader';
 import HighLevelCategories from './high-level-categories';
 import Error from '../../../components/error';
 
@@ -39,7 +39,7 @@ const CategoryMain = () => {
   return (
     <CategoryMainContainer loading={isLoading}>
       {loading ? (
-        <CircleLoader />
+        <MainLoader />
       ) : error ? (
         <Error callback={fetchMenu} />
       ) : (
