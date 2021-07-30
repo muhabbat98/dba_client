@@ -1,18 +1,22 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
+
+interface IsMobileVersion {
+  isMobile?: boolean;
+}
 
 export const CheckBoxInput = styled.input``;
 
-export const CheckBoxSpan = styled.span``;
+export const CheckBoxSpan = styled.span<IsMobileVersion>``;
 
-export const CheckBoxLabel = styled.label`
+export const CheckBoxLabel = styled.label<IsMobileVersion>`
   z-index: 0;
   position: relative;
   display: inline-block;
   color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
   font-family: var(
     --pure-material-font,
-    "Roboto",
-    "Segoe UI",
+    'Roboto',
+    'Segoe UI',
     BlinkMacSystemFont,
     system-ui,
     -apple-system
@@ -52,13 +56,14 @@ export const CheckBoxLabel = styled.label`
   }
 
   /* Box */
-  & > span::before {
-    content: "";
+  & > ${CheckBoxSpan}::before {
+    content: '';
     display: inline-block;
     box-sizing: border-box;
-    margin: 3px 11px 3px 1px;
+    margin: ${({ isMobile }) =>
+      isMobile ? '3px 0px 3px 1px' : '3px 11px 3px 1px'};
     border: solid 1px; /* Safari */
-    border-color: ${({theme}) => `${theme.secondary_color}`};
+    border-color: ${({ theme }) => `${theme.secondary_color}`};
     border-radius: 2px;
     width: 20px;
     height: 20px;
@@ -68,7 +73,7 @@ export const CheckBoxLabel = styled.label`
 
   /* Checkmark */
   & > span::after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: 3px;
@@ -84,13 +89,13 @@ export const CheckBoxLabel = styled.label`
   /* Checked, Indeterminate */
   & > input:checked,
   & > input:indeterminate {
-    background-color: ${({theme}) => `${theme.primary_color}`};
+    background-color: ${({ theme }) => `${theme.primary_color}`};
   }
 
   & > input:checked + span::before,
   & > input:indeterminate + span::before {
-    border-color: ${({theme}) => `${theme.primary_color}`};
-    background-color: ${({theme}) => `${theme.primary_color}`};
+    border-color: ${({ theme }) => `${theme.primary_color}`};
+    background-color: ${({ theme }) => `${theme.primary_color}`};
   }
 
   & > input:checked + span::after,
@@ -124,7 +129,7 @@ export const CheckBoxLabel = styled.label`
   }
 
   & > input:active + span::before {
-    border-color: ${({theme}) => `${theme.primary_color}`};
+    border-color: ${({ theme }) => `${theme.primary_color}`};
   }
 
   & > input:checked:active + span::before {

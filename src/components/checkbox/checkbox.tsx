@@ -9,6 +9,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   register?: any;
   style?: any;
+  isMobileVersion?: boolean;
   callback?: (e: SyntheticEvent) => void;
 }
 
@@ -21,10 +22,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
   style,
   register,
   callback,
+  isMobileVersion,
   ...rest
 }) => {
   return (
-    <CheckBoxLabel style={style} htmlFor={id}>
+    <CheckBoxLabel isMobile={isMobileVersion} style={style} htmlFor={id}>
       <CheckBoxInput
         name={name}
         value={value}
@@ -35,7 +37,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         type="checkbox"
         {...rest}
       />
-      <CheckBoxSpan style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>
+      <CheckBoxSpan isMobile={isMobileVersion} style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>
         {label}
       </CheckBoxSpan>
     </CheckBoxLabel>

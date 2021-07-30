@@ -46,6 +46,8 @@ import {
 
 import { ReactComponent as CartDelete } from '../../assets/icons/cart-delete.svg';
 import CartEmpty from './cart-empty';
+import { useWindowSize } from '../../hooks/useWindowSize';
+import CartMobile from './cart-mobile';
 
 const Cart = () => {
   const { push } = useHistory();
@@ -77,8 +79,14 @@ const Cart = () => {
     }
   };
 
+  const size = useWindowSize();
+  console.log('size => ', size);
+
   return (
     <CartContainer>
+      <CartMobile items={cartItems} />
+
+      <p>asdadsadadas</p>
       <Container>
         <Row>
           <Col>
