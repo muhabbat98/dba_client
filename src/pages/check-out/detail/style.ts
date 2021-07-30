@@ -9,6 +9,9 @@ export const Order = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 8px 0px;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    font-size: 14px;
+  }
 `;
 interface OrderNumberProps {
   isFree: boolean;

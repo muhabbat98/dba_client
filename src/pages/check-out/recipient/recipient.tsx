@@ -52,7 +52,7 @@ const RecipientItem: FC<RecipientItemProps> = ({ nextStep, dataShare }) => {
           register={register}
           setValue={setValue}
         />
-        <Button style={{ marginTop: '32px' }} type="submit">
+        <Button style={{ marginTop: '32px', width: '100%' }} type="submit">
           Продолжить
         </Button>
       </FormRecipient>

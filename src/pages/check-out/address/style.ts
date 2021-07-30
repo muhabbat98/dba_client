@@ -29,6 +29,7 @@ export const HeaderAddress = styled.div`
   @media ${({ theme }) => theme.breakpoints.xs} {
     & span {
       padding: 0.5rem 0.2rem;
+      font-size: 14px;
     }
   }
 `;
