@@ -18,7 +18,8 @@ const Menu = () => {
       </MenuItem>
       <MenuItem to={`${url}/goods`}>Товары</MenuItem>
 
-      <MenuItem to={`${url}/moderators`}>Модераторы </MenuItem>
+      <MenuItem to={`${url}/moderators`}>Модераторы</MenuItem>
+      <MenuItem to={`${url}/references`}>Справочники</MenuItem>
 
       <MenuItem to={`${url}/buyers`}>Покупатели</MenuItem>
       <MenuItem to={`${url}/sellers`}>Продавцы</MenuItem>

@@ -16,8 +16,9 @@ import {
 
 interface AdressItemProps {
   nextStep: any;
+  dataShare: any;
 }
-const AdressItem: FC<AdressItemProps> = ({ nextStep }) => {
+const AdressItem: FC<AdressItemProps> = ({ nextStep, dataShare }) => {
   enum Tabs {
     PACKMEN,
     CALL,
@@ -29,6 +30,7 @@ const AdressItem: FC<AdressItemProps> = ({ nextStep }) => {
   const sendData = (data: any) => {
     console.log('data', data);
     if (data) {
+      dataShare.setData({ ...dataShare.allData, address: data });
       nextStep.setStep({ ...nextStep.step, payment: 1 });
       nextStep.setTab('payment');
     }

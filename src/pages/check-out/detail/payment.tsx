@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { AddressButton } from '../address/style';
 
 import {
@@ -11,8 +11,11 @@ import {
   DetailButton,
 } from './style';
 import { CheckOutBox } from '../style';
-
-const Payment = () => {
+interface PaymentProps {
+  dataShare: any;
+}
+const Payment: FC<PaymentProps> = ({ dataShare }) => {
+  console.log(dataShare);
   return (
     <CheckOutBox>
       <DetailHeader>Детали заказа</DetailHeader>

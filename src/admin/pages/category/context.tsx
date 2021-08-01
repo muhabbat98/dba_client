@@ -2,15 +2,22 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 enum ActionType {
   OPEN_ADD_MODAL,
+  CLOSE_ADD_MODAL,
 }
 
 interface OpenAddModal {
   type: ActionType.OPEN_ADD_MODAL;
 }
 
-interface State {}
+interface CloseAddModal {
+  type: ActionType.CLOSE_ADD_MODAL;
+}
 
-type Action = OpenAddModal;
+interface State {
+  open: boolean;
+}
+
+type Action = OpenAddModal | CloseAddModal;
 
 type Dispatch = (action: Action) => void;
 
@@ -19,7 +26,9 @@ interface CategoryContextType {
   dispatch: Dispatch;
 }
 
-const defaultState: State = {};
+const defaultState: State = {
+  open: false,
+};
 
 const defaultValue: CategoryContextType = {
   state: defaultState,
@@ -42,6 +51,10 @@ export const CategoryProvider: React.FC = ({ children }) => {
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case ActionType.OPEN_ADD_MODAL:
+      return { open: true };
+    case ActionType.CLOSE_ADD_MODAL:
+      return { open: false };
     default:
       return state;
   }
@@ -50,7 +63,17 @@ const reducer = (state: State, action: Action): State => {
 export const useCategory = () => {
   const { state, dispatch } = useContext(CategoryContext);
 
+  const openModal = () => {
+    dispatch({ type: ActionType.OPEN_ADD_MODAL });
+  };
+
+  const closeModal = () => {
+    dispatch({ type: ActionType.CLOSE_ADD_MODAL });
+  };
+
   return {
     state,
+    openModal,
+    closeModal,
   };
 };

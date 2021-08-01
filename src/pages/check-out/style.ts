@@ -14,6 +14,13 @@ export const SmallerContainer = styled.div`
     font-weight: 400;
     line-height: 20px;
   }
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    a{
+      display: none;
+    }
+    width: 100%;
+    padding: 1rem 0rem;
+  }
   a::after {
     content: '';
   }
@@ -30,16 +37,28 @@ export const CheckOutHeader = styled.h3`
   font-size: 24px;
   letter-spacing: 0.5px;
   line-height: 1.5rem;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    font-size: 20px;
+  }
 `;
 export const CheckOutBox = styled.div`
   padding: 2.7rem;
   margin: 2rem 0px;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.light_grey};
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    margin:24px 0px;
+    padding:0px 16px
+  }
 `;
 export const CartHeader = styled.h3`
   font-size: 24px;
   line-height: 1.5rem;
+  margin:0;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    font-size:16px;
+    margin:0
+  }
 `;
 export const CountItems = styled.span``;
 
@@ -47,16 +66,27 @@ export const CartContain = styled.div``;
 export const CartContainItem = styled.div`
   margin: 24px 0px;
   display: flex;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    align-items: center;
+    margin: 14px 0px;
+  }
 `;
 export const CartItemMedia = styled.div`
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.grey3};
   border-radius: 8px;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    text-align: center;
+  }
 `;
 export const CartItemImg = styled.img`
   width: 84px;
   height: 84px;
   object-fit: cover;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    width: 64px;
+    height: 64px;
+    }
 `;
 export const CartItemText = styled.div<Props>`
   padding: 10px 24px;
@@ -72,6 +102,13 @@ export const CartItemText = styled.div<Props>`
     padding: 12px 0px;
     color: ${({ theme }) => theme.grey1};
   }
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    font-size: 14px;
+    ::after{
+      font-size: 14px;
+      padding: 4px 0px;
+    }
+  }
 `;
 
 // Оформление заказа
@@ -79,6 +116,9 @@ export const CartItemText = styled.div<Props>`
 export const StepsOrder = styled.div`
   display: flex;
   justify-content: space-between;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+      margin-top: 22px;
+    }
   & div > div {
     width: 32px;
     height: 32px;
@@ -90,12 +130,19 @@ export const StepsOrder = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media ${({ theme }) => theme.breakpoints.xs} {
+      width: 24px;
+      height: 24px;
+    }
   }
   & div > p {
     font-size: 16px;
     line-height: 24px;
     margin: 10px 0px;
     font-weight: 600;
+    @media ${({ theme }) => theme.breakpoints.xs} {
+     font-size: 12px;
+    }
   }
   & div:not(:last-child) div::after {
     content: '';
@@ -106,6 +153,10 @@ export const StepsOrder = styled.div`
     position: absolute;
     right: -120px;
     top: 50%;
+    @media ${({ theme }) => theme.breakpoints.xs} {
+      width: 40px;
+      right: -56px;
+    }
   }
 `;
 
@@ -124,6 +175,12 @@ export const RecipientIcon = styled.div<RecipientIconProps>`
     width: 23px;
     height: 23px;
   }
+  @media ${({ theme }) => theme.breakpoints.xs} {
+     svg{
+        width :16px ;
+        height: 16px;
+     }
+    }
 `;
 export const RecipientText = styled.p``;
 

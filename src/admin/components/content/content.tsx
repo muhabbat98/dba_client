@@ -6,10 +6,9 @@ import GoodsItem from '../../pages/goods-item';
 import Category from '../../pages/category';
 import Sellers from '../../pages/sellers';
 import Buyers from '../../pages/buyers';
-import AboutSeller from '../../pages/sellers/about-seller'
-
-import { ContentContainer } from './style';
 import Moderator from '../../../admin/pages/moderator';
+import References from '../../pages/references-page';
+import { ContentContainer } from './style';
 
 const Content = () => {
   const { path } = useRouteMatch();
@@ -24,14 +23,11 @@ const Content = () => {
           component={Category}
         />
         <Route exact path={`${path}/goods`} component={Goods} />
+        <Route exact path={`${path}/references`} component={References} />
         <Route exact path={`${path}/goods-item`} component={GoodsItem} />
-
         <Route exact path={`${path}/moderators`} component={Moderator} />
-
-        <Route exact path={`${path}/buyers`} component={Buyers} />
-        <Route exact path={`${path}/sellers`} component={Sellers} />
-
-        <Route exact path={`${path}/sellers/:id`} component={AboutSeller} />
+        <Route path={`${path}/sellers`} component={Sellers} />
+        <Route path={`${path}/buyers`} component={Buyers} />
       </Switch>
     </ContentContainer>
   );

@@ -6,13 +6,17 @@ import Button from '../../../components/button';
 import CircleImageUploader from './circle-image-uploader';
 import photoIcon from '../../assets/icons/photo.svg';
 import iconIcon from '../../assets/icons/icon.svg';
+import { ReactComponent as Cancel } from '../../assets/icons/cancel.svg';
 import {
   AddCategoryContainer,
   AddCategoryWrapper,
   Div,
   Title,
+  CloseIconContainer,
   ImagesUploadContainer,
 } from './style';
+import { useCategory } from '../../pages/category/context';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 interface FormInputs {
   name: string;
@@ -23,11 +27,20 @@ interface FormInputs {
 
 const AddCategory = () => {
   const [data, setData] = useState({
-    name: '',
-    description: '',
+    name: 'ewf',
+    description: 'gwegwe',
     icon: '',
     photo: '',
   });
+
+  const { pathname } = useLocation();
+  const params = useParams();
+
+  console.log('www', params);
+
+  console.log('isChild', params.hasOwnProperty('id'));
+
+  const { closeModal } = useCategory();
 
   const { register, watch, setValue, handleSubmit, errors } =
     useForm<FormInputs>();
@@ -39,8 +52,11 @@ const AddCategory = () => {
 
   return (
     <AddCategoryContainer>
-      <Backdrop close={() => console.log()} />
+      <Backdrop close={closeModal} />
       <AddCategoryWrapper>
+        <CloseIconContainer onClick={closeModal}>
+          <Cancel />
+        </CloseIconContainer>
         <Title>Добавить категория</Title>
         <ImagesUploadContainer>
           <CircleImageUploader

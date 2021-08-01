@@ -83,7 +83,7 @@ export const TableBodyItem = styled.div`
 
   &:last-child {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
   }
 `;

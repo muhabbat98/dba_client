@@ -2,6 +2,9 @@ import styled from 'styled-components';
 export const Address = styled.div`
   min-width: 398px;
   margin: 0 auto;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    min-width: 100%;
+  }
 `;
 export const HeaderAddress = styled.div`
   width: 100%;
@@ -20,8 +23,14 @@ export const HeaderAddress = styled.div`
     line-height: 24px;
     box-sizing: border-box;
     border-radius: 25px;
-    padding: 8px 25px;
+    padding: 0.5rem 2rem;
     cursor: pointer;
+  }
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    & span {
+      padding: 0.5rem 0.2rem;
+      font-size: 14px;
+    }
   }
 `;
 interface HeaderAdressProps {

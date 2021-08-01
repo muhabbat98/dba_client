@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import {
   Address,
   CallHeader,
@@ -25,13 +25,20 @@ import {
   NumberCard,
 } from './style';
 
-const Payment = () => {
+interface PaymentProps {
+  dataShare: any;
+}
+
+const Payment: FC<PaymentProps> = ({ dataShare }) => {
   enum Tabs {
     POCKET,
     CARD,
     NUMBER,
   }
   const [type, setType] = useState(Tabs.POCKET);
+  useEffect(() => {
+    console.log(dataShare);
+  }, []);
   return (
     <Address>
       <HeaderAddress>
