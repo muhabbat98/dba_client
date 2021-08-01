@@ -72,6 +72,7 @@ export const Pagenition = styled.div`
             border-radius: 4px;
             color: rgba(0, 0, 0, 0.5);
             margin-right: 8px;
+            cursor: pointer;
             border:1px solid rgba(0,0,0,0.2);
             :hover {
                   background: linear-gradient(0deg, #F5F8FF, #F5F8FF), #3E66FB;
