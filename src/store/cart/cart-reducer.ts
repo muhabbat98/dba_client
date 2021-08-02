@@ -150,6 +150,19 @@ const incrementCart = (state: CartReducerState, cart: any) => {
         if (cart.isChecked) {
           state.tSum += Number(c.priceResponse.value);
           state.checkedAllCount += cart.count;
+
+          let checkedArray = [];
+          checkedArray = state.checkedAll.map((item) => {
+            if (item.id === c.id) {
+              const copyCheckedObj = { ...item };
+              copyCheckedObj.count += 1;
+              return copyCheckedObj;
+            } else {
+              return item;
+            }
+          });
+
+          state.checkedAll = [...checkedArray];
         }
 
         state.totalPrice = state.totalPrice + Number(c.priceResponse.value);
@@ -187,6 +200,19 @@ const decrementCart = (state: CartReducerState, cart: any) => {
         if (cart.isChecked) {
           state.tSum -= Number(c.priceResponse.value);
           state.checkedAllCount -= cart.count;
+
+          let checkedArray = [];
+          checkedArray = state.checkedAll.map((item) => {
+            if (item.id === c.id) {
+              const copyCheckedObj = { ...item };
+              copyCheckedObj.count -= 1;
+              return copyCheckedObj;
+            } else {
+              return item;
+            }
+          });
+
+          state.checkedAll = [...checkedArray];
         }
 
         state.totalPrice = state.totalPrice - Number(c.priceResponse.value);
