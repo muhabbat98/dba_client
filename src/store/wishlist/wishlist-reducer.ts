@@ -1,12 +1,12 @@
-import { WishlistActionType } from "./wishlist-action-types";
-import { WishlistType } from "./wishlist-types";
+import { WishlistActionType } from './wishlist-action-types';
+import { WishlistType } from './wishlist-types';
 
 export interface WishlistItemState {
   wishlistItems: any[];
 }
 
 const initialState: WishlistItemState = {
-  wishlistItems: []
+  wishlistItems: [],
 };
 
 export const wishlistReducer = (
@@ -17,7 +17,7 @@ export const wishlistReducer = (
     case WishlistType.ADD_TO_WISHLIST:
       return {
         ...state,
-        wishlistItems: [...state.wishlistItems, action.payload]
+        wishlistItems: [...state.wishlistItems, action.payload],
       };
 
     case WishlistType.REMOVE_WISHLIST:
@@ -29,7 +29,8 @@ export const wishlistReducer = (
 };
 
 const removeFromWishlist = (state: WishlistItemState, wishlist: any) => {
-  const removedWishlist = state.wishlistItems.filter(item => item.id !== wishlist.id);
+  const removedWishlist = state.wishlistItems.filter(
+    (item) => item.id !== wishlist.id
+  );
   return { ...state, wishlistItems: removedWishlist };
 };
-

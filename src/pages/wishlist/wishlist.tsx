@@ -1,17 +1,15 @@
-import React from 'react'
 import Col from '../../components/grid/col';
 import Container from '../../components/grid/container';
 import Row from '../../components/grid/row';
 import ProductsTitle from '../../components/products-title';
 import Card from '../../components/card';
-import { useActionCreators, useSelector } from '../../hooks';
+import { useSelector } from '../../hooks';
 import WishlistEmpty from './wishlist-empty';
 
-import { WishlistContainer, WishlistWrapperRow, WishlistWrapperCol } from './style';
+import { WishlistContainer } from './style';
 
 function Wishlist() {
    const { wishlistItems } = useSelector((state) => state.wishlist);
-   console.log('Wishlist = ', wishlistItems);
 
    return (
       <WishlistContainer>

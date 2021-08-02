@@ -1,29 +1,18 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import isEmptyObj from '../../../utils/isEmptyObj';
 
 import {
-  PersonalInfoContainer,
-  PersonalHeader,
   PersonalHeaderLeft,
-  PersonalHeaderRight,
   PersonalAvatar,
   PersonalAvatarImg,
   PersonalNameWrapper,
   PersonalName,
   PersonalNameEmail,
-  ChangeProfileButton,
-  ChangeName,
-  PersonalBody,
-  PersonalBodyGrid,
-  PersonalBodyLabel,
-  PersonalBodyName,
-  PersonalBodyFlex,
   PersonalVerified,
   PersonalVerifiedToggle,
 } from './style';
 
 import Avatar from '../../../assets/images/personal-info-avatar.png';
-import { ReactComponent as Edit } from '../../../assets/icons/edit.svg';
 import { ReactComponent as Verified } from '../../../assets/icons/verified.svg';
 
 interface PersonalHeaderLeftSideProps {
@@ -33,7 +22,6 @@ interface PersonalHeaderLeftSideProps {
 const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({
   personalInfo,
 }) => {
-  console.log('personalInfo ==> ', personalInfo);
 
   return (
     <PersonalHeaderLeft>

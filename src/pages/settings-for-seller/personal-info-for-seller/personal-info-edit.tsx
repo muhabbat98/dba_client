@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect, useRef } from 'react';
+import { useState, FC, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 
@@ -7,7 +7,7 @@ import { AlertPosition } from '../../../utils/alert-position-enum';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 import Dropdown from '../../../components/drop-down';
-import { axios, useActionCreators, useSelector } from '../../../hooks';
+import { axios, useActionCreators } from '../../../hooks';
 
 import {
   PersonalInfoContainer,

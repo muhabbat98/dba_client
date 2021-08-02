@@ -18,7 +18,6 @@ const BuyersList = () => {
 
    const clickHandler = (id: any, ev: any) => {
       if (getParents(ev.target)) {
-         console.log(id);
       } else {
          push(`${pathname}/${id}`);
       }

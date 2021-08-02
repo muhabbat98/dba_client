@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 import PersonalInfoEdit from './personal-info-edit';
-import { axios, useActionCreators, useSelector } from '../../../hooks';
+import { axios, useActionCreators } from '../../../hooks';
 import { AlertPosition } from '../../../utils/alert-position-enum';
 
 import isEmptyObj from '../../../utils/isEmptyObj';

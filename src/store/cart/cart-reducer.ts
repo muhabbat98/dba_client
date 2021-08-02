@@ -147,7 +147,6 @@ const incrementCart = (state: CartReducerState, cart: any) => {
         copyCart.count = copyCart.count + 1;
 
         copyCart.totalSum += Number(c.priceResponse.value);
-        console.log('increment cart => ', cart);
         if (cart.isChecked) {
           state.tSum += Number(c.priceResponse.value);
           state.checkedAllCount += cart.count;

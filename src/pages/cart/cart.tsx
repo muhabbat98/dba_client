@@ -57,8 +57,6 @@ const Cart = () => {
 
   const { userRole } = useRole();
 
-  console.log("userRole => ", userRole);
-
   const deleteCart = (data: any) => {
     removeCart(data);
   };
@@ -80,7 +78,6 @@ const Cart = () => {
   };
 
   const size = useWindowSize();
-  console.log('size => ', size);
 
   return (
     <CartContainer>

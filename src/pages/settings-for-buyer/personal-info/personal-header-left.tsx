@@ -22,7 +22,6 @@ interface PersonalHeaderLeftSideProps {
 const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({
   personalInfo,
 }) => {
-  console.log('personalInfo == ', personalInfo);
 
   return (
     <PersonalHeaderLeft>

@@ -22,7 +22,6 @@ const ListSellers = () => {
 
    const clickHandler = (id: any, ev: any) => {
       if (getParents(ev.target)) {
-         console.log('iddddddd=> ', id);
       } else {
          push(`${pathname}/${id}`);
       }
