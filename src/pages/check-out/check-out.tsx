@@ -32,6 +32,7 @@ import {
   AddressIcon,
   PaymentIcon,
   PaymentText,
+  Line
 } from './style';
 
 enum ActionSteps {
@@ -84,6 +85,7 @@ const CheckOut = () => {
               </RecipientIcon>
               <RecipientText>Получатель</RecipientText>
             </Recipient>
+            <Line/>
             <Address>
               <AddressIcon active={step.address}>
                 {step.address === 1 ? (
@@ -94,6 +96,7 @@ const CheckOut = () => {
               </AddressIcon>
               <AddressText>Адрес доставки</AddressText>
             </Address>
+            <Line/>
             <Payment>
               <PaymentIcon active={step.payment}>
                 {step.payment === 1 ? <PaymantIconWhite /> : <PaymantIcon />}
