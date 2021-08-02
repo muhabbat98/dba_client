@@ -54,10 +54,11 @@ export const CheckOutBox = styled.div`
 export const CartHeader = styled.h3`
   font-size: 24px;
   line-height: 1.5rem;
-  margin:0;
+  margin-bottom: 1.5rem;
   @media ${({ theme }) => theme.breakpoints.xs} {
     font-size:16px;
-    margin:0
+    margin:0;
+    margin-top: 1rem;
   }
 `;
 export const CountItems = styled.span``;
@@ -116,6 +117,9 @@ export const CartItemText = styled.div<Props>`
 export const StepsOrder = styled.div`
   display: flex;
   justify-content: space-between;
+  & > div {
+    position: relative;
+  }
   @media ${({ theme }) => theme.breakpoints.xs} {
       margin-top: 22px;
     }
@@ -144,18 +148,29 @@ export const StepsOrder = styled.div`
      font-size: 12px;
     }
   }
-  & div:not(:last-child) div::after {
+  & > div:not(:last-child)::after {
     content: '';
     display: block;
     width: 91px;
     height: 1px;
     background-color: ${({ theme }) => theme.grey1};
     position: absolute;
-    right: -120px;
-    top: 50%;
+    right: -100px;
+    top: 30%;
     @media ${({ theme }) => theme.breakpoints.xs} {
+      top: 20%;
       width: 40px;
-      right: -56px;
+      right: -100%;
+    }
+    @media only screen and (max-width: 450px) {
+      width: 60%;
+      right: -60%;
+     
+    }
+    @media only screen and (max-width: 380px) {
+      width: 30%;
+      right: -30%;
+     
     }
   }
 `;
