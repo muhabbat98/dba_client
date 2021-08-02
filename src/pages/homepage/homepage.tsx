@@ -20,10 +20,8 @@ import Button from '../../components/button';
 import Row from '../../components/grid/row';
 import Col from '../../components/grid/col';
 
-import { CardWrapperRow, CardWrapperCol, Cont } from './style';
+import { Cont } from './style';
 
-import Dishes from '../../assets/images/dishes.svg';
-import Shoe from '../../assets/images/shoe.svg';
 import Snowboard from '../../assets/images/snowboard.svg';
 import Phones from '../../assets/images/phones.svg';
 import CardImage from '../../assets/images/card-item1.png';
@@ -35,8 +33,7 @@ import CardImage6 from '../../assets/images/card-item6.png';
 import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
 import CardImage9 from '../product-detail/product-detail-header/images/phoneMain.svg';
-import Tiger1 from '../../assets/images/tiger.jpg';
-import Tiger2 from '../../assets/images/tiger2.jpg';
+
 import Slider from '../../components/slider';
 
 export const data = [

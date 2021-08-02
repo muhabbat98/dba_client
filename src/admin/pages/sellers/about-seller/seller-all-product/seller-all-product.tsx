@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
 
 import { TableBodyItem, TableBodyItemWrapper, TableHeader, TableHeaderItem } from '../../../../../global-styles';
 import { SellerProductContainer } from './style';
@@ -8,11 +7,8 @@ import { Order, StatusBox } from '../../../../components/goods-table/style';
 import OptionBox from '../../../../components/goods-table/option-box';
 
 const SellerAllProduct = () => {
-   const { push } = useHistory();
-   const { pathname } = useLocation();
 
    const clickHandler = (id: any, ev: any) => {
-      console.log('iddddddd=> ', id);
    }
 
    return (

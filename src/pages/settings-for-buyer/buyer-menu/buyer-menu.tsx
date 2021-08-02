@@ -1,8 +1,8 @@
 import React from 'react';
-import {useRouteMatch} from "react-router-dom";
-import {BuyerMenuContainer, Li, StyledLink, Ul} from './style';
-import {Exit} from "../../settings/menu/style";
-import {useActionCreators} from "../../../hooks";
+import { useRouteMatch } from "react-router-dom";
+import { Li, StyledLink, Ul } from './style';
+import { Exit } from "../../settings/menu/style";
+import { useActionCreators } from "../../../hooks";
 
 const BuyerMenu = () => {
     const { url } = useRouteMatch();

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import SettingsInput from '../../components/settings-input';
 import Checkbox from '../../components/checkbox';
 import FilterInput from './filter-input';
 import FilterCollapse from './filter-collapse';
@@ -26,7 +25,7 @@ function ProductsFilter() {
 
          <FilterCollapse headerTitle="Бренд">
             <FilterCollapseItem>
-               <FilterInput placeholder=" Я ищу..."/>
+               <FilterInput placeholder=" Я ищу..." />
                <FilterUl>
                   <FilterLi><Checkbox label="Apple" /></FilterLi>
                   <FilterLi><Checkbox label="Samsung" /></FilterLi>
@@ -43,7 +42,7 @@ function ProductsFilter() {
 
          <FilterCollapse headerTitle="Разрешение экрана в пикселях">
             <FilterCollapseItem>
-               <FilterInput placeholder="Поиск"/>
+               <FilterInput placeholder="Поиск" />
                <FilterUl>
                   <FilterLi><Checkbox label="1132x540" /></FilterLi>
                   <FilterLi><Checkbox label="1136x640" /></FilterLi>

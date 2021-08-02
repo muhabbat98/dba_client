@@ -1,5 +1,4 @@
 import React, { useState, FC } from 'react';
-import { useHistory } from 'react-router-dom';
 import Checkbox from '../../../components/checkbox';
 import { StatusBox, Order } from './style';
 import OptionBox from './option-box';
@@ -15,13 +14,10 @@ interface GoodsTableItemProps {
 
 const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelected }) => {
    const { addId } = useItemChecked();
-   const { push } = useHistory();
 
    const [isChecked, setIsChecked] = useState<boolean>(false);
 
    const check = (id: string) => {
-      console.log('id: ', id);
-
       addId(id);
    }
 
@@ -37,7 +33,7 @@ const GoodsTableItem: FC<GoodsTableItemProps> = ({ id, isRowClickable, rowSelect
       if (getParents(ev.target)) {
 
       } else {
-         console.log('iddddddd=> ', id);
+
          // push('/sellers/about-seller/' + id);
       }
    }

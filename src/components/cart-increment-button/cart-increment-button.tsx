@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useActionCreators, useSelector } from '../../hooks';
+import React, { useState } from 'react';
+import { useActionCreators } from '../../hooks';
 
 import { CartIcrementButtonContainer, CartIcncrementButton, CartDecrementButton, CartIcrementInput, } from "./style";
 
