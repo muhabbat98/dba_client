@@ -77,107 +77,153 @@ const Cart = () => {
     }
   };
 
-  const size = useWindowSize();
+  const [width, height] = useWindowSize();
 
   return (
     <CartContainer>
-      <CartMobile items={cartItems} />
-
-      <p>asdadsadadas</p>
-      <Container>
-        <Row>
-          <Col>
-            <ProductsTitle title="Корзина" />
-          </Col>
-        </Row>
-        <Row style={{ gridGap: '40px', paddingBottom: '260px ' }}>
-          {cartItems.length == 0 ? (
-            <Col xl={12}>
-              <CartEmpty />
-            </Col>
-          ) : (
-            <>
-              <Col xl={8}>
-                <CartWrapper>
-                  {cartItems.map((item: any) => (
-                    <CartBox key={item.id}>
-                      <CartBoxLeft>
-                        <CartBoxLeftContainer>
-                          <CartCheckBoxWrapper>
-                            <Checkbox
-                              checked={item.isChecked}
-                              onChange={(ev) => getCheckedTotalSum(item.id, ev)}
-                            />
-                          </CartCheckBoxWrapper>
-                          <CartIconWrapper isChecked={item.isChecked}>
-                            <CartItemImageLink to="">
-                              <CartItemImage src={item.images[0]} />
-                            </CartItemImageLink>
-                          </CartIconWrapper>
-                          <CartInfo>
-                            <CartTitle to="">{item.name}</CartTitle>
-                            <CartManufactor>Продавец:</CartManufactor>
-                            <CartManufactorName>
-                              ООО "ДИХАУС"
-                            </CartManufactorName>
-                          </CartInfo>
-                        </CartBoxLeftContainer>
-                      </CartBoxLeft>
-                      <CartBoxRight>
-                        <CartBoxRightContainer>
-                          <CartDostup>Доступно: 40 </CartDostup>
-                          <CartCalculationPart>
-                            <CartIncrementPart>
-                              <CartPrice>
-                                {formatMoney(item.priceResponse.value)}
-                                <CartPriceSpan>
-                                  {item.priceResponse.currency.shortName}
-                                </CartPriceSpan>
-                              </CartPrice>
-                              {/* Cart Increment Button Component */}
-                              <CartIncrementButton item={item} />
-                            </CartIncrementPart>
-                            <CartIconPart>
-                              {/* Cart Icon Wishlist Component */}
-                              <CartIconWishlist item={item} />
-                              <CartIconDelete onClick={() => deleteCart(item)}>
-                                <CartDelete />
-                              </CartIconDelete>
-                            </CartIconPart>
-                          </CartCalculationPart>
-                        </CartBoxRightContainer>
-                      </CartBoxRight>
-                    </CartBox>
-                  ))}
-                </CartWrapper>
+      {
+        width <= 768 ? (
+          <>
+            {
+              cartItems.length > 0 ? (
+                <>
+                  <CartMobile items={cartItems} />
+                  <Container>
+                    <Row>
+                      <Col xl={4}>
+                        <CartSoldCount>
+                          <CartSoldNameWrapper>
+                            <CartSoldName>Вес заказа</CartSoldName>
+                            <CartSoldPrice>15 кг</CartSoldPrice>
+                          </CartSoldNameWrapper>
+                          <CartSoldNameWrapper>
+                            <CartSoldName>Товары ({totalCount})</CartSoldName>
+                            <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
+                          </CartSoldNameWrapper>
+                          <CartSoldNameWrapper>
+                            <CartSoldName>Скидка по акции</CartSoldName>
+                            <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
+                          </CartSoldNameWrapper>
+                          <CartSoldAllWrapper>
+                            <CartSoldAll>Итого</CartSoldAll>
+                            <CartSoldAllPrice>{formatMoney(tSum)} сум</CartSoldAllPrice>
+                          </CartSoldAllWrapper>
+                          <Button onClick={gotoOrdersPage} style={{ width: '100%' }}>
+                            Перейти к оформлению
+                          </Button>
+                        </CartSoldCount>
+                      </Col>
+                    </Row>
+                  </Container>
+                </>
+              ) : (
+                <Container>
+                  <Row>
+                    <Col xl={12}>
+                      <CartEmpty />
+                    </Col>
+                  </Row>
+                </Container>
+              )
+            }
+          </>
+        ) : (
+          <Container>
+            <Row>
+              <Col>
+                <ProductsTitle title="Корзина" />
               </Col>
-              <Col xl={4}>
-                <CartSoldCount>
-                  <CartSoldNameWrapper>
-                    <CartSoldName>Вес заказа</CartSoldName>
-                    <CartSoldPrice>15 кг</CartSoldPrice>
-                  </CartSoldNameWrapper>
-                  <CartSoldNameWrapper>
-                    <CartSoldName>Товары ({totalCount})</CartSoldName>
-                    <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
-                  </CartSoldNameWrapper>
-                  <CartSoldNameWrapper>
-                    <CartSoldName>Скидка по акции</CartSoldName>
-                    <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
-                  </CartSoldNameWrapper>
-                  <CartSoldAllWrapper>
-                    <CartSoldAll>Итого</CartSoldAll>
-                    <CartSoldAllPrice>{formatMoney(tSum)} сум</CartSoldAllPrice>
-                  </CartSoldAllWrapper>
-                  <Button onClick={gotoOrdersPage} style={{ width: '100%' }}>
-                    Перейти к оформлению
-                  </Button>
-                </CartSoldCount>
-              </Col>
-            </>
-          )}
-        </Row>
-      </Container>
+            </Row>
+            <Row style={{ gridGap: '40px', paddingBottom: '260px ' }}>
+              {cartItems.length == 0 ? (
+                <Col xl={12}>
+                  <CartEmpty />
+                </Col>
+              ) : (
+                <>
+                  <Col xl={8}>
+                    <CartWrapper>
+                      {cartItems.map((item: any) => (
+                        <CartBox key={item.id}>
+                          <CartBoxLeft>
+                            <CartBoxLeftContainer>
+                              <CartCheckBoxWrapper>
+                                <Checkbox
+                                  checked={item.isChecked}
+                                  onChange={(ev) => getCheckedTotalSum(item.id, ev)}
+                                />
+                              </CartCheckBoxWrapper>
+                              <CartIconWrapper isChecked={item.isChecked}>
+                                <CartItemImageLink to="">
+                                  <CartItemImage src={item.images[0]} />
+                                </CartItemImageLink>
+                              </CartIconWrapper>
+                              <CartInfo>
+                                <CartTitle to="">{item.name}</CartTitle>
+                                <CartManufactor>Продавец:</CartManufactor>
+                                <CartManufactorName>
+                                  ООО "ДИХАУС"
+                                </CartManufactorName>
+                              </CartInfo>
+                            </CartBoxLeftContainer>
+                          </CartBoxLeft>
+                          <CartBoxRight>
+                            <CartBoxRightContainer>
+                              <CartDostup>Доступно: 40 </CartDostup>
+                              <CartCalculationPart>
+                                <CartIncrementPart>
+                                  <CartPrice>
+                                    {formatMoney(item.priceResponse.value)}
+                                    <CartPriceSpan>
+                                      {item.priceResponse.currency.shortName}
+                                    </CartPriceSpan>
+                                  </CartPrice>
+                                  {/* Cart Increment Button Component */}
+                                  <CartIncrementButton item={item} />
+                                </CartIncrementPart>
+                                <CartIconPart>
+                                  {/* Cart Icon Wishlist Component */}
+                                  <CartIconWishlist item={item} />
+                                  <CartIconDelete onClick={() => deleteCart(item)}>
+                                    <CartDelete />
+                                  </CartIconDelete>
+                                </CartIconPart>
+                              </CartCalculationPart>
+                            </CartBoxRightContainer>
+                          </CartBoxRight>
+                        </CartBox>
+                      ))}
+                    </CartWrapper>
+                  </Col>
+                  <Col xl={4}>
+                    <CartSoldCount>
+                      <CartSoldNameWrapper>
+                        <CartSoldName>Вес заказа</CartSoldName>
+                        <CartSoldPrice>15 кг</CartSoldPrice>
+                      </CartSoldNameWrapper>
+                      <CartSoldNameWrapper>
+                        <CartSoldName>Товары ({totalCount})</CartSoldName>
+                        <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
+                      </CartSoldNameWrapper>
+                      <CartSoldNameWrapper>
+                        <CartSoldName>Скидка по акции</CartSoldName>
+                        <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
+                      </CartSoldNameWrapper>
+                      <CartSoldAllWrapper>
+                        <CartSoldAll>Итого</CartSoldAll>
+                        <CartSoldAllPrice>{formatMoney(tSum)} сум</CartSoldAllPrice>
+                      </CartSoldAllWrapper>
+                      <Button onClick={gotoOrdersPage} style={{ width: '100%' }}>
+                        Перейти к оформлению
+                      </Button>
+                    </CartSoldCount>
+                  </Col>
+                </>
+              )}
+            </Row>
+          </Container>
+        )
+      }
     </CartContainer>
   );
 };

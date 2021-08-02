@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+interface IsCheckedProps {
+  isChecked?: boolean;
+}
+
 export const CartMobileContainer = styled.div``;
 
 export const CartMobileList = styled.div``;
@@ -29,14 +33,15 @@ export const CartMobileItemRight = styled.div`
   }
 `;
 
-export const CartMobileItemImgLink = styled(Link)`
+export const CartMobileItemImgLink = styled(Link)<IsCheckedProps>`
   display: block;
   width: 80px;
   height: 80px;
   border-radius: 8px;
   padding: 8px;
   overflow: hidden;
-  border: 1px solid #e9ecf4;
+  border: ${({ isChecked }) =>
+    isChecked ? `1px solid #264796` : '1px solid #e9ecf4'};
   margin-bottom: 12px;
 `;
 

@@ -58,6 +58,7 @@ const getTotalSum = (state: CartReducerState, t: any) => {
   changedCartItems = copyOfCartItems.map((c) => {
     if (c.id === t.id) {
       const copyCart = { ...c };
+
       if (t.isChecked) {
         copyCart.isChecked = true;
         state.tSum += copyCart.totalSum;
@@ -71,6 +72,7 @@ const getTotalSum = (state: CartReducerState, t: any) => {
         let removedArray = state.checkedAll.filter((item) => item.id != c.id);
         state.checkedAll = [...removedArray];
       }
+
       return copyCart;
     } else {
       return c;
@@ -88,17 +90,17 @@ const removeCart = (state: CartReducerState, cart: any) => {
       state.totalPrice =
         state.totalPrice -
         state.cartItems[i].count * Number(cart.priceResponse.value);
-
-      state.tSum = state.tSum - cart.priceResponse.value * cart.count;
-
       state.totalCount = state.totalCount - state.cartItems[i].count;
 
-      state.checkedAllCount -= cart.count;
-      let copyCheckedAll = [...state.checkedAll];
-      let removedCheckedAll = copyCheckedAll.filter(
-        (item) => item.id !== cart.id
-      );
-      state.checkedAll = [...removedCheckedAll];
+      if (state.cartItems[i].isChecked) {
+        state.tSum = state.tSum - cart.priceResponse.value * cart.count;
+        state.checkedAllCount -= cart.count;
+        let copyCheckedAll = [...state.checkedAll];
+        let removedCheckedAll = copyCheckedAll.filter(
+          (item) => item.id !== cart.id
+        );
+        state.checkedAll = [...removedCheckedAll];
+      }
     }
   }
   return { ...state, cartItems: removedArray };
