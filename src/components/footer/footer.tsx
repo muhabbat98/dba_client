@@ -2,14 +2,18 @@ import React from "react";
 import Container from "../grid/container";
 import { ReactComponent as AppStore } from "../../assets/icons/appStore.svg";
 import { ReactComponent as PlayMarket } from "../../assets/icons/playMarket.svg";
-
+import {useWindowSize} from '../../hooks/useWindowSize'
 import { FooterWrapper, AppStories, ContainerBoottom, Line } from "./style";
 
 const Footer = () => {
+  const [width,height] = useWindowSize();
+  console.log("hegh-->",height,"width-->",width);
   return (
     <FooterWrapper>
       <Container>
         <ContainerBoottom>
+          {width>768 &&
+          <>
           <ul>
             <li>Покупателям</li>
             <li>Оплата и доставка</li>
@@ -42,6 +46,7 @@ const Footer = () => {
             <li>Telegram</li>
             <li>YouTube</li>
           </ul>
+          </>}
           <ul>
             <li>Мобильные устройства</li>
             <AppStories>
@@ -50,6 +55,7 @@ const Footer = () => {
             </AppStories>
             <li>Перейти на мобильную версию сайта</li>
           </ul>
+          
         </ContainerBoottom>
         <Line></Line>
         <p>2020-2021 © Marketplace</p>

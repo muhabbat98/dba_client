@@ -10,9 +10,10 @@ const  ActiveProductsPage:React.FC<ActivePagePropses> = ({activeData,setOpen,set
     return (
         <div style={{marginTop:40}}>
             {activeData && 
-                activeData.map((item:any)=>{
+                activeData.map((item:any,index:number)=>{
                     return (
-                        <ActiveProductsItem 
+                        <ActiveProductsItem
+                        key={index} 
                         activeData={item} 
                         setOpen={setOpen}
                         setGetDisputeItem={setGetDisputeItem}

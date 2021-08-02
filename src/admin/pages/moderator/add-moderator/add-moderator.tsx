@@ -3,6 +3,7 @@ import ImgUpload from '../../../assets/images/upload-foto.svg'
 import Input from '../../../../components/input';
 import Button from '../../../../components/button';
 import Checkbox from '../../../../components/checkbox';
+import Password from '../../../../components/login/login-inputs/password';
 import { useForm } from "react-hook-form";
 import {ReactComponent as ArrowIcon} from '../../../../assets/icons/arrow-down.svg'
 import {ModalContainer,AddContainer,Title,UploadImg,SelectInput,SelectBox,InputBody} from './style'
@@ -16,10 +17,18 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
       const { register, handleSubmit, control, watch, errors, setValue } = useForm();
       const [avatar,setAvatar] = useState<any>(null);
       const [isOpen, setIsOpen] = useState<boolean>(false);
+      const [errPassword,setErrPassword] = useState<boolean>(false);
       const fileRef = useRef<HTMLInputElement>(null);
       const onSubmit = (data: any) => {
-            console.log('dataa-->',data);
-            setClose(false);
+            
+            if(data.password==data.confirmPassword){
+                  setClose(false);
+                  console.log('dataa-->',data);
+            }
+            else {
+                  setErrPassword(true); 
+                  console.log("password error")}
+            
          }
          const imageChange = (ev:any) => {
             let imgFile = ev.target.files[0];
@@ -47,6 +56,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
             }
       }, [isOpen])
       const list = ["Электроника","Бытовая техника","Строительство и ремонт","Спорт и активный отдых","Одежда, обувь и аксесс","Книги, хобби, канцелярия","Продукты питания","Дача, сезонные товары","Товары для геймеров","Фандом атрибутика","Зоотовары","Красота и уход"]
+      
       return(
             <ModalContainer>
                   <AddContainer ref={reff}>
@@ -100,13 +110,26 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
                               setValue={setValue}
                               />
                         </div>
+                        <Password 
+                              label="Пароль"
+                              name="password"
+                              register={register}
+                              warning={errPassword}
+                              />
+                        <Password 
+                              label="Повторите пароль"
+                              name="confirmPassword"
+                              register={register}
+                              error={errPassword}
+                              warning={errPassword}
+                              />
                         <SelectInput ref={ref}>
                               <span onClick={()=>setIsOpen(open=>!open)}>Категория</span>
                               <InputBody onClick={()=>setIsOpen(open=>!open)}><p>Электроника</p><ArrowIcon/></InputBody>
                               {isOpen &&
                                     <SelectBox>
                                           {list.map((item:any,index:number)=>{
-                                               return( <div key={index}>
+                                                return( <div key={index}>
                                                       <Checkbox/><p>{item}</p>
                                                 </div>)
                                           })}

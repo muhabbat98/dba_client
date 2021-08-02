@@ -6,8 +6,8 @@ export const CardWraper = styled.div`
       box-sizing: border-box;
       border-radius: 4px;
       margin: 0px 16px;
-      max-width:260px;
-      width:260px;
+      max-width:360px;
+      width:350px;
       padding:20px 30px;
       margin-bottom: 24px;
       position:relative;
