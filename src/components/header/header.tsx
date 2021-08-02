@@ -20,19 +20,19 @@ const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <TopHeader />
+        {/*<TopHeader />*/}
         <MiddleHeader />
 
-        {isSellerPath ? (
-          <BottomHeaderForSeller />
-        ) : (
-          <BottomHeader state={state} stateHandler={handleMenuState} />
-        )}
+        {/*{isSellerPath ? (*/}
+        {/*  <BottomHeaderForSeller />*/}
+        {/*) : (*/}
+        {/*  <BottomHeader state={state} stateHandler={handleMenuState} />*/}
+        {/*)}*/}
       </HeaderContainer>
 
-      {state && (
-        <MenuContent menuEls={menuJson} stateHandler={handleMenuState} />
-      )}
+      {/*{state && (*/}
+      {/*  <MenuContent menuEls={menuJson} stateHandler={handleMenuState} />*/}
+      {/*)}*/}
     </>
   );
 };

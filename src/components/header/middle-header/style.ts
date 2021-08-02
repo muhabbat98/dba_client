@@ -18,6 +18,9 @@ export const Logo = styled.h1`
     text-decoration: none;
     color: inherit;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const MiddleHeaderWrapper = styled.div`
@@ -29,4 +32,8 @@ export const MiddleHeaderWrapper = styled.div`
 export const SearchContainer = styled.div`
   flex: 1;
   padding: 0 20px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

@@ -14,4 +14,8 @@ export const ReferencesWrapper = styled.div`
   border: 1px solid #dfe0eb;
   border-radius: 16px;
   padding: 28px;
+  display: flex;
+  & > :first-child {
+    margin-right: 24px;
+  }
 `;
