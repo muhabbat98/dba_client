@@ -19,7 +19,7 @@ import ReklamaMobileApp from '../../components/reklama-mobile-app';
 import Button from '../../components/button';
 import Row from '../../components/grid/row';
 import Col from '../../components/grid/col';
-
+import {useWindowSize} from '../../hooks/useWindowSize'
 import { Cont } from './style';
 
 import Snowboard from '../../assets/images/snowboard.svg';
@@ -185,6 +185,7 @@ export const data = [
 ];
 
 const Homepage = () => {
+  const [width,height] = useWindowSize();
   return (
     <div>
       <Banner />
@@ -241,7 +242,10 @@ const Homepage = () => {
           <Button size="medium">Показать еще</Button>
         </div>
       </Container>
-      <ReklamaMobileApp />
+      {width>768 && 
+        <ReklamaMobileApp />
+      }
+      
       {/*       
       </Container>
       <PopularProducts
