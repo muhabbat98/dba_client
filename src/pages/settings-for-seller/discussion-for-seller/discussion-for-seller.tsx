@@ -20,7 +20,6 @@ const DiscussionForSeller = () => {
   const [toggleFilter, setToggleFilter] = useState(false);
   const [state, setState] = useState('');
 
-  console.log(state);
   return (
     <DiscussionContainer>
       <DiscussionTop>

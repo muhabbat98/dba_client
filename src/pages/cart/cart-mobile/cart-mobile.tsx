@@ -1,15 +1,18 @@
 import React, { FC } from 'react'
+
 import Container from '../../../components/grid/container';
 import formatMoney from '../../../utils/format-money';
-
 import Title from '../../../components/products-title';
+import Checkbox from '../../../components/checkbox';
+import CartIncrementButton from '../../../components/cart-increment-button';
+
 import {
    CartMobileContainer, CartMobileList, CartMobileItem, CartMobileItemLeft, CartMobileItemRight,
    CartMobileItemImgLink, CartMobileImg, Price, Sum, Name, CartMobileInfo, Manufactor, ManufactorName,
    CheckboxWrapper, CartDeleteWrapper
 } from './style';
-import Checkbox from '../../../components/checkbox';
-import CartIncrementButton from '../../../components/cart-increment-button';
+
+
 import { ReactComponent as CartDelete } from '../../../assets/icons/cart-delete.svg';
 
 interface CartMobileProps {
@@ -17,7 +20,6 @@ interface CartMobileProps {
 }
 
 const CartMobile: FC<CartMobileProps> = ({ items }) => {
-   console.log('cart => ', items);
    return (
       <CartMobileContainer>
          <Container>
@@ -27,7 +29,6 @@ const CartMobile: FC<CartMobileProps> = ({ items }) => {
          <CartMobileList>
             {
                items.map((item: any) => {
-                  console.log('item=>>> ', item);
                   return (
                      <CartMobileItem >
                         <CartMobileItemLeft>

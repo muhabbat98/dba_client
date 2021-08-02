@@ -32,8 +32,6 @@ const FilterCollapse: React.FC<CollapseProps> = ({ headerTitle, children }) => {
    //    count += 2;
    // }
 
-   console.log('heightState == ', heightState);
-
    // useEffect(()=>{
    //    setHeightState(activeState == "active" ? "100%" : getCurrentContent());
    //    setRotateState(activeState == 'active' ? 'active_icon' : '');

@@ -1,12 +1,11 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import Backdrop from '../../../components/backdrop';
 import Button from '../../../components/button';
 import CircleLoader from '../../../components/circle-loader';
 import { axios, useError } from '../../../hooks';
-import { ReactComponent as Back } from '../../../assets/icons/add-product-arrow-back.svg';
-import { ReactComponent as Close } from '../../../assets/icons/ic_close.svg';
-import { ReactComponent as ListIcon } from '../../../assets/icons/ic_tv.svg';
+
 import {
   AddProductModalContainer,
   BackButton,
@@ -22,6 +21,10 @@ import {
   ProductOrder,
   ProductName,
 } from './style';
+
+import { ReactComponent as Back } from '../../../assets/icons/add-product-arrow-back.svg';
+import { ReactComponent as Close } from '../../../assets/icons/ic_close.svg';
+import { ReactComponent as ListIcon } from '../../../assets/icons/ic_tv.svg';
 
 interface AddProductModalProps {
   itemId?: any;
@@ -71,9 +74,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const backHandle = async () => {
     if (prevIds.length > 1) {
       let lastIds = [...prevIds];
-      console.log('LastIds = ', lastIds);
       lastIds.pop();
-      console.log('LastIds after pop() = ', lastIds);
       setPrevIds(lastIds);
       const lastIdd = lastIds[lastIds.length - 1];
       await getChildMenuItem(lastIdd, true);

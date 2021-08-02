@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import GoodsGrid from '../../components/goods-grid';
 import GoodsTable from '../../components/goods-table';
@@ -20,9 +20,7 @@ const Goods = () => {
     setDisplayType(type);
   }
 
-  const rowSelectedHandler = (item: any) => {
-    console.log('Item: => ', item)
-  }
+  const rowSelectedHandler = (item: any) => { }
 
   return (
     <GoodsContainer>

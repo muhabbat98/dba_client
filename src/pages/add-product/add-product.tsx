@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
+import { axios, useError } from '../../hooks';
+import CircleLoader from '../../components/circle-loader';
+import Container from '../../components/grid/container';
+import AddProductModal from './add-product-modal';
+import { ReactComponent as ListIcon } from '../../assets/icons/ic_tv.svg';
 import {
   AddProductContainer,
   AddProductList,
@@ -7,11 +11,6 @@ import {
   ItemText,
 } from './style';
 
-import { ReactComponent as ListIcon } from '../../assets/icons/ic_tv.svg';
-import { axios, useError } from '../../hooks';
-import CircleLoader from '../../components/circle-loader';
-import Container from '../../components/grid/container';
-import AddProductModal from './add-product-modal';
 
 const AddProduct = () => {
   const { checkError } = useError();

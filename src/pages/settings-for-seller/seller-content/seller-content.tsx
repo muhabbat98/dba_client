@@ -12,15 +12,13 @@ import DiscussionForSeller from '../discussion-for-seller';
 const SellerContent = () => {
   let { path } = useRouteMatch();
 
-  console.log("path == ", path);
-
   return (
     <SellerContentContainer>
       <Switch>
         <Route
-            exact
-            path={`${path}/`}
-            component={PersonalInfoForSeller} />
+          exact
+          path={`${path}/`}
+          component={PersonalInfoForSeller} />
 
         <Route
           exact
@@ -29,19 +27,19 @@ const SellerContent = () => {
         />
 
         <Route
-            exact
-            path={`${path}/personal-data`}
-            component={PersonalData} />
+          exact
+          path={`${path}/personal-data`}
+          component={PersonalData} />
 
         <Route
-            exact
-            path={`${path}/my-products`}
-            component={MyProducts} />
+          exact
+          path={`${path}/my-products`}
+          component={MyProducts} />
 
         <Route
-            exact
-            path={`${path}/orders`}
-            component={Orders} />
+          exact
+          path={`${path}/orders`}
+          component={Orders} />
 
         <Route
           exact

@@ -54,17 +54,19 @@ export const CheckOutBox = styled.div`
 export const CartHeader = styled.h3`
   font-size: 24px;
   line-height: 1.5rem;
-  margin:0;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
   @media ${({ theme }) => theme.breakpoints.xs} {
     font-size:16px;
-    margin:0
+    margin:0;
+    margin-top: 1rem;
   }
 `;
 export const CountItems = styled.span``;
 
 export const CartContain = styled.div``;
 export const CartContainItem = styled.div`
-  margin: 24px 0px;
+  margin-top: 24px;
   display: flex;
   @media ${({ theme }) => theme.breakpoints.xs} {
     align-items: center;
@@ -116,9 +118,16 @@ export const CartItemText = styled.div<Props>`
 export const StepsOrder = styled.div`
   display: flex;
   justify-content: space-between;
+  & > div {
+    min-width: 125px;
+  }
+
   @media ${({ theme }) => theme.breakpoints.xs} {
       margin-top: 22px;
     }
+    & > div {
+    min-width: 94px;
+  }
   & div > div {
     width: 32px;
     height: 32px;
@@ -126,7 +135,6 @@ export const StepsOrder = styled.div`
     box-sizing: border-box;
     border: 1px solid ${({ theme }) => theme.grey1};
     margin: 0 auto;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,26 +148,21 @@ export const StepsOrder = styled.div`
     line-height: 24px;
     margin: 10px 0px;
     font-weight: 600;
+    text-align: center;
     @media ${({ theme }) => theme.breakpoints.xs} {
      font-size: 12px;
     }
   }
-  & div:not(:last-child) div::after {
-    content: '';
-    display: block;
-    width: 91px;
-    height: 1px;
-    background-color: ${({ theme }) => theme.grey1};
-    position: absolute;
-    right: -120px;
-    top: 50%;
-    @media ${({ theme }) => theme.breakpoints.xs} {
-      width: 40px;
-      right: -56px;
-    }
-  }
-`;
 
+`;
+export const Line = styled.hr`
+    width: 100%;
+    height: 1px;
+    margin-top: 0.85rem;
+    border:none;
+    background-color: ${({ theme }) => theme.grey1};
+
+`
 export const Recipient = styled.div`
   position: relative;
 `;

@@ -34,9 +34,7 @@ const GoodsTopControl: FC<GoodsTopControlProps> = ({ changeDisplay, isShowChange
       }
    }
 
-   const changeHandle = (ev: any) => {
-      console.log(ev.target.value);
-   }
+   const changeHandle = (ev: any) => { }
 
    return (
       <>

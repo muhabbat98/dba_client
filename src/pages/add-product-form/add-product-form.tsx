@@ -22,9 +22,8 @@ import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg
 import { ReactComponent as PhotoApparat } from '../../assets/icons/add-product-photo-apparat.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-delete-icon.svg';
 
-
 const AddProductForm = () => {
-   const { register, handleSubmit, control, errors, watch, setValue } = useForm();
+   const { register, setValue } = useForm();
 
    const [openDeleivery, setOpenDeleivery] = useState<boolean>(false);
    const [productPhoto, setProductPhoto] = useState<any>(null);
@@ -43,7 +42,6 @@ const AddProductForm = () => {
    }
 
    const handleProductPhoto = (ev: any) => {
-      console.log('ev ==> ', ev.target.files);
 
       let imgFile = ev.target.files[0];
       const fileExt = imgFile.name.toLowerCase().split('.').pop();
@@ -58,7 +56,6 @@ const AddProductForm = () => {
       ) {
          let reader = new FileReader();
          reader.onload = function () {
-            console.log(reader.result);
 
             setProductPhoto(reader.result);
          };
@@ -77,11 +74,7 @@ const AddProductForm = () => {
    }
 
    const handleDeletePhoto = () => {
-      alert('aaa')
    }
-
-   console.log('productPhoto = ', productPhoto);
-
 
    return (
       <Container>

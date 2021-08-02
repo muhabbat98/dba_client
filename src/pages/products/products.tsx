@@ -4,7 +4,7 @@ import Container from '../../components/grid/container';
 import Card from '../../components/card';
 import Row from '../../components/grid/row';
 import ProductsTitle from '../../components/products-title';
-import { useLocation, useHistory, useParams, useRouteMatch } from 'react-router-dom';
+import { useLocation, } from 'react-router-dom';
 import ProductsFilter from './products-filter'
 
 import { CategoryContainer } from './style';
@@ -168,13 +168,7 @@ const data = [
 
 
 const Products = () => {
-   console.log("useLocation == ", useLocation());
-   console.log("useHistory == ", useHistory());
-   console.log("useParams == ", useParams());
-   console.log("useRouteMatch == ", useRouteMatch());
-
    const s = new URLSearchParams(useLocation().search);
-   console.log(s);
 
    return (
       <CategoryContainer>
