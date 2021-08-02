@@ -66,7 +66,7 @@ export const CountItems = styled.span``;
 
 export const CartContain = styled.div``;
 export const CartContainItem = styled.div`
-  margin: 24px 0px;
+  margin-top: 24px;
   display: flex;
   @media ${({ theme }) => theme.breakpoints.xs} {
     align-items: center;
@@ -158,7 +158,7 @@ export const StepsOrder = styled.div`
 export const Line = styled.hr`
     width: 100%;
     height: 1px;
-    margin-top: 1rem;
+    margin-top: 0.85rem;
     border:none;
     background-color: ${({ theme }) => theme.grey1};
 
