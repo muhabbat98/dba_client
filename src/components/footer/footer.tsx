@@ -93,12 +93,14 @@ const Footer = () => {
             </Ul>}
           </div>
           </>}
+          {width<768 &&<>
         <Line></Line>
         <MobilRekTitle >Мобильные устройства</MobilRekTitle>
-              <AppStories>
-                <AppStore />
-                <PlayMarket />
-              </AppStories>
+        <AppStories>
+          <AppStore />
+          <PlayMarket />
+        </AppStories>
+        </>}
         <Line></Line>
         <p>2020-2021 © Marketplace</p>
       </Container>

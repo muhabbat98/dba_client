@@ -3,7 +3,6 @@ import { Li, StyledLink } from '../style';
 
 const BuyerMenu = () => {
   const { url } = useRouteMatch();
-
   return (
     <>
       <Li>
