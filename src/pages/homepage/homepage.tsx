@@ -33,7 +33,7 @@ import CardImage6 from '../../assets/images/card-item6.png';
 import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
 import CardImage9 from '../product-detail/product-detail-header/images/phoneMain.svg';
-
+import OrangeBanner from '../../assets/images/orangeBanner.svg';
 import Slider from '../../components/slider';
 
 export const data = [
@@ -195,7 +195,7 @@ const Homepage = () => {
           <Slider data={data} />
         </Container>
       </Cont>
-      ;
+      {width>768 ?
       <PopularProducts
         leftTitle="Акции"
         rightTitle="Смотреть все"
@@ -206,7 +206,11 @@ const Homepage = () => {
         cardColor2="#EBEBEB"
         cardimage1={Snowboard}
         cardimage2={Phones}
-      />
+      />:
+      <Container>
+        <img width="100%" src={OrangeBanner}/>
+      </Container>
+      }
       {/* <Container>
         <ProductsTitle title="Ваша подборка для покупок у нас" />
         <CardWrapperRow>

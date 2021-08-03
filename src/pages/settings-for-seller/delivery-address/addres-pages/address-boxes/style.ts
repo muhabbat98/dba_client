@@ -36,43 +36,61 @@ export const AddresTitiles = styled.div`
     }
     }
 `;
-
+export const MobileDescription = styled.div`
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    width: 261px;
+    letter-spacing: -0.155556px;
+    color: #797979;
+`;
 export const ActionsContainer = styled.div`
     align-self: center;
     display: flex;
 
     div {
     cursor: pointer;
-    
     padding: 15px 12px;
     border-radius:16px;
-    &:hover{
-        background:#F4F6F9;
-        transition:0.3s;
-    }
-    &:first-child {
-        display: flex;
-        span {
+    span{
         align-self: center;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
         line-height: 18px;
+    }
+    /* @media(max-width: 347px){
+        span{display:none;}
+    } */
+    /* svg{
+        @media(max-width:347px){
+            width:15px;
+            height:15px;
+        }
+    } */
+    &:hover{
+        background:#F4F6F9;
+        transition:0.3s;
+    }
+    
+    &:first-child {
         display: flex;
-        align-items: center;
-        letter-spacing: -0.155556px;
-        color: #264796;
-        margin-left: 13px;
+        @media(max-width: 768px){
+            display:none;
+        }
+        span {
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.155556px;
+            color: #264796;
+            margin-left: 13px;
         }
     }
     &:nth-child(2){
         display: flex;
         span {
-            align-self: center;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 18px;
             display: flex;
             align-items: center;
             letter-spacing: -0.155556px;
@@ -86,16 +104,23 @@ export const ActionsContainer = styled.div`
         }
         display: flex;
         span {
-            align-self: center;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 18px;
             display: flex;
             align-items: center;
             letter-spacing: -0.155556px;
             color: red;
             margin-left: 13px;
+        }
+    }
+    &:nth-child(4) {
+        height:35px;
+        width:35px;
+        padding:0px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:10px;
+        @media(min-width: 768px){
+            display:none
         }
     }
     }

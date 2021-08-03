@@ -10,10 +10,13 @@ export const ViewAddressContainer = styled.div<Props>`
   border-radius: 16px;
   padding: 16px 24px;
   position: relative;
-
   height: ${({ isLoading }) => (isLoading ? "400px" : "auto")};
   /* overflow: ${({ isLoading }) => (isLoading ? "hidden" : "auto")}; */
   overflow: hidden !important;
+  @media(max-width: 768px){
+    border:none;
+    padding:0px;
+  }
 `;
 export const BorderBoxContainer = styled.div`
   background: #ffffff;
@@ -93,7 +96,7 @@ export const ActionsContainer = styled.div`
         margin-left: 13px;
       }
     }
-    &:nth-child(2){
+    /* &:nth-child(2){
       display: flex;
       span {
         align-self: center;
@@ -107,8 +110,8 @@ export const ActionsContainer = styled.div`
         color: #264796;
         margin-left: 13px;
       }
-    }
-    &:last-child {
+    } */
+    &:nth-child(2) {
       &:hover{
             background:#f4eaef;
         }
@@ -125,6 +128,18 @@ export const ActionsContainer = styled.div`
         color: red;
         margin-left: 13px;
       }
+    }
+    &:nth-child(3) {
+        height:35px;
+        width:35px;
+        padding:0px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:10px;
+        @media(min-width: 768px){
+            display:none
+        }
     }
   }
 `;
@@ -163,6 +178,17 @@ export const Titlee = styled.div`
     letter-spacing: -0.155556px;
     color: #000000;
     cursor: pointer;
+`;
+export const MobileDescription = styled.div`
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    width: 261px;
+    letter-spacing: -0.155556px;
+    color: #797979;
+    margin-top:12px;
 `;
 export const AddressInfo = styled.div`
     display:flex;
