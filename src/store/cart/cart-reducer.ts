@@ -84,6 +84,7 @@ const getTotalSum = (state: CartReducerState, t: any) => {
 
 // removeCart()
 const removeCart = (state: CartReducerState, cart: any) => {
+  console.log('CART => ', cart);
   let removedArray = state.cartItems.filter((item) => item.id !== cart.id);
   for (let i = 0; i < state.cartItems.length; i++) {
     if (state.cartItems[i].id === cart.id) {

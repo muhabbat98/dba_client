@@ -14,6 +14,7 @@ import Cart from '../../pages/cart';
 import Wishlist from '../../pages/wishlist';
 import CheckOut from '../../pages/check-out';
 import Settings from '../../pages/settings';
+import SettingsForBuyer from '../../pages/settings-for-buyer';
 
 const Content = () => {
   return (
@@ -31,7 +32,8 @@ const Content = () => {
         </ProtectedRouteForSeller>
 
         <ProtectedRouteForBuyer path="/settings">
-          <Settings />
+          {/* <Settings /> */}
+          <SettingsForBuyer />
         </ProtectedRouteForBuyer>
 
         <ProtectedRouteForBuyer path="/checkout">

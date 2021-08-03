@@ -4,11 +4,11 @@ import { AlertPosition } from '../../../utils/alert-position-enum';
 import Input from '../../../components/input/';
 import Button from '../../../components/button';
 import Dropdown from '../../../components/drop-down'
-import { axios, useActionCreators, useSelector } from '../../../hooks';
+import { axios, useActionCreators, useError } from '../../../hooks';
 import { useForm } from "react-hook-form";
 
 import {
-   PersonalInfoContainer, PersonalHeader, PersonalHeaderLeft, PersonalHeaderRight, PersonalAvatar,
+   PersonalInfoContainer, PersonalHeader, PersonalHeaderLeft, PersonalHeaderRight,
    PersonalAvatarImg, PersonalNameWrapper, PersonalName, PersonalNameEmail, ChangeProfileButton, ChangeName, PersonalBody,
    PersonalBodyGrid, PersonalBodyFlex, PersonalEditImage, PersonalAvatarEdit, PersonalEditImageOther, PersonalVerified,
    PersonalVerifiedToggle
@@ -26,6 +26,8 @@ interface PersonalInfoEditProps {
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
    const { register, handleSubmit, control, watch, errors, setValue } = useForm();
+   const { setAlertMessage } = useActionCreators();
+   const { checkError } = useError();
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
@@ -42,13 +44,12 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       dateOfExpire: "",
       dateOfIssue: ""
    });
-  
+
    const [docType, setDocType] = useState<any>('');
    const [avatar, setAvatar] = useState<any>(Avatar);
    const [imgUrl, setImgUrl] = useState<any>(null);
    const [avatarToggle, setAvatarToggle] = useState(false);
    const [loading, setLoading] = useState(true);
-   const { setAlertMessage } = useActionCreators();
 
    const fileRef = useRef<HTMLInputElement>(null);
 
@@ -86,7 +87,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          passportType: data.value
       })
    }
-   
+
    const handleAvatarChange = async (ev: any) => {
       let imgFile = ev.target.files[0];
       const fileExt = imgFile.name.toLowerCase().split('.').pop();
@@ -120,21 +121,8 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                })
             }
          } catch (error) {
-            if (error.debugMessage) {
-               setAlertMessage({
-                  message: error.debugMessage,
-                  type: 'error',
-                  position: AlertPosition.TOP_LEFT
-               });
-            } else {
-               setAlertMessage({
-                  message: error.message,
-                  type: 'error',
-                  position: AlertPosition.TOP_LEFT
-               });
-            }
+            checkError(error);
          }
-
       } else {
          setAlertMessage({
             message: 'Siz yuklagan rasm hajmi juda katta yoki boshqa format tanladingiz',
@@ -160,19 +148,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
          setAvatar(data.imageUrl);
          setImgUrl(data.imageUrl);
       } catch (error) {
-         if (error.debugMessage) {
-            setAlertMessage({
-               message: error.debugMessage,
-               type: 'error',
-               position: AlertPosition.TOP_LEFT
-            });
-         } else {
-            setAlertMessage({
-               message: error.message,
-               type: 'error',
-               position: AlertPosition.TOP_LEFT
-            });
-         }
+         checkError(error);
       }
    }
 
@@ -193,19 +169,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
             position: AlertPosition.TOP_CENTER
          })
       } catch (error) {
-         if (error.debugMessage) {
-            setAlertMessage({
-               message: error.debugMessage,
-               type: 'error',
-               position: AlertPosition.TOP_LEFT
-            });
-         } else {
-            setAlertMessage({
-               message: error.message,
-               type: 'error',
-               position: AlertPosition.TOP_LEFT
-            });
-         }
+         checkError(error);
       }
    }
 
