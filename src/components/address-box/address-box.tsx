@@ -4,6 +4,7 @@ import Button from '../button';
 import Title from '../products-title';
 import Input from '../input';
 import Checkbox from '../checkbox';
+import { useWindowSize } from '../../hooks/useWindowSize';
 import { useRole } from '../../hooks';
 import { useForm } from 'react-hook-form';
 import { isConstructorDeclaration } from 'typescript';
@@ -38,6 +39,7 @@ const AddressBox: React.FC<PropsModal> = ({
     inputItems && inputItems.latitude,
     inputItems && inputItems.longitude,
   ]);
+  const [width, height] = useWindowSize();
   const [main, setMain] = useState(true);
   const [getAdderss, setGetAddres] = useState<any>();
   const [data, setData] = useState({
@@ -196,19 +198,32 @@ const AddressBox: React.FC<PropsModal> = ({
                 onChange={(e: any) => setMain(e.target.checked)}
               />
             )}
-
+            {width<768 && 
+            <YMapContainer>
+              <YandexMap
+                setLocation={setLocation}
+                setData={!inputItems ? setData : setGetAddres}
+                defaultCordinate={
+                  inputItems && [inputItems.latitude, inputItems.longitude]
+                }
+              />
+            </YMapContainer>
+            }
+            
             <Button type="submit">Сохранить</Button>
           </form>
         </FormContainer>
-        <YMapContainer>
-          <YandexMap
-            setLocation={setLocation}
-            setData={!inputItems ? setData : setGetAddres}
-            defaultCordinate={
-              inputItems && [inputItems.latitude, inputItems.longitude]
-            }
-          />
-        </YMapContainer>
+        {width>768 && 
+          <YMapContainer>
+            <YandexMap
+              setLocation={setLocation}
+              setData={!inputItems ? setData : setGetAddres}
+              defaultCordinate={
+                inputItems && [inputItems.latitude, inputItems.longitude]
+              }
+            />
+          </YMapContainer>
+        }
       </Wrapper>
     </ModalContainer>
   );

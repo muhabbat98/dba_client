@@ -164,7 +164,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           err={error?"true":"false"}  
           placeholder={placeholder}
-  
+          
         />
         )
     }
@@ -193,9 +193,10 @@ const Input: React.FC<InputFilds> = ({
       onFocus={() => setIsFocus(true)}
       onBlur={(e) => onBlur(e)}
       style={style}
+      
     >
       {isFocus &&
-      <Label htmlFor={id} isfocus={isFocus} err={error?"true":"false"} >{label} </Label>
+      <Label  htmlFor={id} isfocus={isFocus} err={error?"true":"false"} >{label} </Label>
       } 
 
       {inputType ? (
@@ -213,7 +214,7 @@ const Input: React.FC<InputFilds> = ({
           isfocus={isFocus}
           onBlur={(e) => onBlur(e)}
           err={error?"true":"false"}    
-          
+          {...isFocus?"autofocus":""}
       
         />
       )}
