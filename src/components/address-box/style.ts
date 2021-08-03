@@ -12,6 +12,14 @@ export const ModalContainer = styled.div`
     left:0px;
     overflow:hidden;
     z-index: 99;
+    @media(max-width:768px){
+        /* position:absolute; */
+        /* top:10px; */
+        /* height:1000px; */
+        min-height: 100%;
+        overflow-y: scroll;
+    }
+
 `;
 
 export const Wrapper = styled.div`
@@ -21,10 +29,22 @@ export const Wrapper = styled.div`
     justify-content:space-between;
     padding:40px;
     width:80%;
+    
+    @media(max-width:768px){
+        margin-top:290px;
+        flex-direction: column;
+        width:90%;
+        padding:20px;
+        
+    }
 `;
 export const FormContainer = styled.div`
     width:30%;
     margin-right:20px;
+    @media(max-width: 768px){
+        width:100%;    
+
+        }
     button{
         width:100%;
         margin-top:30px;
@@ -35,6 +55,9 @@ export const FormContainer = styled.div`
             height:100px;
             
         } */
+    } 
+    form{
+        
     }
 `;
 export const SubInputs = styled.div`
@@ -52,5 +75,10 @@ export const YMapContainer = styled.div`
     height:650px;
     overflow:hidden;
     border-radius: 20px 0px 0px 20px;
-    
+    @media(max-width: 768px){
+        width:100%; 
+        border-radius: 20px;   
+        margin-top:16px;
+        height:220px;
+    }
 `;

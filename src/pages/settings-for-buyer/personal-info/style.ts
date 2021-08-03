@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface Props {
-    isEdit?: boolean;
-    isAvatar?: boolean;
-    isLoading?: boolean;
+  isEdit?: boolean;
+  isAvatar?: boolean;
+  isLoading?: boolean;
 }
 
 export const PersonalInfoContainer = styled.div<Props>`
@@ -11,8 +11,14 @@ export const PersonalInfoContainer = styled.div<Props>`
   border-radius: 16px;
   padding: 40px 40px 0 40px;
   position: relative;
-  height: ${({ isLoading }) => (isLoading ? "400px" : "auto")};
-  overflow: ${({ isLoading }) => (isLoading ? "hidden" : "auto")};
+  height: ${({ isLoading }) => (isLoading ? '400px' : 'auto')};
+  overflow: ${({ isLoading }) => (isLoading ? 'hidden' : 'auto')};
+  background: red;
+
+  @media (max-width: 768px) {
+    border: none;
+    padding: 0;
+  }
 `;
 
 export const PersonalHeader = styled.div`
@@ -39,7 +45,7 @@ export const PersonalAvatar = styled.div`
   /* overflow: hidden; */
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -100,14 +106,14 @@ export const PersonalAvatarEdit = styled.div<Props>`
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: ${({ isAvatar }) =>
-    isAvatar ? "transparent" : "rgba(0, 0, 0, 0.6)"};
+      isAvatar ? 'transparent' : 'rgba(0, 0, 0, 0.6)'};
   }
 `;
 
@@ -204,7 +210,7 @@ export const PersonalBodyName = styled.div`
 `;
 
 export const PersonalBodyFlex = styled.div<Props>`
-  margin-bottom: ${({ isEdit }) => (isEdit ? "12px" : "40px")};
+  margin-bottom: ${({ isEdit }) => (isEdit ? '12px' : '40px')};
 `;
 
 export const PersonalEditImage = styled.div<Props>`
@@ -217,7 +223,7 @@ export const PersonalEditImage = styled.div<Props>`
   &:hover {
     background-color: red;
     transform: ${({ isAvatar }) =>
-    isAvatar ? "translateY(0)" : "translateY(-50%)"};
+      isAvatar ? 'translateY(0)' : 'translateY(-50%)'};
   }
 `;
 
@@ -235,7 +241,7 @@ export const PersonalVerifiedToggle = styled.div`
   transition: all 0.25s ease;
 
   &::after {
-    content: "";
+    content: '';
     width: 0;
     height: 0;
     border-left: 5px solid transparent;

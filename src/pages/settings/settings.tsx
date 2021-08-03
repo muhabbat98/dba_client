@@ -1,11 +1,13 @@
 import React from 'react';
 import Conatiner from '../../components/grid/container';
 import Breadcrumb from '../../components/breadcrumb';
+import {useWindowSize} from '../../hooks/useWindowSize'
 import Menu from './menu';
 import Content from './content';
 import { SettingsContainer, MenuAndContent, Title } from './style';
 
 const Settings = () => {
+const [width,height] = useWindowSize();
   return (
     <Conatiner>
       <SettingsContainer>
@@ -13,7 +15,9 @@ const Settings = () => {
 
         <Title>Настройки </Title>
         <MenuAndContent>
-          <Menu />
+          {width>768 &&
+            <Menu />
+          }
           <Content />
         </MenuAndContent>
       </SettingsContainer>

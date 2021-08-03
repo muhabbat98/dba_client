@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useActionCreators } from "../../../../../../hooks";
 import { useRole } from '../../../../../../hooks';
+import {useWindowSize} from '../../../../../../hooks/useWindowSize'
 import { ReactComponent as Pencil } from "../../../../../../assets/icons/pencil.svg";
 import { ReactComponent as Trash } from "../../../../../../assets/icons/red-trash.svg";
 import { ReactComponent as Btnhouse } from "../../../../../../assets/icons/house-btn.svg";
@@ -33,7 +34,7 @@ const AddressBoxes: React.FC<Propses> = ({
   setMainAddresHandler,
 }) => {
   const [openAddress, setOpenAddress] = useState(false);
-
+ const [width,height] = useWindowSize();
   const handleEditButton = () => {
     setOpenEditModal(true);
     setEditItem(data);

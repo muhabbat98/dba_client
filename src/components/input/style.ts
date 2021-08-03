@@ -35,18 +35,25 @@ export const InputElement = styled.input<InputStates>`
   border: none;
   background: ${({err})=>err==="true"?"#FFF4F4":"#f4f6f9"};
   border-radius: 16px;
-  padding: 0px 10px 8px 24px;
-  margin-top: ${({ isfocus }) => (isfocus? 0 : 22)}px;
+  padding: 0px 10px 0px 24px;
+  padding-bottom: ${({ isfocus }) => (isfocus? 8 : 0)}px;
+  display:flex;
+  align-items: center;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   /* cursor:${({ isfocus }) => (isfocus ? 'pointer' : '')}; */
   outline: none;
+  height: 100%;
+  /* border:1px solid; */
+  &:focus{
+    padding: 0px 10px 8px 24px;
+  }
 `;
 
 export const Label = styled.label<InputStates>`
-  margin: 10px 24px;
+  padding: 10px 24px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -54,7 +61,7 @@ export const Label = styled.label<InputStates>`
   color: ${({err})=>err=="true"?"red":theme.blue};
   display: ${({ isfocus }) => (isfocus ? 'block' : 'none')};
   animation: ${anim} 0.4s;
-  
+  /* border:1px solid; */
   
 `;
 export const MaskInput = styled(InputMask)<InputStates>`

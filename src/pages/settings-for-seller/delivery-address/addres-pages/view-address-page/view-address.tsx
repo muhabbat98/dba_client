@@ -5,6 +5,7 @@ import {
   useSelector,
   useRole,
 } from '../../../../../hooks';
+import { useWindowSize } from "../../../../../hooks/useWindowSize";
 import { AlertPosition } from '../../../../../utils/alert-position-enum';
 import Title from '../../../../../components/products-title';
 import Button from '../../../../../components/button';
@@ -13,7 +14,7 @@ import AddressBoxes from '../address-boxes';
 import { ReactComponent as House1 } from '../../../../../assets/icons/house-1.svg';
 import { ReactComponent as Pencil } from '../../../../../assets/icons/pencil.svg';
 import { ReactComponent as Trash } from '../../../../../assets/icons/red-trash.svg';
-import { ReactComponent as Btnhouse } from '../../../../../assets/icons/house-btn.svg';
+import { ReactComponent as BlueArrow } from '../../../../../assets/icons/blueArrow.svg';
 import { ReactComponent as PlusIcon } from '../../../../../assets/icons/plusIcon.svg';
 import {
   ViewAddressContainer,
@@ -26,6 +27,7 @@ import {
   Titlee,
   AddressInfo,
   Line,
+  MobileDescription
 } from './style';
 
 interface Addresses {
@@ -50,6 +52,8 @@ const ViewAddress: React.FC<Addresses> = ({
   const { user } = useSelector((state: any) => ({
     user: state.user,
   }));
+  const [width,height] = useWindowSize();
+  const [openInfo,setOpenInfo] = useState(false);
   const isBuyer = useRole();
   let main = data;
   let multi = data;
@@ -98,7 +102,11 @@ const ViewAddress: React.FC<Addresses> = ({
                   </div>
                 </div>
                 <div>
-                  <Title>Адрес 1</Title>
+                {width<768 &&
+                  <MobileDescription>{mainAddress.city} район,улица {mainAddress.street}, {mainAddress.apartmentNumber}-дом, 
+                  {mainAddress.homeNumber}-квартира</MobileDescription>
+                }
+                {openInfo||width>768 ?
                   <AddressInfo>
                     <div>
                       <p>Страна</p>
@@ -110,11 +118,11 @@ const ViewAddress: React.FC<Addresses> = ({
                     </div>
                     <div>
                       <p>Район</p>
-                      <h5>{mainAddress.district}</h5>
+                      <h5>{mainAddress.district.replace(/район/g,"")}</h5>
                     </div>
                     <div>
                       <p>Улица</p>
-                      <h5>{mainAddress.street}</h5>
+                      <h5>{mainAddress.street.replace(/улица/g,"")}</h5>
                     </div>
                     <div>
                       <p>Доп. информация</p>
@@ -135,7 +143,10 @@ const ViewAddress: React.FC<Addresses> = ({
                       </div>
                     )}
                   </AddressInfo>
-                  <Line></Line>
+                  :<></>}
+                  {width>768 &&
+                    <Line></Line>
+                  }
                   <div
                     style={{
                       display: 'flex',
@@ -146,11 +157,20 @@ const ViewAddress: React.FC<Addresses> = ({
                     <ActionsContainer>
                       <div onClick={editHandle}>
                         <Pencil />
-                        <span>Изменить</span>
+                        {width>346 &&
+                          <span>Изменить</span>
+                        }
+                        
                       </div>
                       <div onClick={() => handleDelete(mainAddress.id)}>
                         <Trash />
-                        <span>Удалить</span>
+                        {width>346 && 
+                          <span>Удалить</span>
+                        }
+                        
+                      </div>
+                      <div onClick={()=>setOpenInfo(open=>!open)}>
+                        <BlueArrow style={{transform:openInfo?"rotate(180deg)":"rotate(0deg)" }}/>
                       </div>
                     </ActionsContainer>
                   </div>

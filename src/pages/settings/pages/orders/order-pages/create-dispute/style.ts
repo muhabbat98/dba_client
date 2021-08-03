@@ -13,7 +13,7 @@ export const DisputeContainer = styled.div`
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
     padding: 40px;
-    
+    z-index:120;
 `;
 export const CloseButton = styled.div`
     position: fixed;

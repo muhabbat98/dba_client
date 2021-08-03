@@ -19,7 +19,7 @@ import ReklamaMobileApp from '../../components/reklama-mobile-app';
 import Button from '../../components/button';
 import Row from '../../components/grid/row';
 import Col from '../../components/grid/col';
-
+import {useWindowSize} from '../../hooks/useWindowSize'
 import { Cont } from './style';
 
 import Snowboard from '../../assets/images/snowboard.svg';
@@ -33,7 +33,7 @@ import CardImage6 from '../../assets/images/card-item6.png';
 import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
 import CardImage9 from '../product-detail/product-detail-header/images/phoneMain.svg';
-
+import OrangeBanner from '../../assets/images/orangeBanner.svg';
 import Slider from '../../components/slider';
 
 export const data = [
@@ -185,6 +185,7 @@ export const data = [
 ];
 
 const Homepage = () => {
+  const [width,height] = useWindowSize();
   return (
     <div>
       <Banner />
@@ -194,7 +195,7 @@ const Homepage = () => {
           <Slider data={data} />
         </Container>
       </Cont>
-      ;
+      {width>768 ?
       <PopularProducts
         leftTitle="Акции"
         rightTitle="Смотреть все"
@@ -205,7 +206,11 @@ const Homepage = () => {
         cardColor2="#EBEBEB"
         cardimage1={Snowboard}
         cardimage2={Phones}
-      />
+      />:
+      <Container>
+        <img width="100%" src={OrangeBanner}/>
+      </Container>
+      }
       {/* <Container>
         <ProductsTitle title="Ваша подборка для покупок у нас" />
         <CardWrapperRow>
@@ -241,7 +246,10 @@ const Homepage = () => {
           <Button size="medium">Показать еще</Button>
         </div>
       </Container>
-      <ReklamaMobileApp />
+      {width>768 && 
+        <ReklamaMobileApp />
+      }
+      
       {/*       
       </Container>
       <PopularProducts
