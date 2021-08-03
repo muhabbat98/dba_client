@@ -9,6 +9,7 @@ import Buyers from '../../pages/buyers';
 import Moderator from '../../../admin/pages/moderator';
 import References from '../../pages/references-page';
 import { ContentContainer } from './style';
+import Template from '../../pages/template';
 
 const Content = () => {
   const { path } = useRouteMatch();
@@ -22,6 +23,7 @@ const Content = () => {
           path={[`${path}/category`, `${path}/category/:id`]}
           component={Category}
         />
+        <Route path={`${path}/template`} component={Template} />
         <Route exact path={`${path}/goods`} component={Goods} />
         <Route exact path={`${path}/references`} component={References} />
         <Route exact path={`${path}/goods-item`} component={GoodsItem} />

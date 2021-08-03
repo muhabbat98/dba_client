@@ -13,9 +13,11 @@ import ReferencesItemRow from '../references-item-row';
 
 interface Props {
   references: any[];
-  fetchReferenceItems?: (row: any) => void;
+  fetchReferenceItems: (row: any) => void;
   currentReference?: any;
   isParent?: boolean;
+  openModal: (isAdding: boolean, row: any, isParent?: boolean) => void;
+  fetchReferences: () => void;
 }
 
 const ReferenceList: React.FC<Props> = ({
@@ -23,12 +25,16 @@ const ReferenceList: React.FC<Props> = ({
   fetchReferenceItems,
   currentReference,
   isParent,
+  openModal,
+  fetchReferences,
 }) => {
   return (
     <ReferenceListContainer>
       <Header>
         <Title>{isParent ? <>Справочники</> : currentReference.name}</Title>
-        <AddButton>
+        <AddButton
+          onClick={() => openModal(true, isParent ? null : currentReference)}
+        >
           <Plus />
           <Add>Добавить</Add>
         </AddButton>
@@ -41,6 +47,10 @@ const ReferenceList: React.FC<Props> = ({
             key={ref.id}
             row={ref}
             fetchReferenceItems={fetchReferenceItems}
+            isParent={isParent}
+            fetchReferences={fetchReferences}
+            currentReference={currentReference}
+            openModal={openModal}
           />
         ))
       ) : (

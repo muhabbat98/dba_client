@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { axios, useError } from '../../../../hooks';
 import { CategoryMainContainer } from './style';
-import MainLoader from '../../../../components/main-loader';
+import MainLoader from '../../../../components/circle-loader';
 import HighLevelCategories from './high-level-categories';
 import Error from '../../../components/error';
 

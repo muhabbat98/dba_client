@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import {
   CategoriesContainer,
   CategoryRowHeader,
@@ -11,6 +12,8 @@ import {
   AllGoodsTitle,
   TemplateTitle,
   Template,
+  Box,
+  BoxContainer,
 } from './style';
 
 import CategoryRow from './category-row';
@@ -23,10 +26,15 @@ interface Props {
   menus: any;
   fetchCategory: () => void;
 }
+interface Params {
+  id: string;
+}
 
 const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [image, setImage] = useState<any>();
+  const { push } = useHistory();
+  const { id } = useParams<Params>();
 
   const openAddModal = () => {};
 
@@ -46,12 +54,12 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
     <CategoriesContainer>
       {/*<AddCategory />*/}
       <CategoryHeader />
-      {image && (
-        <img
-          src={`data:${image.contentType};base64,${image.body}`}
-          alt={'hnjk'}
-        />
-      )}
+      {/*{image && (*/}
+      {/*  <img*/}
+      {/*    src={`data:${image.contentType};base64,${image.body}`}*/}
+      {/*    alt={'hnjk'}*/}
+      {/*  />*/}
+      {/*)}*/}
       {menus.length !== 0 && (
         <CategoryRowHeader>
           <No>
@@ -70,11 +78,11 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
         </CategoryRowHeader>
       )}
       {menus.length === 0 ? (
-        <Empty
-          callback={() => console.log()}
-          title="Нет категории"
-          btnTitle="Добавить категория"
-        />
+        <BoxContainer>
+          <Box onClick={() => push('/admin/template/list/' + id)}>Шаблоны</Box>
+          <Box onClick={() => push('/admin/template/list/' + id)}>Товары</Box>
+          <Box>Добавить категории</Box>
+        </BoxContainer>
       ) : (
         menus.map((menu: any, index: number) => (
           <CategoryRow

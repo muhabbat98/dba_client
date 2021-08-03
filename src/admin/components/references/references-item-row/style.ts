@@ -12,6 +12,10 @@ export const Wrapper = styled.div<Props>`
   //display: none;
   opacity: ${({ isActive }) => (isActive ? '1' : '0')};
   transition: 0.2s;
+  z-index: 1;
+  svg {
+    z-index: 1;
+  }
 `;
 
 export const Name = styled.div`
