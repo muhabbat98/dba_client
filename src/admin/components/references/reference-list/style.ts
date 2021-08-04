@@ -7,6 +7,8 @@ export const ReferenceListContainer = styled.div`
   padding: 24px;
   width: 50%;
   padding-top: 16px;
+  max-height: 600px;
+  overflow-y: auto;
 `;
 
 export const Title = styled.div`

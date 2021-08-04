@@ -66,3 +66,28 @@ export const TemplateTitle = styled.div`
   letter-spacing: 0.03em;
   padding-right: 28px;
 `;
+
+export const Box = styled.div`
+  width: 200px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 22px;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+  margin: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+
+  :hover {
+    background: #c9c7c7;
+  }
+`;
+
+export const BoxContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+`;

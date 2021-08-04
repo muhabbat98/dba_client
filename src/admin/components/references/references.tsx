@@ -10,7 +10,12 @@ const References = () => {
   const [references, setReferences] = useState<any[]>([]);
   const [referenceItems, setReferencesItems] = useState<any[]>([]);
   const [currentReference, setCurrentReference] = useState<any[]>([]);
-  const [editModal, setEditModal] = useState<boolean>(false);
+  const [editModal, setEditModal] = useState<any>({
+    open: false,
+    row: {},
+    isAdding: false,
+    isParent: false,
+  });
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
@@ -32,6 +37,7 @@ const References = () => {
       setReferences(data);
       setIsLoading(false);
       setIsError(false);
+      fetchReferenceItems(data[0]);
       return data[0];
     } catch (e) {
       checkError(e);
@@ -40,23 +46,59 @@ const References = () => {
     }
   }
 
-  async function fetchReferenceItems(row: any) {
+  async function fetchReferenceItems(
+    row: any,
+    isDeletedFetch?: boolean,
+    currentReferenceRow?: any
+  ) {
     try {
-      const response = await axios.get(`/meta_data/reference_item/${row.id}`);
+      const response = await axios.get(
+        `/meta_data/reference_item/${
+          isDeletedFetch ? currentReferenceRow.id : row.id
+        }`
+      );
       const data = await response.data;
       setReferencesItems(data);
-      setCurrentReference(row);
+      if (!isDeletedFetch) {
+        setCurrentReference(row);
+      }
     } catch (e) {
       checkError(e);
     }
   }
 
-  const closeModal = () => setEditModal(false);
-  const openModal = () => setEditModal(true);
+  const closeModal = () =>
+    setEditModal((prevState: any) => {
+      return {
+        open: false,
+        row: {},
+        isAdding: false,
+        isParent: false,
+      };
+    });
+
+  const openModal = (isAdding: boolean, row: any, isParent?: boolean) => {
+    setEditModal((prevState: any) => {
+      return {
+        open: true,
+        isAdding: isAdding,
+        row: row,
+        isParent,
+      };
+    });
+  };
 
   return (
     <ReferencesContainer isLoading={isLoading}>
-      <ChangeReference onClose={closeModal} row={{}} />
+      {editModal.open && (
+        <ChangeReference
+          fetchReferences={fetchReferences}
+          onClose={closeModal}
+          data={editModal}
+          fetchReferenceItems={fetchReferenceItems}
+        />
+      )}
+
       {isLoading ? (
         <CircleLoader />
       ) : isError ? (
@@ -68,10 +110,15 @@ const References = () => {
             fetchReferenceItems={fetchReferenceItems}
             currentReference={currentReference}
             isParent={true}
+            openModal={openModal}
+            fetchReferences={fetchReferences}
           />
           <ReferenceList
             references={referenceItems}
             currentReference={currentReference}
+            openModal={openModal}
+            fetchReferenceItems={fetchReferenceItems}
+            fetchReferences={fetchReferences}
           />
         </ReferencesWrapper>
       )}
