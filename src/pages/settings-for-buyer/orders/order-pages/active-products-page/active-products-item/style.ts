@@ -12,6 +12,9 @@ export const InfoWrapper = styled.div`
     width:100%;
     position:relative;
     background-color:#ffff;
+    @media(max-width: 768px){
+        padding:0px 20px 16px 20px;
+    }
 `;
 export const OrderHeader = styled.div`
     display:flex;
@@ -38,6 +41,9 @@ export const SubContainer = styled.div`
         align-items:center;
         h6{
             margin:0px 16px 0px 8px; 
+            @media(max-width: 768px){
+                margin:-16px 16px 0px 8px; 
+            }
         }
         svg{
             width:40px;
@@ -57,7 +63,16 @@ export const SubContainer = styled.div`
         line-height: 22px;
         color: rgba(0, 0, 0, 0.5);
         margin: -4px 0px 40px 48px;
+        @media(max-width: 768px){
+            margin: -20px 0px 0px 48px;
+        }
     }
+`;
+export const HorizontalLine = styled.div`
+    width:2px;
+    height:40px;
+    margin:2px 0px 2px 20px;
+    background-color:${({theme})=>theme.primary_color};
 `;
 
 export const InfoTitle = styled.h6`
@@ -69,6 +84,11 @@ export const InfoTitle = styled.h6`
     align-items: center;
     color: #000000;
     margin:17px 0px;
+    @media(max-width: 768px){
+        margin:0px;
+        font-size: 14px;
+        line-height: 1.2;
+    }
 `;
 export const ImageContainer = styled.div`
     border: 1px solid #E9ECF4;
@@ -77,11 +97,20 @@ export const ImageContainer = styled.div`
     max-width:100px;
     max-height:100px;
     margin-bottom:24px;
+    @media (max-width: 768px){
+        max-width:80px;
+        max-height:80px;
+    }
     div{
         width:84px;
         height:84px;
         margin:8px;
         overflow:hidden;
+        @media (max-width: 768px){
+            width:64px;
+            height:64px;
+            margin:8px;
+    }
         img{
             object-fit:cover;
             width:100%;
@@ -118,10 +147,15 @@ export const PriceContainer = styled.div`
         color: ${({theme})=>theme.grey1};
         margin-top:-8px;
     }
+    @media(max-width: 768px){
+        display:flex;
+        justify-content: space-between;
+    }
 `;
 export const TextWrapper = styled.div`
     display:flex;
     justify-content:space-between;
+    
     p{
         font-style: normal;
         font-weight: 500;
@@ -132,6 +166,11 @@ export const TextWrapper = styled.div`
         color: ${({theme})=>theme.grey1};
         &:nth-child(2){
             color:#000000;
+        }
+        &::nth-child(1){
+            @media(max-width: 400px){
+                width:100px;
+            }
         }
     }
 `;
@@ -171,6 +210,9 @@ export const ButtonsGroupContainier = styled.div`
         text-decoration-line:underline;
         display:flex;
         cursor:pointer;
+        @media (max-width: 768px) {
+            font-size:14px;
+        }
         svg{
             fill:${({theme})=>theme.primary_color};
             width:12px;

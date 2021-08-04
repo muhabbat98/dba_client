@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import formatMoney from '../../../../../../utils/format-money';
 import Button from '../../../../../../components/button';
+import { useWindowSize } from '../../../../../../hooks/useWindowSize';
 import {ReactComponent as ArrowIcon} from '../../../../../../assets/icons/arrow-down.svg'
 import {
     Tr,
@@ -10,7 +11,8 @@ import {
     TitlesContainer,
     PriceContainer,
     TextWrapper,
-    InfoDeliveryContainer
+    InfoDeliveryContainer,
+    BoxmMobl
 } from "./style"
 
 interface Propses{
@@ -25,9 +27,11 @@ const  HistoryItem:React.FC<Propses> = ({item,setOpen,setGetDisputeItem}) => {
         color:item.status=="completed"?"green":"red",
         
     }
+    const [width,height] = useWindowSize();
     const [open, setOpenn] = useState(false);
     return (
         <>
+        {width > 768 ? <>
             <Tr open={open}>
                 <div> №{item.idOrder} </div>
                 <div> {formatMoney(item.totalPrice)}сум </div>
@@ -35,15 +39,16 @@ const  HistoryItem:React.FC<Propses> = ({item,setOpen,setGetDisputeItem}) => {
                 <div> {item.seller} </div>
                 <div> 
                     <span 
-                    style={{background:open?"#EAEDF5":"",marginRight:20}} 
-                    onClick={()=>setOpenn(!open)}>
+                        style={{background:open?"#EAEDF5":"",marginRight:20}} 
+                        onClick={()=>setOpenn(!open)}>
                         <ArrowIcon 
-                        style={
-                            {transform:open?"rotate(180deg)":"",transition:"0.3s",
-                            marginTop:open?-2:2}}/>
-                        </span> 
+                            style={
+                                {transform:open?"rotate(180deg)":"",transition:"0.3s",
+                                marginTop:open?-2:2}}
+                        />
+                    </span> 
                 </div>
-            </Tr> 
+            </Tr>
             {open &&
                 <InfoWrapper>
                     <InfoTitle>Товары</InfoTitle>
@@ -104,7 +109,13 @@ const  HistoryItem:React.FC<Propses> = ({item,setOpen,setGetDisputeItem}) => {
                     </div>
                 </InfoWrapper> 
             }
-            
+            </>
+            :<>
+                <BoxmMobl>
+                    ddd
+                </BoxmMobl>
+            </> 
+        } 
         </>
     )
 }

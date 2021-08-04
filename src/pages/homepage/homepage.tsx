@@ -243,7 +243,7 @@ const Homepage = () => {
         </Row>
 
         <div style={{ textAlign: 'center', marginTop: '40px' }}>
-          <Button size="medium">Показать еще</Button>
+          <Button size={width>768?"medium":"large"}>Показать еще</Button>
         </div>
       </Container>
       {width>768 && 

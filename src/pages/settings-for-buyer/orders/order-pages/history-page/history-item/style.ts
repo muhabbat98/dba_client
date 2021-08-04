@@ -164,3 +164,10 @@ export const InfoDeliveryContainer = styled.div`
         }
     }
 `;
+
+export const BoxmMobl = styled.div`
+    border: 2px solid #E9ECF4;
+    box-sizing: border-box;
+    border-radius: 16px;
+    padding:16px;
+`;

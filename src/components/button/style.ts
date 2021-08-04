@@ -56,4 +56,8 @@ export const ButtonElement = styled.button<ButtonType>`
     ${({ t }) => t == 'disabled' && 'cursor:no-drop'};
     background: ${({ t }) => (t ? ButtonHover[t] : '#2f66e6')}; //#2f66e6;
   }
+  @media(max-width: 768px){
+    font-size:14px;
+    padding: 0px 15px 0px 15px;
+  }
 `;

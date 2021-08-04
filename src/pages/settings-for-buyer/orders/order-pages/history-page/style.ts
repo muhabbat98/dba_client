@@ -10,7 +10,9 @@ export const TableHeader = styled.div`
     justify-content:space-between;
     padding:16px 23px;
     border-bottom:2px solid #E9ECF4;
-    
+    @media(max-width: 768px){
+        border:none;
+    }
     div{
         
         margin:auto;
