@@ -13,7 +13,6 @@ export const PersonalInfoContainer = styled.div<Props>`
   position: relative;
   height: ${({ isLoading }) => (isLoading ? '400px' : 'auto')};
   overflow: ${({ isLoading }) => (isLoading ? 'hidden' : 'auto')};
-  background: red;
 
   @media (max-width: 768px) {
     border: none;
@@ -27,6 +26,11 @@ export const PersonalHeader = styled.div`
   align-items: center;
   padding-bottom: 25px;
   border-bottom: 1px solid ${({ theme }) => theme.grey4};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const PersonalHeaderLeft = styled.div`
@@ -34,7 +38,12 @@ export const PersonalHeaderLeft = styled.div`
   align-items: center;
 `;
 
-export const PersonalHeaderRight = styled.div``;
+export const PersonalHeaderRight = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 16px;
+  }
+`;
 
 export const PersonalAvatar = styled.div`
   margin-right: 32px;
@@ -43,6 +52,15 @@ export const PersonalAvatar = styled.div`
   height: 120px;
   position: relative;
   /* overflow: hidden; */
+
+  @media (max-width: 768px) {
+    margin-right: 16px;
+  }
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
 
   &::after {
     content: '';
@@ -55,7 +73,13 @@ export const PersonalAvatar = styled.div`
   }
 `;
 
-export const PersonalEditImageOther = styled.div``;
+export const PersonalEditImageOther = styled.div`
+  & > svg {
+    @media (max-width: 768px) {
+      width: 20px;
+    }
+  }
+`;
 
 export const PersonalAvatarEdit = styled.div<Props>`
   margin-right: 32px;
@@ -64,6 +88,11 @@ export const PersonalAvatarEdit = styled.div<Props>`
   height: 120px;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
 
   & > input {
     position: absolute;
@@ -123,6 +152,11 @@ export const PersonalAvatarImg = styled.img`
   object-fit: cover;
   display: block;
   border-radius: 50%;
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export const PersonalNameWrapper = styled.div`
@@ -136,9 +170,13 @@ export const PersonalName = styled.h3`
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 16px;
-  /* max-width: 120px;
-  width: 100%; */
   word-break: break-all;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 4px;
+  }
 `;
 export const PersonalNameEmail = styled.span`
   font-family: Manrope;
@@ -169,6 +207,11 @@ export const ChangeProfileButton = styled.button`
   line-height: 18px;
   transition: all 0.2s ease;
 
+  @media (max-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &:hover {
     background: #f4f6f9;
   }
@@ -188,6 +231,10 @@ export const PersonalBodyGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const PersonalBodyLabel = styled.span`
@@ -224,6 +271,12 @@ export const PersonalEditImage = styled.div<Props>`
     background-color: red;
     transform: ${({ isAvatar }) =>
       isAvatar ? 'translateY(0)' : 'translateY(-50%)'};
+  }
+
+  & > svg {
+    @media (max-width: 768px) {
+      width: 20px;
+    }
   }
 `;
 

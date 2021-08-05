@@ -37,9 +37,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
         type="checkbox"
         {...rest}
       />
-      <CheckBoxSpan isMobile={isMobileVersion} style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>
-        {label}
-      </CheckBoxSpan>
+      <CheckBoxSpan
+        isMobile={isMobileVersion}
+        style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
+      ></CheckBoxSpan>
+      <i>{label}</i>
     </CheckBoxLabel>
   );
 };

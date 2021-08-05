@@ -67,6 +67,8 @@ export const CheckBoxLabel = styled.label<IsMobileVersion>`
     border-radius: 2px;
     width: 20px;
     height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     vertical-align: top;
     transition: border-color 0.2s, background-color 0.2s;
   }

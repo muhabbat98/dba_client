@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{FC} from 'react';
 
 import Checkbox from '../../components/checkbox';
 import FilterInput from './filter-input';
@@ -7,7 +7,8 @@ import FilterCollapse from './filter-collapse';
 import { ProductsFilterWrapper, FilterCollapseItem, FilterUl, FilterLi, ClearFilterBtn } from './style';
 import PriceInput from './price-input';
 
-function ProductsFilter() {
+const ProductsFilter = () =>{
+
    return (
       <ProductsFilterWrapper>
          <FilterCollapse headerTitle="Цена, UZS">

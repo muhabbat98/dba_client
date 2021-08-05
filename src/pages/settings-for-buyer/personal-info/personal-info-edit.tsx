@@ -5,6 +5,7 @@ import Input from '../../../components/input/';
 import Button from '../../../components/button';
 import Dropdown from '../../../components/drop-down'
 import { axios, useActionCreators, useError } from '../../../hooks';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 import { useForm } from "react-hook-form";
 
 import {
@@ -25,9 +26,10 @@ interface PersonalInfoEditProps {
 }
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
-   const { register, handleSubmit, control, watch, errors, setValue } = useForm();
+   const { register, handleSubmit, watch, errors, setValue } = useForm();
    const { setAlertMessage } = useActionCreators();
    const { checkError } = useError();
+   const [width, height] = useWindowSize();
 
    const [state, setState] = useState<any>({
       id: "60927f03ad717f2975f9713d",
@@ -173,7 +175,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       }
    }
 
-   const onSubmit = (data: any, ev: any) => {
+   const onSubmit = (data: any) => {
       uploadData(data);
    }
 
@@ -204,10 +206,15 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
                      <PersonalNameWrapper>
                         <PersonalName>{state.firstName} {" "} {state.secondName}</PersonalName>
                         <PersonalNameEmail>{state.email}</PersonalNameEmail>
-                        <PersonalVerified>
-                           <Verified />
-                           <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
-                        </PersonalVerified>
+                        {
+                           width >= 768 ? (
+                              <PersonalVerified>
+                                 <Verified />
+                                 <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
+                              </PersonalVerified>
+                           ) : null
+                        }
+
                      </PersonalNameWrapper>
                   </PersonalHeaderLeft>
                   <PersonalHeaderRight>

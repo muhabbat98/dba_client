@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface Props {
   isBg?: boolean;
@@ -33,7 +33,7 @@ export const DiscussionFilterBtn = styled.button`
 
 export const FilterText = styled.span`
   color: ${({ theme }) => theme.primary_color};
-  font-family: "Manrope";
+  font-family: 'Manrope';
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -85,7 +85,7 @@ export const StatusDisccusionButton = styled.button<Props>`
   border: none;
   /* cursor: pointer; */
   border-radius: 100px;
-  background-color: ${({ isBg }) => (isBg ? "#DEF4EA" : "#D9EFFF")};
+  background-color: ${({ isBg }) => (isBg ? '#DEF4EA' : '#D9EFFF')};
   color: ${({ isBg, theme }) => (isBg ? theme.green : theme.blue)};
 `;
 
@@ -199,7 +199,7 @@ export const DiscussionEditCancelButton = styled.button`
   top: -40px;
   left: -80px;
 
-  :disabled{
+  :disabled {
     cursor: not-allowed;
     opacity: 0.7;
   }
@@ -235,7 +235,7 @@ export const DiscussionText = styled.div`
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     width: 0;
     height: 0;
     border-bottom: 5px solid ${({ theme }) => theme.light_grey};
@@ -258,7 +258,7 @@ export const DiscussionLi = styled.li`
       border-radius: 16px 16px 0px 16px;
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: 0;
         left: auto;
@@ -352,6 +352,14 @@ export const DiscussionFilterSection = styled.div`
   & > div {
     margin-left: 20px;
     width: 100%;
+  }
+`;
+
+export const DiscussionName = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 

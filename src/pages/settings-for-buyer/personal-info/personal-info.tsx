@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 import PersonalInfoEdit from './personal-info-edit';
-import { axios, useActionCreators } from '../../../hooks';
-import { AlertPosition } from '../../../utils/alert-position-enum';
+import { axios, useError } from '../../../hooks';
 
 import isEmptyObj from '../../../utils/isEmptyObj';
 import PersonalHeaderLeftSide from './personal-header-left';
@@ -23,7 +22,7 @@ const PersonalInfo = () => {
     const [personalInfo, setPersonalInfo] = useState<any>(null);
     const [docType, setDocType] = useState<any>('');
 
-    const { setAlertMessage } = useActionCreators();
+    const { checkError } = useError();
 
     useEffect(() => {
         getPersonalInfo('60927f03ad717f2975f9713d');
@@ -51,19 +50,7 @@ const PersonalInfo = () => {
             setPersonalInfo(data);
             setLoading(false);
         } catch (error) {
-            if (error.debugMessage) {
-                setAlertMessage({
-                    message: error.debugMessage,
-                    type: 'error',
-                    position: AlertPosition.TOP_CENTER
-                });
-            } else {
-                setAlertMessage({
-                    message: error.message,
-                    type: 'error',
-                    position: AlertPosition.TOP_CENTER
-                });
-            }
+            checkError(error);
         }
     }
 

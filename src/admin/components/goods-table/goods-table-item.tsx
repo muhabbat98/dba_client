@@ -8,7 +8,7 @@ import { TableBodyItem, TableBodyItemWrapper } from '../../../global-styles';
 
 interface GoodsTableItemProps {
    id: string;
-   isRowClickable?: boolean | undefined;
+   isRowClickable?: boolean;
    rowSelected?: (item: any) => void | null;
 }
 

@@ -1,10 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CategoryContainer = styled.div``;
 
 export const ProductsFilterWrapper = styled.div`
   border: 2px solid #e9ecf4;
   border-radius: 16px;
+
+  @media (max-width: 768px) {
+    border: none;
+  }
 `;
 
 export const FilterCollapseItem = styled.div``;
@@ -190,4 +194,50 @@ export const ClearFilterBtn = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+`;
+
+export const FilterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const FilterBtn = styled.div`
+  cursor: pointer;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+export const MobileFilterWrapper = styled.div`
+  width: 268px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  right: 0;
+  height: 100%;
+  background-color: #fff;
+`;
+
+export const FilterClose = styled.div`
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: -32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px 0 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const FilterName = styled.div`
+  padding: 16px;
+  padding-bottom: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
 `;
