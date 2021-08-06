@@ -6,6 +6,14 @@ const inputLetter = (e:any) =>{
 }
 export default inputLetter;
 
+export const onlyNumber = (e:any) =>{
+    if(e){
+        return e.replace(/[^0-9]+/g,"")
+    }
+    return "";
+}
+
+
 export const phoneMask = (e:any) => {
     if(e){
     return e.replace(/\D/g, '')

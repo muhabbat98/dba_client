@@ -1,10 +1,10 @@
 import React, { useState,useEffect} from "react";
 import { InputWrapper, MaskInput, InputElement, Label,ErrorTitle } from "./style";
 import { v4 as uuidv4 } from 'uuid';
-import inputLetter,{email,passport,cardNumber,cardDate,inn, phoneMask,anotherThreepleCard} from '../../utils/input-letter'
+import inputLetter,{email,passport,cardNumber,cardDate,inn, phoneMask,anotherThreepleCard,onlyNumber} from '../../utils/input-letter'
 interface InputFilds extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  inputType?: "phone" | "card" | "cardData" | "passport" | "brithDay"| "inn" | "letter" | "email"|"anotherThreepleCard";
+  inputType?: "phone" | "card" | "cardData" | "passport" | "brithDay"| "inn" | "letter" | "email"|"anotherThreepleCard"|"onlyNumber";
   error?:any; //Error Text
   name?:any,
   value?:any
@@ -179,6 +179,21 @@ const Input: React.FC<InputFilds> = ({
           value={inputLetter( watch)}
           isfocus={isFocus}
           err={error?"true":"false"}  
+          placeholder={placeholder}
+        />
+        )
+    }
+    else if(inputType=="onlyNumber"){
+      return (
+        <InputElement
+          id={id}
+          className="inputt"
+          ref={register({ required: true })}
+          name={name}
+          onChange={change}
+          value={onlyNumber( watch)}
+          isfocus={isFocus}
+          err={error?"true":"false"}
           placeholder={placeholder}
         />
         )

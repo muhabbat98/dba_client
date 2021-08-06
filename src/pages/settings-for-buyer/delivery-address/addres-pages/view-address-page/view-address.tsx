@@ -5,12 +5,12 @@ import {
   useSelector,
   useRole,
 } from '../../../../../hooks';
-import { useWindowSize } from "../../../../../hooks/useWindowSize";
 import { AlertPosition } from '../../../../../utils/alert-position-enum';
 import Title from '../../../../../components/products-title';
 import Button from '../../../../../components/button';
 import CircleLoader from '../../../../../components/circle-loader';
 import AddressBoxes from '../address-boxes';
+import { useWindowSize } from '../../../../../hooks/useWindowSize';
 import { ReactComponent as House1 } from '../../../../../assets/icons/house-1.svg';
 import { ReactComponent as Pencil } from '../../../../../assets/icons/pencil.svg';
 import { ReactComponent as Trash } from '../../../../../assets/icons/red-trash.svg';
@@ -87,7 +87,8 @@ const ViewAddress: React.FC<Addresses> = ({
         <>
           {mainAddress && (
             <>
-              <Title title="Основной адрес" style={{ marginTop: 0 }} />
+              {width<768 && <Title title="Адреса доставки" style={{margin:"0px 0px 12px 0px"}}/>}
+              <Title title="Основной адрес" style={{ marginTop: 0,fontSize:18 }} />
               <BorderBox>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -179,7 +180,11 @@ const ViewAddress: React.FC<Addresses> = ({
             </>
           )}
 
-          {addresses.length ? <Title title="Дополнительные адреса" /> : <></>}
+          {addresses.length ? 
+            <Title 
+              title="Дополнительные адреса" 
+              style={{fontSize:18}} />
+              : <></>}
           {addresses &&
             addresses.map((data: any, index: number) => {
               return (

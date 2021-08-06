@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Input from '../input';
+import {useForm} from 'react-hook-form';
 
 enum FormatNames {
   STRING = 'STRING',
@@ -13,12 +14,14 @@ interface FieldProps {
 }
 
 const Field: FC<FieldProps> = ({ format, fieldName }) => {
+  const {register}=useForm();
+
   switch (format) {
     case FormatNames.STRING:
-      return <Input />;
+      return <Input register={register}/>;
 
     default:
-      return <Input />;
+      return <Input register={register}/>;
   }
 };
 

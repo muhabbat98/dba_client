@@ -21,7 +21,8 @@ import {
   InfoDeliveryContainer,
   SubContainer,
   HorizontalLine,
-  ButtonsGroupContainier
+  ButtonsGroupContainier,
+  MoblProductTitle
 } from "./style";
 
 interface ActivePagePropses {
@@ -111,7 +112,9 @@ const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData,setOpen,se
                         <p style={{margin:width<768 ? 0 :""}}>{item.count} шт</p>
                       </PriceContainer>
                     }
-                    <InfoTitle style={{marginTop:width<768?"0px":""}}>{item.itemTitle}</InfoTitle>
+                    {width < 768 ?
+                    <MoblProductTitle>{item.itemTitle}</MoblProductTitle>
+                    :<InfoTitle>{item.itemTitle}</InfoTitle>}
                     <p style={{marginTop:width<768?"3px":""}}>Продавец: {item.itemSeller}</p>
                   </TitlesContainer>
                 </div>

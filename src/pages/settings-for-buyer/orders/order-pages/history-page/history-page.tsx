@@ -3,7 +3,14 @@ import HistoryItem from './history-item';
 import SettingsInput from '../../../../../components/settings-input';
 import SettingsDropdown from '../../../../../components/settings-dropdown';
 import { useWindowSize } from '../../../../../hooks/useWindowSize';
-import {TableHeader,Table,FilterContainer} from './style'
+import { ReactComponent as ArrowIcon } from '../../../../../assets/icons/blueArrow.svg';
+import {
+    TableHeader,
+    Table,
+    FilterContainer,
+    PagenitionInfo,
+    PageSelector
+} from './style'
 
 interface Propses{
     history:any,
@@ -20,15 +27,32 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen,setOpen,setGetDispu
         <div>
             {filterOpen &&
                 <FilterContainer >
-                    <SettingsInput placeholder="ID Заказа" />
-                    <SettingsInput placeholder="Стоимость" />
-                    <SettingsDropdown 
-                        style={{width:"100%"}} 
-                        label="Статус"
-                        options={["Все","Отменён","Доставлен"]}
-                        getOption={func}
-                    />
-                    <SettingsInput placeholder="Продавец" />
+                    {width>768 ? <>
+                        <SettingsInput placeholder="ID Заказа" />
+                        <SettingsInput placeholder="Стоимость" />
+                        <SettingsDropdown 
+                            style={{width:"100%"}} 
+                            label="Статус"
+                            options={["Все","Отменён","Доставлен"]}
+                            getOption={func}
+                        />
+                        <SettingsInput placeholder="Продавец" />
+                    </>
+                    :<div style={{display: "flex",justifyContent: "space-between",}}>
+                        <div style={{marginRight:12}}>
+                            <SettingsInput placeholder="ID Заказа" />
+                            <SettingsInput placeholder="Стоимость" style={{marginTop:16}} />
+                        </div>
+                        <div>
+                        <SettingsDropdown 
+                            style={{width:"100%"}} 
+                            label="Статус"
+                            options={["Все","Отменён","Доставлен"]}
+                            getOption={func}
+                        />
+                        <SettingsInput placeholder="Продавец"style={{marginTop:16}}/>
+                        </div>
+                    </div>}
                 </FilterContainer>  
             }
             
@@ -43,8 +67,8 @@ const  HistoryPage: React.FC<Propses> = ({history,filterOpen,setOpen,setGetDispu
                     </TableHeader>
                     :<>
                         <div style={{display:"flex",justifyContent: "space-between"}}>
-                            <p>11 - 14 из 65 результата</p>
-                            <div><p>страницы: 4</p></div>
+                            <PagenitionInfo>11 - 14 из 65 результата</PagenitionInfo>
+                            <PageSelector><p>страницы: </p><div>4<ArrowIcon/></div></PageSelector>
                         </div>
                     </>
                 }

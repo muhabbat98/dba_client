@@ -76,6 +76,11 @@ export const InfoTitle = styled.h6`
     align-items: center;
     color: #000000;
     margin:17px 0px;
+    @media(max-width: 768px){
+        margin:0px;
+        font-size: 14px;
+        line-height: 1.2;
+    }   
 `;
 export const ImageContainer = styled.div`
     border: 1px solid #E9ECF4;
@@ -84,11 +89,20 @@ export const ImageContainer = styled.div`
     max-width:100px;
     max-height:100px;
     margin-bottom:24px;
+    @media (max-width: 768px){
+        max-width:80px;
+        max-height:80px;
+    }
     div{
         width:84px;
         height:84px;
         margin:8px;
         overflow:hidden;
+        @media (max-width: 768px){
+            width:64px;
+            height:64px;
+            margin:8px;
+        }
         img{
             object-fit:cover;
             width:100%;
@@ -124,7 +138,21 @@ export const PriceContainer = styled.div`
         letter-spacing: -0.15px;
         color: ${({theme})=>theme.grey1};
         margin-top:-8px;
+        
     }
+    @media(max-width: 768px){
+        display:flex;
+        justify-content: space-between;
+    }
+`;
+export const MoblProductTitle = styled.h4`
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    margin:4px 0px 0px 0px;
+    line-height: 18px;
+    color: #000000;
 `;
 export const TextWrapper = styled.div`
     display:flex;
@@ -139,6 +167,11 @@ export const TextWrapper = styled.div`
         color: ${({theme})=>theme.grey1};
         &:nth-child(2){
             color:#000000;
+        }
+        &::nth-child(1){
+            @media(max-width: 400px){
+                width:100px;
+            }
         }
     }
 `;
@@ -165,9 +198,57 @@ export const InfoDeliveryContainer = styled.div`
     }
 `;
 
-export const BoxmMobl = styled.div`
+export const BoxMobl = styled.div`
     border: 2px solid #E9ECF4;
     box-sizing: border-box;
     border-radius: 16px;
-    padding:16px;
+    /* padding:16px; */
+    margin-bottom: 16px;
+`;
+export const BoxMoblTitle = styled.div`
+    display:flex;
+    justify-content: space-between;
+    margin-bottom:12px;
+    p{
+        margin:0px;
+        font-family: Manrope;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        &:nth-child(1){
+            text-transform: uppercase;
+            color: #797979;
+        }
+        &:nth-child(2){
+            color:#000;
+        }
+    }
+    span{
+            border-radius: 100px;
+            padding:6px 15px;
+    }
+`;
+export const OpenButton = styled.div`
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    span{
+        font-family: Manrope;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        text-transform: capitalize;
+        color: #264796;
+    }
+    svg{
+        margin-left:12px;
+    }
+`;
+export const Line = styled.div`
+    border: 1px solid #E9ECF4;
+    width:100%;
+    margin:2px 0px 12px 0px;
+   
 `;

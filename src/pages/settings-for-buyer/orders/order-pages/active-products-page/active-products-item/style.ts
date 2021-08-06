@@ -110,7 +110,7 @@ export const ImageContainer = styled.div`
             width:64px;
             height:64px;
             margin:8px;
-    }
+        }
         img{
             object-fit:cover;
             width:100%;
@@ -222,4 +222,13 @@ export const ButtonsGroupContainier = styled.div`
             
         }
     }
+`;
+export const MoblProductTitle = styled.h4`
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    margin:4px 0px 0px 0px;
+    line-height: 18px;
+    color: #000000;
 `;

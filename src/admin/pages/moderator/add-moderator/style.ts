@@ -11,11 +11,15 @@ export const ModalContainer = styled.div`
       display:flex;
       justify-content:center;
       align-items:center;
+      max-height: 100%;
+      overflow-y: scroll;
 `;
 export const AddContainer = styled.div`
       background: #FFFFFF;
       border-radius: 8px;
-      padding:40px;
+      padding:30px;
+      width:800px;
+      //margin-top:100px;
 `;
 export const Title = styled.div`
       font-family: Manrope;
@@ -58,6 +62,7 @@ export const SelectInput = styled.div`
       margin-bottom: 16px;
       cursor: pointer;
       position: relative;
+      z-index:999;
       span{
             font-family: Manrope;
             font-style: normal;
@@ -85,7 +90,7 @@ export const SelectBox = styled.div`
       border-radius:16px 0px 0px 16px;
       width:100%;
       box-shadow:0px 0px 4px 1px rgba(0,0,0,0.5);
-      left:0px;
+      right:0px;
       bottom:0px;
       padding:12px 24px;
       overflow-y: scroll;

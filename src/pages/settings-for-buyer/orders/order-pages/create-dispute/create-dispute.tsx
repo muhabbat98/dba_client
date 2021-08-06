@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {useHistory} from 'react-router-dom'
 import Backdrop from '../../../../../components/backdrop'
+import { useWindowSize } from '../../../../../hooks/useWindowSize';
 import {ReactComponent as CloseIcon} from '../../../../../assets/icons/ic_close.svg';
 import ProductsTitle from '../../../../../components/products-title';
 import Input from '../../../../../components/input';
 import Dropdown from '../../../../../components/drop-down';
 import Button from '../../../../../components/button';
 import { useForm } from "react-hook-form";
-import {DisputeContainer,CloseButton,DisputeTitle,InputContainer,Discription} from './style';
+import {
+    TransparentWrapper,
+    DisputeContainer,
+    CloseButton,
+    DisputeTitle,
+    InputContainer,
+    Discription
+} from './style';
 
 interface Propses {
     closeModal?:any;
@@ -20,6 +28,7 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
         options[index]=item.itemTitle
     });
     const history = useHistory()
+    const[width,height] = useWindowSize();
     const [spor1,setSpor1] = useState<any>({value:"Причина спора1"});
     const [spor2,setSpor2] = useState<any>({value:options[0]});
     const [data,setData] = useState<any>(
@@ -35,11 +44,23 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
         console.log('submit->',data)
         history.push('/settings/discussion')
     }
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+    
+        return () => {
+          document.body.style.overflow = 'auto';
+        };
+      }, []);
+      const clickHandler = (e: any) => {
+        if (e.target.classList.contains('glass-container')) {
+          closeModal(false);
+        }
+      };
     return (
-        <div>
-            <Backdrop close={closeModal}/>
-            <DisputeContainer>
-                <CloseButton onClick={closeModal}><CloseIcon/></CloseButton>
+        <TransparentWrapper className="glass-container" onClick={clickHandler}>
+            {/* <Backdrop close={closeModal}/> */}
+            <DisputeContainer style={{marginTop:height<630?200:""}}>
+                {/* <CloseButton onClick={closeModal}><CloseIcon/></CloseButton> */}
                 <DisputeTitle>
                     <ProductsTitle title="Спор по заказу"/>
                     <ProductsTitle title={`№ ${getDisputeItem.idOrder}`}/>
@@ -74,12 +95,13 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
                     <Button 
                         style={{marginTop:24}}
                         onClick={hundleSubmit}
+                        size="large"
                         >
                             Начать спор</Button>
                 </InputContainer>
 
             </DisputeContainer>            
-        </div>
+        </TransparentWrapper>
     )
 }
 

@@ -1,18 +1,43 @@
 import styled from "styled-components";
 
+export const TransparentWrapper = styled.div`
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.6);
+    position:fixed;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    top:0px;
+    left:0px;
+    overflow:hidden;
+    z-index: 99;
+    max-height: 100%;
+    overflow-y:scroll;
+
+`;
 export const DisputeContainer = styled.div`
     background: #FFFFFF;
     border-radius: 16px;
     display:flex;
-    position: fixed;
+    position: relative !important;
     flex-direction: column;
     width: 430px;
-    left: 50%;
+    /* left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%); */
     padding: 40px;
+    z-index:100;
+    @media(max-width: 768px){
+        padding:20px;
+        width:70%;
+    }
+    @media(max-width: 576px){
+        padding:20px;
+        width:90%;
+    }
     
 `;
 export const CloseButton = styled.div`
