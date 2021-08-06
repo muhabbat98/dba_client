@@ -1,27 +1,68 @@
 import React, { FC } from 'react';
 import Input from '../input';
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import Dropdown from '../drop-down';
 
 enum FormatNames {
   STRING = 'STRING',
   NUMBER = 'NUMBER',
   DATE = 'DATE',
+  DROPDOWN = 'DROPDOWN',
 }
 
 interface FieldProps {
-  format: 'STRING' | 'NUMBER' | 'DATE';
+  format: 'STRING' | 'NUMBER' | 'DATE' | 'DROPDOWN';
   fieldName: string;
+  list?: any[];
 }
 
-const Field: FC<FieldProps> = ({ format, fieldName }) => {
-  const {register}=useForm();
+const Field: FC<FieldProps> = ({ format, fieldName, list }) => {
+  const { register, setValue, watch } = useForm();
 
   switch (format) {
+    case FormatNames.NUMBER:
+      return (
+        <Input
+          name={fieldName}
+          register={register}
+          label={fieldName}
+          inputType="onlyNumber"
+          //   defVal="ada"
+          setValue={setValue}
+          watch={watch(fieldName)}
+          style={{ maxWidth: '400px', marginBottom: '24px' }}
+        />
+      );
+
+    case FormatNames.DATE:
+      return (
+        <Input
+          name={fieldName}
+          register={register}
+          label={fieldName}
+          type="date"
+          //   defVal="ada"
+          setValue={setValue}
+          watch={watch(fieldName)}
+          style={{ maxWidth: '400px', marginBottom: '24px' }}
+        />
+      );
+
     case FormatNames.STRING:
-      return <Input register={register}/>;
+      return (
+        <Input
+          name={fieldName}
+          register={register}
+          label={fieldName}
+          //   defVal="addsfa"
+          setValue={setValue}
+          watch={watch(fieldName)}
+          style={{ maxWidth: '400px', marginBottom: '24px' }}
+        />
+      );
 
     default:
-      return <Input register={register}/>;
+      return <Dropdown option={list} label={fieldName} />;
   }
 };
 
