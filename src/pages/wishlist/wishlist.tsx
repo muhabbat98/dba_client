@@ -11,13 +11,30 @@ import Field from '../../components/field';
 
 function Wishlist() {
   const { wishlistItems } = useSelector((state) => state.wishlist);
+  //   field={name:'name', format:'format'}
+
+  const field1 = { format: 'STRING', name: 'NameString' };
+  const field2 = { format: 'NUMBER', name: 'NameNumber' };
+  const field3 = { format: 'DATE', name: 'NameDate' };
+  const field4 = {
+    format: 'DROPDOWN',
+    name: 'NameDropdown',
+    list: [1, 2, 3, 4],
+  };
 
   return (
     <WishlistContainer>
-      <Field format="STRING" fieldName="TypeString" />
-      <Field format="NUMBER" fieldName="TypeNumber" />
-      <Field format="DATE" fieldName="TypeDate" />
-      {/* <Field format="DROPDOWN" fieldName="TypeDate" list=['one', two', 'three']/> */}
+      <Field field={field1} />
+      <Field field={field2} />
+      <Field field={field3} />
+      <Field field={field4} />
+
+      {/* <Field format="DATE" fieldName="TypeDate" />
+      <Field
+        format="DROPDOWN"
+        fieldName="TypeDate"
+        list={['one', 'two', 'three']}
+      /> */}
 
       <Container>
         <Row>
