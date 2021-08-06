@@ -29,7 +29,7 @@ function Wishlist() {
       <Field field={field3} />
       <Field field={field4} />
 
-      {/* <Field format="DATE" fieldName="TypeDate" />
+      {/* <Field format="DATE" fieldNa me="TypeDate" />
       <Field
         format="DROPDOWN"
         fieldName="TypeDate"

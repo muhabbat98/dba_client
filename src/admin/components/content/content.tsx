@@ -24,7 +24,11 @@ const Content = () => {
           component={Category}
         />
         <Route path={`${path}/template`} component={Template} />
-        <Route exact path={`${path}/goods`} component={Goods} />
+        <Route
+          exact
+          path={[`${path}/goods`, `${path}/goods/:id`]}
+          component={Goods}
+        />
         <Route exact path={`${path}/references`} component={References} />
         <Route exact path={`${path}/goods-item`} component={GoodsItem} />
         <Route exact path={`${path}/moderators`} component={Moderator} />
