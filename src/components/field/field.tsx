@@ -11,13 +11,14 @@ enum FormatNames {
 }
 
 interface FieldProps {
-  format: 'STRING' | 'NUMBER' | 'DATE' | 'DROPDOWN';
-  fieldName: string;
-  list?: any[];
+  field: any;
 }
 
-const Field: FC<FieldProps> = ({ format, fieldName, list }) => {
+const Field: FC<FieldProps> = ({ field }) => {
   const { register, setValue, watch } = useForm();
+  const format = field.format;
+  const fieldName = field.name;
+  const list = field.list;
 
   switch (format) {
     case FormatNames.NUMBER:
