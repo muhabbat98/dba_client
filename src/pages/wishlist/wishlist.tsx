@@ -17,7 +17,7 @@ function Wishlist() {
       <Field format="STRING" fieldName="TypeString" />
       <Field format="NUMBER" fieldName="TypeNumber" />
       <Field format="DATE" fieldName="TypeDate" />
-      <Field format="DROPDOWN" fieldName="TypeDate" list=['one', two', 'three']/>
+      {/* <Field format="DROPDOWN" fieldName="TypeDate" list=['one', two', 'three']/> */}
 
       <Container>
         <Row>
