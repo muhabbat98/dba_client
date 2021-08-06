@@ -20,8 +20,8 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
       const [isOpen, setIsOpen] = useState<boolean>(false);
       const [errPassword,setErrPassword] = useState<boolean>(false);
       const [menu,setMenu] = useState<any>([]);
-      const [chacked,setChacked] = useState<boolean>();
       const fileRef = useRef<HTMLInputElement>(null);
+      const catList = new Array();
     useEffect(() => {
         getAllProducts();
     }, []);
@@ -41,7 +41,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
 
             if(data.password==data.confirmPassword){
                   setClose(false);
-                  console.log('dataa-->',data);
+                  console.log('dataa-->',data,catList);
             }
             else {
                   setErrPassword(true);
@@ -61,6 +61,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
             formData.append("file", imgFile);
 
       }
+
       const ref = useRef<any>()
       useEffect(() => {
             const checkIfClickedOutside = (e: any) => {
@@ -73,14 +74,19 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
                   document.removeEventListener("mousedown", checkIfClickedOutside)
             }
       }, [isOpen])
-        const catList = new Array();
-
-      const collectCat = (item:string) =>{
-
-              catList.push(item);
 
 
-          console.log("gg-->",catList)
+    const collectCat = (item:string) =>{
+        let incres=0;
+        for(let i=0; i<catList.length; i++){
+            if(catList[i]!=item) {
+                incres++;}
+        }
+        if(incres==catList.length){
+            catList.push(item);
+        }
+        console.log("ll--",catList)
+
       }
 
       return(
@@ -161,7 +167,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
                                                       <SelectBox>
                                                             {menu.map((item:any,index:number)=>{
                                                                   return( <div key={index} onClick={()=>collectCat(item.id)}>
-                                                                        <Checkbox onChange={(e:any)=>setChacked(e.target.checked)} label={item.name}/>
+                                                                        <Checkbox label={item.name}/>
                                                                   </div>)
                                                             })}
 
