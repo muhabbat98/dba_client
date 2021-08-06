@@ -63,14 +63,14 @@ export const SelectInput = styled.div`
       cursor: pointer;
       position: relative;
       z-index:999;
-      span{
-            font-family: Manrope;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 15px;
-            color: #0091FF;
-      }
+`;
+export const SelectInputTitle = styled.span`
+      font-family: Manrope;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 15px;
+      color: #0091FF;
 `;
 export const InputBody = styled.div`
       display:flex;

@@ -6,7 +6,7 @@ import Checkbox from '../../../../components/checkbox';
 import Password from '../../../../components/login/login-inputs/password';
 import { useForm } from "react-hook-form";
 import {ReactComponent as ArrowIcon} from '../../../../assets/icons/arrow-down.svg'
-import {ModalContainer,AddContainer,Title,UploadImg,SelectInput,SelectBox,InputBody} from './style'
+import {ModalContainer,AddContainer,Title,UploadImg,SelectInput,SelectInputTitle,SelectBox,InputBody} from './style'
 import { axios } from '../../../../hooks';
 
 interface Propses {
@@ -19,6 +19,8 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
       const [avatar,setAvatar] = useState<any>(null);
       const [isOpen, setIsOpen] = useState<boolean>(false);
       const [errPassword,setErrPassword] = useState<boolean>(false);
+      const [menu,setMenu] = useState<any>([]);
+      const [chacked,setChacked] = useState<boolean>();
       const fileRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
         getAllProducts();
@@ -28,6 +30,8 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
         try {
             const response = await axios.get('catalog?parentId=');
             const data = await response.data;
+            setMenu(data);
+            // console.log(data)
             // setAllProduct(data);
         } catch (error) {
             // checkError(error);
@@ -69,7 +73,15 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
                   document.removeEventListener("mousedown", checkIfClickedOutside)
             }
       }, [isOpen])
-      const list = ["Электроника","Бытовая техника","Строительство и ремонт","Спорт и активный отдых","Одежда, обувь и аксесс","Книги, хобби, канцелярия","Продукты питания","Дача, сезонные товары","Товары для геймеров","Фандом атрибутика","Зоотовары","Красота и уход"]
+        const catList = new Array();
+
+      const collectCat = (item:string) =>{
+
+              catList.push(item);
+
+
+          console.log("gg-->",catList)
+      }
 
       return(
             <ModalContainer>
@@ -142,14 +154,14 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
                                                 error={errPassword}
                                                 warning={errPassword}
                                                 />
-                                          <SelectInput ref={ref}>
-                                                <span onClick={()=>setIsOpen(open=>!open)}>Категория</span>
+                                          <SelectInput ref={ref} onClick={()=>setIsOpen(true)}>
+                                                <SelectInputTitle onClick={()=>setIsOpen(open=>!open)}>Категория</SelectInputTitle>
                                                 <InputBody onClick={()=>setIsOpen(open=>!open)}><p>Электроника</p><ArrowIcon/></InputBody>
                                                 {isOpen &&
                                                       <SelectBox>
-                                                            {list.map((item:any,index:number)=>{
-                                                                  return( <div key={index}>
-                                                                        <Checkbox/><p>{item}</p>
+                                                            {menu.map((item:any,index:number)=>{
+                                                                  return( <div key={index} onClick={()=>collectCat(item.id)}>
+                                                                        <Checkbox onChange={(e:any)=>setChacked(e.target.checked)} label={item.name}/>
                                                                   </div>)
                                                             })}
 
