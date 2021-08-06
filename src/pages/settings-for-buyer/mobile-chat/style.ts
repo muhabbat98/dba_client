@@ -79,3 +79,43 @@ export const MobileChatItem = styled.div`
     }
   }
 `;
+
+export const MobileChatInputBox = styled.div`
+  position: relative;
+`;
+
+export const ChatInput = styled.input`
+  width: 100%;
+  background: #f1f7fa;
+  border-radius: 16px;
+  outline: none;
+  border: none;
+  height: 48px;
+  padding-left: 20px;
+  padding-right: 100px;
+
+  &::placeholder {
+    color: #878787;
+    font-size: 12px;
+    font-weight: 400;
+  }
+`;
+
+export const AttachFileBtn = styled.div`
+  position: absolute;
+  right: 81px;
+  top: 15px;
+`;
+
+export const SendBtn = styled.div`
+  background-color: ${({ theme }) => theme.primary_color};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 66px;
+  height: 48px;
+  border-radius: 16px;
+`;

@@ -7,34 +7,38 @@ import { useSelector } from '../../hooks';
 import WishlistEmpty from './wishlist-empty';
 
 import { WishlistContainer } from './style';
+import Field from '../../components/field';
 
 function Wishlist() {
-   const { wishlistItems } = useSelector((state) => state.wishlist);
+  const { wishlistItems } = useSelector((state) => state.wishlist);
 
-   return (
-      <WishlistContainer>
-         <Container>
-            <Row>
-               <Col>
-                  <ProductsTitle title="Избранное" />
-               </Col>
-            </Row>
-            <Row>
-               {
-                  wishlistItems.length == 0 ? <WishlistEmpty /> :
-                     wishlistItems.length > 0 && wishlistItems.map((i: any) => {
-                        return (
-                           <Col xl={3} key={i.id}>
-                              <Card item={i} style={{ marginBottom: '16px' }} />
-                           </Col>
-                        )
-                     })
-               }
-            </Row>
-         </Container>
-      </WishlistContainer>
-   )
+  return (
+    <WishlistContainer>
+      {/* <Field format="STRING" fieldName="Type" /> */}
+
+      <Container>
+        <Row>
+          <Col>
+            <ProductsTitle title="Избранное" />
+          </Col>
+        </Row>
+        <Row>
+          {wishlistItems.length == 0 ? (
+            <WishlistEmpty />
+          ) : (
+            wishlistItems.length > 0 &&
+            wishlistItems.map((i: any) => {
+              return (
+                <Col xl={3} key={i.id}>
+                  <Card item={i} style={{ marginBottom: '16px' }} />
+                </Col>
+              );
+            })
+          )}
+        </Row>
+      </Container>
+    </WishlistContainer>
+  );
 }
 
-export default Wishlist
-
+export default Wishlist;

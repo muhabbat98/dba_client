@@ -12,9 +12,15 @@ import {
   ChatDate,
   ChatTime,
   MobileChatText,
+  MobileChatInputBox,
+  ChatInput,
+  AttachFileBtn,
+  SendBtn,
 } from './style';
 
 import { ReactComponent as BackIcon } from '../../../assets/icons/mobile-chat-back-icon.svg';
+import { ReactComponent as AttachIcon } from '../../../assets/icons/mobile-chat-attach.svg';
+import { ReactComponent as SendIcon } from '../../../assets/icons/ic_sent.svg';
 
 const MobileChat = () => {
   const { goBack } = useHistory();
@@ -72,7 +78,16 @@ const MobileChat = () => {
         {/* </MobileChatList> */}
       </MobileChatBody>
 
-      {/* <MobileChatInputBox></MobileChatInputBox> */}
+      <MobileChatInputBox>
+        <ChatInput placeholder="Сообщения" />
+        <AttachFileBtn>
+          <AttachIcon />
+        </AttachFileBtn>
+
+        <SendBtn>
+          <SendIcon />
+        </SendBtn>
+      </MobileChatInputBox>
     </MobileChatContainer>
   );
 };
