@@ -1,12 +1,12 @@
 import styled, { keyframes } from 'styled-components';
 import InputMask from 'react-input-mask';
-import {theme} from '../../theme';
+import { theme } from '../../theme';
 
 interface Error {
-    error:boolean,
+  error: boolean;
 }
-interface IsFocuse{
-    isfocus: any;
+interface IsFocuse {
+  isfocus: any;
 }
 
 export const InputWrapper = styled.div`
@@ -35,18 +35,18 @@ export const InputElement = styled.input<IsFocuse>`
   background: #f4f6f9;
   border-radius: 16px;
   padding: 0px 10px 0px 24px;
-  padding-bottom: ${({ isfocus }) => (isfocus? 8 : 0)}px;
-  display:flex;
+  padding-bottom: ${({ isfocus }) => (isfocus ? 8 : 0)}px;
+  display: flex;
   align-items: center;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 20px;
   /* cursor:${({ isfocus }) => (isfocus ? 'pointer' : '')}; */
   outline: none;
   height: 100%;
   /* border:1px solid; */
-  &:focus{
+  &:focus {
     padding: 0px 10px 8px 24px;
   }
 `;
@@ -57,11 +57,11 @@ export const Label = styled.label<IsFocuse>`
   font-weight: normal;
   font-size: 14px;
   line-height: 15px;
-  color: ${({theme})=>theme.blue};
+  color: ${({ theme }) => theme.blue};
   display: ${({ isfocus }) => (isfocus ? 'block' : 'none')};
   animation: ${anim} 0.4s;
+  padding-bottom: 0px;
   /* border:1px solid; */
-  
 `;
 
 export const ErrorTitle = styled.div`
@@ -69,6 +69,6 @@ export const ErrorTitle = styled.div`
   font-weight: normal;
   font-size: 13px;
   line-height: 15px;
-  color: #F5413D;
-  margin:8px 0px 0px 24px;
+  color: #f5413d;
+  margin: 8px 0px 0px 24px;
 `;

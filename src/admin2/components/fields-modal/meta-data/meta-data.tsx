@@ -106,6 +106,7 @@ const MetaData: React.FC<MetaDataProps> = ({ menu }) => {
       setChoosenProducts(choosenProducts.filter((f) => f !== id));
     }
   };
+
   const handleReference = (id: string) => {
     console.log(id);
     const copyArray = [...choosenReferences];
@@ -152,8 +153,8 @@ const MetaData: React.FC<MetaDataProps> = ({ menu }) => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          label='Имя шаблона'
-          name='name'
+          label="Имя шаблона"
+          name="name"
           register={register({ required: true })}
         />
         <FieldsContainer>
@@ -211,7 +212,7 @@ const MetaData: React.FC<MetaDataProps> = ({ menu }) => {
       </form>
       <AddField callback={newFieldHandler} menu={menu} />
       <br />
-      <Button onClick={handleSubmit(onSubmit)} fullWidth size='bg'>
+      <Button onClick={handleSubmit(onSubmit)} fullWidth size="bg">
         Добавить шаблонь
       </Button>
     </div>
