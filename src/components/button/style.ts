@@ -6,22 +6,25 @@ const ButtonBg = {
   outlined: 'rgba(247, 247, 250, 0.1)',
   disabled: 'rgba(38, 71, 150, 0.05)',
   gray:'#F4F5F9',
+  default: 'theme.primary_color'
 };
 const ButtonFont = {
   white: '#000000',
   outlined: 'theme.primary_color',
   disabled: '#646464',
-  gray:"theme.primary_color"
+  gray:"theme.primary_color",
+  default:'#ffffff'
 };
 const ButtonHover = {
   white: '#faf7f7',
   outlined: '#f0efef8a',
   disabled: '',
   gray:'#e7e8eb',
+  default:'#2f66e6'
 };
 
 interface ButtonType {
-  t?: 'white' | 'outlined' | 'disabled'|'gray';
+  t?: 'white' | 'outlined' | 'disabled'|'gray'|'default';
   size?: 'small' | 'medium' | 'large';
 }
 const Resizing = (size: any) => {

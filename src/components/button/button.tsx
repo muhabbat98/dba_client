@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonElement } from './style';
 
 interface ButtonName extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  btnType?: 'white' | 'outlined' | 'disabled'|'gray',
+  btnType?: 'white' | 'outlined' | 'disabled'|'gray'|'default',
   //small=>max-width:130px, medium=>width:35opx, large=>width:100%, 
   size?: 'small'|'medium'|'large' 
 }

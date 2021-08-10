@@ -6,7 +6,7 @@ import Checkbox from '../../../../components/checkbox';
 import Password from '../../../../components/login/login-inputs/password';
 import { useForm } from "react-hook-form";
 import {ReactComponent as ArrowIcon} from '../../../../assets/icons/arrow-down.svg'
-import {ModalContainer,AddContainer,Title,UploadImg,SelectInput,SelectInputTitle,SelectBox,InputBody} from './style'
+import {ModalContainer,AddContainer,Title,UploadImg,SelectInput,SelectInputTitle,SelectBox,PassError,InputBody} from './style'
 import { axios } from '../../../../hooks';
 
 interface Propses {
@@ -15,13 +15,14 @@ interface Propses {
 }
 
 const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
-      const { register, handleSubmit, control, watch, errors, setValue } = useForm();
-      const [avatar,setAvatar] = useState<any>(null);
-      const [isOpen, setIsOpen] = useState<boolean>(false);
-      const [errPassword,setErrPassword] = useState<boolean>(false);
-      const [menu,setMenu] = useState<any>([]);
-      const fileRef = useRef<HTMLInputElement>(null);
-      const catList = new Array();
+    const { register, handleSubmit, control, watch, errors, setValue } = useForm();
+    const [avatar,setAvatar] = useState<any>(null);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [errPassword,setErrPassword] = useState<boolean>(false);
+    const [menu,setMenu] = useState<any>([]);
+    const [selectList,setSelectList] = useState<any>([]);
+    const fileRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
         getAllProducts();
     }, []);
@@ -31,17 +32,17 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
             const response = await axios.get('catalog?parentId=');
             const data = await response.data;
             setMenu(data);
-            // console.log(data)
-            // setAllProduct(data);
+
         } catch (error) {
-            // checkError(error);
+            console.log(error);
         }
     };
       const onSubmit = (data: any) => {
 
             if(data.password==data.confirmPassword){
                   setClose(false);
-                  console.log('dataa-->',data,catList);
+                  console.log('dataa-->',data);
+                  console.log('selectList-->',selectList)
             }
             else {
                   setErrPassword(true);
@@ -59,7 +60,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
 
             const formData = new FormData();
             formData.append("file", imgFile);
-
+            console.log(imgFile);
       }
 
       const ref = useRef<any>()
@@ -77,15 +78,15 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
 
 
     const collectCat = (item:string) =>{
-        let incres=0;
-        for(let i=0; i<catList.length; i++){
-            if(catList[i]!=item) {
-                incres++;}
+        let increment=0;
+        for(let i=0; i<selectList.length; i++){
+            if(selectList[i]!=item) {
+                increment++;}
         }
-        if(incres==catList.length){
-            catList.push(item);
+        if(increment == selectList.length){
+            setSelectList([...selectList,item])
         }
-        console.log("ll--",catList)
+        // console.log("ll--",selectList)
 
       }
 
@@ -102,86 +103,90 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
                         </UploadImg>
 
                         <form onSubmit={handleSubmit(onSubmit)}>
-                              <div style={{display:"flex"}}>
-                                    <div style={{flex:1}}>
-                                          <div style={{margin:12}}>
-                                                <Input
-                                                name="firstName"
-                                                placeholder="Имя"
-                                                label="Имя"
-                                                // value={state.firstName}
-                                                // defVal={state.firstName}
-                                                inputType="letter"
-                                                watch={watch("firstName")}
-                                                error={errors.firstName}
-                                                register={register}
-                                                setValue={setValue}
-                                                // style={{width:"100%"}}
-                                                />
-                                          </div>
-                                          <div style={{margin:12}}>
-                                                <Input
-                                                name="secondName"
-                                                label="Фамилия"
-                                                placeholder="Фамилия"
-                                                // defVal={state.secondName}
-                                                watch={watch("secondName")}
-                                                register={register}
-                                                inputType="letter"
-                                                error={errors.secondName}
-                                                setValue={setValue}
-                                                />
-                                          </div>
-                                          <div style={{margin:12}}>
-                                                <Input
-                                                name="phoneNumber"
-                                                label="Телефон номер"
-                                                placeholder="Телефон номер"
-                                                // defVal={state.secondName}
-                                                watch={watch("phoneNumber")}
-                                                register={register}
-                                                inputType="phone"
-                                                error={errors.phoneNumber}
-                                                setValue={setValue}
-                                                />
-                                          </div>
-                                    </div>
-                                    <div style={{flex:1}}>
-                                          <Password
-                                                label="Пароль"
-                                                name="password"
-                                                register={register}
-                                                warning={errPassword}
-                                                />
-                                          <Password
-                                                label="Повторите пароль"
-                                                name="confirmPassword"
-                                                register={register}
-                                                error={errPassword}
-                                                warning={errPassword}
-                                                />
-                                          <SelectInput ref={ref} onClick={()=>setIsOpen(true)}>
-                                                <SelectInputTitle onClick={()=>setIsOpen(open=>!open)}>Категория</SelectInputTitle>
-                                                <InputBody onClick={()=>setIsOpen(open=>!open)}><p>Электроника</p><ArrowIcon/></InputBody>
-                                                {isOpen &&
-                                                      <SelectBox>
-                                                            {menu.map((item:any,index:number)=>{
-                                                                  return( <div key={index} onClick={()=>collectCat(item.id)}>
-                                                                        <Checkbox label={item.name}/>
-                                                                  </div>)
-                                                            })}
-
-
-                                                      </SelectBox>
-                                                }
-                                          </SelectInput>
-                                    </div>
-                              </div>
-
-
-                        <div style={{display:'flex',justifyContent: 'center'}}>
-                              <Button style={{width:300}} type="submit" >Добавить</Button>
-                        </div>
+                            <div style={{display:'flex'}}>
+                                <div style={{margin:"12px 12px 12px 0px",flex:1}}>
+                                    <Input
+                                        name="firstName"
+                                        placeholder="Имя"
+                                        label="Имя"
+                                        // value={state.firstName}
+                                        // defVal={state.firstName}
+                                        inputType="letter"
+                                        watch={watch("firstName")}
+                                        error={errors.firstName}
+                                        register={register}
+                                        setValue={setValue}
+                                        // style={{width:"100%"}}
+                                    />
+                                </div>
+                                <div style={{flex:1}}>
+                                    <Password
+                                        label="Пароль"
+                                        name="password"
+                                        register={register}
+                                        warning={errPassword}
+                                    />
+                                </div>
+                            </div>
+                            <div style={{display:'flex'}}>
+                                <div style={{margin:"12px 12px 12px 0px",flex:1}}>
+                                    <Input
+                                        name="secondName"
+                                        label="Фамилия"
+                                        placeholder="Фамилия"
+                                        // defVal={state.secondName}
+                                        watch={watch("secondName")}
+                                        register={register}
+                                        inputType="letter"
+                                        error={errors.secondName}
+                                        setValue={setValue}
+                                    />
+                                </div>
+                                <div style={{flex:1}}>
+                                    <Password
+                                        label="Повторите пароль"
+                                        name="confirmPassword"
+                                        register={register}
+                                        error={errPassword}
+                                        warning={errPassword}
+                                    />
+                                    {errPassword && <PassError>Пароль введен неверно</PassError>}
+                                </div>
+                            </div>
+                            <div style={{display:'flex'}}>
+                                <div style={{margin:"12px 12px 12px 0px",flex:1}}>
+                                    <Input
+                                        name="phoneNumber"
+                                        label="Телефон номер"
+                                        placeholder="Телефон номер"
+                                        // defVal={state.secondName}
+                                        watch={watch("phoneNumber")}
+                                        register={register}
+                                        inputType="phone"
+                                        error={errors.phoneNumber}
+                                        setValue={setValue}
+                                    />
+                                </div>
+                                <div style={{flex:1,marginTop:12}}>
+                                    <SelectInput ref={ref} onClick={()=>setIsOpen(true)}>
+                                        <SelectInputTitle onClick={()=>setIsOpen(open=>!open)}>Категория</SelectInputTitle>
+                                        <InputBody onClick={()=>setIsOpen(open=>!open)}><p>Электроника</p><ArrowIcon/></InputBody>
+                                        {isOpen &&
+                                            <SelectBox>
+                                                {menu.map((item:any,index:number)=>{
+                                                    return(
+                                                    <div key={index} onClick={()=>collectCat(item.id)}>
+                                                        <Checkbox label={item.name}/>
+                                                    </div>)
+                                                })}
+                                            </SelectBox>
+                                        }
+                                    </SelectInput>
+                                </div>
+                            </div>
+                            <div style={{display:'flex',justifyContent: 'center'}}>
+                                  <Button style={{width:300}} type="submit" >Добавить</Button>
+                            </div>
                         </form>
                   </AddContainer>
             </ModalContainer>

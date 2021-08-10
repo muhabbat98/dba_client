@@ -128,3 +128,13 @@ export const SelectBox = styled.div`
             }
       }
 `;
+export const PassError = styled.span`
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 15px;
+      color: #F5413D;
+      position:relative;
+      top:-7px;
+      left:24px;
+`;
