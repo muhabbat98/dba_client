@@ -11,9 +11,8 @@ const Admin = lazy(() => import('./admin'));
 const Old = lazy(() => import('./admin2'));
 
 function App() {
-  
   console.log(1);
-  
+
   return (
     <div>
       <Switch>
@@ -22,11 +21,11 @@ function App() {
             <Admin />
           </Suspense>
         </AdminProtectedRoute>
-        {/*<AdminProtectedRoute path="/admin2">*/}
-        {/*  <Suspense fallback={<MainLoader />}>*/}
-        {/*    <Old />*/}
-        {/*  </Suspense>*/}
-        {/*</AdminProtectedRoute>*/}
+        <AdminProtectedRoute path="/admin2">
+          <Suspense fallback={<MainLoader />}>
+            <Old />
+          </Suspense>
+        </AdminProtectedRoute>
         <Route path="/" component={Main} />
       </Switch>
     </div>

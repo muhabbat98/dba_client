@@ -12,11 +12,17 @@ enum DisplayType {
   TABLE_TYPE = 'TABLE_TYPE',
 }
 
+interface Params {
+  id: string;
+}
+
 const Goods = () => {
   const [displayType, setDisplayType] = useState<DisplayType>(
     DisplayType.TABLE_TYPE
   );
-  const params = useParams();
+  const { id } = useParams<Params>();
+
+  console.log('id => ', id);
 
   const changeDisplay = (type: DisplayType) => {
     setDisplayType(type);
