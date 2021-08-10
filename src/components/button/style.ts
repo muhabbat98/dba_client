@@ -6,7 +6,7 @@ const ButtonBg = {
   outlined: 'rgba(247, 247, 250, 0.1)',
   disabled: 'rgba(38, 71, 150, 0.05)',
   gray:'#F4F5F9',
-  default: 'theme.primary_color'
+  default: '#264796'
 };
 const ButtonFont = {
   white: '#000000',
