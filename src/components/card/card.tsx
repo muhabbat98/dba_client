@@ -1,10 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
 import { isEqual } from 'lodash';
-import Col from '../grid/col';
-import Container from '../grid/container';
-import Row from '../grid/row';
-import Checkbox from '../checkbox';
-import RadioButton from '../radio-button';
 import formatMoney from '../../utils/format-money';
 import { useActionCreators, useSelector } from '../../hooks';
 
@@ -15,7 +10,6 @@ import {
   CardImg,
   CardImageWrapper,
   CardWishlist,
-  CardIconsWrapper,
   CardBody,
   CardTitle,
   CardComents,
@@ -36,14 +30,15 @@ import { ReactComponent as CartIcon } from '../../assets/icons/cart.svg';
 
 interface CardProps {
   item?: any;
-  style?: any
+  style?: any;
 }
 
 const Card: React.FC<CardProps> = ({ item, style }) => {
   const [isInCart, setIsInCart] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
 
-  const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
+  const { addToCart, removeCart, addToWishlist, removeWishlist } =
+    useActionCreators();
 
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -87,17 +82,6 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
     <CardWrapper style={style}>
       <CardHeader>
         <CardLabel>Новинка</CardLabel>
-        {/* <CardIconsWrapper>
-          <CardWishlist
-            onClick={() =>
-              isInWishlist
-                ? removeFromWishlistHandle(item)
-                : addToWishlistHandle(item)
-            }
-          >
-            {isInWishlist ? <HeartFull /> : <HeartIcon />}
-          </CardWishlist>
-        </CardIconsWrapper> */}
         <CardImageWrapper>
           <CardImg src={item.images[0]} />
         </CardImageWrapper>

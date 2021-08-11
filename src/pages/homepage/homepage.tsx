@@ -19,7 +19,7 @@ import ReklamaMobileApp from '../../components/reklama-mobile-app';
 import Button from '../../components/button';
 import Row from '../../components/grid/row';
 import Col from '../../components/grid/col';
-import {useWindowSize} from '../../hooks/useWindowSize'
+import { useWindowSize } from '../../hooks/useWindowSize';
 import { Cont } from './style';
 
 import Snowboard from '../../assets/images/snowboard.svg';
@@ -35,6 +35,7 @@ import CardImage8 from '../../assets/images/card-item8.png';
 import CardImage9 from '../product-detail/product-detail-header/images/phoneMain.svg';
 import OrangeBanner from '../../assets/images/orangeBanner.svg';
 import Slider from '../../components/slider';
+import CardMobile from '../../components/card-mobile';
 
 export const data = [
   {
@@ -185,7 +186,7 @@ export const data = [
 ];
 
 const Homepage = () => {
-  const [width,height] = useWindowSize();
+  const [width, height] = useWindowSize();
   return (
     <div>
       <Banner />
@@ -195,22 +196,23 @@ const Homepage = () => {
           <Slider data={data} />
         </Container>
       </Cont>
-      {width>768 ?
-      <PopularProducts
-        leftTitle="Акции"
-        rightTitle="Смотреть все"
-        cardTitile1="Оформите Плюс и получите 300 баллов для покупок на Маркете"
-        cardTitile2="Мобильные телефоны Купить 4 по цена 3"
-        buttonTitle="Подробнее"
-        cardColor1="#FCF5D2"
-        cardColor2="#EBEBEB"
-        cardimage1={Snowboard}
-        cardimage2={Phones}
-      />:
-      <Container>
-        <img width="100%" src={OrangeBanner}/>
-      </Container>
-      }
+      {width > 768 ? (
+        <PopularProducts
+          leftTitle="Акции"
+          rightTitle="Смотреть все"
+          cardTitile1="Оформите Плюс и получите 300 баллов для покупок на Маркете"
+          cardTitile2="Мобильные телефоны Купить 4 по цена 3"
+          buttonTitle="Подробнее"
+          cardColor1="#FCF5D2"
+          cardColor2="#EBEBEB"
+          cardimage1={Snowboard}
+          cardimage2={Phones}
+        />
+      ) : (
+        <Container>
+          <img width="100%" src={OrangeBanner} />
+        </Container>
+      )}
       {/* <Container>
         <ProductsTitle title="Ваша подборка для покупок у нас" />
         <CardWrapperRow>
@@ -232,24 +234,34 @@ const Homepage = () => {
       </Container> */}
       <Container>
         <ProductsTitle title="Ваша подборка для покупок у нас" />
-        <Row>
-          {data.map((i: any) => {
-            return (
-              <Col xl={3}>
-                <Card item={i} />
-              </Col>
-            );
-          })}
-        </Row>
+        {width >= 768 ? (
+          <Row>
+            {data.map((i: any) => {
+              return (
+                <Col xl={3}>
+                  <Card item={i} />
+                </Col>
+              );
+            })}
+          </Row>
+        ) : (
+          <Row isMobile={true}>
+            {data.map((item: any) => {
+              return (
+                <Col xs={6} sm={4}>
+                  <CardMobile item={item}></CardMobile>
+                </Col>
+              );
+            })}
+          </Row>
+        )}
 
         <div style={{ textAlign: 'center', marginTop: '40px' }}>
-          <Button size={width>768?"medium":"large"}>Показать еще</Button>
+          <Button size={width > 768 ? 'medium' : 'large'}>Показать еще</Button>
         </div>
       </Container>
-      {width>768 && 
-        <ReklamaMobileApp />
-      }
-      
+      {width > 768 && <ReklamaMobileApp />}
+
       {/*       
       </Container>
       <PopularProducts

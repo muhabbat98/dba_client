@@ -28,6 +28,7 @@ import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
 import { ReactComponent as FilterIcon } from '../../assets/icons/product-filter.svg';
 import { ReactComponent as FilterCloseIcon } from '../../assets/icons/product-filter-close.svg';
+import CardMobile from '../../components/card-mobile';
 
 const data = [
   {
@@ -185,6 +186,7 @@ const Products = () => {
               <ProductsFilter />
             </Col>
           ) : null}
+
           {width <= 768 ? (
             // <Col sm={12} xs={12}>
             toggle ? (
@@ -202,16 +204,27 @@ const Products = () => {
           ) : // </Col>
           null}
 
-          <Col xl={9} lg={9} md={9} sm={12} xs={12}>
-            <Row>
-              {data.map((item) => (
-                <Col key={item.id} xl={4}>
-                  <Card item={item} style={{ marginBottom: '16px' }} />
-                </Col>
-              ))}
-            </Row>
-          </Col>
+          {width >= 768 ? (
+            <Col xl={9} lg={9} md={9} sm={12} xs={12}>
+              <Row>
+                {data.map((item) => (
+                  <Col key={item.id} xl={4} lg={6}>
+                    <Card item={item} style={{ marginBottom: '16px' }} />
+                  </Col>
+                ))}
+              </Row>
+            </Col>
+          ) : null}
         </Row>
+        {width < 768 ? (
+          <Row isMobile={true}>
+            {data.map((item) => (
+              <Col xs={6} sm={4} key={item.id}>
+                <CardMobile item={item} />
+              </Col>
+            ))}
+          </Row>
+        ) : null}
       </Container>
     </CategoryContainer>
   );

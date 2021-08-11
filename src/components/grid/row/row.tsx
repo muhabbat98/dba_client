@@ -1,16 +1,17 @@
 import React from 'react';
-import {RowContainer} from './style';
+import { RowContainer } from './style';
 
-interface RowProps{
-   style?: any
+interface RowProps {
+  style?: any;
+  isMobile?: boolean;
 }
 
-const Row: React.FC<RowProps> = ({style, children}) => {
-   return (
-      <RowContainer style={style}>
-         {children}
-      </RowContainer>
-   );
-}
+const Row: React.FC<RowProps> = ({ style, isMobile, children }) => {
+  return (
+    <RowContainer isMobile={isMobile} style={style}>
+      {children}
+    </RowContainer>
+  );
+};
 
 export default Row;

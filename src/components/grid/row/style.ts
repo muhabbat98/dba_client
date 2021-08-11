@@ -1,9 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const RowContainer = styled.div`
+interface IsMobileProps {
+  isMobile?: boolean;
+}
+
+export const RowContainer = styled.div<IsMobileProps>`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   /* column-gap: 10px; */
-  grid-gap: 24px;
+  grid-gap: ${({ isMobile }) => (isMobile ? '16px' : '24px')};
   /* grid-gap: 10px; */
 `;
