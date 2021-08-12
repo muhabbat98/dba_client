@@ -58,11 +58,15 @@ export const SmsText = styled.p`
     line-height: 20px;
     color: #000000;
     width:880px;
+    @media(max-width: 1000px){
+      width:auto;
+      text-align: justify;
+    }
 `;
 export const SmsActionContainer = styled.div`
     display: flex;
     margin-bottom:32px;
-    width: 838px;;
+    //width: 838px;
     p{
         margin:0px;
         cursor:pointer;
@@ -188,8 +192,9 @@ export const Textarea = styled.div<Propses>`
         
     }
     svg{
-        margin:24px 24px 0px 0px;
+        margin:15px 15px 0px 0px;
         cursor:pointer;
+      
     }
     
 `;
@@ -223,7 +228,7 @@ export const TextareaButton = styled.div`
 `;
 export const EmojiContainer = styled.div<Propses>`
     position: absolute;
-    top:-380px;
+    top:-360px;
     right: 30px;
     background: #FFFFFF;
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.12);

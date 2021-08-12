@@ -14,6 +14,10 @@ export const TabBarHead = styled.div`
         line-height: 24px;
         color: #797979;
         cursor: pointer;
+        @media(max-width: 450px){
+          font-size: 14px;
+          padding:10px 15px; 
+        }
     }
 `;
 export const DescriptionText = styled.p`
@@ -22,6 +26,7 @@ export const DescriptionText = styled.p`
     font-size: 16px;
     line-height: 32px;
     color: #000000;
+    text-align: justify;
 `;
 export const Cont = styled.div`
     position: relative;

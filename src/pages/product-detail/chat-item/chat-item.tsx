@@ -1,9 +1,10 @@
-import React,{useState,useRef,} from 'react'
+import React, { useState, useRef, useEffect } from 'react';
 import StarRaiting from '../../../components/star-rating';
 import {ReactComponent as Smile} from '../testimonial/smile.svg'
 import {ReactComponent as Like} from '../../../assets/icons/like-hand.svg'
 import Button from '../../../components/button';
 import Picker from 'emoji-picker-react';
+import {useWindowSize} from '../../../hooks/useWindowSize';
 import {
     TestimonalWrapper,
     ItemContainer,
@@ -30,12 +31,14 @@ interface Propses {
 }
 
 const  ChatItem:React.FC<Propses> = ({item}) => {
-    const refAction = useRef<any>()
+    const refAction = useRef<any>();
+    const ref = useRef<any>();
     const [viewReplays,setViewReplays] = useState<boolean>(false)
     const [textFild,setTextFild] = useState<boolean>(false);
     const [smile,setSmile] = useState<boolean>(false); 
     const [placeholder,setPlaceholder] = useState<any>('');
     const [replay,setReplay] = useState<boolean>(false);
+    const [width,height] = useWindowSize();
     const onEmojiClick = (event:any, emojiObject:any) => {
         setPlaceholder(placeholder+emojiObject.emoji)    
     };
@@ -49,6 +52,17 @@ const  ChatItem:React.FC<Propses> = ({item}) => {
     const onSubmit = () =>{
         console.log('PlaceholderData--->',placeholder)
     }
+    useEffect(() => {
+        const checkIfClickedOutside = (e:any) => {
+            if (smile && ref.current && !ref.current.contains(e.target)) {
+                setSmile(false)
+            }
+        }
+        document.addEventListener("mousedown", checkIfClickedOutside)
+        return () => {
+            document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+    }, [smile])
     return (
         <div>
             <ItemContainer>
@@ -72,7 +86,7 @@ const  ChatItem:React.FC<Propses> = ({item}) => {
                         </SmsActionContainer>
                         {
                             viewReplays && item.replaysms && item.replaysms.map((replay:any,index:number)=>(
-                                <div style={{marginLeft:42}}>
+                                <div style={{marginLeft:width>768?42:""}} key={index}>
                                     <TopSection>
                                         <TopSectionDiv1><img src={replay.avatar}/></TopSectionDiv1>
                                         <TopSectionDiv2> 
@@ -95,7 +109,7 @@ const  ChatItem:React.FC<Propses> = ({item}) => {
                             ))
                         }
                         {replay && 
-                            <div style={{marginLeft:42}}>
+                            <div style={{marginLeft:width>768?42:""}}>
                             <TopSection>
                                 <TopSectionDiv1><img src={item.avatar}/></TopSectionDiv1>
                                 <TopSectionDiv2 > 
@@ -127,12 +141,12 @@ const  ChatItem:React.FC<Propses> = ({item}) => {
                                         <Smile onClick={()=>setSmile(open=>!open)}/>
                                     </Textarea>
                                     <EmojiContainer state={smile}>
-                                        {smile && <Picker onEmojiClick={onEmojiClick} />}
+                                        {smile && <div ref={ref}><Picker onEmojiClick={onEmojiClick} /></div>}
                                     </EmojiContainer>
                                     <TextareaButton>
                                         {!textFild 
-                                            ?<Button btnType="disabled">Добавить отзыв</Button>
-                                            :<Button onClick={onSubmit}>Добавить отзыв</Button>
+                                            ?<Button size={width>660?'medium':'large'} btnType="disabled">Добавить отзыв</Button>
+                                            :<Button size={width>660?'medium':'large'} onClick={onSubmit}>Добавить отзыв</Button>
                                         }
                                     </TextareaButton>
                                 </div>

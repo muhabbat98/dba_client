@@ -29,6 +29,7 @@ import {
     EmojiContainer
 
 } from './style';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 
 const testimonal = [
     {
@@ -79,7 +80,7 @@ const  Testimonial = () => {
     const [smile,setSmile] = useState<boolean>(false); 
     const [placeholder,setPlaceholder] = useState<any>('');
     const [replayTxt,setReplayText] = useState<any>('');
-    const [replay,setReplay] = useState<boolean>(false);
+    const [width,height] = useWindowSize();
     const onEmojiClick = (event:any, emojiObject:any) => {
         setPlaceholder(placeholder+emojiObject.emoji)    
     };
@@ -134,13 +135,13 @@ const  Testimonial = () => {
 
                 </div>
                 {
-                    !open && 
+                   width>768 && !open &&
                     <Button onClick={()=>setOpen(true)} style={{alignSelf:'center'}}>Написать отзыв</Button>
                 }
 
             </ButtonContainer>    
             {
-                open && 
+                (width<768 || open) &&
                 <div style={{position:'relative',width:"100%"}}>
                     <Textarea state={textFild}>
                         <div onClick={()=>handleBlur()}>
@@ -163,8 +164,8 @@ const  Testimonial = () => {
                     </EmojiContainer>
                     <TextareaButton>
                         {!textFild 
-                            ?<Button btnType="disabled">Добавить отзыв</Button>
-                            :<Button onClick={onSubmit}>Добавить отзыв</Button>
+                            ?<Button size={width>650?"medium":'large'} btnType="disabled">Добавить отзыв</Button>
+                            :<Button size={width>650?"medium":'large'} onClick={onSubmit}>Добавить отзыв</Button>
                         }
                     </TextareaButton>
                 </div>
@@ -173,4 +174,4 @@ const  Testimonial = () => {
     )
 }
 
-export default Testimonial
+export default Testimonial;

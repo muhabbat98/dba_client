@@ -7,6 +7,12 @@ export const CharacterContainer = styled.div`
     width: 630px;
     display: flex;
     justify-content: space-between;
+    @media(max-width: 1000px){
+      width:400px;
+    }
+  @media(max-width: 670px){
+    width:auto;
+  }
 `;
 export const CharacterText = styled.div`
     font-style: normal;
@@ -36,7 +42,7 @@ export const SizeText = styled.div`
     letter-spacing: -0.15px;
     color: #000000;
     margin-top:16px;
-    width:250px;
+    //width:250px;
 
 `;
 export const HandeleOpen = styled.p`

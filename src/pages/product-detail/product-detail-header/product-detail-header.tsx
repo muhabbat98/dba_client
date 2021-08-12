@@ -3,7 +3,8 @@ import StarRaiting from '../../../components/star-rating';
 import FormatMoney from '../../../utils/format-money';
 import Button from '../../../components/button';
 import { useParams } from 'react-router-dom';
-import { useActionCreators, useSelector } from '../../../hooks';
+import { useActionCreators, useSelector} from '../../../hooks';
+import {useWindowSize} from '../../../hooks/useWindowSize';
 import  PhoneMain from './images/phoneMain.svg'
 import  Phone1 from './images/phone1.svg'
 import  Phone2 from './images/phone2.svg'
@@ -39,7 +40,7 @@ const  ProductDetailHeader = () => {
     const [mainImage,setMainImage] = useState();
     const [isInCart, setIsInCart] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(false);
-  
+    const [width,height] = useWindowSize();
     const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
     const { cartItems } = useSelector((state) => state.cart);
     const addToCartHandle = (item: any) => {
@@ -146,7 +147,7 @@ const  ProductDetailHeader = () => {
                     <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
                 </BinaryTextConatiner>
                 {isInCart
-                ?<Button  style={{marginTop:27}} btnType="disabled">Товар добавлен в корзину</Button>
+                ?<Button size={width>1000?'medium':"large"} style={{marginTop:27}} btnType="disabled">Товар добавлен в корзину</Button>
                 :<Button style={{marginTop:27}} onClick={() =>
                     isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)}
                   >{isInCart ? "Товар добавлен в корзину" : "Добавить в корзину"}</Button>

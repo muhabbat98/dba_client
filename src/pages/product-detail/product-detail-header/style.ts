@@ -6,6 +6,9 @@ export const DetailHeaderContainer = styled.div`
     border-radius: 16px;
     
     display: flex;
+  @media(max-width: 768px){
+    display:block;
+  }
 `;
 export const LeftPictureContainer = styled.div`
     display: flex;
@@ -62,6 +65,7 @@ export const InfoTitleContainer = styled.div`
         line-height: 36px;
         color: #000000;
         margin:0px;
+     
     }
     svg{
         width: 23px;

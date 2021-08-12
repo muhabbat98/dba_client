@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {useWindowSize} from '../../hooks/useWindowSize';
 import ReklamaMobileApp from '../../components/reklama-mobile-app';
 import Container from '../../components/grid/container';
 import ProductsTitle from '../../components/products-title'
@@ -8,8 +9,10 @@ import Testimonial from './testimonial';
 import Slider from '../../components/slider';
 import {data} from '../homepage/homepage'
 import {TabBarHead,DescriptionText,Cont} from './style';
+import MobileProductHeader from './mobile-product-header';
 
 const ProductDetail = () => {
+    const [width,height] = useWindowSize();
     const [tabBar,setTabBar] = useState({
         item1:true,
         item2:false,
@@ -36,13 +39,17 @@ const ProductDetail = () => {
             item3:true
         })
     }
-
+console.log('width-->',width)
     return (
         <>
             <Container>
-                <ProductsTitle title="iPhone 11 128GB"/>
-                <ProductDetailHeader/>
-                
+                {width > 768 &&
+                    <ProductsTitle title="iPhone 11 128GB" />
+                }
+                {width>1000
+                    ?<ProductDetailHeader/>
+                    :<MobileProductHeader/>
+                }
                 <TabBarHead>
                     <div 
                         onClick={tabBar1} 
@@ -68,7 +75,7 @@ const ProductDetail = () => {
                             }}>Отзывы</div>
                 </TabBarHead>
                 <div>
-                    {tabBar.item1 && 
+                    {tabBar.item1 &&
                         <Characteristic/>
                     }
                     {tabBar.item2 && 
@@ -81,17 +88,19 @@ const ProductDetail = () => {
                         <Testimonial/>
                     }
                 </div>
-                
-
             </Container>
-            <Cont>
+            {width>768 &&
+            <>
+              <Cont>
                 <Container>
-                    <ProductsTitle style={{ marginBottom: '0px' }} title="Похожие товары" />
-                    <Slider data={data}/>
+                  <ProductsTitle style={{ marginBottom: '0px' }} title="Похожие товары" />
+                  <Slider data={data}/>
                 </Container>
-            </Cont>
-            
-            <ReklamaMobileApp/>
+              </Cont>
+
+              <ReklamaMobileApp/>
+            </>}
+
         </>
     )
 }
