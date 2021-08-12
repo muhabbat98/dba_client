@@ -1,0 +1,333 @@
+/* montserrat-300 - latin_cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./fonts/montserrat-v15-latin_cyrillic-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v15-latin_cyrillic-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-regular - latin_cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/montserrat-v15-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v15-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-500 - latin_cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/montserrat-v15-latin_cyrillic-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v15-latin_cyrillic-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-600 - latin_cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./fonts/montserrat-v15-latin_cyrillic-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v15-latin_cyrillic-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-800 - latin_cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('./fonts/montserrat-v15-latin_cyrillic-800.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v15-latin_cyrillic-800.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-900 - latin_cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('./fonts/montserrat-v15-latin_cyrillic-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v15-latin_cyrillic-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* merriweather-300 - latin_cyrillic */
+@font-face {
+	font-family: 'Merriweather';
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url('./fonts/merriweather-v22-latin_cyrillic-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('./fonts/merriweather-v22-latin_cyrillic-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* merriweather-regular - latin_cyrillic */
+  @font-face {
+	font-family: 'Merriweather';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('./fonts/merriweather-v22-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('./fonts/merriweather-v22-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* merriweather-700 - latin_cyrillic */
+  @font-face {
+	font-family: 'Merriweather';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('./fonts/merriweather-v22-latin_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('./fonts/merriweather-v22-latin_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* merriweather-900 - latin_cyrillic */
+  @font-face {
+	font-family: 'Merriweather';
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url('./fonts/merriweather-v22-latin_cyrillic-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('./fonts/merriweather-v22-latin_cyrillic-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+:root {
+    --main-text-color:#2A2A50;
+    --secondary-text-color:#D3B574;
+}
+body {
+  margin: 0;
+  font-family: 'Montserrat',  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.navbar-site-name{
+  color: #111325;
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: bolder;
+  margin-left: 1rem;
+}
+.navbar-menyu-links{
+  list-style: none;
+  padding: 0;
+
+}
+.navbar-menyu-links> li{
+  display: inline-block;
+}
+.navbar-menyu-links li a, .navbar-toggle-menyu{
+   text-decoration: none;
+   color: var(--main-text-color) !important;
+   font-weight: 400 !important;
+   font-size: 16px !important;
+   padding: 0.8rem;
+   transition: all 0.5s ease;
+   text-transform: capitalize !important;
+   font-family: inherit;
+}
+.navbar-menyu-links li a:hover, .navbar-toggle-menyu:hover{
+  color: var(--secondary-text-color)!important;
+  background-color: transparent !important;
+}
+.navbar-toggle-menyu + div{
+    transform: none;
+}
+.navbar-department-link>div{
+  transform: none !important;
+  top:inherit !important;
+  left: inherit !important;
+}
+.home-page-welcome{
+	width: 100%;
+	height: 100vh;
+	background: linear-gradient(0deg, rgba(42,42, 80, 0.8),rgba(42,42, 80, 0.5)), url(./assets/header.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.home-page-welcome h1{
+	font-size: 75px;
+    font-weight: 300;
+    text-transform: capitalize;
+    line-height: 1.2em;
+	color: #fff;
+	font-family: 'Merriweather', serif ;
+	text-align: center;
+}
+.home-page-welcome p{
+	text-align: center;
+    color: #ffffff;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+.login-button{
+  display: block !important;
+  margin-left:auto !important ;
+}
+.login-header-icon{
+  margin-right: 1rem;
+}
+#back-to-top-anchor{
+  min-height: 0 !important;
+}
+.welcome-header{
+    max-width: 620px;
+}
+
+
+.foriegn-body{
+  background-color: white;
+}
+.book-card{
+  padding: 2rem 0px;
+  padding-right: 2rem;
+}
+.media{
+  background-color: #F8F8F8;
+  padding: 1rem;
+  position: relative;
+}
+.media:hover .book-icons{
+  transform: scale(1);
+}
+.media:hover .book-icons a{
+  transform: rotate(0) translate(0px);
+}
+.foriegn-book-cover{
+  display: block;
+  margin: 0 auto;
+  height: 280px;
+  width: 200px;
+  object-fit: cover;
+  -webkit-box-shadow: 16px 16px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 16px 16px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 16px 16px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.book-body{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 2rem 0px;
+  
+}
+.book-body * {
+  margin: 0;
+  padding: 0;
+}
+.book-name{
+  color:var(--main-text-color);
+  text-transform: uppercase;
+  font-size: 16px;
+}
+.book-author{
+  font-size: 14px;
+  font-weight: normal;
+  color:var(--main-text-color);
+
+}
+.foriegn-book-cover img{
+  width: 100%;
+}
+.foriegn-book-header{
+  color: var(--main-text-color);
+  text-align: center;
+  font-size: 30px;
+}
+.book-icons{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  top:0;
+  right: 0;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  transform: scale(0);
+}
+.book-icons a{
+  text-decoration: none;
+  color:var(--main-text-color);
+  padding: 1rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.book-icons a:first-child{
+  transform: translate(-90px, -50px) ;
+}
+.book-icons a:nth-child(2){
+  transform:  translate(0px, 90px) ;
+}
+.book-icons a:nth-child(3){
+  transform:translate(90px, 50px) ;
+}
+.container {
+  width: 900px;
+  margin: 0 auto;
+}
+.science-input{
+  display: flex;
+  flex-wrap: wrap;
+}
+.science-input>div{
+    text-align: center;
+    margin: 1rem 0px;
+    display: flex;
+    align-items:center;
+    margin-right: 1rem
+}
+.science-input>div input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 8px;
+    padding: 0.5rem;
+    font-size: 16px;
+    margin-left: 0.5rem;
+}
+.science-input>div label{
+  font-size: 16px;
+  color:var(--main-text-color);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.science-textarea textarea{
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 8px;
+    padding: 0.5rem;
+    font-size: 16px;
+    outline: none;
+    margin-left: 0.5rem;
+
+}
+.science-checkbox select {
+  margin: 0 1rem;
+  padding: 0.5rem;
+  border:1px solid var(--secondary-text-color);
+  color:var(--main-text-color);
+  font-size: 14px;
+  outline: transparent;
+}
+.science-submit{
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 14px;
+  border:1px solid var(--secondary-text-color);
+  background-color:var(--secondary-text-color) ;
+  color:var(--main-text-color);
+  font-weight: bolder;
+  transition: all 0.5s ease;
+}
+.science-submit:hover{
+  color:var(--secondary-text-color) ;
+  background-color: var(--main-text-color) ;
+}
