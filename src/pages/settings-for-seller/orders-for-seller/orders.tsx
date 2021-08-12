@@ -1,4 +1,3 @@
-
 import React,{useState} from 'react';
 import DefaultOrderPage from './order-pages/default-order-page';
 import MainOrderPage from './order-pages/main-order-page';
@@ -6,7 +5,7 @@ import {history,activeData} from "./datas"
 
 
 
-const OrdersForSeller = () => {
+const Orders = () => {
 const [openOrder, setOpenOrder] = useState((history||activeData)?true:false);
 
   return (
@@ -19,4 +18,4 @@ const [openOrder, setOpenOrder] = useState((history||activeData)?true:false);
   );
 };
 
-export default OrdersForSeller;
+export default Orders;

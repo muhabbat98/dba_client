@@ -1,12 +1,17 @@
 import React,{useState,useRef,useEffect} from 'react';
 import {ReactComponent as PlusIcon} from '../../assets/icons/vector-plus.svg'
+import {axios,useActionCreators,useSelector, useError} from '../../../hooks'
 import ModeratorCard from '../../components/moderator-card'
 import AddModerator from './add-moderator';
 import {Container,HeadBox,CardContainer,Pagenition} from './style'
+import { AlertPosition } from '../../../utils/alert-position-enum';
 
 const Moderator = () => {
       const [openModal,setOpenModal] = useState<boolean>(false);
-      const ref = useRef<any>()
+      const [moderatot,setModerator] = useState<any>([])
+      const ref = useRef<any>();
+      const { setAlertMessage } = useActionCreators();
+      const {checkError} = useError();
       useEffect(() => {
           const checkIfClickedOutside = (e: any) => {
               if (openModal && ref.current && !ref.current.contains(e.target)) {
@@ -17,7 +22,35 @@ const Moderator = () => {
           return () => {
               document.removeEventListener("mousedown", checkIfClickedOutside)
           }
-      }, [openModal])
+      }, [openModal]);
+
+      // ---->API Colls
+
+      useEffect(()=>{
+          getModerator();
+      })
+
+      const addModeratorItem = (data:any) => {
+          addModerator(data);
+      }
+      const getModerator = async () =>{
+          try{
+              const res = await axios.get("/moderator");
+              console.log('moderators-->',res.data);
+          } catch (error) {
+              checkError(error);
+          }
+      }
+      const addModerator = async  (getAddItems:any) => {
+          console.log("getAddItems => ", getAddItems);
+          try{
+              const response = await axios.post('/moderator',getAddItems)
+              console.log('response-->',response);
+          } catch(error) {
+              checkError(error);
+          }
+    }
+
       return (
       <>
             <Container>
@@ -45,7 +78,12 @@ const Moderator = () => {
                   </Pagenition>
                   
             </Container>
-            {openModal&&<AddModerator reff={ref} setClose={setOpenModal}/>}
+            {openModal&&
+                <AddModerator
+                  reff={ref}
+                  setClose={setOpenModal}
+                  addModeratorItem={addModeratorItem}
+                />}
       </>)
 }
 

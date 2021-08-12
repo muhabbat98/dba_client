@@ -1,84 +1,108 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState,useEffect } from 'react'
+import {useHistory} from 'react-router-dom'
 import Backdrop from '../../../../../components/backdrop'
-import { ReactComponent as CloseIcon } from '../../../../../assets/icons/ic_close.svg';
+import { useWindowSize } from '../../../../../hooks/useWindowSize';
+import {ReactComponent as CloseIcon} from '../../../../../assets/icons/ic_close.svg';
 import ProductsTitle from '../../../../../components/products-title';
 import Input from '../../../../../components/input';
 import Dropdown from '../../../../../components/drop-down';
 import Button from '../../../../../components/button';
-import { DisputeContainer, CloseButton, DisputeTitle, InputContainer, Discription } from './style';
+import { useForm } from "react-hook-form";
+import {
+    TransparentWrapper,
+    DisputeContainer,
+    CloseButton,
+    DisputeTitle,
+    InputContainer,
+    Discription
+} from './style';
 
 interface Propses {
-    closeModal?: any;
-    getDisputeItem: any
+    closeModal?:any;
+    getDisputeItem:any
 }
-const CreateDispute: React.FC<Propses> = ({ closeModal, getDisputeItem }) => {
-    const options: any = [];
-    getDisputeItem.order.forEach((item: any, index: number) => {
-        options[index] = item.itemTitle
+const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
+    const { register, handleSubmit, control, watch, errors, setValue } = useForm();
+    const options:any=[];
+    getDisputeItem.order.forEach((item:any,index:number) => {
+        options[index]=item.itemTitle
     });
     const history = useHistory()
-    const [spor1, setSpor1] = useState<any>({ value: "Причина спора1" });
-    const [spor2, setSpor2] = useState<any>({ value: options[0] });
-    const [data, setData] = useState<any>(
+    const[width,height] = useWindowSize();
+    const [spor1,setSpor1] = useState<any>({value:"Причина спора1"});
+    const [spor2,setSpor2] = useState<any>({value:options[0]});
+    const [data,setData] = useState<any>(
         {
-            spor1: spor1.value,
-            spor2: spor2.value,
-            blah: "",
-            description: "",
+            spor1:spor1.value,
+            spor2:spor2.value,
+            blah:getDisputeItem.seller,
+            description:"",
         }
     );
-
-    const hundleSubmit = () => {
-        console.log('sdfsfsd', data)
+        // console.log("sdfdfsd--",getDisputeItem)
+    const hundleSubmit = () =>{
+        console.log('submit->',data)
         history.push('/settings/discussion')
     }
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+    
+        return () => {
+          document.body.style.overflow = 'auto';
+        };
+      }, []);
+      const clickHandler = (e: any) => {
+        if (e.target.classList.contains('glass-container')) {
+          closeModal(false);
+        }
+      };
     return (
-        <div>
-            <Backdrop close={closeModal} />
-            <DisputeContainer>
-                <CloseButton onClick={closeModal}><CloseIcon /></CloseButton>
+        <TransparentWrapper className="glass-container" onClick={clickHandler}>
+            {/* <Backdrop close={closeModal}/> */}
+            <DisputeContainer style={{marginTop:height<630?200:""}}>
+                {/* <CloseButton onClick={closeModal}><CloseIcon/></CloseButton> */}
                 <DisputeTitle>
-                    <ProductsTitle title="Спор по заказу" />
-                    <ProductsTitle title={`№ ${getDisputeItem.idOrder}`} />
+                    <ProductsTitle title="Спор по заказу"/>
+                    <ProductsTitle title={`№ ${getDisputeItem.idOrder}`}/>
                 </DisputeTitle>
                 <InputContainer>
-                    <Dropdown
-                        label="Причина спора"
-                        option={["Причина спора1", "Причина спора2", "Причина спора3"]}
+                    <Dropdown 
+                        label="Причина спора" 
+                        option={["Причина спора1","Причина спора2","Причина спора3"]} 
                         selected={spor1.value}
                         callback={setSpor1}
-                        style={{ marginTop: 32 }}
+                        style={{marginTop:32}}
                     />
-                    <Dropdown
-                        label="Наименование товара"
-                        option={options}
+                    <Dropdown 
+                        label="Наименование товара" 
+                        option={options} 
                         selected={spor2.value}
                         callback={setSpor2}
-                        style={{ marginTop: 24 }}
+                        style={{marginTop:24}}
                     />
                     <Input
                         label="Наименование продавца"
                         placeholder="Наименование продавца"
-                        onChange={(e: any) => setData({ ...data, blah: e.target.value })}
+                        onChange={(e:any)=>setData({...data,blah:e.target.value})}
                         value={data.blah}
-
+                        register={register}
                     />
-                    <Discription
+                    <Discription 
                         placeholder="Расскажите, пожалуйста что произошло"
-                        onChange={(e: any) => setData({ ...data, description: e.target.value })}
+                        onChange={(e:any)=>setData({...data,description:e.target.value})}
                         value={data.description}
-                    />
-                    <Button
-                        style={{ marginTop: 24 }}
+                        />
+                    <Button 
+                        style={{marginTop:24}}
                         onClick={hundleSubmit}
-                    >
-                        Начать спор</Button>
+                        size="large"
+                        >
+                            Начать спор</Button>
                 </InputContainer>
 
-            </DisputeContainer>
-        </div>
+            </DisputeContainer>            
+        </TransparentWrapper>
     )
 }
 
-export default CreateDispute;
+export default CreateDispute; 

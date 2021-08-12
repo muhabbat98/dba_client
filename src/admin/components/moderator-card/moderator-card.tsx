@@ -16,6 +16,8 @@ import {
       Actions  
 } from './style'
 
+
+
 const arr=["Электроника","Здоровье"];
 const ModeratorCard = () => {
       const [open,setOpen] = useState<boolean>(false);

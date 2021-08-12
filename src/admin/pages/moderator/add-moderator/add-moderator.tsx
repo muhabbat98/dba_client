@@ -12,9 +12,10 @@ import { axios } from '../../../../hooks';
 interface Propses {
       setClose:any;
       reff?:any;
+      addModeratorItem?:any
 }
 
-const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
+const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
     const { register, handleSubmit, control, watch, errors, setValue } = useForm();
     const [avatar,setAvatar] = useState<any>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -22,6 +23,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
     const [menu,setMenu] = useState<any>([]);
     const [selectList,setSelectList] = useState<any>([]);
     const fileRef = useRef<HTMLInputElement>(null);
+    const[imgState, setImgState] = useState<any>(null);
 
     useEffect(() => {
         getAllProducts();
@@ -37,44 +39,59 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
             console.log(error);
         }
     };
-      const onSubmit = (data: any) => {
+    const onSubmit = (data: any) => {
+        console.log("data=>  ", imgState);
 
-            if(data.password==data.confirmPassword){
-                  setClose(false);
-                  console.log('dataa-->',data);
-                  console.log('selectList-->',selectList)
+        const formData = new FormData();
+        formData.append("file", imgState);
+
+        if (data.password == data.confirmPassword) {
+            setClose(false);
+            addModeratorItem({
+                firstName:data.firstName,
+                secondName:data.secondName,
+                phoneNumber:data.phoneNumber,
+                password:data.confirmPassword,
+                categoryIds:selectList,
+                image:formData
+            })
+        } else {
+            setErrPassword(true);
+            console.log("password error")
+        }
+
+
+    }
+    const imageChange = (ev:any) => {
+        let imgFile = ev.target.files[0];
+        setImgState(imgFile);
+
+
+        const fileExt = imgFile.name.toLowerCase().split('.').pop();
+
+        let reader = new FileReader();
+        reader.onload = function () {
+            setAvatar(reader.result);
+        };
+        reader.readAsDataURL(imgFile);
+
+        // const formData = new FormData();
+        // formData.append("file", imgFile, imgFile.name);
+        // formData.append("upload_preset", 'darwin');
+        // setImgState(formData);
+    }
+
+    const ref = useRef<any>()
+    useEffect(() => {
+        const checkIfClickedOutside = (e: any) => {
+            if (isOpen && ref.current && !ref.current.contains(e.target)) {
+                setIsOpen(false)
             }
-            else {
-                  setErrPassword(true);
-                  console.log("password error")}
-
-         }
-         const imageChange = (ev:any) => {
-            let imgFile = ev.target.files[0];
-            const fileExt = imgFile.name.toLowerCase().split('.').pop();
-            let reader = new FileReader();
-            reader.onload = function () {
-               setAvatar(reader.result);
-            };
-            reader.readAsDataURL(imgFile);
-
-            const formData = new FormData();
-            formData.append("file", imgFile);
-            console.log(imgFile);
-      }
-
-      const ref = useRef<any>()
-      useEffect(() => {
-            const checkIfClickedOutside = (e: any) => {
-                  if (isOpen && ref.current && !ref.current.contains(e.target)) {
-                        setIsOpen(false)
-                  }
-            }
-            document.addEventListener("mousedown", checkIfClickedOutside)
-            return () => {
-                  document.removeEventListener("mousedown", checkIfClickedOutside)
-            }
-      }, [isOpen])
+        }
+        document.addEventListener("mousedown", checkIfClickedOutside)
+        return () => {
+            document.removeEventListener("mousedown", checkIfClickedOutside)
+        }}, [isOpen])
 
 
     const collectCat = (item:string) =>{
@@ -86,7 +103,6 @@ const AddModerator: React.FC<Propses> = ({setClose,reff}) =>{
         if(increment == selectList.length){
             setSelectList([...selectList,item])
         }
-        // console.log("ll--",selectList)
 
       }
 

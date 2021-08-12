@@ -1,3 +1,3 @@
-import OrdersForSeller from './orders-for-seller';
+import Orders from './orders';
 
-export default OrdersForSeller;
+export default Orders;
