@@ -7,7 +7,8 @@ import { AlertPosition } from '../../../utils/alert-position-enum';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 import Dropdown from '../../../components/drop-down';
-import { axios, useActionCreators } from '../../../hooks';
+import { axios, useActionCreators, useError } from '../../../hooks';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 
 import {
   PersonalInfoContainer,
@@ -39,8 +40,9 @@ interface PersonalInfoEditProps {
 }
 
 const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
-  const { register, handleSubmit, control, errors, watch, setValue } =
-    useForm();
+  const { register, handleSubmit, errors, watch, setValue } = useForm();
+  const { checkError } = useError();
+  const [width] = useWindowSize();
 
   const [state, setState] = useState<any>({
     id: '60cb25a8fdf13d0065176014',
@@ -152,19 +154,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
           });
         }
       } catch (error) {
-        if (error.debugMessage) {
-          setAlertMessage({
-            message: error.debugMessage,
-            type: 'error',
-            position: AlertPosition.TOP_LEFT,
-          });
-        } else {
-          setAlertMessage({
-            message: error.message,
-            type: 'error',
-            position: AlertPosition.TOP_LEFT,
-          });
-        }
+        checkError(error);
       }
     } else {
       setAlertMessage({
@@ -192,19 +182,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
       setAvatar(data.imageUrl);
       setImgUrl(data.imageUrl);
     } catch (error) {
-      if (error.debugMessage) {
-        setAlertMessage({
-          message: error.debugMessage,
-          type: 'error',
-          position: AlertPosition.TOP_LEFT,
-        });
-      } else {
-        setAlertMessage({
-          message: error.message,
-          type: 'error',
-          position: AlertPosition.TOP_LEFT,
-        });
-      }
+      checkError(error);
     }
   };
 
@@ -226,19 +204,7 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
         position: AlertPosition.TOP_CENTER,
       });
     } catch (error) {
-      if (error.debugMessage) {
-        setAlertMessage({
-          message: error.debugMessage,
-          type: 'error',
-          position: AlertPosition.TOP_LEFT,
-        });
-      } else {
-        setAlertMessage({
-          message: error.message,
-          type: 'error',
-          position: AlertPosition.TOP_LEFT,
-        });
-      }
+      checkError(error);
     }
   };
 
@@ -273,12 +239,14 @@ const PersonalInfoEdit: FC<PersonalInfoEditProps> = ({ toggleComponent }) => {
               <PersonalNameWrapper>
                 <PersonalName>{state.fullName}</PersonalName>
                 <PersonalNameEmail> Продавец </PersonalNameEmail>
-                <PersonalVerified>
-                  <Verified />
-                  <PersonalVerifiedToggle>
-                    Зарегистрирован
-                  </PersonalVerifiedToggle>
-                </PersonalVerified>
+                {width > 768 ? (
+                  <PersonalVerified>
+                    <Verified />
+                    <PersonalVerifiedToggle>
+                      Зарегистрирован
+                    </PersonalVerifiedToggle>
+                  </PersonalVerified>
+                ) : null}
               </PersonalNameWrapper>
             </PersonalHeaderLeft>
             <PersonalHeaderRight>

@@ -17,6 +17,10 @@ export const MyProductsCollapseImgWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    overflow-x: auto;
+  }
 `;
 
 export const MyProductsCollapseImgItem = styled.div`

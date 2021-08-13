@@ -171,6 +171,8 @@ const Products = () => {
     setToggle(!toggle);
   };
 
+  console.log('Rerender');
+
   return (
     <CategoryContainer>
       <Container>

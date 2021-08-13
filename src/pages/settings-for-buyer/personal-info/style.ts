@@ -54,12 +54,9 @@ export const PersonalAvatar = styled.div`
   /* overflow: hidden; */
 
   @media (max-width: 768px) {
-    margin-right: 16px;
-  }
-
-  @media (max-width: 768px) {
     width: 48px;
     height: 48px;
+    margin-right: 16px;
   }
 
   &::after {

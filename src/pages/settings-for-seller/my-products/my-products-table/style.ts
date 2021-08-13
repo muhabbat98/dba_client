@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const MyProductsTableContainer = styled.div`
   border: 2px solid #e9ecf4;
   border-radius: 16px;
+
+  @media (max-width: 768px) {
+    border: none;
+  }
 `;
 
 export const MyProductsTableTop = styled.div`
@@ -63,9 +67,18 @@ export const MyProductsFilterSection = styled.div`
   display: flex;
   margin: 24px 20px 15px 0px;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
   & > input,
   & > div {
     margin-left: 20px;
     width: 100%;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+      margin-bottom: 16px;
+    }
   }
 `;

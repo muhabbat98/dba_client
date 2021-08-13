@@ -8,7 +8,7 @@ import Login from '../../components/login';
 const Main = () => {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Content />
       <Footer />
       <>

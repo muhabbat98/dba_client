@@ -23,9 +23,7 @@ interface PersonalHeaderLeftSideProps {
 const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({
   personalInfo,
 }) => {
-
   const [width, height] = useWindowSize();
-  console.log('width=>', width);
 
   return (
     <PersonalHeaderLeft>
@@ -46,14 +44,12 @@ const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({
         <PersonalNameEmail>
           {!isEmptyObj(personalInfo) && personalInfo.email}
         </PersonalNameEmail>
-        {
-          width >= 768 ? (
-            <PersonalVerified>
-              <Verified />
-              <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
-            </PersonalVerified>
-          ) : null
-        }
+        {width >= 768 ? (
+          <PersonalVerified>
+            <Verified />
+            <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
+          </PersonalVerified>
+        ) : null}
       </PersonalNameWrapper>
     </PersonalHeaderLeft>
   );
