@@ -11,7 +11,6 @@ import {
   ItemText,
 } from './style';
 
-
 const AddProduct = () => {
   const { checkError } = useError();
 

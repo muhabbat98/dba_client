@@ -20,11 +20,13 @@ import {
   AddProductModalMenuItem,
   ProductOrder,
   ProductName,
+  AddProductScroll,
 } from './style';
 
 import { ReactComponent as Back } from '../../../assets/icons/add-product-arrow-back.svg';
 import { ReactComponent as Close } from '../../../assets/icons/ic_close.svg';
 import { ReactComponent as ListIcon } from '../../../assets/icons/ic_tv.svg';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 
 interface AddProductModalProps {
   itemId?: any;
@@ -34,6 +36,7 @@ interface AddProductModalProps {
 const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const { checkError } = useError();
   const { push } = useHistory();
+  const [width] = useWindowSize();
 
   const [menu, setMenu] = useState<any>(null);
   const [prevIds, setPrevIds] = useState<any>([]);
@@ -48,6 +51,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const getChildMenuItem = async (ids?: string, reFetch?: boolean) => {
     setLoading(true);
     let idd = ids || itemId;
+
     try {
       const response = await axios.get('catalog?parentId=' + idd);
       const data = await response.data;
@@ -115,34 +119,40 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
                 <ProductTitle>Электроника</ProductTitle>
               </AddProductModalTopLeft>
 
-              <AddProductModalTopRight>
-                <Button>Добавить товар в эту категорию</Button>
-              </AddProductModalTopRight>
+              {width >= 768 ? (
+                <AddProductModalTopRight>
+                  <Button>Добавить товар в эту категорию</Button>
+                </AddProductModalTopRight>
+              ) : null}
             </AddProductModalTop>
 
             <AddProductBreadcrumb>
               Мобильные телефоны и аксессуары
             </AddProductBreadcrumb>
 
-            <AddProductModalMenu>
-              {menu &&
-                menu.map((item: any, index: number) => (
-                  <AddProductModalMenuItem
-                    key={item.id}
-                    onClick={() => setItemId(item.id)}
-                  >
-                    <ProductOrder>{index + 1}</ProductOrder>
-                    <ProductName>{item.name}</ProductName>
-                  </AddProductModalMenuItem>
-                ))}
-            </AddProductModalMenu>
+            {width < 768 ? (
+              <AddProductModalTopRight>
+                <Button>Добавить товар в эту категорию</Button>
+              </AddProductModalTopRight>
+            ) : null}
+
+            <AddProductScroll>
+              <AddProductModalMenu>
+                {menu &&
+                  menu.map((item: any, index: number) => (
+                    <AddProductModalMenuItem
+                      key={item.id}
+                      onClick={() => setItemId(item.id)}
+                    >
+                      <ProductOrder>{index + 1}</ProductOrder>
+                      <ProductName>{item.name}</ProductName>
+                    </AddProductModalMenuItem>
+                  ))}
+              </AddProductModalMenu>
+            </AddProductScroll>
           </>
         )}
       </AddProductModalContainer>
-
-      {/* {
-        (menu && menu.length > 0) && 
-      } */}
     </>
   );
 };

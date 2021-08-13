@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import moment from 'moment';
 
 import PersonalInfoEdit from './personal-info-edit';
-import { axios, useActionCreators } from '../../../hooks';
-import { AlertPosition } from '../../../utils/alert-position-enum';
+import { axios, useError } from '../../../hooks';
 import PersonalHeaderLeftSide from './personal-header-left';
 
 import {
@@ -23,12 +22,12 @@ import { ReactComponent as Edit } from '../../../assets/icons/edit.svg';
 import CircleLoader from '../../../components/circle-loader';
 
 const PersonalInfo = () => {
+  const { checkError } = useError();
+
   const [state, setState] = useState(false);
   const [personalInfo, setPersonalInfo] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const [docType, setDocType] = useState<any>('');
-
-  const { setAlertMessage } = useActionCreators();
 
   useEffect(() => {
     getPersonalInfo('60cb25a8fdf13d0065176014');
@@ -55,19 +54,7 @@ const PersonalInfo = () => {
       setDocTypeHandler(data.typeOfIdentityDocumentOfSupervisor);
       setPersonalInfo(data);
     } catch (error) {
-      if (error.debugMessage) {
-        setAlertMessage({
-          message: error.debugMessage,
-          type: 'error',
-          position: AlertPosition.TOP_CENTER,
-        });
-      } else {
-        setAlertMessage({
-          message: error.message,
-          type: 'error',
-          position: AlertPosition.TOP_CENTER,
-        });
-      }
+      checkError(error);
     }
   };
 

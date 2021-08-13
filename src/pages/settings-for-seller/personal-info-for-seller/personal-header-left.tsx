@@ -14,6 +14,7 @@ import {
 
 import Avatar from '../../../assets/images/personal-info-avatar.png';
 import { ReactComponent as Verified } from '../../../assets/icons/verified.svg';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 
 interface PersonalHeaderLeftSideProps {
   personalInfo?: any;
@@ -22,6 +23,7 @@ interface PersonalHeaderLeftSideProps {
 const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({
   personalInfo,
 }) => {
+  const [width, height] = useWindowSize();
 
   return (
     <PersonalHeaderLeft>
@@ -41,10 +43,12 @@ const PersonalHeaderLeftSide: FC<PersonalHeaderLeftSideProps> = ({
         <PersonalNameEmail>
           {!isEmptyObj(personalInfo) && personalInfo.email}
         </PersonalNameEmail>
-        <PersonalVerified>
-          <Verified />
-          <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
-        </PersonalVerified>
+        {width >= 768 ? (
+          <PersonalVerified>
+            <Verified />
+            <PersonalVerifiedToggle>Зарегистрирован</PersonalVerifiedToggle>
+          </PersonalVerified>
+        ) : null}
       </PersonalNameWrapper>
     </PersonalHeaderLeft>
   );

@@ -187,15 +187,19 @@ export const data = [
 
 const Homepage = () => {
   const [width, height] = useWindowSize();
+
   return (
     <div>
       <Banner />
-      <Cont>
-        <Container>
-          <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-          <Slider data={data} />
-        </Container>
-      </Cont>
+      {width > 768 ? (
+        <Cont>
+          <Container>
+            <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
+            <Slider data={data} />
+          </Container>
+        </Cont>
+      ) : null}
+
       {width > 768 ? (
         <PopularProducts
           leftTitle="Акции"

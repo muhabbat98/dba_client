@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface Props {
   isEdit?: boolean;
@@ -11,8 +11,13 @@ export const PersonalInfoContainer = styled.div<Props>`
   border-radius: 16px;
   padding: 40px 40px 0 40px;
   position: relative;
-  height: ${({isLoading}) => isLoading ? "400px" : "auto"};
-  overflow: ${({isLoading}) => isLoading ? "hidden" : "auto"};
+  height: ${({ isLoading }) => (isLoading ? '400px' : 'auto')};
+  overflow: ${({ isLoading }) => (isLoading ? 'hidden' : 'auto')};
+
+  @media (max-width: 768px) {
+    border: none;
+    padding: 0;
+  }
 `;
 
 export const PersonalHeader = styled.div`
@@ -21,6 +26,11 @@ export const PersonalHeader = styled.div`
   align-items: center;
   padding-bottom: 25px;
   border-bottom: 1px solid ${({ theme }) => theme.grey4};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const PersonalHeaderLeft = styled.div`
@@ -28,7 +38,12 @@ export const PersonalHeaderLeft = styled.div`
   align-items: center;
 `;
 
-export const PersonalHeaderRight = styled.div``;
+export const PersonalHeaderRight = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 16px;
+  }
+`;
 
 export const PersonalAvatar = styled.div`
   margin-right: 32px;
@@ -38,8 +53,14 @@ export const PersonalAvatar = styled.div`
   position: relative;
   /* overflow: hidden; */
 
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+  }
+
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -49,7 +70,13 @@ export const PersonalAvatar = styled.div`
   }
 `;
 
-export const PersonalEditImageOther = styled.div``;
+export const PersonalEditImageOther = styled.div`
+  & > svg {
+    @media (max-width: 768px) {
+      width: 20px;
+    }
+  }
+`;
 
 export const PersonalAvatarEdit = styled.div<Props>`
   margin-right: 32px;
@@ -58,6 +85,11 @@ export const PersonalAvatarEdit = styled.div<Props>`
   height: 120px;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
 
   & > input {
     position: absolute;
@@ -100,14 +132,14 @@ export const PersonalAvatarEdit = styled.div<Props>`
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: ${({ isAvatar }) =>
-      isAvatar ? "transparent" : "rgba(0, 0, 0, 0.6)"};
+      isAvatar ? 'transparent' : 'rgba(0, 0, 0, 0.6)'};
   }
 `;
 
@@ -117,6 +149,11 @@ export const PersonalAvatarImg = styled.img`
   object-fit: cover;
   display: block;
   border-radius: 50%;
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export const PersonalNameWrapper = styled.div`
@@ -133,6 +170,12 @@ export const PersonalName = styled.h3`
   /* max-width: 120px;
   width: 100%; */
   word-break: break-all;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 4px;
+  }
 `;
 export const PersonalNameEmail = styled.span`
   font-family: Manrope;
@@ -163,6 +206,11 @@ export const ChangeProfileButton = styled.button`
   line-height: 18px;
   transition: all 0.2s ease;
 
+  @media (max-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &:hover {
     background: #f4f6f9;
   }
@@ -182,6 +230,10 @@ export const PersonalBodyGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const PersonalBodyLabel = styled.span`
@@ -204,7 +256,7 @@ export const PersonalBodyName = styled.div`
 `;
 
 export const PersonalBodyFlex = styled.div<Props>`
-  margin-bottom: ${({ isEdit }) => (isEdit ? "12px" : "40px")};
+  margin-bottom: ${({ isEdit }) => (isEdit ? '12px' : '40px')};
 `;
 
 export const PersonalEditImage = styled.div<Props>`
@@ -217,7 +269,13 @@ export const PersonalEditImage = styled.div<Props>`
   &:hover {
     background-color: red;
     transform: ${({ isAvatar }) =>
-      isAvatar ? "translateY(0)" : "translateY(-50%)"};
+      isAvatar ? 'translateY(0)' : 'translateY(-50%)'};
+  }
+
+  & > svg {
+    @media (max-width: 768px) {
+      width: 20px;
+    }
   }
 `;
 
@@ -235,7 +293,7 @@ export const PersonalVerifiedToggle = styled.div`
   transition: all 0.25s ease;
 
   &::after {
-    content: "";
+    content: '';
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
@@ -251,7 +309,7 @@ export const PersonalVerified = styled.div`
   position: absolute;
   top: 0;
   right: -200px;
-  
+
   & > svg:hover {
     & + ${PersonalVerifiedToggle} {
       opacity: 1;
