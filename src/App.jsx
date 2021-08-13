@@ -5,6 +5,10 @@ import Login from './Components/Login'
 import Dashboard from './Components/Dashboard/index'
 import { Route, Switch } from 'react-router-dom'
 import Foriegn from './Components/Foriegn';
+import Science from './Components/Science';
+import Journal from './Components/Journal';
+
+
 function App() {
 	return (<>
 		<Menyu />
@@ -13,6 +17,9 @@ function App() {
 			<Route path='/login' exact> <Login />  </Route>
 			<Route path='/dashboard'> <Dashboard /> </Route>
 			<Route path='/foriegn'> <Foriegn /> </Route>
+			<Route path='/science'> <Science /> </Route>
+			<Route path='/journals'> <Journal /> </Route>
+
 
 		</Switch>
 	</>

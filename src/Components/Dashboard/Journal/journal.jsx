@@ -8,13 +8,18 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { IMAGEROUTE, BOOKROUTE } from '../../../settings/url.js'
-import {  CREATE_JOURNAL_TYPE } from '../../../Graphql/Mutation/'
-import Journal from'./journal'
+import { CREATE_JOURNAL } from '../../../Graphql/Mutation/'
 import { JOURNAL_NAME } from '../../../Graphql/Query'
 
+
+
+
 const useStyles = makeStyles((theme) => ({
+    journal_top:{
+        marginTop:'3rem',
+    },
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
@@ -25,16 +30,19 @@ const useStyles = makeStyles((theme) => ({
 export default function Sience() {
     const classes = useStyles()
     const [open, setOpen] = useState(false);
-    const [createJournal, { data, loading, error }] = useMutation( CREATE_JOURNAL_TYPE,{
-        refetchQueries:[{query:JOURNAL_NAME}]
-    })
+    const {data:journalNames, loading:journalWaiting, error:journalError} = useQuery(JOURNAL_NAME)
+    const [createJournal, { data, loading, error }] = useMutation( CREATE_JOURNAL)
 
     const [enterence, setEnterence] = useState({
         title: '',
         keyword: '',
         resourceType: 1,
-        imageId: null,       
-        language: ''
+        imageId: '',
+        fileId: '',
+        language: '',
+        date: '',
+        serialNumber:1,
+        year:1,
     })
     const imgUpload = useRef()
     const bookUpload = useRef()
@@ -58,12 +66,16 @@ export default function Sience() {
             createJournal({
                 variables:{
                     name: enterence.title,
+                    serialNumber: enterence.serialNumber,
+                    year:enterence.year,
+                    fileId:enterence.fileId,
                     coverId: enterence.imageId,
                     language:enterence.language,
                     keywords:enterence.keyword,
-                    resourceType:enterence.resourceType
+                    resourceType:enterence.resourceType,
+                    date:enterence.date
                 },
-                refetchQueries: ["journals"],
+                refetchQueries: ["journal"],
             })
           
         }
@@ -115,6 +127,7 @@ export default function Sience() {
             }
         }
     }
+    console.log(journalNames)
     return (<>
         {
             loading ?
@@ -123,8 +136,8 @@ export default function Sience() {
                 </Backdrop> :
                 <></>
         }
-        <Typography variant="h3" color='primary' gutterBottom>
-           Create Journal General Type
+        <Typography className={classes.journal_top} variant="h3" color='primary' gutterBottom>
+           Create Journal 
         </Typography>
 
         <Snackbar
@@ -149,34 +162,37 @@ export default function Sience() {
         />
         <div className="container science-input">
             <div className="input-element">
-                <label>Title</label>
-                <input type='text' required onKeyUp={(e) => setEnterence({ ...enterence, title: e.target.value })} placeholder="title" required />
+                <label>JOURNAL NAME</label>
+                    {
+                        journalNames&&journalNames.journals ?
+                            <select className="journal_names_select">
+                               { journalNames.journals.map((element, index)=><option key={index}>{element.name}</option>)}
+                            </select>:
+                            <></>
+                    }
+                   
+
             </div>
             <div className="input-element">
-                <label>Keyword</label>
-                <input type='text' onKeyUp={(e) => setEnterence({ ...enterence, keyword: e.target.value })} placeholder="keyword" />
+                <label>Serial Number</label>
+                <input type='number' onKeyUp={(e) => setEnterence({ ...enterence, serialNumber: parseInt(e.target.value) })} placeholder="serial Number" required />
             </div>
-            
-            <div className="input-element science-checkbox">
-                <select name="resource_type" onChange={(e) => setEnterence({ ...enterence, resourceType: parseInt(e.target.value) })}>
-                    <option value="1">Digital</option>
-                    <option value="2">Printed</option>
-                    <option value="3">Digital & Printed</option>
-                </select>
+            <div className="input-element">
+                <label>Year</label>
+                <input type='number' onKeyUp={(e) => setEnterence({ ...enterence, year: parseInt(e.target.value) })} placeholder="year" required />
+            </div>          
+            <div className="input-element">
+                <label>upload full text </label>
+                <input type="file" onChange={sendBook} ref={bookUpload} />
             </div>
 
             <div className="input-element">
-                <label>upload cover image </label>
-                <input type="file" onChange={sendImage} ref={imgUpload} accept="image/*" />
-            </div>
-
-            <div className="input-element">
-                <label>Language</label>
-                <input type='text' onKeyUp={(e) => setEnterence({ ...enterence, language: e.target.value })} placeholder="language" />
+                <label>date</label>
+                <input type='date' onKeyUp={(e) => setEnterence({ ...enterence, date: e.target.value })} placeholder="date" />
             </div>
             <button className="science-submit" onClick={sendScience}>Submit</button>
         </div>
 
-        <Journal/>
+
     </>)
 }

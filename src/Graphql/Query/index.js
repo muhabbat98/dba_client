@@ -5,19 +5,59 @@ export const USER = gql`
         users(userId: $userId)
     }
 `
+export const JOURNAL_NAME = gql`
+    {
+        journals{
+            id
+            name
+            cover{
+                coverId
+                filename
+                mimetype
+            }
+            resourceType
+        }
+    }
+`
+
+export const JOURNALS = gql`
+    query{
+        journals{
+            id
+            file{
+                fileId
+                filename
+                mimetype
+            }
+            cover{
+                coverId
+                filename
+                mimetype
+            }
+            name
+            keywords  	
+            resourceType
+            language
+            serialNumber
+            year
+            date    
+        }
+    }
+
+`
 export const SCIENCE_BOOKS = gql`
     query {
-        scienceBooks {
-            bookId
+        sciences {
+            id
             cover {
-            coverId
-            filename
-            mimetype
+                coverId
+                filename
+                mimetype
             }
             file {
-            filename
-            fileId
-            mimetype
+                filename
+                fileId
+                mimetype
             }
             name
             author
@@ -26,7 +66,7 @@ export const SCIENCE_BOOKS = gql`
             resourceType
             degree
             language
-            data
+            date
         }
     }
 
@@ -34,18 +74,18 @@ export const SCIENCE_BOOKS = gql`
 export const FORIEGN_BOOKS = gql`
     query {
         foriegnBooks {
-            bookId
+            id
             file {
-            fileId
-            filename
-            mimetype
-            size
+                fileId
+                filename
+                mimetype
+                size
             }
             cover {
-            coverId
-            filename
-            mimetype
-            size
+                coverId
+                filename
+                mimetype
+                size
             }
             name
             author
@@ -53,9 +93,9 @@ export const FORIEGN_BOOKS = gql`
             description
             resourceType
             language
-            data
+            date
             resourseHolder
         }
-        }
+    }
 
 `

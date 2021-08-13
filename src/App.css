@@ -281,7 +281,6 @@ code {
     margin: 1rem 0px;
     display: flex;
     align-items:center;
-    margin-right: 1rem
 }
 .science-input>div input{
     background-color: transparent;
@@ -291,9 +290,10 @@ code {
     border-radius: 8px;
     padding: 0.5rem;
     font-size: 16px;
-    margin-left: 0.5rem;
+    margin:0px 0.5rem;
 }
 .science-input>div label{
+  text-align: left;
   font-size: 16px;
   color:var(--main-text-color);
   font-weight: 700;
@@ -330,4 +330,16 @@ code {
 .science-submit:hover{
   color:var(--secondary-text-color) ;
   background-color: var(--main-text-color) ;
+}
+.journal_names_select{
+  margin: 0px 1rem;
+  background-color: transparent;
+  outline: none;
+  background-color: transparent;
+  font-size: 16px;
+  border: none;
+  color:var(--main-text-color);
+  border: 1px solid var(--secondary-text-color);
+  border-radius: 8px;
+  padding: 8px;
 }

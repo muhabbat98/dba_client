@@ -5,8 +5,28 @@ export const GET_TOKEN = gql`
     isUser(useInfo:{username: $username, password: $password, isAdmin: $isAdmin})
   }
 `;
+export const CREATE_JOURNAL_TYPE = gql`
+  mutation CreateJournalType(
+	$coverId: Int
+	$name: String!
+	$keywords: String
+	$resourceType: Int
+	$language: String
+	) {
+	createJournalType(
+		input: {
+		coverId: $coverId
+		name: $name
+		keywords: $keywords
+		resourceType: $resourceType
+		language: $language
+		}
+	)
+	}
+
+`;
 export const CREATE_JOURNAL = gql`
-  mutation CreateJournals(
+	mutation CreateJournals(
 		$name: String!
 		$language: String
 		$year: Int!
@@ -16,8 +36,9 @@ export const CREATE_JOURNAL = gql`
 		$keywords:String
 		$resourceType:Int
 		$date:String
+  
 		) {
-	createJournal(
+		createJournal(
 			input: {
 			name: $name
 			language: $language
@@ -28,11 +49,13 @@ export const CREATE_JOURNAL = gql`
 			keywords:$keywords
 			resourceType:$resourceType
 			date:$date
+        
 			}
 		)
-		}
-
+	}
 `;
+
+
 export const CREATE_SCIENCE_BOOK = gql`
 	mutation CreateScienceBook(
 		$fileId: Int
@@ -45,6 +68,7 @@ export const CREATE_SCIENCE_BOOK = gql`
 		$description:String
 		$resourceType:Int
 		$date:String
+
 	) {
 		createScience(
 			input: {
