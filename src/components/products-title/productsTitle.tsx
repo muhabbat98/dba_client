@@ -3,11 +3,12 @@ import {Title} from './style'
 
 interface Title{
     title?:string,
-    style?: any
+    style?: any;
+    fSize?:any;
 }
-const ProductsTitle:React.FC<Title> = ({title, style}) =>{
+const ProductsTitle:React.FC<Title> = ({title, style,fSize}) =>{
     return(
-        <Title style={style}>{title}</Title>
+        <Title style={style} fSize={fSize}>{title}</Title>
     );
 }
 export default ProductsTitle;

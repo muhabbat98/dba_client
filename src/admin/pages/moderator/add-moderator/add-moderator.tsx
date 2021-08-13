@@ -12,7 +12,7 @@ import { axios } from '../../../../hooks';
 interface Propses {
       setClose:any;
       reff?:any;
-      addModeratorItem?:any
+      addModeratorItem?:any;
 }
 
 const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
@@ -43,18 +43,17 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
         console.log("data=>  ", imgState);
 
         const formData = new FormData();
-        formData.append("file", imgState);
+
 
         if (data.password == data.confirmPassword) {
             setClose(false);
-            addModeratorItem({
-                firstName:data.firstName,
-                secondName:data.secondName,
-                phoneNumber:data.phoneNumber,
-                password:data.confirmPassword,
-                categoryIds:selectList,
-                image:formData
-            })
+            formData.append("image", imgState);
+            formData.append("firstName", data.firstName);
+            formData.append("secondName", data.secondName);
+            formData.append("phoneNumber", data.phoneNumber);
+            formData.append("password", data.confirmPassword);
+            formData.append("categoryIds", selectList);
+            addModeratorItem(formData)
         } else {
             setErrPassword(true);
             console.log("password error")
@@ -66,19 +65,13 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
         let imgFile = ev.target.files[0];
         setImgState(imgFile);
 
-
         const fileExt = imgFile.name.toLowerCase().split('.').pop();
-
         let reader = new FileReader();
         reader.onload = function () {
             setAvatar(reader.result);
         };
         reader.readAsDataURL(imgFile);
 
-        // const formData = new FormData();
-        // formData.append("file", imgFile, imgFile.name);
-        // formData.append("upload_preset", 'darwin');
-        // setImgState(formData);
     }
 
     const ref = useRef<any>()
@@ -125,14 +118,11 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
                                         name="firstName"
                                         placeholder="Имя"
                                         label="Имя"
-                                        // value={state.firstName}
-                                        // defVal={state.firstName}
                                         inputType="letter"
                                         watch={watch("firstName")}
                                         error={errors.firstName}
                                         register={register}
                                         setValue={setValue}
-                                        // style={{width:"100%"}}
                                     />
                                 </div>
                                 <div style={{flex:1}}>

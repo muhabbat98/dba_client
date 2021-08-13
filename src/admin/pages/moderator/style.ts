@@ -37,6 +37,7 @@ export const HeadBox = styled.div`
 `;
 export const CardContainer = styled.div`
       display: flex;
+      justify-content: flex-start;
       justify-content: space-between;
       flex-wrap: wrap;
       margin-top:24px;

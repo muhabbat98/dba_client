@@ -3,13 +3,17 @@ import {ReactComponent as PlusIcon} from '../../assets/icons/vector-plus.svg'
 import {axios,useActionCreators,useSelector, useError} from '../../../hooks'
 import ModeratorCard from '../../components/moderator-card'
 import AddModerator from './add-moderator';
+import EditModerator from './edit-moderator';
 import {Container,HeadBox,CardContainer,Pagenition} from './style'
 import { AlertPosition } from '../../../utils/alert-position-enum';
 
 const Moderator = () => {
       const [openModal,setOpenModal] = useState<boolean>(false);
-      const [moderatot,setModerator] = useState<any>([])
+      const [moderator,setModerator] = useState<any>([])
+      const [openEditModal,setOpenEditModal] =useState<any>(false);
+      const [userItem,setUserItem] = useState();
       const ref = useRef<any>();
+      const ref2 = useRef<any>();
       const { setAlertMessage } = useActionCreators();
       const {checkError} = useError();
       useEffect(() => {
@@ -23,20 +27,38 @@ const Moderator = () => {
               document.removeEventListener("mousedown", checkIfClickedOutside)
           }
       }, [openModal]);
+      useEffect(() => {
+          const checkIfClickedOutside = (e: any) => {
+              if (openEditModal && ref2.current && !ref2.current.contains(e.target)) {
+                  setOpenEditModal(false)
+              }
+          }
+          document.addEventListener("mousedown", checkIfClickedOutside)
+          return () => {
+              document.removeEventListener("mousedown", checkIfClickedOutside)
+          }
+      }, [openEditModal]);
 
       // ---->API Colls
 
       useEffect(()=>{
           getModerator();
-      })
+      },[])
 
       const addModeratorItem = (data:any) => {
           addModerator(data);
       }
+      const editModeratorItem = (data:any) => {
+          editModerator(data);
+      }
+      const refreshModerator = (action:boolean) => {
+        getModerator()
+     }
       const getModerator = async () =>{
           try{
               const res = await axios.get("/moderator");
-              console.log('moderators-->',res.data);
+              setModerator(res.data.reverse())
+              console.log('moderatorsss-->',res.data);
           } catch (error) {
               checkError(error);
           }
@@ -45,11 +67,21 @@ const Moderator = () => {
           console.log("getAddItems => ", getAddItems);
           try{
               const response = await axios.post('/moderator',getAddItems)
-              console.log('response-->',response);
+              refreshModerator(true);
+              // console.log('response-->',response);
           } catch(error) {
               checkError(error);
           }
-    }
+      }
+      const editModerator = async ( data:any ) => {
+          try{
+              const response = await axios.put('/moderator',data);
+              refreshModerator(true);
+          }
+          catch(error) {
+            checkError(error);
+         }
+      }
 
       return (
       <>
@@ -59,14 +91,16 @@ const Moderator = () => {
                         <button onClick={()=>setOpenModal(open=>!open)}><PlusIcon/>Добавить модератора</button>
                   </HeadBox>
                   <CardContainer>
-                        <ModeratorCard/>
-                        <ModeratorCard/>
-                        <ModeratorCard/>
-                        <ModeratorCard/>
-                        <ModeratorCard/>
-                        <ModeratorCard/>
-                        <ModeratorCard/>
-                        <ModeratorCard/>
+                        {moderator.map((item:any)=>(
+                            <ModeratorCard
+                                key={item.id}
+                                item={item}
+                                refreshModerator={refreshModerator}
+                                setUserItem={setUserItem}
+                                setOpenModal={setOpenEditModal}
+
+                            />
+                        ))}
                   </CardContainer>
                   <Pagenition>
                         <p>Показано 1-15 из 40 товаров</p>
@@ -78,6 +112,14 @@ const Moderator = () => {
                   </Pagenition>
                   
             </Container>
+            {openEditModal &&
+                <EditModerator
+                  editModeratorItem={editModeratorItem}
+                  reff={ref2}
+                  setClose={setOpenEditModal}
+                  userItem={userItem}
+                />
+            }
             {openModal&&
                 <AddModerator
                   reff={ref}
