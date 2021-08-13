@@ -48,7 +48,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
 
         if (data.password == data.confirmPassword) {
             setClose(false);
-            formData.append("image", imgState);
+            formData.append("image", imgState?imgState:null);
             formData.append("firstName", data.firstName);
             formData.append("secondName", data.secondName);
             formData.append("phoneNumber", data.phoneNumber);
@@ -102,12 +102,12 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
         }
 
     }
-    const selectImage = () => {
-        // avatar
-        // ImgUpload
-        if(userItem.binaryImg){
-            return userItem.binaryImg
-        }
+    const selectImage:any = () => {
+        if(avatar){
+            return <img src={avatar} alt='avatar'/>
+        }else if(userItem.binaryImg){
+            return  <img src={userItem.binaryImg} alt='avatar'/>
+        }else{ return <img src={ImgUpload} alt='avatar'/> }
     }
     return(
         <ModalContainer>
@@ -115,7 +115,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
                 <Title>Изменить модератор </Title>
                 {/*{userItem.firstName}*/}
                 <UploadImg >
-                    <img src={userItem.binaryImg}/>
+                    {selectImage()}
                     <input
                         ref={fileRef}
                         type="file"

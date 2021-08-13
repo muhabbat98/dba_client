@@ -47,7 +47,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
 
         if (data.password == data.confirmPassword) {
             setClose(false);
-            formData.append("image", imgState);
+            formData.append("image", imgState?imgState:null);
             formData.append("firstName", data.firstName);
             formData.append("secondName", data.secondName);
             formData.append("phoneNumber", data.phoneNumber);
@@ -104,7 +104,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
                   <AddContainer ref={reff}>
                         <Title>Добавить модератор </Title>
                         <UploadImg  >
-                              <img src={avatar?avatar:ImgUpload}/>
+                              <img src={avatar?avatar:ImgUpload} alt='avatar'/>
                               <input
                                     ref={fileRef}
                                     type="file"
