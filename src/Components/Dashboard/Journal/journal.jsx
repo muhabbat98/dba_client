@@ -130,7 +130,7 @@ export default function Sience() {
     console.log(journalNames)
     return (<>
         {
-            loading ?
+            loading||journalWaiting ?
                 <Backdrop open={true} className={classes.backdrop} >
                     <CircularProgress color="inherit" />
                 </Backdrop> :
@@ -165,8 +165,8 @@ export default function Sience() {
                 <label>JOURNAL NAME</label>
                     {
                         journalNames&&journalNames.journals ?
-                            <select className="journal_names_select">
-                               { journalNames.journals.map((element, index)=><option key={index}>{element.name}</option>)}
+                            <select  className="journal_names_select">
+                               { journalNames.journals.map((element, index)=><option value={element.id} key={index}>{element.name}</option>)}
                             </select>:
                             <></>
                     }

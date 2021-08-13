@@ -21,7 +21,17 @@ export const CREATE_JOURNAL_TYPE = gql`
 		resourceType: $resourceType
 		language: $language
 		}
-	)
+	){
+		id
+		cover{
+			filename
+			mimetype
+		}
+		name
+		keywords
+		resourceType
+		language
+	}
 	}
 
 `;

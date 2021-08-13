@@ -63,7 +63,6 @@ export default function Sience() {
                     keywords:enterence.keyword,
                     resourceType:enterence.resourceType
                 },
-                refetchQueries: ["journals"],
             })
           
         }
@@ -124,7 +123,7 @@ export default function Sience() {
                 <></>
         }
         <Typography variant="h3" color='primary' gutterBottom>
-           Create Journal General Type
+            Create Journal General Type
         </Typography>
 
         <Snackbar
@@ -135,7 +134,7 @@ export default function Sience() {
             open={open}
             autoHideDuration={6000}
             onClose={handleClose}
-            message={data && data.createJournalType&&data.createJournalType.message}
+            message={data && data.createJournalType&&data.createJournalType.name}
             action={
                 <React.Fragment>
                     <Button color="secondary" size="small" onClick={handleClose}>
