@@ -96,6 +96,7 @@ const References = () => {
           onClose={closeModal}
           data={editModal}
           fetchReferenceItems={fetchReferenceItems}
+          currentReference={currentReference}
         />
       )}
 

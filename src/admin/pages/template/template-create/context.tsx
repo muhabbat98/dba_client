@@ -4,28 +4,42 @@ enum ActionType {
   ADD_FIELD,
   ADD_PRODUCT,
   ADD_REFERENCE,
+  TOGGLE_VIEW,
+}
+
+export enum ViewType {
+  TEMPLATE_VIEW = 'TEMPLATE_VIEW',
+  TEMPLATE_BUILDER = 'TEMPLATE_BUILDER',
 }
 
 interface AddField {
   type: ActionType.ADD_FIELD;
   payload: any;
 }
+
 interface AddProduct {
   type: ActionType.ADD_PRODUCT;
   payload: any;
 }
+
 interface AddReference {
   type: ActionType.ADD_REFERENCE;
   payload: any;
+}
+
+interface ToggleView {
+  type: ActionType.TOGGLE_VIEW;
+  payload: ViewType;
 }
 
 interface State {
   fields: any[];
   products: any[];
   reference: any[];
+  viewType: ViewType;
 }
 
-type Action = AddField | AddProduct | AddReference;
+type Action = AddField | AddProduct | AddReference | ToggleView;
 
 type Dispatch = (action: Action) => void;
 
@@ -38,6 +52,7 @@ const defaultState: State = {
   fields: [],
   products: [],
   reference: [],
+  viewType: ViewType.TEMPLATE_BUILDER,
 };
 
 const defaultValue: TemplateCreateContextType = {
@@ -68,6 +83,8 @@ const reducer = (state: State, action: Action): State => {
       return addReference(state, action);
     case ActionType.ADD_PRODUCT:
       return addProduct(state, action);
+    case ActionType.TOGGLE_VIEW:
+      return { ...state, viewType: action.payload };
     default:
       return state;
   }
@@ -88,11 +105,27 @@ export const useTemplateCreate = () => {
     dispatch({ type: ActionType.ADD_REFERENCE, payload: reference });
   };
 
+  const setBuilder = () => {
+    dispatch({
+      type: ActionType.TOGGLE_VIEW,
+      payload: ViewType.TEMPLATE_BUILDER,
+    });
+  };
+
+  const setView = () => {
+    dispatch({
+      type: ActionType.TOGGLE_VIEW,
+      payload: ViewType.TEMPLATE_VIEW,
+    });
+  };
+
   return {
     state,
     addProduct,
     addField,
     addReference,
+    setBuilder,
+    setView,
   };
 };
 

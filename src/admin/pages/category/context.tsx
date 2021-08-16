@@ -7,6 +7,7 @@ enum ActionType {
 
 interface OpenAddModal {
   type: ActionType.OPEN_ADD_MODAL;
+  payload: any;
 }
 
 interface CloseAddModal {
@@ -15,6 +16,8 @@ interface CloseAddModal {
 
 interface State {
   open: boolean;
+  id: string | null;
+  callback: any;
 }
 
 type Action = OpenAddModal | CloseAddModal;
@@ -28,6 +31,8 @@ interface CategoryContextType {
 
 const defaultState: State = {
   open: false,
+  id: null,
+  callback: null,
 };
 
 const defaultValue: CategoryContextType = {
@@ -52,9 +57,13 @@ export const CategoryProvider: React.FC = ({ children }) => {
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case ActionType.OPEN_ADD_MODAL:
-      return { open: true };
+      return {
+        open: true,
+        id: action.payload.id,
+        callback: action.payload.callback,
+      };
     case ActionType.CLOSE_ADD_MODAL:
-      return { open: false };
+      return { open: false, id: null, callback: null };
     default:
       return state;
   }
@@ -63,8 +72,8 @@ const reducer = (state: State, action: Action): State => {
 export const useCategory = () => {
   const { state, dispatch } = useContext(CategoryContext);
 
-  const openModal = () => {
-    dispatch({ type: ActionType.OPEN_ADD_MODAL });
+  const openModal = (payload: any) => {
+    dispatch({ type: ActionType.OPEN_ADD_MODAL, payload: payload });
   };
 
   const closeModal = () => {

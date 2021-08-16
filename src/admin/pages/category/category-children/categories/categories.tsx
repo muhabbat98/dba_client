@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { ReactComponent as TemplateIcon } from './template.svg';
+import { ReactComponent as GoodsIcon } from './goods.svg';
+import { ReactComponent as HamburgerIcon } from './hamburger.svg';
 import {
   CategoriesContainer,
   CategoryRowHeader,
@@ -14,6 +17,9 @@ import {
   Template,
   Box,
   BoxContainer,
+  Icon,
+  BoxIconContainer,
+  Title,
 } from './style';
 
 import CategoryRow from './category-row';
@@ -53,7 +59,8 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
   return (
     <CategoriesContainer>
       {/*<AddCategory />*/}
-      <CategoryHeader />
+
+      {menus.length !== 0 && <CategoryHeader />}
       {/*{image && (*/}
       {/*  <img*/}
       {/*    src={`data:${image.contentType};base64,${image.body}`}*/}
@@ -79,9 +86,31 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
       )}
       {menus.length === 0 ? (
         <BoxContainer>
-          <Box onClick={() => push('/admin/template/list/' + id)}>Шаблоны</Box>
-          <Box onClick={() => push('/admin/template/list/' + id)}>Товары</Box>
-          <Box>Добавить категории</Box>
+          <Box onClick={() => push('/admin/template/list/' + id)}>
+            <BoxIconContainer>
+              <Icon>
+                <TemplateIcon />
+              </Icon>
+              <Title>Шаблоны</Title>
+            </BoxIconContainer>
+          </Box>
+          <Box onClick={() => push('/admin/template/list/' + id)}>
+            <BoxIconContainer>
+              <Icon>
+                <GoodsIcon />
+              </Icon>
+              <Title>Товары</Title>
+            </BoxIconContainer>
+          </Box>
+
+          <Box onClick={() => push('/admin/template/list/' + id)}>
+            <BoxIconContainer>
+              <Icon>
+                <HamburgerIcon />
+              </Icon>
+              <Title>Добавить категории</Title>
+            </BoxIconContainer>
+          </Box>
         </BoxContainer>
       ) : (
         menus.map((menu: any, index: number) => (

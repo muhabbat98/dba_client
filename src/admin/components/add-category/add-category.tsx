@@ -17,18 +17,20 @@ import {
 } from './style';
 import { useCategory } from '../../pages/category/context';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { axios, useError } from '../../../hooks';
+import { setAlertMessage } from '../../../store/alert/alert-action-creators';
 
 interface FormInputs {
   name: string;
   description: string;
   icon: FileList;
-  photo: FileList;
+  image: FileList;
 }
 
 const AddCategory = () => {
   const [data, setData] = useState({
-    name: 'ewf',
-    description: 'gwegwe',
+    name: '',
+    description: '',
     icon: '',
     photo: '',
   });
@@ -36,18 +38,45 @@ const AddCategory = () => {
   const { pathname } = useLocation();
   const params = useParams();
 
+  const { checkError } = useError();
+
   console.log('www', params);
 
   console.log('isChild', params.hasOwnProperty('id'));
 
-  const { closeModal } = useCategory();
+  const {
+    closeModal,
+    state: { id },
+  } = useCategory();
 
   const { register, watch, setValue, handleSubmit, errors } =
     useForm<FormInputs>();
 
-  const onSubmit = (data: FormInputs) => {
-    const { description, name, icon, photo } = data;
+  const onSubmit = async (data: FormInputs) => {
+    const { description, name, icon, image } = data;
     console.log('data------->', data);
+
+    try {
+      let formData = new FormData();
+      formData.append('image', data.image[0]);
+      formData.append('icon', data.icon[0]);
+      formData.append('name', data.name);
+      formData.append('description', data.description);
+      formData.append('parentId', !id ? '' : id);
+
+      console.log('formData -- ', formData);
+      const response = await axios.post('/category/add', formData);
+      const d = await response.data;
+
+      setAlertMessage({
+        message: d.message,
+        type: 'success',
+      });
+
+      closeModal();
+    } catch (e) {
+      checkError(e);
+    }
   };
 
   return (
@@ -63,8 +92,8 @@ const AddCategory = () => {
             register={register}
             icon={photoIcon}
             title="Фото"
-            imageProps="https://www.gravatar.com/avatar/7bda2a2eac33e696cf0978dc9d24b5f0?s=328&d=identicon&r=PG&f=1"
-            name="photo"
+            imageProps={null}
+            name="image"
           />
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <CircleImageUploader

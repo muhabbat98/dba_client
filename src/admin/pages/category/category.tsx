@@ -19,6 +19,7 @@ function CategoryWrapper() {
   const {
     state: { open },
   } = useCategory();
+
   const [form, setForm] = useState<FormType | null>(null);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ function CategoryWrapper() {
       setForm(FormType.PARENT);
     }
   }, [id]);
+
   return (
     <>
       {open && <AddCategory />}
