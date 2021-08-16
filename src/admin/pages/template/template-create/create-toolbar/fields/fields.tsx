@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FieldsContainer, AddButton, Wrapper, AddContainer } from './style';
+import {
+  FieldsContainer,
+  Result,
+  AddButton,
+  Wrapper,
+  AddContainer,
+} from './style';
 import { axios, useError } from '../../../../../../hooks';
 import { ReactComponent as Plus } from '../../../../../assets/icons/plus.svg';
 import AllField from '../../../../../../admin2/components/fields-modal/all_fields';
 import AllFields from './all-fields';
 import AddForm from './add-form';
+import { useTemplateCreate } from '../../context';
+import Field from '../../../../../../components/field';
 
 interface Props {
   active: boolean;
+  fetFields: any;
+  fields: any;
 }
 
-interface Params {
-  id: string;
-}
-const Fields: React.FC<Props> = ({ active }) => {
-  const { id } = useParams<Params>();
+const Fields: React.FC<Props> = ({ active, fields, fetFields }) => {
   const { checkError } = useError();
-  const [fields, setFields] = useState<any[]>([]);
+
+  const { state } = useTemplateCreate();
+
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     fetFields();
   }, []);
-
-  async function fetFields() {
-    try {
-      const response = await axios.get('/meta_data/all/fields/' + id);
-      const data = await response.data;
-      setFields(data);
-    } catch (e) {
-      checkError(e);
-    }
-  }
 
   function closeAddModal() {
     setOpenModal(false);
@@ -42,7 +40,6 @@ const Fields: React.FC<Props> = ({ active }) => {
     setOpenModal(true);
   }
 
-  console.log('id - ', id);
   return (
     <FieldsContainer active={active}>
       <Wrapper>
@@ -53,7 +50,14 @@ const Fields: React.FC<Props> = ({ active }) => {
             Добавить поле
           </AddButton>
         </AddContainer>
-        <AllFields fields={fields} />
+        <Wrapper>
+          <AllFields fields={fields} />
+          <Result>
+            {state.fields.map((field: any) => (
+              <Field key={field.id} field={field} />
+            ))}
+          </Result>
+        </Wrapper>
       </Wrapper>
     </FieldsContainer>
   );

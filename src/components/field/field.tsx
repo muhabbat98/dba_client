@@ -2,12 +2,13 @@ import React, { FC } from 'react';
 import Input from '../input';
 import { useForm } from 'react-hook-form';
 import Dropdown from '../drop-down';
+import SimpleInput from '../simple-input';
 
 enum FormatNames {
   STRING = 'STRING',
   NUMBER = 'NUMBER',
   DATE = 'DATE',
-  DROPDOWN = 'DROPDOWN',
+  REFERENCE = 'REFERENCE',
 }
 
 interface FieldProps {
@@ -37,14 +38,10 @@ const Field: FC<FieldProps> = ({ field }) => {
 
     case FormatNames.DATE:
       return (
-        <Input
+        <SimpleInput
           name={fieldName}
-          register={register}
           label={fieldName}
           type="date"
-          //   defVal="ada"
-          setValue={setValue}
-          watch={watch(fieldName)}
           style={{ maxWidth: '400px', marginBottom: '24px' }}
         />
       );

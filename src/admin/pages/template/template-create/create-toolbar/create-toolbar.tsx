@@ -5,20 +5,39 @@ import Products from './products';
 import Reference from './reference';
 import Checkbox from '../../../../../components/checkbox';
 import { useTemplateCreate, ViewType } from '../context';
+import { axios, useError } from '../../../../../hooks';
+import { useParams } from 'react-router-dom';
 
 enum FormType {
   FIELDS,
   PRODUCTS,
   REFERENCES,
 }
+interface Params {
+  id: string;
+}
 
 const CreateToolbar = () => {
   const [formType, setFormType] = useState<FormType>(FormType.FIELDS);
+  const { checkError } = useError();
+  const { id } = useParams<Params>();
+  const [fields, setFields] = useState<any[]>([]);
   const {
     state: { viewType },
+    toggleMain,
   } = useTemplateCreate();
 
   const setForm = (form: FormType): void => setFormType(form);
+
+  async function fetFields() {
+    try {
+      const response = await axios.get('/meta_data/all/fields/' + id);
+      const data = await response.data;
+      setFields(data);
+    } catch (e) {
+      checkError(e);
+    }
+  }
 
   return (
     <CreateToolbarContainer isActive={viewType === ViewType.TEMPLATE_BUILDER}>
@@ -43,12 +62,19 @@ const CreateToolbar = () => {
             Справочники
           </TabItem>
         </TabWrapper>
-        <Checkbox label="Основной" />
+        <Checkbox label="Основной" onChange={toggleMain} />
       </Tab>
 
-      <Fields active={formType === FormType.FIELDS} />
+      <Fields
+        active={formType === FormType.FIELDS}
+        fields={fields}
+        fetFields={fetFields}
+      />
       <Products active={formType === FormType.PRODUCTS} />
-      <Reference active={formType === FormType.REFERENCES} />
+      <Reference
+        active={formType === FormType.REFERENCES}
+        fetFields={fetFields}
+      />
     </CreateToolbarContainer>
   );
 };
