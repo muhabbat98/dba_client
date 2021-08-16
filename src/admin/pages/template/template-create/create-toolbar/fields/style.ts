@@ -35,3 +35,5 @@ export const AddContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const Result = styled.div``;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as Plus } from '../../../../../../../assets/icons/plus-btn.svg';
 import {
   ReferenceListContainer,
@@ -8,8 +8,10 @@ import {
   Header,
   Divider,
   EmptyMessage,
+  PlusContainer,
 } from './style';
 import ReferencesItemRow from '../references-item-row';
+import AddRef from './add-ref/add-ref';
 
 interface Props {
   references: any[];
@@ -18,6 +20,7 @@ interface Props {
   isParent?: boolean;
   openModal: (isAdding: boolean, row: any, isParent?: boolean) => void;
   fetchReferences: () => void;
+  fetFields?: any;
 }
 
 const ReferenceList: React.FC<Props> = ({
@@ -27,17 +30,41 @@ const ReferenceList: React.FC<Props> = ({
   isParent,
   openModal,
   fetchReferences,
+  fetFields,
 }) => {
+  const [modal, modalOpen] = useState<boolean>(false);
+
+  const open = () => modalOpen(true);
+
+  const close = () => modalOpen(false);
   return (
     <ReferenceListContainer>
+      {modal && (
+        <AddRef
+          fetFields={fetFields}
+          close={close}
+          items={references}
+          name={currentReference.name}
+        />
+      )}
       <Header>
-        <Title>{isParent ? <>Справочники</> : currentReference.name}</Title>
-        <AddButton
-          onClick={() => openModal(true, isParent ? null : currentReference)}
-        >
-          <Plus />
-          <Add>Добавить</Add>
-        </AddButton>
+        <Title>
+          {!isParent && (
+            <PlusContainer onClick={open}>
+              <Plus />
+            </PlusContainer>
+          )}
+          {isParent ? <>Справочники</> : currentReference.name}
+        </Title>
+        <>
+          <AddButton
+            onClick={() => openModal(true, isParent ? null : currentReference)}
+          >
+            <Plus />
+
+            <Add>Добавить</Add>
+          </AddButton>
+        </>
       </Header>
       <Divider />
       {references.length > 0 ? (

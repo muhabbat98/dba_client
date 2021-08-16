@@ -11,7 +11,7 @@ const Admin = lazy(() => import('./admin'));
 const Old = lazy(() => import('./admin2'));
 
 function App() {
-  console.log(1);
+  console.log(12);
 
   return (
     <div>

@@ -6,7 +6,11 @@ import ReferenceList from './reference-list';
 import CircleLoader from '../../../../../../../components/circle-loader';
 import ChangeReference from './change-reference';
 
-const References = () => {
+interface Props {
+  fetFields: any;
+}
+
+const References: React.FC<Props> = ({ fetFields }) => {
   const [references, setReferences] = useState<any[]>([]);
   const [referenceItems, setReferencesItems] = useState<any[]>([]);
   const [currentReference, setCurrentReference] = useState<any[]>([]);
@@ -119,6 +123,7 @@ const References = () => {
             openModal={openModal}
             fetchReferenceItems={fetchReferenceItems}
             fetchReferences={fetchReferences}
+            fetFields={fetFields}
           />
         </ReferencesWrapper>
       )}

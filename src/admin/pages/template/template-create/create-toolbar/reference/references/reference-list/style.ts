@@ -13,6 +13,14 @@ export const ReferenceListContainer = styled.div`
   }
 `;
 
+export const PlusContainer = styled.div`
+  display: inline-block;
+  svg {
+    cursor: pointer;
+    margin-right: 16px;
+  }
+`;
+
 export const Title = styled.div`
   font-style: normal;
   font-weight: 600;

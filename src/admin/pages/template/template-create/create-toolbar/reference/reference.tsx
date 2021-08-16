@@ -4,12 +4,13 @@ import References from './references';
 
 interface Props {
   active: boolean;
+  fetFields: any;
 }
 
-const Reference: React.FC<Props> = ({ active }) => {
+const Reference: React.FC<Props> = ({ active, fetFields }) => {
   return (
     <ReferenceContainer active={active}>
-      <References />
+      <References fetFields={fetFields} />
     </ReferenceContainer>
   );
 };

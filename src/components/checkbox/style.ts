@@ -28,7 +28,7 @@ export const CheckBoxLabel = styled.label<IsMobileVersion>`
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    z-index: -1;
+    z-index: 0;
     position: absolute;
     left: -10px;
     top: -8px;

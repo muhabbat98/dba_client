@@ -16,9 +16,12 @@ import { ReactComponent as AddProductIcon } from '../../../../assets/icons/add-p
 import MyProductsCollapse from '../my-products-collapse';
 import SettingsInput from '../../../../components/settings-input';
 import SettingsDropdown from '../../../../components/settings-dropdown';
+import MyProductsTableHeadMobile from './my-products-table-head-mobile';
+import { useWindowSize } from '../../../../hooks/useWindowSize';
 
 const MyProductsTable = () => {
   const { push } = useHistory();
+  const [width] = useWindowSize();
 
   const [toggleFilter, setToggleFilter] = useState(false);
   const [state, setState] = useState('');
@@ -62,16 +65,20 @@ const MyProductsTable = () => {
         </MyProductsFilterSection>
       ) : null}
 
-      <MyProductsHead>
-        <MyProductsHeadItem>НАИМЕНОВАНИЕ ТОВАРА</MyProductsHeadItem>
-        <MyProductsHeadItem>СТОИМОСТЬ</MyProductsHeadItem>
-        <MyProductsHeadItem>КАТЕГОРИЯ</MyProductsHeadItem>
-        <MyProductsHeadItem>ПРОИЗВОДИТЕЛЬ</MyProductsHeadItem>
-        <MyProductsHeadItem>КОЛ-ВО ТОВАРА</MyProductsHeadItem>
-        <MyProductsHeadItem> </MyProductsHeadItem>
-      </MyProductsHead>
+      {width >= 768 ? (
+        <MyProductsHead>
+          <MyProductsHeadItem>НАИМЕНОВАНИЕ ТОВАРА</MyProductsHeadItem>
+          <MyProductsHeadItem>СТОИМОСТЬ</MyProductsHeadItem>
+          <MyProductsHeadItem>КАТЕГОРИЯ</MyProductsHeadItem>
+          <MyProductsHeadItem>ПРОИЗВОДИТЕЛЬ</MyProductsHeadItem>
+          <MyProductsHeadItem>КОЛ-ВО ТОВАРА</MyProductsHeadItem>
+          <MyProductsHeadItem> </MyProductsHeadItem>
+        </MyProductsHead>
+      ) : (
+        <MyProductsTableHeadMobile />
+      )}
 
-      <MyProductsCollapse />
+      {width >= 768 ? <MyProductsCollapse /> : null}
     </MyProductsTableContainer>
   );
 };

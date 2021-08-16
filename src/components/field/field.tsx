@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Input from '../input';
 import { useForm } from 'react-hook-form';
 import Dropdown from '../drop-down';
+import SimpleInput from '../simple-input';
 
 enum FormatNames {
   STRING = 'STRING',
   NUMBER = 'NUMBER',
   DATE = 'DATE',
-  DROPDOWN = 'DROPDOWN',
+  REFERENCE = 'REFERENCE',
 }
 
 interface FieldProps {
@@ -16,9 +17,16 @@ interface FieldProps {
 
 const Field: FC<FieldProps> = ({ field }) => {
   const { register, setValue, watch } = useForm();
+
   const format = field.format;
   const fieldName = field.name;
-  const list = field.list;
+  const list = field.values;
+
+  const [state, setState] = useState(list);
+
+  const dropdownClicked = (data: any) => {
+    setState(data.value);
+  };
 
   switch (format) {
     case FormatNames.NUMBER:
@@ -37,14 +45,10 @@ const Field: FC<FieldProps> = ({ field }) => {
 
     case FormatNames.DATE:
       return (
-        <Input
+        <SimpleInput
           name={fieldName}
-          register={register}
           label={fieldName}
           type="date"
-          //   defVal="ada"
-          setValue={setValue}
-          watch={watch(fieldName)}
           style={{ maxWidth: '400px', marginBottom: '24px' }}
         />
       );
@@ -63,7 +67,15 @@ const Field: FC<FieldProps> = ({ field }) => {
       );
 
     default:
-      return <Dropdown option={list} label={fieldName} />;
+      return (
+        <Dropdown
+          callback={dropdownClicked}
+          selected={state.name}
+          isAdmin={true}
+          option={list}
+          label={fieldName}
+        />
+      );
   }
 };
 

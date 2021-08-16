@@ -5,5 +5,6 @@ interface Props {
 }
 
 export const ProductsContainer = styled.div<Props>`
+  margin-top: 20px;
   display: ${({ active }) => (active ? 'block' : 'none')};
 `;

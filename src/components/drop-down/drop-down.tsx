@@ -15,6 +15,7 @@ interface DropdownProps {
   option?: any;
   selected?: string;
   style?: any;
+  isAdmin?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -23,7 +24,11 @@ const Dropdown: React.FC<DropdownProps> = ({
   option,
   selected,
   style,
+  isAdmin,
 }) => {
+  console.log('option => ', option);
+  console.log('selected => ', selected);
+
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
@@ -47,7 +52,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   const dropdown = useRef<HTMLUListElement>(null);
 
   const selectItem = (item: any, e: SyntheticEvent) => {
-    setSelectedOption(item.value);
+    setSelectedOption(item.value.name);
 
     const target = e.target as HTMLLIElement;
     if (target.parentElement?.childElementCount !== undefined) {
@@ -101,8 +106,10 @@ const Dropdown: React.FC<DropdownProps> = ({
         <DropdownHeader onClick={toggleList}>
           <DropdownLabel>{label}</DropdownLabel>
           <DropdownHeaderTitle>
-            {getActiveName()}
-            {/* {selectedOption || options[0].value} */}
+            {isAdmin
+              ? selectedOption || options[0].value.name
+              : getActiveName()}
+
             <Arrow />
           </DropdownHeaderTitle>
         </DropdownHeader>
@@ -115,7 +122,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 className={item.selected ? 'selected' : ''}
                 onClick={(e: SyntheticEvent) => selectItem(item, e)}
               >
-                {item.value}
+                {isAdmin ? item.value.name : item.value}
               </DropdownOption>
             ))}
           </DropdownOptionList>

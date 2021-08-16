@@ -5,6 +5,8 @@ enum ActionType {
   ADD_PRODUCT,
   ADD_REFERENCE,
   TOGGLE_VIEW,
+  START_LOADING,
+  TOGGLE_MAIN,
 }
 
 export enum ViewType {
@@ -32,14 +34,26 @@ interface ToggleView {
   payload: ViewType;
 }
 
+interface ToggleView {
+  type: ActionType.TOGGLE_VIEW;
+  payload: ViewType;
+}
+
+interface ToggleMain {
+  type: ActionType.TOGGLE_MAIN;
+  payload: any;
+}
+
+type Action = AddField | AddProduct | AddReference | ToggleView | ToggleMain;
+
 interface State {
   fields: any[];
   products: any[];
   reference: any[];
   viewType: ViewType;
+  loading: boolean;
+  isMain: boolean;
 }
-
-type Action = AddField | AddProduct | AddReference | ToggleView;
 
 type Dispatch = (action: Action) => void;
 
@@ -53,6 +67,8 @@ const defaultState: State = {
   products: [],
   reference: [],
   viewType: ViewType.TEMPLATE_BUILDER,
+  loading: false,
+  isMain: false,
 };
 
 const defaultValue: TemplateCreateContextType = {
@@ -77,6 +93,11 @@ export const TemplateCreateContextProvider: React.FC = ({ children }) => {
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case ActionType.TOGGLE_MAIN:
+      return {
+        ...state,
+        isMain: !state.isMain,
+      };
     case ActionType.ADD_FIELD:
       return addField(state, action);
     case ActionType.ADD_REFERENCE:
@@ -119,6 +140,13 @@ export const useTemplateCreate = () => {
     });
   };
 
+  const toggleMain = () => {
+    dispatch({
+      type: ActionType.TOGGLE_MAIN,
+      payload: [],
+    });
+  };
+
   return {
     state,
     addProduct,
@@ -126,6 +154,7 @@ export const useTemplateCreate = () => {
     addReference,
     setBuilder,
     setView,
+    toggleMain,
   };
 };
 
@@ -150,9 +179,9 @@ function addReference(state: State, action: Action) {
 function addProduct(state: State, action: Action) {
   const copyState = JSON.parse(JSON.stringify(state));
 
-  let products = [...copyState.fields];
+  let products = [...copyState.products];
   const find = products.findIndex((f: any) => f.id === action.payload.id);
-  console.log(find);
+
   if (find < 0) {
     products.push(action.payload);
   } else {
