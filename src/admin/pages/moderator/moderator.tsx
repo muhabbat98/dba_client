@@ -6,6 +6,7 @@ import AddModerator from './add-moderator';
 import EditModerator from './edit-moderator';
 import {Container,HeadBox,CardContainer,Pagenition} from './style'
 import { AlertPosition } from '../../../utils/alert-position-enum';
+import SimpleInput from '../../../components/simple-input';
 
 const Moderator = () => {
       const [openModal,setOpenModal] = useState<boolean>(false);
@@ -110,7 +111,6 @@ const Moderator = () => {
                               <span>3</span>
                         </div>
                   </Pagenition>
-                  
             </Container>
             {openEditModal &&
                 <EditModerator

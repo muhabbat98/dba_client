@@ -22,6 +22,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
     const [errPassword,setErrPassword] = useState<boolean>(false);
     const [menu,setMenu] = useState<any>([]);
     const [selectList,setSelectList] = useState<any>([]);
+    const [checkBoxValue,setCheckBoxValue] = useState<any>();
     const fileRef = useRef<HTMLInputElement>(null);
     const[imgState, setImgState] = useState<any>(null);
 
@@ -93,12 +94,13 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
             if(selectList[i]!=item) {
                 increment++;}
         }
-        if(increment == selectList.length){
+        if(increment == selectList.length&&checkBoxValue==true){
             setSelectList([...selectList,item])
         }
 
       }
-
+        console.log('val-->',checkBoxValue);
+        console.log('List-->',selectList);
       return(
             <ModalContainer>
                   <AddContainer ref={reff}>
@@ -182,7 +184,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
                                                 {menu.map((item:any,index:number)=>{
                                                     return(
                                                     <div key={index} onClick={()=>collectCat(item.id)}>
-                                                        <Checkbox label={item.name}/>
+                                                        <Checkbox onChange={(e:any)=>setCheckBoxValue(e.target.checked)} label={item.name}/>
                                                     </div>)
                                                 })}
                                             </SelectBox>

@@ -139,17 +139,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
                                 // style={{width:"100%"}}
                             />
                         </div>
-                        <div style={{flex:1}}>
-                            <Password
-                                label="Пароль"
-                                name="password"
-                                register={register}
-                                warning={errPassword}
-                            />
-                        </div>
-                    </div>
-                    <div style={{display:'flex'}}>
-                        <div style={{margin:"12px 12px 12px 0px",flex:1}}>
+                        <div style={{marginTop:12,flex:1}}>
                             <Input
                                 name="secondName"
                                 label="Фамилия"
@@ -161,16 +151,6 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
                                 error={errors.secondName}
                                 setValue={setValue}
                             />
-                        </div>
-                        <div style={{flex:1}}>
-                            <Password
-                                label="Повторите пароль"
-                                name="confirmPassword"
-                                register={register}
-                                error={errPassword}
-                                warning={errPassword}
-                            />
-                            {errPassword && <PassError>Пароль введен неверно</PassError>}
                         </div>
                     </div>
                     <div style={{display:'flex'}}>

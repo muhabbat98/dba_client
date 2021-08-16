@@ -6,13 +6,17 @@ interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
     label?:string,
     placeholder?:string,
     style?:any,
-    ref?:any
+    ref?:any,
+    defaultValue?:any,
 }
-const SimpleInput:React.FC<Propses> = ({label,ref,placeholder,style,...rest}) => {
+const SimpleInput:React.FC<Propses> = ({label,ref,placeholder,defaultValue,style,...rest}) => {
     const [isFocus, setIsFocus] = useState<boolean>(false);
     const [id,setId] = useState<string>('');
     useEffect(()=>{
         const val:any = document.querySelector('.inputt');
+        if(defaultValue&&defaultValue.length>0){
+            setIsFocus(true);
+        }
         if(val){
             const leng=val.value
             if(leng.length>0) {
@@ -42,6 +46,7 @@ const SimpleInput:React.FC<Propses> = ({label,ref,placeholder,style,...rest}) =>
                 <InputElement
                     {...rest}
                     ref={ref}
+                    defaultValue={defaultValue}
                     autoFocus ={isFocus?true:false}
                     placeholder={!isFocus ? placeholder : ""}
                     isfocus={isFocus}
