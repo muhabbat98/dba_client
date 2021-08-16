@@ -12,7 +12,9 @@ const Menu = () => {
       <MenuItem to={`${url}`}>Главная</MenuItem>
       <MenuItem
         to={`${url}/category`}
-        isActive={() => pathname.includes('category')}
+        isActive={() =>
+          pathname.includes('category') || pathname.includes('template')
+        }
       >
         Категория
       </MenuItem>

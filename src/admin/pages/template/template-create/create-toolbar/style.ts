@@ -4,18 +4,20 @@ interface Props {
   active?: boolean;
 }
 
-export const CreateToolbarContainer = styled.div`
+export const CreateToolbarContainer = styled.div<{ isActive: boolean }>`
   //height: 600px;
   //overflow-y: auto;
   background: white;
   border: 1px solid #dfe0eb;
   padding: 24px;
+  display: ${({ isActive }) => (isActive ? 'block' : 'none')};
 `;
 
 export const Tab = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 export const TabWrapper = styled.div`
   display: flex;
 `;

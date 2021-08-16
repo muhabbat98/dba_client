@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { CreateToolbarContainer, TabItem, Tab, TabWrapper } from './style';
+import { CreateToolbarContainer, Tab, TabItem, TabWrapper } from './style';
 import Fields from './fields';
 import Products from './products';
 import Reference from './reference';
 import Checkbox from '../../../../../components/checkbox';
+import { useTemplateCreate, ViewType } from '../context';
 
 enum FormType {
   FIELDS,
@@ -13,11 +14,14 @@ enum FormType {
 
 const CreateToolbar = () => {
   const [formType, setFormType] = useState<FormType>(FormType.FIELDS);
+  const {
+    state: { viewType },
+  } = useTemplateCreate();
 
   const setForm = (form: FormType): void => setFormType(form);
 
   return (
-    <CreateToolbarContainer>
+    <CreateToolbarContainer isActive={viewType === ViewType.TEMPLATE_BUILDER}>
       <Tab>
         <TabWrapper>
           <TabItem

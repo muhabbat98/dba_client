@@ -68,21 +68,20 @@ export const TemplateTitle = styled.div`
 `;
 
 export const Box = styled.div`
-  width: 200px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  font-size: 22px;
-  border: 2px solid #cccccc;
-  border-radius: 8px;
-  margin: 10px;
+  width: 246px;
+  background: #ffffff;
+  border: 2px solid #e9ecf4;
+  border-radius: 16px;
   transition: 0.3s;
   cursor: pointer;
-
+  margin-right: 24px;
+  padding: 24px;
   :hover {
-    background: #c9c7c7;
+    border: 2px solid transparent;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
+  }
+  :last-child {
+    margin-right: 0;
   }
 `;
 
@@ -90,4 +89,24 @@ export const BoxContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 50px;
+`;
+
+export const BoxIconContainer = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+export const Icon = styled.div``;
+
+export const Title = styled.div`
+  margin-top: 12px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: -0.155556px;
+  color: #252733;
 `;

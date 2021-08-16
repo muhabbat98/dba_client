@@ -1,19 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { TemplateCreateContextProvider, useTemplateCreate } from './context';
 import {
-  TemplateCreateContainer,
+  TemplateCreateContextProvider,
+  useTemplateCreate,
+  ViewType,
+} from './context';
+import {
   Header,
-  Right,
+  Label,
   Left,
   Middle,
+  Right,
+  TemplateCreateContainer,
   ToggleContainer,
-  Label,
 } from './style';
 import CreateToolbar from './create-toolbar';
 import View from './view/view';
 import SimpleInput from '../../../../components/simple-input';
-import Checkbox from '../../../../components/checkbox';
 import Button from '../../../../components/button';
 import Toggle from '../../../../components/toggle';
 
@@ -23,7 +26,10 @@ interface Params {
 
 const TemplateCreateMain = () => {
   const { id } = useParams<Params>();
-  const { state } = useTemplateCreate();
+  const { state, setView, setBuilder } = useTemplateCreate();
+
+  const change =
+    state.viewType === ViewType.TEMPLATE_BUILDER ? setView : setBuilder;
 
   console.log('state -- ', state);
   return (
@@ -38,7 +44,7 @@ const TemplateCreateMain = () => {
       </Header>
       <Middle>
         <ToggleContainer>
-          <Toggle />
+          <Toggle onChange={change} />
           <Label>Предварительный просмотр</Label>
         </ToggleContainer>
       </Middle>

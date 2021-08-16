@@ -14,7 +14,6 @@ const Template = () => {
   const { id } = useParams<Params>();
   const { path } = useRouteMatch();
 
-  console.log('id - ', id);
   return (
     <TemplateContainer>
       <Switch>

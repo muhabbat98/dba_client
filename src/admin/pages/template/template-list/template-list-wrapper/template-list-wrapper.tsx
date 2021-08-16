@@ -10,7 +10,11 @@ const TemplateListWrapper: React.FC<Props> = ({ templates }) => {
   return (
     <TemplateListWrapperContainer>
       {templates.map((template, index) => (
-        <TemplateListItem template={template} number={index + 1} />
+        <TemplateListItem
+          key={template.id}
+          template={template}
+          number={index + 1}
+        />
       ))}
     </TemplateListWrapperContainer>
   );
