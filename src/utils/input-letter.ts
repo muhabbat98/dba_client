@@ -1,6 +1,6 @@
 const inputLetter = (e:any) =>{
     if(e){
-    return e.replace(/[^a-zA-Z-а-яА-Я]\s/ig,"")
+    return e.replace(/[^a-zA-Z-а-яА-Я]+/g,"")
     } 
     return "";
 }

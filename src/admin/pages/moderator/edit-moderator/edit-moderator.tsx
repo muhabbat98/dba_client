@@ -91,17 +91,26 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
         }}, [isOpen])
 
 
-    const collectCat = (item:string) =>{
-        let increment=0;
-        for(let i=0; i<selectList.length; i++){
-            if(selectList[i]!=item) {
-                increment++;}
-        }
-        if(increment == selectList.length){
-            setSelectList([...selectList,item])
+    const collectCat = (e:any) => {
+        const {checked,name} = e.target;
+        for(let i=0; i<menu.length; i++){
+            if(menu[i].id==name&&checked==true){
+                setSelectList([...selectList,name])
+            }
+            if(menu[i].id==name&&checked==false){
+                for(let i=0; i<selectList.length; i++){
+                    setSelectList(selectList.filter((item:any) => item !== name))
+                }
+            }
         }
 
     }
+    const checkedList = (item:any) => {
+        userItem.forEach((id:any)=>{
+            return id==item?true:false
+        })
+    }
+
     const selectImage:any = () => {
         if(avatar){
             return <img src={avatar} alt='avatar'/>
@@ -175,8 +184,13 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
                                 <SelectBox>
                                     {menu.map((item:any,index:number)=>{
                                         return(
-                                            <div key={index} onClick={()=>collectCat(item.id)}>
-                                                <Checkbox label={item.name}/>
+                                            <div key={index}>
+                                                <Checkbox
+                                                    // defaultValue={()=>checkedList(item.id)}
+                                                    label={item.name}
+                                                    name={item.id}
+                                                    onChange={(e:any)=>collectCat(e)}
+                                                />
                                             </div>)
                                     })}
                                 </SelectBox>

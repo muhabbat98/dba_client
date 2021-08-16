@@ -16,6 +16,7 @@ import {
       Tag,
       Actions  
 } from './style'
+import SimpleInput from '../../../components/simple-input';
 
 
 interface Propses{
@@ -111,7 +112,6 @@ const ModeratorCard:React.FC<Propses> = ({item,refreshModerator,setUserItem,setO
                               <div onClick={handleDelete}><DeleteIcon/>Удалить</div>
                         </Actions>
                   }
-
             </CardWraper>
       )
       

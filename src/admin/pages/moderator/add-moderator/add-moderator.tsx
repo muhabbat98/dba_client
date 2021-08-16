@@ -87,20 +87,21 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
             document.removeEventListener("mousedown", checkIfClickedOutside)
         }}, [isOpen])
 
-
-    const collectCat = (item:string) =>{
-        let increment=0;
-        for(let i=0; i<selectList.length; i++){
-            if(selectList[i]!=item) {
-                increment++;}
-        }
-        if(increment == selectList.length&&checkBoxValue==true){
-            setSelectList([...selectList,item])
+      const collectCat = (e:any) => {
+        const {checked,name} = e.target;
+        for(let i=0; i<menu.length; i++){
+            if(menu[i].id==name&&checked==true){
+                setSelectList([...selectList,name])
+            }
+            if(menu[i].id==name&&checked==false){
+                for(let i=0; i<selectList.length; i++){
+                    setSelectList(selectList.filter((item:any) => item !== name))
+                }
+            }
         }
 
       }
-        console.log('val-->',checkBoxValue);
-        console.log('List-->',selectList);
+
       return(
             <ModalContainer>
                   <AddContainer ref={reff}>
@@ -183,8 +184,12 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
                                             <SelectBox>
                                                 {menu.map((item:any,index:number)=>{
                                                     return(
-                                                    <div key={index} onClick={()=>collectCat(item.id)}>
-                                                        <Checkbox onChange={(e:any)=>setCheckBoxValue(e.target.checked)} label={item.name}/>
+                                                    <div key={index}>
+                                                        <Checkbox
+                                                            onChange={(e:any)=>collectCat(e)}
+                                                            label={item.name}
+                                                            name={item.id}
+                                                        />
                                                     </div>)
                                                 })}
                                             </SelectBox>
