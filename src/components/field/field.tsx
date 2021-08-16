@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Input from '../input';
 import { useForm } from 'react-hook-form';
 import Dropdown from '../drop-down';
@@ -17,11 +17,16 @@ interface FieldProps {
 
 const Field: FC<FieldProps> = ({ field }) => {
   const { register, setValue, watch } = useForm();
+
   const format = field.format;
   const fieldName = field.name;
   const list = field.values;
 
-  console.log('field => ', field);
+  const [state, setState] = useState(list);
+
+  const dropdownClicked = (data: any) => {
+    setState(data.value);
+  };
 
   switch (format) {
     case FormatNames.NUMBER:
@@ -62,7 +67,15 @@ const Field: FC<FieldProps> = ({ field }) => {
       );
 
     default:
-      return <Dropdown isAdmin={true} option={list} label={fieldName} />;
+      return (
+        <Dropdown
+          callback={dropdownClicked}
+          selected={state.name}
+          isAdmin={true}
+          option={list}
+          label={fieldName}
+        />
+      );
   }
 };
 

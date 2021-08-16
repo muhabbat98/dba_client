@@ -27,6 +27,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   isAdmin,
 }) => {
   console.log('option => ', option);
+  console.log('selected => ', selected);
+
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
@@ -50,7 +52,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   const dropdown = useRef<HTMLUListElement>(null);
 
   const selectItem = (item: any, e: SyntheticEvent) => {
-    setSelectedOption(item.value);
+    setSelectedOption(item.value.name);
 
     const target = e.target as HTMLLIElement;
     if (target.parentElement?.childElementCount !== undefined) {
@@ -104,8 +106,10 @@ const Dropdown: React.FC<DropdownProps> = ({
         <DropdownHeader onClick={toggleList}>
           <DropdownLabel>{label}</DropdownLabel>
           <DropdownHeaderTitle>
-            {getActiveName()}
-            {/* {selectedOption || options[0].value} */}
+            {isAdmin
+              ? selectedOption || options[0].value.name
+              : getActiveName()}
+
             <Arrow />
           </DropdownHeaderTitle>
         </DropdownHeader>
