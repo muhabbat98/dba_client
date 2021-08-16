@@ -62,7 +62,7 @@ const Field: FC<FieldProps> = ({ field }) => {
       );
 
     default:
-      return <Dropdown option={list} label={fieldName} />;
+      return <Dropdown isAdmin={true} option={list} label={fieldName} />;
   }
 };
 
