@@ -15,6 +15,7 @@ interface DropdownProps {
   option?: any;
   selected?: string;
   style?: any;
+  isAdmin?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -23,7 +24,9 @@ const Dropdown: React.FC<DropdownProps> = ({
   option,
   selected,
   style,
+  isAdmin,
 }) => {
+  console.log('option => ', option);
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
@@ -115,7 +118,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 className={item.selected ? 'selected' : ''}
                 onClick={(e: SyntheticEvent) => selectItem(item, e)}
               >
-                {item.value}
+                {isAdmin ? item.value.name : item.value}
               </DropdownOption>
             ))}
           </DropdownOptionList>

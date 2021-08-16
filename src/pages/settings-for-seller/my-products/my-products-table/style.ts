@@ -15,6 +15,10 @@ export const MyProductsTableTop = styled.div`
   align-items: center;
   padding: 19px 20px;
   border-bottom: 2px solid #e9ecf4;
+
+  @media (max-width: 768px) {
+    border-bottom: none;
+  }
 `;
 
 export const MyProductsFilterBtn = styled.button`
@@ -69,6 +73,8 @@ export const MyProductsFilterSection = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    margin-right: 0;
+    margin-left: 0;
   }
 
   & > input,

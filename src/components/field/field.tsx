@@ -19,7 +19,9 @@ const Field: FC<FieldProps> = ({ field }) => {
   const { register, setValue, watch } = useForm();
   const format = field.format;
   const fieldName = field.name;
-  const list = field.list;
+  const list = field.values;
+
+  console.log('field => ', field);
 
   switch (format) {
     case FormatNames.NUMBER:

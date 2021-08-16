@@ -4,11 +4,13 @@ import MyProductsTable from './my-products-table';
 import { MyProductsContainer } from './style';
 
 const MyProducts = () => {
-  return <MyProductsContainer>
-    {/* <EntryPage /> */}
+  return (
+    <MyProductsContainer>
+      {/* <EntryPage /> */}
 
-    <MyProductsTable />
-  </MyProductsContainer>;
+      <MyProductsTable />
+    </MyProductsContainer>
+  );
 };
 
 export default MyProducts;
