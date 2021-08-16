@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import Grid from '@material-ui/core/Grid';
 import Cover from '../../assets/default-cover.jpg'
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaControlCard() {
     const classes = useStyles();
     const { data, loading, error } = useQuery(FORIEGN_BOOKS)
-    console.log(data && data.foriegnBooks)
+
     useEffect(() => {
         if (error) alert(error.message)
     }, [error])

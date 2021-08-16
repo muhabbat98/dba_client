@@ -36,33 +36,24 @@ export const CREATE_JOURNAL_TYPE = gql`
 
 `;
 export const CREATE_JOURNAL = gql`
-	mutation CreateJournals(
-		$name: String!
-		$language: String
+	mutation CreateJournal(
 		$year: Int!
 		$serialNumber: Int!
-		$fileId:Int
-		$coverId:Int
-		$keywords:String
-		$resourceType:Int
-		$date:String
-  
+		$date: String
+		$fileId: Int
+		$generalId: Int!
 		) {
 		createJournal(
 			input: {
-			name: $name
-			language: $language
+			generalId: $generalId
+			fileId: $fileId
 			year: $year
 			serialNumber: $serialNumber
-			fileId:$fileId
-			coverId:$coverId
-			keywords:$keywords
-			resourceType:$resourceType
-			date:$date
-        
+			date: $date
 			}
 		)
-	}
+		}
+
 `;
 
 

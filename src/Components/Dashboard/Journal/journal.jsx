@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios'
 import { useMutation, useQuery } from '@apollo/client'
-import { IMAGEROUTE, BOOKROUTE } from '../../../settings/url.js'
+import {  BOOKROUTE } from '../../../settings/url.js'
 import { CREATE_JOURNAL } from '../../../Graphql/Mutation/'
 import { JOURNAL_NAME } from '../../../Graphql/Query'
 
@@ -33,16 +33,12 @@ export default function Sience() {
     const {data:journalNames, loading:journalWaiting, error:journalError} = useQuery(JOURNAL_NAME)
     const [createJournal, { data, loading, error }] = useMutation( CREATE_JOURNAL)
 
-    const [enterence, setEnterence] = useState({
-        title: '',
-        keyword: '',
-        resourceType: 1,
-        imageId: '',
+    const [enterence, setEnterence] = useState({       
         fileId: '',
-        language: '',
         date: '',
         serialNumber:1,
         year:1,
+        journalId:1
     })
     const imgUpload = useRef()
     const bookUpload = useRef()
@@ -56,26 +52,23 @@ export default function Sience() {
     useEffect(() => {
         if (error) alert(error.message)
         else if (data) {
+            console.log(data)
             setOpen(true)
-            imgUpload.current.value = ''
+            bookUpload.current.value = ''
         }
     }, [error, data])
     const sendScience = () => {
       
-        if (enterence.title) {
+        if (enterence.serialNumber) {
             createJournal({
                 variables:{
                     name: enterence.title,
                     serialNumber: enterence.serialNumber,
                     year:enterence.year,
                     fileId:enterence.fileId,
-                    coverId: enterence.imageId,
-                    language:enterence.language,
-                    keywords:enterence.keyword,
-                    resourceType:enterence.resourceType,
+                    generalId:enterence.journalId,
                     date:enterence.date
-                },
-                refetchQueries: ["journal"],
+                }
             })
           
         }
@@ -83,28 +76,7 @@ export default function Sience() {
             alert("enter required fields")
         }
     }
-    const sendImage = (e) => {
-       
-        if (imgUpload.current.files.length) {
-            const formData = new FormData()
-            formData.append('cover', imgUpload.current.files[0])
-            try {
-                axios({
-                    method: "POST",
-                    url: IMAGEROUTE,
-                    data: formData,
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                }).then(res => {
-                    setEnterence({ ...enterence, imageId: res.data.cover_id })
-                })
-            }
-            catch (err) {
-                alert(err.message)
-            }
-        }
-    }
+  
     const sendBook = (e) => {
         
         if (bookUpload.current.files.length) {
@@ -127,7 +99,7 @@ export default function Sience() {
             }
         }
     }
-    console.log(journalNames)
+  
     return (<>
         {
             loading||journalWaiting ?
@@ -148,7 +120,7 @@ export default function Sience() {
             open={open}
             autoHideDuration={6000}
             onClose={handleClose}
-            message={data && data.createJournalType&&data.createJournalType.message}
+            message={data && data.createJournal&&data.createJournal.message}
             action={
                 <React.Fragment>
                     <Button color="secondary" size="small" onClick={handleClose}>
@@ -165,7 +137,7 @@ export default function Sience() {
                 <label>JOURNAL NAME</label>
                     {
                         journalNames&&journalNames.journals ?
-                            <select  className="journal_names_select">
+                            <select  className="journal_names_select" onClick={(e)=>setEnterence({ ...enterence, journalId: parseInt(e.target.value) })}>
                                { journalNames.journals.map((element, index)=><option value={element.id} key={index}>{element.name}</option>)}
                             </select>:
                             <></>

@@ -5,6 +5,20 @@ export const USER = gql`
         users(userId: $userId)
     }
 `
+export const EXACT_JOURNAL = gql`
+    query ExactJournal($id:Int){
+        exactJournals(id: $id) {
+            id
+            file {
+            filename
+            }
+            serialNumber
+            year    
+            date
+        }
+    }
+
+`
 export const JOURNAL_NAME = gql`
     {
         journals{
@@ -21,27 +35,17 @@ export const JOURNAL_NAME = gql`
 `
 
 export const JOURNALS = gql`
-    query{
-        journals{
-            id
-            file{
-                fileId
-                filename
-                mimetype
-            }
-            cover{
-                coverId
-                filename
-                mimetype
-            }
-            name
-            keywords  	
-            resourceType
-            language
-            serialNumber
-            year
-            date    
+   query{
+    journals{
+        id
+        cover{
+            coverId
+            filename
         }
+        name
+        resourceType
+        language  
+    }
     }
 
 `
@@ -75,6 +79,14 @@ export const FORIEGN_BOOKS = gql`
     query {
         foriegnBooks {
             id
+            name
+            author
+            keywords
+            description
+            resourceType
+            language
+            date
+            resourseHolder
             file {
                 fileId
                 filename
@@ -87,14 +99,6 @@ export const FORIEGN_BOOKS = gql`
                 mimetype
                 size
             }
-            name
-            author
-            keywords
-            description
-            resourceType
-            language
-            date
-            resourseHolder
         }
     }
 
