@@ -31,15 +31,10 @@ const Field: FC<FieldProps> = ({ field }) => {
   switch (format) {
     case FormatNames.NUMBER:
       return (
-        <Input
-          name={fieldName}
-          register={register}
+        <SimpleInput
           label={fieldName}
-          inputType="onlyNumber"
-          //   defVal="ada"
-          setValue={setValue}
-          watch={watch(fieldName)}
-          style={{ maxWidth: '400px', marginBottom: '24px' }}
+          placeholder={fieldName}
+          inputType="number"
         />
       );
 
@@ -55,14 +50,10 @@ const Field: FC<FieldProps> = ({ field }) => {
 
     case FormatNames.STRING:
       return (
-        <Input
-          name={fieldName}
-          register={register}
+        <SimpleInput
           label={fieldName}
-          //   defVal="addsfa"
-          setValue={setValue}
-          watch={watch(fieldName)}
-          style={{ maxWidth: '400px', marginBottom: '24px' }}
+          placeholder={fieldName}
+          inputType="string"
         />
       );
 
