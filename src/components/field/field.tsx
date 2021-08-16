@@ -35,6 +35,7 @@ const Field: FC<FieldProps> = ({ field }) => {
           label={fieldName}
           placeholder={fieldName}
           inputType="number"
+          style={{ marginBottom: '16px' }}
         />
       );
 
@@ -44,7 +45,7 @@ const Field: FC<FieldProps> = ({ field }) => {
           name={fieldName}
           label={fieldName}
           type="date"
-          style={{ maxWidth: '400px', marginBottom: '24px' }}
+          style={{ maxWidth: '100%', marginBottom: '16px' }}
         />
       );
 
@@ -54,6 +55,7 @@ const Field: FC<FieldProps> = ({ field }) => {
           label={fieldName}
           placeholder={fieldName}
           inputType="string"
+          style={{ marginBottom: '16px' }}
         />
       );
 
@@ -65,6 +67,7 @@ const Field: FC<FieldProps> = ({ field }) => {
           isAdmin={true}
           option={list}
           label={fieldName}
+          style={{ marginBottom: '16px' }}
         />
       );
   }
