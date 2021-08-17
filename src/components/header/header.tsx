@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import BottomHeader from './bottom-header';
 import MiddleHeader from './middle-header';
 import TopHeader from './top-header';
 import MenuContent from '../menu';
 import { HeaderContainer } from './style';
-import menuJson from './menu.json';
 import BottomHeaderForSeller from './bottom-header-for-seller';
-import { useSellerPathname } from '../../hooks';
+import { useSellerPathname,useActionCreators, useSelector } from '../../hooks';
 
 const Header = () => {
   const [state, setMenuState] = useState<boolean>(false);
   const { isSellerPath } = useSellerPathname();
+  const { menu } = useSelector((state) => state.menu);
+  const {fetchMenu} = useActionCreators();
+ 
+  useEffect(()=>{
+    fetchMenu();
+  },[]);
 
   const handleMenuState = () => {
     setMenuState(!state);
@@ -30,11 +35,8 @@ const Header = () => {
         )}
       </HeaderContainer>
 
-      {/*{state && (*/}
-      {/*  <MenuContent menuEls={menuJson} stateHandler={handleMenuState} />*/}
-      {/*)}*/}
       {state && (
-        <MenuContent menuEls={menuJson} stateHandler={handleMenuState} />
+        <MenuContent menuEls={menu} stateHandler={handleMenuState} />
       )}
     </>
   );

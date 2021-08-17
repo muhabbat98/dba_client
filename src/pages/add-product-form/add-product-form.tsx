@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import { useError } from '../../hooks';
 
 import Container from '../../components/grid/container';
 import ProductTitle from '../../components/products-title';
@@ -37,12 +39,28 @@ import {
 import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
 import { ReactComponent as PhotoApparat } from '../../assets/icons/add-product-photo-apparat.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-delete-icon.svg';
+import { axios } from '../../hooks';
+
+interface Params {
+  categoryId: string;
+  productId: string;
+}
 
 const AddProductForm = () => {
   const { register, setValue } = useForm();
+  const { categoryId, productId } = useParams<Params>();
+  const { checkError } = useError();
 
   const [openDeleivery, setOpenDeleivery] = useState<boolean>(false);
   const [productPhoto, setProductPhoto] = useState<any>(null);
+  const [allFields, setAllFields] = useState<any>(null);
+
+  console.log('categoryId => ', categoryId);
+  console.log('productId => ', productId);
+
+  useEffect(() => {
+    getData(productId);
+  }, []);
 
   const dropdownDocumentHandle = () => {};
 
@@ -82,6 +100,22 @@ const AddProductForm = () => {
         type: 'error',
         position: AlertPosition.TOP_CENTER,
       });
+    }
+  };
+
+  const getData = async (id: any) => {
+    try {
+      const response = await axios.get('/meta_data/product/' + id);
+      // /marketplace-v1/api/meta_data/product/{productId}
+      const data = await response.data;
+
+      // const response = await axios.get('catalog?parentId=');
+      // const data = await response.data;
+
+      console.log('datatata => ', data);
+      setAllFields(data);
+    } catch (error) {
+      checkError(error);
     }
   };
 

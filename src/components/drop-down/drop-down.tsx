@@ -26,9 +26,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   style,
   isAdmin,
 }) => {
-  console.log('option => ', option);
-  console.log('selected => ', selected);
-
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);

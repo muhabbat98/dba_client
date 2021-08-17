@@ -41,6 +41,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const [menu, setMenu] = useState<any>(null);
   const [prevIds, setPrevIds] = useState<any>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [categoryId, setCategoryId] = useState<string>('');
 
   useEffect(() => {
     (async () => {
@@ -60,8 +61,18 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
         if (!reFetch) {
           setPrevIds([...prevIds, idd]);
         }
+        setCategoryId(idd);
       } else {
-        push('/seller/add-product-form/' + idd);
+        const res = await axios.get(`/meta_data/products/${idd}`);
+        const d = await res.data;
+        if (d.length > 0) {
+          setMenu(d);
+          if (!reFetch) {
+            setPrevIds([...prevIds, idd]);
+          }
+        } else {
+          push('/seller/add-product-form/' + categoryId + '/' + idd);
+        }
       }
 
       setLoading(false);
@@ -90,6 +101,8 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const closeModal = () => {
     modalClose();
   };
+
+  console.log('categoryId => ', categoryId);
 
   return (
     <>
