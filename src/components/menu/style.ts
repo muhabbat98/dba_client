@@ -55,6 +55,19 @@ export const List = styled.ul`
     border-right: 0.5px solid #CDCDCD;
     max-height:550px;
     overflow-y:auto;
+    ::-webkit-scrollbar {
+        width: 7px;
+        cursor: pointer;
+    };
+    ::-webkit-scrollbar-thumb {
+        background: #F4F6F9;
+        border-radius: 8px;
+    };
+    ::-webkit-scrollbar-track {
+        background: white;
+        border-radius: 7px;
+    };
+
 `;
 export const MenuIcon = styled.div`
     display:inline-block;
@@ -86,11 +99,28 @@ export const ListItem = styled.li`
     }
     transition:all .2s ease-in;
 `;
-
+export const ListWrapper = styled.div`
+    overflow:auto;
+    max-height:550px;
+    margin:16px; 
+    ::-webkit-scrollbar {
+        width: 7px;
+        cursor: pointer;
+    };
+    ::-webkit-scrollbar-thumb {
+        background: #F4F6F9;
+        border-radius: 8px;
+    };
+    ::-webkit-scrollbar-track {
+        background: white;
+        border-radius: 7px;
+    };
+`;
 export const ChildrenList = styled.ul`
     padding:8px;
     max-height:400px;
     overflow-y:auto; 
+   
 `;
 export const ChildListItem = styled.li` 
     list-style:none;

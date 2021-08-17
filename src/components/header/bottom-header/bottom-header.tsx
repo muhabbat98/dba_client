@@ -22,7 +22,8 @@ const BottomHeader: React.FC<MenuStateProps> = ({ state, stateHandler }) => {
   const handleMenuIcon = () => {
     setMenuComponentState(!state);
     setTimeout(function () {
-      if (stateHandler) stateHandler();
+      if (stateHandler) 
+        stateHandler();
     }, 200);
   };
   return (
