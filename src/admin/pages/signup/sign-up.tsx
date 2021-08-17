@@ -6,7 +6,10 @@ import {LogoPart, InputPart, SignUpDiv, LogoHeader, LogoIcon, LogoName, MainLogo
 import Mlogo from '../../../assets/icons/m-icon.svg'
 import MainImage from './sign-up-img.svg'
 import Input from '../../../components/input'
+import Password from '../../../components/login/login-inputs/password'
+
 import Button from '../../../components/button'
+import Checkbox from '../../../components/checkbox';
 
 
 const MenuModal = () => {
@@ -14,8 +17,9 @@ const MenuModal = () => {
     useForm();
 
   const [state, setState] = useState<any>({
-    email: '',
     password: '',
+    phoneNumber: '',
+	isAdmin:false
   });
   const onSubmit = (data: any, ev: any) => {
     if (data) {
@@ -37,30 +41,29 @@ const MenuModal = () => {
 			</LogoPart>
 			<InputPart>
 				<InputCard>
-					<CardHeader> Войти </CardHeader>
+					<CardHeader>Войти </CardHeader>
 					
 					<AdminForm onSubmit={handleSubmit(onSubmit)}>
 						<Input
-						name="email"
-						placeholder="Email"
-						label="Email"
-						defVal={state.email}
-						inputType="email"
-						watch={watch('email')}
-						error={errors.email}
+						name="phoneNumber"
+						placeholder="Номер телефона"
+						label="Номер телефона"
+						defVal={state.phoneNumber}
+						inputType="phone"
+						watch={watch('phoneNumber')}
+						error={errors.phoneNumber}
 						register={register}
 						setValue={setValue}
 						/>
-						<Input
+						<Password 
 						name="password"
-						placeholder="Пароль"
-						label="Пароль"
-						defVal={state.password}
-						watch={watch('password')}
+						label="Пароль"					
 						error={errors.password}
 						register={register}
-						setValue={setValue}
-						/>
+						 />
+
+						<Checkbox register={register} label="войти как администратор" name="isAdmin"></Checkbox>						
+
 						<Button style={{ marginTop: '32px', width: '100%' }} type="submit">
 							Продолжить
 						</Button>

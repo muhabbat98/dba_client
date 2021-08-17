@@ -60,20 +60,10 @@ export const CardHeader = styled.h2`
     font-size: 56px;
     line-height: 64px;
     text-align: center;
-    ::after{
-        content: 'Marketplace Админ';
-        margin-top: 16px;
-        font-style: normal;
-        display: block;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 32px;
-        color: rgba(38, 71, 150, 0.7);
-    }
 `;
 export const AdminForm = styled.form`
     &>div{
         margin-top:21px ;
     }
-`;  
-
+`;
+  
