@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const WrapperContainer = styled.div`
     display:flex;
+    @media(max-width: 768px){
+        display:block;
+    }
 `;
 export const CharacterContainer = styled.div`
     width: 630px;
@@ -10,9 +13,9 @@ export const CharacterContainer = styled.div`
     @media(max-width: 1000px){
       width:400px;
     }
-  @media(max-width: 670px){
-    width:auto;
-  }
+`;
+export const MobileContainer = styled.div`
+    
 `;
 export const CharacterText = styled.div`
     font-style: normal;
@@ -24,6 +27,9 @@ export const CharacterText = styled.div`
     margin-top:16px;
     white-space: nowrap;
     width: auto;
+    @media(max-width: 768px){
+      margin-top:12px;
+    }
 `;
 export const Dots = styled.span`
     border-bottom: 1px dashed #E9ECF4;
@@ -42,7 +48,9 @@ export const SizeText = styled.div`
     letter-spacing: -0.15px;
     color: #000000;
     margin-top:16px;
-    //width:250px;
+    @media(max-width: 768px){
+        margin-top:4px;
+    }
 
 `;
 export const HandeleOpen = styled.p`
