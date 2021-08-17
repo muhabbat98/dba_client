@@ -18,6 +18,7 @@ const Content = () => {
     <ContentContainer>
       <Switch>
         <Route exact path={path} component={Homepage} />
+
         <Route
           exact
           path={[`${path}/category`, `${path}/category/:id`]}
