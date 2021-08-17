@@ -3,6 +3,8 @@ import { useSelector } from './useSelector';
 export enum UserRole {
   BUYER = 'ROLE_BUYER',
   SELLER = 'ROLE_SELLER',
+  ADMIN = 'ROLE_ADMIN',
+  MODERATOR = 'ROLE_MODERATOR',
 }
 
 interface UserRoleType {
@@ -21,6 +23,12 @@ export const useRole = (): UserRoleType => {
   } else if (roles === 'ROLE_SELLER') {
     isBuyer = false;
     userRole = UserRole.SELLER;
+  } else if (roles === 'ROLE_ADMIN') {
+    isBuyer = false;
+    userRole = UserRole.ADMIN;
+  } else if (roles === 'ROLE_MODERATOR') {
+    isBuyer = false;
+    userRole = UserRole.MODERATOR;
   } else {
     isBuyer = false;
     userRole = null;
