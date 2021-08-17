@@ -27,6 +27,14 @@ const CategoryRow: React.FC<Props> = ({ menu, num, fetchCategory }) => {
     push('/admin/category/' + menu.id);
   };
 
+  const goCreateTemplate = () => {
+    push('/admin/template/create/' + menu.id);
+  };
+
+  const goGoods = () => {
+    push('/admin/goods/' + menu.id);
+  };
+
   return (
     <CategoryRowContainer>
       <No>
@@ -36,10 +44,10 @@ const CategoryRow: React.FC<Props> = ({ menu, num, fetchCategory }) => {
       <Name onClick={onClick}>
         <CatName>{menu.name}</CatName>
       </Name>
-      <AllGoods>
+      <AllGoods onClick={goGoods}>
         <ToAllGoods>Все товари</ToAllGoods>
       </AllGoods>
-      <Template>
+      <Template onClick={goCreateTemplate}>
         <AddTemplate>Добавить шаблон</AddTemplate>
       </Template>
       <Actions>

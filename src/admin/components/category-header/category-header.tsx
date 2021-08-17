@@ -13,7 +13,7 @@ const CategoryHeader = () => {
         <Link to="/">Категории</Link>
       </Paths>
       <Action>
-        <SearchInput label="Искать категории ..." callback={search} />
+        {/*//<SearchInput label="Искать категории ..." callback={search} />*/}
         <CategoryAddButton />
       </Action>
     </CategoryHeaderContainer>

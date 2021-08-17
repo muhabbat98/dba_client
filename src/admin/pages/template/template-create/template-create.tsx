@@ -38,22 +38,32 @@ const TemplateCreateMain = () => {
   console.log('state -- ', state);
 
   const add = async () => {
-    let data = {
-      categoryId: id,
-      fieldIds: state.fields.map((f) => f.id),
-      isMain: state.isMain,
-      name: name,
-      newFields: [],
-      propertyIds: state.products.map((f) => f.id),
-      referenceIds: [],
-    };
-    console.log(data);
-    try {
-      const response = await axios.post('/meta_data/add/product', data);
-      const message = await response.data;
-      //setAlertMessage({message});
-    } catch (e) {
-      checkError(e);
+    if (
+      name.length > 0 &&
+      (state.fields.length > 0 || state.products.length > 0)
+    ) {
+      let data = {
+        categoryId: id,
+        fieldIds: state.fields.map((f) => f.id),
+        isMain: state.isMain,
+        name: name,
+        newFields: [],
+        propertyIds: state.products.map((f) => f.id),
+        referenceIds: [],
+      };
+      console.log(data);
+      try {
+        const response = await axios.post('/meta_data/add/product', data);
+        const message = await response.data;
+        setAlertMessage({ message: message, type: 'success' });
+      } catch (e) {
+        checkError(e);
+      }
+    } else {
+      setAlertMessage({
+        message: 'Поле заполнено некорректно',
+        type: 'warning',
+      });
     }
   };
 

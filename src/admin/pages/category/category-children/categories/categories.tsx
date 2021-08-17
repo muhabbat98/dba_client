@@ -27,6 +27,7 @@ import CategoryHeader from '../../../../components/category-header';
 import Empty from '../../../../components/empty';
 import AddCategory from '../../../../components/add-category';
 import { axios } from '../../../../../hooks';
+import { useCategory } from '../../context';
 
 interface Props {
   menus: any;
@@ -37,10 +38,11 @@ interface Params {
 }
 
 const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  //const [openModal, setOpenModal] = useState<boolean>(false);
   const [image, setImage] = useState<any>();
   const { push } = useHistory();
   const { id } = useParams<Params>();
+  const { openModal } = useCategory();
 
   const openAddModal = () => {};
 
@@ -94,7 +96,7 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
               <Title>Шаблоны</Title>
             </BoxIconContainer>
           </Box>
-          <Box onClick={() => push('/admin/template/list/' + id)}>
+          <Box onClick={() => push('/admin/goods/' + id)}>
             <BoxIconContainer>
               <Icon>
                 <GoodsIcon />
@@ -103,7 +105,11 @@ const Categories: React.FC<Props> = ({ menus, fetchCategory }) => {
             </BoxIconContainer>
           </Box>
 
-          <Box onClick={() => push('/admin/template/list/' + id)}>
+          <Box
+            onClick={() =>
+              openModal({ id: id, callback: () => console.log(11) })
+            }
+          >
             <BoxIconContainer>
               <Icon>
                 <HamburgerIcon />
