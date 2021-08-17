@@ -18,7 +18,9 @@ const Menu = () => {
       >
         Категория
       </MenuItem>
-      <MenuItem to={`${url}/goods`}>Товары</MenuItem>
+      <MenuItem to={`${url}/goods`} isActive={() => pathname.includes('goods')}>
+        Товары
+      </MenuItem>
 
       <MenuItem to={`${url}/moderators`}>Модераторы</MenuItem>
       <MenuItem to={`${url}/references`}>Справочники</MenuItem>

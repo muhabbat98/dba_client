@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const AllFieldsContainer = styled.div``;
+export const AllFieldsContainer = styled.div`
+  flex: 1;
+`;
 
 export const Header = styled.div`
   display: flex;

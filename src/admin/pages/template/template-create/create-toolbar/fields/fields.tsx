@@ -5,6 +5,7 @@ import {
   Result,
   AddButton,
   Wrapper,
+  WrapperContainer,
   AddContainer,
 } from './style';
 import { axios, useError } from '../../../../../../hooks';
@@ -50,14 +51,14 @@ const Fields: React.FC<Props> = ({ active, fields, fetFields }) => {
             Добавить поле
           </AddButton>
         </AddContainer>
-        <Wrapper>
+        <WrapperContainer>
           <AllFields fields={fields} />
           <Result>
             {state.fields.map((field: any) => (
               <Field key={field.id} field={field} />
             ))}
           </Result>
-        </Wrapper>
+        </WrapperContainer>
       </Wrapper>
     </FieldsContainer>
   );
