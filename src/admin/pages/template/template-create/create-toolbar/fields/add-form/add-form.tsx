@@ -18,6 +18,7 @@ import Button from '../../../../../../../components/button';
 import { useForm } from 'react-hook-form';
 import { axios, useActionCreators, useError } from '../../../../../../../hooks';
 import RadioButton from '../../../../../../../components/radio-button';
+import field from '../../../../../../../admin2/components/field/field';
 
 interface Props {
   onClose: () => void;
@@ -65,6 +66,12 @@ const AddForm: React.FC<Props> = ({ onClose, fetFields }) => {
     }
   }
 
+  const f = primitiveTypes.filter((type) => {
+    return !(type.type === 'REFERENCE' || type.type === 'COLOR');
+  });
+
+  console.log('f', f);
+
   return (
     <AddFormContainer>
       <Backdrop close={onClose} />
@@ -75,8 +82,8 @@ const AddForm: React.FC<Props> = ({ onClose, fetFields }) => {
         <Title>Добавить поле</Title>
         <form onSubmit={handleSubmit(submit)}>
           <PrimitiveTypesContainer>
-            {primitiveTypes.map((type, index) => (
-              <Types id={type.type}>
+            {f.map((type, index) => (
+              <Types key={type.type} id={type.type}>
                 <RadioButton
                   isChecked={index === 0 ? true : false}
                   label={type.name}

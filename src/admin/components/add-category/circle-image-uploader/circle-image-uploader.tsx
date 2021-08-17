@@ -44,6 +44,7 @@ const CircleImageUploader: React.FC<Props> = ({
     const input = e.target;
     const url = input.value;
     const ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    console.log(input.files);
     if (
       input.files &&
       input.files[0] &&
@@ -60,6 +61,7 @@ const CircleImageUploader: React.FC<Props> = ({
       };
       reader.readAsDataURL(input.files[0]);
     } else {
+      console.log(11);
       setAlertMessage({
         message: 'Размер картинки слишком большой или формат не правильный',
         type: 'warning',
@@ -67,7 +69,7 @@ const CircleImageUploader: React.FC<Props> = ({
       setImage(undefined);
     }
   };
-
+  console.log('image --- ', image);
   return (
     <CircleImageUploaderContainer isImage={image}>
       <Label htmlFor={id} />
@@ -88,7 +90,7 @@ const CircleImageUploader: React.FC<Props> = ({
               {/*</ViewIconContainer>*/}
               <CancelIconContainer
                 title="Убрать фото"
-                onClick={() => setImage(null)}
+                onClick={() => setImage(undefined)}
               >
                 <Cancel />
               </CancelIconContainer>

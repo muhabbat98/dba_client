@@ -17,8 +17,8 @@ import {
     Reviews,
     ReviewsContainer,
     BinaryTextConatiner,
-    ColorsContainer
-
+    ColorsContainer,
+    PriceTitles
 } from './style'
 
 const images = [
@@ -92,6 +92,7 @@ const MobileProductHeader = () => {
                 >{isInWishlist ?<HeartFull style={{width:17,height:17}}/>:<Heart style={{width:17,height:17}}/>}</div>
 
             </ReviewsContainer>
+            <PriceTitles>8 595 000 сум <span>8 416 000 сум</span></PriceTitles>
             <MobileSlider items={images}/>
             <BinaryTextConatiner>
                 <p>Цвет товара:</p><span>синий</span>

@@ -10,12 +10,12 @@ interface Props {
 const Menu: React.FC<Props> = ({ deleteCategory }) => {
   return (
     <MenuContainer>
-      <MenuItem>
-        <IconContainer>
-          <Edit />
-        </IconContainer>
-        <Title>Изменить</Title>
-      </MenuItem>
+      {/*<MenuItem>*/}
+      {/*  <IconContainer>*/}
+      {/*    <Edit />*/}
+      {/*  </IconContainer>*/}
+      {/*  <Title>Изменить</Title>*/}
+      {/*</MenuItem>*/}
       <MenuItem onClick={deleteCategory}>
         <IconContainer>
           <Trash />

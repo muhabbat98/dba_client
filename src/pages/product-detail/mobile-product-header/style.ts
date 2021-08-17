@@ -38,6 +38,21 @@ export const Reviews = styled.div`
       color: #000000;
     }
 `;
+export const PriceTitles = styled.div`
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.16px;
+    color: #000000;
+    margin-top:16px;
+        span{
+          margin-left:24px;
+          color:#FF4242;
+          text-decoration-line: line-through;
+        }
+`;
 export const BinaryTextConatiner = styled.div`
     display: flex;
     align-items: center;

@@ -17,8 +17,7 @@ import {
 } from './style';
 import { useCategory } from '../../pages/category/context';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { axios, useError } from '../../../hooks';
-import { setAlertMessage } from '../../../store/alert/alert-action-creators';
+import { axios, useActionCreators, useError } from '../../../hooks';
 
 interface FormInputs {
   name: string;
@@ -34,6 +33,8 @@ const AddCategory = () => {
     icon: '',
     photo: '',
   });
+
+  const { setAlertMessage } = useActionCreators();
 
   const { pathname } = useLocation();
   const params = useParams();
@@ -55,27 +56,34 @@ const AddCategory = () => {
   const onSubmit = async (data: FormInputs) => {
     const { description, name, icon, image } = data;
     console.log('data------->', data);
+    if (data.image[0] && data.icon[0]) {
+      try {
+        let formData = new FormData();
+        formData.append('image', data.image[0]);
+        formData.append('icon', data.icon[0]);
+        formData.append('name', data.name);
+        formData.append('description', data.description);
+        formData.append('parentId', !id ? '' : id);
 
-    try {
-      let formData = new FormData();
-      formData.append('image', data.image[0]);
-      formData.append('icon', data.icon[0]);
-      formData.append('name', data.name);
-      formData.append('description', data.description);
-      formData.append('parentId', !id ? '' : id);
+        console.log('formData -- ', formData);
+        const response = await axios.post('/category/add', formData);
+        const d = await response.data;
 
-      console.log('formData -- ', formData);
-      const response = await axios.post('/category/add', formData);
-      const d = await response.data;
+        setAlertMessage({
+          message: d.message,
+          type: 'success',
+        });
+        window.location.reload();
 
+        closeModal();
+      } catch (e) {
+        checkError(e);
+      }
+    } else {
       setAlertMessage({
-        message: d.message,
-        type: 'success',
+        message: 'Поле заполнено некорректно',
+        type: 'warning',
       });
-
-      closeModal();
-    } catch (e) {
-      checkError(e);
     }
   };
 

@@ -6,8 +6,9 @@ import {
     CharacterText,
     Dots,
     SizeText,
-    HandeleOpen
-} from './style'
+    HandeleOpen, MobileContainer
+} from './style';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 const charchters =[
     {character:"Толщина предмета",size:"0.74 см"},
     {character:"Разрешение экрана",size:"2532х1170"},
@@ -18,7 +19,7 @@ const charchters =[
     {character:"Ширина предмета",size:"7.15 см"},
     {character:"Беспроводные интерфейсы",size:" NFC; Bluetooth 5.0; Wi-Fi 802.11ax"},
     {character:"Спутниковая навигация",size:"ГЛОНАСС; GPS; BeiDou; Galileo;QZSS"},
-    
+
 ]
 const display = [
     {character:"Тип дисплея/экранаолщина предмета",size:"Super AMOLED"},
@@ -33,60 +34,96 @@ const network = [
 ]
 const Characteristic = () => {
     const [characters,setCharacters] = useState<boolean>(false)
-    
+    const [width,height] = useWindowSize();
     return (
         <div>
             <ProductTitle title="Характеристика"/>
             <WrapperContainer>
-                <div>
-                    {charchters.map((item,index)=>(
-                        <CharacterContainer key={index} style={{display:"flex"}}>
-                            <CharacterText>{item.character}</CharacterText>
-                            <Dots></Dots>
-                        </CharacterContainer>
-                    ))}
-                </div>
-                <div>
-                    {charchters.map((item,index)=>(
-                        <SizeText key={index}>{item.size}</SizeText>
-                    ))
-                    }
-                </div>
+                {width>768 ?
+                    <>
+                        <div>
+                            {charchters.map((item,index)=>(
+                                <CharacterContainer key={index} style={{display:"flex"}}>
+                                    <CharacterText>{item.character}</CharacterText>
+                                    <Dots></Dots>
+                                </CharacterContainer>
+                            ))}
+                        </div>
+                        <div>
+                            {charchters.map((item,index)=>(
+                                <SizeText key={index}>{item.size}</SizeText>
+                            ))
+                            }
+                        </div>
+
+                    </> :
+                    <>
+                        {charchters.map((item:any,index:number)=>(
+                                <MobileContainer key={index}>
+                                    <CharacterText>{item.character}</CharacterText>
+                                    <SizeText key={index}>{item.size}</SizeText>
+                                </MobileContainer>
+                            ))}
+                    </>}
             </WrapperContainer>
             {characters && <>
                 <ProductTitle title="Экран"/>
             <WrapperContainer>
-                <div>
-                    {display.map((item,index)=>(
-                        <CharacterContainer key={index} style={{display:"flex"}}>
-                            <CharacterText>{item.character}</CharacterText>
-                            <Dots></Dots>
-                        </CharacterContainer>
-                    ))}
-                </div>
-                <div>
-                    {display.map((item,index)=>(
-                        <SizeText key={index}>{item.size}</SizeText>
-                    ))
-                    }
-                </div>
+                {width>768 ?
+                    <>
+                        <div>
+                            {display.map((item,index)=>(
+                                <CharacterContainer key={index} style={{display:"flex"}}>
+                                    <CharacterText>{item.character}</CharacterText>
+                                    <Dots></Dots>
+                                </CharacterContainer>
+                            ))}
+                        </div>
+                        <div>
+                            {display.map((item,index)=>(
+                                <SizeText key={index}>{item.size}</SizeText>
+                            ))
+                            }
+                        </div>
+                    </>:
+                    <>
+                        {display.map((item:any,index:number)=>(
+                            <MobileContainer key={index}>
+                                <CharacterText>{item.character}</CharacterText>
+                                <SizeText key={index}>{item.size}</SizeText>
+                            </MobileContainer>
+                        ))}
+                    </>}
+
             </WrapperContainer>
             <ProductTitle title="Связь"/>
             <WrapperContainer>
-                <div>
-                    {network.map((item,index)=>(
-                        <CharacterContainer key={index} style={{display:"flex"}}>
-                            <CharacterText>{item.character}</CharacterText>
-                            <Dots></Dots>
-                        </CharacterContainer>
-                    ))}
-                </div>
-                <div>
-                    {network.map((item,index)=>(
-                        <SizeText key={index}>{item.size}</SizeText>
-                    ))
-                    }
-                </div>
+                {width>768 ?
+                    <>
+                        <div>
+                            {network.map((item,index)=>(
+                                <CharacterContainer key={index} style={{display:"flex"}}>
+                                    <CharacterText>{item.character}</CharacterText>
+                                    <Dots></Dots>
+                                </CharacterContainer>
+                            ))}
+                        </div>
+                        <div>
+                            {network.map((item,index)=>(
+                                <SizeText key={index}>{item.size}</SizeText>
+                            ))
+                            }
+                        </div>
+                    </>:
+                    <>
+                        {network.map((item:any,index:number)=>(
+                            <MobileContainer key={index}>
+                                <CharacterText>{item.character}</CharacterText>
+                                <SizeText key={index}>{item.size}</SizeText>
+                            </MobileContainer>
+                        ))}
+                    </>}
+
             </WrapperContainer>
             </>}
             <HandeleOpen onClick={()=>setCharacters(open=>!open)}>{characters?"Свернуть характеристики":"Развернуть характеристики"}</HandeleOpen>

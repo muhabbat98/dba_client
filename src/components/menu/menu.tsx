@@ -1,6 +1,9 @@
 import React,{SyntheticEvent,useEffect,useState} from "react";
-import { axios, useActionCreators } from '../../hooks';
+import { useActionCreators } from '../../hooks';
+import {Link} from 'react-router-dom';
+
 import {
+    ListWrapper,
     MenuWrapper,
     BlurLayer,
     List,
@@ -33,22 +36,11 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
         if(menuEls){
             setMenus(menuEls);
             setActiveMenu(menuEls[0]);
+            endLoading();
         }else{
-            
+            startLoading();
         }
     },[])
-    const fetchMenu = async () => {
-        setMenus([]);
-        try {
-          startLoading();
-          const respone = await axios('/category/all');
-          const data = await respone.data;
-          setMenus(data);
-          endLoading();
-        } catch (e) {
-          error('Что-то пошло не так!');
-        }
-      };
     
     const handleActiveMenu=(e: SyntheticEvent, item:any)=>{
         setActiveMenu(item);
@@ -60,10 +52,12 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
         }
         target.classList.add('active');
     }
+
     const activeChildrenlickHandle=(e: SyntheticEvent)=>{
         const target = e.target as HTMLElement;
         target.parentElement?.click();
     }
+
     const handleShowMore=(e:SyntheticEvent)=>{
         const target = e.target as HTMLElement;
         target.parentElement?.previousElementSibling?.classList.toggle('show');
@@ -75,13 +69,17 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
             target.textContent = 'Все категория...';
         }
     }
+
     const handleClose =()=>{
         if(stateHandler)
-        stateHandler();
+            stateHandler();
+    }
+    const handleOutsideClick =()=>{
+            handleClose();
     }
     return(<>
-        <BlurLayer>
-            <MenuWrapper>
+        <BlurLayer onClick={handleOutsideClick}>
+            <MenuWrapper onClick={(e)=>e.stopPropagation()}>
                 <Container> 
                     <Row>
                         <Col xl={3} lg={3} md={3}>
@@ -95,23 +93,21 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                             </List>
                         </Col>
                         <Col  xl={4} lg={4} md={4}>
-                        <div style={{overflow:'auto',maxHeight:550,margin:16}}>
+                        <ListWrapper >
                         {activeMenu?activeMenu.subCategories.map((item1:any,i:number)=>{
                             if(i<Math.ceil(activeMenu.subCategories.length/2))
-                            return(<ChildrenList className="content">
+                            return(<Link to={item1.url}><ChildrenList className="content">
                                 <ChildListItem className="parent">
                                     <ChildTitle>{item1.name}</ChildTitle>
                                 </ChildListItem>
                                {item1.subCategories.map((item2:any,i:number)=>{
-                                   if(i<5)
+                                 if(i<5)
                                    return(<ChildListItem className="">
                                         <ChildTitle>{item2.name}</ChildTitle>
                                     </ChildListItem>)
                                 })}
-                                {item1.subCategories.length>5?
-                                <>
                                 
-                                <ShowMoreElements restNumEls={item1.subCategories.length-5}>
+                            {/* <ShowMoreElements restNumEls={item1.subCategories.length-5}>
                                 {item1.subCategories.map(
                                     (item2:any,i:number)=>{
                                         if(i>4)
@@ -119,14 +115,14 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                         <ChildTitle>{item2.name}</ChildTitle>
                                     </ChildListItem>)
                                     }
-                                )}</ShowMoreElements>
-                                <ChildListItem className="">
-                                        <ChildTitle onClick={(e:SyntheticEvent)=>handleShowMore(e)} style={{color:'#264796'}}>Все категория...</ChildTitle>
-                                </ChildListItem></>:''}
-                        </ChildrenList>)}):''}</div>
+                                )}</ShowMoreElements> */}
+                               {item1.subCategories.length>5?<ChildListItem className="">
+                                        <ChildTitle style={{color:'#264796'}}>Все категория...</ChildTitle>
+                                </ChildListItem>:''}
+                        </ChildrenList></Link>)}):''}</ListWrapper>
                         </Col>
                         <Col  xl={4} lg={4} md={4}>
-                        <div style={{overflow:'auto',maxHeight:550,margin:16}}>
+                        <ListWrapper>
                         {activeMenu?activeMenu.subCategories.slice(0).reverse().map((item1:any,i:number)=>{
                             if(i<activeMenu.subCategories.length-Math.ceil(activeMenu.subCategories.length/2))
                             return(<ChildrenList className="content">
@@ -139,9 +135,8 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                         <ChildTitle>{item2.name}</ChildTitle>
                                     </ChildListItem>)
                                 })}
-                                {item1.subCategories.length>5?
-                                <>
-                                <ShowMoreElements restNumEls={item1.subCategories.length-5}>
+                               
+                                {/* <ShowMoreElements restNumEls={item1.subCategories.length-5}>
                                 {item1.subCategories.map(
                                     (item2:any,i:number)=>{
                                         if(i>4)
@@ -149,11 +144,11 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                         <ChildTitle>{item2.name}</ChildTitle>
                                     </ChildListItem>)
                                     }
-                                )}</ShowMoreElements>
-                                <ChildListItem className="">
+                                )}</ShowMoreElements> */}
+                                {item1.subCategories.length>5?<ChildListItem className="">
                                         <ChildTitle onClick={(e:SyntheticEvent)=>handleShowMore(e)} style={{color:'#264796'}}>Все категория</ChildTitle>
-                                </ChildListItem></>:''}
-                        </ChildrenList>)}):''}</div>
+                                </ChildListItem>:''}
+                        </ChildrenList>)}):''}</ListWrapper>
                         </Col>
                         
                         <Col  xl={1}lg={1} md={1}>

@@ -7,7 +7,6 @@ interface Props {
 export const FieldsContainer = styled.div<Props>`
   display: ${({ active }) => (active ? 'block' : 'none')};
   margin-top: 16px;
-  width: 50%;
 `;
 
 export const AddButton = styled.div`
@@ -31,9 +30,20 @@ export const AddButton = styled.div`
 
 export const Wrapper = styled.div``;
 
+export const WrapperContainer = styled.div`
+  display: flex;
+`;
+
 export const AddContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 
-export const Result = styled.div``;
+export const Result = styled.div`
+  flex: 1;
+  padding: 10px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+`;
