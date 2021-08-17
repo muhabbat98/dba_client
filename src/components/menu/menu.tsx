@@ -75,7 +75,9 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
             stateHandler();
     }
     const handleOutsideClick =()=>{
-            handleClose();
+            setTimeout(function(){
+                handleClose();
+            },100);
     }
     return(<>
         <BlurLayer onClick={handleOutsideClick}>
@@ -96,15 +98,18 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                         <ListWrapper >
                         {activeMenu?activeMenu.subCategories.map((item1:any,i:number)=>{
                             if(i<Math.ceil(activeMenu.subCategories.length/2))
-                            return(<Link to={item1.url}><ChildrenList className="content">
+                            return(<ChildrenList className="content">
+                                <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}>
                                 <ChildListItem className="parent">
                                     <ChildTitle>{item1.name}</ChildTitle>
                                 </ChildListItem>
+                                </Link>
                                {item1.subCategories.map((item2:any,i:number)=>{
                                  if(i<5)
-                                   return(<ChildListItem className="">
+                                   return(<Link style={{ textDecoration:"none"}} to={item2.route}  onClick={handleOutsideClick}>
+                                       <ChildListItem className="">
                                         <ChildTitle>{item2.name}</ChildTitle>
-                                    </ChildListItem>)
+                                    </ChildListItem></Link>)
                                 })}
                                 
                             {/* <ShowMoreElements restNumEls={item1.subCategories.length-5}>
@@ -116,39 +121,43 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                     </ChildListItem>)
                                     }
                                 )}</ShowMoreElements> */}
-                               {item1.subCategories.length>5?<ChildListItem className="">
+                               {item1.subCategories.length>5?
+                               <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}><ChildListItem className="">
                                         <ChildTitle style={{color:'#264796'}}>Все категория...</ChildTitle>
-                                </ChildListItem>:''}
-                        </ChildrenList></Link>)}):''}</ListWrapper>
+                                </ChildListItem></Link>:''}
+                        </ChildrenList>)}):''}</ListWrapper>
                         </Col>
                         <Col  xl={4} lg={4} md={4}>
                         <ListWrapper>
                         {activeMenu?activeMenu.subCategories.slice(0).reverse().map((item1:any,i:number)=>{
                             if(i<activeMenu.subCategories.length-Math.ceil(activeMenu.subCategories.length/2))
                             return(<ChildrenList className="content">
-                                <ChildListItem className="parent">
-                                    <ChildTitle>{item1.name}</ChildTitle>
-                                </ChildListItem>
-                               {item1.subCategories.map((item2:any,i:number)=>{
-                                   if(i<5)
-                                   return(<ChildListItem className="">
-                                        <ChildTitle>{item2.name}</ChildTitle>
-                                    </ChildListItem>)
-                                })}
-                               
-                                {/* <ShowMoreElements restNumEls={item1.subCategories.length-5}>
-                                {item1.subCategories.map(
-                                    (item2:any,i:number)=>{
-                                        if(i>4)
-                                        return(<ChildListItem className="">
-                                        <ChildTitle>{item2.name}</ChildTitle>
-                                    </ChildListItem>)
-                                    }
-                                )}</ShowMoreElements> */}
-                                {item1.subCategories.length>5?<ChildListItem className="">
-                                        <ChildTitle onClick={(e:SyntheticEvent)=>handleShowMore(e)} style={{color:'#264796'}}>Все категория</ChildTitle>
-                                </ChildListItem>:''}
-                        </ChildrenList>)}):''}</ListWrapper>
+                                    <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}>
+                                        <ChildListItem className="parent">
+                                            <ChildTitle>{item1.name}</ChildTitle>
+                                        </ChildListItem></Link>
+                                    {item1.subCategories.map((item2:any,i:number)=>{
+                                        if(i<5)
+        
+                                        return(<Link style={{ textDecoration:"none"}} to={item2.route}  onClick={handleOutsideClick}><ChildListItem className="">
+                                                <ChildTitle>{item2.name}</ChildTitle>
+                                            </ChildListItem></Link>)
+                                        })}
+                                    
+                                        {/* <ShowMoreElements restNumEls={item1.subCategories.length-5}>
+                                        {item1.subCategories.map(
+                                            (item2:any,i:number)=>{
+                                                if(i>4)
+                                                return(<ChildListItem className="">
+                                                <ChildTitle>{item2.name}</ChildTitle>
+                                            </ChildListItem>)
+                                            }
+                                        )}</ShowMoreElements> */}
+                                        {item1.subCategories.length>5? <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}><ChildListItem className="">
+                                                <ChildTitle onClick={(e:SyntheticEvent)=>handleShowMore(e)} style={{color:'#264796'}}>Все категория</ChildTitle>
+                                        </ChildListItem></Link>:''}
+                                </ChildrenList>)}):''}
+                        </ListWrapper>
                         </Col>
                         
                         <Col  xl={1}lg={1} md={1}>
