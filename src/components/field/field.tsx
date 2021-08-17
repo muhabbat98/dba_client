@@ -1,6 +1,4 @@
 import React, { FC, useState } from 'react';
-import Input from '../input';
-import { useForm } from 'react-hook-form';
 import Dropdown from '../drop-down';
 import SimpleInput from '../simple-input';
 
@@ -16,8 +14,6 @@ interface FieldProps {
 }
 
 const Field: FC<FieldProps> = ({ field }) => {
-  const { register, setValue, watch } = useForm();
-
   const format = field.format;
   const fieldName = field.name;
   const list = field.values;
