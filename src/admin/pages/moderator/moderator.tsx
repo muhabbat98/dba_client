@@ -15,6 +15,8 @@ const Moderator = () => {
       const [userItem,setUserItem] = useState();
       const ref = useRef<any>();
       const ref2 = useRef<any>();
+      const [addModeratorAnswer,setAddModeratorAnswer] = useState<boolean>(false);
+      const [editModeratorAnswer,setEditModeratorAnswer] = useState<boolean>(false);
       const { setAlertMessage } = useActionCreators();
       const {checkError} = useError();
       useEffect(() => {
@@ -69,15 +71,18 @@ const Moderator = () => {
           try{
               const response = await axios.post('/moderator',getAddItems)
               refreshModerator(true);
+
               // console.log('response-->',response);
           } catch(error) {
               checkError(error);
+              setAddModeratorAnswer(true);
           }
       }
       const editModerator = async ( data:any ) => {
           try{
               const response = await axios.put('/moderator',data);
               refreshModerator(true);
+              setEditModeratorAnswer(true);
           }
           catch(error) {
             checkError(error);
@@ -125,6 +130,7 @@ const Moderator = () => {
                   reff={ref}
                   setClose={setOpenModal}
                   addModeratorItem={addModeratorItem}
+                  requestAnswer={addModeratorAnswer}
                 />}
       </>)
 }

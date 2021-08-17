@@ -13,9 +13,10 @@ interface Propses {
       setClose:any;
       reff?:any;
       addModeratorItem?:any;
+      requestAnswer?:boolean;
 }
 
-const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
+const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem,requestAnswer}) =>{
     const { register, handleSubmit, control, watch, errors, setValue } = useForm();
     const [avatar,setAvatar] = useState<any>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,7 +48,8 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem}) =>{
 
 
         if (data.password == data.confirmPassword) {
-            setClose(false);
+
+            setClose(false)
             formData.append("image", imgState?imgState:null);
             formData.append("firstName", data.firstName);
             formData.append("secondName", data.secondName);
