@@ -9,7 +9,7 @@ import ChangeReference from './change-reference';
 const References = () => {
   const [references, setReferences] = useState<any[]>([]);
   const [referenceItems, setReferencesItems] = useState<any[]>([]);
-  const [currentReference, setCurrentReference] = useState<any[]>([]);
+  const [currentReference, setCurrentReference] = useState<any>(null);
   const [editModal, setEditModal] = useState<any>({
     open: false,
     row: {},
@@ -25,7 +25,12 @@ const References = () => {
   useEffect(() => {
     (async () => {
       const firstChild = await fetchReferences();
-      await fetchReferenceItems(firstChild);
+      console.log('firstChild', firstChild);
+      if (firstChild) {
+        console.log('firstChild2', firstChild);
+        await fetchReferenceItems(firstChild);
+        setCurrentReference(firstChild);
+      }
     })();
   }, []);
 
@@ -37,7 +42,12 @@ const References = () => {
       setReferences(data);
       setIsLoading(false);
       setIsError(false);
-      fetchReferenceItems(data[0]);
+      if (data[0]) {
+        fetchReferenceItems(data[0]);
+      } else {
+        setCurrentReference(null);
+      }
+
       return data[0];
     } catch (e) {
       checkError(e);
@@ -54,7 +64,7 @@ const References = () => {
     try {
       const response = await axios.get(
         `/meta_data/reference_item/${
-          isDeletedFetch ? currentReferenceRow.id : row.id
+          isDeletedFetch ? currentReferenceRow?.id : row.id
         }`
       );
       const data = await response.data;
@@ -64,6 +74,7 @@ const References = () => {
       }
     } catch (e) {
       checkError(e);
+      console.log(11214);
     }
   }
 
@@ -114,13 +125,15 @@ const References = () => {
             openModal={openModal}
             fetchReferences={fetchReferences}
           />
-          <ReferenceList
-            references={referenceItems}
-            currentReference={currentReference}
-            openModal={openModal}
-            fetchReferenceItems={fetchReferenceItems}
-            fetchReferences={fetchReferences}
-          />
+          {currentReference && (
+            <ReferenceList
+              references={referenceItems}
+              currentReference={currentReference}
+              openModal={openModal}
+              fetchReferenceItems={fetchReferenceItems}
+              fetchReferences={fetchReferences}
+            />
+          )}
         </ReferencesWrapper>
       )}
     </ReferencesContainer>
