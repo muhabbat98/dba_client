@@ -9,9 +9,18 @@ interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
     style?:any,
     ref?:any,
     defaultValue?:any,
+    inputValueForMask?:any,
     inputType?: 'string' | 'number';
 }
-const SimpleInput:React.FC<Propses> = ({label,ref,placeholder,defaultValue,style,inputType,...rest}) => {
+const SimpleInput:React.FC<Propses> = ({
+    label,
+    ref,
+    placeholder,
+    defaultValue,
+    style,
+    inputType,
+    inputValueForMask,
+    ...rest}) => {
     const [isFocus, setIsFocus] = useState<boolean>(false);
     const [number,setNumber] = useState<any>(null);
     const [string,setString] = useState<any>(null);
@@ -28,6 +37,7 @@ const SimpleInput:React.FC<Propses> = ({label,ref,placeholder,defaultValue,style
             }
         }
 
+        inputValueForMask(inputType && inputType=='string'?string:number);
     })
     const onBlur = (e: any) => {
         setIsFocus(true);
