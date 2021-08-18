@@ -13,7 +13,7 @@ interface Props {
 const References: React.FC<Props> = ({ fetFields }) => {
   const [references, setReferences] = useState<any[]>([]);
   const [referenceItems, setReferencesItems] = useState<any[]>([]);
-  const [currentReference, setCurrentReference] = useState<any[]>([]);
+  const [currentReference, setCurrentReference] = useState<any>(null);
   const [editModal, setEditModal] = useState<any>({
     open: false,
     row: {},
@@ -29,7 +29,10 @@ const References: React.FC<Props> = ({ fetFields }) => {
   useEffect(() => {
     (async () => {
       const firstChild = await fetchReferences();
-      await fetchReferenceItems(firstChild);
+      if (firstChild) {
+        await fetchReferenceItems(firstChild);
+        setCurrentReference(firstChild);
+      }
     })();
   }, []);
 
@@ -41,7 +44,11 @@ const References: React.FC<Props> = ({ fetFields }) => {
       setReferences(data);
       setIsLoading(false);
       setIsError(false);
-      fetchReferenceItems(data[0]);
+      if (data[0]) {
+        fetchReferenceItems(data[0]);
+      } else {
+        setCurrentReference(null);
+      }
       return data[0];
     } catch (e) {
       checkError(e);
@@ -96,6 +103,7 @@ const References: React.FC<Props> = ({ fetFields }) => {
     <ReferencesContainer isLoading={isLoading}>
       {editModal.open && (
         <ChangeReference
+          currentReference={currentReference}
           fetchReferences={fetchReferences}
           onClose={closeModal}
           data={editModal}
@@ -117,14 +125,16 @@ const References: React.FC<Props> = ({ fetFields }) => {
             openModal={openModal}
             fetchReferences={fetchReferences}
           />
-          <ReferenceList
-            references={referenceItems}
-            currentReference={currentReference}
-            openModal={openModal}
-            fetchReferenceItems={fetchReferenceItems}
-            fetchReferences={fetchReferences}
-            fetFields={fetFields}
-          />
+          {currentReference && (
+            <ReferenceList
+              references={referenceItems}
+              currentReference={currentReference}
+              openModal={openModal}
+              fetchReferenceItems={fetchReferenceItems}
+              fetchReferences={fetchReferences}
+              fetFields={fetFields}
+            />
+          )}
         </ReferencesWrapper>
       )}
     </ReferencesContainer>

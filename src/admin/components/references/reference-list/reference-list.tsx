@@ -31,7 +31,7 @@ const ReferenceList: React.FC<Props> = ({
   return (
     <ReferenceListContainer>
       <Header>
-        <Title>{isParent ? <>Справочники</> : currentReference.name}</Title>
+        <Title>{isParent ? <>Справочники</> : currentReference?.name}</Title>
         <AddButton
           onClick={() => openModal(true, isParent ? null : currentReference)}
         >
@@ -43,7 +43,7 @@ const ReferenceList: React.FC<Props> = ({
       {references.length > 0 ? (
         references.map((ref) => (
           <ReferencesItemRow
-            isActive={ref.id === currentReference.id}
+            isActive={ref.id === currentReference?.id}
             key={ref.id}
             row={ref}
             fetchReferenceItems={fetchReferenceItems}

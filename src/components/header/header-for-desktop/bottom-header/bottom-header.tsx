@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Container from '../../grid/container';
-import BreadCrumb from '../../hambuger-menu';
+import Container from '../../../grid/container';
+import BreadCrumb from '../../../hambuger-menu';
 import {
   BottomHeaderContainer,
   MenuContainer,
@@ -22,8 +22,7 @@ const BottomHeader: React.FC<MenuStateProps> = ({ state, stateHandler }) => {
   const handleMenuIcon = () => {
     setMenuComponentState(!state);
     setTimeout(function () {
-      if (stateHandler) 
-        stateHandler();
+      if (stateHandler) stateHandler();
     }, 200);
   };
   return (
@@ -36,28 +35,28 @@ const BottomHeader: React.FC<MenuStateProps> = ({ state, stateHandler }) => {
           <MenuWrapper>
             <MenuContainer>
               <MenuItem>
-                <Link to='/'>Мобильные телефоны</Link>
+                <Link to="/">Мобильные телефоны</Link>
               </MenuItem>
               <MenuItem>
-                <Link to='/'>Телевизоры</Link>
+                <Link to="/">Телевизоры</Link>
               </MenuItem>
               <MenuItem>
-                <Link to='/'>Товари длядома</Link>
+                <Link to="/">Товари длядома</Link>
               </MenuItem>
               <MenuItem>
-                <Link to='/'>Авто</Link>
+                <Link to="/">Авто</Link>
               </MenuItem>
               <MenuItem>
-                <Link to='/'>Гигиена</Link>
+                <Link to="/">Гигиена</Link>
               </MenuItem>
               <MenuItem>
-                <Link to='/'>Зоотовари</Link>
+                <Link to="/">Зоотовари</Link>
               </MenuItem>
               <MenuItem>
-                <Link to='/'>Красота</Link>
+                <Link to="/">Красота</Link>
               </MenuItem>
               <MenuItem>
-                <Link to='/'>Строительство и ремонт</Link>
+                <Link to="/">Строительство и ремонт</Link>
               </MenuItem>
             </MenuContainer>
           </MenuWrapper>

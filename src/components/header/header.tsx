@@ -1,45 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import BottomHeader from './bottom-header';
-import MiddleHeader from './middle-header';
-import TopHeader from './top-header';
-import MenuContent from '../menu';
-import { HeaderContainer } from './style';
-import BottomHeaderForSeller from './bottom-header-for-seller';
-import { useSellerPathname,useActionCreators, useSelector } from '../../hooks';
+import React from 'react';
+import HeaderForDesktop from './header-for-desktop';
+import { useWindowSize } from '../../hooks/useWindowSize';
+import HeaderForMobile from './header-for-mobile';
 
 const Header = () => {
-  const [state, setMenuState] = useState<boolean>(false);
-  const { isSellerPath } = useSellerPathname();
-  const { menu } = useSelector((state) => state.menu);
-  const {fetchMenu} = useActionCreators();
- 
-  useEffect(()=>{
-    fetchMenu();
-  },[]);
+  const [width, height] = useWindowSize();
 
-  const handleMenuState = () => {
-    setMenuState(!state);
-  };
+  let header = null;
 
-  return (
-    <>
-      <HeaderContainer>
-        <TopHeader />
-        <MiddleHeader />
+  if (width > 768) {
+    header = <HeaderForDesktop />;
+  } else {
+    header = <HeaderForMobile />;
+  }
 
-        {isSellerPath ? (
-          <BottomHeaderForSeller />
-        ) : (
-          <BottomHeader state={state} stateHandler={handleMenuState} />
-        )}
-      </HeaderContainer>
-
-      {state && (
-        <MenuContent menuEls={menu} stateHandler={handleMenuState} />
-      )}
-    </>
-  );
+  return header;
 };
 
 export default Header;

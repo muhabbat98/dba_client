@@ -21,7 +21,8 @@ interface Props {
   onClose: () => void;
   data: any;
   fetchReferences: () => void;
-  fetchReferenceItems: (row: any) => void;
+  fetchReferenceItems: any;
+  currentReference: any;
 }
 
 const ChangeReference: React.FC<Props> = ({
@@ -29,6 +30,7 @@ const ChangeReference: React.FC<Props> = ({
   data,
   fetchReferences,
   fetchReferenceItems,
+  currentReference,
 }) => {
   const { isAdding, row, isParent } = data;
   const { checkError } = useError();
@@ -78,16 +80,27 @@ const ChangeReference: React.FC<Props> = ({
       }
     } else {
       try {
-        const response = await axios.put('/meta_data/reference', {
-          id: row.id,
-          name: datas.name,
-        });
+        const response = await axios.put(
+          isParent
+            ? '/meta_data/reference'
+            : '/meta_data/change_reference_item',
+          isParent
+            ? {
+                id: row.id,
+                name: datas.name,
+              }
+            : { newName: datas.name, referenceItemId: row.id }
+        );
         const dat = await response.data;
+
         setAlertMessage({
           message: dat.message,
           type: 'success',
         });
-        isParent ? fetchReferences() : fetchReferenceItems(row);
+
+        isParent
+          ? fetchReferences()
+          : fetchReferenceItems(row, true, currentReference);
         onClose();
       } catch (error) {
         checkError(error);
