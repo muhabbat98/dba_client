@@ -39,7 +39,7 @@ const ProductDetail = () => {
             item3:true
         })
     }
-console.log('width-->',width)
+
     return (
         <>
             <Container>
