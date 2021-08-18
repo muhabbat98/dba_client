@@ -63,4 +63,7 @@ export const ButtonElement = styled.button<ButtonType>`
     font-size:14px;
     padding: 0px 15px 0px 15px;
   }
+  @media(max-width:480px){
+    height:48px;
+  }
 `;

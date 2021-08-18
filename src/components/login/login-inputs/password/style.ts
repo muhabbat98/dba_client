@@ -20,6 +20,11 @@ export const PhoneContainer = styled.div<{
   margin-top: 12px;
   margin-bottom: 12px;
   position: relative;
+  
+  @media(max-width: 480px){
+    height: 48px;
+    padding: 4px 21px;
+  }
 `;
 
 export const PhoneContainerLabel = styled.label``;
@@ -46,6 +51,10 @@ export const InputContainer = styled.div`
     top: 50%;
     transform: translateY(-50%);
     right: 25px;
+    @media(max-width: 480px){
+      height: 20px;
+      width: 20px;
+    }
   }
 `;
 
@@ -60,6 +69,10 @@ export const Input = styled.input`
   width: 90%;
   letter-spacing: 2px;
   height: 22px;
+  @media(max-width: 480px){
+    height: 20px;
+  }
+  
 `;
 
 export const Placeholder = styled.div`
@@ -68,11 +81,14 @@ export const Placeholder = styled.div`
   transform: translateY(-50%);
   left: 25px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 600;
   font-size: 17px;
   line-height: 18px;
   color: rgba(0, 0, 0, 0.5);
   user-select: none;
+  @media(max-width: 480px){
+    font-size: 14px;
+  }
 `;
 
 export const Mask = styled.div`
