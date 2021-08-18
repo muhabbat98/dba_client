@@ -95,26 +95,14 @@ export const InputCard = styled.div`
         margin: 0px 42px ;
     }
     @media only screen and (max-width: 768px){
-        padding: 22px;
+        padding: 16px;
     }
   
     @media ${({ theme }) => theme.breakpoints.xs}{
         margin: 0px 36px ;
         border-radius: 8px;
         box-sizing: border-box;      
-    }
-  
-   
-   
-  
-   
-
-  
-   
-    /* @media only screen and (max-width: 320px){
-        margin: 0px 18px ;
-        padding: 22px;
-    } */
+    }  
 `;
 export const CardHeader = styled.h2`
     margin-top: 0;
