@@ -26,11 +26,13 @@ const SimpleInput: React.FC<Propses> = ({
   const [number, setNumber] = useState<any>(null);
   const [string, setString] = useState<any>(null);
   const [id, setId] = useState<string>('');
+
   useEffect(() => {
     const val: any = document.querySelector('.inputt');
     if (defaultValue && defaultValue.length > 0) {
       setIsFocus(true);
     }
+
     if (val) {
       const leng = val.value;
       if (leng.length > 0) {
@@ -41,6 +43,7 @@ const SimpleInput: React.FC<Propses> = ({
     inputValueHandler &&
       inputValueHandler(inputType && inputType == 'string' ? string : number);
   });
+
   const onBlur = (e: any) => {
     setIsFocus(true);
     const val = e.target.value;
@@ -48,6 +51,7 @@ const SimpleInput: React.FC<Propses> = ({
       setIsFocus(true);
     } else setIsFocus(false);
   };
+
   const inputMaskType = () => {
     if (inputType == 'number') {
       return (

@@ -6,21 +6,25 @@ import { AddProductFormItemBodyItem } from './style';
 
 interface AddProductFormItemProps {
   item: any;
+  handleInput: any;
 }
 
-const AddProductFormItem: FC<AddProductFormItemProps> = ({ item }) => {
+const AddProductFormItem: FC<AddProductFormItemProps> = ({
+  item,
+  handleInput,
+}) => {
   return (
     <>
       <ProductTitle fSize={16} title={item.name} />
       <AddProductFormItemBodyItem>
         {item.fields.map((j: any) => (
-          <Field key={j.id} field={j} />
+          <Field handleInput={handleInput} key={j.id} field={j} />
         ))}
       </AddProductFormItemBodyItem>
 
       {item.products.length > 0 &&
         item.products.map((i: any, index: number) => (
-          <AddProductFormItem key={index} item={i} />
+          <AddProductFormItem handleInput={handleInput} key={index} item={i} />
         ))}
     </>
   );

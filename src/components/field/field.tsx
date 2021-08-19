@@ -15,7 +15,6 @@ interface FieldProps {
 }
 
 const Field: FC<FieldProps> = ({ field, handleInput }) => {
-  // console.log('field => ', field);
   const format = field.format;
   const fieldName = field.name;
   const list = field.values;
@@ -27,8 +26,7 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
   };
 
   const change = (e: any) => {
-    console.log('e--', e, field.id);
-    // handleInput(e, field.id);
+    handleInput(e, field.id);
   };
 
   switch (format) {
@@ -40,8 +38,6 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
           inputType="number"
           style={{ marginBottom: '16px' }}
           inputValueHandler={change}
-
-          // onChange={change}
         />
       );
 
@@ -63,7 +59,7 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
           placeholder={fieldName}
           inputType="string"
           style={{ marginBottom: '16px' }}
-          onChange={change}
+          inputValueHandler={change}
         />
       );
 

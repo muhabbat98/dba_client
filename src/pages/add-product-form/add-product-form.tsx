@@ -54,12 +54,6 @@ const AddProductForm = () => {
   const { categoryId, productId } = useParams<Params>();
   const { checkError } = useError();
 
-  const handleInput = (e: any, id: string) => {
-    console.log(id, e.target.value);
-
-    // const copyInputs = [...inputs];
-  };
-
   const [openDeleivery, setOpenDeleivery] = useState<boolean>(false);
   const [productPhoto, setProductPhoto] = useState<any>(null);
   const [allFields, setAllFields] = useState<any>(null);
@@ -68,6 +62,12 @@ const AddProductForm = () => {
   useEffect(() => {
     getData(productId);
   }, []);
+
+  const handleInput = (data: any, id: string) => {
+    console.log('e=> ', data);
+    // console.log(id, ' => ', e.target.value);
+    // const copyInputs = [...inputs];
+  };
 
   const dropdownDocumentHandle = () => {};
 
@@ -326,7 +326,10 @@ const AddProductForm = () => {
 
         <AddProductFormItem>
           {!isEmptyObj(allFields) && (
-            <AddProductFormItemRecursive item={allFields} />
+            <AddProductFormItemRecursive
+              item={allFields}
+              handleInput={handleInput}
+            />
           )}
         </AddProductFormItem>
 
