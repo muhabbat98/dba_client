@@ -42,6 +42,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const [prevIds, setPrevIds] = useState<any>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [categoryId, setCategoryId] = useState<string>('');
+  const [isSecond, setIsSecond] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -65,11 +66,17 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
       } else {
         const res = await axios.get(`/meta_data/products/${idd}`);
         const d = await res.data;
+        console.log('d => ', d);
+
         if (d.length > 0) {
           setMenu(d);
+          setIsSecond(true);
           if (!reFetch) {
             setPrevIds([...prevIds, idd]);
           }
+        } else if (d.length == 0 && !isSecond) {
+          setMenu([]);
+          setPrevIds([...prevIds, idd]);
         } else {
           push('/seller/add-product-form/' + categoryId + '/' + idd);
         }
@@ -151,7 +158,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
 
             <AddProductScroll>
               <AddProductModalMenu>
-                {menu &&
+                {menu.length > 0 ? (
                   menu.map((item: any, index: number) => (
                     <AddProductModalMenuItem
                       key={item.id}
@@ -160,7 +167,10 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
                       <ProductOrder>{index + 1}</ProductOrder>
                       <ProductName>{item.name}</ProductName>
                     </AddProductModalMenuItem>
-                  ))}
+                  ))
+                ) : (
+                  <h1 style={{ fontSize: '30px' }}>Здесь нет темплета!</h1>
+                )}
               </AddProductModalMenu>
             </AddProductScroll>
           </>

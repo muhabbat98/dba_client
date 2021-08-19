@@ -11,9 +11,11 @@ enum FormatNames {
 
 interface FieldProps {
   field: any;
+  handleInput?: any;
 }
 
-const Field: FC<FieldProps> = ({ field }) => {
+const Field: FC<FieldProps> = ({ field, handleInput }) => {
+  // console.log('field => ', field);
   const format = field.format;
   const fieldName = field.name;
   const list = field.values;
@@ -24,14 +26,20 @@ const Field: FC<FieldProps> = ({ field }) => {
     setState(data.value);
   };
 
+  const change = (e: any) => {
+    console.log(1111);
+    handleInput(e, field.id);
+  };
+
   switch (format) {
     case FormatNames.NUMBER:
       return (
         <SimpleInput
           label={fieldName}
           placeholder={fieldName}
-          inputType="number"
+          // inputType="number"
           style={{ marginBottom: '16px' }}
+          onChange={change}
         />
       );
 
@@ -42,6 +50,7 @@ const Field: FC<FieldProps> = ({ field }) => {
           label={fieldName}
           type="date"
           style={{ maxWidth: '100%', marginBottom: '16px' }}
+          onChange={change}
         />
       );
 
@@ -52,6 +61,7 @@ const Field: FC<FieldProps> = ({ field }) => {
           placeholder={fieldName}
           inputType="string"
           style={{ marginBottom: '16px' }}
+          onChange={change}
         />
       );
 
