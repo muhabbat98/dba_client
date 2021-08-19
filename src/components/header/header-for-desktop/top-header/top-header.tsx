@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from '../../grid/container';
-import DropdownMenu from '../../dropdown-menu';
+import Container from '../../../grid/container';
+import DropdownMenu from '../../../dropdown-menu';
 import {
   TopHeaderWrapper,
   TopHeaderContainer,
@@ -10,7 +10,7 @@ import {
   MenuContainer,
 } from './style';
 import { useLocation } from 'react-router-dom';
-import { useSellerPathname } from '../../../hooks';
+import { useSellerPathname } from '../../../../hooks';
 
 const TopHeader = () => {
   const { isSellerPath } = useSellerPathname();

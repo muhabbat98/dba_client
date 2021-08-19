@@ -123,7 +123,6 @@ export const ChildrenList = styled.ul`
    
 `;
 export const ChildListItem = styled.li` 
-    list-style:none;
     margin:2;
     display:flex;
     font-weight: 500;

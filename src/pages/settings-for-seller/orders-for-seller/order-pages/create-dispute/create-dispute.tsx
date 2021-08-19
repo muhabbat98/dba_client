@@ -42,7 +42,7 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
         // console.log("sdfdfsd--",getDisputeItem)
     const hundleSubmit = () =>{
         console.log('submit->',data)
-        history.push('/settings/discussion')
+        history.push('/seller/settings/discussion')
     }
     useEffect(() => {
         document.body.style.overflow = 'hidden';

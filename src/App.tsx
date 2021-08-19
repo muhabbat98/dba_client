@@ -26,9 +26,7 @@ function App() {
             <Old />
           </Suspense>
         </AdminProtectedRoute>
-  
         <Route path="/" component={Main} />
-        
       </Switch>
     </div>
   );

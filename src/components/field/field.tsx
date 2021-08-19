@@ -27,8 +27,8 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
   };
 
   const change = (e: any) => {
-    console.log(1111);
-    handleInput(e, field.id);
+    console.log('e--', e, field.id);
+    // handleInput(e, field.id);
   };
 
   switch (format) {
@@ -37,9 +37,11 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
         <SimpleInput
           label={fieldName}
           placeholder={fieldName}
-          // inputType="number"
+          inputType="number"
           style={{ marginBottom: '16px' }}
-          onChange={change}
+          inputValueHandler={change}
+
+          // onChange={change}
         />
       );
 

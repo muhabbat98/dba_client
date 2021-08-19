@@ -6,8 +6,8 @@ import {
   useHistory,
   useParams,
 } from 'react-router-dom';
-import Container from '../../grid/container';
-import BreadCrumb from '../../hambuger-menu';
+import Container from '../../../grid/container';
+import BreadCrumb from '../../../hambuger-menu';
 import MenuItem from './menu-item';
 import {
   BottomHeaderContainer,
