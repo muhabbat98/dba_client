@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Cart } from '../../../assets/icons/shopping-cart.svg';
 import Breadcrumb from '../../hambuger-menu/hambuger-menu';
 import { Count } from '../../middle-header-action/middle-header-action-for-buyer/style';
-
+import BreadCrumbMenu from './bread-crumb'
 import { Basket, HeaderForMobileContainer, InputHeader, LeftMenuBtn, LogoHeader, Marketplace, ScrollableHeader, SearchInput, List, ListItem, MLink, ListLink } from './style';
 import {
 	useActionCreators,
@@ -18,13 +18,15 @@ const HeaderForMobile = () => {
 		cart: state.cart.totalCount,
 		user: checkUSer(state.user),
 	  }));
-	
+	const [active, setActive] = useState('/')
+	const [menu, setModal] = useState(false)
   return (
     <HeaderForMobileContainer>
 		<LogoHeader>
-			<LeftMenuBtn>
-				<Breadcrumb menuState={false}></Breadcrumb>
+			<LeftMenuBtn onClick={()=>setModal(!menu)}>
+				<Breadcrumb menuState={menu} ></Breadcrumb>
 			</LeftMenuBtn>
+				<BreadCrumbMenu isOpen={menu} setModal={setModal}/>		
 			<Marketplace>
 				<MLink as = {Link} to='/'>Marketplace</MLink>
 			</Marketplace>
@@ -43,25 +45,25 @@ const HeaderForMobile = () => {
 		<ScrollableHeader>
 			<List>
 				<ListItem >
-					<ListLink isActive={true} as={Link} to='/'>Мобильные телефоны</ListLink>
+					<ListLink isActive={active==='/'} as={Link} to='/'>Мобильные телефоны</ListLink>
 				</ListItem>
 				<ListItem>
-					<ListLink isActive={false} as={Link} to='/'>Телевизоры</ListLink>
+					<ListLink isActive={active==='/route'} as={Link} to='/route'>Телевизоры</ListLink>
 				</ListItem>
 				<ListItem>
-					<ListLink isActive={false} as={Link} to='/'>Товари длядома</ListLink>
+					<ListLink isActive={active==='/route'} as={Link} to='/route'>Товари длядома</ListLink>
 				</ListItem>
 				<ListItem>
-					<ListLink isActive={false} as={Link} to='/'>Авто</ListLink>
+					<ListLink isActive={active==='/route'} as={Link} to='/route'>Авто</ListLink>
 				</ListItem>
 				<ListItem>
-					<ListLink isActive={false} as={Link} to='/'>Гигиена</ListLink>
+					<ListLink isActive={active==='/route'} as={Link} to='/route'>Гигиена</ListLink>
 				</ListItem>
 				<ListItem>
-					<ListLink isActive={false} as={Link} to='/'>Зоотовари</ListLink>
+					<ListLink isActive={active==='/route'} as={Link} to='/route'>Зоотовари</ListLink>
 				</ListItem>
 				<ListItem>
-					<ListLink isActive={false} as={Link} to='/'>Красота</ListLink>
+					<ListLink isActive={active==='/route'} as={Link} to='/route'>Красота</ListLink>
 				</ListItem>
 				<ListItem>
 					<ListLink isActive={false} as={Link} to='/'>Строительство и ремонт</ListLink>

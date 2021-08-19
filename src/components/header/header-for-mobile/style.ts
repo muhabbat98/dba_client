@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import search from '../../../assets/icons/search-grey.svg'
 
-export const HeaderForMobileContainer = styled.div``;
+export const HeaderForMobileContainer = styled.div`
+    position:relative;
+`
 export const LogoHeader = styled.div`
     display: flex;
     justify-content: space-between;
