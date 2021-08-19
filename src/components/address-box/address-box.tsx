@@ -58,7 +58,7 @@ const AddressBox: React.FC<PropsModal> = ({
 
   useEffect(() => {
     inputItems && setData(inputItems);
-    console.log('working input--', inputItems);
+    // console.log('working input--', inputItems);
   }, []);
 
   useEffect(() => {

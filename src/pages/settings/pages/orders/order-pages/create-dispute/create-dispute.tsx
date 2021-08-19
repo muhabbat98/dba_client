@@ -32,8 +32,8 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
     );
         // console.log("sdfdfsd--",getDisputeItem)
     const hundleSubmit = () =>{
-        console.log('submit->',data)
-        history.push('/settings/discussion')
+        console.log('submit->',data);
+        history.push('seller/settings/discussion');
     }
     return (
         <div>
@@ -71,7 +71,7 @@ const  CreateDispute:React.FC<Propses> = ({closeModal,getDisputeItem}) => {
                         onChange={(e:any)=>setData({...data,description:e.target.value})}
                         value={data.description}
                         />
-                    <Button 
+                    <Button
                         style={{marginTop:24}}
                         onClick={hundleSubmit}
                         >
