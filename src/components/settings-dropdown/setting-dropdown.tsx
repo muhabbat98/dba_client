@@ -14,7 +14,7 @@ const SettingDropdown: React.FC<Propses> = ({ label, options, getOption, isFromA
     const selectOption = (data: any) => {
         setOption(data);
         setIsOpen(false);
-        getOption(data);
+        getOption && getOption(data);
     }
 
     const ref = useRef<any>()

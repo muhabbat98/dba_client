@@ -46,21 +46,6 @@ const ModeratorCard:React.FC<Propses> = ({item,refreshModerator,setUserItem,setO
           }
       }, [open]);
 
-    useEffect(()=>{
-        getImage()
-    },[])
-
-    const getImage = async () =>{
-        try{
-            const img:any = await axios.get( `https://my.fido.uz/marketplace-v1/${item.imageUrl}`);
-            setBinaryImage(img.data.body)
-            setContentType(img.data.contentType);
-        } catch(err) {
-            console.log('error',err)
-        }
-    }
-    const binary_data =`data:${contentType};base64,${binaryImage}`;
-
       const deleteModerator = async () => {
           try{
               const res = await axios.delete(`/moderator/${item.id}`);
@@ -85,13 +70,13 @@ const ModeratorCard:React.FC<Propses> = ({item,refreshModerator,setUserItem,setO
     const handleEditModerator = () => {
         setOpen(false);
         setOpenModal(true);
-        setUserItem({item:item,binaryImg:binary_data})
+        setUserItem({item:item,binaryImg:item.imageUrl})
     }
       return(
             <CardWraper>
                   <ActionBtn onClick={()=>setOpen(open=>!open)}><DostsIcon/></ActionBtn>    
                   <CardBox>
-                        <AvatarImg><img src={binary_data}/></AvatarImg>
+                        <AvatarImg><img src={item.imageUrl}/></AvatarImg>
                         <NameTitle>{item.firstName} {item.secondName}</NameTitle>
                         <PhoneNumber>+998 {item.phoneNumber}</PhoneNumber>
                         <RoleTitle>Модератор</RoleTitle>

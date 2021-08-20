@@ -5,14 +5,13 @@ import ModeratorCard from '../../components/moderator-card'
 import AddModerator from './add-moderator';
 import EditModerator from './edit-moderator';
 import {Container,HeadBox,CardContainer,Pagenition} from './style'
-import { AlertPosition } from '../../../utils/alert-position-enum';
-import SimpleInput from '../../../components/simple-input';
 
 const Moderator = () => {
       const [openModal,setOpenModal] = useState<boolean>(false);
       const [moderator,setModerator] = useState<any>([])
       const [openEditModal,setOpenEditModal] =useState<any>(false);
       const [userItem,setUserItem] = useState();
+      const [menu,setMenu] = useState<any>([]);
       const ref = useRef<any>();
       const ref2 = useRef<any>();
       const [addModeratorAnswer,setAddModeratorAnswer] = useState<boolean>(false);
@@ -46,6 +45,7 @@ const Moderator = () => {
 
       useEffect(()=>{
           getModerator();
+          getAllProducts();
       },[])
 
       const addModeratorItem = (data:any) => {
@@ -57,6 +57,17 @@ const Moderator = () => {
       const refreshModerator = (action:boolean) => {
         getModerator()
      }
+
+    const getAllProducts = async () => {
+       try {
+          const response = await axios.get('catalog?parentId=');
+          setMenu(response.data);
+
+       } catch (error) {
+          console.log(error);
+       }
+   };
+
       const getModerator = async () =>{
           try{
               const res = await axios.get("/moderator");
@@ -88,7 +99,9 @@ const Moderator = () => {
             checkError(error);
          }
       }
-
+      const  value = (data:any) => {
+          console.log('rerere--',data)
+    }
       return (
       <>
             <Container>
@@ -123,6 +136,7 @@ const Moderator = () => {
                   reff={ref2}
                   setClose={setOpenEditModal}
                   userItem={userItem}
+                  menu={menu}
                 />
             }
             {openModal&&

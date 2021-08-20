@@ -1,4 +1,5 @@
 import React,{useState,useRef,useEffect} from 'react';
+import { axios } from '../../../../hooks';
 import ImgUpload from '../../../assets/images/upload-foto.svg'
 import Input from '../../../../components/input';
 import Button from '../../../../components/button';
@@ -6,8 +7,19 @@ import Checkbox from '../../../../components/checkbox';
 import Password from '../../../../components/login/login-inputs/password';
 import { useForm } from "react-hook-form";
 import {ReactComponent as ArrowIcon} from '../../../../assets/icons/arrow-down.svg'
-import {ModalContainer,AddContainer,Title,UploadImg,SelectInput,SelectInputTitle,SelectBox,PassError,InputBody} from './style'
-import { axios } from '../../../../hooks';
+import {
+    ModalContainer,
+    AddContainer,
+    Title,
+    UploadImg,
+    SelectInput,
+    SelectInputTitle,
+    SelectBox,
+    PassError,
+    InputBody,
+    CancelContainer
+} from './style';
+import {ReactComponent as Cancel} from '../../../assets/icons/cancel.svg';
 
 interface Propses {
       setClose:any;
@@ -107,6 +119,7 @@ const AddModerator: React.FC<Propses> = ({setClose,reff,addModeratorItem,request
       return(
             <ModalContainer>
                   <AddContainer ref={reff}>
+                        <CancelContainer onClick={()=>setClose(false)}><Cancel/></CancelContainer>
                         <Title>Добавить модератор </Title>
                         <UploadImg  >
                               <img src={avatar?avatar:ImgUpload} alt='avatar'/>

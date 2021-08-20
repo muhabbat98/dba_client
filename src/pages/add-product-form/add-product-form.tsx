@@ -66,7 +66,7 @@ const AddProductForm = () => {
     2) e = bir marta Event objectini qabul qiladi(asosan Date tipidan keladi)
    */
   const handleInput = (e: any, id: string, parentId: any) => {
-    console.log('handleInput');
+    console.log('handleInput',e);
     if (e) {
       console.log('e => ', typeof e);
       console.log('id => ', id);

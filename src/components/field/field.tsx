@@ -30,8 +30,9 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId }) => {
   };
 
   const change = (e: any) => {
+      console.log("eeeeeeee=> ", e)
     if (handleInput) {
-      handleInput(e, field.id, parentId);
+      handleInput(e, field.id,  parentId);
     }
   };
 

@@ -36,6 +36,7 @@ import CardImage9 from '../product-detail/product-detail-header/images/phoneMain
 import OrangeBanner from '../../assets/images/orangeBanner.svg';
 import Slider from '../../components/slider';
 import CardMobile from '../../components/card-mobile';
+import Skeleton from '../../components/main-skeleton';
 
 export const data = [
   {
@@ -190,6 +191,8 @@ const Homepage = () => {
 
   return (
     <div>
+        {/*Skleton loader */}
+        {/*<Skeleton/>*/}
       <Banner />
       {width > 768 ? (
         <Cont>

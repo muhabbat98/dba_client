@@ -19,7 +19,18 @@ export const AddContainer = styled.div`
       border-radius: 8px;
       padding:30px;
       width:800px;
+      position: relative;
       //margin-top:100px;
+`;
+export const CancelContainer = styled.span`
+      position:absolute;
+      cursor: pointer;
+      right: 20px;
+      top:20px;  
+      svg{
+        width: 15px;
+        height: 15px;
+      }
 `;
 export const Title = styled.div`
       font-family: Manrope;

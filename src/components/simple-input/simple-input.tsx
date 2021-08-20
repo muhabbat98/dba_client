@@ -7,7 +7,6 @@ interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   placeholder?: string;
   style?: any;
-  ref?: any;
   defaultValue?: any;
   inputValueHandler?: any;
   parentId?: any;
@@ -15,7 +14,6 @@ interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 const SimpleInput: React.FC<Propses> = ({
   label,
-  ref,
   placeholder,
   defaultValue,
   style,
@@ -24,26 +22,12 @@ const SimpleInput: React.FC<Propses> = ({
   ...rest
 }) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [number, setNumber] = useState<any>(null);
-  const [string, setString] = useState<any>(null);
-  const [id, setId] = useState<string>('');
+  const [number, setNumber] = useState<any>('');
+  const [string, setString] = useState<any>('');
 
   useEffect(() => {
-    const val: any = document.querySelector('.inputt');
-    if (defaultValue && defaultValue.length > 0) {
-      setIsFocus(true);
-    }
-
-    if (val) {
-      const leng = val.value;
-      if (leng.length > 0) {
-        setIsFocus(true);
-      }
-    }
-
-    inputValueHandler &&
-      inputValueHandler(inputType && inputType == 'string' ? string : number);
-  });
+      inputValueHandler &&  inputValueHandler(inputType && inputType == 'string' ? string : number);
+  },[number,string]);
 
   const onBlur = (e: any) => {
     setIsFocus(true);
@@ -58,7 +42,6 @@ const SimpleInput: React.FC<Propses> = ({
       return (
         <InputElement
           {...rest}
-          ref={ref}
           onChange={(e: any) => setNumber(onlyNumber(e.target.value))}
           value={number}
           defaultValue={defaultValue}
@@ -72,7 +55,6 @@ const SimpleInput: React.FC<Propses> = ({
       return (
         <InputElement
           {...rest}
-          ref={ref}
           onChange={(e: any) => setString(inputLetter(e.target.value))}
           value={string}
           defaultValue={defaultValue}
@@ -93,7 +75,7 @@ const SimpleInput: React.FC<Propses> = ({
         style={style}
       >
         {isFocus && (
-          <Label htmlFor={id} isfocus={isFocus}>
+          <Label isfocus={isFocus}>
             {label}{' '}
           </Label>
         )}
@@ -102,7 +84,6 @@ const SimpleInput: React.FC<Propses> = ({
         ) : (
           <InputElement
             {...rest}
-            ref={ref}
             defaultValue={defaultValue}
             autoFocus={isFocus ? true : false}
             placeholder={!isFocus ? placeholder : ''}

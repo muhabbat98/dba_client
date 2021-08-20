@@ -6,40 +6,51 @@ import Checkbox from '../../../../components/checkbox';
 import Password from '../../../../components/login/login-inputs/password';
 import { useForm } from "react-hook-form";
 import {ReactComponent as ArrowIcon} from '../../../../assets/icons/arrow-down.svg'
-import {ModalContainer,AddContainer,Title,UploadImg,SelectInput,SelectInputTitle,SelectBox,PassError,InputBody} from '../add-moderator/style'
+import {
+    ModalContainer,
+    AddContainer,
+    Title,
+    UploadImg,
+    SelectInput,
+    SelectInputTitle,
+    SelectBox,
+    PassError,
+    InputBody,
+    CancelContainer
+} from '../add-moderator/style';
 import { axios } from '../../../../hooks';
+import { ReactComponent as Cancel } from '../../../assets/icons/cancel.svg';
 
 interface Propses {
     setClose?:any;
     reff?:any;
     editModeratorItem?:any;
     userItem:any;
+    menu?:any
 }
 
-const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userItem}) => {
+const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userItem,menu}) => {
     const { register, handleSubmit, watch, errors, setValue } = useForm();
     const [avatar,setAvatar] = useState<any>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [errPassword,setErrPassword] = useState<boolean>(false);
-    const [menu,setMenu] = useState<any>([]);
     const [selectList,setSelectList] = useState<any>([]);
     const fileRef = useRef<HTMLInputElement>(null);
-    const[imgState, setImgState] = useState<any>(null);
+    const [imgState, setImgState] = useState<any>(null);
+    const [checked,setChecked] = useState<any>();
 
-    useEffect(() => {
-        getAllProducts();
-    }, []);
-
-    const getAllProducts = async () => {
-        try {
-            const response = await axios.get('catalog?parentId=');
-            const data = await response.data;
-            setMenu(data);
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    let arr = new Array;
+    useEffect(()=>{
+        const temp = userItem.item.categoryNames;
+        for(let i=0; i<temp.length; i++){
+            for(let j=0; j<menu.length; j++) {
+                if (temp[i].id == menu[j].id ) {
+                    arr[i] = { id: menu[i].id, name: menu[i].name, checked: true };
+                }
+            }}
+        setChecked(arr);
+    },[])
+    console.log('arr',checked);
     const onSubmit = (data: any) => {
         console.log("data=>  ", imgState);
 
@@ -60,13 +71,10 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
             setErrPassword(true);
             console.log("password error")
         }
-
-
     }
     const imageChange = (ev:any) => {
         let imgFile = ev.target.files[0];
         setImgState(imgFile);
-
 
         const fileExt = imgFile.name.toLowerCase().split('.').pop();
 
@@ -105,11 +113,6 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
         }
 
     }
-    const checkedList = (item:any) => {
-        userItem.forEach((id:any)=>{
-            return id==item?true:false
-        })
-    }
 
     const selectImage:any = () => {
         if(avatar){
@@ -121,6 +124,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
     return(
         <ModalContainer>
             <AddContainer ref={reff}>
+                <CancelContainer onClick={()=>setClose(false)}><Cancel/></CancelContainer>
                 <Title>Изменить модератор </Title>
                 {/*{userItem.firstName}*/}
                 <UploadImg >
@@ -186,7 +190,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
                                         return(
                                             <div key={index}>
                                                 <Checkbox
-                                                    // defaultValue={()=>checkedList(item.id)}
+                                                    // defaultChecked={item.checked}
                                                     label={item.name}
                                                     name={item.id}
                                                     onChange={(e:any)=>collectCat(e)}

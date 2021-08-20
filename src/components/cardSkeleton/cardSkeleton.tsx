@@ -7,6 +7,7 @@ const  CardSkeleton = () => {
               <div></div>
               <div></div>
               <div></div>
+              <div></div>
         </Wrapper>
     )
 }
