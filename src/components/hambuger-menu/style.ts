@@ -7,19 +7,24 @@ export const Stick = styled.div`
   margin-bottom: 3px;
   background: black;
   transition: 0.5s;
+  user-select: none;
+  :active {
+    background: none;
+  }
 `;
 
 export const BreadcrumbContainer = styled.div`
-cursor: pointer;
-&.active{
-  & ${Stick}:nth-child(1){
-    transform: translateY(5px) rotate(135deg);
-  };
-  & ${Stick}:nth-child(2){
-    transform: scale(0);
-  };
-  && ${Stick}:nth-child(3){
-    transform: translateY(-5px) rotate(-135deg);
+  user-select: none;
+  cursor: pointer;
+  &.active {
+    & ${Stick}:nth-child(1) {
+      transform: translateY(5px) rotate(135deg);
+    }
+    & ${Stick}:nth-child(2) {
+      transform: scale(0);
+    }
+    && ${Stick}:nth-child(3) {
+      transform: translateY(-5px) rotate(-135deg);
+    }
   }
-}
 `;

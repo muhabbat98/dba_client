@@ -4,9 +4,9 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 import HeaderForMobile from './header-for-mobile';
 
 const Header = () => {
-  const [width, height] = useWindowSize();
+  const [width] = useWindowSize();
 
-  let header = null;
+  let header;
 
   if (width > 768) {
     header = <HeaderForDesktop />;
