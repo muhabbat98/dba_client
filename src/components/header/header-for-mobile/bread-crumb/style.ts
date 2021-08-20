@@ -61,7 +61,8 @@ export const MenuListItem = styled.li`
 	a{
 		display: flex;
 		align-items: center;
-		text-decoration: none;			
+		text-decoration: none;	
+		width:100%;		
 	}
 	&:hover{
 		background-color: #E9ECF4;

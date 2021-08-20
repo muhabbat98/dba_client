@@ -63,7 +63,7 @@ const BreadCrumb:FC<BreadCrumbProps> = ({isOpen, setModal}) => {
 						<ListText>Каталог</ListText>
 					</MenuListItem>
 					<MenuListItem>
-						<Link to ='/'>
+						<Link to ='/' onClick={()=>setModal(false)}>
 							<ListIcon src={Book}></ListIcon>
 							<ListText>Заказы  </ListText>
 						</Link>
@@ -75,7 +75,7 @@ const BreadCrumb:FC<BreadCrumbProps> = ({isOpen, setModal}) => {
 						</Link>
 					</MenuListItem>
 					<MenuListItem>
-						<Link to='/'>
+						<Link to='/' onClick={()=>setModal(false)}>
 							<ListIcon src={Location} ></ListIcon>
 							<ListText>Ташкент</ListText>
 						</Link>
