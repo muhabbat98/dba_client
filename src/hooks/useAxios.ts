@@ -10,6 +10,7 @@ import fetch from 'axios';
 //     : 'https://my.fido.uz/marketplace-v1/api';
 
 const url = 'https://my.fido.uz/marketplace-v1/api';
+//const url = 'http://10.50.71.76:8080/marketplace-v2/api';
 
 // const url =
 //   process.env.NODE_ENV === 'development'

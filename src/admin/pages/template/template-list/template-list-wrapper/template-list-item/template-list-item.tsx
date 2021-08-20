@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   TemplateListItemContainer,
   Number,
@@ -14,16 +14,17 @@ interface Props {
 }
 
 const TemplateListItem: React.FC<Props> = ({ template, number }) => {
-  const { id } = useParams<{ id: string }>();
   const { push } = useHistory();
-  console.log('id - ', id);
+
   return (
     <TemplateListItemContainer>
       <NumberContainer>
         <Number>{number}</Number>
       </NumberContainer>
       <Title>{template.name}</Title>
-      <View onClick={() => push('/admin/template/view/' + id)}>Посмотреть</View>
+      <View onClick={() => push('/admin/template/view/' + template.id)}>
+        Посмотреть
+      </View>
     </TemplateListItemContainer>
   );
 };
