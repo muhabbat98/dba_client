@@ -12,9 +12,10 @@ enum FormatNames {
 interface FieldProps {
   field: any;
   handleInput?: any;
+  parentId?: any;
 }
 
-const Field: FC<FieldProps> = ({ field, handleInput }) => {
+const Field: FC<FieldProps> = ({ field, handleInput, parentId }) => {
   const format = field.format;
   const fieldName = field.name;
   const list = field.values;
@@ -23,10 +24,15 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
 
   const dropdownClicked = (data: any) => {
     setState(data.value);
+    if (handleInput) {
+      handleInput(data.value.name, data.value.id, parentId);
+    }
   };
 
   const change = (e: any) => {
-    handleInput(e, field.id);
+    if (handleInput) {
+      handleInput(e, field.id, parentId);
+    }
   };
 
   switch (format) {
@@ -38,6 +44,7 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
           inputType="number"
           style={{ marginBottom: '16px' }}
           inputValueHandler={change}
+          parentId={parentId}
         />
       );
 
@@ -49,6 +56,7 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
           type="date"
           style={{ maxWidth: '100%', marginBottom: '16px' }}
           onChange={change}
+          parentId={parentId}
         />
       );
 
@@ -60,6 +68,7 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
           inputType="string"
           style={{ marginBottom: '16px' }}
           inputValueHandler={change}
+          parentId={parentId}
         />
       );
 
@@ -72,6 +81,7 @@ const Field: FC<FieldProps> = ({ field, handleInput }) => {
           option={list}
           label={fieldName}
           style={{ marginBottom: '16px' }}
+          parentId={parentId}
         />
       );
   }

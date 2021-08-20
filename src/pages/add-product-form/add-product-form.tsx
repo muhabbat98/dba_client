@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useError } from '../../hooks';
-
 import Container from '../../components/grid/container';
 import ProductTitle from '../../components/products-title';
-import Input from '../../components/input';
 import Dropdown from '../../components/drop-down';
 import Button from '../../components/button';
 import RadioButton from '../../components/radio-button';
 import { setAlertMessage } from '../../store/root-action-creators';
 import { AlertPosition } from '../../utils/alert-position-enum';
 import { axios } from '../../hooks';
-import Field from '../../components/field';
+import isEmptyObj from '../../utils/isEmptyObj';
 import AddProductFormItemRecursive from './add-product-form-item';
 
 import {
@@ -42,7 +39,7 @@ import {
 import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
 import { ReactComponent as PhotoApparat } from '../../assets/icons/add-product-photo-apparat.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-delete-icon.svg';
-import isEmptyObj from '../../utils/isEmptyObj';
+import SimpleInput from '../../components/simple-input';
 
 interface Params {
   categoryId: string;
@@ -50,23 +47,61 @@ interface Params {
 }
 
 const AddProductForm = () => {
-  const { register, setValue } = useForm();
   const { categoryId, productId } = useParams<Params>();
   const { checkError } = useError();
 
   const [openDeleivery, setOpenDeleivery] = useState<boolean>(false);
   const [productPhoto, setProductPhoto] = useState<any>(null);
   const [allFields, setAllFields] = useState<any>(null);
-  const [inputs, setInput] = useState<any>();
+  const [collectiveJson, setCollectiveJson] = useState<any>(null);
 
   useEffect(() => {
     getData(productId);
   }, []);
 
-  const handleInput = (data: any, id: string) => {
-    console.log('e=> ', data);
-    // console.log(id, ' => ', e.target.value);
-    // const copyInputs = [...inputs];
+  /** TODO
+   *
+   *handleInput(e: any, id: string, parentId: any) da "e" ning qiymati 2 ta qiymat qabul qiladi:
+    1) e = bir marta string qiymat qiymat
+    2) e = bir marta Event objectini qabul qiladi(asosan Date tipidan keladi)
+   */
+  const handleInput = (e: any, id: string, parentId: any) => {
+    if (e) {
+      console.log('e => ', typeof e);
+      console.log('id => ', id);
+      console.log('parentid => ', parentId);
+      if (typeof e == 'object') {
+        e = e.target.value;
+      }
+      let copyObj = { ...allFields };
+      console.log(changeFieldsValueHandler(e, id, copyObj, parentId));
+      setCollectiveJson(changeFieldsValueHandler(e, id, copyObj, parentId));
+    }
+  };
+
+  const changeFieldsValueHandler = (
+    val: any,
+    id: string,
+    copyObj: any,
+    parentId: any
+  ) => {
+    for (let key in copyObj) {
+      if (key === 'id' && copyObj[key] == parentId) {
+        for (let i = 0; i < copyObj.fields.length; i++) {
+          if (copyObj.fields[i].id == id) {
+            copyObj.fields[i].values = val;
+          }
+        }
+      }
+    }
+
+    if (copyObj.products.length > 0) {
+      for (let i = 0; i < copyObj.products.length; i++) {
+        changeFieldsValueHandler(val, id, copyObj.products[i], parentId);
+      }
+    }
+
+    return copyObj;
   };
 
   const dropdownDocumentHandle = () => {};
@@ -141,41 +176,28 @@ const AddProductForm = () => {
           <ProductTitle fSize={16} title="Добавить данные" />
           <AddProductFormItemBody>
             <AddProductFormItemBodyItem>
-              <Input
-                name="typeOfOwnership"
+              <SimpleInput
+                label="Введите название товара *"
                 placeholder="Введите название товара *"
-                label="Форма собственности"
-                // defVal={state.typeOfOwnership}
-                // watch={watch('typeOfOwnership')}
-                // error={errors.typeOfOwnership}
-                register={register}
-                setValue={setValue}
+                inputValueHandler={handleInput}
               />
             </AddProductFormItemBodyItem>
 
             <AddProductFormItemBodyItem>
-              <Input
-                name="typeOfOwnership"
+              <SimpleInput
+                label="Стоимость *"
                 placeholder="Стоимость *"
-                label="Форма собственности"
-                // defVal={state.typeOfOwnership}
-                // watch={watch('typeOfOwnership')}
-                // error={errors.typeOfOwnership}
-                register={register}
-                setValue={setValue}
+                inputType="number"
+                inputValueHandler={handleInput}
               />
             </AddProductFormItemBodyItem>
 
             <AddProductFormItemBodyItem>
-              <Input
-                name="typeOfOwnership"
+              <SimpleInput
+                label="Количество *"
                 placeholder="Количество *"
-                label="Форма собственности"
-                // defVal={state.typeOfOwnership}
-                // watch={watch('typeOfOwnership')}
-                // error={errors.typeOfOwnership}
-                register={register}
-                setValue={setValue}
+                inputType="number"
+                inputValueHandler={handleInput}
               />
             </AddProductFormItemBodyItem>
 

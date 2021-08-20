@@ -1,25 +1,26 @@
 import React, { FC } from 'react';
-import Field from '../../../components/field';
-import ProductTitle from '../../../components/products-title';
+import Field from '../../../../components/field';
+import ProductTitle from '../../../../components/products-title';
 
 import { AddProductFormItemBodyItem } from './style';
 
-interface AddProductFormItemProps {
+interface ViewForTemplateRecursiveProps {
   item: any;
-  handleInput: any;
+  //   handleInput: any;
 }
 
-const AddProductFormItem: FC<AddProductFormItemProps> = ({
+const ViewForTemplateRecursive: FC<ViewForTemplateRecursiveProps> = ({
   item,
-  handleInput,
+  //   handleInput,
 }) => {
+  console.log('item => ', item);
   return (
     <>
       <ProductTitle fSize={16} title={item.name} />
       <AddProductFormItemBodyItem>
         {item.fields.map((j: any) => (
           <Field
-            handleInput={handleInput}
+            // handleInput={handleInput}
             key={j.id}
             field={j}
             parentId={item.id}
@@ -29,10 +30,14 @@ const AddProductFormItem: FC<AddProductFormItemProps> = ({
 
       {item.products.length > 0 &&
         item.products.map((i: any, index: number) => (
-          <AddProductFormItem handleInput={handleInput} key={index} item={i} />
+          <ViewForTemplateRecursive
+            // handleInput={handleInput}
+            key={index}
+            item={i}
+          />
         ))}
     </>
   );
 };
 
-export default AddProductFormItem;
+export default ViewForTemplateRecursive;

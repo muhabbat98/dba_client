@@ -10,6 +10,7 @@ interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
   ref?: any;
   defaultValue?: any;
   inputValueHandler?: any;
+  parentId?: any;
   inputType?: 'string' | 'number';
 }
 const SimpleInput: React.FC<Propses> = ({

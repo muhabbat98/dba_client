@@ -10,12 +10,13 @@ import {
 } from './style';
 
 interface DropdownProps {
-  callback?: (data: string) => void | null;
+  callback?: (data: string, parentId?: any) => void | null;
   label?: string;
   option?: any;
   selected?: string;
   style?: any;
   isAdmin?: boolean;
+  parentId?: any;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -25,6 +26,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   selected,
   style,
   isAdmin,
+  parentId,
 }) => {
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState('');
@@ -48,7 +50,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const dropdown = useRef<HTMLUListElement>(null);
 
-  const selectItem = (item: any, e: SyntheticEvent) => {
+  const selectItem = (item: any, e: SyntheticEvent, parentId?: any) => {
     setSelectedOption(item.value.name);
 
     const target = e.target as HTMLLIElement;
@@ -117,7 +119,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 key={key}
                 data-index={item.index}
                 className={item.selected ? 'selected' : ''}
-                onClick={(e: SyntheticEvent) => selectItem(item, e)}
+                onClick={(e: SyntheticEvent) => selectItem(item, e, parentId)}
               >
                 {isAdmin ? item.value.name : item.value}
               </DropdownOption>
