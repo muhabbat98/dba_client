@@ -63,6 +63,9 @@ export const MenuListItem = styled.li`
 		align-items: center;
 		text-decoration: none;			
 	}
+	&:hover{
+		background-color: #E9ECF4;
+	}
     
 `;
 export const ListIcon = styled.img`
