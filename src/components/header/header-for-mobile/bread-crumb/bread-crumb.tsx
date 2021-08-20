@@ -69,7 +69,7 @@ const BreadCrumb:FC<BreadCrumbProps> = ({isOpen, setModal}) => {
 						</Link>
 					</MenuListItem>
 					<MenuListItem>
-						<Link to='/'>
+						<Link to='/wishlist' onClick={()=>setModal(false)}>
 							<ListIcon  src={Heart}></ListIcon>
 							<ListText>Избранное </ListText>
 						</Link>
