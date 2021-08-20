@@ -21,6 +21,7 @@ export const LogoPart = styled.div`
 export const LogoHeader = styled.div`
     margin: 64px;
     display: flex;
+
     @media ${({ theme }) => theme.breakpoints.sm}{
         margin: 32px;
     }
@@ -37,7 +38,7 @@ export const LogoIcon = styled.img`
     }   
 `;
 export const LogoName = styled.div`
-    color: ${({theme})=>theme.blue};
+    
     margin-left: 24px;
     font-family: Manrope;
     text-transform: uppercase;
@@ -45,6 +46,10 @@ export const LogoName = styled.div`
     font-weight: bold;
     font-size: 28px;
     line-height: 40px;
+    a{
+        text-decoration: none;
+        color:${({theme})=>theme.blue}; ;
+    }
     @media ${({ theme }) => theme.breakpoints.sm}{
         margin-left: 14px;
         font-size: 16px;

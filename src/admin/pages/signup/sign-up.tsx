@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import  { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   LogoPart,
@@ -20,7 +20,7 @@ import Password from '../../../components/login/login-inputs/password';
 import Button from '../../../components/button';
 import Checkbox from '../../../components/checkbox';
 import { axios, useActionCreators, UserRole } from '../../../hooks';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const MenuModal = () => {
   const { register, handleSubmit, control, watch, errors, setValue } =
@@ -51,20 +51,15 @@ const MenuModal = () => {
       const data = await response.data;
       setUser(data);
       push('/admin');
-      // setLoading(false);
-      // if (data.roles === UserRole.SELLER) {
-      //   push('/seller');
-      // }
-      // closeLogin();
-      // // window.location.reload();
+   
     } catch (error) {
-      //setLoading(false);
+     
       if (error.debugMessage) {
         setAlertMessage({
           message: error.debugMessage,
           type: 'error',
         });
-        //setError(error.debugMessage);
+       
       } else {
         setAlertMessage({
           message: error.message,
@@ -80,7 +75,7 @@ const MenuModal = () => {
         <LogoPart>
           <LogoHeader>
             <LogoIcon src={Mlogo}></LogoIcon>
-            <LogoName>Marketplace</LogoName>
+            <LogoName><Link to='/'>Marketplace</Link></LogoName>
           </LogoHeader>
           <MainLogoPart>
             <img src={MainImage} alt="analitic engeneer" />

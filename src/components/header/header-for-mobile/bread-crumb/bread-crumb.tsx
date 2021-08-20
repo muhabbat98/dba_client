@@ -21,7 +21,7 @@ interface BreadCrumbProps {
 
 const BreadCrumb:FC<BreadCrumbProps> = ({isOpen, setModal}) => {
 
-	const { openLogin } = useActionCreators();
+	const { openLogin,setConfirm, cleanUser, cleanConfirm } = useActionCreators();
 
 	
 	const user:any = useSelector(state=> state.user);
@@ -30,22 +30,33 @@ const BreadCrumb:FC<BreadCrumbProps> = ({isOpen, setModal}) => {
 		openLogin();
 		setModal(false)
 	}
-	
+	const handleExit = ()=>{
+		setConfirm({
+            message: 'Вы действительно хотите выйти',
+            callback: () => {
+                cleanUser();
+                cleanConfirm();
+            },
+        });
+	}
   return (
 	  <LeftMenuModal isVisible={isOpen} onClick={e=>{if(e.currentTarget=== e.target)setModal(false)}} >
+
 		  <LeftMenu  isVisible={isOpen}>
 		  	
-				{!user ? <EnterAccunt>
+				{user&& !user.id ? <EnterAccunt>
 					<AccountHeader> Войдите в свой аккаунт</AccountHeader>					
 					<EnterButton onClick={userModal} >Войти </EnterButton>
-				</EnterAccunt>:<UserHeader>
+				</EnterAccunt>
+					:
+					<UserHeader>
 						<UserImage src={DefaultImg}></UserImage>
 						<UserInfo>
 							<UserName>{user&&user.firstName}</UserName>
-							<UserAddress>{user&&user.email}</UserAddress>
-						
+							<UserAddress>{user&&user.email}</UserAddress>						
 						</UserInfo>
-					</UserHeader>}
+					</UserHeader>
+				}
 				<MenuList>
 					<MenuListItem>
 						<BreadCrumbButton menuState={false} ></BreadCrumbButton> 
@@ -69,18 +80,21 @@ const BreadCrumb:FC<BreadCrumbProps> = ({isOpen, setModal}) => {
 							<ListText>Ташкент</ListText>
 						</Link>
 					</MenuListItem>
-					<MenuListItem>
-						<Link to='/'>
-							<ListIcon src={Setting}></ListIcon>
-							<ListText>Настройки</ListText>
-						</Link>
-					</MenuListItem>
-					<MenuListItem>
-						<Link to='/'>
-							<ListIcon src={LogOut}></ListIcon>
-							<ListText>Выйти</ListText>
-						</Link>
-					</MenuListItem>
+					{
+						user&& user.id?<>
+							<MenuListItem>
+								<Link to='/settings' onClick={()=>setModal(false)}>
+									<ListIcon src={Setting}></ListIcon>
+									<ListText>Настройки</ListText>
+								</Link>
+							</MenuListItem>
+							<MenuListItem onClick={handleExit}>
+									<ListIcon src={LogOut}></ListIcon>
+									<ListText>Выйти</ListText>
+							</MenuListItem></>
+								: 
+							<></>
+					}
 				</MenuList>
 		  </LeftMenu>
 	  </LeftMenuModal>
