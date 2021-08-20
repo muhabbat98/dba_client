@@ -41,14 +41,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
 
     let arr = new Array;
     useEffect(()=>{
-        const temp = userItem.item.categoryNames;
-        for(let i=0; i<temp.length; i++){
-            for(let j=0; j<menu.length; j++) {
-                if (temp[i].id == menu[j].id ) {
-                    arr[i] = { id: menu[i].id, name: menu[i].name, checked: true };
-                }
-            }}
-        setChecked(arr);
+        creatNewCheckedArray();
     },[])
     console.log('arr',checked);
     const onSubmit = (data: any) => {
@@ -96,8 +89,8 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
         document.addEventListener("mousedown", checkIfClickedOutside)
         return () => {
             document.removeEventListener("mousedown", checkIfClickedOutside)
-        }}, [isOpen])
-
+        }
+    }, [isOpen])
 
     const collectCat = (e:any) => {
         const {checked,name} = e.target;
@@ -120,6 +113,21 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
         }else if(userItem.binaryImg){
             return  <img src={userItem.binaryImg} alt='avatar'/>
         }else{ return <img src={ImgUpload} alt='avatar'/> }
+    }
+
+    const creatNewCheckedArray = () => {
+        const temp = userItem.item.categoryNames;
+        for(let i=0; i<menu.length; i++){
+            arr[i] = { id: menu[i].id, name: menu[i].name, checked: false };
+        }
+        for(let i=0; i<temp.length; i++) {
+            arr.map((item: any) => {
+                if ( temp[i].id == item.id) {
+                    item.checked = true;
+                }
+            });
+        }
+        setChecked(arr);
     }
     return(
         <ModalContainer>
@@ -186,11 +194,11 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
                                 <InputBody onClick={()=>setIsOpen(open=>!open)}><p>Электроника</p><ArrowIcon/></InputBody>
                                 {isOpen &&
                                 <SelectBox>
-                                    {menu.map((item:any,index:number)=>{
+                                    {checked.map((item:any,index:number)=>{
                                         return(
                                             <div key={index}>
                                                 <Checkbox
-                                                    // defaultChecked={item.checked}
+                                                    defaultChecked={item.checked}
                                                     label={item.name}
                                                     name={item.id}
                                                     onChange={(e:any)=>collectCat(e)}
