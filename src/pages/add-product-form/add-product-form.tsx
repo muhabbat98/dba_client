@@ -262,8 +262,8 @@ const AddProductForm = () => {
             <AddProductFormItemBodyItem>
               <SimpleInput
                 name="quantity"
-                label="Количество *"
-                placeholder="Количество *"
+                label="Производитель *"
+                placeholder="Производитель *"
                 // inputType="number"
                 onChange={addProductChangeHandler}
                 // inputValueHandler={addProductChangeHandler}

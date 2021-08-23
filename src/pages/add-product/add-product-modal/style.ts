@@ -93,16 +93,19 @@ export const ProductTitle = styled.div`
 `;
 
 export const AddProductBreadcrumb = styled.div`
-  font-size: 16px;
-  color: ${({ theme }) => theme.primary_color};
   line-height: 32px;
   font-weight: 600;
   border-bottom: 2px solid #e9ecf4;
   padding: 24px 24px 8px;
-
+  display: flex;
   @media (max-width: 768px) {
     border-bottom: none;
   }
+`;
+
+export const AddProductBreadcrumbItem = styled.div`
+  font-size: 16px;
+  color: ${({ theme }) => theme.primary_color};
 `;
 
 export const AddProductModalMenu = styled.div`
