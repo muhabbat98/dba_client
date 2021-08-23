@@ -31,9 +31,14 @@ import { useWindowSize } from '../../../hooks/useWindowSize';
 interface AddProductModalProps {
   itemId?: any;
   modalClose: () => void;
+  categoryName: string;
 }
 
-const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
+const AddProductModal: FC<AddProductModalProps> = ({
+  itemId,
+  modalClose,
+  categoryName,
+}) => {
   const { checkError } = useError();
   const { push } = useHistory();
   const [width] = useWindowSize();
@@ -43,6 +48,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [categoryId, setCategoryId] = useState<string>('');
   const [isSecond, setIsSecond] = useState<boolean>(false);
+  const [breadcrumb, setBreadcrumb] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
@@ -57,6 +63,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
     try {
       const response = await axios.get('catalog?parentId=' + idd);
       const data = await response.data;
+      console.log('d => ', data);
       if (data.length > 0) {
         setMenu(data);
         if (!reFetch) {
@@ -66,8 +73,6 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
       } else {
         const res = await axios.get(`/meta_data/products/${idd}`);
         const d = await res.data;
-        console.log('d => ', d);
-
         if (d.length > 0) {
           setMenu(d);
           setIsSecond(true);
@@ -109,7 +114,14 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
     modalClose();
   };
 
-  console.log('categoryId => ', categoryId);
+  const breadcrumbChange = () => {
+    if (breadcrumb && breadcrumb.length > 0) {
+      breadcrumb.map((item: any) => <span>item</span>);
+    }
+  };
+
+  console.log('prevIds => ', prevIds);
+  // console.log('breadcrumb => ', brea)
 
   return (
     <>
@@ -136,7 +148,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
                   <ListIcon />
                 </ProductIcon>
 
-                <ProductTitle>Электроника</ProductTitle>
+                <ProductTitle>{categoryName}</ProductTitle>
               </AddProductModalTopLeft>
 
               {width >= 768 ? (

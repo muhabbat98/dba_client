@@ -18,6 +18,7 @@ const AddProduct = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [id, setId] = useState<string>('');
+  const [categoryName, setCategoryName] = useState<string>('');
 
   useEffect(() => {
     getAllProducts();
@@ -39,6 +40,11 @@ const AddProduct = () => {
 
   const openModalHandle = (id: string) => {
     setOpenModal(true);
+    for (let i = 0; i < allProduct.length; i++) {
+      if (allProduct[i].id == id) {
+        setCategoryName(allProduct[i].name);
+      }
+    }
     setId(id);
   };
 
@@ -54,7 +60,11 @@ const AddProduct = () => {
         ) : (
           <AddProductList>
             {openModal && (
-              <AddProductModal itemId={id} modalClose={modalClose} />
+              <AddProductModal
+                categoryName={categoryName}
+                itemId={id}
+                modalClose={modalClose}
+              />
             )}
             {allProduct.map((item: any) => (
               <AddProductItem
