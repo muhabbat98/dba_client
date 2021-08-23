@@ -197,6 +197,8 @@ export const DeleteIconBox = styled.div`
   transition: all 0.25s ease;
 `;
 
+export const FirstViewIcon = styled.div``;
+
 export const AddProductPhotoItem = styled.div`
   width: 123px;
   height: 123px;
@@ -206,15 +208,12 @@ export const AddProductPhotoItem = styled.div`
   overflow: hidden;
   position: relative;
 
-  &:first-child {
-    &::after {
-      content: url('../../assets/icons/add-product-star.svg');
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 16px;
-      height: 16px;
-    }
+  & > ${FirstViewIcon} {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
   }
 
   @media (max-width: 768px) {
