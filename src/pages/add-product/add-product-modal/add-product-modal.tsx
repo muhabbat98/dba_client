@@ -16,6 +16,7 @@ import {
   ProductIcon,
   ProductTitle,
   AddProductBreadcrumb,
+  AddProductBreadcrumbItem,
   AddProductModalMenu,
   AddProductModalMenuItem,
   ProductOrder,
@@ -31,9 +32,14 @@ import { useWindowSize } from '../../../hooks/useWindowSize';
 interface AddProductModalProps {
   itemId?: any;
   modalClose: () => void;
+  categoryName: string;
 }
 
-const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
+const AddProductModal: FC<AddProductModalProps> = ({
+  itemId,
+  modalClose,
+  categoryName,
+}) => {
   const { checkError } = useError();
   const { push } = useHistory();
   const [width] = useWindowSize();
@@ -43,6 +49,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [categoryId, setCategoryId] = useState<string>('');
   const [isSecond, setIsSecond] = useState<boolean>(false);
+  const [breadcrumb, setBreadcrumb] = useState<any>([]);
 
   useEffect(() => {
     (async () => {
@@ -57,8 +64,10 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
     try {
       const response = await axios.get('catalog?parentId=' + idd);
       const data = await response.data;
+      console.log('d => ', data);
       if (data.length > 0) {
         setMenu(data);
+
         if (!reFetch) {
           setPrevIds([...prevIds, idd]);
         }
@@ -66,8 +75,6 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
       } else {
         const res = await axios.get(`/meta_data/products/${idd}`);
         const d = await res.data;
-        console.log('d => ', d);
-
         if (d.length > 0) {
           setMenu(d);
           setIsSecond(true);
@@ -90,13 +97,17 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
   };
 
   const setItemId = async (id: string) => {
+    breadcrumbChange(id, false);
     await getChildMenuItem(id);
   };
 
   const backHandle = async () => {
     if (prevIds.length > 1) {
       let lastIds = [...prevIds];
-      lastIds.pop();
+
+      let removedId = lastIds.pop();
+      breadcrumbChange(removedId, true);
+
       setPrevIds(lastIds);
       const lastIdd = lastIds[lastIds.length - 1];
       await getChildMenuItem(lastIdd, true);
@@ -109,7 +120,27 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
     modalClose();
   };
 
-  console.log('categoryId => ', categoryId);
+  const breadcrumbChange = (id: string, isRemoved?: boolean) => {
+    if (menu && menu.length > 1) {
+      if (!isRemoved) {
+        for (let i = 0; i < menu.length; i++) {
+          if (menu[i].id == id) {
+            setBreadcrumb([...breadcrumb, menu[i].name]);
+          }
+        }
+      } else {
+        console.log('ssssssssssssss');
+        // breadcrumb.pop();
+        setBreadcrumb([...breadcrumb.slice(0, breadcrumb.length - 1)]);
+      }
+    } else {
+      setBreadcrumb([...breadcrumb.slice(0, breadcrumb.length - 1)]);
+    }
+  };
+
+  console.log('prevIds => ', prevIds);
+  console.log('menu => ', menu);
+  console.log('breadcrumb => ', breadcrumb);
 
   return (
     <>
@@ -136,7 +167,7 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
                   <ListIcon />
                 </ProductIcon>
 
-                <ProductTitle>Электроника</ProductTitle>
+                <ProductTitle>{categoryName}</ProductTitle>
               </AddProductModalTopLeft>
 
               {width >= 768 ? (
@@ -147,7 +178,14 @@ const AddProductModal: FC<AddProductModalProps> = ({ itemId, modalClose }) => {
             </AddProductModalTop>
 
             <AddProductBreadcrumb>
-              Мобильные телефоны и аксессуары
+              <AddProductBreadcrumbItem>
+                {categoryName}
+              </AddProductBreadcrumbItem>
+              /
+              {breadcrumb.length > 0 &&
+                breadcrumb.map((item: any) => (
+                  <AddProductBreadcrumbItem>{item} / </AddProductBreadcrumbItem>
+                ))}
             </AddProductBreadcrumb>
 
             {width < 768 ? (

@@ -46,6 +46,18 @@ interface Params {
   productId: string;
 }
 
+interface AddProductDataType {
+  name: string;
+  price: string;
+  quantity: string;
+  productComment: string;
+}
+
+interface DeliveryAddressType {
+  province: string;
+  city: string;
+}
+
 const AddProductForm = () => {
   const { categoryId, productId } = useParams<Params>();
   const { checkError } = useError();
@@ -54,10 +66,35 @@ const AddProductForm = () => {
   const [productPhoto, setProductPhoto] = useState<any>(null);
   const [allFields, setAllFields] = useState<any>(null);
   const [collectiveJson, setCollectiveJson] = useState<any>(null);
+  const [region, setRegion] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [addProductData, setAddProductData] = useState<AddProductDataType>({
+    name: '',
+    price: '',
+    quantity: '',
+    productComment: '',
+  });
+  const [deliveryAddress, setDeliveryAddress] = useState<DeliveryAddressType>({
+    province: '',
+    city: '',
+  });
 
   useEffect(() => {
     getData(productId);
   }, []);
+
+  const addProductChangeHandler = (ev: any) => {
+    console.log(ev.target.name);
+    console.log(ev.target.value);
+    setAddProductData((prevState) => {
+      return {
+        ...prevState,
+        [ev.target.name]: ev.target.value,
+      };
+    });
+  };
+
+  console.log('addProductData ', addProductData);
 
   /** TODO
    *
@@ -66,7 +103,7 @@ const AddProductForm = () => {
     2) e = bir marta Event objectini qabul qiladi(asosan Date tipidan keladi)
    */
   const handleInput = (e: any, id: string, parentId: any) => {
-    console.log('handleInput',e);
+    console.log('handleInput', e);
     if (e) {
       console.log('e => ', typeof e);
       console.log('id => ', id);
@@ -105,7 +142,27 @@ const AddProductForm = () => {
     return copyObj;
   };
 
-  const dropdownDocumentHandle = () => {};
+  const dropdownRegionHandle = (data: any) => {
+    setRegion(data.value);
+    setDeliveryAddress((prevState) => {
+      return {
+        ...prevState,
+        province: data.value,
+      };
+    });
+  };
+
+  const dropdownCityHandle = (data: any) => {
+    setCity(data.value);
+    setDeliveryAddress((prevState) => {
+      return {
+        ...prevState,
+        city: data.value,
+      };
+    });
+  };
+
+  console.log(deliveryAddress);
 
   const setDelivery = (ev: any) => {
     const val = ev.target.value;
@@ -158,6 +215,12 @@ const AddProductForm = () => {
 
   const handleDeletePhoto = () => {};
 
+  const sendData = () => {
+    const newObj: any = { ...collectiveJson };
+    newObj.addProductData = { ...addProductData };
+    newObj.deliveryAddress = { ...deliveryAddress };
+  };
+
   return (
     <Container>
       <AddProductFormContainer>
@@ -178,32 +241,41 @@ const AddProductForm = () => {
           <AddProductFormItemBody>
             <AddProductFormItemBodyItem>
               <SimpleInput
+                name="name"
                 label="Введите название товара *"
                 placeholder="Введите название товара *"
-                inputValueHandler={handleInput}
+                onChange={addProductChangeHandler}
               />
             </AddProductFormItemBodyItem>
 
             <AddProductFormItemBodyItem>
               <SimpleInput
+                name="price"
                 label="Стоимость *"
                 placeholder="Стоимость *"
-                inputType="number"
-                inputValueHandler={handleInput}
+                // inputType="number"
+                // inputValueHandler={addProductChangeHandler}
+                onChange={addProductChangeHandler}
               />
             </AddProductFormItemBodyItem>
 
             <AddProductFormItemBodyItem>
               <SimpleInput
-                label="Количество *"
-                placeholder="Количество *"
-                inputType="number"
-                inputValueHandler={handleInput}
+                name="quantity"
+                label="Производитель *"
+                placeholder="Производитель *"
+                // inputType="number"
+                onChange={addProductChangeHandler}
+                // inputValueHandler={addProductChangeHandler}
               />
             </AddProductFormItemBodyItem>
 
             <AddProductFormItemBodyItem>
-              <Textarea placeholder="Введите описание товара"></Textarea>
+              <Textarea
+                name="productComment"
+                placeholder="Введите описание товара"
+                onChange={addProductChangeHandler}
+              ></Textarea>
             </AddProductFormItemBodyItem>
           </AddProductFormItemBody>
         </AddProductFormItem>
@@ -391,8 +463,8 @@ const AddProductForm = () => {
                     'Паспорт иностранного гражданина',
                   ]}
                   label="Область"
-                  // selected={state.typeOfIdentityDocumentOfSupervisor}
-                  callback={dropdownDocumentHandle}
+                  selected={region}
+                  callback={dropdownRegionHandle}
                 />
               </DeleiveryZoneItem>
 
@@ -408,8 +480,8 @@ const AddProductForm = () => {
                     'Янгиюль ',
                   ]}
                   label="Город"
-                  // selected={state.typeOfIdentityDocumentOfSupervisor}
-                  callback={dropdownDocumentHandle}
+                  selected={city}
+                  callback={dropdownCityHandle}
                 />
               </DeleiveryZoneItem>
             </DeleiveryZone>
@@ -418,7 +490,7 @@ const AddProductForm = () => {
 
         <AddProductFormBottom>
           <Button btnType="gray">Очистить</Button>
-          <Button>Опубликовать</Button>
+          <Button onClick={sendData}>Опубликовать</Button>
         </AddProductFormBottom>
       </AddProductFormContainer>
     </Container>
