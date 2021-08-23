@@ -40,12 +40,18 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
     const [checked,setChecked] = useState<any>();
 
     let arr = new Array;
+    let userCategoryList = new Array;
+    userItem.item.categoryNames.map((item:any)=>{
+        userCategoryList.push(item.id);
+    })
+
     useEffect(()=>{
         creatNewCheckedArray();
+
     },[])
-    console.log('arr',checked);
+
     const onSubmit = (data: any) => {
-        console.log("data=>  ", imgState);
+        // console.log("data=>  ", imgState);
 
         const formData = new FormData();
 
@@ -57,7 +63,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
             formData.append("secondName", data.secondName);
             formData.append("phoneNumber", data.phoneNumber);
             // formData.append("password", data.confirmPassword);
-            formData.append("categoryIds", selectList);
+            formData.append("categoryIds", selectList.length>0?selectList:userCategoryList);
             formData.append("id", userItem.item.id);
             editModeratorItem(formData)
         } else {
@@ -106,7 +112,6 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
         }
 
     }
-
     const selectImage:any = () => {
         if(avatar){
             return <img src={avatar} alt='avatar'/>
