@@ -72,7 +72,7 @@ const Moderator = () => {
           try{
               const res = await axios.get("/moderator");
               setModerator(res.data.reverse())
-              console.log('moderatorsss-->',res.data);
+              // console.log('moderatorsss-->',res.data);
           } catch (error) {
               checkError(error);
           }
@@ -82,7 +82,6 @@ const Moderator = () => {
           try{
               const response = await axios.post('/moderator',getAddItems)
               refreshModerator(true);
-
               // console.log('response-->',response);
           } catch(error) {
               checkError(error);
@@ -100,7 +99,7 @@ const Moderator = () => {
          }
       }
       const  value = (data:any) => {
-          console.log('rerere--',data)
+          // console.log('rerere--',data)
     }
       return (
       <>

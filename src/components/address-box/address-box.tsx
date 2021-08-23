@@ -86,10 +86,7 @@ const AddressBox: React.FC<PropsModal> = ({
     if (callback) callback(data);
     // console.log("Maindataa------->", data)
   };
-  //  console.log("gggg--",location&&location[0])
-  // console.log("lat-",inputItems&&inputItems.latitude,"long-",inputItems&&inputItems.longitude)
-  // console.log("rr->>",location)
-  // console.log("inputdata---->",inputItems)
+
   return (
     <ModalContainer className="glass-container" onClick={clickHandler}>
       <Wrapper>
