@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import TemplateList from './template-list';
 import TemplateCreate from './template-create';
 import TemplateView from './template-view';
+import Back from '../../components/back';
 
 interface Params {
   id: string;
@@ -16,6 +17,7 @@ const Template = () => {
 
   return (
     <TemplateContainer>
+      <Back />
       <Switch>
         <Route exact path={`${path}/list/:id`}>
           <TemplateList />

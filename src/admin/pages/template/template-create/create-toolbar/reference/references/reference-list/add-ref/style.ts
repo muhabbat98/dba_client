@@ -27,3 +27,10 @@ export const CloseIcon = styled.div`
     right: 16px;
   }
 `;
+
+export const ChooseAll = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  cursor: pointer;
+`;

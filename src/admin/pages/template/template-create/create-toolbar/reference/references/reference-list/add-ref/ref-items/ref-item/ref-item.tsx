@@ -4,13 +4,18 @@ import Checkbox from '../../../../../../../../../../../components/checkbox';
 
 interface Props {
   item: any;
-  handleCheck: (id: string) => void;
+  handleCheck: any;
+  checked: boolean;
 }
 
-const RefItem: React.FC<Props> = ({ item, handleCheck }) => {
+const RefItem: React.FC<Props> = ({ item, handleCheck, checked }) => {
   return (
     <RefItemContainer>
-      <Checkbox onChange={() => handleCheck(item.id)} />
+      <Checkbox
+        onChange={(e) => handleCheck(e, item.id)}
+        checked={checked}
+        defaultChecked={checked}
+      />
       {item.name}
     </RefItemContainer>
   );
