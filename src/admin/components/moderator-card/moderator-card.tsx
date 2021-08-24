@@ -77,7 +77,7 @@ const ModeratorCard:React.FC<Propses> = ({item,refreshModerator,setUserItem,setO
             <CardWraper>
                   <ActionBtn onClick={()=>setOpen(open=>!open)}><DostsIcon/></ActionBtn>    
                   <CardBox>
-                        <AvatarImg><img src={item.imageUrl?item.imageUrl:DefUSer}/></AvatarImg>
+                        <AvatarImg><img src={item.imageUrl!='noUrl'?item.imageUrl:DefUSer}/></AvatarImg>
                         <NameTitle>{item.firstName} {item.secondName}</NameTitle>
                         <PhoneNumber>+998 {item.phoneNumber}</PhoneNumber>
                         <RoleTitle>Модератор</RoleTitle>

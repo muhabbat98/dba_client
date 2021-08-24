@@ -65,7 +65,7 @@ const AddModerator: React.FC<Propses> = ({
 
     if (data.password == data.confirmPassword) {
       setClose(false);
-      formData.append('image', imgState ? imgState : null);
+        imgState&& formData.append('image', imgState);
       formData.append('firstName', data.firstName);
       formData.append('secondName', data.secondName);
       formData.append('phoneNumber', data.phoneNumber);
@@ -208,7 +208,7 @@ const AddModerator: React.FC<Propses> = ({
                             onChange={(e: any) => collectCat(e)}
                             label={item.name}
                             name={item.id}
-                            
+
                           />
                         </div>
                       );

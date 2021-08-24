@@ -58,7 +58,7 @@ const EditModerator: React.FC<Propses> = ({setClose,reff,editModeratorItem,userI
 
         if (data.password == data.confirmPassword) {
             setClose(false);
-            formData.append("image", imgState?imgState:null);
+            imgState && formData.append("image", imgState);
             formData.append("firstName", data.firstName);
             formData.append("secondName", data.secondName);
             formData.append("phoneNumber", data.phoneNumber);
