@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import FormatMoney from '../../../utils/format-money';
-import Button from '../../../components/button';
 import { useParams } from 'react-router-dom';
-import { useActionCreators, useSelector} from '../../../hooks';
-import {useWindowSize} from '../../../hooks/useWindowSize';
+import { useActionCreators, useSelector,useRole} from '../../../hooks';
+import Button from '../../../components/button';
 import MobileSlider from '../../../components/mobile-slider';
 import {ReactComponent as Star} from '../../../assets/icons/star-full.svg';
 import  PhoneMain from '../product-detail-header/images/phoneMain.svg'
@@ -30,6 +29,8 @@ const images = [
 
 const MobileProductHeader = () => {
     const { id } = useParams<any>();
+    const isBuyer = useRole().isBuyer;
+    console.log('isisis',isBuyer)
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [isInCart, setIsInCart] = useState(false);
     const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
@@ -60,6 +61,11 @@ const MobileProductHeader = () => {
         setIsInWishlist(!isInWishlist);
         removeWishlist(item);
     };
+    const heartButton = () => {
+        isBuyer && (isInWishlist
+            ? removeFromWishlistHandle(item)
+            : addToWishlistHandle(item))
+    }
     const item = {
         "id": id,
         "route": "/catalog/details/samsung-6063033fb1a9f83cc5c612330",
@@ -83,15 +89,12 @@ const MobileProductHeader = () => {
             <ProductTitle>Apple / Смартфон iPhone 11 128GB (новая комплектация)</ProductTitle>
             <ReviewsContainer>
                 <Reviews><Star/><span>4</span> <p>(1241) отзывов</p></Reviews>
-                <div
-                    onClick={() =>
-                        isInWishlist
-                            ? removeFromWishlistHandle(item)
-                            : addToWishlistHandle(item)
-                    }
-                >{isInWishlist ?<HeartFull style={{width:17,height:17}}/>:<Heart style={{width:17,height:17}}/>}</div>
-
-            </ReviewsContainer>
+                <div onClick={heartButton}>
+                    {isBuyer && isInWishlist ?
+                        <HeartFull style={{width:17,height:17}}/>
+                        :<Heart style={{width:17,height:17}}/>}
+                </div>
+            </ReviewsContainer><span>sssss</span>
             <PriceTitles>8 595 000 сум <span>8 416 000 сум</span></PriceTitles>
             <MobileSlider items={images}/>
             <BinaryTextConatiner>
@@ -110,10 +113,17 @@ const MobileProductHeader = () => {
             <BinaryTextConatiner>
                 <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
             </BinaryTextConatiner>
-            {isInCart
-                ?<Button size={"large"} style={{marginTop:27}} btnType="disabled">Товар добавлен в корзину</Button>
-                :<Button size={"large"}  style={{marginTop:27}} onClick={() =>
-                    isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)}
+            {!isBuyer
+                ?<Button
+                    size={"large"}
+                    style={{marginTop:27}}
+                    btnType="disabled"
+                >Неактивная кнопка</Button>
+                :<Button
+                    size={"large"}
+                    style={{marginTop:27}}
+                    btnType={isInCart?'disabled':'default'}
+                    onClick={() =>isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)}
                 >{isInCart ? "Товар добавлен в корзину" : "Добавить в корзину"}</Button>
             }
         </>

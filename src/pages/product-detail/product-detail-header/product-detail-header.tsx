@@ -3,7 +3,7 @@ import StarRaiting from '../../../components/star-rating';
 import FormatMoney from '../../../utils/format-money';
 import Button from '../../../components/button';
 import { useParams } from 'react-router-dom';
-import { useActionCreators, useSelector} from '../../../hooks';
+import { useActionCreators, useRole, useSelector } from '../../../hooks';
 import {useWindowSize} from '../../../hooks/useWindowSize';
 import  PhoneMain from './images/phoneMain.svg'
 import  Phone1 from './images/phone1.svg'
@@ -37,6 +37,7 @@ const images = [
 ]
 const  ProductDetailHeader = () => {
     const { id } = useParams<any>();
+    const isBuyer = useRole().isBuyer;
     const [mainImage,setMainImage] = useState();
     const [isInCart, setIsInCart] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(false);
@@ -76,7 +77,11 @@ const  ProductDetailHeader = () => {
     const setMainPicture = (item:any) => {
         setMainImage(item);
     }
-
+    const heartButton = () => {
+        isBuyer && (isInWishlist
+            ? removeFromWishlistHandle(item)
+            : addToWishlistHandle(item))
+    }
     const item = {
         "id": id,
         "route": "/catalog/details/samsung-6063033fb1a9f83cc5c612330",
@@ -116,13 +121,11 @@ const  ProductDetailHeader = () => {
             <ProductInformation>
                 <InfoTitleContainer>
                     <p>Apple / Смартфон iPhone 11 128GB (новая комплектация)</p>
-                    <div 
-                        onClick={() =>
-                            isInWishlist
-                                ? removeFromWishlistHandle(item)
-                                : addToWishlistHandle(item)
-                            }
-                    >{isInWishlist ?<HeartFull/>:<Heart />}</div>
+                    <div onClick={heartButton}>
+                        {isBuyer && isInWishlist ?
+                            <HeartFull style={{width:17,height:17}}/>
+                            :<Heart style={{width:17,height:17}}/>}
+                    </div>
                 </InfoTitleContainer>
                 <RatingContainer>
                     <StarRaiting callback={starRaitingResult} />
@@ -146,11 +149,18 @@ const  ProductDetailHeader = () => {
                 <BinaryTextConatiner>
                     <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
                 </BinaryTextConatiner>
-                {isInCart
-                ?<Button size={width>1000?'medium':"large"} style={{marginTop:27}} btnType="disabled">Товар добавлен в корзину</Button>
-                :<Button style={{marginTop:27}} onClick={() =>
-                    isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)}
-                  >{isInCart ? "Товар добавлен в корзину" : "Добавить в корзину"}</Button>
+                {!isBuyer
+                    ? <Button
+                        size={"medium"}
+                        style={{ marginTop: 27 }}
+                        btnType="disabled"
+                    >Неактивная кнопка</Button>
+                    : <Button
+                        size={"medium"}
+                        style={{ marginTop: 27 }}
+                        btnType={isInCart ? 'disabled' : 'default'}
+                        onClick={() => isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)}
+                    >{isInCart ? "Товар добавлен в корзину" : "Добавить в корзину"}</Button>
                 }
             </ProductInformation>
             
