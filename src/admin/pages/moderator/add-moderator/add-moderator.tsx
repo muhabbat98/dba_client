@@ -208,7 +208,7 @@ const AddModerator: React.FC<Propses> = ({
                             onChange={(e: any) => collectCat(e)}
                             label={item.name}
                             name={item.id}
-                            checked={true}
+                            
                           />
                         </div>
                       );
