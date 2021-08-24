@@ -94,7 +94,7 @@ const MobileProductHeader = () => {
                         <HeartFull style={{width:17,height:17}}/>
                         :<Heart style={{width:17,height:17}}/>}
                 </div>
-            </ReviewsContainer><span>sssss</span>
+            </ReviewsContainer>
             <PriceTitles>8 595 000 сум <span>8 416 000 сум</span></PriceTitles>
             <MobileSlider items={images}/>
             <BinaryTextConatiner>
