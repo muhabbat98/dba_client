@@ -34,11 +34,13 @@ import {
   AddProductPhotoItem,
   PtotoApparatBox,
   DeleteIconBox,
+  FirstViewIcon,
 } from './style';
 
 import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
 import { ReactComponent as PhotoApparat } from '../../assets/icons/add-product-photo-apparat.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-delete-icon.svg';
+import { ReactComponent as FirstView } from '../../assets/icons/first-view.svg';
 import SimpleInput from '../../components/simple-input';
 
 interface Params {
@@ -288,133 +290,47 @@ const AddProductForm = () => {
               изменить порядок
             </AddProductPhotoAttention>
             <AddProductPhoto>
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
-                ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((item: any, index: number) =>
+                index === 0 ? (
+                  <AddProductPhotoItem>
+                    <input type="file" onChange={handleProductPhoto} />
+                    <FirstViewIcon>
+                      <FirstView />
+                    </FirstViewIcon>
+                    {productPhoto ? (
+                      <img src={productPhoto} />
+                    ) : (
+                      <PtotoApparatBox onClick={handleProductPhoto}>
+                        <PhotoApparat />
+                      </PtotoApparatBox>
+                    )}
 
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
+                    {productPhoto ? (
+                      <DeleteIconBox onClick={handleDeletePhoto}>
+                        <DeleteIcon />
+                      </DeleteIconBox>
+                    ) : null}
+                  </AddProductPhotoItem>
                 ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
+                  <AddProductPhotoItem>
+                    <input type="file" onChange={handleProductPhoto} />
 
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
-                ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
+                    {productPhoto ? (
+                      <img src={productPhoto} />
+                    ) : (
+                      <PtotoApparatBox onClick={handleProductPhoto}>
+                        <PhotoApparat />
+                      </PtotoApparatBox>
+                    )}
 
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
-                ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
-
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
-                ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
-
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
-                ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
-
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
-                ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
-
-              <AddProductPhotoItem>
-                <input type="file" onChange={handleProductPhoto} />
-                {productPhoto ? (
-                  <img src={productPhoto} />
-                ) : (
-                  <PtotoApparatBox onClick={handleProductPhoto}>
-                    <PhotoApparat />
-                  </PtotoApparatBox>
-                )}
-                {productPhoto ? (
-                  <DeleteIconBox onClick={handleDeletePhoto}>
-                    <DeleteIcon />
-                  </DeleteIconBox>
-                ) : null}
-              </AddProductPhotoItem>
+                    {productPhoto ? (
+                      <DeleteIconBox onClick={handleDeletePhoto}>
+                        <DeleteIcon />
+                      </DeleteIconBox>
+                    ) : null}
+                  </AddProductPhotoItem>
+                )
+              )}
             </AddProductPhoto>
           </AddProductPhotoBoxItem>
         </AddProductPhotoBox>

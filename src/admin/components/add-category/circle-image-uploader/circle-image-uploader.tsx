@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { ReactComponent as View } from '../../../assets/icons/view.svg';
 import { ReactComponent as Cancel } from '../../../assets/icons/cancel.svg';
@@ -22,6 +22,8 @@ interface Props {
   imageProps?: string | null;
   register: any;
   name: string;
+  isUpload: boolean;
+  setValue: any;
 }
 
 const CircleImageUploader: React.FC<Props> = ({
@@ -30,6 +32,8 @@ const CircleImageUploader: React.FC<Props> = ({
   icon,
   title,
   name,
+  isUpload,
+  setValue,
 }) => {
   const [image, setImage] = useState<any>();
   const { setAlertMessage } = useActionCreators();
@@ -44,7 +48,7 @@ const CircleImageUploader: React.FC<Props> = ({
     const input = e.target;
     const url = input.value;
     const ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-    console.log(input.files);
+    //console.log(input.files);
     if (
       input.files &&
       input.files[0] &&
@@ -61,7 +65,7 @@ const CircleImageUploader: React.FC<Props> = ({
       };
       reader.readAsDataURL(input.files[0]);
     } else {
-      console.log(11);
+      //console.log(11);
       setAlertMessage({
         message: 'Размер картинки слишком большой или формат не правильный',
         type: 'warning',
@@ -69,9 +73,9 @@ const CircleImageUploader: React.FC<Props> = ({
       setImage(undefined);
     }
   };
-  console.log('image --- ', image);
+  //console.log('image --- ', image);
   return (
-    <CircleImageUploaderContainer isImage={image}>
+    <CircleImageUploaderContainer isImage={image} isUpload={isUpload}>
       <Label htmlFor={id} />
       {!image ? (
         <>
@@ -90,7 +94,10 @@ const CircleImageUploader: React.FC<Props> = ({
               {/*</ViewIconContainer>*/}
               <CancelIconContainer
                 title="Убрать фото"
-                onClick={() => setImage(undefined)}
+                onClick={() => {
+                  setValue(name, '');
+                  setImage(undefined);
+                }}
               >
                 <Cancel />
               </CancelIconContainer>
@@ -105,7 +112,7 @@ const CircleImageUploader: React.FC<Props> = ({
         type="file"
         id={id}
         ref={register}
-        //value={image}
+        // value={image}
         defaultValue={image}
       />
     </CircleImageUploaderContainer>

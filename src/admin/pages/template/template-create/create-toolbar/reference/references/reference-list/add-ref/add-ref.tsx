@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { AddRefContainer, Content, CloseIcon } from './style';
+import React, { useEffect, useState } from 'react';
+import { AddRefContainer, Content, CloseIcon, ChooseAll } from './style';
 import { ReactComponent as Close } from '../../../../../../../../assets/icons/cancel.svg';
 import Backdrop from '../../../../../../../../../components/backdrop';
 import SimpleInput from '../../../../../../../../../components/simple-input';
@@ -11,6 +11,7 @@ import {
   useError,
 } from '../../../../../../../../../hooks';
 import { useParams } from 'react-router-dom';
+import Checkbox from '../../../../../../../../../components/checkbox';
 
 interface Props {
   close: () => void;
@@ -24,6 +25,7 @@ interface Params {
 
 const AddRef: React.FC<Props> = ({ close, items, name, fetFields }) => {
   const [input, setInput] = useState(name);
+  const [isCheckAll, setIsCheckAll] = useState<boolean>(false);
   const { id } = useParams<Params>();
   const [selectedRef, setSelectedRef] = useState<any[]>([]);
   const { checkError } = useError();
@@ -53,7 +55,7 @@ const AddRef: React.FC<Props> = ({ close, items, name, fetFields }) => {
     console.log('incorrect');
   };
 
-  function handleCheck(id: string) {
+  function handleCheck(e: any, id: string) {
     const copyRefs = [...selectedRef];
     const find = copyRefs.find((ref) => ref === id);
     console.log('find', find);
@@ -67,6 +69,20 @@ const AddRef: React.FC<Props> = ({ close, items, name, fetFields }) => {
   }
 
   const active = input.length > 0 && selectedRef.length > 0;
+
+  function checkAll() {
+    setIsCheckAll((prevState) => !prevState);
+  }
+
+  useEffect(() => {
+    if (isCheckAll) {
+      setSelectedRef(items.map((ref) => ref.id));
+    } else {
+      setSelectedRef([]);
+    }
+  }, [isCheckAll]);
+
+  console.log('selectedRef -- ', selectedRef);
 
   return (
     <AddRefContainer>
@@ -82,7 +98,14 @@ const AddRef: React.FC<Props> = ({ close, items, name, fetFields }) => {
           value={input}
           onChange={(e: any) => setInput(e.target.value)}
         />
-        <RefItems items={items} handleCheck={handleCheck} />
+        <ChooseAll>
+          <Checkbox callback={checkAll} checked={isCheckAll} /> Выбрать все
+        </ChooseAll>
+        <RefItems
+          selected={selectedRef}
+          items={items}
+          handleCheck={handleCheck}
+        />
         <Button
           btnType={active ? 'default' : 'disabled'}
           onClick={submit}

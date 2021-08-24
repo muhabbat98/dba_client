@@ -2,6 +2,17 @@ import styled from 'styled-components';
 
 interface Props {
   isImage: any;
+  isUpload: boolean;
+}
+
+function checkBorder(isImage: boolean, isUpload: boolean) {
+  if (isImage && !isUpload) {
+    return '3px solid #c6c6c6';
+  } else if (isUpload) {
+    return '3px solid red';
+  } else if (!isImage && !isUpload) {
+    return 'none';
+  }
 }
 
 export const CircleImageUploaderContainer = styled.div<Props>`
@@ -14,7 +25,7 @@ export const CircleImageUploaderContainer = styled.div<Props>`
   align-items: center;
   justify-content: center;
   transition: 0.3s;
-  border: ${({ isImage }) => (isImage ? '3px solid #c6c6c6' : 'none')};
+  border: ${({ isImage, isUpload }) => checkBorder(isImage, isUpload)};
   flex-direction: column;
   :hover {
     background: #e4e6e9;

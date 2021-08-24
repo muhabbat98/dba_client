@@ -64,7 +64,6 @@ const AddProductModal: FC<AddProductModalProps> = ({
     try {
       const response = await axios.get('catalog?parentId=' + idd);
       const data = await response.data;
-      console.log('d => ', data);
       if (data.length > 0) {
         setMenu(data);
 
@@ -129,7 +128,6 @@ const AddProductModal: FC<AddProductModalProps> = ({
           }
         }
       } else {
-        console.log('ssssssssssssss');
         // breadcrumb.pop();
         setBreadcrumb([...breadcrumb.slice(0, breadcrumb.length - 1)]);
       }
@@ -137,10 +135,6 @@ const AddProductModal: FC<AddProductModalProps> = ({
       setBreadcrumb([...breadcrumb.slice(0, breadcrumb.length - 1)]);
     }
   };
-
-  console.log('prevIds => ', prevIds);
-  console.log('menu => ', menu);
-  console.log('breadcrumb => ', breadcrumb);
 
   return (
     <>
