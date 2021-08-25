@@ -46,9 +46,6 @@ export const AddProductFormBreadcrumbItem = styled.div`
 export const AddProductFormItem = styled.div``;
 
 export const AddProductFormItemBody = styled.div`
-  border: 2px solid #e9ecf4;
-  border-radius: 16px;
-  padding: 24px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 50px;
@@ -62,15 +59,6 @@ export const AddProductFormItemBody = styled.div`
 `;
 
 export const AddProductFormItemBodyItem = styled.div``;
-
-export const Textarea = styled.textarea`
-  padding: 24px;
-  background: #f4f6f9;
-  border-radius: 16px;
-  width: 100%;
-  border: none;
-  outline: none;
-`;
 
 export const AddProductFormBottom = styled.div`
   margin-top: 32px;
@@ -247,3 +235,50 @@ export const AddProductPhotoItem = styled.div`
     }
   }
 `;
+
+export const AddProductWrapp = styled.div`
+  border: 2px solid #e9ecf4;
+  border-radius: 16px;
+  padding: 24px;
+
+  & {
+    .wrap {
+      margin-top: 16px;
+      position: relative;
+    }
+  }
+`;
+
+export const TextareaLabel = styled.label`
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  color: #797979;
+  font-size: 20px;
+  font-weight: 700;
+  pointer-events: none;
+`;
+
+export const Textarea = styled.textarea`
+  padding: 24px;
+  background: #f4f6f9;
+  border-radius: 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  height: 146px;
+
+  &:focus ~ ${TextareaLabel} {
+    top: 7px;
+    color: ${({ theme }) => theme.blue};
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &:empty ~ ${TextareaLabel} {
+    top: 24px;
+  }
+`;
+
+export const AddPhotoButton = styled.button``;

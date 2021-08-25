@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useError } from '../../hooks';
 import Container from '../../components/grid/container';
@@ -35,6 +35,9 @@ import {
   PtotoApparatBox,
   DeleteIconBox,
   FirstViewIcon,
+  TextareaLabel,
+  AddProductWrapp,
+  AddPhotoButton,
 } from './style';
 
 import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
@@ -60,16 +63,28 @@ interface DeliveryAddressType {
   city: string;
 }
 
+interface AddedPhotosType {
+  photoUrl: string;
+  isMain: boolean;
+}
+
 const AddProductForm = () => {
   const { categoryId, productId } = useParams<Params>();
   const { checkError } = useError();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [openDeleivery, setOpenDeleivery] = useState<boolean>(false);
-  const [productPhoto, setProductPhoto] = useState<any>(null);
+  const [productPhoto, setProductPhoto] = useState<any>([]);
   const [allFields, setAllFields] = useState<any>(null);
   const [collectiveJson, setCollectiveJson] = useState<any>(null);
   const [region, setRegion] = useState<string>('');
   const [city, setCity] = useState<string>('');
+  const [photoArray, setPhotoArray] = useState<any>([
+    {
+      photoUrl: '',
+      isMain: true,
+    },
+  ]);
   const [addProductData, setAddProductData] = useState<AddProductDataType>({
     name: '',
     price: '',
@@ -80,9 +95,14 @@ const AddProductForm = () => {
     province: '',
     city: '',
   });
+  const [addedPhotos, setAddedPhotos] = useState<any>([]);
 
   useEffect(() => {
     getData(productId);
+
+    if (textareaRef) {
+      textareaRef.current?.focus();
+    }
   }, []);
 
   const addProductChangeHandler = (ev: any) => {
@@ -96,26 +116,26 @@ const AddProductForm = () => {
     });
   };
 
-  console.log('addProductData ', addProductData);
-
   /** TODO
    *
    *handleInput(e: any, id: string, parentId: any) da "e" ning qiymati 2 ta qiymat qabul qiladi:
     1) e = bir marta string qiymat qiymat
     2) e = bir marta Event objectini qabul qiladi(asosan Date tipidan keladi)
    */
-  const handleInput = (e: any, id: string, parentId: any) => {
-    console.log('handleInput', e);
+  const handleInput = (
+    e: any,
+    id: string,
+    parentId: any,
+    isReference?: boolean
+  ) => {
     if (e) {
-      console.log('e => ', typeof e);
-      console.log('id => ', id);
-      console.log('parentid => ', parentId);
       if (typeof e == 'object') {
         e = e.target.value;
       }
-      let copyObj = { ...allFields };
-      console.log(changeFieldsValueHandler(e, id, copyObj, parentId));
-      setCollectiveJson(changeFieldsValueHandler(e, id, copyObj, parentId));
+      let copyObj = JSON.parse(JSON.stringify(collectiveJson));
+      setCollectiveJson(
+        changeFieldsValueHandler(e, id, copyObj, parentId, isReference)
+      );
     }
   };
 
@@ -123,13 +143,27 @@ const AddProductForm = () => {
     val: any,
     id: string,
     copyObj: any,
-    parentId: any
+    parentId: any,
+    isReference?: boolean
   ) => {
     for (let key in copyObj) {
       if (key === 'id' && copyObj[key] == parentId) {
         for (let i = 0; i < copyObj.fields.length; i++) {
-          if (copyObj.fields[i].id == id) {
-            copyObj.fields[i].values = val;
+          if (!isReference) {
+            if (copyObj.fields[i].id == id) {
+              copyObj.fields[i].values = val;
+            }
+          } else {
+            if (
+              copyObj.fields[i].values &&
+              copyObj.fields[i].values.length > 0
+            ) {
+              for (let j = 0; j < copyObj.fields[i].values.length; j++) {
+                if (copyObj.fields[i].values[j].id == id) {
+                  copyObj.fields[i].values = copyObj.fields[i].values[j].id;
+                }
+              }
+            }
           }
         }
       }
@@ -137,7 +171,13 @@ const AddProductForm = () => {
 
     if (copyObj.products.length > 0) {
       for (let i = 0; i < copyObj.products.length; i++) {
-        changeFieldsValueHandler(val, id, copyObj.products[i], parentId);
+        changeFieldsValueHandler(
+          val,
+          id,
+          copyObj.products[i],
+          parentId,
+          isReference
+        );
       }
     }
 
@@ -164,8 +204,6 @@ const AddProductForm = () => {
     });
   };
 
-  console.log(deliveryAddress);
-
   const setDelivery = (ev: any) => {
     const val = ev.target.value;
     if (val == 'yes') {
@@ -175,52 +213,97 @@ const AddProductForm = () => {
     }
   };
 
-  const handleProductPhoto = (ev: any) => {
-    let imgFile = ev.target.files[0];
-    const fileExt = imgFile.name.toLowerCase().split('.').pop();
-
-    if (
-      imgFile &&
-      (fileExt == 'jpg' ||
-        fileExt == 'jpeg' ||
-        fileExt == 'png' ||
-        fileExt == 'gif' ||
-        fileExt == 'webp')
-    ) {
-      let reader = new FileReader();
-      reader.onload = function () {
-        setProductPhoto(reader.result);
-      };
-      reader.readAsDataURL(imgFile);
-
-      const formData = new FormData();
-      formData.append('file', imgFile);
-    } else {
-      setAlertMessage({
-        message:
-          'Siz yuklagan rasm hajmi juda katta yoki boshqa format tanladingiz',
-        type: 'error',
-        position: AlertPosition.TOP_CENTER,
-      });
-    }
-  };
-
   const getData = async (id: any) => {
     try {
       const response = await axios.get('/meta_data/product/' + id);
       const data = await response.data;
       setAllFields(data);
+      setCollectiveJson(data);
     } catch (error) {
       checkError(error);
     }
   };
 
+  const handleProductPhoto = (ev: any, isMainImg: boolean) => {
+    let targetFile = ev.target.files;
+    console.log('isMainImg ', isMainImg);
+
+    if (ev && targetFile && targetFile.length > 0) {
+      for (let i = 0; i < targetFile.length; i++) {
+        let imgFile = targetFile[i];
+        const fileExt = imgFile.name.toLowerCase().split('.').pop();
+        console.log('imgFile ', imgFile);
+
+        if (
+          imgFile &&
+          (fileExt == 'jpg' ||
+            fileExt == 'jpeg' ||
+            fileExt == 'png' ||
+            fileExt == 'gif' ||
+            fileExt == 'webp')
+        ) {
+          let reader = new FileReader();
+          reader.onload = function () {
+            setProductPhoto((prevState: any) => {
+              return [...prevState, reader.result];
+            });
+
+            setAddedPhotos((prevState: any) => {
+              return [
+                ...prevState,
+                { photoUrl: reader.result, isMain: isMainImg },
+              ];
+            });
+          };
+          reader.readAsDataURL(imgFile);
+
+          // const formData = new FormData();
+          // formData.append('file', imgFile);
+        } else {
+          setAlertMessage({
+            message:
+              'Siz yuklagan rasm hajmi juda katta yoki boshqa format tanladingiz',
+            type: 'error',
+            position: AlertPosition.TOP_CENTER,
+          });
+        }
+      }
+    }
+  };
+
   const handleDeletePhoto = () => {};
 
-  const sendData = () => {
+  const addMorePhoto = () => {
+    if (photoArray.length < 8) {
+      setPhotoArray([
+        ...photoArray,
+        {
+          photoUrl: '',
+          isMain: false,
+        },
+      ]);
+    }
+    return false;
+  };
+
+  console.log('photoArray ', photoArray);
+  console.log('addedPhotos ', addedPhotos);
+
+  const sendData = async () => {
     const newObj: any = { ...collectiveJson };
     newObj.addProductData = { ...addProductData };
     newObj.deliveryAddress = { ...deliveryAddress };
+    newObj.addedPhotos = [...addedPhotos];
+
+    console.log('newObj ', newObj);
+
+    try {
+      const response = await axios.post('/product', newObj);
+      const data = await response.data;
+      console.log('response => ', data);
+    } catch (error) {
+      checkError(error);
+    }
   };
 
   return (
@@ -240,46 +323,49 @@ const AddProductForm = () => {
 
         <AddProductFormItem>
           <ProductTitle fSize={16} title="Добавить данные" />
-          <AddProductFormItemBody>
-            <AddProductFormItemBodyItem>
-              <SimpleInput
-                name="name"
-                label="Введите название товара *"
-                placeholder="Введите название товара *"
-                onChange={addProductChangeHandler}
-              />
-            </AddProductFormItemBodyItem>
+          <AddProductWrapp>
+            <AddProductFormItemBody>
+              <AddProductFormItemBodyItem>
+                <SimpleInput
+                  name="name"
+                  label="Введите название товара *"
+                  placeholder="Введите название товара *"
+                  onChange={addProductChangeHandler}
+                />
+              </AddProductFormItemBodyItem>
 
-            <AddProductFormItemBodyItem>
-              <SimpleInput
-                name="price"
-                label="Стоимость *"
-                placeholder="Стоимость *"
-                // inputType="number"
-                // inputValueHandler={addProductChangeHandler}
-                onChange={addProductChangeHandler}
-              />
-            </AddProductFormItemBodyItem>
+              <AddProductFormItemBodyItem>
+                <SimpleInput
+                  name="price"
+                  label="Стоимость *"
+                  placeholder="Стоимость *"
+                  // inputType="number"
+                  // inputValueHandler={addProductChangeHandler}
+                  onChange={addProductChangeHandler}
+                />
+              </AddProductFormItemBodyItem>
 
-            <AddProductFormItemBodyItem>
-              <SimpleInput
-                name="quantity"
-                label="Производитель *"
-                placeholder="Производитель *"
-                // inputType="number"
-                onChange={addProductChangeHandler}
-                // inputValueHandler={addProductChangeHandler}
-              />
-            </AddProductFormItemBodyItem>
-
-            <AddProductFormItemBodyItem>
+              <AddProductFormItemBodyItem>
+                <SimpleInput
+                  name="quantity"
+                  label="Производитель *"
+                  placeholder="Производитель *"
+                  // inputType="number"
+                  onChange={addProductChangeHandler}
+                  // inputValueHandler={addProductChangeHandler}
+                />
+              </AddProductFormItemBodyItem>
+            </AddProductFormItemBody>
+            <AddProductFormItemBodyItem className="wrap">
               <Textarea
                 name="productComment"
-                placeholder="Введите описание товара"
+                ref={textareaRef}
+                // placeholder="Введите описание товара"
                 onChange={addProductChangeHandler}
               ></Textarea>
+              <TextareaLabel>Введите описание товара</TextareaLabel>
             </AddProductFormItemBodyItem>
-          </AddProductFormItemBody>
+          </AddProductWrapp>
         </AddProductFormItem>
 
         <AddProductPhotoBox>
@@ -290,48 +376,61 @@ const AddProductForm = () => {
               изменить порядок
             </AddProductPhotoAttention>
             <AddProductPhoto>
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((item: any, index: number) =>
-                index === 0 ? (
-                  <AddProductPhotoItem>
-                    <input type="file" onChange={handleProductPhoto} />
-                    <FirstViewIcon>
-                      <FirstView />
-                    </FirstViewIcon>
-                    {productPhoto ? (
-                      <img src={productPhoto} />
-                    ) : (
-                      <PtotoApparatBox onClick={handleProductPhoto}>
-                        <PhotoApparat />
-                      </PtotoApparatBox>
-                    )}
+              {photoArray.length > 0 &&
+                photoArray.map((item: any, index: number) =>
+                  item.isMain ? (
+                    <AddProductPhotoItem>
+                      <input
+                        multiple
+                        type="file"
+                        onChange={(ev: any) => handleProductPhoto(ev, true)}
+                      />
+                      <FirstViewIcon>
+                        <FirstView />
+                      </FirstViewIcon>
+                      {productPhoto ? (
+                        <img src={productPhoto[index]} />
+                      ) : (
+                        <PtotoApparatBox
+                          onChange={(ev: any) => handleProductPhoto(ev, true)}
+                        >
+                          <PhotoApparat />
+                        </PtotoApparatBox>
+                      )}
 
-                    {productPhoto ? (
-                      <DeleteIconBox onClick={handleDeletePhoto}>
-                        <DeleteIcon />
-                      </DeleteIconBox>
-                    ) : null}
-                  </AddProductPhotoItem>
-                ) : (
-                  <AddProductPhotoItem>
-                    <input type="file" onChange={handleProductPhoto} />
+                      {productPhoto ? (
+                        <DeleteIconBox onClick={handleDeletePhoto}>
+                          <DeleteIcon />
+                        </DeleteIconBox>
+                      ) : null}
+                    </AddProductPhotoItem>
+                  ) : (
+                    <AddProductPhotoItem>
+                      <input
+                        multiple
+                        type="file"
+                        onChange={(ev: any) => handleProductPhoto(ev, false)}
+                      />
+                      {productPhoto ? (
+                        <img src={productPhoto[index]} />
+                      ) : (
+                        <PtotoApparatBox
+                          onChange={(ev: any) => handleProductPhoto(ev, false)}
+                        >
+                          <PhotoApparat />
+                        </PtotoApparatBox>
+                      )}
 
-                    {productPhoto ? (
-                      <img src={productPhoto} />
-                    ) : (
-                      <PtotoApparatBox onClick={handleProductPhoto}>
-                        <PhotoApparat />
-                      </PtotoApparatBox>
-                    )}
-
-                    {productPhoto ? (
-                      <DeleteIconBox onClick={handleDeletePhoto}>
-                        <DeleteIcon />
-                      </DeleteIconBox>
-                    ) : null}
-                  </AddProductPhotoItem>
-                )
-              )}
+                      {productPhoto ? (
+                        <DeleteIconBox onClick={handleDeletePhoto}>
+                          <DeleteIcon />
+                        </DeleteIconBox>
+                      ) : null}
+                    </AddProductPhotoItem>
+                  )
+                )}
             </AddProductPhoto>
+            <AddPhotoButton onClick={addMorePhoto}>ADD PHOTO</AddPhotoButton>
           </AddProductPhotoBoxItem>
         </AddProductPhotoBox>
 

@@ -322,10 +322,10 @@ const ViewForTemplate: FC<ViewForTemplateProps> = ({ data }) => {
         </DeleiveryZoneBox>
       ) : null}
 
-      <AddProductFormBottom>
+      {/* <AddProductFormBottom>
         <Button btnType="gray">Очистить</Button>
         <Button>Опубликовать</Button>
-      </AddProductFormBottom>
+      </AddProductFormBottom> */}
     </ViewForTemplateContainer>
   );
 };
