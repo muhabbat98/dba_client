@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import GoodsGrid from '../../components/goods-grid';
 import GoodsTable from '../../components/goods-table';
 import GoodsTopControl from '../../components/goods-top-control';
+import {} from '../../..';
 
 import { GoodsContainer, GoodsDisplayContainer } from './style';
 
@@ -21,8 +22,6 @@ const Goods = () => {
     DisplayType.TABLE_TYPE
   );
   const { id } = useParams<Params>();
-
-  console.log('id => ', id);
 
   const changeDisplay = (type: DisplayType) => {
     setDisplayType(type);

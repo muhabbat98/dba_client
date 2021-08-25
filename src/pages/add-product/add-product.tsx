@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { axios, useError } from '../../hooks';
 import CircleLoader from '../../components/circle-loader';
 import Container from '../../components/grid/container';
@@ -10,9 +11,11 @@ import {
   AddProductItem,
   ItemText,
 } from './style';
+import AddProductPage from './add-product-page';
 
 const AddProduct = () => {
   const { checkError } = useError();
+  const { push } = useHistory();
 
   const [allProduct, setAllProduct] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,19 +41,23 @@ const AddProduct = () => {
     }
   };
 
-  const openModalHandle = (id: string) => {
-    setOpenModal(true);
-    for (let i = 0; i < allProduct.length; i++) {
-      if (allProduct[i].id == id) {
-        setCategoryName(allProduct[i].name);
-      }
-    }
-    setId(id);
+  const pageClickHandle = (id: string) => {
+    push(`add-product-page/${id}`);
   };
 
-  const modalClose = () => {
-    setOpenModal(false);
-  };
+  // const openModalHandle = (id: string) => {
+  //   setOpenModal(true);
+  //   for (let i = 0; i < allProduct.length; i++) {
+  //     if (allProduct[i].id == id) {
+  //       setCategoryName(allProduct[i].name);
+  //     }
+  //   }
+  //   setId(id);
+  // };
+
+  // const modalClose = () => {
+  //   setOpenModal(false);
+  // };
 
   return (
     <Container>
@@ -59,16 +66,18 @@ const AddProduct = () => {
           <CircleLoader />
         ) : (
           <AddProductList>
-            {openModal && (
+            {/* {openModal && (
               <AddProductModal
                 categoryName={categoryName}
                 itemId={id}
                 modalClose={modalClose}
               />
-            )}
+            )} */}
+            {/* <AddProductPage categoryName={categoryName} id={id} /> */}
             {allProduct.map((item: any) => (
               <AddProductItem
-                onClick={() => openModalHandle(item.id)}
+                onClick={() => pageClickHandle(item.id)}
+                // onClick={() => openModalHandle(item.id)}
                 key={item.id}
               >
                 <ListIcon />

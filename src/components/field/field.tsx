@@ -25,14 +25,13 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId }) => {
   const dropdownClicked = (data: any) => {
     setState(data.value);
     if (handleInput) {
-      handleInput(data.value.name, data.value.id, parentId);
+      handleInput(data.value.name, data.value.id, parentId, true);
     }
   };
 
   const change = (e: any) => {
-    console.log('eeeeeeee=> ', e);
     if (handleInput) {
-      handleInput(e, field.id, parentId);
+      handleInput(e, field.id, parentId, false);
     }
   };
 

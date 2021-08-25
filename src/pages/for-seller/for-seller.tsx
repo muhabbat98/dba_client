@@ -6,6 +6,7 @@ import Error404 from '../../components/404';
 import AddProduct from '../add-product';
 import MainPageForSeller from '../main-page-for-seller';
 import AddProductForm from '../add-product-form';
+import AddProductPage from '../add-product/add-product-page';
 
 const ForSeller = () => {
   const { path } = useRouteMatch();
@@ -16,6 +17,11 @@ const ForSeller = () => {
         <Route exact path={path} component={MainPageForSeller} />
         <Route path={`${path}/settings`} component={Settings} />
         <Route path={`${path}/add-product`} component={AddProduct} />
+        <Route
+          exact
+          path={[`${path}/add-product-page`, `${path}/add-product-page/:id`]}
+          component={AddProductPage}
+        />
         <Route
           path={`${path}/add-product-form/:categoryId/:productId`}
           component={AddProductForm}
