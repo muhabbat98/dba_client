@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { axios, useError } from '../../../../hooks';
 import ViewForTemplate from '../../../components/view-for-template';
 import { TemplateViewContainer } from './style';
+import { useMainContext } from '../../main/context';
 
 interface Params {
   id: string;
@@ -33,6 +34,11 @@ const TemplateView = () => {
   };
 
   console.log('data=> ', data);
+  const { setPageTitle } = useMainContext();
+
+  useEffect(() => {
+    setPageTitle('Просмотр шаблона');
+  }, []);
 
   return (
     <TemplateViewContainer>

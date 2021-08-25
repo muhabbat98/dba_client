@@ -57,8 +57,8 @@ axios.interceptors.response.use(
       error.response.status &&
       error.response.status === 401
     ) {
-      alert('К сожалению, ваша сессия истекла.');
-      return window.location.replace('/marketplace/#/');
+      // alert('К сожалению, ваша сессия истекла.');
+      //return window.location.replace('/marketplace/#/');
     }
 
     let err;

@@ -4,6 +4,7 @@ import CategoryMain from './category-main';
 import CategoryPage from './category-children';
 import React, { useEffect, useState } from 'react';
 import AddCategory from '../../components/add-category';
+import { useMainContext } from '../main/context';
 
 interface Params {
   id: string;
@@ -40,6 +41,12 @@ function CategoryWrapper() {
 }
 
 const Category = () => {
+  const { setPageTitle } = useMainContext();
+
+  useEffect(() => {
+    setPageTitle('Все категории');
+  }, []);
+
   return (
     <CategoryProvider>
       <CategoryWrapper />

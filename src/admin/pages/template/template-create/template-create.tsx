@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   TemplateCreateContextProvider,
@@ -20,6 +20,7 @@ import SimpleInput from '../../../../components/simple-input';
 import Button from '../../../../components/button';
 import Toggle from '../../../../components/toggle';
 import { axios, useActionCreators, useError } from '../../../../hooks';
+import { useMainContext } from '../../main/context';
 
 interface Params {
   id: string;
@@ -97,6 +98,12 @@ const TemplateCreateMain = () => {
 };
 
 const TemplateCreate = () => {
+  const { setPageTitle } = useMainContext();
+
+  useEffect(() => {
+    setPageTitle('Создать шаблонов');
+  }, []);
+
   return (
     <TemplateCreateContextProvider>
       <TemplateCreateMain />

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
 import Homepage from '../../pages/homepage';
 import Goods from '../../pages/goods';
 import GoodsItem from '../../pages/goods-item';
@@ -10,6 +10,7 @@ import Moderator from '../../../admin/pages/moderator';
 import References from '../../pages/references-page';
 import { ContentContainer } from './style';
 import Template from '../../pages/template';
+import { useMainContext } from '../../pages/main/context';
 
 const Content = () => {
   const { path } = useRouteMatch();
