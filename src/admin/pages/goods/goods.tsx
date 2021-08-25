@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import GoodsGrid from '../../components/goods-grid';
 import GoodsTable from '../../components/goods-table';
 import GoodsTopControl from '../../components/goods-top-control';
-import {} from '../../..';
+import { useMainContext } from '../main/context';
 
 import { GoodsContainer, GoodsDisplayContainer } from './style';
 
@@ -18,10 +18,16 @@ interface Params {
 }
 
 const Goods = () => {
+  const { setPageTitle } = useMainContext();
+  const { id } = useParams<Params>();
+
   const [displayType, setDisplayType] = useState<DisplayType>(
     DisplayType.TABLE_TYPE
   );
-  const { id } = useParams<Params>();
+
+  useEffect(() => {
+    setPageTitle('Товары');
+  }, []);
 
   const changeDisplay = (type: DisplayType) => {
     setDisplayType(type);
