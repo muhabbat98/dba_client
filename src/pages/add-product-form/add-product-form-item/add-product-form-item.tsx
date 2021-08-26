@@ -7,11 +7,13 @@ import { AddProductFormItemBodyItem } from './style';
 interface AddProductFormItemProps {
   item: any;
   handleInput: any;
+  isReset: boolean;
 }
 
 const AddProductFormItem: FC<AddProductFormItemProps> = ({
   item,
   handleInput,
+  isReset,
 }) => {
   return (
     <>
@@ -19,6 +21,7 @@ const AddProductFormItem: FC<AddProductFormItemProps> = ({
       <AddProductFormItemBodyItem>
         {item.fields.map((j: any) => (
           <Field
+            isReset={isReset}
             handleInput={handleInput}
             key={j.id}
             field={j}
@@ -29,7 +32,12 @@ const AddProductFormItem: FC<AddProductFormItemProps> = ({
 
       {item.products.length > 0 &&
         item.products.map((i: any, index: number) => (
-          <AddProductFormItem handleInput={handleInput} key={index} item={i} />
+          <AddProductFormItem
+            handleInput={handleInput}
+            key={index}
+            item={i}
+            isReset={isReset}
+          />
         ))}
     </>
   );

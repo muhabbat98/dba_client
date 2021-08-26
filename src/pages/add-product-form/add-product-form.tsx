@@ -38,6 +38,7 @@ import {
   TextareaLabel,
   AddProductWrapp,
   AddPhotoButton,
+  ClearButton,
 } from './style';
 
 import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
@@ -79,6 +80,7 @@ const AddProductForm = () => {
   const [collectiveJson, setCollectiveJson] = useState<any>(null);
   const [region, setRegion] = useState<string>('');
   const [city, setCity] = useState<string>('');
+  const [isReset, setIsReset] = useState<boolean>(false);
   const [photoArray, setPhotoArray] = useState<any>([
     {
       photoData: '',
@@ -284,10 +286,16 @@ const AddProductForm = () => {
     return false;
   };
 
+  const resetHandle = () => {
+    setIsReset(true);
+    setOpenDeleivery(false);
+  };
+
   console.log('photoArray ', photoArray);
   console.log('addedPhotos ', addedPhotos);
 
-  const sendData = async () => {
+  const sendData = async (ev: any) => {
+    ev.preventDefault();
     const newObj: any = { ...collectiveJson };
     newObj.addProductData = { ...addProductData };
     newObj.deliveryAddress = { ...deliveryAddress };
@@ -307,204 +315,208 @@ const AddProductForm = () => {
   return (
     <Container>
       <AddProductFormContainer>
-        <AddProductFormBreadcrumb>
-          <AddProductFormBreadcrumbItem className="main">
-            Электроника <ArrowRight />
-          </AddProductFormBreadcrumbItem>
-          <AddProductFormBreadcrumbItem>
-            Мобильные телефоны и аксессуары <ArrowRight />
-          </AddProductFormBreadcrumbItem>
-          <AddProductFormBreadcrumbItem>
-            Мобильные телефоны <ArrowRight />
-          </AddProductFormBreadcrumbItem>
-        </AddProductFormBreadcrumb>
+        <form>
+          <AddProductFormBreadcrumb>
+            <AddProductFormBreadcrumbItem className="main">
+              Электроника <ArrowRight />
+            </AddProductFormBreadcrumbItem>
+            <AddProductFormBreadcrumbItem>
+              Мобильные телефоны и аксессуары <ArrowRight />
+            </AddProductFormBreadcrumbItem>
+            <AddProductFormBreadcrumbItem>
+              Мобильные телефоны <ArrowRight />
+            </AddProductFormBreadcrumbItem>
+          </AddProductFormBreadcrumb>
+          <AddProductFormItem>
+            <ProductTitle fSize={16} title="Добавить данные" />
+            <AddProductWrapp>
+              <AddProductFormItemBody>
+                <AddProductFormItemBodyItem>
+                  <SimpleInput
+                    name="name"
+                    label="Введите название товара *"
+                    placeholder="Введите название товара *"
+                    onChange={addProductChangeHandler}
+                  />
+                </AddProductFormItemBodyItem>
 
-        <AddProductFormItem>
-          <ProductTitle fSize={16} title="Добавить данные" />
-          <AddProductWrapp>
-            <AddProductFormItemBody>
-              <AddProductFormItemBodyItem>
-                <SimpleInput
-                  name="name"
-                  label="Введите название товара *"
-                  placeholder="Введите название товара *"
+                <AddProductFormItemBodyItem>
+                  <SimpleInput
+                    name="price"
+                    label="Стоимость *"
+                    placeholder="Стоимость *"
+                    // inputType="number"
+                    // inputValueHandler={addProductChangeHandler}
+                    onChange={addProductChangeHandler}
+                  />
+                </AddProductFormItemBodyItem>
+
+                <AddProductFormItemBodyItem>
+                  <SimpleInput
+                    name="quantity"
+                    label="Производитель *"
+                    placeholder="Производитель *"
+                    // inputType="number"
+                    onChange={addProductChangeHandler}
+                    // inputValueHandler={addProductChangeHandler}
+                  />
+                </AddProductFormItemBodyItem>
+              </AddProductFormItemBody>
+              <AddProductFormItemBodyItem className="wrap">
+                <Textarea
+                  name="productComment"
+                  ref={textareaRef}
+                  // placeholder="Введите описание товара"
                   onChange={addProductChangeHandler}
-                />
+                ></Textarea>
+                <TextareaLabel>Введите описание товара</TextareaLabel>
               </AddProductFormItemBodyItem>
-
-              <AddProductFormItemBodyItem>
-                <SimpleInput
-                  name="price"
-                  label="Стоимость *"
-                  placeholder="Стоимость *"
-                  // inputType="number"
-                  // inputValueHandler={addProductChangeHandler}
-                  onChange={addProductChangeHandler}
-                />
-              </AddProductFormItemBodyItem>
-
-              <AddProductFormItemBodyItem>
-                <SimpleInput
-                  name="quantity"
-                  label="Производитель *"
-                  placeholder="Производитель *"
-                  // inputType="number"
-                  onChange={addProductChangeHandler}
-                  // inputValueHandler={addProductChangeHandler}
-                />
-              </AddProductFormItemBodyItem>
-            </AddProductFormItemBody>
-            <AddProductFormItemBodyItem className="wrap">
-              <Textarea
-                name="productComment"
-                ref={textareaRef}
-                // placeholder="Введите описание товара"
-                onChange={addProductChangeHandler}
-              ></Textarea>
-              <TextareaLabel>Введите описание товара</TextareaLabel>
-            </AddProductFormItemBodyItem>
-          </AddProductWrapp>
-        </AddProductFormItem>
-
-        <AddProductPhotoBox>
-          <ProductTitle fSize={16} title="Добавить фото" />
-          <AddProductPhotoBoxItem>
-            <AddProductPhotoAttention>
-              Первое фото будет на обложке объявления. Перетащите, чтобы
-              изменить порядок
-            </AddProductPhotoAttention>
-            <AddProductPhoto>
-              {photoArray.length > 0 &&
-                photoArray.map((item: any, index: number) =>
-                  item.isMain ? (
-                    <AddProductPhotoItem>
-                      <input
-                        multiple
-                        type="file"
-                        onChange={(ev: any) => handleProductPhoto(ev, true)}
-                      />
-                      <FirstViewIcon>
-                        <FirstView />
-                      </FirstViewIcon>
-                      {productPhoto ? (
-                        <img src={productPhoto[index]} />
-                      ) : (
-                        <PtotoApparatBox
+            </AddProductWrapp>
+          </AddProductFormItem>
+          <AddProductPhotoBox>
+            <ProductTitle fSize={16} title="Добавить фото" />
+            <AddProductPhotoBoxItem>
+              <AddProductPhotoAttention>
+                Первое фото будет на обложке объявления. Перетащите, чтобы
+                изменить порядок
+              </AddProductPhotoAttention>
+              <AddProductPhoto>
+                {photoArray.length > 0 &&
+                  photoArray.map((item: any, index: number) =>
+                    item.isMain ? (
+                      <AddProductPhotoItem>
+                        <input
+                          multiple
+                          type="file"
                           onChange={(ev: any) => handleProductPhoto(ev, true)}
-                        >
-                          <PhotoApparat />
-                        </PtotoApparatBox>
-                      )}
+                        />
+                        <FirstViewIcon>
+                          <FirstView />
+                        </FirstViewIcon>
+                        {productPhoto ? (
+                          <img src={productPhoto[index]} />
+                        ) : (
+                          <PtotoApparatBox
+                            onChange={(ev: any) => handleProductPhoto(ev, true)}
+                          >
+                            <PhotoApparat />
+                          </PtotoApparatBox>
+                        )}
 
-                      {productPhoto ? (
-                        <DeleteIconBox onClick={handleDeletePhoto}>
-                          <DeleteIcon />
-                        </DeleteIconBox>
-                      ) : null}
-                    </AddProductPhotoItem>
-                  ) : (
-                    <AddProductPhotoItem>
-                      <input
-                        multiple
-                        type="file"
-                        onChange={(ev: any) => handleProductPhoto(ev, false)}
-                      />
-                      {productPhoto ? (
-                        <img src={productPhoto[index]} />
-                      ) : (
-                        <PtotoApparatBox
+                        {productPhoto ? (
+                          <DeleteIconBox onClick={handleDeletePhoto}>
+                            <DeleteIcon />
+                          </DeleteIconBox>
+                        ) : null}
+                      </AddProductPhotoItem>
+                    ) : (
+                      <AddProductPhotoItem>
+                        <input
+                          multiple
+                          type="file"
                           onChange={(ev: any) => handleProductPhoto(ev, false)}
-                        >
-                          <PhotoApparat />
-                        </PtotoApparatBox>
-                      )}
+                        />
+                        {productPhoto ? (
+                          <img src={productPhoto[index]} />
+                        ) : (
+                          <PtotoApparatBox
+                            onChange={(ev: any) =>
+                              handleProductPhoto(ev, false)
+                            }
+                          >
+                            <PhotoApparat />
+                          </PtotoApparatBox>
+                        )}
 
-                      {productPhoto ? (
-                        <DeleteIconBox onClick={handleDeletePhoto}>
-                          <DeleteIcon />
-                        </DeleteIconBox>
-                      ) : null}
-                    </AddProductPhotoItem>
-                  )
-                )}
-            </AddProductPhoto>
-            <AddPhotoButton onClick={addMorePhoto}>ADD PHOTO</AddPhotoButton>
-          </AddProductPhotoBoxItem>
-        </AddProductPhotoBox>
+                        {productPhoto ? (
+                          <DeleteIconBox onClick={handleDeletePhoto}>
+                            <DeleteIcon />
+                          </DeleteIconBox>
+                        ) : null}
+                      </AddProductPhotoItem>
+                    )
+                  )}
+              </AddProductPhoto>
+              <AddPhotoButton onClick={addMorePhoto}>ADD PHOTO</AddPhotoButton>
+            </AddProductPhotoBoxItem>
+          </AddProductPhotoBox>
 
-        <AddProductFormItem>
-          {!isEmptyObj(allFields) && (
-            <AddProductFormItemRecursive
-              item={allFields}
-              handleInput={handleInput}
-            />
-          )}
-        </AddProductFormItem>
-
-        <DeleiveryBox>
-          <ProductTitle fSize={16} title="Доставка" />
-          <Deleivery>
-            <DeleiveryItem>
-              <RadioButton
-                value="yes"
-                name="delivery"
-                label="Есть"
-                callback={setDelivery}
+          <AddProductFormItem>
+            {!isEmptyObj(allFields) && (
+              <AddProductFormItemRecursive
+                item={allFields}
+                handleInput={handleInput}
+                isReset={isReset}
               />
-            </DeleiveryItem>
+            )}
+          </AddProductFormItem>
 
-            <DeleiveryItem>
-              <RadioButton
-                value="no"
-                name="delivery"
-                label="Нет"
-                callback={setDelivery}
-              />
-            </DeleiveryItem>
-          </Deleivery>
-        </DeleiveryBox>
-
-        {openDeleivery ? (
-          <DeleiveryZoneBox>
-            <ProductTitle fSize={16} title="Территория доставки" />
-            <DeleiveryZone>
-              <DeleiveryZoneItem>
-                <Dropdown
-                  option={[
-                    'Биометрический паспорт',
-                    'ID-карта Республики Узбекистан',
-                    'Паспорт иностранного гражданина',
-                  ]}
-                  label="Область"
-                  selected={region}
-                  callback={dropdownRegionHandle}
+          <DeleiveryBox>
+            <ProductTitle fSize={16} title="Доставка" />
+            <Deleivery>
+              <DeleiveryItem>
+                <RadioButton
+                  value="yes"
+                  name="delivery"
+                  label="Есть"
+                  callback={setDelivery}
                 />
-              </DeleiveryZoneItem>
+              </DeleiveryItem>
 
-              <DeleiveryZoneItem>
-                <Dropdown
-                  option={[
-                    'Алмалык',
-                    'Ангрен',
-                    'Ахангаран',
-                    'Бекабад',
-                    'Нурафшан',
-                    'Чирчик ',
-                    'Янгиюль ',
-                  ]}
-                  label="Город"
-                  selected={city}
-                  callback={dropdownCityHandle}
+              <DeleiveryItem>
+                <RadioButton
+                  value="no"
+                  name="delivery"
+                  label="Нет"
+                  callback={setDelivery}
                 />
-              </DeleiveryZoneItem>
-            </DeleiveryZone>
-          </DeleiveryZoneBox>
-        ) : null}
+              </DeleiveryItem>
+            </Deleivery>
+          </DeleiveryBox>
+          {openDeleivery ? (
+            <DeleiveryZoneBox>
+              <ProductTitle fSize={16} title="Территория доставки" />
+              <DeleiveryZone>
+                <DeleiveryZoneItem>
+                  <Dropdown
+                    option={[
+                      'Биометрический паспорт',
+                      'ID-карта Республики Узбекистан',
+                      'Паспорт иностранного гражданина',
+                    ]}
+                    label="Область"
+                    selected={region}
+                    callback={dropdownRegionHandle}
+                  />
+                </DeleiveryZoneItem>
 
-        <AddProductFormBottom>
-          <Button btnType="gray">Очистить</Button>
-          <Button onClick={sendData}>Опубликовать</Button>
-        </AddProductFormBottom>
+                <DeleiveryZoneItem>
+                  <Dropdown
+                    option={[
+                      'Алмалык',
+                      'Ангрен',
+                      'Ахангаран',
+                      'Бекабад',
+                      'Нурафшан',
+                      'Чирчик ',
+                      'Янгиюль ',
+                    ]}
+                    label="Город"
+                    selected={city}
+                    callback={dropdownCityHandle}
+                  />
+                </DeleiveryZoneItem>
+              </DeleiveryZone>
+            </DeleiveryZoneBox>
+          ) : null}
+          <AddProductFormBottom>
+            {/* <Button type="reset" btnType="gray">
+              Очистить
+            </Button> */}
+            <ClearButton onClick={resetHandle} type="reset" value="Очистить" />
+            <Button onClick={(ev: any) => sendData(ev)}>Опубликовать</Button>
+          </AddProductFormBottom>
+        </form>
       </AddProductFormContainer>
     </Container>
   );
