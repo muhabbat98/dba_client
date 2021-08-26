@@ -116,13 +116,14 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
               onClick={() => (!role.isBuyer&&!role.userRole)||(role.isBuyer) ?  (  isInWishlist
                 ? removeFromWishlistHandle(item)
                 : addToWishlistHandle(item)) :false  }
-  
+                style={{cursor:(!role.isBuyer&&!role.userRole)||(role.isBuyer)?"pointer":"auto"}}
             >
               {isInWishlist ? <HeartFull /> : <HeartIcon />}
             </CardWishlist>
             <CardCartIcon
               isInCartStyle={isInCart}
               onClick={() =>(!role.isBuyer&&!role.userRole)||(role.isBuyer) ?  ( isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)) :false  }
+              style={{cursor:(!role.isBuyer&&!role.userRole)||(role.isBuyer)?"pointer":"auto"}}
             >
               <CardSpan />
               <CartIcon />

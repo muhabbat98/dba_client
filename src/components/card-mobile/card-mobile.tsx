@@ -72,6 +72,7 @@ const CardMobile: FC<CardMobileProps> = ({ item }) => {
       <CardMobileImageWrapper>
         <CardMobileWishlist
           onClick={() =>   (!role.isBuyer&&!role.userRole)||(role.isBuyer) ?    isInWishlist   ? removeFromWishlistHandle(item) : addToWishlistHandle(item) :false }
+          style={{cursor:(!role.isBuyer&&!role.userRole)||(role.isBuyer)?"pointer":"auto"}}
         >
           {isInWishlist ? <HeartFull /> : <HeartIcon />}
         </CardMobileWishlist>
@@ -86,6 +87,7 @@ const CardMobile: FC<CardMobileProps> = ({ item }) => {
           <CardMobileCart
             isInCartStyle={isInCart}
             onClick={() => (!role.isBuyer&&!role.userRole)||(role.isBuyer) ?  (  isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)) :false }
+            style={{cursor:(!role.isBuyer&&!role.userRole)||(role.isBuyer)?"pointer":"auto"}}
           >
             <CartIcon />
           </CardMobileCart>
