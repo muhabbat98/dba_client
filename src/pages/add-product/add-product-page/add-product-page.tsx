@@ -32,6 +32,7 @@ const AddProductPage = () => {
   }, [id]);
 
   const getChildMenuItem = async (ids?: string) => {
+    console.log('IDS ', ids);
     setLoading(true);
     let itemId = ids || id;
 
