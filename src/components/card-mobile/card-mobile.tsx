@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useActionCreators, useSelector } from '../../hooks';
+import { useActionCreators, useSelector, useRole } from '../../hooks';
 import formatMoney from '../../utils/format-money';
 import {
   CardMobileContainer,
@@ -30,7 +30,7 @@ const CardMobile: FC<CardMobileProps> = ({ item }) => {
 
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
-
+  const role =useRole()
   useEffect(() => {
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].id === item.id) {
@@ -71,11 +71,7 @@ const CardMobile: FC<CardMobileProps> = ({ item }) => {
     <CardMobileContainer>
       <CardMobileImageWrapper>
         <CardMobileWishlist
-          onClick={() =>
-            isInWishlist
-              ? removeFromWishlistHandle(item)
-              : addToWishlistHandle(item)
-          }
+          onClick={() =>   (!role.isBuyer&&!role.userRole)||(role.isBuyer) ?    isInWishlist   ? removeFromWishlistHandle(item) : addToWishlistHandle(item) :false }
         >
           {isInWishlist ? <HeartFull /> : <HeartIcon />}
         </CardMobileWishlist>
@@ -89,9 +85,7 @@ const CardMobile: FC<CardMobileProps> = ({ item }) => {
           <CardPrice>{formatMoney(item.priceResponse.value)} сум</CardPrice>
           <CardMobileCart
             isInCartStyle={isInCart}
-            onClick={() =>
-              isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)
-            }
+            onClick={() => (!role.isBuyer&&!role.userRole)||(role.isBuyer) ?  (  isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)) :false }
           >
             <CartIcon />
           </CardMobileCart>
