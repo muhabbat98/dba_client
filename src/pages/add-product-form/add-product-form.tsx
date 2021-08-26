@@ -81,7 +81,7 @@ const AddProductForm = () => {
   const [city, setCity] = useState<string>('');
   const [photoArray, setPhotoArray] = useState<any>([
     {
-      photoUrl: '',
+      photoData: '',
       isMain: true,
     },
   ]);
@@ -106,8 +106,6 @@ const AddProductForm = () => {
   }, []);
 
   const addProductChangeHandler = (ev: any) => {
-    console.log(ev.target.name);
-    console.log(ev.target.value);
     setAddProductData((prevState) => {
       return {
         ...prevState,
@@ -251,7 +249,7 @@ const AddProductForm = () => {
             setAddedPhotos((prevState: any) => {
               return [
                 ...prevState,
-                { photoUrl: reader.result, isMain: isMainImg },
+                { photoData: reader.result, isMain: isMainImg },
               ];
             });
           };
@@ -278,7 +276,7 @@ const AddProductForm = () => {
       setPhotoArray([
         ...photoArray,
         {
-          photoUrl: '',
+          photoData: '',
           isMain: false,
         },
       ]);
