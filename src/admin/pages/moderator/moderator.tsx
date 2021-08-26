@@ -1,6 +1,7 @@
 import React,{useState,useRef,useEffect} from 'react';
 import {ReactComponent as PlusIcon} from '../../assets/icons/vector-plus.svg'
 import {axios,useActionCreators,useSelector, useError} from '../../../hooks'
+import {useMainContext} from '../main/context'
 import ModeratorCard from '../../components/moderator-card'
 import AddModerator from './add-moderator';
 import EditModerator from './edit-moderator';
@@ -18,6 +19,11 @@ const Moderator = () => {
       const [editModeratorAnswer,setEditModeratorAnswer] = useState<boolean>(false);
       const { setAlertMessage } = useActionCreators();
       const {checkError} = useError();
+      const {setPageTitle} = useMainContext();
+      useEffect(() => {
+         setPageTitle('Модераторы')
+      },[]);
+
       useEffect(() => {
           const checkIfClickedOutside = (e: any) => {
               if (openModal && ref.current && !ref.current.contains(e.target)) {

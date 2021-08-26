@@ -37,7 +37,7 @@ const images = [
 ]
 const  ProductDetailHeader = () => {
     const { id } = useParams<any>();
-    const isBuyer = useRole().isBuyer;
+    const isBuyer = useRole().userRole=='ROLE_SELLER';
     const [mainImage,setMainImage] = useState();
     const [isInCart, setIsInCart] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(false);
@@ -78,7 +78,7 @@ const  ProductDetailHeader = () => {
         setMainImage(item);
     }
     const heartButton = () => {
-        isBuyer && (isInWishlist
+        !isBuyer && (isInWishlist
             ? removeFromWishlistHandle(item)
             : addToWishlistHandle(item))
     }
@@ -100,8 +100,7 @@ const  ProductDetailHeader = () => {
           }
         }
       }
-    
-// console.log("id--->",id)
+
     return (
         <DetailHeaderContainer>
             <LeftPictureContainer>
@@ -122,7 +121,7 @@ const  ProductDetailHeader = () => {
                 <InfoTitleContainer>
                     <p>Apple / Смартфон iPhone 11 128GB (новая комплектация)</p>
                     <div onClick={heartButton}>
-                        {isBuyer && isInWishlist ?
+                        {!isBuyer && isInWishlist ?
                             <HeartFull style={{width:17,height:17}}/>
                             :<Heart style={{width:17,height:17}}/>}
                     </div>
@@ -149,12 +148,12 @@ const  ProductDetailHeader = () => {
                 <BinaryTextConatiner>
                     <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
                 </BinaryTextConatiner>
-                {!isBuyer
+                {isBuyer
                     ? <Button
                         size={"medium"}
                         style={{ marginTop: 27 }}
                         btnType="disabled"
-                    >Неактивная кнопка</Button>
+                    >Добавить в корзину</Button>
                     : <Button
                         size={"medium"}
                         style={{ marginTop: 27 }}

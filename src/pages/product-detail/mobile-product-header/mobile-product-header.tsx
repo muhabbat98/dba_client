@@ -29,8 +29,7 @@ const images = [
 
 const MobileProductHeader = () => {
     const { id } = useParams<any>();
-    const isBuyer = useRole().isBuyer;
-    console.log('isisis',isBuyer)
+    const isBuyer = useRole().userRole=='ROLE_SELLER';
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [isInCart, setIsInCart] = useState(false);
     const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
@@ -62,7 +61,7 @@ const MobileProductHeader = () => {
         removeWishlist(item);
     };
     const heartButton = () => {
-        isBuyer && (isInWishlist
+        !isBuyer && (isInWishlist
             ? removeFromWishlistHandle(item)
             : addToWishlistHandle(item))
     }
@@ -90,7 +89,7 @@ const MobileProductHeader = () => {
             <ReviewsContainer>
                 <Reviews><Star/><span>4</span> <p>(1241) отзывов</p></Reviews>
                 <div onClick={heartButton}>
-                    {isBuyer && isInWishlist ?
+                    {!isBuyer && isInWishlist ?
                         <HeartFull style={{width:17,height:17}}/>
                         :<Heart style={{width:17,height:17}}/>}
                 </div>
@@ -113,12 +112,12 @@ const MobileProductHeader = () => {
             <BinaryTextConatiner>
                 <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
             </BinaryTextConatiner>
-            {!isBuyer
+            {isBuyer
                 ?<Button
                     size={"large"}
                     style={{marginTop:27}}
                     btnType="disabled"
-                >Неактивная кнопка</Button>
+                >Добавить в корзину</Button>
                 :<Button
                     size={"large"}
                     style={{marginTop:27}}
