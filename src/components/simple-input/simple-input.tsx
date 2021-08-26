@@ -11,6 +11,7 @@ interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
   inputValueHandler?: any;
   parentId?: any;
   inputType?: 'string' | 'number';
+  isReset?:any
 }
 const SimpleInput: React.FC<Propses> = ({
   label,
@@ -19,6 +20,7 @@ const SimpleInput: React.FC<Propses> = ({
   style,
   inputType,
   inputValueHandler,
+  isReset,
   ...rest
 }) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -27,6 +29,10 @@ const SimpleInput: React.FC<Propses> = ({
 
   useEffect(() => {
       inputValueHandler &&  inputValueHandler(inputType && inputType == 'string' ? string : number);
+      if(isReset==true){
+          setNumber('');
+          setString('');
+      }
   },[number,string]);
 
   const onBlur = (e: any) => {
