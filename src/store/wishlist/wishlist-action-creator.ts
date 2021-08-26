@@ -11,11 +11,19 @@ export const addToWishlist = (wishlistItem: WishlistItemState) => (
   });
 };
 
-export const removeWishlist = (wishlistItem: WishlistItemState) => (
-   dispatch: Dispatch
- ) => {
-   dispatch({
-     type: WishlistType.REMOVE_WISHLIST,
-     payload: wishlistItem
-   });
+export const cleanWishlist = () => {
+  return{
+    type:WishlistType.CLEAN_WISHLIST
+  }
+};
+
+
+
+export const removeWishlist = (wishlistItem: WishlistItemState) =>  (
+  dispatch: Dispatch
+) => {
+  dispatch({
+    type: WishlistType.REMOVE_WISHLIST,
+    payload: wishlistItem
+  });
 };

@@ -25,3 +25,6 @@ export const getTotalSum = (checkedTotalSum: CartCheckedTotalSum) => ({
   type: CartType.GET_TOTAL_SUM,
   payload: checkedTotalSum,
 });
+export const cleanCart = () => ({
+  type: CartType.CLEAN_CART,
+});
