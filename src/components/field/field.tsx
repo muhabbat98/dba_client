@@ -13,9 +13,11 @@ interface FieldProps {
   field: any;
   handleInput?: any;
   parentId?: any;
+  isReset?: boolean;
 }
 
-const Field: FC<FieldProps> = ({ field, handleInput, parentId }) => {
+const Field: FC<FieldProps> = ({ field, handleInput, parentId, isReset }) => {
+  console.log('isReset ', isReset);
   const format = field.format;
   const fieldName = field.name;
   const list = field.values;
@@ -45,6 +47,7 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId }) => {
           style={{ marginBottom: '16px' }}
           inputValueHandler={change}
           parentId={parentId}
+          isReset={isReset}
         />
       );
 
@@ -57,6 +60,7 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId }) => {
           style={{ maxWidth: '100%', marginBottom: '16px' }}
           onChange={change}
           parentId={parentId}
+          isReset={isReset}
         />
       );
 
@@ -69,6 +73,7 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId }) => {
           style={{ marginBottom: '16px' }}
           inputValueHandler={change}
           parentId={parentId}
+          isReset={isReset}
         />
       );
 

@@ -282,3 +282,18 @@ export const Textarea = styled.textarea`
 `;
 
 export const AddPhotoButton = styled.button``;
+
+export const ClearButton = styled.input`
+  background: #f4f6f9;
+  color: ${({ theme }) => theme.primary_color};
+  max-width: 350px;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  height: 56px;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 20px;
+`;
