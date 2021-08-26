@@ -126,6 +126,7 @@ export const CardOldPrice = styled.div`
    color: ${({ theme }) => `${theme.red}`};
    text-decoration: line-through;
    height: 20px;
+   text-align: left;
    margin-bottom: 7px;
 `;
 

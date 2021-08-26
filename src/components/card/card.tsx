@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import { isEqual } from 'lodash';
 import formatMoney from '../../utils/format-money';
-import { useActionCreators, useSelector } from '../../hooks';
+import { useActionCreators, useSelector, useRole } from '../../hooks';
 
 import {
   CardWrapper,
@@ -43,6 +43,7 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
   const { cartItems } = useSelector((state) => state.cart);
 
   const { wishlistItems } = useSelector((state) => state.wishlist);
+  const role = useRole()
 
   useEffect(() => {
     for (let i = 0; i < cartItems.length; i++) {
@@ -56,6 +57,7 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
         setIsInWishlist(true);
       }
     }
+   
   }, []);
 
   const addToCartHandle = (item: any) => {
@@ -111,19 +113,16 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
           </CardCurrentPrice>
           <div style={{ display: 'flex', alignItems: 'baseline' }}>
             <CardWishlist
-              onClick={() =>
-                isInWishlist
-                  ? removeFromWishlistHandle(item)
-                  : addToWishlistHandle(item)
-              }
+              onClick={() => (!role.isBuyer&&!role.userRole)||(role.isBuyer) ?  (  isInWishlist
+                ? removeFromWishlistHandle(item)
+                : addToWishlistHandle(item)) :false  }
+  
             >
               {isInWishlist ? <HeartFull /> : <HeartIcon />}
             </CardWishlist>
             <CardCartIcon
               isInCartStyle={isInCart}
-              onClick={() =>
-                isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)
-              }
+              onClick={() =>(!role.isBuyer&&!role.userRole)||(role.isBuyer) ?  ( isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)) :false  }
             >
               <CardSpan />
               <CartIcon />
