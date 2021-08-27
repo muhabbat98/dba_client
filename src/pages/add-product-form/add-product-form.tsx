@@ -334,7 +334,7 @@ const AddProductForm = () => {
       const response = await axios.post('/product', newObj);
       const data = await response.data;
       if (data.code == 200) {
-        push('/product-detail/' + data.id + '/' + newObj.name);
+        push('/product-detail/' + newObj.name + '/' + data.id);
       }
     } catch (error) {
       checkError(error);
