@@ -366,9 +366,43 @@ code {
   justify-content: space-between;
   transition: 2s;
 }
-/* .resources-info > div {
+.resources-info > div {
   position: relative;
   top: -80px;
+  color: var(--main-text-color);
+  /* left: -100%; */
   width: 30%;
   transition: 2s;
-} */
+}
+
+.resources-info > div a {
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem;
+  color: var(--main-text-color);
+  background-color: var(--secondary-text-color);
+  border-radius: 8px;
+  transition: 0.25s ease;
+}
+.resources-info > div a:hover {
+  color: white;
+}
+.sitation-section {
+  position: relative;
+}
+.sitation {
+  position: relative;
+}
+.sitation > * {
+  padding-left: 30px;
+}
+.sitation::before {
+  content: "";
+  width: 30px;
+  height: 100%;
+  display: block;
+  background-color: var(--secondary-text-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
