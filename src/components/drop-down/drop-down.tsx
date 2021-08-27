@@ -17,6 +17,8 @@ interface DropdownProps {
   style?: any;
   isAdmin?: boolean;
   parentId?: any;
+  isReset?: boolean;
+  isAddProduct?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -27,10 +29,12 @@ const Dropdown: React.FC<DropdownProps> = ({
   style,
   isAdmin,
   parentId,
+  isReset,
+  isAddProduct,
 }) => {
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState('');
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('Tanlang');
 
   useEffect(() => {
     window.addEventListener('click', dropdownOverlayClick);
@@ -89,6 +93,8 @@ const Dropdown: React.FC<DropdownProps> = ({
     return o[0] && o[0].value;
   };
 
+  console.log('selected option ', selectedOption);
+
   // function foobar() {
   //    console.log('fooooo  ', isOpen);
   // }
@@ -104,13 +110,20 @@ const Dropdown: React.FC<DropdownProps> = ({
       >
         <DropdownHeader onClick={toggleList}>
           <DropdownLabel>{label}</DropdownLabel>
-          <DropdownHeaderTitle>
-            {isAdmin
-              ? selectedOption || options[0].value.name
-              : getActiveName()}
+          {isAddProduct ? (
+            <DropdownHeaderTitle>
+              {selectedOption}
+              <Arrow />
+            </DropdownHeaderTitle>
+          ) : (
+            <DropdownHeaderTitle>
+              {isAdmin
+                ? selectedOption || options[0].value.name
+                : getActiveName()}
 
-            <Arrow />
-          </DropdownHeaderTitle>
+              <Arrow />
+            </DropdownHeaderTitle>
+          )}
         </DropdownHeader>
         {
           <DropdownOptionList className={isOpen} ref={dropdown}>

@@ -281,7 +281,14 @@ export const Textarea = styled.textarea`
   }
 `;
 
-export const AddPhotoButton = styled.button``;
+export const AddPhotoButton = styled.button`
+  border: 2px solid #e9ecf4;
+  border-radius: 16px;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+`;
 
 export const ClearButton = styled.input`
   background: #f4f6f9;

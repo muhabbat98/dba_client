@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 import { useError } from '../../hooks';
 import Container from '../../components/grid/container';
 import ProductTitle from '../../components/products-title';
@@ -45,6 +46,7 @@ import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg
 import { ReactComponent as PhotoApparat } from '../../assets/icons/add-product-photo-apparat.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-delete-icon.svg';
 import { ReactComponent as FirstView } from '../../assets/icons/first-view.svg';
+import { ReactComponent as AddProductPlus } from '../../assets/icons/add-product-plus-icon.svg';
 import SimpleInput from '../../components/simple-input';
 
 interface Params {
@@ -67,10 +69,12 @@ interface DeliveryAddressType {
 interface AddedPhotosType {
   photoUrl: string;
   isMain: boolean;
+  id: string;
 }
 
 const AddProductForm = () => {
   const { categoryId, productId } = useParams<Params>();
+  const { push } = useHistory();
   const { checkError } = useError();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -85,6 +89,7 @@ const AddProductForm = () => {
     {
       photoData: '',
       isMain: true,
+      id: uuid(),
     },
   ]);
   const [addProductData, setAddProductData] = useState<AddProductDataType>({
@@ -128,6 +133,7 @@ const AddProductForm = () => {
     parentId: any,
     isReference?: boolean
   ) => {
+    console.log('e => ', e);
     if (e) {
       if (typeof e == 'object') {
         e = e.target.value;
@@ -206,6 +212,7 @@ const AddProductForm = () => {
 
   const setDelivery = (ev: any) => {
     const val = ev.target.value;
+    console.log('val ', val);
     if (val == 'yes') {
       setOpenDeleivery(true);
     } else {
@@ -224,15 +231,13 @@ const AddProductForm = () => {
     }
   };
 
-  const handleProductPhoto = (ev: any, isMainImg: boolean) => {
+  const handleProductPhoto = (ev: any, isMainImg: boolean, id: string) => {
     let targetFile = ev.target.files;
-    console.log('isMainImg ', isMainImg);
 
     if (ev && targetFile && targetFile.length > 0) {
       for (let i = 0; i < targetFile.length; i++) {
         let imgFile = targetFile[i];
         const fileExt = imgFile.name.toLowerCase().split('.').pop();
-        console.log('imgFile ', imgFile);
 
         if (
           imgFile &&
@@ -251,14 +256,11 @@ const AddProductForm = () => {
             setAddedPhotos((prevState: any) => {
               return [
                 ...prevState,
-                { photoData: reader.result, isMain: isMainImg },
+                { photoData: reader.result, isMain: isMainImg, id: id },
               ];
             });
           };
           reader.readAsDataURL(imgFile);
-
-          // const formData = new FormData();
-          // formData.append('file', imgFile);
         } else {
           setAlertMessage({
             message:
@@ -271,15 +273,43 @@ const AddProductForm = () => {
     }
   };
 
-  const handleDeletePhoto = () => {};
+  const handleDeletePhoto = (id: string, idx: number) => {
+    if (photoArray.length > 0) {
+      for (let i = 0; i < photoArray.length; i++) {
+        if (photoArray[i].id == id) {
+          let removedPhotoArray = photoArray.filter(
+            (item: any) => item.id != id
+          );
 
-  const addMorePhoto = () => {
+          if (addedPhotos.length > 0 && addedPhotos[i]) {
+            if (addedPhotos[i].id == id) {
+              let removedAddedPhotos = addedPhotos.filter(
+                (item: any) => item.id !== id
+              );
+
+              setProductPhoto(
+                productPhoto.filter((photo: any, index: any) => index != idx)
+              );
+
+              setAddedPhotos(removedAddedPhotos);
+            }
+          }
+          setPhotoArray(removedPhotoArray);
+        }
+      }
+    }
+  };
+
+  const addMorePhoto = (ev: any) => {
+    ev.preventDefault();
+
     if (photoArray.length < 8) {
       setPhotoArray([
         ...photoArray,
         {
           photoData: '',
           isMain: false,
+          id: uuid(),
         },
       ]);
     }
@@ -290,9 +320,6 @@ const AddProductForm = () => {
     setIsReset(true);
     setOpenDeleivery(false);
   };
-
-  console.log('photoArray ', photoArray);
-  console.log('addedPhotos ', addedPhotos);
 
   const sendData = async (ev: any) => {
     ev.preventDefault();
@@ -306,11 +333,17 @@ const AddProductForm = () => {
     try {
       const response = await axios.post('/product', newObj);
       const data = await response.data;
-      console.log('response => ', data);
+      if (data.code == 200) {
+        push('/product-detail/' + data.id + '/' + newObj.name);
+      }
     } catch (error) {
       checkError(error);
     }
   };
+
+  console.log('addedPhotos ', addedPhotos);
+  console.log('photoArray ', photoArray);
+  console.log('productPhoto ', productPhoto);
 
   return (
     <Container>
@@ -327,6 +360,7 @@ const AddProductForm = () => {
               Мобильные телефоны <ArrowRight />
             </AddProductFormBreadcrumbItem>
           </AddProductFormBreadcrumb>
+
           <AddProductFormItem>
             <ProductTitle fSize={16} title="Добавить данные" />
             <AddProductWrapp>
@@ -373,6 +407,7 @@ const AddProductForm = () => {
               </AddProductFormItemBodyItem>
             </AddProductWrapp>
           </AddProductFormItem>
+
           <AddProductPhotoBox>
             <ProductTitle fSize={16} title="Добавить фото" />
             <AddProductPhotoBoxItem>
@@ -383,12 +418,14 @@ const AddProductForm = () => {
               <AddProductPhoto>
                 {photoArray.length > 0 &&
                   photoArray.map((item: any, index: number) =>
-                    item.isMain ? (
+                    index == 0 ? (
                       <AddProductPhotoItem>
                         <input
                           multiple
                           type="file"
-                          onChange={(ev: any) => handleProductPhoto(ev, true)}
+                          onChange={(ev: any) =>
+                            handleProductPhoto(ev, true, item.id)
+                          }
                         />
                         <FirstViewIcon>
                           <FirstView />
@@ -397,31 +434,8 @@ const AddProductForm = () => {
                           <img src={productPhoto[index]} />
                         ) : (
                           <PtotoApparatBox
-                            onChange={(ev: any) => handleProductPhoto(ev, true)}
-                          >
-                            <PhotoApparat />
-                          </PtotoApparatBox>
-                        )}
-
-                        {productPhoto ? (
-                          <DeleteIconBox onClick={handleDeletePhoto}>
-                            <DeleteIcon />
-                          </DeleteIconBox>
-                        ) : null}
-                      </AddProductPhotoItem>
-                    ) : (
-                      <AddProductPhotoItem>
-                        <input
-                          multiple
-                          type="file"
-                          onChange={(ev: any) => handleProductPhoto(ev, false)}
-                        />
-                        {productPhoto ? (
-                          <img src={productPhoto[index]} />
-                        ) : (
-                          <PtotoApparatBox
                             onChange={(ev: any) =>
-                              handleProductPhoto(ev, false)
+                              handleProductPhoto(ev, true, item.id)
                             }
                           >
                             <PhotoApparat />
@@ -429,15 +443,55 @@ const AddProductForm = () => {
                         )}
 
                         {productPhoto ? (
-                          <DeleteIconBox onClick={handleDeletePhoto}>
+                          <DeleteIconBox
+                            onClick={() => handleDeletePhoto(item.id, index)}
+                          >
                             <DeleteIcon />
                           </DeleteIconBox>
                         ) : null}
                       </AddProductPhotoItem>
+                    ) : (
+                      <>
+                        <AddProductPhotoItem>
+                          <input
+                            multiple
+                            type="file"
+                            onChange={(ev: any) =>
+                              handleProductPhoto(ev, false, item.id)
+                            }
+                          />
+                          {productPhoto ? (
+                            <img src={productPhoto[index]} />
+                          ) : (
+                            <PtotoApparatBox
+                              onChange={(ev: any) =>
+                                handleProductPhoto(ev, false, item.id)
+                              }
+                            >
+                              <PhotoApparat />
+                            </PtotoApparatBox>
+                          )}
+
+                          {productPhoto ? (
+                            <DeleteIconBox
+                              onClick={() => handleDeletePhoto(item.id, index)}
+                            >
+                              <DeleteIcon />
+                            </DeleteIconBox>
+                          ) : null}
+                        </AddProductPhotoItem>
+                      </>
                     )
                   )}
+
+                {photoArray.length < 8 ? (
+                  <AddProductPhotoItem>
+                    <AddPhotoButton onClick={(ev: any) => addMorePhoto(ev)}>
+                      <AddProductPlus />
+                    </AddPhotoButton>
+                  </AddProductPhotoItem>
+                ) : null}
               </AddProductPhoto>
-              <AddPhotoButton onClick={addMorePhoto}>ADD PHOTO</AddPhotoButton>
             </AddProductPhotoBoxItem>
           </AddProductPhotoBox>
 
@@ -447,6 +501,7 @@ const AddProductForm = () => {
                 item={allFields}
                 handleInput={handleInput}
                 isReset={isReset}
+                isAddProduct={true}
               />
             )}
           </AddProductFormItem>
@@ -473,6 +528,7 @@ const AddProductForm = () => {
               </DeleiveryItem>
             </Deleivery>
           </DeleiveryBox>
+
           {openDeleivery ? (
             <DeleiveryZoneBox>
               <ProductTitle fSize={16} title="Территория доставки" />
@@ -510,9 +566,6 @@ const AddProductForm = () => {
             </DeleiveryZoneBox>
           ) : null}
           <AddProductFormBottom>
-            {/* <Button type="reset" btnType="gray">
-              Очистить
-            </Button> */}
             <ClearButton onClick={resetHandle} type="reset" value="Очистить" />
             <Button onClick={(ev: any) => sendData(ev)}>Опубликовать</Button>
           </AddProductFormBottom>

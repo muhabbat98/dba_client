@@ -8,12 +8,14 @@ interface AddProductFormItemProps {
   item: any;
   handleInput: any;
   isReset: boolean;
+  isAddProduct: boolean;
 }
 
 const AddProductFormItem: FC<AddProductFormItemProps> = ({
   item,
   handleInput,
   isReset,
+  isAddProduct,
 }) => {
   return (
     <>
@@ -26,6 +28,7 @@ const AddProductFormItem: FC<AddProductFormItemProps> = ({
             key={j.id}
             field={j}
             parentId={item.id}
+            isAddProduct={isAddProduct}
           />
         ))}
       </AddProductFormItemBodyItem>
@@ -37,6 +40,7 @@ const AddProductFormItem: FC<AddProductFormItemProps> = ({
             key={index}
             item={i}
             isReset={isReset}
+            isAddProduct={isAddProduct}
           />
         ))}
     </>

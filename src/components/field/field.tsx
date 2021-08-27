@@ -14,9 +14,16 @@ interface FieldProps {
   handleInput?: any;
   parentId?: any;
   isReset?: boolean;
+  isAddProduct?: boolean;
 }
 
-const Field: FC<FieldProps> = ({ field, handleInput, parentId, isReset }) => {
+const Field: FC<FieldProps> = ({
+  field,
+  handleInput,
+  parentId,
+  isReset,
+  isAddProduct,
+}) => {
   console.log('isReset ', isReset);
   const format = field.format;
   const fieldName = field.name;
@@ -43,7 +50,7 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId, isReset }) => {
         <SimpleInput
           label={fieldName}
           placeholder={fieldName}
-          inputType="number"
+          // inputType="number"
           style={{ marginBottom: '16px' }}
           inputValueHandler={change}
           parentId={parentId}
@@ -69,7 +76,7 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId, isReset }) => {
         <SimpleInput
           label={fieldName}
           placeholder={fieldName}
-          inputType="string"
+          // inputType="string"
           style={{ marginBottom: '16px' }}
           inputValueHandler={change}
           parentId={parentId}
@@ -87,6 +94,8 @@ const Field: FC<FieldProps> = ({ field, handleInput, parentId, isReset }) => {
           label={fieldName}
           style={{ marginBottom: '16px' }}
           parentId={parentId}
+          isReset={isReset}
+          isAddProduct={isAddProduct}
         />
       );
   }
