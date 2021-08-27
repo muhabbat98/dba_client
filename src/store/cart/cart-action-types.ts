@@ -25,9 +25,14 @@ interface SetCheckedTotalSum {
   payload: {};
 }
 
+interface SetCleanCart {
+  type: CartType.CLEAN_CART;
+}
+
 export type CartActionTypes =
   | SetAddToCart
   | SetRemoveItem
   | SetIncrement
   | SetDecrement
-  | SetCheckedTotalSum;
+  | SetCheckedTotalSum
+  | SetCleanCart

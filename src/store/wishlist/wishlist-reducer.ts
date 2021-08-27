@@ -22,7 +22,12 @@ export const wishlistReducer = (
 
     case WishlistType.REMOVE_WISHLIST:
       return removeFromWishlist(state, action.payload);
-
+    case WishlistType.CLEAN_WISHLIST:
+        return {
+          ...state,
+          wishlistItems: []
+        };
+  
     default:
       return state;
   }

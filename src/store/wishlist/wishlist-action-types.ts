@@ -9,5 +9,7 @@ interface RemoveWishlist {
   type: WishlistType.REMOVE_WISHLIST;
   payload: {};
 }
-
-export type WishlistActionType = AddToWishlist | RemoveWishlist;
+interface CleanWishlist {
+  type: WishlistType.CLEAN_WISHLIST;
+}
+export type WishlistActionType = AddToWishlist | RemoveWishlist | CleanWishlist;

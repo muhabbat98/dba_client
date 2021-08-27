@@ -1,3 +1,4 @@
+import { cleanCart } from './cart-action-creator';
 import { CartActionTypes } from './cart-action-types';
 import { CartType } from './cart-types';
 
@@ -46,6 +47,18 @@ export const cartReducer = (
 
     case CartType.GET_TOTAL_SUM:
       return getTotalSum(state, action.payload);
+
+    case CartType.CLEAN_CART:
+      return {
+        ...state,
+        cartItems: [],
+        totalPrice: 0,
+        totalCount: 0,
+        tSum: 0,
+        checkedAll: [],
+        checkedAllCount: 0,
+      };
+
     default:
       return state;
   }

@@ -4,4 +4,6 @@ export enum CartType {
   INCREMENT = 'INCREMENT',
   DECREMENT = 'DECREMENT',
   GET_TOTAL_SUM = 'GET_TOTAL_SUM',
+  CLEAN_CART = 'CLEAN_CART',
+
 }
