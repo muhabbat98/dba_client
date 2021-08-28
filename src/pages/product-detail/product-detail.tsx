@@ -11,16 +11,24 @@ import Slider from '../../components/slider';
 import { data } from '../homepage/homepage';
 import { TabBarHead, DescriptionText, Cont } from './style';
 import MobileProductHeader from './mobile-product-header';
+import { axios } from '../../hooks';
+
+interface UseParams{
+    id: string,
+    name: string
+}
 
 const ProductDetail = () => {
     const [width, height] = useWindowSize();
-    const id = useParams()
-    console.log('id--->',id)
+    const {id, name} = useParams<UseParams>();
+    const [product,setProduct] = useState<any>();
+
     const [tabBar, setTabBar] = useState({
         item1: true,
         item2: false,
         item3: false
     });
+
     const tabBar1 = () => {
         setTabBar({
             item1: true,
@@ -28,6 +36,7 @@ const ProductDetail = () => {
             item3: false
         });
     };
+
     const tabBar2 = () => {
         setTabBar({
             item1: false,
@@ -43,7 +52,20 @@ const ProductDetail = () => {
         });
     };
 
-    // useEffect(()=>)
+    useEffect(()=>{
+        getProduct();
+    },[id])
+
+    const getProduct = async () => {
+        try{
+            const response = await axios.get(`product/${name}/${id}`);
+            setProduct(response.data);
+            console.log('res->',response.data)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
     return (
         <>
             <Container>
@@ -51,7 +73,7 @@ const ProductDetail = () => {
                 <ProductsTitle title='iPhone 11 128GB' />
                 }
                 {width > 1000
-                    ? <ProductDetailHeader />
+                    ? <ProductDetailHeader product={product} />
                     : <MobileProductHeader />
                 }
                 <TabBarHead>

@@ -35,7 +35,12 @@ const images = [
     { img: Phone4 },
     { img: Phone5 }
 ];
-const ProductDetailHeader = () => {
+
+interface UseProductProps{
+    product?:any
+}
+
+const ProductDetailHeader:React.FC<UseProductProps> = ({product}) => {
     const { id } = useParams<any>();
     const isBuyer = useRole().userRole == 'ROLE_SELLER';
     const [mainImage, setMainImage] = useState();
@@ -101,25 +106,31 @@ const ProductDetailHeader = () => {
         }
     };
 
+    const isMainImages = product
+        ?product.
+        addedPhotoWithImageUrls.
+        filter((item:any,index:number)=>item.isMain!=true&&index<6)
+        :images;
+
     return (
         <DetailHeaderContainer>
             <LeftPictureContainer>
                 {
-                    images.map((item, index) => (
-                        <PicturesItem key={index} onClick={() => setMainPicture(item.img)}>
-                            <div><img src={item.img} alt='phone' /></div>
+                    isMainImages.map((item:any) => (
+                        <PicturesItem key={item.id} onClick={() => setMainPicture(item.photoUrl)}>
+                            <div><img src={item.photoUrl} alt='phone' /></div>
                         </PicturesItem>
                     ))
                 }
             </LeftPictureContainer>
             <MainPicture>
                 <div>
-                    <img src={mainImage || PhoneMain} alt='phone' />
+                    <img src={mainImage || (product?product.addedPhotoWithImageUrls[0].photoUrl:PhoneMain)} alt='phone' />
                 </div>
             </MainPicture>
             <ProductInformation>
                 <InfoTitleContainer>
-                    <p>Apple / Смартфон iPhone 11 128GB (новая комплектация)</p>
+                    <p>{product?product.addProductData.name:'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</p>
                     <div onClick={heartButton}>
                         {!isBuyer && isInWishlist ?
                             <HeartFull style={{ width: 17, height: 17 }} />
@@ -130,7 +141,7 @@ const ProductDetailHeader = () => {
                     <StarRaiting callback={starRaitingResult} />
                     <p>(1241)отзывов</p>
                 </RatingContainer>
-                <NewPrice>{FormatMoney(7574000)} сум</NewPrice>
+                <NewPrice>{product?FormatMoney(product.addProductData.price):FormatMoney(7574000)} сум</NewPrice>
                 <OldPrice>{FormatMoney(8416000)} сум</OldPrice>
                 <BinaryTextConatiner>
                     <p>Цвет товара:</p><span>синий</span>

@@ -33,6 +33,11 @@ export const PicturesItem = styled.div`
             width: 100%;
             height:100%;
             object-fit: cover;
+            border-radius: 8px;
+              &:hover{
+                border-radius: 0px;
+                transition: .4s;
+              }
             }
         }
 `;
@@ -58,6 +63,7 @@ export const ProductInformation = styled.div`
 export const InfoTitleContainer = styled.div`
     display: flex;
     justify-content: space-between;
+  
     p{
         font-style: normal;
         font-weight: 600;
