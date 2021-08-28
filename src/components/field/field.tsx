@@ -24,7 +24,6 @@ const Field: FC<FieldProps> = ({
   isReset,
   isAddProduct,
 }) => {
-  console.log('isReset ', isReset);
   const format = field.format;
   const fieldName = field.name;
   const list = field.values;
@@ -52,7 +51,7 @@ const Field: FC<FieldProps> = ({
           placeholder={fieldName}
           // inputType="number"
           style={{ marginBottom: '16px' }}
-          inputValueHandler={change}
+          onChange={change}
           parentId={parentId}
           isReset={isReset}
         />
@@ -78,7 +77,7 @@ const Field: FC<FieldProps> = ({
           placeholder={fieldName}
           // inputType="string"
           style={{ marginBottom: '16px' }}
-          inputValueHandler={change}
+          onChange={change}
           parentId={parentId}
           isReset={isReset}
         />

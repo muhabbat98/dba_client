@@ -85,6 +85,7 @@ const AddProductForm = () => {
   const [region, setRegion] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [isReset, setIsReset] = useState<boolean>(false);
+  const [activeClass, setActiveClass] = useState('');
   const [photoArray, setPhotoArray] = useState<any>([
     {
       photoData: '',
@@ -106,17 +107,16 @@ const AddProductForm = () => {
 
   useEffect(() => {
     getData(productId);
-
-    if (textareaRef) {
-      textareaRef.current?.focus();
-    }
   }, []);
 
   const addProductChangeHandler = (ev: any) => {
+    const value = ev.target.value;
+    const name = ev.target.name;
+
     setAddProductData((prevState) => {
       return {
         ...prevState,
-        [ev.target.name]: ev.target.value,
+        [name]: value,
       };
     });
   };
@@ -133,7 +133,6 @@ const AddProductForm = () => {
     parentId: any,
     isReference?: boolean
   ) => {
-    console.log('e => ', e);
     if (e) {
       if (typeof e == 'object') {
         e = e.target.value;
@@ -167,6 +166,12 @@ const AddProductForm = () => {
               for (let j = 0; j < copyObj.fields[i].values.length; j++) {
                 if (copyObj.fields[i].values[j].id == id) {
                   copyObj.fields[i].values = copyObj.fields[i].values[j].id;
+                  console.log(
+                    'copyObj.fields[i].values[j] ',
+                    copyObj.fields[i].values[j]
+                  );
+                  copyObj.fields[i].selectedName =
+                    copyObj.fields[i].values[j].name;
                 }
               }
             }
@@ -334,7 +339,7 @@ const AddProductForm = () => {
       const response = await axios.post('/product', newObj);
       const data = await response.data;
       if (data.code == 200) {
-        push('/product-detail/' + newObj.name + '/' + data.id);
+        // push('/product-detail/' + newObj.name + '/' + data.id);
       }
     } catch (error) {
       checkError(error);
@@ -403,7 +408,11 @@ const AddProductForm = () => {
                   // placeholder="Введите описание товара"
                   onChange={addProductChangeHandler}
                 ></Textarea>
-                <TextareaLabel>Введите описание товара</TextareaLabel>
+                <TextareaLabel
+                  className={addProductData.productComment && 'active'}
+                >
+                  Введите описание товара
+                </TextareaLabel>
               </AddProductFormItemBodyItem>
             </AddProductWrapp>
           </AddProductFormItem>

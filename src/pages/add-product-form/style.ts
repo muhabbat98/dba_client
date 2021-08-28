@@ -257,6 +257,13 @@ export const TextareaLabel = styled.label`
   font-size: 20px;
   font-weight: 700;
   pointer-events: none;
+
+  &.active {
+    top: 7px;
+    font-size: 14px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.blue};
+  }
 `;
 
 export const Textarea = styled.textarea`
@@ -269,15 +276,14 @@ export const Textarea = styled.textarea`
   resize: none;
   height: 146px;
 
+  /* input:focus ~ .floating-label,
+input:not(:focus):valid ~ .floating-label{ */
+
   &:focus ~ ${TextareaLabel} {
     top: 7px;
-    color: ${({ theme }) => theme.blue};
     font-size: 14px;
     font-weight: 500;
-  }
-
-  &:empty ~ ${TextareaLabel} {
-    top: 24px;
+    color: ${({ theme }) => theme.blue};
   }
 `;
 

@@ -93,8 +93,6 @@ const Dropdown: React.FC<DropdownProps> = ({
     return o[0] && o[0].value;
   };
 
-  console.log('selected option ', selectedOption);
-
   // function foobar() {
   //    console.log('fooooo  ', isOpen);
   // }
