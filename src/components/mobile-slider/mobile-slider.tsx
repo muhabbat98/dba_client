@@ -7,6 +7,7 @@ import SwiperCore, {
     Pagination
 } from 'swiper/core';
 import {Wrapper} from './style'
+import isEmptyObj from '../../utils/isEmptyObj';
 
 SwiperCore.use([Pagination]);
 interface SliderProps{
@@ -16,12 +17,12 @@ const MobileSlider:React.FC<SliderProps> = ({items}) => {
     return(
         <div style={{position:'relative',height:"100%",marginTop:20,width:'100%'}}>
             <Swiper pagination={true} className="mySwiper">
-                {items.map((item:any,index:number) => {
+                {!isEmptyObj(items)&&items.map((item:any,index:number) => {
                     return(
                     <SwiperSlide key={index}>
                         <div>
                             <Wrapper>
-                                <img src={item.img} alt={item.img}/>
+                                <img src={item.photoUrl} alt={item.img}/>
                             </Wrapper>
                         </div>
                     </SwiperSlide>

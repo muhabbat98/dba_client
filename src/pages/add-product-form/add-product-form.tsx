@@ -346,7 +346,7 @@ const AddProductForm = () => {
       const data = await response.data;
       console.log('response => ', data);
       if (data.code == 200) {
-        // push('/product-detail/' + newObj.name + '/' + data.id);
+        push('/product-detail/' + newObj.name + '/' + data.id);
       }
     } catch (error) {
       checkError(error);

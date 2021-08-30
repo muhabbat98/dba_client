@@ -1,4 +1,4 @@
-const isEmptyObj = (obj: any) => {
+    const isEmptyObj = (obj: any) => {
    for (let key in obj) {
       return false;
    }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useParams } from 'react-router-dom';
+
 import ReklamaMobileApp from '../../components/reklama-mobile-app';
 import Container from '../../components/grid/container';
 import ProductsTitle from '../../components/products-title';
@@ -54,12 +55,12 @@ const ProductDetail = () => {
 
     useEffect(()=>{
         getProduct();
-    },[id])
+    },[])
 
     const getProduct = async () => {
         try{
             const response = await axios.get(`product/${name}/${id}`);
-            setProduct(response.data);
+            setProduct(response.data );
             console.log('res->',response.data)
         }
         catch(err){
@@ -69,12 +70,12 @@ const ProductDetail = () => {
     return (
         <>
             <Container>
-                {width > 768 &&
-                <ProductsTitle title='iPhone 11 128GB' />
-                }
+                {/*{width > 768 &&*/}
+                {/*<ProductsTitle title='iPhone 11 128GB' />*/}
+                {/*}*/}
                 {width > 1000
                     ? <ProductDetailHeader product={product} />
-                    : <MobileProductHeader />
+                    : <MobileProductHeader product={product} />
                 }
                 <TabBarHead>
                     <div
@@ -106,7 +107,7 @@ const ProductDetail = () => {
                 </TabBarHead>
                 <div>
                     {tabBar.item1 &&
-                    <Characteristic />
+                    <Characteristic product={product}/>
                     }
                     {tabBar.item2 &&
                     <div>

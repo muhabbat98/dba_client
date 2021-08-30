@@ -13,7 +13,7 @@ export const DetailHeaderContainer = styled.div`
 export const LeftPictureContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 24px 16px;    
 `;
 export const PicturesItem = styled.div`
@@ -63,7 +63,7 @@ export const ProductInformation = styled.div`
 export const InfoTitleContainer = styled.div`
     display: flex;
     justify-content: space-between;
-  
+    width: 100% !important;
     p{
         font-style: normal;
         font-weight: 600;

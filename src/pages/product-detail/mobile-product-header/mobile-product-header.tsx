@@ -19,6 +19,7 @@ import {
     ColorsContainer,
     PriceTitles
 } from './style'
+import isEmptyObj from '../../../utils/isEmptyObj';
 
 const images = [
     {img:iPhone12},
@@ -27,7 +28,10 @@ const images = [
     {img:iPhone12},
 ]
 
-const MobileProductHeader = () => {
+interface UseProductProps{
+    product?:any
+}
+const MobileProductHeader:React.FC<UseProductProps> = ({product}) => {
     const { id } = useParams<any>();
     const isBuyer = useRole().userRole=='ROLE_SELLER';
     const [isInWishlist, setIsInWishlist] = useState(false);
@@ -83,9 +87,10 @@ const MobileProductHeader = () => {
             }
         }
     }
+
     return(
         <>
-            <ProductTitle>Apple / Смартфон iPhone 11 128GB (новая комплектация)</ProductTitle>
+            <ProductTitle>{!isEmptyObj(product)?product.addProductData.name:'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</ProductTitle>
             <ReviewsContainer>
                 <Reviews><Star/><span>4</span> <p>(1241) отзывов</p></Reviews>
                 <div onClick={heartButton}>
@@ -94,8 +99,8 @@ const MobileProductHeader = () => {
                         :<Heart style={{width:17,height:17}}/>}
                 </div>
             </ReviewsContainer>
-            <PriceTitles>8 595 000 сум <span>8 416 000 сум</span></PriceTitles>
-            <MobileSlider items={images}/>
+            <PriceTitles>{product?FormatMoney(product.addProductData.price):FormatMoney(7574000)}  сум <span>8 416 000 сум</span></PriceTitles>
+            <MobileSlider items={!isEmptyObj(product)&&product.addedPhotoWithImageUrls}/>
             <BinaryTextConatiner>
                 <p>Цвет товара:</p><span>синий</span>
             </BinaryTextConatiner>
