@@ -85,7 +85,6 @@ const AddProductForm = () => {
   const [region, setRegion] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [isReset, setIsReset] = useState<boolean>(false);
-  const [activeClass, setActiveClass] = useState('');
   const [photoArray, setPhotoArray] = useState<any>([
     {
       photoData: '',
@@ -156,7 +155,11 @@ const AddProductForm = () => {
         for (let i = 0; i < copyObj.fields.length; i++) {
           if (!isReference) {
             if (copyObj.fields[i].id == id) {
-              copyObj.fields[i].values = val;
+              copyObj.fields[i].value = val;
+
+              copyObj.fields[i].selectedId = null;
+              copyObj.fields[i].selectedName = null;
+              copyObj.fields[i].parentId = null;
             }
           } else {
             if (
@@ -165,13 +168,11 @@ const AddProductForm = () => {
             ) {
               for (let j = 0; j < copyObj.fields[i].values.length; j++) {
                 if (copyObj.fields[i].values[j].id == id) {
-                  copyObj.fields[i].values = copyObj.fields[i].values[j].id;
-                  console.log(
-                    'copyObj.fields[i].values[j] ',
-                    copyObj.fields[i].values[j]
-                  );
+                  // copyObj.fields[i].values = copyObj.fields[i].values[j].id;
+                  copyObj.fields[i].selectedId = copyObj.fields[i].values[j].id;
                   copyObj.fields[i].selectedName =
                     copyObj.fields[i].values[j].name;
+                  copyObj.fields[i].parentId = parentId;
                 }
               }
             }
@@ -229,6 +230,7 @@ const AddProductForm = () => {
     try {
       const response = await axios.get('/meta_data/product/' + id);
       const data = await response.data;
+      console.log(JSON.stringify(data));
       setAllFields(data);
       setCollectiveJson(data);
     } catch (error) {
@@ -329,15 +331,20 @@ const AddProductForm = () => {
   const sendData = async (ev: any) => {
     ev.preventDefault();
     const newObj: any = { ...collectiveJson };
+
+    setEmptyValueToReference(newObj);
+
     newObj.addProductData = { ...addProductData };
     newObj.deliveryAddress = { ...deliveryAddress };
     newObj.addedPhotos = [...addedPhotos];
 
     console.log('newObj ', newObj);
+    console.log(JSON.stringify(newObj));
 
     try {
       const response = await axios.post('/product', newObj);
       const data = await response.data;
+      console.log('response => ', data);
       if (data.code == 200) {
         // push('/product-detail/' + newObj.name + '/' + data.id);
       }
@@ -346,9 +353,15 @@ const AddProductForm = () => {
     }
   };
 
-  console.log('addedPhotos ', addedPhotos);
-  console.log('photoArray ', photoArray);
-  console.log('productPhoto ', productPhoto);
+  const setEmptyValueToReference = (obj: any) => {
+    console.log('obj ', obj);
+  };
+
+  console.log('allFields ', allFields);
+
+  // console.log('addedPhotos ', addedPhotos);
+  // console.log('photoArray ', photoArray);
+  // console.log('productPhoto ', productPhoto);
 
   return (
     <Container>

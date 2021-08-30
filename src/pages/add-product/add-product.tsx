@@ -15,7 +15,7 @@ const AddProduct = () => {
   const { checkError } = useError();
   const { push } = useHistory();
 
-  const [allProduct, setAllProduct] = useState<any>(null);
+  const [allProduct, setAllProduct] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const AddProduct = () => {
     try {
       const response = await axios.get('catalog?parentId=');
       const data = await response.data;
+      console.log('data => ', data);
       setAllProduct(data);
       setLoading(false);
     } catch (error) {
@@ -40,6 +41,8 @@ const AddProduct = () => {
     push(`add-product-page/${id}`);
   };
 
+  console.log('allProduct ', allProduct);
+
   return (
     <Container>
       <AddProductContainer>
@@ -47,15 +50,16 @@ const AddProduct = () => {
           <CircleLoader />
         ) : (
           <AddProductList>
-            {allProduct.map((item: any) => (
-              <AddProductItem
-                onClick={() => pageClickHandle(item.id)}
-                key={item.id}
-              >
-                <ListIcon />
-                <ItemText>{item.name}</ItemText>
-              </AddProductItem>
-            ))}
+            {allProduct.length > 0 &&
+              allProduct.map((item: any) => (
+                <AddProductItem
+                  onClick={() => pageClickHandle(item.id)}
+                  key={item.id}
+                >
+                  <ListIcon />
+                  <ItemText>{item.name}</ItemText>
+                </AddProductItem>
+              ))}
           </AddProductList>
         )}
       </AddProductContainer>
