@@ -173,6 +173,12 @@ const AddProductForm = () => {
                   copyObj.fields[i].selectedName =
                     copyObj.fields[i].values[j].name;
                   copyObj.fields[i].parentId = parentId;
+                  copyObj.fields[i].value = null;
+
+                  console.log(
+                    'copyObj.fields[i].selectedName  ',
+                    copyObj.fields[i].selectedName
+                  );
                 }
               }
             }
@@ -230,7 +236,6 @@ const AddProductForm = () => {
     try {
       const response = await axios.get('/meta_data/product/' + id);
       const data = await response.data;
-      console.log(JSON.stringify(data));
       setAllFields(data);
       setCollectiveJson(data);
     } catch (error) {
@@ -332,14 +337,13 @@ const AddProductForm = () => {
     ev.preventDefault();
     const newObj: any = { ...collectiveJson };
 
-    setEmptyValueToReference(newObj);
+    setEmptyValueToReference(collectiveJson);
 
     newObj.addProductData = { ...addProductData };
     newObj.deliveryAddress = { ...deliveryAddress };
     newObj.addedPhotos = [...addedPhotos];
 
     console.log('newObj ', newObj);
-    console.log(JSON.stringify(newObj));
 
     try {
       const response = await axios.post('/product', newObj);
@@ -354,10 +358,19 @@ const AddProductForm = () => {
   };
 
   const setEmptyValueToReference = (obj: any) => {
-    console.log('obj ', obj);
+    obj.fields &&
+      obj.fields.map((item: any) => {
+        if (item.format == 'REFERENCE') {
+          item.values = null;
+        }
+      });
+
+    if (obj.products.length > 0) {
+      obj.products.map((item: any) => setEmptyValueToReference(item));
+    }
   };
 
-  console.log('allFields ', allFields);
+  // console.log('allFields ', allFields);
 
   // console.log('addedPhotos ', addedPhotos);
   // console.log('photoArray ', photoArray);
