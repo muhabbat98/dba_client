@@ -36,6 +36,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   const [isOpen, setIsOpen] = useState('');
   const [selectedOption, setSelectedOption] = useState('Tanlang');
 
+  console.log('dropdown isReset ', isReset);
+
   useEffect(() => {
     window.addEventListener('click', dropdownOverlayClick);
 
