@@ -116,8 +116,8 @@ const ProductDetailHeader:React.FC<UseProductProps> = ({product}) => {
         <DetailHeaderContainer>
             <LeftPictureContainer>
                 {
-                    isMainImages.map((item:any) => (
-                        <PicturesItem key={item.id} onClick={() => setMainPicture(item.photoUrl)}>
+                    isMainImages.map((item:any,index:number) => (
+                        <PicturesItem key={index} onClick={() => setMainPicture(item.photoUrl)}>
                             <div><img src={item.photoUrl} alt='phone' /></div>
                         </PicturesItem>
                     ))

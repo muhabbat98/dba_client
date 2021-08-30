@@ -40,14 +40,7 @@ const Products:React.FC<ProductsProps> = ({product,isOpen}) => {
     const deep = product && product;
     const [width,height] = useWindowSize();
 
-    const sortValue = (item:any) => {
-        if(item.format=="REFERENCE"){
-            return item.selectedName
-        }
-        else {
-            return item.value
-        }
-    }
+
     return(
         <>
             <ProductTitle title={!isEmptyObj(deep) && deep.name}/>
@@ -56,7 +49,7 @@ const Products:React.FC<ProductsProps> = ({product,isOpen}) => {
                 <>
                     <div>
                         {!isEmptyObj(deep)&&deep.fields.map((item:any)=>(
-                            <CharacterContainer key={item.id+1} style={{display:"flex"}}>
+                            <CharacterContainer key={item.id} style={{display:"flex"}}>
                                 <CharacterText>{item.name}</CharacterText>
                                 <Dots></Dots>
                             </CharacterContainer>
@@ -65,7 +58,7 @@ const Products:React.FC<ProductsProps> = ({product,isOpen}) => {
                     </div>
                     <div>
                         {!isEmptyObj(deep)&&deep.fields.map((item:any)=>(
-                            <SizeText key={item.id}>{()=>sortValue(item)}</SizeText>
+                            <SizeText key={item.id}>{item.format=="REFERENCE"?item.selectedName:item.value}</SizeText>
                         ))}
                     </div>
                 </>
@@ -73,7 +66,7 @@ const Products:React.FC<ProductsProps> = ({product,isOpen}) => {
                 {!isEmptyObj(deep)&&deep.fields.map((item:any)=>(
                     <MobileContainer key={item.id}>
                         <CharacterText>{item.name}</CharacterText>
-                        <SizeText >{()=>sortValue(item)}</SizeText>
+                        <SizeText >{item.format=="REFERENCE"?item.selectedName:item.value}</SizeText>
                     </MobileContainer>
                 ))}
                 </>}
