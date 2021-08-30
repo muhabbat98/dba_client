@@ -7,7 +7,7 @@ import ProductTitle from '../../components/products-title';
 import Dropdown from '../../components/drop-down';
 import Button from '../../components/button';
 import RadioButton from '../../components/radio-button';
-import { setAlertMessage } from '../../store/root-action-creators';
+import { useActionCreators } from '../../hooks/useActionCreators';
 import { AlertPosition } from '../../utils/alert-position-enum';
 import { axios } from '../../hooks';
 import isEmptyObj from '../../utils/isEmptyObj';
@@ -77,6 +77,7 @@ const AddProductForm = () => {
   const { push } = useHistory();
   const { checkError } = useError();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { setAlertMessage } = useActionCreators();
 
   const [openDeleivery, setOpenDeleivery] = useState<boolean>(false);
   const [productPhoto, setProductPhoto] = useState<any>([]);
@@ -174,11 +175,6 @@ const AddProductForm = () => {
                     copyObj.fields[i].values[j].name;
                   copyObj.fields[i].parentId = parentId;
                   copyObj.fields[i].value = null;
-
-                  console.log(
-                    'copyObj.fields[i].selectedName  ',
-                    copyObj.fields[i].selectedName
-                  );
                 }
               }
             }
@@ -250,7 +246,6 @@ const AddProductForm = () => {
       for (let i = 0; i < targetFile.length; i++) {
         let imgFile = targetFile[i];
         const fileExt = imgFile.name.toLowerCase().split('.').pop();
-
         if (
           imgFile &&
           (fileExt == 'jpg' ||
@@ -330,7 +325,7 @@ const AddProductForm = () => {
 
   const resetHandle = () => {
     setIsReset(true);
-    setOpenDeleivery(false);
+    // setOpenDeleivery(false);
   };
 
   const sendData = async (ev: any) => {
@@ -350,7 +345,7 @@ const AddProductForm = () => {
       const data = await response.data;
       console.log('response => ', data);
       if (data.code == 200) {
-        // push('/product-detail/' + newObj.name + '/' + data.id);
+        push('/product-detail/' + newObj.name + '/' + data.id);
       }
     } catch (error) {
       checkError(error);
@@ -372,9 +367,9 @@ const AddProductForm = () => {
 
   // console.log('allFields ', allFields);
 
-  // console.log('addedPhotos ', addedPhotos);
-  // console.log('photoArray ', photoArray);
-  // console.log('productPhoto ', productPhoto);
+  console.log('addedPhotos ', addedPhotos);
+  console.log('photoArray ', photoArray);
+  console.log('productPhoto ', productPhoto);
 
   return (
     <Container>
