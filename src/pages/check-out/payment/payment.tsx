@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from 'react';
+import { useState, FC, useEffect } from 'react';
 import {
   Address,
   CallHeader,
@@ -14,7 +14,7 @@ import {
 import Uzcard from '../../../assets/images/uzcard-small.png';
 
 import Humo from '../../../assets/images/humocard-small.png';
-
+import {useSelector, axios, useError } from '../../../hooks'
 import {
   CardData,
   CardImage,
@@ -36,26 +36,50 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
     NUMBER,
   }
   const [type, setType] = useState(Tabs.POCKET);
-  useEffect(() => {
-    console.log(dataShare);
-  }, []);
+  const [data, setData] =useState<any>()
+  const [loading, setLoading] = useState(true)
+  const {checkError} =useError()
+
+  const getCard = (id:any)=>{      
+      dataShare.setData({ ...dataShare.allData, payment:{id} });
+  }
+
+  useEffect(()=>{
+    (async()=>{
+      
+      try{
+        
+        const response = await axios.get('/user/cards');
+        setLoading(false)
+        
+        if(response.data){
+          setData(response.data);
+        }
+     
+      }
+      catch(err){
+        checkError(err)
+        setLoading(false);
+      }
+    })()
+  },[])
   return (
     <Address>
       <HeaderAddress>
         <PackmenHeader
-          isActive={type === 0 ? true : false}
+          isactive={type === 0 ? true : false}
           onClick={() => setType(Tabs.POCKET)}
         >
           Эл.кошелёк
         </PackmenHeader>
         <CallHeader
-          isActive={type === 1 ? true : false}
+          isactive={type === 1 ? true : false}
           onClick={() => setType(Tabs.CARD)}
         >
           Картой
         </CallHeader>
         <MailHeader
-          isActive={type === 2 ? true : false}
+          isactive={type === 2 ? true : false}
           onClick={() => setType(Tabs.NUMBER)}
         >
           Счет в банке
@@ -66,16 +90,20 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
       ) : type === 1 ? (
         <PackmenBody>
           <AddressList>
-            <SampleAdress as={SampleCard}>
-              <CardImage src={Uzcard} />
-              <CardData>
-                <MainCardData>
-                  <NameCard>AAB Humo</NameCard>
-                  <NumberCard>Humo **** 6600</NumberCard>
-                </MainCardData>
-                <CardMoney>125 300 </CardMoney>
-              </CardData>
-            </SampleAdress>
+            {
+                  
+              data&&data.map((elem:any, i:number)=> <SampleAdress onClick= {()=>getCard(elem.id)} key={i} as={SampleCard}>
+                  <CardImage src={Uzcard} />
+                    <CardData>
+                      <MainCardData>
+                        <NameCard>{elem.cardName}</NameCard>
+                        <NumberCard>{elem.cardNumber}</NumberCard>
+                      </MainCardData>
+                      <CardMoney>{elem.expirationMonth +'/'+elem.expirationYear} </CardMoney>
+                    </CardData>
+                </SampleAdress> )        
+              }
+            {/*     
             <SampleAdress as={SampleCard}>
               <CardImage src={Humo} />
               <CardData>
@@ -85,17 +113,9 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
                 </MainCardData>
                 <CardMoney>125 300 </CardMoney>
               </CardData>
-            </SampleAdress>
-            <SampleAdress as={SampleCard}>
-              <CardImage src={Uzcard} />
-              <CardData>
-                <MainCardData>
-                  <NameCard>AAB Humo</NameCard>
-                  <NumberCard>Humo **** 6600</NumberCard>
-                </MainCardData>
-                <CardMoney>125 300 </CardMoney>
-              </CardData>
-            </SampleAdress>
+            </SampleAdress> */}
+     
+
 
             <AddressButton>+ Добавить карту</AddressButton>
           </AddressList>

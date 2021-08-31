@@ -27,6 +27,7 @@ import { ReactComponent as HeartFull } from '../../assets/icons/heart-full2.svg'
 import { ReactComponent as StarFill } from '../../assets/icons/star-full.svg';
 import { ReactComponent as StarEmpty } from '../../assets/icons/star-empty.svg';
 import { ReactComponent as CartIcon } from '../../assets/icons/cart.svg';
+import {axios, useError} from '../../hooks'
 
 interface CardProps {
   item?: any;
@@ -34,8 +35,11 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ item, style }) => {
+  const {checkError} = useError()
   const [isInCart, setIsInCart] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [loading, setLoading] = useState(true)
+  const [ data, setData] = useState<any>()
 
   const { addToCart, removeCart, addToWishlist, removeWishlist } =
     useActionCreators();
@@ -44,8 +48,19 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
 
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const role = useRole()
-
+  console.log(item)
   useEffect(() => {
+    
+    (async()=>{
+      try{
+        const response = await axios.get("product/getAllProducts")
+        setData(response.data)
+        setLoading(false)
+      }
+      catch(err){
+        checkError(err)
+      }
+    })()
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].id === item.id) {
         setIsInCart(true);
@@ -85,12 +100,14 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
       <CardHeader>
         <CardLabel>Новинка</CardLabel>
         <CardImageWrapper>
-          <CardImg src={item.images[0]} />
+          <CardImg src={item.addedPhotoWithImageUrls[0].photoUrl} />
         </CardImageWrapper>
       </CardHeader>
+
       <CardBody>
-        <CardTitle title={item.name} to={`/product-detail/${item.id}`}>
-          {item.name}
+        <CardTitle title={item.addProductData.name} to={`/product-detail/${item.addProductData.name}/${item.id}`}>
+        {/* <CardTitle title={item.addProductData.name} to={`/product-detail/${item.addProductData.name+"/"+item.id}`}> */}
+          {item.addProductData.name}
         </CardTitle>
         <CardComents>
           <CardStarsWrapper>
@@ -103,13 +120,13 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
           <CardCommentCount>51 отзивов</CardCommentCount>
         </CardComents>
         <CardOldPrice>
-          {formatMoney(item.priceResponse.value)}{' '}
-          <span>{item.priceResponse.currency.shortName}</span>
+          {formatMoney(item.addProductData.price)}{' '}
+          <span>sum</span>
         </CardOldPrice>
         <CardCartWrapper>
           <CardCurrentPrice>
-            {formatMoney(item.priceResponse.value)}{' '}
-            <span>{item.priceResponse.currency.shortName}</span>
+            {formatMoney(item.addProductData.price)}{' '}
+            <span>sum</span>
           </CardCurrentPrice>
           <div style={{ display: 'flex', alignItems: 'baseline' }}>
             <CardWishlist

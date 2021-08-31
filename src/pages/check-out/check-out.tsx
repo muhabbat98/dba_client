@@ -79,15 +79,15 @@ const CheckOut = () => {
           <CartHeader>Оформление заказа </CartHeader>
 
           <StepsOrder>
-            <Recipient>
+            <Recipient onClick={()=>{if(step.resipient) {setTab('resipient')}}}>
               <RecipientIcon active={step.resipient}>
                 <AccountIcon />
               </RecipientIcon>
               <RecipientText>Получатель</RecipientText>
             </Recipient>
             <Line/>
-            <Address>
-              <AddressIcon active={step.address}>
+            <Address onClick={()=>{if(step.address) {setTab('address')}}}>
+              <AddressIcon   active={step.address}>
                 {step.address === 1 ? (
                   <NavigationIconWhite />
                 ) : (
@@ -97,7 +97,7 @@ const CheckOut = () => {
               <AddressText>Адрес доставки</AddressText>
             </Address>
             <Line/>
-            <Payment>
+            <Payment onClick={()=>{if(step.payment) {setTab('payment')}}} >
               <PaymentIcon active={step.payment}>
                 {step.payment === 1 ? <PaymantIconWhite /> : <PaymantIcon />}
               </PaymentIcon>

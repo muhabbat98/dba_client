@@ -44,15 +44,21 @@ const Slider: FC<SliderProps> = ({ data }) => {
          // onSlideChange={() => console.log('slide change')}
          // onSwiper={(swiper) => console.log(swiper)}
          >
+
             {
-               data.map((i: any) => {
+              data&&data.map((elem:any, i:number)=> <SwiperSlide key={i}>
+                     <Card item={elem} />
+                  </SwiperSlide>)
+            }
+            {/* {
+               carddata.map((i: any) => {
                   return (
                      <SwiperSlide key={i.id}>
                         <Card item={i} />
                      </SwiperSlide>
                   )
                })
-            }
+            } */}
          </Swiper>
       </SwiperContainer>
    )

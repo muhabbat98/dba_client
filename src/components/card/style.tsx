@@ -26,7 +26,7 @@ export const CardWrapper = styled.div`
    border: 2px solid #E9ECF4;
    border-radius: 16px;
    transition: all .25s ease;
-   
+   width: 100%;
 
    &:hover{
       border: 2px solid transparent;

@@ -1,5 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import AddressBox from '../../../components/address-box';
+import {useSelector, axios, useError } from '../../../hooks'
 import {
   Address,
   CallHeader,
@@ -18,40 +19,77 @@ interface AdressItemProps {
   nextStep: any;
   dataShare: any;
 }
+
 const AdressItem: FC<AdressItemProps> = ({ nextStep, dataShare }) => {
   enum Tabs {
     PACKMEN,
     CALL,
     MAIL,
   }
+
+  const user:any = useSelector(state=>state.user)
+
   const [type, setType] = useState(Tabs.PACKMEN);
-  const [state, setState] = useState(false);
-  console.log(nextStep);
-  const sendData = (data: any) => {
-    console.log('data', data);
-    if (data) {
-      dataShare.setData({ ...dataShare.allData, address: data });
-      nextStep.setStep({ ...nextStep.step, payment: 1 });
-      nextStep.setTab('payment');
-    }
-  };
+  // const [state, setState] = useState(false);
+  const [data, setData] = useState<any>([]);
+  const [loading, setLoading]=useState<boolean>(true);
+  const {checkError} = useError()
+
+
+
+  const getLocation = (id:any)=>{
+    
+    dataShare.setData({ ...dataShare.allData, address:{id} });
+    nextStep.setStep({ ...nextStep.step, payment: 1 });
+    nextStep.setTab('payment');
+  }
+  // const sendData = (data: any) => {
+   
+  //   if (data) {
+  //     dataShare.setData({ ...dataShare.allData, address: data });
+  //     nextStep.setStep({ ...nextStep.step, payment: 1 });
+  //     nextStep.setTab('payment');
+  //   }
+  // };
+
+  
+  useEffect(()=>{
+    (async()=>{
+      
+      try{
+        
+        const response = await axios.get('/user/location/'+user.id);
+        setLoading(false)
+        
+        if(response.data){
+          setData(response.data);
+        }
+        setLoading(false);
+      }
+      catch(err){
+        checkError(err)
+        setLoading(false);
+      }
+    })()
+  },[])
+
   return (
     <Address>
       <HeaderAddress>
         <PackmenHeader
-          isActive={type === 0 ? true : false}
+          isactive={type === 0 ? true : false}
           onClick={() => setType(Tabs.PACKMEN)}
         >
           Курьером
         </PackmenHeader>
         <CallHeader
-          isActive={type === 1 ? true : false}
+          isactive={type === 1 ? true : false}
           onClick={() => setType(Tabs.CALL)}
         >
           Самовывоз
         </CallHeader>
         <MailHeader
-          isActive={type === 2 ? true : false}
+          isactive={type === 2 ? true : false}
           onClick={() => setType(Tabs.MAIL)}
         >
           Почтой
@@ -60,26 +98,24 @@ const AdressItem: FC<AdressItemProps> = ({ nextStep, dataShare }) => {
       {type === 0 ? (
         <PackmenBody>
           <AddressList>
-            <SampleAdress>
-              Ташкент, Чиланзарский район ,<br /> 100135
-            </SampleAdress>
-            <SampleAdress>
-              Ташкент, Чиланзарский район ,<br /> 100135
-            </SampleAdress>
-            <SampleAdress>
-              Ташкент, Чиланзарский район ,<br /> 100135
-            </SampleAdress>
 
-            <AddressButton onClick={() => setState(true)}>
+            {
+                  
+              data&&data.map((elem:any, i:number)=>  <SampleAdress onClick={()=>getLocation(elem.id)} key ={i}>
+                  {elem.city+","+elem.district+","+elem.street+","+elem.apartmentNumber} <br /> {elem.postcode}
+                </SampleAdress>)        
+            }
+
+            {/* <AddressButton onClick={() => setState(true)}>
               + Указать адрес
-            </AddressButton>
-            {state && (
+            </AddressButton> */}
+            {/* {state && (
               <AddressBox
                 closeModal={setState}
                 modalTitle="Указать адрес"
                 getItems={(data: any) => sendData(data)}
               />
-            )}
+            )} */}
           </AddressList>
         </PackmenBody>
       ) : type === 1 ? (

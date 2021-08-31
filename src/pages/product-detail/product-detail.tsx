@@ -9,7 +9,7 @@ import ProductDetailHeader from './product-detail-header';
 import Characteristic from './characteristic';
 import Testimonial from './testimonial';
 import Slider from '../../components/slider';
-import { data } from '../homepage/homepage';
+// import { data } from '../homepage/homepage';
 import { TabBarHead, DescriptionText, Cont } from './style';
 import MobileProductHeader from './mobile-product-header';
 import { axios } from '../../hooks';
@@ -125,7 +125,7 @@ const ProductDetail = () => {
               <Cont>
                 <Container>
                   <ProductsTitle style={{ marginBottom: '0px' }} title='Похожие товары' />
-                  <Slider data={data} />
+                  {/* <Slider data={data} /> */}
                 </Container>
               </Cont>
 

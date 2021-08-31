@@ -34,19 +34,19 @@ export const HeaderAddress = styled.div`
   }
 `;
 interface HeaderAdressProps {
-  isActive: boolean;
+  isactive: boolean;
 }
 export const PackmenHeader = styled.span<HeaderAdressProps>`
-  color: ${({ theme, isActive }) => (isActive ? theme.blue : '#89A9BC')};
-  background-color: ${({ isActive }) => (isActive ? '#fff' : 'transparent')};
+  color: ${({ theme, isactive }) => (isactive ? theme.blue : '#89A9BC')};
+  background-color: ${({ isactive }) => (isactive ? '#fff' : 'transparent')};
 `;
 export const CallHeader = styled.span<HeaderAdressProps>`
-  color: ${({ theme, isActive }) => (isActive ? theme.blue : '#89A9BC')};
-  background-color: ${({ isActive }) => (isActive ? '#fff' : 'transparent')};
+  color: ${({ theme, isactive }) => (isactive ? theme.blue : '#89A9BC')};
+  background-color: ${({ isactive }) => (isactive ? '#fff' : 'transparent')};
 `;
 export const MailHeader = styled.span<HeaderAdressProps>`
-  color: ${({ theme, isActive }) => (isActive ? theme.blue : '#89A9BC')};
-  background-color: ${({ isActive }) => (isActive ? '#fff' : 'transparent')};
+  color: ${({ theme, isactive }) => (isactive ? theme.blue : '#89A9BC')};
+  background-color: ${({ isactive }) => (isactive ? '#fff' : 'transparent')};
 `;
 
 export const PackmenBody = styled.div`
@@ -62,7 +62,7 @@ export const AddressList = styled.ul`
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
   border-radius: 16px;
   list-style: none;
-  padding-top: 16px;
+  padding: 16px 0px;
 `;
 export const SampleAdress = styled.li`
   font-size: 14px;
@@ -85,6 +85,7 @@ export const AddressButton = styled.button`
   color: ${({ theme }) => theme.primary_color};
   border-radius: 16px;
   margin: 24px;
+  margin-bottom: 8px;
   cursor: pointer;
   transition: all 0.25s ease;
   :hover {

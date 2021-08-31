@@ -76,14 +76,14 @@ const CardMobile: FC<CardMobileProps> = ({ item }) => {
         >
           {isInWishlist ? <HeartFull /> : <HeartIcon />}
         </CardMobileWishlist>
-        <CardMobileImage src={item.images[0]} />
+        <CardMobileImage src={item.addedPhotoWithImageUrls[0].photoUrl} />
       </CardMobileImageWrapper>
 
       <CardMobileBody>
-        <CardMobileTitle to="/">{item.name}</CardMobileTitle>
+        <CardMobileTitle to="/">{item.addProductData.name}</CardMobileTitle>
         <CardOldPrice> {formatMoney(1300000)} сум</CardOldPrice>
         <CardBottom>
-          <CardPrice>{formatMoney(item.priceResponse.value)} сум</CardPrice>
+          <CardPrice>{formatMoney(item.addProductData.price)} сум</CardPrice>
           <CardMobileCart
             isInCartStyle={isInCart}
             onClick={() => (!role.isBuyer&&!role.userRole)||(role.isBuyer) ?  (  isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)) :false }

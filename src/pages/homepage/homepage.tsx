@@ -6,7 +6,7 @@
 
 // export default Homepage;
 
-import React from 'react';
+import {useEffect, useState} from 'react';
 
 import Card from '../../components/card';
 
@@ -37,157 +37,175 @@ import OrangeBanner from '../../assets/images/orangeBanner.svg';
 import Slider from '../../components/slider';
 import CardMobile from '../../components/card-mobile';
 import Skeleton from '../../components/main-skeleton';
+import { axios, useError } from '../../hooks';
 
-export const data = [
-  {
-    id: '6063033fb1a9f83cc5c612330',
-    route: '/catalog/details/samsung-6063033fb1a9f83cc5c612330',
-    name: 'Apple / Смартфон iPhone 11 128GB (новая комплектация)',
-    images: [CardImage9],
-    priceResponse: {
-      value: '7574000',
-      currency: {
-        id: '6063033fb1a9f83cc5c612330',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-  {
-    id: '6063033fb1a9f83cc5c61050',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'Умные часы Samsung Galaxy Watch Active2...',
-    images: [CardImage],
-    priceResponse: {
-      value: '9148000',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-  {
-    id: '6063033fb1a9f83cc5c123120',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'Adidas / Мяч TEAM TrainingPr.',
-    images: [CardImage2],
-    priceResponse: {
-      value: '206049',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-  {
-    id: '6063033fb1a9f83cc523423',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'Apple / Медиаплеер Apple TV 32GB...',
-    images: [CardImage3],
-    priceResponse: {
-      value: '1849000',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
+// export const data = [
+//   {
+//     id: '6063033fb1a9f83cc5c612330',
+//     route: '/catalog/details/samsung-6063033fb1a9f83cc5c612330',
+//     name: 'Apple / Смартфон iPhone 11 128GB (новая комплектация)',
+//     images: [CardImage9],
+//     priceResponse: {
+//       value: '7574000',
+//       currency: {
+//         id: '6063033fb1a9f83cc5c612330',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+//   {
+//     id: '6063033fb1a9f83cc5c61050',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'Умные часы Samsung Galaxy Watch Active2...',
+//     images: [CardImage],
+//     priceResponse: {
+//       value: '9148000',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+//   {
+//     id: '6063033fb1a9f83cc5c123120',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'Adidas / Мяч TEAM TrainingPr.',
+//     images: [CardImage2],
+//     priceResponse: {
+//       value: '206049',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+//   {
+//     id: '6063033fb1a9f83cc523423',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'Apple / Медиаплеер Apple TV 32GB...',
+//     images: [CardImage3],
+//     priceResponse: {
+//       value: '1849000',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
 
-  {
-    id: '606dfsd83cc52sd3423',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'Adidas / Кроссовки D Rose 773 2020...',
-    images: [CardImage4],
-    priceResponse: {
-      value: '629000',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-  {
-    id: '60dfgreteewwsd3423',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'PUMA / Сникеры Puma Backcourt Mid',
-    images: [CardImage5],
-    priceResponse: {
-      value: '682900',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-  {
-    id: '60dfgretee36343643',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'Apple / Смартфон iPhone 12 Pro 128GB',
-    images: [CardImage6],
-    priceResponse: {
-      value: '12798000',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-  {
-    id: '60dfgretee3634453643',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'Apple / Наушники AirPods Pro с беспроводным...',
-    images: [CardImage7],
-    priceResponse: {
-      value: '2572000 ',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-  {
-    id: '60dfgretee3avcc3443',
-    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
-    name: 'Sweet Baby / Прогулочная коляска... ',
-    images: [CardImage8],
-    priceResponse: {
-      value: '2085000 ',
-      currency: {
-        id: '605b73ecd3f290742ec3f957',
-        name: 'Uzbekistan Sum',
-        shortName: 'сум',
-        code: 860,
-        format: 2,
-      },
-    },
-  },
-];
+//   {
+//     id: '606dfsd83cc52sd3423',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'Adidas / Кроссовки D Rose 773 2020...',
+//     images: [CardImage4],
+//     priceResponse: {
+//       value: '629000',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+//   {
+//     id: '60dfgreteewwsd3423',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'PUMA / Сникеры Puma Backcourt Mid',
+//     images: [CardImage5],
+//     priceResponse: {
+//       value: '682900',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+//   {
+//     id: '60dfgretee36343643',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'Apple / Смартфон iPhone 12 Pro 128GB',
+//     images: [CardImage6],
+//     priceResponse: {
+//       value: '12798000',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+//   {
+//     id: '60dfgretee3634453643',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'Apple / Наушники AirPods Pro с беспроводным...',
+//     images: [CardImage7],
+//     priceResponse: {
+//       value: '2572000 ',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+//   {
+//     id: '60dfgretee3avcc3443',
+//     route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+//     name: 'Sweet Baby / Прогулочная коляска... ',
+//     images: [CardImage8],
+//     priceResponse: {
+//       value: '2085000 ',
+//       currency: {
+//         id: '605b73ecd3f290742ec3f957',
+//         name: 'Uzbekistan Sum',
+//         shortName: 'сум',
+//         code: 860,
+//         format: 2,
+//       },
+//     },
+//   },
+// ];
 
 const Homepage = () => {
   const [width, height] = useWindowSize();
+  const {checkError} = useError()
+  const [loading, setLoading] = useState(true)
+  const [carddata, setData] = useState<any>([])
+
+  useEffect(()=>{
+    (async()=>{
+      try{
+        const response = await axios.get("product/getAllProducts")
+        setData(response.data)
+        setLoading(false)
+      }
+      catch(err){
+        checkError(err)
+      }
+    })()
+    console.log(carddata)
+  },[])
 
   return (
     <div>
@@ -198,7 +216,7 @@ const Homepage = () => {
         <Cont>
           <Container>
             <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-            <Slider data={data} />
+            <Slider data={carddata} />
           </Container>
         </Cont>
       ) : null}
@@ -243,23 +261,26 @@ const Homepage = () => {
         <ProductsTitle title="Ваша подборка для покупок у нас" />
         {width >= 768 ? (
           <Row>
-            {data.map((i: any) => {
-              return (
-                <Col xl={3}>
-                  <Card item={i} />
-                </Col>
-              );
-            })}
+            {
+              carddata&&carddata.map((elem:any, i:number)=><Col key={i} xl={3}>
+                  <Card item={elem}/>
+              </Col>)
+            }
           </Row>
         ) : (
           <Row isMobile={true}>
-            {data.map((item: any) => {
+            {
+              carddata&&carddata.map((elem:any, i:number)=><Col key={i} sm={4}>
+                  <CardMobile item={elem}></CardMobile>
+              </Col>)
+            }
+            {/* {data.map((item: any) => {
               return (
                 <Col xs={6} sm={4}>
                   <CardMobile item={item}></CardMobile>
                 </Col>
               );
-            })}
+            })} */}
           </Row>
         )}
 

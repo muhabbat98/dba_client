@@ -40,10 +40,10 @@ export const NumberCard = styled.div`
   }
 `;
 export const CardMoney = styled.div`
-  &::after {
+  /* &::after {
     content: 'сум';
     color: grey;
-  }
+  } */
   @media ${({ theme }) => theme.breakpoints.xs} {
     font-size: 14px;
   }

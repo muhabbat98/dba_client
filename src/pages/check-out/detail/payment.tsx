@@ -1,5 +1,6 @@
 import React, { useState, FC } from 'react';
 import { AddressButton } from '../address/style';
+import {useSelector, axios, useError } from '../../../hooks'
 
 import {
   DetailHeader,
@@ -15,7 +16,32 @@ interface PaymentProps {
   dataShare: any;
 }
 const Payment: FC<PaymentProps> = ({ dataShare }) => {
-  console.log(dataShare);
+  const [loading, setLoading] = useState(true)
+  console.log(dataShare)
+  const {checkError} =useError()
+
+  const sendOrder = async()=>{
+    try{
+        
+      const response = await axios.post('order',{
+        "locationId": dataShare.allData.address.id,
+        "productIds": [
+          "612cce46e7cc972d22d6c92b"
+        ],
+        "recipientName": dataShare.allData.userInfo.fio,
+        "recipientPhoneNumber": dataShare.allData.userInfo.phoneNumber
+      });
+      
+      console.log(response)
+      setLoading(false)
+    
+    }
+    catch(err){
+      checkError(err)
+      setLoading(false);
+    }
+  }
+
   return (
     <CheckOutBox>
       <DetailHeader>Детали заказа</DetailHeader>
@@ -36,8 +62,9 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
         <SummNumber>7 483 448 сум</SummNumber>
       </Order>
       <AddressButton as={DetailButton}>Отмена</AddressButton>
-      <AddressButton as={DetailButton}>Перейти к оплате</AddressButton>
+      <AddressButton onClick={sendOrder} as={DetailButton}>Перейти к оплате</AddressButton>
     </CheckOutBox>
   );
 };
+
 export default Payment;
