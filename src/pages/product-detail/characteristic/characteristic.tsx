@@ -22,6 +22,7 @@ const Characteristic:React.FC<Propses> = ({product}) => {
     return (
         <div>
             <Products product={product} isOpen={characters}/>
+
             <HandeleOpen onClick={()=>setCharacters(open=>!open)}>
                 {characters?"Свернуть характеристики":"Развернуть характеристики"}
             </HandeleOpen>
@@ -29,6 +30,8 @@ const Characteristic:React.FC<Propses> = ({product}) => {
     )
 }
 export default Characteristic;
+
+
 
 
 interface ProductsProps {
@@ -73,6 +76,7 @@ const Products:React.FC<ProductsProps> = ({product,isOpen}) => {
             </WrapperContainer>
 
             {isOpen && (!isEmptyObj(deep) && deep.products.length>0 && deep.products.map((item:any)=><Products product={item}/>))}
+
         </>
     );
 }

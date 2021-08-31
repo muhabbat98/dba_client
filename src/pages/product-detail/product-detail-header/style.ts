@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface ActiveImage{
+    isActive?:any;
+}
+
 export const DetailHeaderContainer = styled.div`
   border: 2px solid #E9ECF4;
   box-sizing: border-box;
@@ -16,14 +20,20 @@ export const LeftPictureContainer = styled.div`
   justify-content: flex-start;
   padding: 24px 16px;
 `;
-export const PicturesItem = styled.div`
+export const PicturesItem = styled.div<ActiveImage>`
   box-sizing: border-box;
   border-radius: 8px;
   border: 2px solid #ffffff;
   cursor: pointer;
-
+  border:${({isActive})=>isActive==true ?'2px solid #264796':''};
+  
   &:hover {
     border: 2px solid #264796;
+    
+    img{
+      border-radius: 0px;
+      transition: .4s;
+    }
   }
 
   div {
@@ -36,12 +46,8 @@ export const PicturesItem = styled.div`
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: ${({isActive})=>isActive==true ?"0px":"8px"};
 
-      &:hover {
-        border-radius: 0px;
-        transition: .4s;
-      }
     }
   }
 `;

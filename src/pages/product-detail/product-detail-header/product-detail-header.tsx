@@ -5,12 +5,8 @@ import Button from '../../../components/button';
 import { useParams } from 'react-router-dom';
 import { useActionCreators, useRole, useSelector } from '../../../hooks';
 import { useWindowSize } from '../../../hooks/useWindowSize';
-import PhoneMain from './images/phoneMain.svg';
-import Phone1 from './images/phone1.svg';
-import Phone2 from './images/phone2.svg';
-import Phone3 from './images/phone3.svg';
-import Phone4 from './images/phone4.svg';
-import Phone5 from './images/phone5.svg';
+import PhoneMain from '../../../assets/images/defaultProductimage.svg';
+
 import { ReactComponent as Heart } from '../../../assets/icons/heart2.svg';
 import { ReactComponent as HeartFull } from '../../../assets/icons/heart-full2.svg';
 import {
@@ -29,13 +25,6 @@ import {
 } from './style';
 import isEmptyObj from '../../../utils/isEmptyObj';
 
-const images = [
-    { img: Phone1 },
-    { img: Phone2 },
-    { img: Phone3 },
-    { img: Phone4 },
-    { img: Phone5 }
-];
 
 interface UseProductProps {
     product?: any;
@@ -82,6 +71,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
     };
     const setMainPicture = (item: any) => {
         setMainImage(item);
+        console.log('inn-',item)
     };
     const heartButton = () => {
         !isBuyer && (isInWishlist
@@ -112,23 +102,32 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
             ? product.addedPhotoWithImageUrls.filter((item: any, index: number) => index < 6)
             : [];
 
+    const mainImg:any = ( ) => {
+        if(mainImage) return <img src={mainImage} alt='MainImage' />;
+        if(!isEmptyObj(product) && product.addedPhotoWithImageUrls != null)
+            return <img src={product.addedPhotoWithImageUrls[0].photoUrl} alt='MainImage' />;
+        else return <img src={PhoneMain} alt='MainImage' />;
+    }
+
     return (
         <DetailHeaderContainer>
             <LeftPictureContainer>
                 {
                     imagesList.map((item: any, index: number) => (
-                        <PicturesItem key={index} onClick={() => setMainPicture(item.photoUrl)}>
-                            <div><img src={item.photoUrl} alt='phone' /></div>
-                        </PicturesItem>
+                        <PicturesItems
+                            key={index}
+                            setMainPicture={setMainPicture}
+                            item={item}
+                        />
+                        // <PicturesItem key={index} onClick={() => setMainPicture(item.photoUrl)}>
+                        //     <div><img src={item.photoUrl} alt='phone' /></div>
+                        // </PicturesItem>
                     ))
                 }
             </LeftPictureContainer>
             <MainPicture>
                 <div>
-                    <img src={mainImage ||
-                    !isEmptyObj(product) && product.addedPhotoWithImageUrls != null
-                        ? product.addedPhotoWithImageUrls[0].photoUrl
-                        : PhoneMain} alt='phone' />
+                    {mainImg()}
                 </div>
             </MainPicture>
             <ProductInformation>
@@ -187,3 +186,25 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
 };
 
 export default ProductDetailHeader;
+
+interface ImagesProps{
+    setMainPicture?:any;
+    item?:any;
+}
+const PicturesItems:React.FC<ImagesProps> = ({setMainPicture,item}) => {
+    const [isActivee,setIsActive] = useState(false);
+
+    const handleClick = (url:string) => {
+        setMainPicture(item && item.photoUrl)
+        setIsActive(url==item.photoUrl?true:false);
+    }
+
+    return(
+        <PicturesItem
+            // isActive={isActivee}
+            onClick={()=>handleClick(item.photoUrl)}
+           >
+            <div><img src={item && item.photoUrl} alt='phone' /></div>
+        </PicturesItem>
+    );
+}
