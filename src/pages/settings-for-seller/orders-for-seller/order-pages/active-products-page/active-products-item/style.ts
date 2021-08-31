@@ -207,9 +207,11 @@ export const ButtonsGroupContainier = styled.div`
         font-size: 16px;
         line-height: 22px;
         letter-spacing: -0.05px;
-        text-decoration-line:underline;
         display:flex;
         cursor:pointer;
+        &:nth-child(1){
+        text-decoration-line:underline;
+        }
         @media (max-width: 768px) {
             font-size:14px;
         }

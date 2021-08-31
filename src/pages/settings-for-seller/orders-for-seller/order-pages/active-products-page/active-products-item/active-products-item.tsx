@@ -44,14 +44,15 @@ const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData, setOpen, 
     );
     const [width, height] = useWindowSize();
 
-    const receivedButton = () =>{
+    const receivedButton = () => {
         setConfirm({
             message: 'Вы хотите подтвердить получение товара?',
             callback: () => {
                 try {
                     cleanConfirm();
-                } catch (error) {}
-            },
+                } catch (error) {
+                }
+            }
         });
     };
 
@@ -105,50 +106,48 @@ const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData, setOpen, 
                     </SubContainer>
                 </div>
                 <div style={{ marginTop: width < 768 ? 27 : '' }}></div>
-                {activeData.order.map((item: any, index: number) => {
-                    return (
-                        <div key={index}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <div style={{ display: 'flex' }}>
-                                    <ImageContainer>
-                                        <div>
-                                            <img src={item.itemImg} />
-                                        </div>
-                                    </ImageContainer>
-                                    <TitlesContainer>
-                                        {width < 768 &&
-                                        <PriceContainer>
-                                          <InfoTitle style={{ marginTop: 0 }}>
-                                              {formatMoney(item.itemPrice)}
-                                            <span style={{
-                                                marginLeft: 5,
-                                                fontWeight: 'normal'
-                                            }}>сум</span>
-                                          </InfoTitle>
-                                          <p style={{ margin: width < 768 ? 0 : '' }}>{item.count} шт</p>
-                                        </PriceContainer>
-                                        }
-                                        {width < 768 ?
-                                            <MoblProductTitle>{item.itemTitle}</MoblProductTitle>
-                                            : <InfoTitle>{item.itemTitle}</InfoTitle>}
-                                        <p style={{ marginTop: width < 768 ? '3px' : '' }}>Продавец: {item.itemSeller}</p>
-                                        <p>Сумма доставка:<span style={{color:'#264796'}}> 25000 сум</span></p>
-                                    </TitlesContainer>
+
+                <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex' }}>
+                            <ImageContainer>
+                                <div>
+                                    <img src={activeData.order[0].itemImg} />
                                 </div>
-                                {width > 768 &&
+                            </ImageContainer>
+                            <TitlesContainer>
+                                {width < 768 &&
                                 <PriceContainer>
-                                  <InfoTitle>
-                                      {formatMoney(item.itemPrice)}
-                                    <span style={{ marginLeft: 5, fontWeight: 'normal' }}>сум</span>
+                                  <InfoTitle style={{ marginTop: 0 }}>
+                                      {formatMoney(activeData.order[0].itemPrice)}
+                                    <span style={{
+                                        marginLeft: 5,
+                                        fontWeight: 'normal'
+                                    }}>сум</span>
                                   </InfoTitle>
-                                  <p>{item.count} шт</p>
+                                  <p style={{ margin: width < 768 ? 0 : '' }}>{activeData.order[0].count} шт</p>
                                 </PriceContainer>
                                 }
-
-                            </div>
+                                {width < 768 ?
+                                    <MoblProductTitle>{activeData.order[0].itemTitle}</MoblProductTitle>
+                                    : <InfoTitle>{activeData.order[0].itemTitle}</InfoTitle>}
+                                <p style={{ marginTop: width < 768 ? '3px' : '' }}>Продавец: {activeData.order[0].itemSeller}</p>
+                                <p>Сумма доставка:<span style={{ color: '#264796' }}> 25000 сум</span></p>
+                            </TitlesContainer>
                         </div>
-                    );
-                })}
+                        {width > 768 &&
+                        <PriceContainer>
+                          <InfoTitle>
+                              {formatMoney(activeData.order[0].itemPrice)}
+                            <span style={{ marginLeft: 5, fontWeight: 'normal' }}>сум</span>
+                          </InfoTitle>
+                          <p>{activeData.order[0].count} шт</p>
+                        </PriceContainer>
+                        }
+
+                    </div>
+                </div>
+
                 {open &&
                 <>
                   <InfoTitle style={{ marginBottom: width < 768 ? 6 : '' }}>Информация о заказе</InfoTitle>
