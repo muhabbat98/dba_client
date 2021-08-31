@@ -79,7 +79,7 @@ const ModeratorCard:React.FC<Propses> = ({item,refreshModerator,setUserItem,setO
                   <CardBox>
                         <AvatarImg><img src={item.imageUrl!='noUrl'?item.imageUrl:DefUSer}/></AvatarImg>
                         <NameTitle>{item.firstName} {item.secondName}</NameTitle>
-                        <PhoneNumber>+998 {item.phoneNumber}</PhoneNumber>
+                        <PhoneNumber>{item.phoneNumber}</PhoneNumber>
                         <RoleTitle>Модератор</RoleTitle>
                         <RoleTags>
                              { 

@@ -62,13 +62,17 @@ const AddModerator: React.FC<Propses> = ({
     console.log('data=>  ', imgState);
 
     const formData = new FormData();
+    const phoneNumber = data.phoneNumber
+        .replaceAll('(', '')
+        .replaceAll(')', '')
+        .replaceAll('-', '');
 
     if (data.password == data.confirmPassword) {
       setClose(false);
         imgState&& formData.append('image', imgState);
       formData.append('firstName', data.firstName);
       formData.append('secondName', data.secondName);
-      formData.append('phoneNumber', data.phoneNumber);
+      formData.append('phoneNumber', '+998'+phoneNumber);
       formData.append('password', data.confirmPassword);
       formData.append('categoryIds', selectList);
       addModeratorItem(formData);

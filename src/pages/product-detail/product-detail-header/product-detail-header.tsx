@@ -27,6 +27,7 @@ import {
     ColorsContainer
 
 } from './style';
+import isEmptyObj from '../../../utils/isEmptyObj';
 
 const images = [
     { img: Phone1 },
@@ -36,11 +37,11 @@ const images = [
     { img: Phone5 }
 ];
 
-interface UseProductProps{
-    product?:any
+interface UseProductProps {
+    product?: any;
 }
 
-const ProductDetailHeader:React.FC<UseProductProps> = ({product}) => {
+const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
     const { id } = useParams<any>();
     const isBuyer = useRole().userRole == 'ROLE_SELLER';
     const [mainImage, setMainImage] = useState();
@@ -106,17 +107,16 @@ const ProductDetailHeader:React.FC<UseProductProps> = ({product}) => {
         }
     };
 
-    const isMainImages = product
-        ?product.
-        addedPhotoWithImageUrls.
-        filter((item:any,index:number)=>item.isMain!=true&&index<6)
-        :images;
+    const imagesList =
+        !isEmptyObj(product) && product.addedPhotoWithImageUrls != null
+            ? product.addedPhotoWithImageUrls.filter((item: any, index: number) => index < 6)
+            : [];
 
     return (
         <DetailHeaderContainer>
             <LeftPictureContainer>
                 {
-                    isMainImages.map((item:any,index:number) => (
+                    imagesList.map((item: any, index: number) => (
                         <PicturesItem key={index} onClick={() => setMainPicture(item.photoUrl)}>
                             <div><img src={item.photoUrl} alt='phone' /></div>
                         </PicturesItem>
@@ -125,12 +125,15 @@ const ProductDetailHeader:React.FC<UseProductProps> = ({product}) => {
             </LeftPictureContainer>
             <MainPicture>
                 <div>
-                    <img src={mainImage || (product?product.addedPhotoWithImageUrls[0].photoUrl:PhoneMain)} alt='phone' />
+                    <img src={mainImage ||
+                    !isEmptyObj(product) && product.addedPhotoWithImageUrls != null
+                        ? product.addedPhotoWithImageUrls[0].photoUrl
+                        : PhoneMain} alt='phone' />
                 </div>
             </MainPicture>
             <ProductInformation>
                 <InfoTitleContainer>
-                    <p>{product?product.addProductData.name:'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</p>
+                    <p>{product ? product.addProductData.name : 'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</p>
                     <div onClick={heartButton}>
                         {!isBuyer && isInWishlist ?
                             <HeartFull style={{ width: 17, height: 17 }} />
@@ -141,23 +144,28 @@ const ProductDetailHeader:React.FC<UseProductProps> = ({product}) => {
                     <StarRaiting callback={starRaitingResult} />
                     <p>(1241)отзывов</p>
                 </RatingContainer>
-                <NewPrice>{product?FormatMoney(product.addProductData.price):FormatMoney(7574000)} сум</NewPrice>
-                <OldPrice>{FormatMoney(8416000)} сум</OldPrice>
+                <NewPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</NewPrice>
+                {/*<OldPrice>{FormatMoney(8416000)} сум</OldPrice>*/}
+
+                {/*Future add colors*/}
+                {/*<BinaryTextConatiner>*/}
+                {/*    <p>Цвет товара:</p><span>синий</span>*/}
+                {/*</BinaryTextConatiner>*/}
+                {/*<ColorsContainer>*/}
+                {/*    {*/}
+                {/*        ['#FF4242', '#0091FF', '#22B573', '#FFFFFF', '#000000'].map((item, index) => (*/}
+                {/*            <div key={index} style={{ background: item }}></div>*/}
+                {/*        ))*/}
+                {/*    }*/}
+                {/*</ColorsContainer>*/}
+
+                {/*<BinaryTextConatiner>*/}
+                {/*    <p>Доставка:</p><span>25-27 апреля</span>*/}
+                {/*</BinaryTextConatiner>*/}
+
                 <BinaryTextConatiner>
-                    <p>Цвет товара:</p><span>синий</span>
-                </BinaryTextConatiner>
-                <ColorsContainer>
-                    {
-                        ['#FF4242', '#0091FF', '#22B573', '#FFFFFF', '#000000'].map((item, index) => (
-                            <div key={index} style={{ background: item }}></div>
-                        ))
-                    }
-                </ColorsContainer>
-                <BinaryTextConatiner>
-                    <p>Доставка:</p><span>25-27 апреля</span>
-                </BinaryTextConatiner>
-                <BinaryTextConatiner>
-                    <p>Продавец:</p><span style={{ color: '#264796' }}>Marketplace ООО</span>
+                    <p>Продавец:</p><span
+                    style={{ color: '#264796' }}>{!isEmptyObj(product) && product.addProductData.quantity}</span>
                 </BinaryTextConatiner>
                 {isBuyer
                     ? <Button
