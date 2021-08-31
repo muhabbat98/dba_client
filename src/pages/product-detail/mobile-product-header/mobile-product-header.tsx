@@ -91,31 +91,37 @@ const MobileProductHeader:React.FC<UseProductProps> = ({product}) => {
     return(
         <>
             <ProductTitle>{!isEmptyObj(product)?product.addProductData.name:'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</ProductTitle>
-            <ReviewsContainer>
-                <Reviews><Star/><span>4</span> <p>(1241) отзывов</p></Reviews>
-                <div onClick={heartButton}>
-                    {!isBuyer && isInWishlist ?
-                        <HeartFull style={{width:17,height:17}}/>
-                        :<Heart style={{width:17,height:17}}/>}
-                </div>
-            </ReviewsContainer>
-            <PriceTitles>{product?FormatMoney(product.addProductData.price):FormatMoney(7574000)}  сум <span>8 416 000 сум</span></PriceTitles>
+
+            {/*<ReviewsContainer>*/}
+            {/*    <Reviews><Star/><span>4</span> <p>(1241) отзывов</p></Reviews>*/}
+            {/*    <div onClick={heartButton}>*/}
+            {/*        {!isBuyer && isInWishlist ?*/}
+            {/*            <HeartFull style={{width:17,height:17}}/>*/}
+            {/*            :<Heart style={{width:17,height:17}}/>}*/}
+            {/*    </div>*/}
+            {/*</ReviewsContainer>*/}
+
+            <PriceTitles>{product?FormatMoney(product.addProductData.price):FormatMoney(7574000)} сум
+                {/*сум <span>8 416 000 сум</span>*/}
+            </PriceTitles>
             <MobileSlider items={!isEmptyObj(product)&&product.addedPhotoWithImageUrls}/>
+
+            {/*<BinaryTextConatiner>*/}
+            {/*    <p>Цвет товара:</p><span>синий</span>*/}
+            {/*</BinaryTextConatiner>*/}
+            {/*<ColorsContainer>*/}
+            {/*    {*/}
+            {/*        ["#FF4242",'#0091FF',"#22B573","#FFFFFF","#000000"].map((item,index)=>(*/}
+            {/*            <div key={index} style={{background:item}}></div>*/}
+            {/*        ))*/}
+            {/*    }*/}
+            {/*</ColorsContainer>*/}
+            {/*<BinaryTextConatiner>*/}
+            {/*    <p>Доставка:</p><span>25-27 апреля</span>*/}
+            {/*</BinaryTextConatiner>*/}
+
             <BinaryTextConatiner>
-                <p>Цвет товара:</p><span>синий</span>
-            </BinaryTextConatiner>
-            <ColorsContainer>
-                {
-                    ["#FF4242",'#0091FF',"#22B573","#FFFFFF","#000000"].map((item,index)=>(
-                        <div key={index} style={{background:item}}></div>
-                    ))
-                }
-            </ColorsContainer>
-            <BinaryTextConatiner>
-                <p>Доставка:</p><span>25-27 апреля</span>
-            </BinaryTextConatiner>
-            <BinaryTextConatiner>
-                <p>Продавец:</p><span style={{color:"#264796"}}>Marketplace ООО</span>
+                <p>Продавец:</p><span style={{color:"#264796"}}>{!isEmptyObj(product)&&product.addProductData.quantity}</span>
             </BinaryTextConatiner>
             {isBuyer
                 ?<Button

@@ -96,14 +96,14 @@ const ProductDetail = () => {
                             }}>
                         Описание
                     </div>
-                    <div
-                        onClick={tabBar3}
-                        style={
-                            {
-                                borderBottom: tabBar.item3 ? '4px solid #264796' : '',
-                                color: tabBar.item3 ? '#000000' : ''
-                            }}>Отзывы
-                    </div>
+                    {/*<div*/}
+                    {/*    onClick={tabBar3}*/}
+                    {/*    style={*/}
+                    {/*        {*/}
+                    {/*            borderBottom: tabBar.item3 ? '4px solid #264796' : '',*/}
+                    {/*            color: tabBar.item3 ? '#000000' : ''*/}
+                    {/*        }}>Отзывы*/}
+                    {/*</div>*/}
                 </TabBarHead>
                 <div>
                     {tabBar.item1 &&
@@ -116,7 +116,7 @@ const ProductDetail = () => {
                     </div>
                     }
                     {tabBar.item3 &&
-                    <Testimonial />
+                        <Testimonial />
                     }
                 </div>
             </Container>

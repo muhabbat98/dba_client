@@ -118,7 +118,9 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                             key={index}
                             setMainPicture={setMainPicture}
                             item={item}
-                        />
+                            mainImage={mainImage}
+
+                    />
                         // <PicturesItem key={index} onClick={() => setMainPicture(item.photoUrl)}>
                         //     <div><img src={item.photoUrl} alt='phone' /></div>
                         // </PicturesItem>
@@ -139,10 +141,12 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                             : <Heart style={{ width: 17, height: 17 }} />}
                     </div>
                 </InfoTitleContainer>
-                <RatingContainer>
-                    <StarRaiting callback={starRaitingResult} />
-                    <p>(1241)отзывов</p>
-                </RatingContainer>
+
+                {/*<RatingContainer>*/}
+                {/*    <StarRaiting callback={starRaitingResult} />*/}
+                {/*    <p>(1241)отзывов</p>*/}
+                {/*</RatingContainer>*/}
+
                 <NewPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</NewPrice>
                 {/*<OldPrice>{FormatMoney(8416000)} сум</OldPrice>*/}
 
@@ -190,10 +194,14 @@ export default ProductDetailHeader;
 interface ImagesProps{
     setMainPicture?:any;
     item?:any;
+    mainImage:any;
 }
-const PicturesItems:React.FC<ImagesProps> = ({setMainPicture,item}) => {
+const PicturesItems:React.FC<ImagesProps> = ({setMainPicture,mainImage,item}) => {
     const [isActivee,setIsActive] = useState(false);
 
+    useEffect(()=>{
+        setIsActive(mainImage!=item.photoUrl?false:true)
+    },[mainImage])
     const handleClick = (url:string) => {
         setMainPicture(item && item.photoUrl)
         setIsActive(url==item.photoUrl?true:false);
@@ -201,7 +209,7 @@ const PicturesItems:React.FC<ImagesProps> = ({setMainPicture,item}) => {
 
     return(
         <PicturesItem
-            // isActive={isActivee}
+            isActive={isActivee}
             onClick={()=>handleClick(item.photoUrl)}
            >
             <div><img src={item && item.photoUrl} alt='phone' /></div>
