@@ -28,6 +28,7 @@ import { ReactComponent as StarFill } from '../../assets/icons/star-full.svg';
 import { ReactComponent as StarEmpty } from '../../assets/icons/star-empty.svg';
 import { ReactComponent as CartIcon } from '../../assets/icons/cart.svg';
 import {axios, useError} from '../../hooks'
+import { Link } from 'react-router-dom';
 
 interface CardProps {
   item?: any;
@@ -99,9 +100,11 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
     <CardWrapper style={style}>
       <CardHeader>
         <CardLabel>Новинка</CardLabel>
-        <CardImageWrapper>
-          <CardImg src={item.addedPhotoWithImageUrls[0].photoUrl} />
-        </CardImageWrapper>
+        <Link style={{display:"block"} } to={`/product-detail/${item.addProductData.name}/${item.id}`}>
+          <CardImageWrapper>
+            <CardImg src={item.addedPhotoWithImageUrls[0].photoUrl} />
+          </CardImageWrapper>
+        </Link>
       </CardHeader>
 
       <CardBody>

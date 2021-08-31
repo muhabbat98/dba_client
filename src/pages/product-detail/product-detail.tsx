@@ -9,10 +9,215 @@ import ProductDetailHeader from './product-detail-header';
 import Characteristic from './characteristic';
 import Testimonial from './testimonial';
 import Slider from '../../components/slider';
-// import { data } from '../homepage/homepage';
+
 import { TabBarHead, DescriptionText, Cont } from './style';
 import MobileProductHeader from './mobile-product-header';
+
 import { axios } from '../../hooks';
+
+import CardImage from '../../assets/images/card-item1.png';
+import CardImage2 from '../../assets/images/card-item2.png';
+import CardImage3 from '../../assets/images/card-item3.png';
+import CardImage4 from '../../assets/images/card-item4.png';
+import CardImage5 from '../../assets/images/card-item5.png';
+import CardImage6 from '../../assets/images/card-item6.png';
+import CardImage7 from '../../assets/images/card-item7.png';
+import CardImage8 from '../../assets/images/card-item8.png';
+import CardImage9 from '../product-detail/product-detail-header/images/phoneMain.svg';
+
+const data = [
+  {
+    id: '6063033fb1a9f83cc5c612330',
+    route: '/catalog/details/samsung-6063033fb1a9f83cc5c612330',
+    name: 'Apple / Смартфон iPhone 11 128GB (новая комплектация)',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage9
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '7574000',
+      currency: {
+        id: '6063033fb1a9f83cc5c612330',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+  {
+    id: '6063033fb1a9f83cc5c61050',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'Умные часы Samsung Galaxy Watch Active2...',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '9148000',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+  {
+    id: '6063033fb1a9f83cc5c123120',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'Adidas / Мяч TEAM TrainingPr.',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage2
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '206049',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+  {
+    id: '6063033fb1a9f83cc523423',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'Apple / Медиаплеер Apple TV 32GB...',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage3
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '1849000',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+
+  {
+    id: '606dfsd83cc52sd3423',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'Adidas / Кроссовки D Rose 773 2020...',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage4
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '629000',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+  {
+    id: '60dfgreteewwsd3423',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'PUMA / Сникеры Puma Backcourt Mid',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage5
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '682900',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+  {
+    id: '60dfgretee36343643',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'Apple / Смартфон iPhone 12 Pro 128GB',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage6
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '12798000',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+  {
+    id: '60dfgretee3634453643',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'Apple / Наушники AirPods Pro с беспроводным...',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage7
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '2572000 ',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+  {
+    id: '60dfgretee3avcc3443',
+    route: '/catalog/details/samsung--6063033fb1a9f83cc5c61050',
+    name: 'Sweet Baby / Прогулочная коляска... ',
+    addedPhotoWithImageUrls: [{
+        photoUrl:CardImage8
+    }],
+    addProductData:{
+        name:"Iphone"
+    },
+    priceResponse: {
+      value: '2085000 ',
+      currency: {
+        id: '605b73ecd3f290742ec3f957',
+        name: 'Uzbekistan Sum',
+        shortName: 'сум',
+        code: 860,
+        format: 2,
+      },
+    },
+  },
+];
+
 
 interface UseParams{
     id: string,
@@ -125,7 +330,7 @@ const ProductDetail = () => {
               <Cont>
                 <Container>
                   <ProductsTitle style={{ marginBottom: '0px' }} title='Похожие товары' />
-                  {/* <Slider data={data} /> */}
+                  <Slider data={data} />
                 </Container>
               </Cont>
 

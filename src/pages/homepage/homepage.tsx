@@ -187,6 +187,7 @@ import { axios, useError } from '../../hooks';
 //   },
 // ];
 
+
 const Homepage = () => {
   const [width, height] = useWindowSize();
   const {checkError} = useError()
@@ -204,7 +205,6 @@ const Homepage = () => {
         checkError(err)
       }
     })()
-    console.log(carddata)
   },[])
 
   return (
@@ -216,9 +216,9 @@ const Homepage = () => {
         <Cont>
           <Container>
             <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-            <Slider data={carddata} />
+            <Slider data={carddata.slice(0, 9).reverse()} />
           </Container>
-        </Cont>
+        </Cont> 
       ) : null}
 
       {width > 768 ? (
@@ -274,13 +274,6 @@ const Homepage = () => {
                   <CardMobile item={elem}></CardMobile>
               </Col>)
             }
-            {/* {data.map((item: any) => {
-              return (
-                <Col xs={6} sm={4}>
-                  <CardMobile item={item}></CardMobile>
-                </Col>
-              );
-            })} */}
           </Row>
         )}
 

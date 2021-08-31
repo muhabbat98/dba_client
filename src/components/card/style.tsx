@@ -22,6 +22,7 @@ export const CardWrapperCol = styled.div`
    margin-bottom: 32px;
 `;
 
+
 export const CardWrapper = styled.div`
    border: 2px solid #E9ECF4;
    border-radius: 16px;
@@ -100,6 +101,7 @@ export const CardTitle = styled(Link)`
    display: -webkit-box;
    text-overflow: ellipsis;
    -webkit-line-clamp: 2;
+   text-align: left;
 `;
 
 export const CardComents = styled.div`
