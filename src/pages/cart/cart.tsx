@@ -45,18 +45,19 @@ import {
   CartSoldAll,
   CartIconWrapper,
   CartCheckBoxWrapper,
+  CartDelivery
 } from './style';
 
 import { ReactComponent as CartDelete } from '../../assets/icons/cart-delete.svg';
 
 const Cart = () => {
   const { push } = useHistory();
-  const { cartItems, tSum, totalCount } = useSelector((state) => state.cart);
+  const { cartItems, tSum, totalCount, deliveryCost, totalSum } = useSelector((state) => state.cart);
   const { removeCart, getTotalSum, openLogin } = useActionCreators();
   const { userRole } = useRole();
   const [isCheckedState, setIsCheckedState] = useState<boolean>(true);
   const [state, setState] = useState<boolean>(false);
-
+  // console.log(totalSum)
   useEffect(() => {
     checkIsCheckedHandler();
   }, [state]);
@@ -183,8 +184,13 @@ const Cart = () => {
                               <CartTitle to="">{item.addProductData.name}</CartTitle>
                               <CartManufactor>Продавец:</CartManufactor>
                               <CartManufactorName>
-                                ООО "ДИХАУС"
+                                ООО "ДИХАУС"  
                               </CartManufactorName>
+                              <br/>
+                              <CartManufactor>Сумма доставка:</CartManufactor>
+                              <CartDelivery>
+                                25000 сум
+                              </CartDelivery>
                             </CartInfo>
                           </CartBoxLeftContainer>
                         </CartBoxLeft>
@@ -237,7 +243,7 @@ const Cart = () => {
                     <CartSoldAllWrapper>
                       <CartSoldAll>Итого</CartSoldAll>
                       <CartSoldAllPrice>
-                        {formatMoney(tSum)} сум
+                        {formatMoney(totalSum)} сум
                       </CartSoldAllPrice>
                     </CartSoldAllWrapper>
                     <Button

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
@@ -29,7 +29,7 @@ import Catalog7 from '../../assets/images/catalog7.png';
 import Catalog8 from '../../assets/images/catalog8.png';
 import Advertise from '../../assets/images/advertise1.png'; 
 
-
+import { axios, useError } from '../../hooks'
 import CardImage from '../../assets/images/card-item1.png';
 import CardImage2 from '../../assets/images/card-item2.png';
 import CardImage3 from '../../assets/images/card-item3.png';
@@ -41,158 +41,174 @@ import CardImage8 from '../../assets/images/card-item8.png';
 
 import catalogData from './data.json';
 
-export const data = [
-   {
-      "id": "6063033fb1a9f83cc5c61050",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "Умные часы Samsung Galaxy Watch Active2...",
-      "images": [
-         CardImage
-      ],
-      "priceResponse": {
-         "value": "9148000",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   },
-   {
-      "id": "6063033fb1a9f83cc5c123120",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "Adidas / Мяч TEAM TrainingPr.",
-      "images": [
-         CardImage2
-      ],
-      "priceResponse": {
-         "value": "206049",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   },
-   {
-      "id": "6063033fb1a9f83cc523423",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "Apple / Медиаплеер Apple TV 32GB...",
-      "images": [
-         CardImage3
-      ],
-      "priceResponse": {
-         "value": "1 849 000",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   },
+// export const data = [
+//    {
+//       "id": "6063033fb1a9f83cc5c61050",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "Умные часы Samsung Galaxy Watch Active2...",
+//       "images": [
+//          CardImage
+//       ],
+//       "priceResponse": {
+//          "value": "9148000",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    },
+//    {
+//       "id": "6063033fb1a9f83cc5c123120",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "Adidas / Мяч TEAM TrainingPr.",
+//       "images": [
+//          CardImage2
+//       ],
+//       "priceResponse": {
+//          "value": "206049",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    },
+//    {
+//       "id": "6063033fb1a9f83cc523423",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "Apple / Медиаплеер Apple TV 32GB...",
+//       "images": [
+//          CardImage3
+//       ],
+//       "priceResponse": {
+//          "value": "1 849 000",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    },
 
-   {
-      "id": "606dfsd83cc52sd3423",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "Adidas / Кроссовки D Rose 773 2020...",
-      "images": [
-         CardImage4
-      ],
-      "priceResponse": {
-         "value": "629 000",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   },
-   {
-      "id": "60dfgreteewwsd3423",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "PUMA / Сникеры Puma Backcourt Mid",
-      "images": [
-         CardImage5
-      ],
-      "priceResponse": {
-         "value": "682 900",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   },
-   {
-      "id": "60dfgretee36343643",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "Apple / Смартфон iPhone 12 Pro 128GB",
-      "images": [
-         CardImage6
-      ],
-      "priceResponse": {
-         "value": "12 798 000",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   },
-   {
-      "id": "60dfgretee3634453643",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "Apple / Наушники AirPods Pro с беспроводным...",
-      "images": [
-         CardImage7
-      ],
-      "priceResponse": {
-         "value": "2 572 000 ",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   },
-   {
-      "id": "60dfgretee3avcc3443",
-      "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-      "name": "Sweet Baby / Прогулочная коляска... ",
-      "images": [
-         CardImage8
-      ],
-      "priceResponse": {
-         "value": "2 085 000 ",
-         "currency": {
-            "id": "605b73ecd3f290742ec3f957",
-            "name": "Uzbekistan Sum",
-            "shortName": "сум",
-            "code": 860,
-            "format": 2
-         }
-      }
-   }
-]
+//    {
+//       "id": "606dfsd83cc52sd3423",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "Adidas / Кроссовки D Rose 773 2020...",
+//       "images": [
+//          CardImage4
+//       ],
+//       "priceResponse": {
+//          "value": "629 000",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    },
+//    {
+//       "id": "60dfgreteewwsd3423",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "PUMA / Сникеры Puma Backcourt Mid",
+//       "images": [
+//          CardImage5
+//       ],
+//       "priceResponse": {
+//          "value": "682 900",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    },
+//    {
+//       "id": "60dfgretee36343643",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "Apple / Смартфон iPhone 12 Pro 128GB",
+//       "images": [
+//          CardImage6
+//       ],
+//       "priceResponse": {
+//          "value": "12 798 000",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    },
+//    {
+//       "id": "60dfgretee3634453643",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "Apple / Наушники AirPods Pro с беспроводным...",
+//       "images": [
+//          CardImage7
+//       ],
+//       "priceResponse": {
+//          "value": "2 572 000 ",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    },
+//    {
+//       "id": "60dfgretee3avcc3443",
+//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
+//       "name": "Sweet Baby / Прогулочная коляска... ",
+//       "images": [
+//          CardImage8
+//       ],
+//       "priceResponse": {
+//          "value": "2 085 000 ",
+//          "currency": {
+//             "id": "605b73ecd3f290742ec3f957",
+//             "name": "Uzbekistan Sum",
+//             "shortName": "сум",
+//             "code": 860,
+//             "format": 2
+//          }
+//       }
+//    }
+// ]
 
 SwiperCore.use([Navigation]);
 
 const Catalog = () => {
-
+   const {checkError} = useError()
+   const [loading, setLoading] = useState(true)
+   const [carddata, setData] = useState<any>([])
+ 
+   useEffect(()=>{
+     (async()=>{
+       try{
+         const response = await axios.get("product/getAllProducts")
+         setData(response.data)
+         setLoading(false)
+       }
+       catch(err){
+         checkError(err)
+       }
+     })()
+   },[])
+   console.log("card data ",carddata)
    return (
       <CatalogContainer>
          <Container>
@@ -293,7 +309,7 @@ const Catalog = () => {
                      <ProductsTitle title="Популярные товары" />
                      <Row>
                         {
-                           data.map((i: any) => {
+                           carddata.map((i: any) => {
                               return (
                                  <Col xl={4}>
                                     <Card item={i} />

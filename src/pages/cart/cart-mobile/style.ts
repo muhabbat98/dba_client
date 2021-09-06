@@ -76,10 +76,12 @@ export const Name = styled.div`
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   margin-bottom: 4px;
+  
 `;
 
 export const CartMobileInfo = styled.div`
   display: flex;
+  flex-wrap: wrap;
   color: ${({ theme }) => theme.grey1};
   font-size: 12px;
   font-weight: 400;
@@ -88,9 +90,15 @@ export const CartMobileInfo = styled.div`
 
 export const Manufactor = styled.div`
   margin-right: 3px;
+  padding-top: 8px;
 `;
-
-export const ManufactorName = styled.div``;
+export const CartDelivery = styled.div`
+    color: #264796;
+    padding-top: 8px;
+`;
+export const ManufactorName = styled.div`
+  padding-top: 8px;
+`;
 
 export const CartDeleteWrapper = styled.div`
   position: absolute;
