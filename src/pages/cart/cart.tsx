@@ -120,6 +120,10 @@ const Cart = () => {
                         <CartSoldName>Скидка по акции</CartSoldName>
                         <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
                       </CartSoldNameWrapper>
+                      <CartSoldNameWrapper>
+                      <CartSoldName>Сумма доставка:</CartSoldName>
+                      <CartSoldPrice as= {DeleiveryCost}>{formatMoney(deliveryCost)} сум</CartSoldPrice>
+                    </CartSoldNameWrapper>
                       <CartSoldAllWrapper>
                         <CartSoldAll>Итого</CartSoldAll>
                         <CartSoldAllPrice>
