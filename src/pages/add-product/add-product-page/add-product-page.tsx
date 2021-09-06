@@ -13,17 +13,20 @@ import {
 
 interface Params {
   id: string;
+  categoryId: string;
+  productId: string;
 }
 
 const AddProductPage = () => {
-  const { push } = useHistory();
+  const { push, replace } = useHistory();
   const { url, path } = useRouteMatch();
   const { checkError } = useError();
-  const { id } = useParams<Params>();
+  const { id, productId, categoryId } = useParams<Params>();
 
   const [isLoading, setLoading] = useState<boolean>(true);
   const [menu, setMenu] = useState<any>([]);
-  const [categoryId, setCategoryId] = useState<string>('');
+  const [categoryIds, setCategoryId] = useState<string>('');
+  const [isSecond, setIsSecond] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -32,7 +35,6 @@ const AddProductPage = () => {
   }, [id]);
 
   const getChildMenuItem = async (ids?: string) => {
-    console.log('IDS ', ids);
     setLoading(true);
     let itemId = ids || id;
 
@@ -45,11 +47,27 @@ const AddProductPage = () => {
       } else {
         const res = await axios.get(`/meta_data/products/${itemId}`);
         const d = await res.data;
-        console.log('dddd => ', d);
-        if (menu.length > 0) {
+        console.log('d => ', d);
+        console.log('categoryIds => ', categoryIds);
+
+        // if (menu.length > 0) {
+        //   setMenu(d);
+        // } else {
+        //   if (categoryIds != '') {
+        //     replace('/seller/add-product-form/' + categoryIds + '/' + itemId);
+        //   }
+        // }
+
+        if (d.length > 0) {
           setMenu(d);
+          setIsSecond(true);
+          // alert('1');
+        } else if (d.length == 0 && !isSecond && categoryIds != '') {
+          setMenu([]);
+          // alert('2');
         } else {
-          push('/seller/add-product-form/' + categoryId + '/' + itemId);
+          // alert('ddddd');
+          replace('/seller/add-product-form/' + categoryIds + '/' + itemId);
         }
       }
 
@@ -65,26 +83,25 @@ const AddProductPage = () => {
     push(`${id}`);
   };
 
-  console.log('menu ', menu);
-
   return (
     <AddProductPageContainer isLoading={isLoading}>
       <Container>
         {isLoading ? (
           <CircleLoader />
-        ) : (
+        ) : menu.length > 0 ? (
           <AddProductPageList>
-            {menu.length > 0 &&
-              menu.map((item: any, index: number) => (
-                <AddProductPageListItem
-                  onClick={() => setItemId(item.id)}
-                  key={item.id}
-                >
-                  <ProductOrder>{index + 1}</ProductOrder>
-                  <ProductName>{item.name}</ProductName>
-                </AddProductPageListItem>
-              ))}
+            {menu.map((item: any, index: number) => (
+              <AddProductPageListItem
+                onClick={() => setItemId(item.id)}
+                key={item.id}
+              >
+                <ProductOrder>{index + 1}</ProductOrder>
+                <ProductName>{item.name}</ProductName>
+              </AddProductPageListItem>
+            ))}
           </AddProductPageList>
+        ) : (
+          <h1 style={{ fontSize: '30px' }}>Здесь нет темплета!</h1>
         )}
       </Container>
     </AddProductPageContainer>
