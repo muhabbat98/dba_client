@@ -206,7 +206,7 @@ const Homepage = () => {
       }
     })()
   },[])
-
+  console.log("card data ",carddata)
   return (
     <div>
         {/*Skleton loader */}

@@ -176,11 +176,11 @@ const Cart = () => {
                             </CartCheckBoxWrapper>
                             <CartIconWrapper isChecked={item.isChecked}>
                               <CartItemImageLink to="">
-                                <CartItemImage src={item.images[0]} />
+                                <CartItemImage src={item.addedPhotoWithImageUrls[0].photoUrl} />
                               </CartItemImageLink>
                             </CartIconWrapper>
                             <CartInfo>
-                              <CartTitle to="">{item.name}</CartTitle>
+                              <CartTitle to="">{item.addProductData.name}</CartTitle>
                               <CartManufactor>Продавец:</CartManufactor>
                               <CartManufactorName>
                                 ООО "ДИХАУС"
@@ -195,9 +195,10 @@ const Cart = () => {
                             <CartCalculationPart>
                               <CartIncrementPart>
                                 <CartPrice>
-                                  {formatMoney(item.priceResponse.value)}
+                                  {formatMoney(item.addProductData.price)}
                                   <CartPriceSpan>
-                                    {item.priceResponse.currency.shortName}
+                                    sum
+                                    {/* {item.priceResponse.currency.shortName} */}
                                   </CartPriceSpan>
                                 </CartPrice>
                                 {/* Cart Increment Button Component */}

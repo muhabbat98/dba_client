@@ -17,20 +17,18 @@ interface PaymentProps {
 }
 const Payment: FC<PaymentProps> = ({ dataShare }) => {
   const [loading, setLoading] = useState(true)
-  console.log(dataShare)
   const {checkError} =useError()
-
+  let resData = {
+    "locationId": dataShare.allData.address.id,
+    "productIds": [...dataShare.cart.cartItems].map(one=>one.id),
+    "recipientName": dataShare.allData.userInfo.fio,
+    "recipientPhoneNumber": dataShare.allData.userInfo.phoneNumber
+  }
+  console.log('dataShare', resData)
   const sendOrder = async()=>{
     try{
-        
-      const response = await axios.post('order',{
-        "locationId": dataShare.allData.address.id,
-        "productIds": [
-          "612cce46e7cc972d22d6c92b"
-        ],
-        "recipientName": dataShare.allData.userInfo.fio,
-        "recipientPhoneNumber": dataShare.allData.userInfo.phoneNumber
-      });
+      
+      const response = await axios.post('order',resData);
       
       console.log(response)
       setLoading(false)
@@ -59,7 +57,7 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
       </Order>
       <Order>
         <SummData>Итого</SummData>
-        <SummNumber>7 483 448 сум</SummNumber>
+        <SummNumber>{dataShare.cart.totalPrice }сум</SummNumber>
       </Order>
       <AddressButton as={DetailButton}>Отмена</AddressButton>
       <AddressButton onClick={sendOrder} as={DetailButton}>Перейти к оплате</AddressButton>

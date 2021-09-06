@@ -61,7 +61,7 @@ const CartMobile: FC<CartMobileProps> = ({ items }) => {
             <CartMobileItem key={item.id}>
               <CartMobileItemLeft>
                 <CartMobileItemImgLink isChecked={item.isChecked} to="">
-                  <CartMobileImg src={item.images[0]} />
+                  <CartMobileImg src={item.addedPhotoWithImageUrls[0].photoUrl} />
                 </CartMobileItemImgLink>
                 <CartIncrementButton item={item} isMobile={true} />
               </CartMobileItemLeft>
@@ -74,9 +74,9 @@ const CartMobile: FC<CartMobileProps> = ({ items }) => {
                   />
                 </CheckboxWrapper>
                 <Price>
-                  {formatMoney(item.priceResponse.value)} <Sum>сум</Sum>
+                  {formatMoney(item.addProductData.price)} <Sum>сум</Sum>
                 </Price>
-                <Name>{item.name}</Name>
+                <Name>{item.addProductData.name}</Name>
                 <CartMobileInfo>
                   <Manufactor>Продавец:</Manufactor>
                   <ManufactorName>ООО "ДИХАУС"</ManufactorName>

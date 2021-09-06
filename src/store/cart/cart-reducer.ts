@@ -97,17 +97,17 @@ const getTotalSum = (state: CartReducerState, t: any) => {
 
 // removeCart()
 const removeCart = (state: CartReducerState, cart: any) => {
-  console.log('CART => ', cart);
+  // console.log('CART => ', cart);
   let removedArray = state.cartItems.filter((item) => item.id !== cart.id);
   for (let i = 0; i < state.cartItems.length; i++) {
     if (state.cartItems[i].id === cart.id) {
       state.totalPrice =
         state.totalPrice -
-        state.cartItems[i].count * Number(cart.priceResponse.value);
+        state.cartItems[i].count * Number(cart.addProductData.price);
       state.totalCount = state.totalCount - state.cartItems[i].count;
 
       if (state.cartItems[i].isChecked) {
-        state.tSum = state.tSum - cart.priceResponse.value * cart.count;
+        state.tSum = state.tSum - cart.addProductData.price * cart.count;
         state.checkedAllCount -= cart.count;
         let copyCheckedAll = [...state.checkedAll];
         let removedCheckedAll = copyCheckedAll.filter(
@@ -133,19 +133,19 @@ const addToCart = (state: CartReducerState, cart: any) => {
         copyCart.count = copyCart.count + 1;
 
         state.totalPrice =
-          state.totalPrice + copyCart.count * Number(c.priceResponse.value);
+        state.totalPrice + copyCart.count * Number(c.addProductData.price);
         state.totalCount = state.totalCount + 1;
         return copyCart;
       }
       return c;
     });
   } else {
-    state.totalPrice = state.totalPrice + Number(cart.priceResponse.value);
+    state.totalPrice = state.totalPrice + Number(cart.addProductData.price);
     state.totalCount = state.totalCount + 1;
 
     changedCartItems = [
       ...copyOfCartItems,
-      { count: 1, totalSum: Number(cart.priceResponse.value), ...cart },
+      { count: 1, totalSum: Number(cart.addProductData.price), ...cart },
     ];
   }
   return { ...state, cartItems: changedCartItems };
@@ -162,9 +162,9 @@ const incrementCart = (state: CartReducerState, cart: any) => {
         const copyCart = { ...c };
         copyCart.count = copyCart.count + 1;
 
-        copyCart.totalSum += Number(c.priceResponse.value);
+        copyCart.totalSum += Number(c.addProductData.price);
         if (cart.isChecked) {
-          state.tSum += Number(c.priceResponse.value);
+          state.tSum += Number(c.addProductData.price);
           state.checkedAllCount += cart.count;
 
           let checkedArray = [];
@@ -181,7 +181,7 @@ const incrementCart = (state: CartReducerState, cart: any) => {
           state.checkedAll = [...checkedArray];
         }
 
-        state.totalPrice = state.totalPrice + Number(c.priceResponse.value);
+        state.totalPrice = state.totalPrice + Number(c.addProductData.price);
         state.totalCount = state.totalCount + 1;
 
         return copyCart;
@@ -190,11 +190,11 @@ const incrementCart = (state: CartReducerState, cart: any) => {
     });
   } else {
     alert('incrementCart()');
-    state.totalPrice = state.totalPrice + Number(cart.priceResponse.value);
+    state.totalPrice = state.totalPrice + Number(cart.addProductData.price);
     state.totalCount = +state.totalCount + 1;
     changedCartItems = [
       ...copyOfCartItems,
-      { count: 1, totalSum: Number(cart.priceResponse.value), ...cart },
+      { count: 1, totalSum: Number(cart.addProductData.price), ...cart },
     ];
   }
   return { ...state, cartItems: changedCartItems };
@@ -212,9 +212,9 @@ const decrementCart = (state: CartReducerState, cart: any) => {
         const copyCart = { ...c };
         copyCart.count = copyCart.count - 1;
 
-        copyCart.totalSum -= Number(c.priceResponse.value);
+        copyCart.totalSum -= Number(c.addProductData.price);
         if (cart.isChecked) {
-          state.tSum -= Number(c.priceResponse.value);
+          state.tSum -= Number(c.addProductData.price);
           state.checkedAllCount -= cart.count;
 
           let checkedArray = [];
@@ -231,7 +231,7 @@ const decrementCart = (state: CartReducerState, cart: any) => {
           state.checkedAll = [...checkedArray];
         }
 
-        state.totalPrice = state.totalPrice - Number(c.priceResponse.value);
+        state.totalPrice = state.totalPrice - Number(c.addProductData.price);
         state.totalCount = state.totalCount - 1;
         return copyCart;
       }

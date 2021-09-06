@@ -66,7 +66,7 @@ const CheckOut = () => {
             {cart.checkedAll.map((element, index) => (
               <CartContainItem key={index}>
                 <CartItemMedia>
-                  <CartItemImg src={element.images[0]} />
+                  <CartItemImg src={element.addedPhotoWithImageUrls[0].photoUrl} />
                 </CartItemMedia>
                 <CartItemText count={element.count}>
                   {element.name}
@@ -119,7 +119,7 @@ const CheckOut = () => {
           )}
         </CheckOutBox>
         {tab === 'payment' ? (
-          <PaymentDetails dataShare={{ allData, setData }} />
+          <PaymentDetails dataShare={{ allData, setData, cart }} />
         ) : (
           <></>
         )}
