@@ -198,6 +198,9 @@ export const CartSoldPrice = styled.div`
   font-size: 16px;
   line-height: 22px;
 `;
+export const DeleiveryCost = styled.div`
+  color: ${({theme})=>theme.primary_color};
+`;
 
 /** CartEmpty.tsx */
 export const CartEmptyContainer = styled.div`
