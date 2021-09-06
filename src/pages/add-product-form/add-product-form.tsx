@@ -338,6 +338,8 @@ const AddProductForm = () => {
     newObj.deliveryAddress = { ...deliveryAddress };
     newObj.addedPhotos = [...addedPhotos];
 
+    delete newObj.id;
+
     console.log('newObj ', newObj);
 
     try {

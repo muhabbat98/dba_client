@@ -5,6 +5,7 @@ import GoodsGrid from '../../components/goods-grid';
 import GoodsTable from '../../components/goods-table';
 import GoodsTopControl from '../../components/goods-top-control';
 import { useMainContext } from '../main/context';
+// import {axios}
 
 import { GoodsContainer, GoodsDisplayContainer } from './style';
 
@@ -28,6 +29,10 @@ const Goods = () => {
   useEffect(() => {
     setPageTitle('Товары');
   }, []);
+
+  // const getProducts = async () => {
+  //   // const response = await axios.get(`product/getAllProducts`);
+  // };
 
   const changeDisplay = (type: DisplayType) => {
     setDisplayType(type);

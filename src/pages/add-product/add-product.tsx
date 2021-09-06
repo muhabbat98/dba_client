@@ -28,7 +28,6 @@ const AddProduct = () => {
     try {
       const response = await axios.get('catalog?parentId=');
       const data = await response.data;
-      console.log('data => ', data);
       setAllProduct(data);
       setLoading(false);
     } catch (error) {
@@ -38,10 +37,8 @@ const AddProduct = () => {
   };
 
   const pageClickHandle = (id: string) => {
-    push(`add-product-page/${id}`);
+    push(`/seller/add-product-page/${id}`);
   };
-
-  console.log('allProduct ', allProduct);
 
   return (
     <Container>
