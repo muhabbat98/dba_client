@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { axios, useActionCreators, UserRole } from '../../../../../hooks';
 import LoginFooter from '../../../login-footer';
@@ -9,21 +10,21 @@ import { useLogin } from '../../../context';
 import { AlertPosition } from '../../../../../utils/alert-position-enum';
 import { Div, Error, Container } from './style';
 import CircleLoader from '../../../../circle-loader';
-import { useLocation, useHistory } from 'react-router-dom';
+
 
 interface FieldProps {
   pasword: string;
 }
 
 const Login = () => {
-  const { push } = useHistory();
+  const history = useHistory();
   const { setAlertMessage, setUser } = useActionCreators();
   const { register, handleSubmit } = useForm<FieldProps>();
   const [error, setError] = useState<string | null>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const [phone, setPhone] = useState('');
-
+  
   const {
     state: { user },
   } = useLogin();
@@ -63,9 +64,12 @@ const Login = () => {
       setUser(data);
       setLoading(false);
       if (data.roles === UserRole.SELLER) {
-        push('/seller');
+        history.push('/seller');
       }
       closeLogin();
+      if(data.roles === UserRole.BUYER && history.location.pathname==="/cart"){
+        history.push("/checkout")
+      }
       // window.location.reload();
     } catch (error) {
       setLoading(false);

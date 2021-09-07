@@ -23,6 +23,7 @@ import {
   ManufactorName,
   CheckboxWrapper,
   CartDeleteWrapper,
+  CartDelivery
 } from './style';
 
 import { ReactComponent as CartDelete } from '../../../assets/icons/cart-delete.svg';
@@ -80,6 +81,12 @@ const CartMobile: FC<CartMobileProps> = ({ items }) => {
                 <CartMobileInfo>
                   <Manufactor>Продавец:</Manufactor>
                   <ManufactorName>ООО "ДИХАУС"</ManufactorName>
+                </CartMobileInfo>
+                <CartMobileInfo>
+                  <Manufactor>Сумма доставка:</Manufactor>
+                  <CartDelivery>
+                    25000 сум
+                  </CartDelivery>
                 </CartMobileInfo>
                 <CartDeleteWrapper onClick={() => deleteCart(item)}>
                   <CartDelete />

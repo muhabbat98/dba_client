@@ -25,12 +25,17 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
     "recipientPhoneNumber": dataShare.allData.userInfo.phoneNumber
   }
   console.log('dataShare', resData)
-  const sendOrder = async()=>{
+  const sendOrder = async(e:any)=>{
+    e.target.disabled = true
+
     try{
       
       const response = await axios.post('order',resData);
-      
-      console.log(response)
+      if(response.status===200){
+        // e.target.disabled = false
+        console.log(response)
+      }
+     
       setLoading(false)
     
     }
@@ -57,7 +62,7 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
       </Order>
       <Order>
         <SummData>Итого</SummData>
-        <SummNumber>{dataShare.cart.totalPrice }сум</SummNumber>
+        <SummNumber>{dataShare.cart.tSum }сум</SummNumber>
       </Order>
       <AddressButton as={DetailButton}>Отмена</AddressButton>
       <AddressButton onClick={sendOrder} as={DetailButton}>Перейти к оплате</AddressButton>

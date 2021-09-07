@@ -34,6 +34,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
     const { startLoading, endLoading, error } = useActionCreators();
     useEffect(()=>{
         if(menuEls){
+            console.log("menu elements",menuEls)
             setMenus(menuEls);
             setActiveMenu(menuEls[0]);
             endLoading();

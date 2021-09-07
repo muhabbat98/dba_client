@@ -92,4 +92,8 @@ export const AddressButton = styled.button`
     background-color: ${({ theme }) => theme.primary_color};
     color: #fff;
   }
+  :disabled{
+    background-color: #fff;
+    color:  #f4f6f9;
+  }
 `;
