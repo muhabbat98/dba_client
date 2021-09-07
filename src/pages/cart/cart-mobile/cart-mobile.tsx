@@ -85,7 +85,7 @@ const CartMobile: FC<CartMobileProps> = ({ items }) => {
                 <CartMobileInfo>
                   <Manufactor>Сумма доставка:</Manufactor>
                   <CartDelivery>
-                    25000 сум
+                    {item.deliveryAddress.deliveryPrice - 0} сум
                   </CartDelivery>
                 </CartMobileInfo>
                 <CartDeleteWrapper onClick={() => deleteCart(item)}>

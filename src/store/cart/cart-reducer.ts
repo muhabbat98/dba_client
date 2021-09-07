@@ -74,6 +74,7 @@ let delivery_cost = 25000
 const getTotalSum = (state: CartReducerState, t: any) => {
   let copyOfCartItems = [...state.cartItems];
   let changedCartItems = [];
+  console.log(t, state)
   changedCartItems = copyOfCartItems.map((c) => {
     if (c.id === t.id) {
       const copyCart = { ...c };
@@ -82,7 +83,7 @@ const getTotalSum = (state: CartReducerState, t: any) => {
         state.tSum += copyCart.totalSum;
         state.checkedAll.push(copyCart);
         state.checkedAllCount += c.count;
-        state.deliveryCost += (delivery_cost - 0)
+        state.deliveryCost += (c.deliveryAddress.deliveryPrice - 0)
         state.totalSum  = (state.tSum+state.deliveryCost)
       
 
@@ -90,7 +91,7 @@ const getTotalSum = (state: CartReducerState, t: any) => {
         copyCart.isChecked = false;
         state.tSum -= copyCart.totalSum;
         state.checkedAllCount -= c.count;
-        state.deliveryCost -= (delivery_cost - 0)
+        state.deliveryCost -= (c.deliveryAddress.deliveryPrice - 0)
         state.totalSum  = (state.tSum+state.deliveryCost)
      
         let removedArray = state.checkedAll.filter((item) => item.id != c.id);
@@ -118,7 +119,7 @@ const removeCart = (state: CartReducerState, cart: any) => {
         state.totalCount = state.totalCount - state.cartItems[i].count;
       if (state.cartItems[i].isChecked) {
         state.tSum = state.tSum - cart.addProductData.price * cart.count;
-        state.deliveryCost -= (delivery_cost - 0)
+        state.deliveryCost -= (state.cartItems[i].deliveryAddress.deliveryPrice - 0)
         state.totalSum  = (state.tSum+state.deliveryCost)
      
         state.checkedAllCount -= cart.count;

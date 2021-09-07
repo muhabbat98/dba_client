@@ -194,7 +194,7 @@ const Cart = () => {
                               <br/>
                               <CartManufactor>Сумма доставка:</CartManufactor>
                               <CartDelivery>
-                                25000 сум
+                                {item.deliveryAddress.deliveryPrice - 0} сум
                               </CartDelivery>
                             </CartInfo>
                           </CartBoxLeftContainer>
