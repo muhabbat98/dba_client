@@ -64,6 +64,7 @@ interface AddProductDataType {
 interface DeliveryAddressType {
   province: string;
   city: string;
+  deliveryPrice: number;
 }
 
 interface AddedPhotosType {
@@ -102,6 +103,7 @@ const AddProductForm = () => {
   const [deliveryAddress, setDeliveryAddress] = useState<DeliveryAddressType>({
     province: '',
     city: '',
+    deliveryPrice: 0,
   });
   const [addedPhotos, setAddedPhotos] = useState<any>([]);
 
@@ -117,6 +119,17 @@ const AddProductForm = () => {
       return {
         ...prevState,
         [name]: value,
+      };
+    });
+  };
+
+  const deliveryPriceHandler = (ev: any) => {
+    const value = Number(ev.target.value);
+
+    setDeliveryAddress((prevState) => {
+      return {
+        ...prevState,
+        deliveryPrice: value,
       };
     });
   };
@@ -602,6 +615,14 @@ const AddProductForm = () => {
                     label="Город"
                     selected={city}
                     callback={dropdownCityHandle}
+                  />
+                </DeleiveryZoneItem>
+                <DeleiveryZoneItem>
+                  <SimpleInput
+                    onChange={deliveryPriceHandler}
+                    name="deliveryPrice"
+                    label="Сумма доставки"
+                    placeholder="Сумма доставки"
                   />
                 </DeleiveryZoneItem>
               </DeleiveryZone>
