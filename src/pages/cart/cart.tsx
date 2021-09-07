@@ -45,7 +45,8 @@ import {
   CartSoldAll,
   CartIconWrapper,
   CartCheckBoxWrapper,
-  CartDelivery
+  CartDelivery,
+  DeleiveryCost
 } from './style';
 
 import { ReactComponent as CartDelete } from '../../assets/icons/cart-delete.svg';
@@ -119,6 +120,10 @@ const Cart = () => {
                         <CartSoldName>Скидка по акции</CartSoldName>
                         <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
                       </CartSoldNameWrapper>
+                      <CartSoldNameWrapper>
+                      <CartSoldName>Сумма доставка:</CartSoldName>
+                      <CartSoldPrice as= {DeleiveryCost}>{formatMoney(deliveryCost)} сум</CartSoldPrice>
+                    </CartSoldNameWrapper>
                       <CartSoldAllWrapper>
                         <CartSoldAll>Итого</CartSoldAll>
                         <CartSoldAllPrice>
@@ -240,12 +245,17 @@ const Cart = () => {
                       <CartSoldName>Скидка по акции</CartSoldName>
                       <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
                     </CartSoldNameWrapper>
+                    <CartSoldNameWrapper>
+                      <CartSoldName>Сумма доставка:</CartSoldName>
+                      <CartSoldPrice as= {DeleiveryCost}>{formatMoney(deliveryCost)} сум</CartSoldPrice>
+                    </CartSoldNameWrapper>
                     <CartSoldAllWrapper>
                       <CartSoldAll>Итого</CartSoldAll>
                       <CartSoldAllPrice>
                         {formatMoney(totalSum)} сум
                       </CartSoldAllPrice>
                     </CartSoldAllWrapper>
+                    
                     <Button
                       btnType={isCheckedState ? 'disabled' : 'default'}
                       disabled={isCheckedState}
