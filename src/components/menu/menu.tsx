@@ -84,7 +84,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
             <MenuWrapper onClick={(e)=>e.stopPropagation()}>
                 <Container> 
                     <Row>
-                        <Col xl={3} lg={3} md={3}>
+                        <Col xl={3} lg={3} md={6}>
                             <List>
                                 {menus.map((item:any)=>{
                                     return(<ListItem onClick={(e: SyntheticEvent)=>handleActiveMenu(e,item)} >
@@ -94,7 +94,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                 })}
                             </List>
                         </Col>
-                        <Col  xl={4} lg={4} md={4}>
+                        <Col  xl={4} lg={4} md={6}>
                         <ListWrapper >
                         {activeMenu?activeMenu.subCategories.map((item1:any,i:number)=>{
                             if(i<Math.ceil(activeMenu.subCategories.length/2))
@@ -127,7 +127,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                 </ChildListItem></Link>:''}
                         </ChildrenList>)}):''}</ListWrapper>
                         </Col>
-                        <Col  xl={4} lg={4} md={4}>
+                        <Col  xl={4} lg={4} md={6}>
                         <ListWrapper>
                         {activeMenu?activeMenu.subCategories.slice(0).reverse().map((item1:any,i:number)=>{
                             if(i<activeMenu.subCategories.length-Math.ceil(activeMenu.subCategories.length/2))
@@ -159,7 +159,6 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                 </ChildrenList>)}):''}
                         </ListWrapper>
                         </Col>
-                        
                         <Col  xl={1}lg={1} md={1}>
                             <CloseButton onClick={handleClose}/>
                         </Col>

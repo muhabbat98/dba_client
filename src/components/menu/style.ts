@@ -3,8 +3,8 @@ interface MenuElsProps{
     restNumEls?:number;
 }
 export const MenuWrapper = styled.div`
-max-width:1100px;
-max-height:600px;
+width:90%;
+height:85%;
 position:absolute;
 background-color:white;
 border:1px solid #CDCDCD;
@@ -53,7 +53,7 @@ margin: 24px 8px 24px 32px ;
 export const List = styled.ul`
     padding:8px;
     border-right: 0.5px solid #CDCDCD;
-    max-height:550px;
+    max-height:81vh;
     overflow-y:auto;
     ::-webkit-scrollbar {
         width: 7px;
@@ -101,7 +101,7 @@ export const ListItem = styled.li`
 `;
 export const ListWrapper = styled.div`
     overflow:auto;
-    max-height:550px;
+    max-height:80vh;
     margin:16px; 
     ::-webkit-scrollbar {
         width: 7px;
@@ -118,12 +118,11 @@ export const ListWrapper = styled.div`
 `;
 export const ChildrenList = styled.ul`
     padding:8px;
-    max-height:400px;
     overflow-y:auto; 
    
 `;
 export const ChildListItem = styled.li` 
-    margin:2;
+    padding:8px;
     display:flex;
     font-weight: 500;
     font-size: 16px;
