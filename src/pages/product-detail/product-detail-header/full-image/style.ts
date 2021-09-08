@@ -37,46 +37,48 @@ export const Xbutton = styled.div`
   }
 `;
 export const LeftArrow = styled.div`
-  background: #282c34;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  left: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  cursor: pointer;
-  &:hover {
-    background: #35383e;
-  }
 
-  svg{
-    fill:#f1f1f1;
-    width: 20px;
-    height: 20px;
-    transform: rotate(90deg);
-  }
-`;
-export const RightArrow = styled.div`
-  background: #282c34;
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 80vh;
   position: absolute;
-  right: 15px;
+  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   cursor: pointer;
+
   &:hover {
-    background: #35383e;
+    background: rgba(0,0,0,0.2);
+    transition: 0.5s;
   }
 
   svg {
     fill: #f1f1f1;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+    transform: rotate(90deg);
+  }
+`;
+export const RightArrow = styled.div`
+  //background: #282c34;
+  width: 70px;
+  height: 80vh;
+  position: absolute;
+  right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0,0,0,0.2);
+    transition: 0.5s;
+  }
+
+  svg {
+    fill: #f1f1f1;
+    width: 25px;
+    height: 25px;
     transform: rotate(-90deg);
   }
 `;

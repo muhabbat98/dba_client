@@ -115,7 +115,8 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                 isFluidWidth: false,
                 width: 470,
                 height: 526,
-                src: `${mainImage}`
+                src: `${mainImage}`,
+                sizes: '(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw'
             }}
             largeImage={{
                 width: 1200,
@@ -177,8 +178,8 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                     {mainImg()}
 
                 </div>
-            </MainPicture>
 
+            </MainPicture>
             <ProductInformation>
                 <InfoTitleContainer>
                     <p>{product ? product.addProductData.name : 'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</p>
@@ -238,6 +239,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
               currentImage={currentImage}
               setIsOpen={setIsOpen}
             />}
+
         </DetailHeaderContainer>
     );
 };

@@ -57,19 +57,11 @@ export const MainPicture = styled.div`
 
   div {
     box-sizing: border-box;
-    border-radius: 16px;
-    width: 470px;
-    height: 526px;
+    //border-radius: 16px;
+    //width: 470px;
+    //height: 526px;
     //overflow: hidden;
     div{
-      border-radius: 0px;
-      width: 100%;
-      height: 100%;
-      //position: absolute;
-      //&:nth-child(4){
-      //  margin-left: 30px;
-      //}
-    }
     img {
       width: 100%;
       height: 100%;
