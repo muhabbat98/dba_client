@@ -54,7 +54,7 @@ const FullImage: React.FC<FullImageProps> = ({ currentImage, imageList, setIsOpe
             setMainImage(imageList[0].photoUrl);
             k=0;
         }
-        if (k < imageList.length) {
+        else if (k < imageList.length) {
             k++;
         }
         else {
