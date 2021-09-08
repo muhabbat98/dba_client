@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useActionCreators, useRole, useSelector } from '../../../hooks';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import PhoneMain from '../../../assets/images/defaultProductimage.svg';
+import ReactImageMagnify from 'react-image-magnify';
 
 import { ReactComponent as Heart } from '../../../assets/icons/heart2.svg';
 import { ReactComponent as HeartFull } from '../../../assets/icons/heart-full2.svg';
@@ -24,6 +25,7 @@ import {
 
 } from './style';
 import isEmptyObj from '../../../utils/isEmptyObj';
+import FullImage from './full-image';
 
 
 interface UseProductProps {
@@ -36,7 +38,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
     const [mainImage, setMainImage] = useState();
     const [isInCart, setIsInCart] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(false);
-    const [width, height] = useWindowSize();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
     const { cartItems } = useSelector((state) => state.cart);
     const addToCartHandle = (item: any) => {
@@ -51,6 +53,9 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
         }
 
     }, []);
+    useEffect(() => {
+        setMainImage(!isEmptyObj(product) && product.addedPhotoWithImageUrls[0].photoUrl);
+    }, [product]);
     const deleteFromCartHandle = (item: any) => {
         removeCart(item);
         setIsInCart(!isInCart);
@@ -71,13 +76,13 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
     };
     const setMainPicture = (item: any) => {
         setMainImage(item);
-        console.log('inn-',item)
     };
     const heartButton = () => {
         !isBuyer && (isInWishlist
             ? removeFromWishlistHandle(item)
             : addToWishlistHandle(item));
     };
+
     const item = {
         'id': id,
         'route': '/catalog/details/samsung-6063033fb1a9f83cc5c612330',
@@ -102,12 +107,52 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
             ? product.addedPhotoWithImageUrls.filter((item: any, index: number) => index < 6)
             : [];
 
-    const mainImg:any = ( ) => {
-        if(mainImage) return <img src={mainImage} alt='MainImage' />;
-        if(!isEmptyObj(product) && product.addedPhotoWithImageUrls != null)
-            return <img src={product.addedPhotoWithImageUrls[0].photoUrl} alt='MainImage' />;
+    const mainImg: any = () => {
+        if (mainImage) return <ReactImageMagnify
+            enlargedImageContainerDimensions={{ width: '100%', height: '100%' }}
+            smallImage={{
+                alt: 'Testing',
+                isFluidWidth: false,
+                width: 470,
+                height: 526,
+                src: `${mainImage}`
+            }}
+            largeImage={{
+                width: 1200,
+                height: 1200,
+                src: `${mainImage}`
+            }}
+        >
+        </ReactImageMagnify>;
+        // <img src={mainImage} alt='MainImage' />;
+        if (!isEmptyObj(product) && product.addedPhotoWithImageUrls != null)
+            return <ReactImageMagnify
+                enlargedImageContainerDimensions={{ width: '100%', height: '100%' }}
+                smallImage={{
+                    alt: 'Testing',
+                    isFluidWidth: false,
+                    width: 470,
+                    height: 526,
+                    src: `${product.addedPhotoWithImageUrls[0].photoUrl}`
+                }}
+                largeImage={{
+                    width: 1200,
+                    height: 1200,
+                    src: `${product.addedPhotoWithImageUrls[0].photoUrl}`
+                }}
+            >
+            </ReactImageMagnify>;
+        // <img src={product.addedPhotoWithImageUrls[0].photoUrl} alt='MainImage' />;
         else return <img src={PhoneMain} alt='MainImage' />;
-    }
+    };
+    const currentImage = () => {
+        if (mainImage) return mainImage;
+        if (!isEmptyObj(product) && product.addedPhotoWithImageUrls != null)
+            return product.addedPhotoWithImageUrls[0].photoUrl;
+    };
+    const handleFullImage = () => {
+        setIsOpen(true);
+    };
 
     return (
         <DetailHeaderContainer>
@@ -120,18 +165,20 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                             item={item}
                             mainImage={mainImage}
 
-                    />
+                        />
                         // <PicturesItem key={index} onClick={() => setMainPicture(item.photoUrl)}>
                         //     <div><img src={item.photoUrl} alt='phone' /></div>
                         // </PicturesItem>
                     ))
                 }
             </LeftPictureContainer>
-            <MainPicture>
+            <MainPicture onClick={handleFullImage}>
                 <div>
                     {mainImg()}
+
                 </div>
             </MainPicture>
+
             <ProductInformation>
                 <InfoTitleContainer>
                     <p>{product ? product.addProductData.name : 'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</p>
@@ -149,22 +196,23 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
 
                 <NewPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</NewPrice>
                 {/*<OldPrice>{FormatMoney(8416000)} сум</OldPrice>*/}
+                <>
+                    {/*Future add colors*/}
+                    {/*<BinaryTextConatiner>*/}
+                    {/*    <p>Цвет товара:</p><span>синий</span>*/}
+                    {/*</BinaryTextConatiner>*/}
+                    {/*<ColorsContainer>*/}
+                    {/*    {*/}
+                    {/*        ['#FF4242', '#0091FF', '#22B573', '#FFFFFF', '#000000'].map((item, index) => (*/}
+                    {/*            <div key={index} style={{ background: item }}></div>*/}
+                    {/*        ))*/}
+                    {/*    }*/}
+                    {/*</ColorsContainer>*/}
 
-                {/*Future add colors*/}
-                {/*<BinaryTextConatiner>*/}
-                {/*    <p>Цвет товара:</p><span>синий</span>*/}
-                {/*</BinaryTextConatiner>*/}
-                {/*<ColorsContainer>*/}
-                {/*    {*/}
-                {/*        ['#FF4242', '#0091FF', '#22B573', '#FFFFFF', '#000000'].map((item, index) => (*/}
-                {/*            <div key={index} style={{ background: item }}></div>*/}
-                {/*        ))*/}
-                {/*    }*/}
-                {/*</ColorsContainer>*/}
-
-                {/*<BinaryTextConatiner>*/}
-                {/*    <p>Доставка:</p><span>25-27 апреля</span>*/}
-                {/*</BinaryTextConatiner>*/}
+                    {/*<BinaryTextConatiner>*/}
+                    {/*    <p>Доставка:</p><span>25-27 апреля</span>*/}
+                    {/*</BinaryTextConatiner>*/}
+                </>
 
                 <BinaryTextConatiner>
                     <p>Продавец:</p><span
@@ -184,35 +232,43 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                     >{isInCart ? 'Товар добавлен в корзину' : 'Добавить в корзину'}</Button>
                 }
             </ProductInformation>
-
+            {isOpen &&
+            <FullImage
+              imageList={product.addedPhotoWithImageUrls}
+              currentImage={currentImage}
+              setIsOpen={setIsOpen}
+            />}
         </DetailHeaderContainer>
     );
 };
 
 export default ProductDetailHeader;
 
-interface ImagesProps{
-    setMainPicture?:any;
-    item?:any;
-    mainImage:any;
+interface ImagesProps {
+    setMainPicture?: any;
+    item?: any;
+    mainImage: any;
 }
-const PicturesItems:React.FC<ImagesProps> = ({setMainPicture,mainImage,item}) => {
-    const [isActivee,setIsActive] = useState(false);
 
-    useEffect(()=>{
-        setIsActive(mainImage!=item.photoUrl?false:true)
-    },[mainImage])
-    const handleClick = (url:string) => {
-        setMainPicture(item && item.photoUrl)
-        setIsActive(url==item.photoUrl?true:false);
-    }
 
-    return(
+const PicturesItems: React.FC<ImagesProps> = ({ setMainPicture, mainImage, item }) => {
+    const [isActivee, setIsActive] = useState(false);
+
+    useEffect(() => {
+        setIsActive(mainImage != item.photoUrl ? false : true);
+    }, [mainImage]);
+
+    const handleClick = (url: string) => {
+        setMainPicture(item && item.photoUrl);
+        setIsActive(url == item.photoUrl ? true : false);
+    };
+
+    return (
         <PicturesItem
             isActive={isActivee}
-            onClick={()=>handleClick(item.photoUrl)}
-           >
+            onClick={() => handleClick(item.photoUrl)}
+        >
             <div><img src={item && item.photoUrl} alt='phone' /></div>
         </PicturesItem>
     );
-}
+};
