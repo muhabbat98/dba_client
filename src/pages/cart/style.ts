@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { theme } from '../../theme';
 
 interface Props {
   isChecked: boolean;
@@ -74,14 +75,13 @@ export const CartItemImageLink = styled(Link)`
 export const CartTitle = styled(Link)`
   color: #000;
   margin-top: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
   line-height: 22px;
   overflow: hidden;
   max-height: 46px;
-  height: 46px;
   -webkit-box-orient: vertical;
   display: block;
   display: -webkit-box;
@@ -95,9 +95,20 @@ export const CartManufactorName = styled.span``;
 
 export const CartManufactor = styled.span`
   & + ${CartManufactorName}, & {
+    display: inline-block;
     color: #808080;
     font-size: 14px;
     font-weight: 500;
+  }
+`;
+export const CartDelivery = styled.span`
+    padding-top: 8px;
+  & + ${CartManufactorName}, & {
+    display: inline-block;
+    color: #264796;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 8px;
   }
 `;
 
@@ -186,6 +197,9 @@ export const CartSoldPrice = styled.div`
   color: #797979;
   font-size: 16px;
   line-height: 22px;
+`;
+export const DeleiveryCost = styled.div`
+  color: ${({theme})=>theme.primary_color};
 `;
 
 /** CartEmpty.tsx */

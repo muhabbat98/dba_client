@@ -216,7 +216,7 @@ const Homepage = () => {
         <Cont>
           <Container>
             <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-            <Slider data={carddata.slice(0, 9).reverse()} />
+            <Slider data={carddata.slice(carddata.length - 10, 10).reverse()} />
           </Container>
         </Cont> 
       ) : null}

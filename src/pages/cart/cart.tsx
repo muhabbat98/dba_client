@@ -45,18 +45,20 @@ import {
   CartSoldAll,
   CartIconWrapper,
   CartCheckBoxWrapper,
+  CartDelivery,
+  DeleiveryCost
 } from './style';
 
 import { ReactComponent as CartDelete } from '../../assets/icons/cart-delete.svg';
 
 const Cart = () => {
   const { push } = useHistory();
-  const { cartItems, tSum, totalCount } = useSelector((state) => state.cart);
+  const { cartItems, tSum, totalCount, deliveryCost, totalSum } = useSelector((state) => state.cart);
   const { removeCart, getTotalSum, openLogin } = useActionCreators();
   const { userRole } = useRole();
   const [isCheckedState, setIsCheckedState] = useState<boolean>(true);
   const [state, setState] = useState<boolean>(false);
-
+  // console.log(totalSum)
   useEffect(() => {
     checkIsCheckedHandler();
   }, [state]);
@@ -118,6 +120,10 @@ const Cart = () => {
                         <CartSoldName>Скидка по акции</CartSoldName>
                         <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
                       </CartSoldNameWrapper>
+                      <CartSoldNameWrapper>
+                      <CartSoldName>Сумма доставка:</CartSoldName>
+                      <CartSoldPrice as= {DeleiveryCost}>{formatMoney(deliveryCost)} сум</CartSoldPrice>
+                    </CartSoldNameWrapper>
                       <CartSoldAllWrapper>
                         <CartSoldAll>Итого</CartSoldAll>
                         <CartSoldAllPrice>
@@ -183,8 +189,13 @@ const Cart = () => {
                               <CartTitle to="">{item.addProductData.name}</CartTitle>
                               <CartManufactor>Продавец:</CartManufactor>
                               <CartManufactorName>
-                                ООО "ДИХАУС"
+                                ООО "ДИХАУС"  
                               </CartManufactorName>
+                              <br/>
+                              <CartManufactor>Сумма доставка:</CartManufactor>
+                              <CartDelivery>
+                                {item.deliveryAddress.deliveryPrice - 0} сум
+                              </CartDelivery>
                             </CartInfo>
                           </CartBoxLeftContainer>
                         </CartBoxLeft>
@@ -234,12 +245,17 @@ const Cart = () => {
                       <CartSoldName>Скидка по акции</CartSoldName>
                       <CartSoldPrice>{formatMoney(tSum)} сум</CartSoldPrice>
                     </CartSoldNameWrapper>
+                    <CartSoldNameWrapper>
+                      <CartSoldName>Сумма доставка:</CartSoldName>
+                      <CartSoldPrice as= {DeleiveryCost}>{formatMoney(deliveryCost)} сум</CartSoldPrice>
+                    </CartSoldNameWrapper>
                     <CartSoldAllWrapper>
                       <CartSoldAll>Итого</CartSoldAll>
                       <CartSoldAllPrice>
-                        {formatMoney(tSum)} сум
+                        {formatMoney(totalSum)} сум
                       </CartSoldAllPrice>
                     </CartSoldAllWrapper>
+                    
                     <Button
                       btnType={isCheckedState ? 'disabled' : 'default'}
                       disabled={isCheckedState}
