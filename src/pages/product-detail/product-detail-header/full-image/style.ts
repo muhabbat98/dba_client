@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
   img{
     min-width: 400px;
     max-width: 1200px;
-    max-height: 800px;
+    max-height: 90vh;
   }
 `;
 export const Counter = styled.span`
