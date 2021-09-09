@@ -198,21 +198,21 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                 <NewPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</NewPrice>
                 <OldPrice>{ product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</OldPrice>
                 <>
-                    {/*Future add colors*/}
-                    {/*<BinaryTextConatiner>*/}
-                    {/*    <p>Цвет товара:</p><span>синий</span>*/}
-                    {/*</BinaryTextConatiner>*/}
-                    {/*<ColorsContainer>*/}
-                    {/*    {*/}
-                    {/*        ['#FF4242', '#0091FF', '#22B573', '#FFFFFF', '#000000'].map((item, index) => (*/}
-                    {/*            <div key={index} style={{ background: item }}></div>*/}
-                    {/*        ))*/}
-                    {/*    }*/}
-                    {/*</ColorsContainer>*/}
+                    Future add colors
+                    <BinaryTextConatiner>
+                        <p>Цвет товара:</p><span>синий</span>
+                    </BinaryTextConatiner>
+                    <ColorsContainer>
+                        {
+                            ['#FF4242', '#0091FF', '#22B573', '#FFFFFF', '#000000'].map((item, index) => (
+                                <div key={index} style={{ background: item }}></div>
+                            ))
+                        }
+                    </ColorsContainer>
 
-                    {/*<BinaryTextConatiner>*/}
-                    {/*    <p>Доставка:</p><span>25-27 апреля</span>*/}
-                    {/*</BinaryTextConatiner>*/}
+                    <BinaryTextConatiner>
+                        <p>Доставка:</p><span>25-27 апреля</span>
+                    </BinaryTextConatiner>
                 </>
 
                 <BinaryTextConatiner>
