@@ -196,7 +196,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                 {/*</RatingContainer>*/}
 
                 <NewPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</NewPrice>
-                {/*<OldPrice>{FormatMoney(8416000)} сум</OldPrice>*/}
+                <OldPrice>{ product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</OldPrice>
                 <>
                     {/*Future add colors*/}
                     {/*<BinaryTextConatiner>*/}
