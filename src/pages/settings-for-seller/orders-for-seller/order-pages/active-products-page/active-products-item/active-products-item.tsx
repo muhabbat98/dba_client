@@ -132,7 +132,7 @@ const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData, setOpen, 
                                     <MoblProductTitle>{activeData.order[0].itemTitle}</MoblProductTitle>
                                     : <InfoTitle>{activeData.order[0].itemTitle}</InfoTitle>}
                                 <p style={{ marginTop: width < 768 ? '3px' : '' }}>Продавец: {activeData.order[0].itemSeller}</p>
-                                <p>Сумма доставка:<span style={{ color: '#264796' }}> 25000 сум</span></p>
+                               
                             </TitlesContainer>
                         </div>
                         {width > 768 &&
@@ -199,17 +199,13 @@ const ActiveProductsItem: React.FC<ActivePagePropses> = ({ activeData, setOpen, 
                     </div>
                     <div>
                         <Button
-                            onClick={receivedButton}
-                            style={{ maxWidth: width > 768 ? 240 : 120, height: width < 768 ? 40 : '' }}
-                        >Заказ получен</Button>
-                        <Button
                             style={{ maxWidth: width > 768 ? 240 : 120, height: width < 768 ? 40 : '', marginLeft: 16 }}
                             btnType='outlined'
                             onClick={() => {
                                 setOpen(true);
                                 setGetDisputeItem(activeData);
                             }}
-                        >Начать спор</Button>
+                        >Сменить статус</Button>
                     </div>
 
                 </ButtonsGroupContainier>

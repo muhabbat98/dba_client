@@ -62,7 +62,7 @@ const Footer = () => {
         </>:<>
           <div style={{paddingTop:11,marginTop:40,marginBottom:25}}>
             <FooterDropDown onClick={()=>setDrpDown1(open=>!open)}>
-              <p>Покупателям</p> <WhiteArrow style={{transform:drpDown1?'rotate(180deg)':'rotate(0deg)'}}/>
+              <p>Покупателям</p> <WhiteArrow style={{transform:drpDown1?'rotate(180deg)':'rotate(0deg)',transition:"0.3s"}}/>
             </FooterDropDown>
             {drpDown1 && <Ul>
               <li>Оплата и доставка</li>
@@ -73,7 +73,7 @@ const Footer = () => {
               <li>Пользовательское соглашение</li>
             </Ul>}
             <FooterDropDown onClick={()=>setDrpDown2(open=>!open)}>
-              <p>Партнерам</p> <WhiteArrow style={{transform:drpDown2?'rotate(180deg)':'rotate(0deg)'}}/>
+              <p>Партнерам</p> <WhiteArrow style={{transform:drpDown2?'rotate(180deg)':'rotate(0deg)',transition:"0.3s"}}/>
             </FooterDropDown>
             {drpDown2 && <Ul>
               <li>Как начать продавать</li>
@@ -82,7 +82,7 @@ const Footer = () => {
               <li>Личный кабинет продавца</li>
             </Ul>}
             <FooterDropDown onClick={()=>setDrpDown3(open=>!open)}>
-              <p>Компания</p> <WhiteArrow style={{transform:drpDown3?'rotate(180deg)':'rotate(0deg)'}}/>
+              <p>Компания</p> <WhiteArrow style={{transform:drpDown3?'rotate(180deg)':'rotate(0deg)',transition:"0.3s"}}/>
             </FooterDropDown>
             {drpDown3 && <Ul>
               <li>О нас</li>
