@@ -22,8 +22,9 @@ const Content = () => {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/product-detail/:name/:id" component={ProductDetail} />
-        <Route exact path="/catalog" component={Catalog} />
-        <Route exact path="/products" component={Products} />
+        <Route exact path={["/catalog", "/catalog/:id" ]} component={(props:any)=><Catalog {...props} key={window.location.pathname} />} />
+        
+        <Route exact path="/products/:id" component={Products} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/wishlist" component={Wishlist} />
 

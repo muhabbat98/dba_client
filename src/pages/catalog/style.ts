@@ -24,6 +24,7 @@ export const MainCatalogImage = styled.div`
   padding: 24px;
   margin-bottom: 16px;
   transition: all .25s ease;
+  background-size: 70% 65%;
   
   &:hover{
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.12);
