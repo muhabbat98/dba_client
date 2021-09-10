@@ -24,15 +24,7 @@ import { Cont } from './style';
 
 import Snowboard from '../../assets/images/snowboard.svg';
 import Phones from '../../assets/images/phones.svg';
-import CardImage from '../../assets/images/card-item1.png';
-import CardImage2 from '../../assets/images/card-item2.png';
-import CardImage3 from '../../assets/images/card-item3.png';
-import CardImage4 from '../../assets/images/card-item4.png';
-import CardImage5 from '../../assets/images/card-item5.png';
-import CardImage6 from '../../assets/images/card-item6.png';
-import CardImage7 from '../../assets/images/card-item7.png';
-import CardImage8 from '../../assets/images/card-item8.png';
-import CardImage9 from '../product-detail/product-detail-header/images/phoneMain.svg';
+
 import OrangeBanner from '../../assets/images/orangeBanner.svg';
 import Slider from '../../components/slider';
 import CardMobile from '../../components/card-mobile';
@@ -59,7 +51,7 @@ const Homepage = () => {
   useEffect(()=>{
     products()
   },[])
-  console.log("card data ",carddata,carddata.slice(carddata.length - 10, 10))
+ 
   return (
     <div>
         {/*Skleton loader */}

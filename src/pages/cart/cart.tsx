@@ -182,7 +182,7 @@ const Cart = () => {
                             </CartCheckBoxWrapper>
                             <CartIconWrapper isChecked={item.isChecked}>
                               <CartItemImageLink to="">
-                                <CartItemImage src={item.addedPhotoWithImageUrls[0].photoUrl} />
+                                {item.addedPhotoWithImageUrls!==null ? <CartItemImage src={item.addedPhotoWithImageUrls[0].photoUrl} />:<></>}
                               </CartItemImageLink>
                             </CartIconWrapper>
                             <CartInfo>

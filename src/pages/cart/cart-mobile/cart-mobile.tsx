@@ -62,7 +62,7 @@ const CartMobile: FC<CartMobileProps> = ({ items }) => {
             <CartMobileItem key={item.id}>
               <CartMobileItemLeft>
                 <CartMobileItemImgLink isChecked={item.isChecked} to="">
-                  <CartMobileImg src={item.addedPhotoWithImageUrls[0].photoUrl} />
+                  {item.addedPhotoWithImageUrls!==null?<CartMobileImg src={item.addedPhotoWithImageUrls[0].photoUrl} />:<></>}
                 </CartMobileItemImgLink>
                 <CartIncrementButton item={item} isMobile={true} />
               </CartMobileItemLeft>
