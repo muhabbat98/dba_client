@@ -16,7 +16,7 @@ interface SliderProps {
 }
 
 const Slider: FC<SliderProps> = ({ data }) => {
-   console.log("data",data)
+ 
    return (
       <SwiperContainer>
          <Swiper

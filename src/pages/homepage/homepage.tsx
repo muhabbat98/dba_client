@@ -69,7 +69,7 @@ const Homepage = () => {
         <Cont>
           <Container>
             <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-            <Slider data={carddata.length<10 ? carddata.slice(0, 10).reverse():carddata.slice(carddata.length - 10, 10)} />
+            <Slider data={carddata.length<10 ? carddata.reverse():carddata.slice(carddata.length - 10, 11).reverse()} />
           </Container>
         </Cont> 
       ) : null}
