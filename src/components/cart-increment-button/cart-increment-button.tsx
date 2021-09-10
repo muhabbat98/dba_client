@@ -42,7 +42,7 @@ const CartIncrementButton: React.FC<CartIncrementButtonProps> = ({ item, isMobil
          <CartIcncrementButton isMobileVersion={isMobile} onClick={() => incrementHandle(item)}>
             <CartPlus />
          </CartIcncrementButton>
-         <CartIcrementInput isMobileVersion={isMobile} className={addClass} value={item.count} type="number" />
+         <CartIcrementInput isMobileVersion={isMobile} className={addClass} readOnly={true} value={item.count} type="number" />
          <CartDecrementButton isMobileVersion={isMobile} onClick={() => decrementHandle(item)}>
             <CartMinus />
          </CartDecrementButton>

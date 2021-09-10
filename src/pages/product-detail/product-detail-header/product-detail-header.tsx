@@ -35,29 +35,28 @@ interface UseProductProps {
 const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
     const { id } = useParams<any>();
     const isBuyer = useRole().userRole == 'ROLE_SELLER';
-    const [mainImage, setMainImage] = useState();
-    const [isInCart, setIsInCart] = useState(false);
-    const [isInWishlist, setIsInWishlist] = useState(false);
+    const [mainImage, setMainImage] = useState<any>();
+    const [isInCart, setIsInCart] = useState<boolean>(false);
+    const [isInWishlist, setIsInWishlist] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { addToCart, removeCart, addToWishlist, removeWishlist } = useActionCreators();
     const { cartItems } = useSelector((state) => state.cart);
-    const addToCartHandle = (item: any) => {
-        addToCart(item);
-        setIsInCart(!isInCart);
-    };
+
     useEffect(() => {
         for (let i = 0; i < cartItems.length; i++) {
-            if (cartItems[i].id === item.id) {
+            let tempId=!isEmptyObj(product) && product.id
+            if (cartItems[i].id ===tempId ) {
                 setIsInCart(true);
             }
         }
+    }, [product]);
 
-    }, []);
     useEffect(() => {
         setMainImage(!isEmptyObj(product) && product.addedPhotoWithImageUrls[0].photoUrl);
-    }, [product]);
-    const deleteFromCartHandle = (item: any) => {
-        removeCart(item);
+    }, [!isEmptyObj(product) && product.addedPhotoWithImageUrls!=null&&product]);
+
+    const addToCartHandle = (item: any) => {
+        addToCart(item);
         setIsInCart(!isInCart);
     };
 
@@ -79,34 +78,15 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
     };
     const heartButton = () => {
         !isBuyer && (isInWishlist
-            ? removeFromWishlistHandle(item)
-            : addToWishlistHandle(item));
-    };
-
-    const item = {
-        'id': id,
-        'route': '/catalog/details/samsung-6063033fb1a9f83cc5c612330',
-        'name': 'Apple / Смартфон iPhone 11 128GB (новая комплектация)',
-        'images': [
-            PhoneMain
-        ],
-        'priceResponse': {
-            'value': '7574000',
-            'currency': {
-                'id': '6063033fb1a9f83cc5c612330',
-                'name': 'Uzbekistan Sum',
-                'shortName': 'сум',
-                'code': 860,
-                'format': 2
-            }
-        }
+            ? removeFromWishlistHandle(product)
+            : addToWishlistHandle(product));
     };
 
     const imagesList =
         !isEmptyObj(product) && product.addedPhotoWithImageUrls != null
             ? product.addedPhotoWithImageUrls.filter((item: any, index: number) => index < 6)
             : [];
-
+    // console.log("rrrrR---->",!isEmptyObj(product) && product.addedPhotoWithImageUrls)
     const mainImg: any = () => {
         if (mainImage) return <ReactImageMagnify
             enlargedImageContainerDimensions={{ width: '100%', height: '100%' }}
@@ -126,7 +106,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
         >
         </ReactImageMagnify>;
         // <img src={mainImage} alt='MainImage' />;
-        if (!isEmptyObj(product) && product.addedPhotoWithImageUrls != null)
+        if (!isEmptyObj(product) && product.addedPhotoWithImageUrls!=null)
             return <ReactImageMagnify
                 enlargedImageContainerDimensions={{ width: '100%', height: '100%' }}
                 smallImage={{
@@ -146,6 +126,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
         // <img src={product.addedPhotoWithImageUrls[0].photoUrl} alt='MainImage' />;
         else return <img src={PhoneMain} alt='MainImage' />;
     };
+
     const currentImage = () => {
         if (mainImage) return mainImage;
         if (!isEmptyObj(product) && product.addedPhotoWithImageUrls != null)
@@ -154,7 +135,31 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
     const handleFullImage = () => {
         setIsOpen(true);
     };
-
+    const cardButtons = () => {
+        if(isBuyer){
+            return <Button
+                size={'medium'}
+                style={{ marginTop: 27 }}
+                btnType='disabled'
+            >Добавить в корзину</Button>
+        }
+        else if(!isInCart){
+            return <Button
+                size={'medium'}
+                style={{ marginTop: 27 }}
+                btnType={'default'}
+                onClick={() =>  addToCartHandle(product)}
+            >{'Добавить в корзину'}</Button>
+        }
+        else {
+            return <Button
+                size={'medium'}
+                style={{ marginTop: 27 }}
+                btnType={'disabled'}
+            >{'Товар добавлен в корзину'}</Button>
+        }
+    }
+console.log("isCard--->",isInCart)
     return (
         <DetailHeaderContainer>
             <LeftPictureContainer>
@@ -196,7 +201,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                 {/*</RatingContainer>*/}
 
                 <NewPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</NewPrice>
-                <OldPrice>{ product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</OldPrice>
+                <OldPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</OldPrice>
                 <>
                     {/*Future add colors*/}
                     {/*<BinaryTextConatiner>*/}
@@ -219,19 +224,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
                     <p>Продавец:</p><span
                     style={{ color: '#264796' }}>{!isEmptyObj(product) && product.addProductData.quantity}</span>
                 </BinaryTextConatiner>
-                {isBuyer
-                    ? <Button
-                        size={'medium'}
-                        style={{ marginTop: 27 }}
-                        btnType='disabled'
-                    >Добавить в корзину</Button>
-                    : <Button
-                        size={'medium'}
-                        style={{ marginTop: 27 }}
-                        btnType={isInCart ? 'disabled' : 'default'}
-                        onClick={() => isInCart ? deleteFromCartHandle(item) : addToCartHandle(item)}
-                    >{isInCart ? 'Товар добавлен в корзину' : 'Добавить в корзину'}</Button>
-                }
+                {cardButtons()}
             </ProductInformation>
             {isOpen &&
             <FullImage
@@ -246,12 +239,13 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
 
 export default ProductDetailHeader;
 
+
+// PicturesItems Component
 interface ImagesProps {
     setMainPicture?: any;
     item?: any;
     mainImage: any;
 }
-
 
 const PicturesItems: React.FC<ImagesProps> = ({ setMainPicture, mainImage, item }) => {
     const [isActivee, setIsActive] = useState(false);
