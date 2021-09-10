@@ -42,7 +42,7 @@ const AddProduct = () => {
 
   return (
     <Container>
-      <AddProductContainer>
+      <AddProductContainer loading={loading}>
         {loading ? (
           <CircleLoader />
         ) : (

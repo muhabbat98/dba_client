@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const AddProductContainer = styled.div``;
+interface LoadingProps {
+  loading: boolean;
+}
+
+export const AddProductContainer = styled.div<LoadingProps>`
+  height: ${({ loading }) => (loading ? '350px' : 'auto')};
+`;
 
 export const AddProductList = styled.div`
   display: grid;

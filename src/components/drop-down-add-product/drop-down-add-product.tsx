@@ -1,7 +1,7 @@
 import React, { useState, SyntheticEvent, useEffect, useRef } from 'react';
+import { DropDownAddProductContainer } from './style';
 import { ReactComponent as Arrow } from '../../assets/icons/down-arrow.svg';
 import {
-  DropdownContainer,
   DropdownHeader,
   DropdownOptionList,
   DropdownOption,
@@ -10,7 +10,6 @@ import {
 } from './style';
 
 interface DropdownProps {
-  callback?: (data: string, parentId?: any) => void | null;
   label?: string;
   option?: any;
   selected?: string;
@@ -19,10 +18,10 @@ interface DropdownProps {
   parentId?: any;
   isReset?: number;
   isAddProduct?: boolean;
+  callback?: (data: string, parentId?: any) => void | null;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
-  callback,
+const DropDownAddProduct: React.FC<DropdownProps> = ({
   label,
   option,
   selected,
@@ -31,12 +30,12 @@ const Dropdown: React.FC<DropdownProps> = ({
   parentId,
   isReset,
   isAddProduct,
+  callback,
 }) => {
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState('');
-  const [selectedOption, setSelectedOption] = useState('Tanlang');
-
-  console.log('dropdown isReset ', isReset);
+  const [selectedOption, setSelectedOption] = useState<string>('Tanlang');
+  const [stateReset, setStateReset] = useState<number>(0);
 
   useEffect(() => {
     window.addEventListener('click', dropdownOverlayClick);
@@ -45,6 +44,12 @@ const Dropdown: React.FC<DropdownProps> = ({
       window.removeEventListener('click', dropdownOverlayClick);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (isReset && isReset > 0) {
+      setStateReset(stateReset + 1);
+    }
+  }, [isReset]);
 
   const options = option.map((item: any, i: any) => {
     return {
@@ -58,6 +63,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const selectItem = (item: any, e: SyntheticEvent, parentId?: any) => {
     setSelectedOption(item.value.name);
+    setStateReset(0);
 
     const target = e.target as HTMLLIElement;
     if (target.parentElement?.childElementCount !== undefined) {
@@ -101,29 +107,21 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   // foobar();
 
+  console.log('isReset ', isReset);
+
   return (
     <>
-      <DropdownContainer
+      <DropDownAddProductContainer
         ref={toggleRef}
         className="dropdown-container"
         style={style}
       >
         <DropdownHeader onClick={toggleList}>
           <DropdownLabel>{label}</DropdownLabel>
-          {isAddProduct ? (
-            <DropdownHeaderTitle>
-              {selectedOption}
-              <Arrow />
-            </DropdownHeaderTitle>
-          ) : (
-            <DropdownHeaderTitle>
-              {isAdmin
-                ? selectedOption || options[0].value.name
-                : getActiveName()}
-
-              <Arrow />
-            </DropdownHeaderTitle>
-          )}
+          <DropdownHeaderTitle>
+            {stateReset > 0 ? 'Tanlang' : selectedOption}
+            <Arrow />
+          </DropdownHeaderTitle>
         </DropdownHeader>
         {
           <DropdownOptionList className={isOpen} ref={dropdown}>
@@ -134,14 +132,14 @@ const Dropdown: React.FC<DropdownProps> = ({
                 className={item.selected ? 'selected' : ''}
                 onClick={(e: SyntheticEvent) => selectItem(item, e, parentId)}
               >
-                {isAdmin ? item.value.name : item.value}
+                {item.value.name}
               </DropdownOption>
             ))}
           </DropdownOptionList>
         }
-      </DropdownContainer>
+      </DropDownAddProductContainer>
     </>
   );
 };
 
-export default Dropdown;
+export default DropDownAddProduct;

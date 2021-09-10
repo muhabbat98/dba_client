@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import Card from '../card';
 import { GoodsGridContainer, FlexRow, FlexCol } from './style';
 
@@ -11,110 +11,39 @@ import Good6 from '../../assets/images/good6.png';
 import Good7 from '../../assets/images/good7.png';
 import Good8 from '../../assets/images/good8.png';
 
-const GoodsGrid = () => {
+interface GoodsGridProps {
+  item: any;
+}
+
+const GoodsGrid: FC<GoodsGridProps> = ({ item }) => {
+  console.log('iiiitem => ', item);
+
+  const getMainImage = (photoArray: any): string => {
+    for (let i = 0; i < photoArray.length; i++) {
+      if (photoArray[i].isMain) {
+        console.log('aaa ');
+        return photoArray[i].photoUrl;
+      }
+    }
+
+    return photoArray[0].photoUrl;
+  };
+
   return (
     <GoodsGridContainer>
       <FlexRow>
-        <FlexCol>
-          <Card
-            imgUrl={Good1}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={true}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good2}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={false}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good3}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={true}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good4}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={true}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good5}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={false}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good6}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={false}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good7}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={true}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good8}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={true}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good1}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={true}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
-        <FlexCol>
-          <Card
-            imgUrl={Good2}
-            categoryName="Мобильные телефоны"
-            title="Умные часы Samsung Galaxy Watch Active2..."
-            authorName="Филипп Назаров"
-            status={false}
-            sum="9 148 000 сум"
-          />
-        </FlexCol>
+        {item.map((i: any) => (
+          <FlexCol>
+            <Card
+              imgUrl={getMainImage(i.addedPhotoWithImageUrls)}
+              categoryName="Мобильные телефоны"
+              title={i.addProductData.name}
+              authorName={i.addProductData.quantity}
+              status={true}
+              sum={i.addProductData.price}
+            />
+          </FlexCol>
+        ))}
       </FlexRow>
     </GoodsGridContainer>
   );

@@ -12,6 +12,8 @@ import { AlertPosition } from '../../utils/alert-position-enum';
 import { axios } from '../../hooks';
 import isEmptyObj from '../../utils/isEmptyObj';
 import AddProductFormItemRecursive from './add-product-form-item';
+import Row from '../../components/grid/row';
+import Col from '../../components/grid/col';
 
 import {
   AddProductFormContainer,
@@ -40,6 +42,7 @@ import {
   AddProductWrapp,
   AddPhotoButton,
   ClearButton,
+  AddProductFormSaleBox,
 } from './style';
 
 import { ReactComponent as ArrowRight } from '../../assets/icons/arrow-right.svg';
@@ -48,6 +51,7 @@ import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-del
 import { ReactComponent as FirstView } from '../../assets/icons/first-view.svg';
 import { ReactComponent as AddProductPlus } from '../../assets/icons/add-product-plus-icon.svg';
 import SimpleInput from '../../components/simple-input';
+import AddProductPhotoV1 from './add-product-photo-V1';
 
 interface Params {
   categoryId: string;
@@ -59,6 +63,7 @@ interface AddProductDataType {
   price: string;
   quantity: string;
   productComment: string;
+  oldPrice: number;
 }
 
 interface DeliveryAddressType {
@@ -86,7 +91,8 @@ const AddProductForm = () => {
   const [collectiveJson, setCollectiveJson] = useState<any>(null);
   const [region, setRegion] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [isReset, setIsReset] = useState<boolean>(false);
+  const [isReset, setIsReset] = useState<number>(0);
+  const [isSale, setIsSale] = useState<boolean>(false);
   const [photoArray, setPhotoArray] = useState<any>([
     {
       photoData: '',
@@ -99,6 +105,7 @@ const AddProductForm = () => {
     price: '',
     quantity: '',
     productComment: '',
+    oldPrice: 0,
   });
   const [deliveryAddress, setDeliveryAddress] = useState<DeliveryAddressType>({
     province: '',
@@ -112,8 +119,12 @@ const AddProductForm = () => {
   }, []);
 
   const addProductChangeHandler = (ev: any) => {
-    const value = ev.target.value;
+    let value = ev.target.value;
     const name = ev.target.name;
+
+    if (name == 'oldPrice') {
+      value = Number(value);
+    }
 
     setAddProductData((prevState) => {
       return {
@@ -146,6 +157,8 @@ const AddProductForm = () => {
     parentId: any,
     isReference?: boolean
   ) => {
+    console.log('e => ', e);
+
     if (e) {
       if (typeof e == 'object') {
         e = e.target.value;
@@ -233,11 +246,19 @@ const AddProductForm = () => {
 
   const setDelivery = (ev: any) => {
     const val = ev.target.value;
-    console.log('val ', val);
     if (val == 'yes') {
       setOpenDeleivery(true);
     } else {
       setOpenDeleivery(false);
+    }
+  };
+
+  const setSale = (ev: any) => {
+    const val = ev.target.value;
+    if (val == 'yes') {
+      setIsSale(true);
+    } else {
+      setIsSale(false);
     }
   };
 
@@ -314,6 +335,7 @@ const AddProductForm = () => {
               setAddedPhotos(removedAddedPhotos);
             }
           }
+
           setPhotoArray(removedPhotoArray);
         }
       }
@@ -337,8 +359,19 @@ const AddProductForm = () => {
   };
 
   const resetHandle = () => {
-    setIsReset(true);
-    // setOpenDeleivery(false);
+    setIsReset(isReset + 1);
+    setAddProductData((prevState) => {
+      return {
+        ...prevState,
+        oldPrice: 0,
+      };
+    });
+
+    if (photoArray.length > 0) {
+      setPhotoArray([]);
+      setAddedPhotos([]);
+      setProductPhoto([]);
+    }
   };
 
   const sendData = async (ev: any) => {
@@ -380,6 +413,25 @@ const AddProductForm = () => {
     }
   };
 
+  // const checkDropdownIsFilled = (obj: any): boolean => {
+  //   obj.fields &&
+  //     obj.fields.map((item: any) => {
+  //       if (item.format == 'REFERENCE') {
+  //         if (typeof item.values === 'object') {
+  //           console.log('item.values instanceof Array');
+  //         }
+  //         console.log('dddd ', item.values);
+  //         return false;
+  //       }
+  //     });
+
+  //   if (obj.products.length > 0) {
+  //     obj.products.map((item: any) => checkDropdownIsFilled(item));
+  //   }
+
+  //   return true;
+  // };
+
   // console.log('allFields ', allFields);
 
   console.log('addedPhotos ', addedPhotos);
@@ -390,6 +442,8 @@ const AddProductForm = () => {
     <Container>
       <AddProductFormContainer>
         <form>
+          {/* <AddProductPhotoV1 /> */}
+
           <AddProductFormBreadcrumb>
             <AddProductFormBreadcrumbItem className="main">
               Электроника <ArrowRight />
@@ -411,17 +465,6 @@ const AddProductForm = () => {
                     name="name"
                     label="Введите название товара *"
                     placeholder="Введите название товара *"
-                    onChange={addProductChangeHandler}
-                  />
-                </AddProductFormItemBodyItem>
-
-                <AddProductFormItemBodyItem>
-                  <SimpleInput
-                    name="price"
-                    label="Стоимость *"
-                    placeholder="Стоимость *"
-                    // inputType="number"
-                    // inputValueHandler={addProductChangeHandler}
                     onChange={addProductChangeHandler}
                   />
                 </AddProductFormItemBodyItem>
@@ -450,6 +493,55 @@ const AddProductForm = () => {
                   Введите описание товара
                 </TextareaLabel>
               </AddProductFormItemBodyItem>
+            </AddProductWrapp>
+          </AddProductFormItem>
+
+          <AddProductFormItem>
+            <ProductTitle fSize={16} title="Скидка" />
+            <AddProductWrapp>
+              <AddProductFormSaleBox>
+                <Row>
+                  <Col xl={6}>
+                    <RadioButton
+                      value="yes"
+                      name="sale"
+                      label="Есть"
+                      callback={setSale}
+                    />
+                  </Col>
+                  <Col xl={6}>
+                    <RadioButton
+                      isChecked={true}
+                      value="no"
+                      name="sale"
+                      label="Нет"
+                      callback={setSale}
+                    />
+                  </Col>
+                </Row>
+              </AddProductFormSaleBox>
+
+              <AddProductFormItemBody>
+                <AddProductFormItemBodyItem>
+                  <SimpleInput
+                    name="price"
+                    label="Стоимость *"
+                    placeholder="Стоимость *"
+                    onChange={addProductChangeHandler}
+                  />
+                </AddProductFormItemBodyItem>
+
+                <AddProductFormItemBodyItem>
+                  {isSale ? (
+                    <SimpleInput
+                      name="oldPrice"
+                      label="Стоимость со скидкой *"
+                      placeholder="Стоимость со скидкой *"
+                      onChange={addProductChangeHandler}
+                    />
+                  ) : null}
+                </AddProductFormItemBodyItem>
+              </AddProductFormItemBody>
             </AddProductWrapp>
           </AddProductFormItem>
 
@@ -568,6 +660,7 @@ const AddProductForm = () => {
                   value="no"
                   name="delivery"
                   label="Нет"
+                  isChecked={true}
                   callback={setDelivery}
                 />
               </DeleiveryItem>

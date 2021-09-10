@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import Dropdown from '../drop-down';
+import DropDownAddProduct from '../drop-down-add-product';
 import SimpleInput from '../simple-input';
 
 enum FormatNames {
@@ -13,7 +14,7 @@ interface FieldProps {
   field: any;
   handleInput?: any;
   parentId?: any;
-  isReset?: boolean;
+  isReset?: number;
   isAddProduct?: boolean;
 }
 
@@ -40,6 +41,38 @@ const Field: FC<FieldProps> = ({
   const change = (e: any) => {
     if (handleInput) {
       handleInput(e, field.id, parentId, false);
+    }
+  };
+
+  const dropdownChecker = () => {
+    if (isAddProduct) {
+      return (
+        <DropDownAddProduct
+          callback={dropdownClicked}
+          selected={state.name}
+          isAdmin={true}
+          option={list}
+          label={fieldName}
+          style={{ marginBottom: '16px' }}
+          parentId={parentId}
+          isReset={isReset}
+          isAddProduct={isAddProduct}
+        />
+      );
+    } else {
+      return (
+        <Dropdown
+          callback={dropdownClicked}
+          selected={state.name}
+          isAdmin={true}
+          option={list}
+          label={fieldName}
+          style={{ marginBottom: '16px' }}
+          parentId={parentId}
+          isReset={isReset}
+          isAddProduct={isAddProduct}
+        />
+      );
     }
   };
 
@@ -84,19 +117,7 @@ const Field: FC<FieldProps> = ({
       );
 
     default:
-      return (
-        <Dropdown
-          callback={dropdownClicked}
-          selected={state.name}
-          isAdmin={true}
-          option={list}
-          label={fieldName}
-          style={{ marginBottom: '16px' }}
-          parentId={parentId}
-          isReset={isReset}
-          isAddProduct={isAddProduct}
-        />
-      );
+      return dropdownChecker();
   }
 };
 

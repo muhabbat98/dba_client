@@ -12,6 +12,8 @@ todo.txt
 # production
 /build
 
+/src/pages/add-product-form/add-product-photo-V1
+
 # misc
 .DS_Store
 .env.local
@@ -19,6 +21,7 @@ todo.txt
 .env.test.local
 .env.production.local
 to-do.txt
+todo-list.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

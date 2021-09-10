@@ -310,3 +310,16 @@ export const ClearButton = styled.input`
   font-weight: 600;
   line-height: 20px;
 `;
+
+export const AddProductFormSaleBox = styled.div`
+  margin-bottom: 24px;
+
+  & * {
+    font-size: 24px;
+    font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+`;

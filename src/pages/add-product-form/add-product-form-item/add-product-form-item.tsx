@@ -7,7 +7,7 @@ import { AddProductFormItemBodyItem } from './style';
 interface AddProductFormItemProps {
   item: any;
   handleInput: any;
-  isReset: boolean;
+  isReset: number;
   isAddProduct: boolean;
 }
 
