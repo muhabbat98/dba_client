@@ -15,6 +15,7 @@ interface MenuStateProps {
   stateHandler?: () => void | undefined;
 }
 const BottomHeader: React.FC<MenuStateProps> = ({ state, stateHandler }) => {
+
   const [componentState, setMenuComponentState] = useState<any>();
   useEffect(() => {
     setMenuComponentState(state);

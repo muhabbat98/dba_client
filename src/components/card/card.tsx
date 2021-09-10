@@ -27,6 +27,7 @@ import { ReactComponent as HeartFull } from '../../assets/icons/heart-full2.svg'
 import { ReactComponent as StarFill } from '../../assets/icons/star-full.svg';
 import { ReactComponent as StarEmpty } from '../../assets/icons/star-empty.svg';
 import { ReactComponent as CartIcon } from '../../assets/icons/cart.svg';
+import  DefaultImage from '../../assets/images/default.png';
 import { useError} from '../../hooks'
 import { Link } from 'react-router-dom';
 
@@ -91,7 +92,7 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
         <CardLabel>Новинка</CardLabel>
         <Link style={{display:"block"} } to={`/product-detail/${item.addProductData.name}/${item.id}`}>
           <CardImageWrapper>
-         { item.addedPhotoWithImageUrls!==null?<CardImg src={item.addedPhotoWithImageUrls[0].photoUrl} />:<></>}
+         { item.addedPhotoWithImageUrls!==null?<CardImg src={item.addedPhotoWithImageUrls[0].photoUrl} />:<CardImg src={DefaultImage}/>}
           </CardImageWrapper>
         </Link>
       </CardHeader>
