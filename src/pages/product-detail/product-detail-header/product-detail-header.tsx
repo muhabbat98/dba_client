@@ -86,7 +86,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
         !isEmptyObj(product) && product.addedPhotoWithImageUrls != null
             ? product.addedPhotoWithImageUrls.filter((item: any, index: number) => index < 6)
             : [];
-    // console.log("rrrrR---->",!isEmptyObj(product) && product.addedPhotoWithImageUrls)
+    console.log("rrrrR---->",!isEmptyObj(product) && product)
     const mainImg: any = () => {
         if (mainImage) return <ReactImageMagnify
             enlargedImageContainerDimensions={{ width: '100%', height: '100%' }}
@@ -159,7 +159,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
             >{'Товар добавлен в корзину'}</Button>
         }
     }
-console.log("isCard--->",isInCart)
+
     return (
         <DetailHeaderContainer>
             <LeftPictureContainer>
@@ -201,7 +201,7 @@ console.log("isCard--->",isInCart)
                 {/*</RatingContainer>*/}
 
                 <NewPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</NewPrice>
-                <OldPrice>{product ? FormatMoney(product.addProductData.price) : FormatMoney(7574000)} сум</OldPrice>
+                <OldPrice>{product&&product.addProductData.oldPrice!="0" ? `${FormatMoney(product.addProductData.oldPrice)}сум` : ""} </OldPrice>
                 <>
                     {/*Future add colors*/}
                     {/*<BinaryTextConatiner>*/}

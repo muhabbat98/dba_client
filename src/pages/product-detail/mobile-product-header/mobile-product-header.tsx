@@ -21,6 +21,7 @@ import {
     PriceTitles
 } from './style'
 import isEmptyObj from '../../../utils/isEmptyObj';
+import { OldPrice } from '../product-detail-header/style';
 
 const images = [
     {img:iPhone12},
@@ -105,7 +106,7 @@ const MobileProductHeader:React.FC<UseProductProps> = ({product}) => {
             </ReviewsContainer>
 
             <PriceTitles>{product?FormatMoney(product.addProductData.price):FormatMoney(7574000)} сум
-                {/*сум <span>8 416 000 сум</span>*/}
+                <span>{product&&product.addProductData.oldPrice!="0" ? `${FormatMoney(product.addProductData.oldPrice)}сум` : ""}</span>
             </PriceTitles>
             <MobileSlider items={!isEmptyObj(product)&&product.addedPhotoWithImageUrls!=null?!isEmptyObj(product)&&product.addedPhotoWithImageUrls:[{photoUrl:Defaultimage,img:"Default"}]}/>
 
