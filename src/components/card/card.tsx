@@ -40,7 +40,7 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
   const [isInCart, setIsInCart] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [loading, setLoading] = useState(true)
-  const [ data, setData] = useState<any>()
+  // const [ data, setData] = useState<any>()
 
   const { addToCart, removeCart, addToWishlist, removeWishlist } =
     useActionCreators();
@@ -52,16 +52,16 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
   console.log(item)
   useEffect(() => {
     
-    (async()=>{
-      try{
-        const response = await axios.get("product/getAllProducts")
-        setData(response.data)
-        setLoading(false)
-      }
-      catch(err){
-        checkError(err)
-      }
-    })()
+    // (async()=>{
+    //   try{
+    //     const response = await axios.get("product/getAllProducts")
+    //     setData(response.data)
+    //     setLoading(false)
+    //   }
+    //   catch(err){
+    //     checkError(err)
+    //   }
+    // })()
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].id === item.id) {
         setIsInCart(true);

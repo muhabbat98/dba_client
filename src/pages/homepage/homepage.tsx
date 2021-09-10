@@ -193,18 +193,18 @@ const Homepage = () => {
   const {checkError} = useError()
   const [loading, setLoading] = useState(true)
   const [carddata, setData] = useState<any>([])
-
+  const products = async()=>{
+    try{
+      const response = await axios.get("product/getAllProducts")
+      setData(response.data)
+      setLoading(false)
+    }
+    catch(err){
+      checkError(err)
+    }
+  }
   useEffect(()=>{
-    (async()=>{
-      try{
-        const response = await axios.get("product/getAllProducts")
-        setData(response.data)
-        setLoading(false)
-      }
-      catch(err){
-        checkError(err)
-      }
-    })()
+    products()
   },[])
   console.log("card data ",carddata,carddata.slice(carddata.length - 10, 10))
   return (
