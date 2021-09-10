@@ -102,7 +102,7 @@ const Card: React.FC<CardProps> = ({ item, style }) => {
         <CardLabel>Новинка</CardLabel>
         <Link style={{display:"block"} } to={`/product-detail/${item.addProductData.name}/${item.id}`}>
           <CardImageWrapper>
-            <CardImg src={item.addedPhotoWithImageUrls[0].photoUrl} />
+         { item.addedPhotoWithImageUrls!==null?<CardImg src={item.addedPhotoWithImageUrls[0].photoUrl} />:<></>}
           </CardImageWrapper>
         </Link>
       </CardHeader>
