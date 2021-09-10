@@ -33,6 +33,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
     const [activeMenu,setActiveMenu]= useState<any>(null);
     const { startLoading, endLoading, error } = useActionCreators();
     useEffect(()=>{
+        
         if(menuEls){
             console.log("menu elements",menuEls)
             setMenus(menuEls);
@@ -87,7 +88,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                     <Row>
                         <Col xl={3} lg={3} md={6}>
                             <List>
-                                {menus.map((item:any)=>{
+                                {menus.map((item:any)=>{                                   
                                     return(<ListItem onClick={(e: SyntheticEvent)=>handleActiveMenu(e,item)} >
                                     <MenuIcon onClick={(e: SyntheticEvent)=>activeChildrenlickHandle(e)}><Ic_Male/></MenuIcon>
                                     <MenuTitle  onClick={(e: SyntheticEvent)=> activeChildrenlickHandle(e)}>{item.name}</MenuTitle>
@@ -98,6 +99,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                         <Col  xl={4} lg={4} md={6}>
                         <ListWrapper >
                         {activeMenu?activeMenu.subCategories.map((item1:any,i:number)=>{
+                            console.log("item", item1, activeMenu)
                             if(i<Math.ceil(activeMenu.subCategories.length/2))
                             return(<ChildrenList className="content">
                                 <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}>

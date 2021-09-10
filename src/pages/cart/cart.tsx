@@ -50,7 +50,8 @@ import {
 } from './style';
 
 import { ReactComponent as CartDelete } from '../../assets/icons/cart-delete.svg';
-
+import  DefaultImage from '../../assets/images/default.png';
+import { CardImg } from '../../components/card/style';
 const Cart = () => {
   const { push } = useHistory();
   const { cartItems, tSum, totalCount, deliveryCost, totalSum } = useSelector((state) => state.cart);
@@ -182,7 +183,7 @@ const Cart = () => {
                             </CartCheckBoxWrapper>
                             <CartIconWrapper isChecked={item.isChecked}>
                               <CartItemImageLink to="">
-                                {item.addedPhotoWithImageUrls!==null ? <CartItemImage src={item.addedPhotoWithImageUrls[0].photoUrl} />:<></>}
+                                {item.addedPhotoWithImageUrls!==null ? <CartItemImage src={item.addedPhotoWithImageUrls[0].photoUrl} />:<CardImg src={DefaultImage}/>}
                               </CartItemImageLink>
                             </CartIconWrapper>
                             <CartInfo>

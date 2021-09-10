@@ -3,8 +3,9 @@ interface MenuElsProps{
     restNumEls?:number;
 }
 export const MenuWrapper = styled.div`
-width:90%;
+width:auto;
 height:85%;
+padding: 0.2rem 1rem;
 position:absolute;
 background-color:white;
 border:1px solid #CDCDCD;
@@ -13,7 +14,11 @@ z-index:999;
 display:inline-block;
 transition: all .3s linear;
 `;
+export const MenuContainer = styled.div`
+    width:100%;
+    padding: 1rem;
 
+`;
 export const BlurLayer = styled.div`
     width:100%;
     height:100%;

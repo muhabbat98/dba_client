@@ -77,9 +77,9 @@ export const CardImageWrapper = styled.div`
 
 export const CardImg = styled.img`
    max-width: 100%;
+   height: 100%;
    display: block;
    margin: auto;
-   height: 204px;
    object-fit: cover;
    border-radius: 8px;
 `;

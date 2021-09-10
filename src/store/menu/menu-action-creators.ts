@@ -15,6 +15,7 @@ export const fetchMenu = () => async (dispatch: Dispatch, getState: any) => {
   if (!menu.menu) {
     try {
       // startLoading();
+    
       const respone = await axios('/category/all');
       const data = await respone.data;
 
