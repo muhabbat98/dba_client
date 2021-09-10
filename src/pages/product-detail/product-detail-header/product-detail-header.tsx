@@ -5,7 +5,7 @@ import Button from '../../../components/button';
 import { useParams } from 'react-router-dom';
 import { useActionCreators, useRole, useSelector } from '../../../hooks';
 import { useWindowSize } from '../../../hooks/useWindowSize';
-import PhoneMain from '../../../assets/images/defaultProductimage.svg';
+import Defaultimage from '../../../assets/images/defaultProductimage.svg';
 import ReactImageMagnify from 'react-image-magnify';
 
 import { ReactComponent as Heart } from '../../../assets/icons/heart2.svg';
@@ -124,7 +124,7 @@ const ProductDetailHeader: React.FC<UseProductProps> = ({ product }) => {
             >
             </ReactImageMagnify>;
         // <img src={product.addedPhotoWithImageUrls[0].photoUrl} alt='MainImage' />;
-        else return <img src={PhoneMain} alt='MainImage' />;
+        else return <img src={Defaultimage} alt='MainImage' />;
     };
 
     const currentImage = () => {
