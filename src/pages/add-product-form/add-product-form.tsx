@@ -51,7 +51,7 @@ import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-del
 import { ReactComponent as FirstView } from '../../assets/icons/first-view.svg';
 import { ReactComponent as AddProductPlus } from '../../assets/icons/add-product-plus-icon.svg';
 import SimpleInput from '../../components/simple-input';
-import AddProductPhotoV1 from './add-product-photo-V1';
+// import AddProductPhotoV1 from './add-product-photo-V1';
 
 interface Params {
   categoryId: string;
