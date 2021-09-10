@@ -211,7 +211,7 @@ const Products = () => {
               <Row>
                 {data.map((item) => (
                   <Col key={item.id} xl={4} lg={6}>
-                    <Card item={item} style={{ marginBottom: '16px' }} />
+                    {/* <Card item={item} style={{ marginBottom: '16px' }} /> */}
                   </Col>
                 ))}
               </Row>
@@ -222,7 +222,7 @@ const Products = () => {
           <Row isMobile={true}>
             {data.map((item) => (
               <Col xs={6} sm={4} key={item.id}>
-                <CardMobile item={item} />
+                {/* <CardMobile item={item} /> */}
               </Col>
             ))}
           </Row>

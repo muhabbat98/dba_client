@@ -182,7 +182,7 @@ const Cart = () => {
                             </CartCheckBoxWrapper>
                             <CartIconWrapper isChecked={item.isChecked}>
                               <CartItemImageLink to="">
-                                <CartItemImage src={item.addedPhotoWithImageUrls[0].photoUrl} />
+                                {item.addedPhotoWithImageUrls!==null ? <CartItemImage src={item.addedPhotoWithImageUrls[0].photoUrl} />:<></>}
                               </CartItemImageLink>
                             </CartIconWrapper>
                             <CartInfo>
@@ -194,7 +194,7 @@ const Cart = () => {
                               <br/>
                               <CartManufactor>Сумма доставка:</CartManufactor>
                               <CartDelivery>
-                                25000 сум
+                                {item.deliveryAddress.deliveryPrice - 0} сум
                               </CartDelivery>
                             </CartInfo>
                           </CartBoxLeftContainer>

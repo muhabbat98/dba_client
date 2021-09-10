@@ -40,154 +40,10 @@ import CardImage7 from '../../assets/images/card-item7.png';
 import CardImage8 from '../../assets/images/card-item8.png';
 
 import catalogData from './data.json';
+import {  Route, Switch, useParams, useRouteMatch, useHistory } from 'react-router';
+import { indexOf } from 'lodash';
+import { Link } from 'react-router-dom';
 
-// export const data = [
-//    {
-//       "id": "6063033fb1a9f83cc5c61050",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "Умные часы Samsung Galaxy Watch Active2...",
-//       "images": [
-//          CardImage
-//       ],
-//       "priceResponse": {
-//          "value": "9148000",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    },
-//    {
-//       "id": "6063033fb1a9f83cc5c123120",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "Adidas / Мяч TEAM TrainingPr.",
-//       "images": [
-//          CardImage2
-//       ],
-//       "priceResponse": {
-//          "value": "206049",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    },
-//    {
-//       "id": "6063033fb1a9f83cc523423",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "Apple / Медиаплеер Apple TV 32GB...",
-//       "images": [
-//          CardImage3
-//       ],
-//       "priceResponse": {
-//          "value": "1 849 000",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    },
-
-//    {
-//       "id": "606dfsd83cc52sd3423",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "Adidas / Кроссовки D Rose 773 2020...",
-//       "images": [
-//          CardImage4
-//       ],
-//       "priceResponse": {
-//          "value": "629 000",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    },
-//    {
-//       "id": "60dfgreteewwsd3423",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "PUMA / Сникеры Puma Backcourt Mid",
-//       "images": [
-//          CardImage5
-//       ],
-//       "priceResponse": {
-//          "value": "682 900",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    },
-//    {
-//       "id": "60dfgretee36343643",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "Apple / Смартфон iPhone 12 Pro 128GB",
-//       "images": [
-//          CardImage6
-//       ],
-//       "priceResponse": {
-//          "value": "12 798 000",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    },
-//    {
-//       "id": "60dfgretee3634453643",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "Apple / Наушники AirPods Pro с беспроводным...",
-//       "images": [
-//          CardImage7
-//       ],
-//       "priceResponse": {
-//          "value": "2 572 000 ",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    },
-//    {
-//       "id": "60dfgretee3avcc3443",
-//       "route": "/catalog/details/samsung--6063033fb1a9f83cc5c61050",
-//       "name": "Sweet Baby / Прогулочная коляска... ",
-//       "images": [
-//          CardImage8
-//       ],
-//       "priceResponse": {
-//          "value": "2 085 000 ",
-//          "currency": {
-//             "id": "605b73ecd3f290742ec3f957",
-//             "name": "Uzbekistan Sum",
-//             "shortName": "сум",
-//             "code": 860,
-//             "format": 2
-//          }
-//       }
-//    }
-// ]
 
 SwiperCore.use([Navigation]);
 
@@ -195,20 +51,47 @@ const Catalog = () => {
    const {checkError} = useError()
    const [loading, setLoading] = useState(true)
    const [carddata, setData] = useState<any>([])
- 
+   const [category, setCategory] = useState<any>([])
+   const [compile, setCompile] = useState(false)
+
+   type CategoryId  = {
+      id:string
+   }
+
+   const { id } = useParams<CategoryId>()
+
+   const history = useHistory()
+   console.log(history)
    useEffect(()=>{
-     (async()=>{
-       try{
-         const response = await axios.get("product/getAllProducts")
-         setData(response.data)
+      product()
+      catalog()
+    },[])
+   
+   const catalog = async()=>{
+      try{
+         const res = await axios.get("catalog?parentId="+ (id ? id : ""))
+         setCategory(res.data)
+         if(res.data.length === 0){
+            history.replace(`/products/${id}`)
+        }
          setLoading(false)
-       }
-       catch(err){
-         checkError(err)
-       }
-     })()
-   },[])
-   console.log("card data ",carddata)
+      }
+      catch(err){
+        checkError(err)
+      }
+   }
+
+   const product = async()=>{
+      try{
+        const response = await axios.get("product/getAllProducts")
+        setData(response.data)
+        setLoading(false)
+      }
+      catch(err){
+        checkError(err)
+      }
+   }
+console.log(id)
    return (
       <CatalogContainer>
          <Container>
@@ -217,9 +100,10 @@ const Catalog = () => {
                <Col xl={3}>
                   <SidebarCategoryBox>
                      <CatalogLeftMmenuUl>
-                        {
+                        {/* {
                            catalogData.subCategories.map(item => <CatalogLeftMmenu items={item} />)
-                        }
+                        } */}
+                        {category.map((item:any, i:number)=><CatalogLeftMmenu items={item} />)}
                      </CatalogLeftMmenuUl>
                   </SidebarCategoryBox>
                </Col>
@@ -247,62 +131,21 @@ const Catalog = () => {
                   </AdvertiseCatalog>
                   <MainCatalog>
                      <Row>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog1})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Телевизори</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog2})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Смартфоны</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog3})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Беспроводные наушники</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog4})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Умные часы и браслеты</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog5})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Игровые приставки</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog6})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Фотокамери</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog7})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Планшеты</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
-                        <Col xl={3}>
-                           <MainCatalogImage style={{ backgroundImage: `url(${Catalog8})` }}>
-                              <MainCatalogLink to="">
-                                 <MainCatalogTitle>Умний дом</MainCatalogTitle>
-                              </MainCatalogLink>
-                           </MainCatalogImage>
-                        </Col>
+                     {
+                           category.map((one:any, i:number)=>{
+                              return (
+                             
+                                 <Col xl={3} key={i}>                                    
+                                    <MainCatalogImage style={{ backgroundImage: `url(${one.imageUrl})` }}>                                    
+                                       <MainCatalogLink to={`${one.id}`} >
+                                          <MainCatalogTitle>{one.name}</MainCatalogTitle>
+                                       </MainCatalogLink>
+                                    </MainCatalogImage>                                    
+                                 </Col>
+                          
+                              )
+                           })
+                        }
                      </Row>
                   </MainCatalog>
                   <CatalogSimilarProducts>

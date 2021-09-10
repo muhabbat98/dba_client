@@ -51,8 +51,8 @@ const Products:React.FC<ProductsProps> = ({product,isOpen}) => {
             {width>768 ?
                 <>
                     <div>
-                        {!isEmptyObj(deep)&&deep.fields.map((item:any)=>(
-                            <CharacterContainer key={item.id} style={{display:"flex"}}>
+                        {!isEmptyObj(deep)&&deep.fields.map((item:any,index:number)=>(
+                            <CharacterContainer key={index} style={{display:"flex"}}>
                                 <CharacterText>{item.name}</CharacterText>
                                 <Dots></Dots>
                             </CharacterContainer>

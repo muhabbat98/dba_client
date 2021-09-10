@@ -9,6 +9,7 @@ import  PhoneMain from '../product-detail-header/images/phoneMain.svg'
 import  Phone1 from '../product-detail-header/images/phone1.svg'
 import  iPhone12 from '../product-detail-header/images/iPhone12.svg'
 import  Phone3 from '../product-detail-header/images/phone3.svg'
+import Defaultimage from '../../../assets/images/defaultProductimage.svg';
 import {ReactComponent as Heart} from '../../../assets/icons/heart2.svg'
 import {ReactComponent as HeartFull} from '../../../assets/icons/heart-full2.svg'
 import {
@@ -92,19 +93,21 @@ const MobileProductHeader:React.FC<UseProductProps> = ({product}) => {
         <>
             <ProductTitle>{!isEmptyObj(product)?product.addProductData.name:'Apple / Смартфон iPhone 11 128GB (новая комплектация)'}</ProductTitle>
 
-            {/*<ReviewsContainer>*/}
-            {/*    <Reviews><Star/><span>4</span> <p>(1241) отзывов</p></Reviews>*/}
-            {/*    <div onClick={heartButton}>*/}
-            {/*        {!isBuyer && isInWishlist ?*/}
-            {/*            <HeartFull style={{width:17,height:17}}/>*/}
-            {/*            :<Heart style={{width:17,height:17}}/>}*/}
-            {/*    </div>*/}
-            {/*</ReviewsContainer>*/}
+            <ReviewsContainer>
+                <Reviews>
+                    {/*<Star/><span>4</span> <p>(1241) отзывов</p>*/}
+                </Reviews>
+                <div onClick={heartButton}>
+                    {!isBuyer && isInWishlist ?
+                        <HeartFull style={{width:17,height:17}}/>
+                        :<Heart style={{width:17,height:17}}/>}
+                </div>
+            </ReviewsContainer>
 
             <PriceTitles>{product?FormatMoney(product.addProductData.price):FormatMoney(7574000)} сум
                 {/*сум <span>8 416 000 сум</span>*/}
             </PriceTitles>
-            <MobileSlider items={!isEmptyObj(product)&&product.addedPhotoWithImageUrls}/>
+            <MobileSlider items={!isEmptyObj(product)&&product.addedPhotoWithImageUrls!=null?!isEmptyObj(product)&&product.addedPhotoWithImageUrls:[{photoUrl:Defaultimage,img:"Default"}]}/>
 
             {/*<BinaryTextConatiner>*/}
             {/*    <p>Цвет товара:</p><span>синий</span>*/}
