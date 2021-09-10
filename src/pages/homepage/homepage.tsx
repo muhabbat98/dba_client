@@ -206,7 +206,7 @@ const Homepage = () => {
       }
     })()
   },[])
-  console.log("card data ",carddata)
+  console.log("card data ",carddata,carddata.slice(carddata.length - 10, 10))
   return (
     <div>
         {/*Skleton loader */}
@@ -216,7 +216,7 @@ const Homepage = () => {
         <Cont>
           <Container>
             <ProductsTitle style={{ marginBottom: '0px' }} title="Новинки" />
-            <Slider data={carddata.slice(carddata.length - 10, 10).reverse()} />
+            <Slider data={carddata.length<10 ? carddata.slice(0, 10).reverse():carddata.slice(carddata.length - 10, 10)} />
           </Container>
         </Cont> 
       ) : null}
