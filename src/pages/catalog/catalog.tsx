@@ -61,7 +61,7 @@ const Catalog = () => {
    const { id } = useParams<CategoryId>()
 
    const history = useHistory()
-
+   console.log(history)
    useEffect(()=>{
       product()
       catalog()
@@ -91,7 +91,7 @@ const Catalog = () => {
         checkError(err)
       }
    }
-console.log(category)
+console.log(id)
    return (
       <CatalogContainer>
          <Container>
@@ -134,13 +134,15 @@ console.log(category)
                      {
                            category.map((one:any, i:number)=>{
                               return (
+                             
                                  <Col xl={3} key={i}>                                    
                                     <MainCatalogImage style={{ backgroundImage: `url(${one.imageUrl})` }}>                                    
-                                       <MainCatalogLink to={`${one.id}`}>
+                                       <MainCatalogLink to={`${one.id}`} >
                                           <MainCatalogTitle>{one.name}</MainCatalogTitle>
                                        </MainCatalogLink>
                                     </MainCatalogImage>                                    
                                  </Col>
+                          
                               )
                            })
                         }
