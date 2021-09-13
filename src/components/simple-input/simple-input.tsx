@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {} from './style';
 import { InputElement, InputWrapper, Label } from './style';
-import inputLetter, { onlyNumber } from '../../utils/input-letter';
+import inputLetter, { maskForMoney, onlyNumber } from '../../utils/input-letter';
 
 interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -10,7 +10,7 @@ interface Propses extends React.InputHTMLAttributes<HTMLInputElement> {
   defaultValue?: any;
   inputValueHandler?: any;
   parentId?: any;
-  inputType?: 'string' | 'number';
+  inputType?: 'string' | 'number'|'moneyFormat';
   isReset?: any;
 }
 const SimpleInput: React.FC<Propses> = ({
@@ -71,6 +71,20 @@ const SimpleInput: React.FC<Propses> = ({
           onBlur={(e) => onBlur(e)}
         />
       );
+    }
+    else if(inputType=='moneyFormat'){
+        return (
+            <InputElement
+                {...rest}
+                onChange={(e: any) => setString(maskForMoney(e.target.value))}
+                value={string}
+                defaultValue={defaultValue}
+                autoFocus={isFocus ? true : false}
+                placeholder={!isFocus ? placeholder : ''}
+                isfocus={isFocus}
+                onBlur={(e) => onBlur(e)}
+            />
+        );
     }
   };
 

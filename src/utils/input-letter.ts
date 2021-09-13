@@ -74,3 +74,10 @@ export const anotherThreepleCard = (e:any) => {
     }
     return "";
 }
+
+export const maskForMoney = (e:any) =>{
+    if(e){
+        return e.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+    return '';
+}
