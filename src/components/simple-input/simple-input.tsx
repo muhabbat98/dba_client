@@ -31,16 +31,10 @@ const SimpleInput: React.FC<Propses> = ({
   const [number, setNumber] = useState<any>('');
   const [string, setString] = useState<any>('');
   const [money, setMoney] = useState<any>('');
-
-  const getStates = () => {
-    if (inputType && inputType == 'string') return string;
-    if (inputType && inputType == 'number') return number;
-    if (inputType && inputType == 'moneyFormat') return money;
-  };
+  const [ev, setEv] = useState<any>();
 
   useEffect(() => {
-    inputValueHandler && inputValueHandler(getStates());
-    //   inputValueHandler(inputType && inputType == 'string' ? string : number);
+    inputValueHandler && inputValueHandler(ev && ev);
   }, [number, string, money]);
 
   useEffect(() => {
@@ -48,10 +42,9 @@ const SimpleInput: React.FC<Propses> = ({
       setNumber('');
       setString('');
       setMoney('');
+      setEv(null);
     }
   }, [isReset]);
-
-  console.log('money--', money);
 
   const onBlur = (e: any) => {
     setIsFocus(true);
@@ -60,13 +53,16 @@ const SimpleInput: React.FC<Propses> = ({
       setIsFocus(true);
     } else setIsFocus(false);
   };
-  console.log('res-->', isReset);
+
   const inputMaskType = () => {
     if (inputType == 'number') {
       return (
         <InputElement
           {...rest}
-          onChange={(e: any) => setNumber(onlyNumber(e.target.value))}
+          onChange={(e: any) => {
+            setNumber(onlyNumber(e.target.value));
+            setEv(e);
+          }}
           value={number}
           defaultValue={defaultValue}
           autoFocus={isFocus ? true : false}
@@ -79,7 +75,10 @@ const SimpleInput: React.FC<Propses> = ({
       return (
         <InputElement
           {...rest}
-          onChange={(e: any) => setString(inputLetter(e.target.value))}
+          onChange={(e: any) => {
+            setString(inputLetter(e.target.value));
+            setEv(e);
+          }}
           value={string}
           defaultValue={defaultValue}
           autoFocus={isFocus ? true : false}
@@ -89,12 +88,13 @@ const SimpleInput: React.FC<Propses> = ({
         />
       );
     } else if (inputType == 'moneyFormat') {
-      console.log('moneyy--->', money);
-      console.log('inputType', inputType);
       return (
         <InputElement
           {...rest}
-          onChange={(e: any) => setMoney(maskForMoney(e.target.value))}
+          onChange={(e: any) => {
+            setMoney(maskForMoney(e.target.value));
+            setEv(e);
+          }}
           value={money}
           defaultValue={defaultValue}
           autoFocus={isFocus ? true : false}

@@ -120,20 +120,22 @@ const AddProductForm = () => {
   }, []);
 
   const addProductChangeHandler = (ev: any) => {
-    console.log('EV => ', ev);
+    console.log('EV => ', ev && ev.target.value);
 
-    // let value = ev.target.value;
-    // const name = ev.target.name;
-    // // console.log(maskForMoney(value));
-    // if (name == 'oldPrice') {
-    //   value = Number(value);
-    // }
-    // setAddProductData((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     [name]: value,
-    //   };
-    // });
+    if (ev) {
+      let value = ev.target.value;
+      const name = ev.target.name;
+      // console.log(maskForMoney(value));
+      if (name == 'oldPrice') {
+        value = Number(value);
+      }
+      setAddProductData((prevState) => {
+        return {
+          ...prevState,
+          [name]: value,
+        };
+      });
+    }
   };
 
   const deliveryPriceHandler = (ev: any) => {
