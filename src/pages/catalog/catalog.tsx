@@ -93,7 +93,7 @@ const Catalog = () => {
         checkError(err)
       }
    }
-console.log("cat",category)
+
    return (
       <CatalogContainer>
          <Container>

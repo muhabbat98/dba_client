@@ -1,6 +1,6 @@
 import React,{SyntheticEvent,useEffect,useState} from "react";
 import { useActionCreators } from '../../hooks';
-import {Link} from 'react-router-dom';
+import {Link, useRouteMatch} from 'react-router-dom';
 
 import {
     ListWrapper,
@@ -23,15 +23,19 @@ import Col from '../grid/col';
 import { ReactComponent as Ic_Male } from "./assets/ic_male.svg"; 
 import { ReactComponent as Ic_Female } from "./assets/ic_female.svg"; 
 import { ReactComponent as Ad_img } from "./assets/ad_img.svg"; 
+import { inherits } from "util";
 
 interface MenuProps {
     menuEls?:any;
     stateHandler?: ()=>void;
 }
 const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
+    let { url, path } = useRouteMatch();
+    
     const [menus,setMenus] = useState<any>([]);
     const [activeMenu,setActiveMenu]= useState<any>(null);
     const { startLoading, endLoading, error } = useActionCreators();
+
     useEffect(()=>{
         
         if(menuEls){
@@ -76,11 +80,13 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
         if(stateHandler)
             stateHandler();
     }
+    
     const handleOutsideClick =()=>{
             setTimeout(function(){
                 handleClose();
             },100);
     }
+
     return(<>
         <BlurLayer onClick={handleOutsideClick}>
             <MenuWrapper onClick={(e)=>e.stopPropagation()}>
@@ -88,6 +94,14 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                     <Row>
                         <Col xl={3} lg={3} md={6}>
                             <List>
+                        
+                                <Link to="/catalog/" style={{ textDecoration:"none", color:"inherit"}} onClick={()=>handleOutsideClick()}>
+                                    <ListItem>
+                                        <MenuIcon ><Ic_Male/></MenuIcon>
+                                        <MenuTitle >Catalog</MenuTitle>
+                                    </ListItem>
+                                </Link>
+              
                                 {menus.map((item:any)=>{                                   
                                     return(<ListItem onClick={(e: SyntheticEvent)=>handleActiveMenu(e,item)} >
                                     <MenuIcon onClick={(e: SyntheticEvent)=>activeChildrenlickHandle(e)}><Ic_Male/></MenuIcon>
@@ -102,14 +116,14 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                             console.log("item", item1, activeMenu)
                             if(i<Math.ceil(activeMenu.subCategories.length/2))
                             return(<ChildrenList className="content">
-                                <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}>
+                                <Link style={{ textDecoration:"none"}} to={"/catalog/"+item1.id}  onClick={()=>handleOutsideClick()}>
                                 <ChildListItem className="parent">
                                     <ChildTitle>{item1.name}</ChildTitle>
                                 </ChildListItem>
                                 </Link>
                                {item1.subCategories.map((item2:any,i:number)=>{
                                  if(i<5)
-                                   return(<Link style={{ textDecoration:"none"}} to={item2.route}  onClick={handleOutsideClick}>
+                                   return(<Link style={{ textDecoration:"none"}} to={"/catalog/"+item2.id}  onClick={handleOutsideClick}>
                                        <ChildListItem className="">
                                         <ChildTitle>{item2.name}</ChildTitle>
                                     </ChildListItem></Link>)
@@ -125,7 +139,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                     }
                                 )}</ShowMoreElements> */}
                                {item1.subCategories.length>5?
-                               <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}><ChildListItem className="">
+                               <Link style={{ textDecoration:"none"}} to={"/catalog/"+item1.id}  onClick={handleOutsideClick}><ChildListItem className="">
                                         <ChildTitle style={{color:'#264796'}}>Все категория...</ChildTitle>
                                 </ChildListItem></Link>:''}
                         </ChildrenList>)}):''}</ListWrapper>
@@ -135,14 +149,14 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                         {activeMenu?activeMenu.subCategories.slice(0).reverse().map((item1:any,i:number)=>{
                             if(i<activeMenu.subCategories.length-Math.ceil(activeMenu.subCategories.length/2))
                             return(<ChildrenList className="content">
-                                    <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}>
+                                    <Link style={{ textDecoration:"none"}} to={"/catalog/"+item1.id}  onClick={handleOutsideClick}>
                                         <ChildListItem className="parent">
                                             <ChildTitle>{item1.name}</ChildTitle>
                                         </ChildListItem></Link>
                                     {item1.subCategories.map((item2:any,i:number)=>{
                                         if(i<5)
         
-                                        return(<Link style={{ textDecoration:"none"}} to={item2.route}  onClick={handleOutsideClick}><ChildListItem className="">
+                                        return(<Link style={{ textDecoration:"none"}} to={"/catalog/"+item2.id}  onClick={handleOutsideClick}><ChildListItem className="">
                                                 <ChildTitle>{item2.name}</ChildTitle>
                                             </ChildListItem></Link>)
                                         })}
@@ -156,7 +170,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                                             </ChildListItem>)
                                             }
                                         )}</ShowMoreElements> */}
-                                        {item1.subCategories.length>5? <Link style={{ textDecoration:"none"}} to={item1.route}  onClick={handleOutsideClick}><ChildListItem className="">
+                                        {item1.subCategories.length>5? <Link style={{ textDecoration:"none"}} to={"/catalog/"+item1.id}  onClick={handleOutsideClick}><ChildListItem className="">
                                                 <ChildTitle onClick={(e:SyntheticEvent)=>handleShowMore(e)} style={{color:'#264796'}}>Все категория</ChildTitle>
                                         </ChildListItem></Link>:''}
                                 </ChildrenList>)}):''}
