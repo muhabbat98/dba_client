@@ -43,6 +43,7 @@ import catalogData from './data.json';
 import {  Route, Switch, useParams, useRouteMatch, useHistory } from 'react-router';
 import { indexOf } from 'lodash';
 import { Link } from 'react-router-dom';
+import { title } from 'process';
 
 
 SwiperCore.use([Navigation]);
@@ -53,7 +54,7 @@ const Catalog = () => {
    const [carddata, setData] = useState<any>([])
    const [category, setCategory] = useState<any>([])
    const [compile, setCompile] = useState(false)
-
+   const [maintitle, setTitle] = useState("glavniy")
    type CategoryId  = {
       id:string
    }
@@ -61,10 +62,11 @@ const Catalog = () => {
    const { id } = useParams<CategoryId>()
 
    const history = useHistory()
-   console.log(history)
+
    useEffect(()=>{
       product()
       catalog()
+      console.log(maintitle)
     },[])
    
    const catalog = async()=>{
@@ -91,11 +93,12 @@ const Catalog = () => {
         checkError(err)
       }
    }
-console.log(id)
+console.log("cat",category)
    return (
       <CatalogContainer>
          <Container>
-            <ProductsTitle title="Электроника" />
+         
+            <ProductsTitle title={maintitle}/>
             <Row>
                <Col xl={3}>
                   <SidebarCategoryBox>
@@ -131,13 +134,14 @@ console.log(id)
                   </AdvertiseCatalog>
                   <MainCatalog>
                      <Row>
+                   
                      {
                            category.map((one:any, i:number)=>{
                               return (
                              
                                  <Col xl={3} key={i}>                                    
-                                    <MainCatalogImage style={{ backgroundImage: `url(${one.imageUrl})` }}>                                    
-                                       <MainCatalogLink to={`${one.id}`} >
+                                    <MainCatalogImage onClick={()=>console.log("hello")} style={{ backgroundImage: `url(${one.imageUrl})` }}>                                    
+                                       <MainCatalogLink   to={`${one.id}`} >
                                           <MainCatalogTitle>{one.name}</MainCatalogTitle>
                                        </MainCatalogLink>
                                     </MainCatalogImage>                                    
