@@ -1,12 +1,12 @@
 import { Card, CardContent, Container, Typography } from '@material-ui/core'
-import { useRef } from 'react'
+import About from './About'
 import Resourse from './Resourses'
-
+import Workers from './Workers'
 const {USER} = require('../../Graphql/Query')
 const {useQuery} =require('@apollo/client')
 
 export default function Home (){
-    const counts = useRef()
+
     const { data} = useQuery(USER,{
         variables:{
             userId:parseInt(localStorage.getItem('userid'))
@@ -44,5 +44,7 @@ export default function Home (){
                 </CardContent>
             </Card>
         </Container>
+        <About/>
+        <Workers/>
     </>)
 }

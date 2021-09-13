@@ -119,3 +119,22 @@ export const CREATE_FORIEGN_BOOK = gql`
 		}
  
 `;
+
+export const ADD_USER = gql`
+	mutation AddUser(
+  $username: String!
+  $password: String!
+  $isAdmin: Boolean
+  $fullName: String
+) {
+  addUser(
+    useInfo: {
+      username: $username
+      password: $password
+      fullName: $fullName
+      isAdmin: $isAdmin
+    }
+  )
+}
+ 
+`;

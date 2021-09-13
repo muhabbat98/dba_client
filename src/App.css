@@ -199,6 +199,7 @@ code {
 
 .foriegn-body {
   background-color: white;
+  padding: 50px 0px;
 }
 .book-card {
   padding: 2rem 0px;
@@ -405,4 +406,90 @@ code {
   position: absolute;
   top: 0;
   left: 0;
+}
+.home-about {
+  margin: 50px 0px;
+  background-color: var(--main-text-color);
+  min-height: 50vh;
+}
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.home-container > div {
+  padding: 2rem 0px;
+  width: 42%;
+}
+
+.home-container > div:first-child {
+  color: #fff;
+}
+.home-about-text h2 {
+  font-size: 2rem;
+  text-align: center;
+}
+.home-about-text a {
+  color: var(--main-text-color);
+  background-color: var(--secondary-text-color);
+  text-decoration: none;
+  font-size: 16px;
+  padding: 16px;
+  display: inline-block;
+  margin: 16px 0px;
+  transition: 0.3s ease;
+}
+.home-about-text a:hover {
+  background-color: #fff;
+}
+.home-about-card > div {
+  width: 48%;
+  background-color: white;
+  padding: 16px;
+  margin-top: 16px;
+  position: relative;
+}
+.home-about-card > div::before {
+  content: "";
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: 0.3s ease;
+}
+.home-about-card > div:hover::before {
+  background-color: var(--secondary-text-color);
+}
+.home-about-card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.home-about-card h4 {
+  color: var(--main-text-color);
+  text-align: center;
+  font-size: 16px;
+}
+.home-about-card {
+  color: gray;
+  font-size: 12px;
+}
+.visiblity-button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  position: relative;
+  left: -3rem;
+  top: 3px;
+}
+.team-members {
+  margin: 5rem 0px;
+}
+.team-picture {
+  width: 300px;
+  height: 200px;
 }
