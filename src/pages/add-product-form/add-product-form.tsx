@@ -51,6 +51,7 @@ import { ReactComponent as DeleteIcon } from '../../assets/icons/add-product-del
 import { ReactComponent as FirstView } from '../../assets/icons/first-view.svg';
 import { ReactComponent as AddProductPlus } from '../../assets/icons/add-product-plus-icon.svg';
 import SimpleInput from '../../components/simple-input';
+import { maskForMoney } from '../../utils/input-letter';
 // import AddProductPhotoV1 from './add-product-photo-V1';
 
 interface Params {
@@ -119,19 +120,22 @@ const AddProductForm = () => {
   }, []);
 
   const addProductChangeHandler = (ev: any) => {
-    let value = ev.target.value;
-    const name = ev.target.name;
+    console.log('EV => ', ev && ev.target.value);
 
-    if (name == 'oldPrice') {
-      value = Number(value);
+    if (ev) {
+      let value = ev.target.value;
+      const name = ev.target.name;
+      // console.log(maskForMoney(value));
+      if (name == 'oldPrice') {
+        value = Number(value);
+      }
+      setAddProductData((prevState) => {
+        return {
+          ...prevState,
+          [name]: value,
+        };
+      });
     }
-
-    setAddProductData((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
-    });
   };
 
   const deliveryPriceHandler = (ev: any) => {
@@ -542,6 +546,7 @@ const AddProductForm = () => {
                     name="price"
                     label="Стоимость *"
                     placeholder="Стоимость *"
+                    inputType={'moneyFormat'}
                     onChange={addProductChangeHandler}
                   />
                 </AddProductFormItemBodyItem>
@@ -552,7 +557,10 @@ const AddProductForm = () => {
                       name="oldPrice"
                       label="Стоимость со скидкой *"
                       placeholder="Стоимость со скидкой *"
-                      onChange={addProductChangeHandler}
+                      inputType={'moneyFormat'}
+                      isReset={isReset}
+                      // onChange={addProductChangeHandler}
+                      inputValueHandler={addProductChangeHandler}
                     />
                   ) : null}
                 </AddProductFormItemBodyItem>
