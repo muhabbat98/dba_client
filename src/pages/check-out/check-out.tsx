@@ -34,7 +34,7 @@ import {
   PaymentText,
   Line
 } from './style';
-
+import  DefaultImage from '../../assets/images/default.png';
 enum ActionSteps {
   RECIPIENT = 1,
   ADDRESS = 0,
@@ -66,7 +66,7 @@ const CheckOut = () => {
             {cart.checkedAll.map((element, index) => (
               <CartContainItem key={index}>
                 <CartItemMedia>
-                  <CartItemImg src={element.addedPhotoWithImageUrls[0].photoUrl} />
+                {element.addedPhotoWithImageUrls?<CartItemImg src={element.addedPhotoWithImageUrls[0].photoUrl} />:<CartItemImg src={DefaultImage} />}
                 </CartItemMedia>
                 <CartItemText count={element.count}>
                   {element.name}

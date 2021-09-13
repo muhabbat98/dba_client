@@ -9,9 +9,10 @@ interface ColBreakpoints {
    xs?: number; // < 576px dan kichik
 }
 
-const Col: React.FC<ColBreakpoints> = ({ xl, lg, md, sm, xs, children }) => {
+const Col: React.FC<ColBreakpoints> = ({ xl, lg, md, sm, xs, children}) => {
+   
    return (
-      <ColContainer size={{xl, lg, md, sm, xs}}>
+      <ColContainer size={{xl, lg, md, sm, xs}}  >
          {children}
       </ColContainer>
    )
