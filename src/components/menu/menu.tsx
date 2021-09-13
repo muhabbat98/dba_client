@@ -39,7 +39,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
     useEffect(()=>{
         
         if(menuEls){
-            console.log("menu elements",menuEls)
+         
             setMenus(menuEls);
             setActiveMenu(menuEls[0]);
             endLoading();
@@ -113,7 +113,7 @@ const MenuContainer:React.FC<MenuProps>=({menuEls,stateHandler})=>{
                         <Col  xl={4} lg={4} md={6}>
                         <ListWrapper >
                         {activeMenu?activeMenu.subCategories.map((item1:any,i:number)=>{
-                            console.log("item", item1, activeMenu)
+                
                             if(i<Math.ceil(activeMenu.subCategories.length/2))
                             return(<ChildrenList className="content">
                                 <Link style={{ textDecoration:"none"}} to={"/catalog/"+item1.id}  onClick={()=>handleOutsideClick()}>
