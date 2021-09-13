@@ -120,8 +120,6 @@ const AddProductForm = () => {
   }, []);
 
   const addProductChangeHandler = (ev: any) => {
-    console.log('EV => ', ev && ev.target.value);
-
     if (ev) {
       let value = ev.target.value;
       const name = ev.target.name;
@@ -408,12 +406,12 @@ const AddProductForm = () => {
     console.log('newObj ', newObj);
 
     try {
-      // const response = await axios.post('/product', newObj);
-      // const data = await response.data;
-      // console.log('response => ', data);
-      // if (data.code == 200) {
-      //   push('/product-detail/' + newObj.name + '/' + data.id);
-      // }
+      const response = await axios.post('/product', newObj);
+      const data = await response.data;
+      console.log('response => ', data);
+      if (data.code == 200) {
+        push('/product-detail/' + newObj.name + '/' + data.id);
+      }
     } catch (error) {
       checkError(error);
     }
