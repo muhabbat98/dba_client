@@ -35,7 +35,7 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
     CARD,
     NUMBER,
   }
-  const [type, setType] = useState(Tabs.POCKET);
+  const [type, setType] = useState(Tabs.CARD);
   const [data, setData] =useState<any>()
   const [loading, setLoading] = useState(true)
   const {checkError} =useError()

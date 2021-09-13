@@ -18,13 +18,18 @@ interface PaymentProps {
 const Payment: FC<PaymentProps> = ({ dataShare }) => {
   const [loading, setLoading] = useState(true)
   const {checkError} =useError()
-  let resData = {
-    "locationId": dataShare.allData.address.id,
-    "productIds": [...dataShare.cart.cartItems].map(one=>one.id),
-    "recipientName": dataShare.allData.userInfo.fio,
-    "recipientPhoneNumber": dataShare.allData.userInfo.phoneNumber
+ 
+  let resData = {    
+    buyer: {
+      name: dataShare.allData.userInfo.fio,
+      phoneNumber: dataShare.allData.userInfo.phoneNumber
+    },
+    cardId: dataShare.allData.payment&&dataShare.allData.payment.id,
+    goods: dataShare.cart.checkedAll.map((one:any)=>({amount:one.count, goodId:one.id, sellerId:one.sellerId})),
+    paymentType: "fromCard",    
+    locationId: dataShare.allData.address.id
   }
-  console.log('dataShare', resData)
+  
   const sendOrder = async(e:any)=>{
     e.target.disabled = true
 
@@ -32,7 +37,7 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
       
       const response = await axios.post('order',resData);
       if(response.status===200){
-        // e.target.disabled = false
+        e.target.disabled = false
         console.log(response)
       }
      
@@ -58,11 +63,11 @@ const Payment: FC<PaymentProps> = ({ dataShare }) => {
       </Order>
       <Order>
         <OrderName>Доставка Marketplace</OrderName>
-        <OrderNumber isFree={true}>бесплатно</OrderNumber>
+        <OrderNumber isFree={true}>{dataShare.cart.deliveryCost}</OrderNumber>
       </Order>
       <Order>
         <SummData>Итого</SummData>
-        <SummNumber>{dataShare.cart.tSum }сум</SummNumber>
+        <SummNumber>{dataShare.cart.totalSum }сум</SummNumber>
       </Order>
       <AddressButton as={DetailButton}>Отмена</AddressButton>
       <AddressButton onClick={sendOrder} as={DetailButton}>Перейти к оплате</AddressButton>
