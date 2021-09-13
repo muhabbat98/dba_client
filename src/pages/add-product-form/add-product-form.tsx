@@ -360,12 +360,27 @@ const AddProductForm = () => {
 
   const resetHandle = () => {
     setIsReset(isReset + 1);
-    setAddProductData((prevState) => {
-      return {
-        ...prevState,
-        oldPrice: 0,
-      };
+    setAddProductData({
+      // ...prevState,
+      oldPrice: 0,
+      name: '',
+      price: '',
+      productComment: '',
+      quantity: '',
     });
+
+    setCollectiveJson(allFields);
+
+    // setAddProductData((prevState) => {
+    //   return {
+    //     // ...prevState,
+    //     oldPrice: 0,
+    //     name: '',
+    //     price: '',
+    //     productComment: '',
+    //     quantity: '',
+    //   };
+    // });
 
     if (photoArray.length > 0) {
       setPhotoArray([]);
@@ -389,12 +404,12 @@ const AddProductForm = () => {
     console.log('newObj ', newObj);
 
     try {
-      const response = await axios.post('/product', newObj);
-      const data = await response.data;
-      console.log('response => ', data);
-      if (data.code == 200) {
-        push('/product-detail/' + newObj.name + '/' + data.id);
-      }
+      // const response = await axios.post('/product', newObj);
+      // const data = await response.data;
+      // console.log('response => ', data);
+      // if (data.code == 200) {
+      //   push('/product-detail/' + newObj.name + '/' + data.id);
+      // }
     } catch (error) {
       checkError(error);
     }
