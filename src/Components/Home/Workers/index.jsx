@@ -4,7 +4,7 @@ export default function Workers (){
     return(
         <Container className="team-members" >
             <Typography variant="h2" component="h3" align="center">Meet The Partners</Typography>
-            <Box display="flex" justifyContent="space-between" m={5}>
+            <Box display="flex" justifyContent="space-between" alignItems="center" m={5}>
                 <Paper p={5}>
                     <Card>
                         <CardActionArea>

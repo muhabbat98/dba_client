@@ -2,6 +2,7 @@ import { Card, CardContent, Container, Typography } from '@material-ui/core'
 import About from './About'
 import Resourse from './Resourses'
 import Workers from './Workers'
+import Footer from '../Footer'
 const {USER} = require('../../Graphql/Query')
 const {useQuery} =require('@apollo/client')
 
@@ -32,19 +33,19 @@ export default function Home (){
                     <Typography  color="textSecondary" gutterBottom>
                                 Word of the Day
                     </Typography>
-                            <Typography variant="h2" component="h2">
-                                1000
-                            </Typography>
+                    <Typography variant="h2" component="h2">
+                        1000
+                    </Typography>
             
-                            <Typography variant="body2" component="p">
-                                well meaning and kindly.
-                
-                            </Typography>
+                    <Typography variant="body2" component="p">
+                        well meaning and kindly.                
+                    </Typography>
                 
                 </CardContent>
             </Card>
         </Container>
         <About/>
         <Workers/>
+        <Footer/>
     </>)
 }
