@@ -7,12 +7,12 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { gsap } from "gsap";
 import  ScrollTrigger  from "gsap/ScrollTrigger";
-
-
-
+import {useQuery} from '@apollo/client'
+import {COUNT} from '../../../Graphql/Query'
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
   root: {
@@ -31,12 +31,15 @@ const useStyles = makeStyles({
   },
 });
 export default function Resourse (){
-    const classes = useStyles();    
-    const bull = <span className={classes.bullet}>•</span>;
     const counts = useRef()
     const numeric = useRef()
     const numeric2 = useRef()
     const numeric3 = useRef()
+    const classes = useStyles();    
+    const {data} = useQuery(COUNT)
+    console.log("data",data)
+
+  
 
  
     gsap.registerPlugin(ScrollTrigger )

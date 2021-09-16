@@ -2,8 +2,21 @@ import {  gql  } from "@apollo/client";
 
 export const USER = gql`
     query($userId: Int) {
-        users(userId: $userId)
+        user(userId: $userId){
+            username,
+            fullName
+        }
     }
+  
+`
+export const COUNT= gql`
+    query{
+        countResources{
+            name
+            count
+        }
+    }
+  
 `
 export const EXACT_JOURNAL = gql`
     query ExactJournal($id:Int){
