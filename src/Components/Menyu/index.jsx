@@ -225,7 +225,7 @@ export default function BackToTop(props) {
 									</Popper>
 								</div>
 							</li>
-							<li><Link to="/">{languages[language].aboutUs}</Link></li>
+							<li><Link to="/about">{languages[language].aboutUs}</Link></li>
 							<li><Link to="/login">{languages[language].signIn}</Link></li>
 							<li><LanguageDropDown /></li>
 						</ul>

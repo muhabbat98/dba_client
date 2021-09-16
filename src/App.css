@@ -498,6 +498,7 @@ code {
   color: white;
   font-size: 16px;
   font-weight: bolder;
+  margin-top: auto;
 }
 .main-footer a,
 svg {
@@ -505,4 +506,7 @@ svg {
   text-decoration: none;
   font-size: 16px;
   font-weight: bolder;
+}
+.main-footer a:hover {
+  color: var(--secondary-text-color);
 }

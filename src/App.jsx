@@ -7,7 +7,8 @@ import { Route, Switch } from 'react-router-dom'
 import Foriegn from './Components/Foriegn';
 import Science from './Components/Science';
 import Journal from './Components/Journal';
-
+import About from './Components/About'
+import Footer from './Components/Footer';
 
 function App() {
 	return (<>
@@ -19,9 +20,9 @@ function App() {
 			<Route path='/foriegn'> <Foriegn /> </Route>
 			<Route path='/science'> <Science /> </Route>
 			<Route path='/journals'> <Journal /> </Route>
-
-
+			<Route path='/about'> <About /> </Route>
 		</Switch>
+		<Footer/>
 	</>
 	);
 }

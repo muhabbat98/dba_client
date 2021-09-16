@@ -46,6 +46,5 @@ export default function Home (){
         </Container>
         <About/>
         <Workers/>
-        <Footer/>
     </>)
 }

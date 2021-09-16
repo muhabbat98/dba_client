@@ -30,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: '0 auto',
       marginTop: '2rem',
-      padding: theme.spacing(6)
+      padding: theme.spacing(6),
     },
+    
     loginText: {
       fontSize: '36px'
     },
@@ -44,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     },
 
   },
+  cover:{
+    minHeight:"calc(100vh - 320px)",
+  }
 }));
 const StyledButton = withStyles({
   root: {
@@ -127,57 +131,59 @@ export default function SimpleContainer() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container className={classes.root} maxWidth="sm">
-        <Paper>
-          <Typography className={classes.loginText} variant="h4" component="h2">
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <AccountCircle fontSize="large" className="login-header-icon" color='secondary' />
-              Login
-            </Box>
-          </Typography>
-          <div className={classes.margin}>
-            <Grid container spacing={1} alignItems="flex-end" margin="1.4rem 0px">
-              <Grid item>
-                <Person color="secondary" />
+      <div className={classes.cover}>
+        <Container className={classes.root} maxWidth="sm">
+          <Paper>
+            <Typography className={classes.loginText} variant="h4" component="h2">
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <AccountCircle fontSize="large" className="login-header-icon" color='secondary' />
+                Login
+              </Box>
+            </Typography>
+            <div className={classes.margin}>
+              <Grid container spacing={1} alignItems="flex-end" margin="1.4rem 0px">
+                <Grid item>
+                  <Person color="secondary" />
+                </Grid>
+                <Grid item>
+                  <TextField id="input-with-icon-grid" onChange={setUsername} label="username" />
+                </Grid>
               </Grid>
-              <Grid item>
-                <TextField id="input-with-icon-grid" onChange={setUsername} label="username" />
-              </Grid>
-            </Grid>
-          </div>
-          <Box display="flex" justifyContent="space-between" alignItems='center' margin="1.4rem 0px" >
-            <Lock color="secondary" />
-            <FormControl className={clsx(classes.margin, classes.textField)}>
+            </div>
+            <Box display="flex" justifyContent="space-between" alignItems='center' margin="1.4rem 0px" >
+              <Lock color="secondary" />
+              <FormControl className={clsx(classes.margin, classes.textField)}>
 
-              <InputLabel htmlFor="standard-adornment-password"> Password </InputLabel>
-              <Input
-                id="standard-adornment-password"
-                type={values.showPassword ? 'text' : 'password'}
-                value={values.password}
-                onChange={handleChange('password')}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
+                <InputLabel htmlFor="standard-adornment-password"> Password </InputLabel>
+                <Input
+                  id="standard-adornment-password"
+                  type={values.showPassword ? 'text' : 'password'}
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Box>
+            <FormGroup row>
+              <FormControlLabel
+                control={<Checkbox checked={values.isAdmin} onChange={handleChange('isAdmin')} />}
+                label="admin"
               />
-            </FormControl>
-          </Box>
-          <FormGroup row>
-            <FormControlLabel
-              control={<Checkbox checked={values.isAdmin} onChange={handleChange('isAdmin')} />}
-              label="admin"
-            />
-          </FormGroup>
-          <StyledButton onClick={checkLogin} disabled={values.password.length && values.username.length ? false : true} className="login-button">Log In</StyledButton>
-        </Paper>
-      </Container>
+            </FormGroup>
+            <StyledButton onClick={checkLogin} disabled={values.password.length && values.username.length ? false : true} className="login-button">Log In</StyledButton>
+          </Paper>
+        </Container>
+      </div>
     </React.Fragment>
   );
 }
