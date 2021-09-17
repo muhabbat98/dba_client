@@ -3,8 +3,9 @@ import About from './About'
 import Resourse from './Resourses'
 import Workers from './Workers'
 import Footer from '../Footer'
-const {USER} = require('../../Graphql/Query')
-const {useQuery} =require('@apollo/client')
+import {USER} from '../../Graphql/Query'
+import {useQuery} from '@apollo/client'
+import { languages, useLanguage } from '../../Providers/LangProvider'
 
 
 const Name = ()=>{
@@ -15,16 +16,17 @@ const Name = ()=>{
 }
 
 export default function Home (){
- 
-    
+    const [language ]= useLanguage(false)
+    console.log(languages[language].welcome)
     return(<>
         <div className="home-page-welcome">
             <h1 className="welcome-header"> 
             {
                 localStorage.getItem("userid")?<Name/> : "user "
             }
-            Welcome to our library​</h1>
-            <p>Let’s take the first step together and help you win your case.<br/> We are here every step of the way.</p>
+                {languages[language].welcome}​
+            </h1>
+            <p>{languages[language].headerFirst}<br/>{languages[language].headerSecond}</p>
         </div>
         <Resourse />
         <Container>

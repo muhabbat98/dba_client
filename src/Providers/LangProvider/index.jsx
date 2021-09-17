@@ -12,7 +12,10 @@ const languages = {
         journals:"journals",
         ourTeam:"Out team",
         signIn:"sign in",
-        lang:"language"
+        lang:"language",
+        welcome:"Welcome to our library",
+        headerFirst:"Let’s take the first step together and help you win your case.",
+        headerSecond:" We are here every step of the way."
     },
     uzbek:{
         home: "bosh sahifa",
@@ -24,7 +27,10 @@ const languages = {
         journals:"Vaqtli nashrlar",
         ourTeam:"Jamoamiz",
         signIn:"A'zolikni tasdiqlash",
-        lang:"til"
+        lang:"til",
+        welcome:"Kutubxonamizga xush kelibsiz",
+        headerFirst:"Davlat Boshqaruv akademiyasi kutubxonasi o'z foydalanuvchilari uchun qulayliklar yaratgan holda",
+        headerSecond:"o'z xizmatlarini online tarzda taklif etadi"
     }
 }
 

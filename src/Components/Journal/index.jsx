@@ -20,7 +20,7 @@ import Chip from '@material-ui/core/Chip'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    marginTop:'2rem',
+    margin:'2rem 0px',
     backgroundColor: theme.palette.background.paper,
   },
   nested: {

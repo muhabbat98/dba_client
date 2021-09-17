@@ -33,17 +33,28 @@ const useStyles = makeStyles({
 export default function Resourse (){
     const counts = useRef()
     const numeric = useRef()
-    const numeric2 = useRef()
-    const numeric3 = useRef()
+
+    const [numbers, setNumbers] = useState([0,0,0])
     const classes = useStyles();    
     const {data} = useQuery(COUNT)
-    console.log("data",data)
+   
 
   
 
  
     gsap.registerPlugin(ScrollTrigger )
-
+    useEffect(()=>{
+        if(data){
+            setNumbers(data.countResources.map((e, i)=>{
+                setInterval(()=>{
+                    if(numbers[i]<=e.count){
+                        console.log(numbers[i])
+                    }
+                })
+            }))
+           
+        }
+    },[data])
     useEffect(()=>{
         gsap.from(counts.current, 
             {
@@ -54,18 +65,18 @@ export default function Resourse (){
            ease:'bounce',
            stagger:0.35
        })
-
-       gsap.from([numeric.current,numeric3.current,numeric2.current], 
-        {
-       scrollTrigger:{
-           trigger: numeric.current,
-       },
-        textContent: 0,
-        duration: 4,
-        ease: "ease",
-        snap: { textContent: 1 },
-        delay:1.5
-        })
+      
+    //    gsap.from(numbers, 
+    //     {
+    //    scrollTrigger:{
+    //        trigger: counts.current,
+    //    },
+    //     textContent: 0,
+    //     duration: 10,
+    //     ease: "ease",
+    //     snap: { textContent: 1 },
+    //     delay:1.5
+    //     })
     },[])
 
    
@@ -73,17 +84,21 @@ export default function Resourse (){
 
     return(
         <div ref = {counts} className='resources-info'>
-                <Card className={classes.root}>
+                {
+                    data?data.countResources.map((elem,i)=><Card key={i} className={classes.root}>
                     <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            Word of the Day
+                        <Typography className={classes.title}  color="textSecondary" gutterBottom>
+                            Word of the Day 
                         </Typography>
                         <Typography variant="h2" align="center" ref={numeric} component="h2">
-                           52
+
+                           {
+                               elem.count
+                           }
                         </Typography>
                 
                         <Typography variant="body2" component="p">
-                            well meaning and kindly.
+                            {elem.name}
                         <br />
                             {'"a benevolent smile"'}
                         </Typography>
@@ -91,45 +106,11 @@ export default function Resourse (){
                     <CardActions>
                         <Link to="/">Learn more</Link>
                     </CardActions>
-                </Card>
-                <Card className={classes.root}>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            Word of the Day
-                        </Typography>
-                        <Typography variant="h2" align="center"  ref={numeric2} component="h2">
-                           15
-                        </Typography>
-                
-                        <Typography variant="body2" component="p">
-                            well meaning and kindly.
-                        <br />
-                            {'"a benevolent smile"'}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Link to="/">Learn more</Link>
-                    </CardActions>
-                </Card>
-                <Card className={classes.root}>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            Word of the Day
-                        </Typography>
-                        <Typography variant="h2" align="center"  ref={numeric3} component="h2">
-                            1000
-                        </Typography>
-           
-                        <Typography variant="body2" component="p">
-                            well meaning and kindly.
-                        <br />
-                            {'"a benevolent smile"'}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Link to="/">Learn more</Link>
-                    </CardActions>
-                </Card>
+                </Card>)
+                :
+                <></>
+                }
+      
         </div>
     )
 }
