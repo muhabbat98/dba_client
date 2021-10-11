@@ -10,7 +10,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import ShareIcon from '@material-ui/icons/Share';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { useQuery } from '@apollo/client'
-import { FORIEGN_BOOKS } from '../../Graphql/Query'
+import { SCIENCE_BOOKS } from '../../Graphql/Query'
 import { STATIC_ROUTE } from '../../settings/url'
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function MediaControlCard() {
     const classes = useStyles();
-    const { data, loading, error } = useQuery(FORIEGN_BOOKS)
-
+    const { data, loading, error } = useQuery(SCIENCE_BOOKS)
+    console.log(data && data.sciences)
     useEffect(() => {
         if (error) alert(error.message)
     }, [error])
@@ -37,13 +37,14 @@ export default function MediaControlCard() {
                     <></>
             }
             <div className="foriegn-body">
-                <h2 className="foriegn-book-header">The foriegn department books</h2>
-            
+                <h2 className="foriegn-book-header">The Scientific researches</h2>
+                
                 <Container maxWidth="lg">
+                <h3 style={{textAlign:'left', color:"var(--secondary-text-color"}} className="foriegn-book-header">PHD</h3>
                     <Grid container>
                         {
-                            data && data.foriegnBooks ?
-                                data.foriegnBooks.map((element, index) => (
+                            data && data.sciences ?
+                                data.sciences.map((element, index) => (
                                     <Grid display='flex' key={index} item md={3} className="book-card" >
                                         <div className="media">
                                             <img src={element.cover ? STATIC_ROUTE + element.cover.filename : Cover} className='foriegn-book-cover' alt="cover" />

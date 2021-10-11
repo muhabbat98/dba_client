@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Cover from '../../assets/default-cover.jpg'
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,17 +12,26 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import { useQuery } from '@apollo/client'
 import { SCIENCE_BOOKS } from '../../Graphql/Query'
 import { STATIC_ROUTE } from '../../settings/url'
+import{ Card,CardContent,CardMedia,Typography } from '@material-ui/core';
+import Phd from '../../assets/phd.jpg'
+import Bachelor from '../../assets/bachelor.jpg'
+import Magister from '../../assets/magister.png'
+import BookComponents from './science'
+import { Button, CardActionArea, CardActions } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
     },
+    smallBox:{
+        paddingRight: '16px'
+    }
 
 }));
 export default function MediaControlCard() {
     const classes = useStyles();
     const { data, loading, error } = useQuery(SCIENCE_BOOKS)
-    console.log(data && data.sciences)
+    const [state, setState] = useState(false)
     useEffect(() => {
         if (error) alert(error.message)
     }, [error])
@@ -38,43 +47,80 @@ export default function MediaControlCard() {
             }
             <div className="foriegn-body">
                 <h2 className="foriegn-book-header">The Scientific researches</h2>
+                
                 <Container maxWidth="lg">
-                    <Grid container>
-                        {
-                            data && data.sciences ?
-                                data.sciences.map((element, index) => (
-                                    <Grid display='flex' key={index} item md={3} className="book-card" >
-                                        <div className="media">
-                                            <img src={element.cover ? STATIC_ROUTE + element.cover.filename : Cover} className='foriegn-book-cover' alt="cover" />
-                                            <div className="book-icons">
-                                                {
-                                                    element.file && element.file.filename ?
-                                                        <a href={STATIC_ROUTE + element.file.filename}> <GetAppIcon /> </a> :
-                                                        <></>
-
-                                                }
-                                                <a href="/"> <ShareIcon /> </a>
-                                                <a href="/"> <VisibilityIcon /></a>
-                                            </div>
-                                        </div>
-                                        <div className="book-body">
-                                            <div className="about-book">
-                                                <h4 className="book-name">{element.name}</h4>
-                                                <h6 className="book-author">{element.author}</h6>
-                                            </div>
-                                            <div className="data">
-                                                <div >{element.resourceType === 2 ? 'printed' : 'digital'}</div>
-                                                <div>{element.data}</div>
-                                            </div>
-                                        </div>
-                                    </Grid>)
-                                )
-                                :
-                                <></>
-                        }
-
-
-                    </Grid>
+     
+                    {
+                        state?<BookComponents />:
+                        <Grid container>
+                            <Grid className={classes.smallBox} xs={4} item>
+                                <Card sx={{ maxWidth: 345}} onClick={()=>setState(true)} >
+                                    <CardActionArea>
+                                        <CardMedia
+                                        component="img"
+                                        height="200"
+                                        image={Phd}
+                                        alt="phd image"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                Phd
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                                species, ranging across all continents except Antarctica
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                
+                                </Card>
+                            </Grid>
+                            <Grid className={classes.smallBox} xs={4} item>
+                                <Card sx={{ maxWidth: 345 }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                        component="img"
+                                        height="200"
+                                        image={Magister}
+                                        alt="phd image"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                Magister
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                                species, ranging across all continents except Antarctica
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                
+                                </Card>
+                            </Grid>
+                            <Grid className={classes.smallBox} xs={4} item>
+                                <Card sx={{ maxWidth: 345 }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                        component="img"
+                                        height="200"
+                                        image={Bachelor}
+                                        alt="phd image"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                Bachalor
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                                species, ranging across all continents except Antarctica
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    }
                 </Container>
             </div>
         </React.Fragment>

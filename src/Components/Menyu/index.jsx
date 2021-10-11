@@ -171,7 +171,7 @@ export default function BackToTop(props) {
 						title="Paella dish"
 					/>
 					<p className="navbar-site-name">{languages[language].logo}</p>
-					<div className={classes.search}>
+					{/* <div className={classes.search}>
 						<div className={classes.searchIcon}>
 							<SearchIcon />
 						</div>
@@ -183,48 +183,22 @@ export default function BackToTop(props) {
 							}}
 							inputProps={{ 'aria-label': 'search' }}
 						/>
-					</div>
+					</div> */}
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						<ul className="navbar-menyu-links">
 							<li><Link to="/">{languages[language].home}</Link></li>
 							<li>
-								<div className='navbar-department-link'>
-									<Button
-										ref={anchorRef}
-										aria-controls={open ? 'menu-list-grow' : undefined}
-										aria-haspopup="true"
-										onClick={handleToggle}
-										className="navbar-toggle-menyu"
-									>
-										{languages[language].departments}
-									</Button>
-									<Popper className={classes.navbar_root_dropdown} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-										{({ TransitionProps, placement }) => (
-											<Grow
-												{...TransitionProps}
-												style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-											>
-												<Paper>
-													<ClickAwayListener onClickAway={handleClose}>
-														<MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-															<MenuItem onClick={handleClose}>
-																<Link to="/science">{languages[language].science}</Link>
-															</MenuItem>
-															<MenuItem onClick={handleClose}>
-																<Link to="/foriegn">{languages[language].foreign}</Link>
-															</MenuItem>
-															<MenuItem onClick={handleClose}>
-																<Link to="/journals">{languages[language].journals}</Link>
-															</MenuItem>
-														</MenuList>
-													</ClickAwayListener>
-												</Paper>
-											</Grow>
-										)}
-									</Popper>
-								</div>
+								<Link to="/science">{languages[language].science}</Link>
 							</li>
+							<li>
+								<Link to="/foriegn">{languages[language].foreign}</Link>
+							</li>
+							<li>
+								<Link to="/journals">{languages[language].journals}</Link>
+							</li>
+							<li><Link to="/">Elektron kitobla</Link></li>
+							<li><Link to="https://www.natlib.uz" exact>milliy kutubxona</Link></li>
 							<li><Link to="/about">{languages[language].aboutUs}</Link></li>
 							<li><Link to="/login">{languages[language].signIn}</Link></li>
 							<li><LanguageDropDown /></li>
