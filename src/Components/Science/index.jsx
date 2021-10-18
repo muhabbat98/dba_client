@@ -30,31 +30,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function MediaControlCard() {
     const classes = useStyles();
-    const { data, loading, error } = useQuery(SCIENCE_BOOKS)
-    const [state, setState] = useState(false)
-    useEffect(() => {
-        if (error) alert(error.message)
-    }, [error])
+    // const { data, loading, error } = useQuery(SCIENCE_BOOKS)
+    const [state, setState] = useState(0)
+    // useEffect(() => {
+    //     if (error) alert(error.message)
+    // }, [error])
     return (
         <React.Fragment>
             <CssBaseline />
-            {
+            {/* {
                 loading ?
                     <Backdrop open={true} className={classes.backdrop} >
                         <CircularProgress color="inherit" />
                     </Backdrop> :
                     <></>
-            }
+            } */}
             <div className="foriegn-body">
-                <h2 className="foriegn-book-header">The Scientific researches</h2>
+            <h2 className="foriegn-book-header">The Scientific researches</h2>
                 
                 <Container maxWidth="lg">
      
                     {
-                        state?<BookComponents />:
+                        state!==0?<BookComponents department={{number:state, setState, state}} />:
                         <Grid container>
                             <Grid className={classes.smallBox} xs={4} item>
-                                <Card sx={{ maxWidth: 345}} onClick={()=>setState(true)} >
+                                <Card sx={{ maxWidth: 345}} onClick={()=>setState(3)} >
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
@@ -76,7 +76,7 @@ export default function MediaControlCard() {
                                 </Card>
                             </Grid>
                             <Grid className={classes.smallBox} xs={4} item>
-                                <Card sx={{ maxWidth: 345 }}>
+                                <Card sx={{ maxWidth: 345 }} onClick={()=>setState(2)}>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
@@ -98,7 +98,7 @@ export default function MediaControlCard() {
                                 </Card>
                             </Grid>
                             <Grid className={classes.smallBox} xs={4} item>
-                                <Card sx={{ maxWidth: 345 }}>
+                                <Card sx={{ maxWidth: 345 }} onClick={()=>setState(1)}>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"

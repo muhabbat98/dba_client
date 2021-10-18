@@ -63,8 +63,8 @@ export const JOURNALS = gql`
 
 `
 export const SCIENCE_BOOKS = gql`
-    query {
-        sciences {
+    query($id:Int) {
+        sciences (degree:$id){
             id
             cover {
                 coverId
