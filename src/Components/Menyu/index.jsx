@@ -198,7 +198,7 @@ export default function BackToTop(props) {
 								<Link to="/journals">{languages[language].journals}</Link>
 							</li>
 							<li><Link to="/">Elektron kitobla</Link></li>
-							<li><Link to="https://www.natlib.uz" exact>milliy kutubxona</Link></li>
+							<li><a href="https://www.natlib.uz">milliy kutubxona</a></li>
 							<li><Link to="/about">{languages[language].aboutUs}</Link></li>
 							<li><Link to="/login">{languages[language].signIn}</Link></li>
 							<li><LanguageDropDown /></li>

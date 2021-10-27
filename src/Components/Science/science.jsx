@@ -17,6 +17,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useQuery } from '@apollo/client'
 import { SCIENCE_BOOKS } from '../../Graphql/Query'
 import { STATIC_ROUTE } from '../../settings/url'
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -53,10 +55,10 @@ export default function MediaControlCard({department}) {
     const classes = useStyles();
     const { data, loading, error } = useQuery(SCIENCE_BOOKS,{
         variables:{
-            degree:department.number
+            id:department.number
         }
     })
-    console.log("data",data, department)
+  
     useEffect(() => {
         if (error) alert(error.message)
     }, [error])
@@ -76,20 +78,20 @@ export default function MediaControlCard({department}) {
                 <Container maxWidth="lg">
                     {/* <h3 style={{textAlign:'left', color:"var(--secondary-text-color"}} className="foriegn-book-header">PHD</h3>
                     <h3 style={{textAlign:'left', color:"var(--secondary-text-color"}} className="foriegn-book-header"></h3> */}
-                    <div role="presentation" onClick={handleClick}>
+                    <div role="presentation" >
                         <Breadcrumbs aria-label="breadcrumb">
                             <StyledBreadcrumb
                             style={{cursor:"pointer"}}
                             component="div"
                             label="PHD"
-                            icon={<HomeIcon fontSize="small" />}
+                            icon={<LocalLibraryIcon fontSize="small" />}
                             onClick={()=>department.setState(3)}
                             />
                             <StyledBreadcrumb
                             style={{cursor:"pointer"}}
                             component="div"
                             label="Magistr"
-                            icon={<HomeIcon fontSize="small" />}
+                            icon={<AccountBalanceIcon fontSize="small" />}
                             onClick={()=>department.setState(2)}
                             />
                             <StyledBreadcrumb
