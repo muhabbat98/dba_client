@@ -9,6 +9,7 @@ import Science from './Components/Science';
 import Journal from './Components/Journal';
 import About from './Components/About'
 import Footer from './Components/Footer';
+import Ebooks from './Components/Ebooks'
 
 function App() {
 	return (<>
@@ -21,6 +22,8 @@ function App() {
 			<Route path='/science'> <Science /> </Route>
 			<Route path='/journals'> <Journal /> </Route>
 			<Route path='/about'> <About /> </Route>
+			<Route path='/ebooks'> <Ebooks/> </Route>
+
 		</Switch>
 		<Footer/>
 	</>

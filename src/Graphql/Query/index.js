@@ -116,3 +116,32 @@ export const FORIEGN_BOOKS = gql`
     }
 
 `
+export const DEPARTMENT = gql`
+    {
+        departments{
+            id
+            name
+        }
+    }
+`
+export const EBOOKS = gql`
+    query($id:Int){
+        eBooks(departmentId:$id){
+            id
+            department{
+                id
+                name
+            }
+            file{
+                fileId
+                filename
+            }
+            cover{
+                coverId
+                filename
+            }
+            author
+            name    
+        }
+        }
+`
