@@ -58,7 +58,7 @@ export default function MediaControlCard({data}) {
                         {
                             newData && newData.eBooks ?
                                 newData.eBooks.map((element, index) => (
-                                    <Grid display='flex' key={index} item md={3} className="book-card" >
+                                    <Grid item  key={index} md={3} className="book-card" >
                                         <div className="media">
                                             <img src={element.cover ? STATIC_ROUTE + element.cover.filename : Cover} className='foriegn-book-cover' alt="cover" />
                                             <div className="book-icons">

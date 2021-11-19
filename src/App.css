@@ -511,3 +511,24 @@ code {
 .main-footer a:hover {
   color: var(--secondary-text-color);
 }
+.ebook-menu{
+  min-width: 25%;
+
+}
+.ebook-menu ul{
+  padding: 0;
+  list-style: none;
+}
+.ebook-menu ul li{
+  padding: 0.5rem 1rem;
+  text-transform: capitalize;
+  font-family: serif;
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.active-menu {
+  margin-left: 5px;
+   border-left:1px solid teal ;
+   color: teal;
+}
