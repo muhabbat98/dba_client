@@ -1,7 +1,7 @@
 import { Container } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-export default function (){
+function Home (){
     return(
        <div className="home-about">
            <Container>
@@ -46,3 +46,4 @@ export default function (){
        </div>
     )
 }
+export default Home

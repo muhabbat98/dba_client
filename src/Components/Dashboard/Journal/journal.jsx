@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Sience() {
     const classes = useStyles()
     const [open, setOpen] = useState(false);
-    const {data:journalNames, loading:journalWaiting, error:journalError} = useQuery(JOURNAL_NAME)
+    const {data:journalNames, loading:journalWaiting} = useQuery(JOURNAL_NAME)
     const [createJournal, { data, loading, error }] = useMutation( CREATE_JOURNAL)
 
     const [enterence, setEnterence] = useState({       
@@ -40,7 +40,7 @@ export default function Sience() {
         year:1,
         journalId:1
     })
-    const imgUpload = useRef()
+  
     const bookUpload = useRef()
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {

@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios'
 import { useMutation } from '@apollo/client'
-import { IMAGEROUTE, BOOKROUTE } from '../../../settings/url.js'
+import { IMAGEROUTE } from '../../../settings/url.js'
 import {  CREATE_JOURNAL_TYPE } from '../../../Graphql/Mutation/'
 import Journal from'./journal'
 import { JOURNAL_NAME } from '../../../Graphql/Query'
@@ -37,7 +37,7 @@ export default function Sience() {
         language: ''
     })
     const imgUpload = useRef()
-    const bookUpload = useRef()
+    // const bookUpload = useRef()
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -92,28 +92,28 @@ export default function Sience() {
             }
         }
     }
-    const sendBook = (e) => {
+    // const sendBook = (e) => {
         
-        if (bookUpload.current.files.length) {
-            const formData = new FormData()
-            formData.append('book', bookUpload.current.files[0])
-            try {
-                axios({
-                    method: "POST",
-                    url: BOOKROUTE,
-                    data: formData,
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                }).then(res => {
-                    setEnterence({ ...enterence, fileId: res.data.file_id })
-                })
-            }
-            catch (err) {
-                alert(err.message)
-            }
-        }
-    }
+    //     if (bookUpload.current.files.length) {
+    //         const formData = new FormData()
+    //         formData.append('book', bookUpload.current.files[0])
+    //         try {
+    //             axios({
+    //                 method: "POST",
+    //                 url: BOOKROUTE,
+    //                 data: formData,
+    //                 headers: {
+    //                     "Content-Type": "multipart/form-data"
+    //                 }
+    //             }).then(res => {
+    //                 setEnterence({ ...enterence, fileId: res.data.file_id })
+    //             })
+    //         }
+    //         catch (err) {
+    //             alert(err.message)
+    //         }
+    //     }
+    // }
     return (<>
         {
             loading ?
@@ -149,11 +149,11 @@ export default function Sience() {
         <div className="container science-input">
             <div className="input-element">
                 <label>Title</label>
-                <input type='text' required onKeyUp={(e) => setEnterence({ ...enterence, title: e.target.value })} placeholder="title" required />
+                <input name="title" type='text' required onKeyUp={(e) => setEnterence({ ...enterence, title: e.target.value })} placeholder="title" required />
             </div>
             <div className="input-element">
                 <label>Keyword</label>
-                <input type='text' onKeyUp={(e) => setEnterence({ ...enterence, keyword: e.target.value })} placeholder="keyword" />
+                <input name="keyword" type='text' onKeyUp={(e) => setEnterence({ ...enterence, keyword: e.target.value })} placeholder="keyword" />
             </div>
             
             <div className="input-element science-checkbox">

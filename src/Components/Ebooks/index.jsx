@@ -1,10 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { Container } from '@mui/material';
 
 import { useQuery } from '@apollo/client'
 import { DEPARTMENT } from '../../Graphql/Query'
@@ -12,7 +6,7 @@ import Department from './Departments'
 
 export default function VerticalTabs() {
     
-    const { data, loading, error } = useQuery( DEPARTMENT )
+    const { data } = useQuery( DEPARTMENT )
 
     const [ value, setValue ] = React.useState(  );
  

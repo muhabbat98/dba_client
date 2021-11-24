@@ -152,7 +152,7 @@ const Foriegn = () => {
         else if (data && data.createForiegnBook.status === 404) alert("smth get wrong")
         if (error) alert(error.message)
 
-    }, [bookFiles, imageFiles, state, data, error])
+    }, [bookFiles, imageFiles, state, data, error,checkImage, checked, inputData])
 
     const sendData = () => {
         if (inputData.title.length) {

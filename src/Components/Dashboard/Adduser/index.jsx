@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -7,9 +7,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import axios from 'axios'
 import { useMutation } from '@apollo/client'
-import { IMAGEROUTE, BOOKROUTE } from '../../../settings/url.js'
 import { ADD_USER} from '../../../Graphql/Mutation/'
 import {Visibility, VisibilityOff} from '@material-ui/icons';
 
@@ -33,8 +31,7 @@ export default function Sience() {
         fullname: '',
         userType: 1,
     })
-    const imgUpload = useRef()
-    const bookUpload = useRef()
+
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
