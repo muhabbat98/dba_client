@@ -45,7 +45,7 @@ export default function MediaControlCard({data}) {
                     </Backdrop> :
                     <></>
             } */}
-            <div className="foriegn-body">
+            <div className="foriegn-body" style={{background:"transparent"}}>
                 {/* {
                     data && data.departments.map((u) => <>
                          <h2 className="foriegn-book-header">{u.name}</h2>

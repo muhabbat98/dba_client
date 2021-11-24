@@ -76,7 +76,6 @@ export default function SimpleContainer() {
   useEffect(() => {
 
     // Save userInfo to localStorage 
-    console.log(data)
     if (data && data.isUser.status === 200) {
 
       window.localStorage.setItem("userid", data.isUser.data.user_id)
@@ -118,7 +117,9 @@ export default function SimpleContainer() {
 
   const checkLogin = () => {
 
-    if (values.password.length && values.username.length) {
+    if ( values.password.length && values.username.length )
+    {
+      console.log(values.username,  values.password, values.isAdmin)
       userInfo({
         variables: {
           username: values.username,

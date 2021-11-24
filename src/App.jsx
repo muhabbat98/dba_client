@@ -3,15 +3,27 @@ import Menyu from './Components/Menyu'
 import Home from './Components/Home'
 import Login from './Components/Login'
 import Dashboard from './Components/Dashboard/index'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useLocation } from 'react-router-dom'
 import Foriegn from './Components/Foriegn';
 import Science from './Components/Science';
 import Journal from './Components/Journal';
 import About from './Components/About'
 import Footer from './Components/Footer';
 import Ebooks from './Components/Ebooks'
+import { useEffect } from 'react';
 
-function App() {
+function App ()
+{
+	const {pathname} = useLocation()
+	useEffect( () =>
+	{
+		let token = window.localStorage.getItem( "token" )
+		console.log(window.location.pathname)
+		if ( !token&&pathname!=="/login" )
+		{
+			window.location.replace('/login')
+		}
+	},[pathname])
 	return (<>
 		<Menyu />
 		<Switch>
