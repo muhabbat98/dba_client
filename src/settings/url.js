@@ -1,7 +1,7 @@
-const BOOKROUTE = "http://localhost:5000/book";
-const IMAGEROUTE = "http://localhost:5000/cover";
+const BOOKROUTE = "https://dbauz.herokuapp.com/book";
+const IMAGEROUTE = "https://dbauz.herokuapp.com/cover";
 
-const STATIC_ROUTE = "http://localhost:5000/static/"
+const STATIC_ROUTE = "https://dbauz.herokuapp.com/static/"
 
 module.exports = {
   BOOKROUTE,
