@@ -10,12 +10,12 @@ export default function VerticalTabs() {
 
     const [ value, setValue ] = React.useState(  );
  
-    // console.log("data ",value)
+    console.log("data ",value)
     React.useEffect( () =>
     {
         if ( data && data.departments )
         {
-            setValue( data.departments[ 0 ].id )
+            setValue( parseInt(data.departments[ 0 ]&&data.departments[ 0 ].id) )
         }
     },[data])
 
@@ -26,7 +26,7 @@ export default function VerticalTabs() {
               <ul>
                   <li style={{fontWeight:"bold", textTransform:"uppercase", color:"teal"}}> Departments </li>
                   {
-                      data && data.departments.map( u => <li key={ u.id } className={value===u.id?"active-menu":""} onClick={()=>setValue(u.id)}>{u.name}</li>)
+                      data && data.departments.map( u => <li key={ u.id } className={value===u.id?"active-menu":""} onClick={()=>setValue(parseInt(u.id))}>{u.name}</li>)
                   }
               </ul>
           </div>

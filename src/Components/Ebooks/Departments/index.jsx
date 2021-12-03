@@ -7,13 +7,13 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import ShareIcon from '@material-ui/icons/Share';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { useQuery } from '@apollo/client'
-import { EBOOKS } from '../../../Graphql/Query';
+import { SPDEPARTMENT } from '../../../Graphql/Query';
 // import { DEPARTMENT } from '../../Graphql/Query'
 import { STATIC_ROUTE } from '../../../settings/url'
 
 export default function MediaControlCard({data}) {
   
-    const { data: newData } = useQuery(EBOOKS, {
+    const { data: newData } = useQuery(SPDEPARTMENT, {
         variables: {
             id:data.id
         }
@@ -47,8 +47,8 @@ export default function MediaControlCard({data}) {
                 <Container maxWidth="lg">
                     <Grid container>
                         {
-                            newData && newData.eBooks ?
-                                newData.eBooks.map((element, index) => (
+                            newData && newData.department.eBooks ?
+                                newData.department.eBooks.map((element, index) => (
                                     <Grid item  key={index} md={3} className="book-card" >
                                         <div className="media">
                                             <img src={element.cover ? STATIC_ROUTE + element.cover.filename : Cover} className='foriegn-book-cover' alt="cover" />

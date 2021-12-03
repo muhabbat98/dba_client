@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Cover from '../../assets/default-cover.jpg'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import ShareIcon from '@material-ui/icons/Share';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import { useQuery } from '@apollo/client'
-import { SCIENCE_BOOKS } from '../../Graphql/Query'
-import { STATIC_ROUTE } from '../../settings/url'
+
 import{ Card,CardContent,CardMedia,Typography } from '@material-ui/core';
 import Phd from '../../assets/phd.jpg'
 import Bachelor from '../../assets/bachelor.jpg'
 import Magister from '../../assets/magister.png'
 import BookComponents from './science'
-import { Button, CardActionArea, CardActions } from '@material-ui/core';
+import { CardActionArea } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,

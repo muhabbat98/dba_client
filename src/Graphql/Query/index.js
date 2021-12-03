@@ -117,16 +117,27 @@ export const FORIEGN_BOOKS = gql`
 
 `
 export const DEPARTMENT = gql`
-    {
-        departments{
-            id
+query Departments {
+  departments {
+    name
+    id
+  }
+}
+`
+export const SPDEPARTMENT = gql`
+    query Departments($id:Int) {
+        department(id:$id) {
             name
+            id
+            eBooks{
+            name
+            }
         }
-    }
+        }
 `
 export const EBOOKS = gql`
     query($id:Int){
-        eBooks(departmentId:$id){
+        eBook(id:$id){
             id
             department{
                 id

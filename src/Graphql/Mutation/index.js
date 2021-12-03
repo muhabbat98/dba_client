@@ -122,19 +122,43 @@ export const CREATE_FORIEGN_BOOK = gql`
 
 export const ADD_USER = gql`
 	mutation AddUser(
-  $username: String!
-  $password: String!
-  $isAdmin: Boolean
-  $fullName: String
-) {
-  addUser(
-    useInfo: {
-      username: $username
-      password: $password
-      fullName: $fullName
-      isAdmin: $isAdmin
-    }
-  )
-}
- 
+		$username: String!
+		$password: String!
+		$isAdmin: Boolean
+		$fullName: String
+		) {
+		addUser(
+			useInfo: {
+			username: $username
+			password: $password
+			fullName: $fullName
+			isAdmin: $isAdmin
+			}
+		)
+		}
 `;
+export const CREATE_EBOOK = gql`
+	mutation createEbook($author: String, $coverId: Int, $departmentId: Int, $name: String, $fileId: Int){
+	createEbook(author: $author, coverId: $coverId, departmentId: $departmentId, name: $name, fileId: $fileId) {
+		author
+		name
+		cover {
+			coverId
+			filename
+		}
+		file {
+			fileId
+			filename
+		}
+	}
+}`
+
+export const ADD_DEPARTMENT = gql`
+	mutation AddDepartment ($name:String){
+	createDepartment(name: $name) {
+		id
+		name
+	}
+}
+  `
+

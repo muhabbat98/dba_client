@@ -69,7 +69,35 @@ const Foriegn = () => {
     const [sendFunction, { data, loading, error }] = useMutation(CREATE_FORIEGN_BOOK)
 
     const [open, setOpen] = React.useState(false);
+    useEffect(() => {
+        if ( bookFiles.length )
+        {
+            setChecked( { ...checked, bookButton: false } );
+        }
+    }, [ bookFiles ] )
+    
+    useEffect(() => {
+   
+        if (imageFiles.length) {
+            setImage( { ...checkImage, imageButton: false } );
+        }
+    }, [imageFiles] )
+    useEffect( () =>
+    {
+         if (state !== inputData.type) setData({ ...inputData, type: state })
 
+    }, [ state, inputData ] )
+    useEffect( () =>{
+    
+        if (data && data.createForiegnBook.status === 200) setOpen(true)
+        else if (data && data.createForiegnBook.status === 404) alert("smth get wrong")
+
+    }, [data])
+   useEffect( () =>
+    {
+        if (error) alert(error.message)
+
+   }, [ error ] )
 
 
     const handleClose = (event, reason) => {
@@ -84,7 +112,8 @@ const Foriegn = () => {
         if (imageFiles.length) {
            
             let formData = new FormData();
-            formData.append('cover', imageFiles[0])
+            formData.append( 'cover', imageFiles[ 0 ] )
+            console.log(imageFiles[0])
             try {
                 axios({
                     method: 'post',
@@ -137,23 +166,8 @@ const Foriegn = () => {
         }
     }
 
-    useEffect(() => {
-        if (bookFiles.length) {
-            setChecked({ ...checked, bookButton: false })
-
-        }
-        if (imageFiles.length) {
-            setImage({ ...checkImage, imageButton: false })
-
-        }
-
-        if (state !== inputData.type) setData({ ...inputData, type: state })
-        if (data && data.createForiegnBook.status === 200) setOpen(true)
-        else if (data && data.createForiegnBook.status === 404) alert("smth get wrong")
-        if (error) alert(error.message)
-
-    }, [bookFiles, imageFiles, state, data, error,checkImage, checked, inputData])
-
+    
+    
     const sendData = () => {
         if (inputData.title.length) {
             sendFunction({

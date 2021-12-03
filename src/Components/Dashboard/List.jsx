@@ -9,6 +9,7 @@ import Foriegn from './Foriegn'
 import Sience from './Sience'
 import Journal from './Journal'
 import AddUser from './Adduser'
+import Department from './Departments'
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
 
@@ -84,7 +85,7 @@ export default function VerticalTabs() {
 				<Tab label="Sience Department" {...a11yProps(1)} />
 				<Tab label="Journal Department" {...a11yProps(2)} />
 				<Tab label="Add New User" {...a11yProps(3)} />
-				<Tab label="Item Five" {...a11yProps(4)} />
+				<Tab label="Ebooks" {...a11yProps(4)} />
 				<Tab label="Item Six" {...a11yProps(5)} />
 				<Tab label="Item Seven" {...a11yProps(6)} />
 			</Tabs>
@@ -101,10 +102,10 @@ export default function VerticalTabs() {
 				<AddUser/>
 			</TabPanel>
 			<TabPanel className={classes.tabPanalField} value={value} index={4}>
-				Item Five
+				<Department/>
 			</TabPanel>
 			<TabPanel className={classes.tabPanalField} value={value} index={5}>
-				Item Six
+				item
 			</TabPanel>
 			<TabPanel className={classes.tabPanalField} value={value} index={6}>
 				Item Seven

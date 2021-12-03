@@ -12,6 +12,9 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import { useQuery } from '@apollo/client'
 import { FORIEGN_BOOKS } from '../../Graphql/Query'
 import { STATIC_ROUTE } from '../../settings/url'
+import IMAGE from '../../assets/elsevier.jfif'
+import Scopus from '../../assets/scopus.png'
+import Web from '../../assets/web.png'
 const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
@@ -37,8 +40,37 @@ export default function MediaControlCard() {
                     <></>
             }
             <div className="foriegn-body">
+                <h2 className="foriegn-book-header">Xalqaro databaselar</h2>
+                <Container>
+                    <Grid container style={ { display: 'flex' } }>
+                        <Grid  item md={ 4 } className="book-card" >
+                            <a href="https://www.elsevier.com/">
+                                <div className="media">
+                                    <img src={ IMAGE } style={{width:"100%"}} className='foriegn-book-cover' alt="elsevier" />
+                                    <h4 className="book-name"> Elsevier </h4>                
+                                </div>
+                            </a>
+                        </Grid>
+                         <Grid  item md={ 4 } className="book-card" >
+                            <a href="https://www.scopus.com/">
+                                <div className="media">
+                                    <img src={ Scopus} style={{width:"100%"}} className='foriegn-book-cover' alt="elsevier" />
+                                    <h4 className="book-name"> Scopus </h4>                
+                                </div>
+                            </a>
+                        </Grid>
+                         <Grid  item md={ 4 } className="book-card" >
+                            <a href="https://access.clarivate.com/login?app=wos&alternative=true&shibShireURL=https:%2F%2Fwww.webofknowledge.com%2F%3Fauth%3DShibboleth&shibReturnURL=https:%2F%2Fwww.webofknowledge.com%2F&roaming=true">
+                                <div className="media">
+                                    <img src={ Web} style={{width:"100%"}} className='foriegn-book-cover' alt="elsevier" />
+                                    <h4 className="book-name">Web of science </h4>                
+                                </div>
+                            </a>
+                        </Grid>
+                    </Grid>
+                </Container>
                 <h2 className="foriegn-book-header">The foriegn department books</h2>
-            
+
                 <Container maxWidth="lg">
                     <Grid container>
                         {
