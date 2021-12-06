@@ -19,10 +19,10 @@ function App ()
 	{
 		let token = window.localStorage.getItem( "token" )
 		console.log(window.location.pathname)
-		if ( !token&&pathname!=="/login" )
-		{
-			window.location.replace('/login')
-		}
+		// if ( !token&&pathname!=="/login" )
+		// {
+		// 	window.location.replace('/login')
+		// }
 	},[pathname])
 	return (<>
 		<Menyu />
