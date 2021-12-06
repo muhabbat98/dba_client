@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/dba_client/static/css/main.0e500e4b.chunk.css",
+    "main.js": "/dba_client/static/js/main.3f6e3d68.chunk.js",
+    "main.js.map": "/dba_client/static/js/main.3f6e3d68.chunk.js.map",
+    "runtime-main.js": "/dba_client/static/js/runtime-main.d156d45f.js",
+    "runtime-main.js.map": "/dba_client/static/js/runtime-main.d156d45f.js.map",
+    "static/js/2.8777429e.chunk.js": "/dba_client/static/js/2.8777429e.chunk.js",
+    "static/js/2.8777429e.chunk.js.map": "/dba_client/static/js/2.8777429e.chunk.js.map",
+    "static/js/3.a718f8a5.chunk.js": "/dba_client/static/js/3.a718f8a5.chunk.js",
+    "static/js/3.a718f8a5.chunk.js.map": "/dba_client/static/js/3.a718f8a5.chunk.js.map",
+    "index.html": "/dba_client/index.html",
+    "static/css/main.0e500e4b.chunk.css.map": "/dba_client/static/css/main.0e500e4b.chunk.css.map",
+    "static/js/2.8777429e.chunk.js.LICENSE.txt": "/dba_client/static/js/2.8777429e.chunk.js.LICENSE.txt",
+    "static/media/bachelor.c456c50c.jpg": "/dba_client/static/media/bachelor.c456c50c.jpg",
+    "static/media/dba.a72dfa5d.png": "/dba_client/static/media/dba.a72dfa5d.png",
+    "static/media/elsevier.e0ed95bf.jfif": "/dba_client/static/media/elsevier.e0ed95bf.jfif",
+    "static/media/App.css": "/dba_client/static/media/montserrat-v15-latin_cyrillic-regular.f263cfd0.woff2",
+    "static/media/magazine_cover.41d5f4b4.jpg": "/dba_client/static/media/magazine_cover.41d5f4b4.jpg",
+    "static/media/magister.6c587eb7.png": "/dba_client/static/media/magister.6c587eb7.png",
+    "static/media/phd.d701eebc.jpg": "/dba_client/static/media/phd.d701eebc.jpg",
+    "static/media/scopus.15ecaba2.png": "/dba_client/static/media/scopus.15ecaba2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d156d45f.js",
+    "static/js/2.8777429e.chunk.js",
+    "static/css/main.0e500e4b.chunk.css",
+    "static/js/main.3f6e3d68.chunk.js"
+  ]
+}
