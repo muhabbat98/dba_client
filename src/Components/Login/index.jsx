@@ -1,52 +1,37 @@
 import React from 'react';
 import clsx from 'clsx';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import { VisibilityOff, Visibility, Lock, Person } from '@material-ui/icons';
-import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button'
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { Box } from '@material-ui/core';
+import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { makeStyles, withStyles } from '@mui/styles';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import FormControl from '@mui/material/FormControl';
+import { VisibilityOff, Visibility, Lock, Person, AccountCircle } from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import Button from '@mui/material/Button'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import InputAdornment from '@mui/material/InputAdornment';
+import { Box } from '@mui/material';
 import { useMutation } from "@apollo/client";
 import { GET_TOKEN } from '../../Graphql/Mutation'
 import { useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: '0 auto',
-      marginTop: '2rem',
-      padding: theme.spacing(6),
-    },
-    
-    loginText: {
-      fontSize: '36px'
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-    textField: {
-      width: '25ch',
-      padding: theme.spacing(1),
-    },
+const useStyles = makeStyles(() => ({
+  sampleRoot: {
+    padding: 32,
 
   },
   cover:{
-    minHeight:"calc(100vh - 320px)",
+    marginTop: 32,
+    marginBottom: 32,
+    minHeight: '80vh'
   }
 }));
 const StyledButton = withStyles({
@@ -130,11 +115,10 @@ export default function SimpleContainer() {
     }
   }
   return (
-    <React.Fragment>
-      <CssBaseline />
+  
       <div className={classes.cover}>
-        <Container className={classes.root} maxWidth="sm">
-          <Paper>
+      <Container  maxWidth='sm'>
+          <Paper className={ classes.sampleRoot}>
             <Typography className={classes.loginText} variant="h4" component="h2">
               <Box display="flex" alignItems="center" justifyContent="center">
                 <AccountCircle fontSize="large" className="login-header-icon" color='secondary' />
@@ -146,12 +130,17 @@ export default function SimpleContainer() {
                 <Grid item>
                   <Person color="secondary" />
                 </Grid>
-                <Grid item>
-                  <TextField id="input-with-icon-grid" onChange={setUsername} label="username" />
+              <Grid item>
+                <FormControl className={ clsx( classes.margin, classes.textField ) }>
+                  <InputLabel htmlFor="username-input"> Username </InputLabel>
+                  <Input id="username-input" type='text' onChange={setUsername} />
+                </FormControl>
+                
+                  {/* <TextField id="input-with-icon-grid" onChange={setUsername} label="username" /> */}
                 </Grid>
               </Grid>
             </div>
-            <Box display="flex" justifyContent="space-between" alignItems='center' margin="1.4rem 0px" >
+            <Box display="flex" alignItems='center' margin="1.4rem 0px" >
               <Lock color="secondary" />
               <FormControl className={clsx(classes.margin, classes.textField)}>
 
@@ -185,6 +174,5 @@ export default function SimpleContainer() {
           </Paper>
         </Container>
       </div>
-    </React.Fragment>
   );
 }

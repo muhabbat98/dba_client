@@ -1,4 +1,4 @@
-import { Card, CardContent, Container, Typography } from '@material-ui/core'
+import { Card, CardContent, Container, Typography } from '@mui/material'
 import About from './About'
 import Resourse from './Resourses'
 import Workers from './Workers'

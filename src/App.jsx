@@ -11,7 +11,19 @@ import About from './Components/About'
 import Footer from './Components/Footer';
 import Ebooks from './Components/Ebooks'
 import { useEffect } from 'react';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
+
+const theme = createTheme();
+
+// const useStyles = makeStyles((theme) => {
+//   root: {
+//     // some CSS that access to theme
+// 	  footer: {
+// 		  minHeight:"100vh"
+// 	  }
+//   }
+// });
 function App ()
 {
 	const {pathname} = useLocation()
@@ -23,21 +35,25 @@ function App ()
 		{
 			window.location.replace('/login')
 		}
-	},[pathname])
-	return (<>
-		<Menyu />
-		<Switch>
-			<Route path='/' exact> <Home />  </Route>
-			<Route path='/login' exact> <Login />  </Route>
-			<Route path='/dashboard'> <Dashboard /> </Route>
-			<Route path='/foriegn'> <Foriegn /> </Route>
-			<Route path='/science'> <Science /> </Route>
-			<Route path='/journals'> <Journal /> </Route>
-			<Route path='/about'> <About /> </Route>
-			<Route path='/ebooks'> <Ebooks/> </Route>
+	}, [ pathname ] )
 
-		</Switch>
-		<Footer/>
+	return ( <>
+		<ThemeProvider theme={ theme }>
+			<Menyu />
+			<Switch>
+				<Route path='/' exact> <Home />  </Route>
+				<Route path='/login' exact> <Login/>  </Route>
+				<Route path='/dashboard'> <Dashboard /> </Route>
+				<Route path='/foriegn'> <Foriegn /> </Route>
+				<Route path='/science'> <Science /> </Route>
+				<Route path='/journals'> <Journal /> </Route>
+				<Route path='/about'> <About /> </Route>
+				<Route path='/ebooks'> <Ebooks/> </Route>
+
+			</Switch>
+			<Footer />
+		</ThemeProvider>
+		
 	</>
 	);
 }

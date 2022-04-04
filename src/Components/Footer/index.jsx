@@ -1,5 +1,5 @@
-import { Container, Grid, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { Instagram, Phone, Telegram } from "@material-ui/icons";
+import { Container, Grid, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Instagram, Phone, Telegram } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
  function Footer (){

@@ -499,7 +499,7 @@ code {
   color: white;
   font-size: 16px;
   font-weight: bolder;
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 .main-footer a,
 .main-footer svg {

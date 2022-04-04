@@ -1,4 +1,4 @@
-import { CardMedia, Container, Paper, Typography, Card, CardActionArea, CardContent,Box } from "@material-ui/core"
+import { CardMedia, Container, Paper, Typography, Card, CardActionArea, CardContent,Box } from "@mui/material"
 import Header from '../../../assets/header.jpg'
 export default function Workers (){
     return(

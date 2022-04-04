@@ -1,28 +1,26 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import Lists from './List'
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    width: '100%',
   },
   toolbar: {
     paddingRight: 24, 
   },
 
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+  appBar: {    
     minHeight:'84px',
-    position: 'fixed'
+    position: 'relative',
+    left: 0,
+    top:0
   },
 
 
