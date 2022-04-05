@@ -8,19 +8,25 @@ import Lists from './List'
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  dashboardRoot: {
     display: 'flex',
     width: '100%',
+    position: 'static'
   },
   toolbar: {
     paddingRight: 24, 
+  
   },
-
+  title: {
+    // position:'sticky'
+  },
   appBar: {    
-    minHeight:'84px',
-    position: 'relative',
+    minHeight:'88px',
+    position: 'sticky',
     left: 0,
-    top:0
+    top: 0,
+    display: "flex",
+    justifyContent: 'center'
   },
 
 
@@ -31,9 +37,9 @@ export default function Dashboard() {
 
 
   return (
-    <div className={classes.root}>
+    <div className={classes.dashboardRoot}>
         <CssBaseline />
-        <AppBar position="absolute" className={classes.appBar}>
+        <AppBar  className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                     Dashboard

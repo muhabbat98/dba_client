@@ -4,13 +4,10 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { gsap } from "gsap";
-import  ScrollTrigger  from "gsap/ScrollTrigger";
 import {useQuery} from '@apollo/client'
 import {COUNT} from '../../../Graphql/Query'
-import { useEffect, useRef } from 'react';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { List } from 'react-content-loader';
 
 
 const useStyles = makeStyles({
@@ -27,69 +24,27 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
-  },
+    },
+    loader: {
+        position: 'relative',
+        top: '-80px'
+  }
 });
 export default function Resourse (){
-    const counts = useRef()
-    const numeric = useRef()
 
-    const [numbers, setNumbers] = useState([0,0,0])
     const classes = useStyles();    
-    const {data} = useQuery(COUNT)
-   
-
-  
-
- 
-    gsap.registerPlugin(ScrollTrigger )
-    useEffect(()=>{
-        if(data){
-            setNumbers(data.countResources.map((e, i)=>{
-                setInterval(()=>{
-                    if(numbers[i]<=e.count){
-                        console.log(numbers[i])
-                    }
-                })
-            }))
-           
-        }
-    },[data,numbers])
-    useEffect(()=>{
-        gsap.from(counts.current, 
-            {
-           scrollTrigger:{
-               trigger: counts.current,
-           },
-           x:-1800,
-           ease:'bounce',
-           stagger:0.35
-       })
-      
-    //    gsap.from(numbers, 
-    //     {
-    //    scrollTrigger:{
-    //        trigger: counts.current,
-    //    },
-    //     textContent: 0,
-    //     duration: 10,
-    //     ease: "ease",
-    //     snap: { textContent: 1 },
-    //     delay:1.5
-    //     })
-    },[])
-
-   
+    const { data } = useQuery( COUNT );   
    
 
     return(
-        <div ref = {counts} className='resources-info'>
+        <div  className='resources-info'>
                 {
-                    data?data.countResources.map((elem,i)=><Card key={i} className={classes.root}>
+                    data&&data.countResources?data.countResources.map((elem,i)=><Card key={i} className={classes.root}>
                     <CardContent>
                         <Typography className={classes.title}  color="textSecondary" gutterBottom>
                             Word of the Day 
                         </Typography>
-                        <Typography variant="h2" align="center" ref={numeric} component="h2">
+                        <Typography variant="h2" align="center" component="h2">
 
                            {
                                elem.count
@@ -107,9 +62,12 @@ export default function Resourse (){
                     </CardActions>
                 </Card>)
                 :
-                <></>
+                <>
+                        <List className={classes.loader}/>
+                        <List className={classes.loader}/>
+                        <List className={classes.loader}/>
+                </>
                 }
-      
         </div>
     )
 }
